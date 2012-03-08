@@ -1,0 +1,254 @@
+[
+  {
+    "model": "formula.variable",
+    "pk": 1,
+    "fields": {
+      "name": "Tristeza",
+      "code": "V1",
+      "dimension": 1 
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 2,
+    "fields": {
+      "name": "Pesimismo",
+      "code": "V2",
+      "dimension": 1
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 3,
+    "fields": {
+      "name": "Cogniciones autorreferenciadas negativas",
+      "code": "V3",
+      "dimension": 1
+    }
+  },  
+  {
+    "model": "formula.variable",
+    "pk": 4,
+    "fields": {
+      "name": "Preocupaciones somáticas",
+      "code": "V4",
+      "dimension": 1
+    }
+  },  
+  {
+    "model": "formula.variable",
+    "pk": 5,
+    "fields": {
+      "name": "Insatisfacción",
+      "code": "V5",
+      "dimension": 1
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 6,
+    "fields": {
+      "name": "Ideas suicidas",
+      "code": "V6",
+      "dimension": 1
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 7,
+    "fields": {
+      "name": "Llanto",
+      "code": "V7",
+      "dimension": 1
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 8,
+    "fields": {
+      "name": "Irritabilidad",
+      "code": "V8",
+      "dimension": 1
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 9,
+    "fields": {
+      "name": "Retirada social",
+      "code": "V9",
+      "dimension": 1
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 10,
+    "fields": {
+      "name": "Indecisión",
+      "code": "V10",
+      "dimension": 1
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 11,
+    "fields": {
+      "name": "Concentración",
+      "code": "V11",
+      "dimension": 1
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 12,
+    "fields": {
+      "name": "Miedo",
+      "code": "V12",
+      "dimension": 1
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 13,
+    "fields": {
+      "name": "Tensión",
+      "code": "V13",
+      "dimension": 1
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 14,
+    "fields": {
+      "name": "Ralentización",
+      "code": "V14",
+      "dimension": 1
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 15,
+    "fields": {
+      "name": "Fatigabilidad",
+      "code": "V15",
+      "dimension": 2
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 16,
+    "fields": {
+      "name": "Insomnio",
+      "code": "V16",
+      "dimension": 2
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 17,
+    "fields": {
+      "name": "Síntomas musculares",
+      "code": "V17",
+      "dimension": 2
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 18,
+    "fields": {
+      "name": "Pérdida de peso",
+      "code": "V18",
+      "dimension": 2
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 19,
+    "fields": {
+      "name": "Pérdida de apetito",
+      "code": "V19",
+      "dimension": 2
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 20,
+    "fields": {
+      "name": "Síntomas gastrointestinales",
+      "code": "V20",
+      "dimension": 2
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 21,
+    "fields": {
+      "name": "Síntomas respiratorios",
+      "code": "V21",
+      "dimension": 2
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 22,
+    "fields": {
+      "name": "Síntomas cardiovasculares",
+      "code": "V22",
+      "dimension": 2
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 23,
+    "fields": {
+      "name": "Síntomas genitourinarios",
+      "code": "V23",
+      "dimension": 2
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 24,
+    "fields": {
+      "name": "Síntomas sensoriales",
+      "code": "V24",
+      "dimension": 2
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 25,
+    "fields": {
+      "name": "Síntomas vegetativos",
+      "code": "V25",
+      "dimension": 2
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 26,
+    "fields": {
+      "name": "Inhibición psíquica",
+      "code": "V26",
+      "dimension": 2
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 27,
+    "fields": {
+      "name": "Conciencia de la enfermedad",
+      "code": "V27",
+      "dimension": 2
+    }
+  },
+  {
+    "model": "formula.variable",
+    "pk": 28,
+    "fields": {
+      "name": "Ansiedad durante la entrevista",
+      "code": "V28",
+      "dimension": 2
+    }
+  }
+]
