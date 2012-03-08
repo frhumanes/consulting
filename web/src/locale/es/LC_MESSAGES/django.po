@@ -1,0 +1,200 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-08 09:49-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: settings.py:41
+msgid "Spanish"
+msgstr ""
+
+#: settings.py:42
+msgid "English"
+msgstr ""
+
+#: consulting/models.py:13
+msgid "Default"
+msgstr ""
+
+#: consulting/models.py:14
+msgid "Successive"
+msgstr ""
+
+#: consulting/models.py:20
+msgid "Kind of report"
+msgstr ""
+
+#: consulting/models.py:22
+msgid "Observations"
+msgstr ""
+
+#: consulting/models.py:61 survey/models.py:46 survey/models.py:67
+msgid "Text"
+msgstr ""
+
+#: consulting/models.py:76
+msgid "Date"
+msgstr ""
+
+#: consulting/models.py:84
+msgid "Before"
+msgstr ""
+
+#: consulting/models.py:85
+msgid "After"
+msgstr ""
+
+#: consulting/models.py:91
+msgid "Posology (mg/day)"
+msgstr ""
+
+#: consulting/models.py:92
+msgid ""
+"Treatment time before or after begining of             symptoms (months)"
+msgstr ""
+
+#: consulting/models.py:94
+msgid ""
+"Treatment BEFORE or AFTER begining of                     apsychiatric "
+"symptoms"
+msgstr ""
+
+#: formula/models.py:10 formula/models.py:21 survey/models.py:11
+#: survey/models.py:19 survey/models.py:36 userprofile/models.py:22
+msgid "Name"
+msgstr ""
+
+#: formula/models.py:11 formula/models.py:34
+msgid "Polynomial"
+msgstr ""
+
+#: formula/models.py:22 survey/models.py:12 survey/models.py:20
+#: survey/models.py:37 survey/models.py:47 survey/models.py:64
+msgid "Code"
+msgstr ""
+
+#: medicament/models.py:9
+msgid "Name of group"
+msgstr ""
+
+#: medicament/models.py:10
+msgid "Adverse_Reaction"
+msgstr ""
+
+#: medicament/models.py:20
+msgid "Name of medicine"
+msgstr ""
+
+#: medicament/models.py:21
+msgid "Active Ingredient"
+msgstr ""
+
+#: survey/models.py:28
+msgid "General"
+msgstr ""
+
+#: survey/models.py:29
+msgid "Extensive"
+msgstr ""
+
+#: survey/models.py:30
+msgid "Abbreviated"
+msgstr ""
+
+#: survey/models.py:35 survey/models.py:63
+msgid "Kind"
+msgstr ""
+
+#: survey/models.py:55
+msgid "Bounded"
+msgstr ""
+
+#: survey/models.py:56
+msgid "Free"
+msgstr ""
+
+#: survey/models.py:65
+msgid "Weight"
+msgstr ""
+
+#: userprofile/models.py:9
+msgid "Female"
+msgstr ""
+
+#: userprofile/models.py:10
+msgid "Male"
+msgstr ""
+
+#: userprofile/models.py:13
+msgid "Married"
+msgstr ""
+
+#: userprofile/models.py:14
+msgid "Stable partner"
+msgstr ""
+
+#: userprofile/models.py:15
+msgid "Divorced"
+msgstr ""
+
+#: userprofile/models.py:16
+msgid "Widow"
+msgstr ""
+
+#: userprofile/models.py:17
+msgid "Single"
+msgstr ""
+
+#: userprofile/models.py:18
+msgid "Other"
+msgstr ""
+
+#: userprofile/models.py:23
+msgid "First surname"
+msgstr ""
+
+#: userprofile/models.py:24
+msgid "Second surname"
+msgstr ""
+
+#: userprofile/models.py:25
+msgid "Sex"
+msgstr ""
+
+#: userprofile/models.py:26
+msgid "Address"
+msgstr ""
+
+#: userprofile/models.py:27
+msgid "Town"
+msgstr ""
+
+#: userprofile/models.py:28
+msgid "Postcode"
+msgstr ""
+
+#: userprofile/models.py:29
+msgid "Date of Birth"
+msgstr ""
+
+#: userprofile/models.py:30
+msgid "Status"
+msgstr ""
+
+#: userprofile/models.py:31
+msgid "Profession"
+msgstr ""
