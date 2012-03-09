@@ -20,6 +20,8 @@ class Report(models.Model):
     kind = models.IntegerField(_(u'Kind of report'), choices=KIND)
     name = models.CharField(max_length=255)
     observations = models.TextField(_(u'Observations'), blank=True)
+    recommendations_treatment = models.TextField(_(u'recommendations_treatment'
+                                ), blank=True)
     date = models.DateTimeField()
 
 
