@@ -19,8 +19,16 @@
 
             <div class="pull-right">
                 <div class="row">
-                    <div class="span2"><p class="navbar-text">Logged in as <a href="#">username</a></p></div>
-                    <div class="span1"><p class="navbar-text"><a href="#">Logout</a></p></div>
+                    <div class="span2">
+                        <p class="navbar-text">Logged in as 
+                            <a href="#">{{ user.username }}</a>
+                        </p>
+                    </div>
+                    <div class="span1">
+                        <p class="navbar-text">
+                           <a href='{% url logout %}'>Logout</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

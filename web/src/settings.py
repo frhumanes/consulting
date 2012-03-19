@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'medicament',
     'consulting',
     'main',
+    'registration',
 )
 
 AUTH_PROFILE_MODULE = 'userprofile.Profile'
