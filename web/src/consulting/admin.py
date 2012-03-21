@@ -26,12 +26,12 @@ admin.site.register(Visit, VisitAdmin)
 
 class QuestionnaireAdmin(admin.ModelAdmin):
     fieldsets = [('Questionnaires', {'fields': ['survey', 'self_administered',
-                'rate', 'creation_date', 'start_date', 'end_date', 'deadline',
-                'completed']})]
+                'rate', 'creation_date', 'start_date', 'end_date', 'from_date',
+                'to_date', 'completed']})]
     list_display = ('survey', 'creation_date', 'start_date', 'end_date',
-                    'deadline', 'completed')
+                    'from_date', 'to_date', 'completed')
     search_fields = ('survey', 'creation_date', 'start_date', 'end_date',
-                    'deadline', 'completed')
+                    'from_date', 'to_date', 'completed')
     ordering = ('survey', 'creation_date')
 
 admin.site.register(Questionnaire, QuestionnaireAdmin)
