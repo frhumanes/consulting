@@ -65,6 +65,8 @@ LANGUAGES = (
   ('en', gettext('English')),
 )
 
+LOGIN_URL = '/account/login/'
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
