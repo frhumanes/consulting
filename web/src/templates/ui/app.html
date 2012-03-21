@@ -1,0 +1,54 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]> <!--> 
+<html lang="en">
+<!-- <![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block extend_meta %}
+    {% endblock %}
+
+    {% block js_files %}
+      <script src="{{ STATIC_URL }}js/jquery.js"></script>
+      <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
+    {% endblock %}
+
+    <script type="text/javascript">
+      {% block js %}
+      {% endblock %}
+
+      $(document).ready(function(){
+        {% block jquery_init %}
+        {% endblock %}
+      })
+    </script>
+
+    {% block css %}    
+      <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+      <link href="{{ STATIC_URL }}css/app.css" rel="stylesheet">
+    {% endblock %}
+
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+
+  </head>
+  <body data-offset="50" data-target=".subnav" data-spy="scroll" data-twttr-rendered="true">
+    
+    {% block header%}
+    {% endblock  %}
+    
+    {% block body %}
+    {% endblock body %}    
+    
+    {% block footer%}   
+    {% endblock %}
+  </body>
+</html>
