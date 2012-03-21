@@ -1,0 +1,36 @@
+{% extends "ui/app.html" %}
+{% load i18n%}
+{% block jquery_init %}
+    $('#newpatient').click(function(){
+        $('#aux').load('{% url prueba %}');
+        <!-- alert('HOLAAAAAAAAAAAAAAAAAAAa') -->
+    })
+{% endblock %} 
+{% block body %}
+    {% include "ui/includes/header.html" %}
+    <div class="container">
+        {% include "ui/includes/nav-bar.html" %}
+    </div>
+    <div class="container" style="padding-top:100px;">      
+        <div class="row" >
+            <div class="span6 offset3">
+            <form class="well form-horizontal">{% csrf_token %}
+                <label class="control-label span2" style="text-align: center;">
+                        {% trans 'PACIENTE' %}
+                </label>
+                <input type="text" class="input-medium search-query span3">
+            </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span4 offset4" style="padding-left:5px;"> 
+                <a id="newpatient" class="btn btn-large btn-primary span3" href="">
+                    {% trans 'ALTA PACIENTE' %}
+                </a>
+            </div>            
+        </div>
+        <div id="aux"></div>
+        
+    </div>
+
+{% endblock body %}
