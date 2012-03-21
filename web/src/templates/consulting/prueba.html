@@ -1,1 +1,15 @@
-HOLA
+{% extends "ui/app.html" %}
+{% load i18n%}
+{% block jquery_init %}
+    $('#pulsa').click(function(){
+        $('#carga').load('{% url cargando %}');
+    })
+{% endblock %}
+{% block body %}
+<div>HOLA</div>
+
+<div id="pulsa">
+    Pulsa aqui
+</div>
+<div id="carga"><div>
+{% endblock body %}

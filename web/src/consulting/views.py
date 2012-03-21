@@ -14,7 +14,13 @@ from django.contrib.auth.decorators import login_required
 #                               context_instance=RequestContext(request))
 
 
-def administrative(request):
-    print '*********************En tmp*********************************'
+def prueba(request):
+    print '*********************En prueba*********************************'
     return render_to_response('consulting/prueba.html', {},
+                              context_instance=RequestContext(request))
+
+
+def cargando(request):
+    print '*********************En cargando*********************************'
+    return render_to_response('consulting/carga.html', {},
                               context_instance=RequestContext(request))

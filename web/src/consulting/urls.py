@@ -4,8 +4,9 @@ from consulting.views import *
 
 
 urlpatterns = patterns('',
-    url(r'^$', administrative, name='administrative_index'),
+    # url(r'^$', administrative, name='administrative_index'),
     # url(r'^$', prueba, name='administrative_index'),
     # url(r'^newpatient/', newpatient, name='newpatient'),
-    url(r'^prueba/', prueba, name='prueba'),
+    url(r'^$', prueba, name='prueba'),
+    url(r'^cargando/', cargando, name='cargando'),
 )
