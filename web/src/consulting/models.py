@@ -48,7 +48,8 @@ class Questionnaire(models.Model):
     creation_date = models.DateTimeField()
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)
-    deadline = models.DateTimeField()
+    from_date = models.DateTimeField(blank=True, null=True)
+    to_date = models.DateTimeField(blank=True, null=True)
     rate = models.BooleanField(default=True)
 
     completed = models.BooleanField()
