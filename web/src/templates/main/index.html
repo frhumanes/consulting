@@ -1,39 +1,97 @@
 {% extends "ui/app.html" %}
+
 {% load i18n%}
-    
+
+
+{% block jquery_init %}
+
+        var evnts = function(){
+            return {
+                    "event": [
+                         {"date":"2012-01-25","title":"1"}
+                        ,{"date":"2012-02-01","title":"2"}
+                        ,{"date":"2012-03-22","title":"34"}
+                        ,{"date":"2012-04-03","title":"123"}
+                        ,{"date":"2012-05-04","title":"223"}
+                        ,{"date":"2012-06-28","title":"4"}
+                        ,{"date":"2012-07-28","title":"5"}
+                        ,{"date":"2012-08-16","title":"14"}
+                        ,{"date":"2012-09-21","title":"10"}
+                        ,{"date":"2012-10-21","title":"10"}
+                        ,{"date":"2012-11-21","title":"10"}
+                        ,{"date":"2012-12-21","title":"10"}
+                    ]
+                }
+            };
+
+       $('#calendar').Calendar({ 'events': evnts, 'weekStart': 1 })
+       .on('changeDay', function(event){ alert(event.day.valueOf()); })
+       .on('onEvent', function(event){ alert(event.day.valueOf()); })
+       .on('onNext', function(event){ alert("Next"); })
+       .on('onPrev', function(event){ alert("Prev"); })
+       .on('onCurrent', function(event){ alert("Current"); });
+
+{% endblock %}
+
+{% block header%}
+    {% include "main/includes/header.html" %}
+{% endblock  %}
+
 {% block body %}
-  {% include "ui/includes/header.html" %}
+    <div class="container">
 
-  <div class="container">
-    {% include "ui/includes/nav-bar.html" %}
-
-
-    <!-- Main hero unit for a primary marketing message or call to action -->
-    <div class="hero-unit">
-      <h1>Hello, world!</h1>
-      <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-      <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+    <!-- ALERTS -->
+    <div class="alert alert-info">
+        <a class="close" data-dismiss="alert">×</a>
+        <strong>Tiene 15 mensajes privados nuevos</strong>
     </div>
 
-    <!-- Example row of columns -->
-    <div class="row">
-      <div class="span4">
-        <h2>Heading</h2>
-         <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn" href="#">View details &raquo;</a></p>
-      </div>
-      <div class="span2">
-        <h2>Heading</h2>
-         <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn" href="#">View details &raquo;</a></p>
-     </div>
-      <div class="span6">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn" href="#">View details &raquo;</a></p>
-      </div>
+    <div class="alert alert-info">
+        <a class="close" data-dismiss="alert">×</a>
+        <strong>Tiene 4 mensajes nuevos</strong>
+    </div>
+
+    <!-- END ALERTS -->
+    <div class="">
+        <h2>Citas <small></small></h2>
+        <hr>
+        <div class="row">
+            <div class="span4" id="calendar"/></div>
+
+            <div class="span8">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     <hr>
   </div> <!-- /container -->
 {% endblock body %}
-   
