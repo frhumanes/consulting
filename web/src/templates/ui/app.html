@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>Consulting</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -11,6 +11,7 @@
       <script src="{{ STATIC_URL }}js/jquery.js"></script>
       <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
       <script src="{{ STATIC_URL }}js/calendar.js"></script>
+      <script src="{{ STATIC_URL }}js/pyramid.js"></script>
     {% endblock %}
 
     {% block css %}
@@ -53,6 +54,7 @@
     {% endblock body %}
 
     {% block footer%}
+       {% include "ui/includes/footer.html" %}
     {% endblock %}
   </body>
 </html>

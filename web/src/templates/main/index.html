@@ -31,14 +31,59 @@
        .on('onPrev', function(event){ alert("Prev"); })
        .on('onCurrent', function(event){ alert("Current"); });
 
+       $('#pyramid_anxiety').Pyramid({
+          'height': 350,
+          'width': 350,
+          'slices':4,
+          'slice_separation': 0.1,
+          'colours': ['red', 'yellow', 'green', 'blue'],
+          'text': ['1', '2', '3', '4']
+       })
+       .on('click', function(event){ alert(event.text) });
+
+        $('#pyramid_depression').Pyramid({
+          'height': 500,
+          'width': 500,
+          'slices':4,
+          'slice_separation': 0.25,
+          'colours': ['red', 'yellow', 'green', 'blue'],
+          'text': ['12 (12%)', '250 (34%)', '3', '4', '5']
+       })
+       .on('click', function(event){ alert(event.text) });
+
 {% endblock %}
 
 {% block header%}
-    {% include "main/includes/header.html" %}
+  {% include "ui/includes/header.html" %}
 {% endblock  %}
 
 {% block body %}
     <div class="container">
+
+    <div class="subnav">
+        <ul class="nav nav-pills">
+            <!-- <li class="dropdown active">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Buttons <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="active"><a href="#buttonGroups">Button groups</a></li>
+                <li><a href="#buttonDropdowns">Button dropdowns</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Navigation <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#navs">Nav, tabs, pills</a></li>
+                <li><a href="#navbar">Navbar</a></li>
+                <li><a href="#breadcrumbs">Breadcrumbs</a></li>
+                <li><a href="#pagination">Pagination</a></li>
+              </ul>
+            </li>-->
+            <li class="active"><a href="#inicio">Consulta</a></li>
+            <li><a href="#patients">Mensajería</a></li>
+            <li><a href="#initial-val">Estadísticas</a></li>
+            <li><a href="#dates">Administración</a></li>
+        </ul>
+    </div>
 
     <!-- ALERTS -->
     <div class="alert alert-info">
@@ -145,7 +190,23 @@
               </ul>
             </div>
         </div>
+        <br/>
+        <div class="">
+          <h2>Pirámides <small></small></h2>
+          <hr>
+          <div class="row">
+              <div class="span6" id="a"/>
+                  <h2><small>Ansiedad</small></h2>
+                  <div id="pyramid_anxiety"></div>
+                  <hr>
+              </div>
+              <div class="span6" id="a"/>
+                <h2><small>Depresión</small></h2>
+                    <div id="pyramid_depression"></div>
+                  <hr>
+              </div>
+          </div>
+        </div>
     </div>
-    <hr>
   </div> <!-- /container -->
 {% endblock body %}
