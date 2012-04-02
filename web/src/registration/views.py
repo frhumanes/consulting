@@ -1,33 +1,41 @@
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from registration.forms import UserRegistrationForm
 from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.utils.translation import ugettext_lazy as _
 
 
-def login_consulting30(request, redirect_field_name=REDIRECT_FIELD_NAME,
+def login_consulting(request, redirect_field_name=REDIRECT_FIELD_NAME,
                         form_class=UserRegistrationForm):
-    # next = redirect_field_name
-    redirect_to = request.REQUEST.get(redirect_field_name, '')
 
-    if request.method == "POST":
+    if request.method == 'POST':
         form = form_class(data=request.POST)
         if form.is_valid():
-            user = form.get_user()
-            login(request, user)
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
 
-            if redirect_to:
-                return HttpResponseRedirect(redirect_to)
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    # Redirect to a success page.
+                    return HttpResponseRedirect(reverse('main_index'))
+                else:
+                    # Return a 'disabled account' error message
+                    return HttpResponseRedirect(reverse('main_index'))
             else:
+                # Return an 'invalid login' error message.
                 return HttpResponseRedirect(reverse('main_index'))
     else:
-        form = form_class(request)
+        form = form_class()
 
     return render_to_response('registration/login.html',
-                                {'form': form, 'redirect_to': redirect_to},
-                                context_instance=RequestContext(request))
+        {'form': form},
+        context_instance=RequestContext(request))
 
 
 def logout(request):

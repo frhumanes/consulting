@@ -1,85 +1,65 @@
+{% extends "ui/app.html" %}
+
 {% load i18n%}
-<!DOCTYPE html>
-<html lang="en">
 
-  <head>
-    <meta charset="utf-8">
-    <title>Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- styles -->
-    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
-      .block .block_content {
-          background: none repeat scroll 0 0 #FFFFFF;
-          border-left: 1px solid #CCCCCC;
-          border-right: 1px solid #CCCCCC;
-          overflow: hidden;
-          padding: 10px 20px 0;
-      }
-    </style>    
-  </head>
-
-  <body data-offset="50" data-target=".subnav" data-spy="scroll" data-twttr-rendered="true">    
-    <div class="container" style="padding-top:100px;">      
+{{ block body}}
+<div class="container" style="padding-top:100px;">
       <div class="row" >
-        <div class="span4 offset4 well">
+        <div class="span8 well">
         <!-- ERRORS -->
-          {% if not form.username.errors and not form.password.errors %}
-            {% if form.errors %}
-              <div class="alert alert-error">
-                <a class="close" data-dismiss="alert">×</a>
-                <strong>{%trans 'El usuario no existe o la contraseña introducida no es la correcta' %}</strong>
-              </div>
-            {% endif %}
-          {% endif %}
-          {% if form.username.errors %}
-            <div class="alert alert-error">
-              <a class="close" data-dismiss="alert">×</a>
-              <strong>{%trans 'Usuario es obligatorio' %}</strong>
-            </div>
-          {% endif %}
-          {% if form.password.errors %}
-            <div class="alert alert-error">
-              <a class="close" data-dismiss="alert">×</a>
-              <strong>{%trans 'Contraseña es obligatorio' %}</strong>
-            </div>
-          {% endif %}         
-        <!-- END ERRORS -->  
-          <form class="form-horizontal" method="post" id="login-form" name="form" action="{% url register %}">{% csrf_token %}
-            <div class="control-group">
-              <label class="control-label" for="input01">Usuario</label>
-              <div class="controls">
-                {{form.username}}
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label" for="input01">Contraseña</label>
-              <div class="controls">
-                {{form.password}}
-              </div>
-            </div>
-            <div class="controls">
-              <button type="submit" class="btn">Registrarse</button>
-            </div>
-          </form>          
+
+        <form class="form-horizontal" method="post" id="login-form" name="form" action="{% url register %}">
+          {% csrf_token %}
+          <fieldset>
+              <legend>Login</legend>
+
+              {{ form.errors }}
+              {% if form.errors %}
+                <div class="alert alert-error">
+                  <a class="close" data-dismiss="alert">×</a>
+                  <strong>{{form.errors}}</strong>
+                </div>
+              {% endif %}
+
+              {% if form.username.errors %}
+                <div class="control-group error">
+                  <label for="inputError" class="control-label">{{form.username.label}}</label>
+                  <div class="controls">
+                    <input type="text" id="inputError">
+                    {% for error in form.username.errors %}
+                       <span class="help-inline">{{ error|escape }}</span>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% else %}
+                <div class="control-group">
+                  <label for="focusedInput" class="control-label">{{form.username.label}}</label>
+                  <div class="controls">
+                    <input type="text" id="focusedInput" class="input-xlarge focused">
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if form.password.errors %}
+                <div class="control-group error">
+                  <label for="inputError" class="control-label">{{form.password.label}}</label>
+                  <div class="controls">
+                    <input type="text" id="inputError">
+                    {% for error in form.password.errors %}
+                       <span class="help-inline">{{ error|escape }}</span>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% else %}
+                <div class="control-group">
+                  <label for="focusedInput" class="control-label">{{form.password.label}}</label>
+                  <div class="controls">
+                    <input type="text" id="focusedInput" class="input-xlarge focused">
+                  </div>
+                </div>
+              {% endif %}
+
         </div>
-      </div>      
+      </div>
     </div>
-
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{{ STATIC_URL }}js/jquery.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
-  </body>
-
-
-</html>
+{{ endblock }}
