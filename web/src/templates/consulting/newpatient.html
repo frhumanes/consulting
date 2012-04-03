@@ -1,13 +1,19 @@
 {% extends "ui/app.html" %}
+
 {% load i18n%}
-{% block extend_js_files %}
+
+{% block js_files %}
+  {{ block.super }}
   <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
 {% endblock %}
-{% block extend_css_files %}
+
+{% block css_files %}
+  {{ block.super }}
   <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet">
 {% endblock %}
+
 {% block jquery_init %}
-  $('#dp').datepicker().on('changeDate', 
+  $('#dp').datepicker().on('changeDate',
     function(ev){$('#dp').datepicker('hide');
   });
 {% endblock %}
@@ -17,18 +23,18 @@
     <div class="container">
         {% include "ui/includes/nav-bar.html" %}
     </div>
-    <div class="container" style="padding-top:100px;">      
+    <div class="container" style="padding-top:100px;">
       <div class="row" >
         <div class="span8 offset2 well">
-          <form class="form-horizontal" id="form" action="." method="post" accept-charset="utf-8">{% csrf_token %} 
+          <form class="form-horizontal" id="form" action="." method="post" accept-charset="utf-8">{% csrf_token %}
             {% if exituser %}
             <div class="alert alert-error">
               <a class="close" data-dismiss="alert">×</a>
               <strong>
                 {% trans 'El usuario ya existe' %}
               </strong>
-            </div>                              
-            {% endif %}       
+            </div>
+            {% endif %}
             <div class="control-group">
               <label class="control-label">
                 {% trans 'Nombre' %}
@@ -36,7 +42,7 @@
               <div class="controls">
                 {{form.name}}
                 {% if form.name.errors %}
-                  {{ form.name.errors }}                
+                  {{ form.name.errors }}
                 {% endif %}
               </div>
             </div>
@@ -47,10 +53,10 @@
               <div class="controls">
                 {{form.first_surname}}
                 {% if form.first_surname.errors %}
-                  {{ form.first_surname.errors }}                
+                  {{ form.first_surname.errors }}
                 {% endif %}
               </div>
-            </div> 
+            </div>
            <div class="control-group">
               <label class="control-label">
                 {% trans 'Segundo Apellido' %}
@@ -58,7 +64,7 @@
               <div class="controls">
                 {{form.second_surname}}
                 {% if form.second_surname.errors %}
-                  {{ form.second_surname.errors }}                
+                  {{ form.second_surname.errors }}
                 {% endif %}
               </div>
             </div>
@@ -69,7 +75,7 @@
               <div class="controls">
                 {{form.nif}}
                 {% if form.nif.errors %}
-                  {{ form.nif.errors }}                
+                  {{ form.nif.errors }}
                 {% endif %}
               </div>
             </div>
@@ -80,7 +86,7 @@
               <div class="controls">
                 {{form.sex}}
                 {% if form.sex.errors %}
-                  {{ form.sex.errors }}                
+                  {{ form.sex.errors }}
                 {% endif %}
               </div>
             </div>
@@ -91,7 +97,7 @@
               <div class="controls">
                 {{form.address}}
                 {% if form.address.errors %}
-                  {{ form.address.errors }}                
+                  {{ form.address.errors }}
                 {% endif %}
               </div>
             </div>
@@ -102,7 +108,7 @@
               <div class="controls">
                 {{form.town}}
                 {% if form.town.errors %}
-                  {{ form.town.errors }}                
+                  {{ form.town.errors }}
                 {% endif %}
               </div>
             </div>
@@ -113,10 +119,10 @@
               <div class="controls">
                 {{form.postcode}}
                 {% if form.postcode.errors %}
-                  {{ form.postcode.errors }}                
+                  {{ form.postcode.errors }}
                 {% endif %}
               </div>
-            </div> 
+            </div>
             <div class="control-group">
               <label class="control-label">
                 {% trans 'Estado Civil' %}
@@ -124,7 +130,7 @@
               <div class="controls">
                 {{form.status}}
                 {% if form.status.errors %}
-                  {{ form.status.errors }}                
+                  {{ form.status.errors }}
                 {% endif %}
               </div>
             </div>
@@ -140,9 +146,9 @@
                   </span>
                 </div>
                 {% if form.dob.errors %}
-                  {{ form.dob.errors }}                
+                  {{ form.dob.errors }}
                 {% endif %}
-              </div>              
+              </div>
             </div>
             <div class="control-group">
               <label class="control-label">
@@ -151,7 +157,7 @@
               <div class="controls">
                 {{form.phone1}}
                 {% if form.phone1.errors %}
-                  {{ form.phone1.errors }}                
+                  {{ form.phone1.errors }}
                 {% endif %}
               </div>
             </div>
@@ -162,7 +168,7 @@
               <div class="controls">
                 {{form.phone2}}
                 {% if form.phone2.errors %}
-                  {{ form.phone2.errors }}                
+                  {{ form.phone2.errors }}
                 {% endif %}
               </div>
             </div>
@@ -173,7 +179,7 @@
               <div class="controls">
                 {{form.email}}
                 {% if form.email.errors %}
-                  {{ form.email.errors }}                
+                  {{ form.email.errors }}
                 {% endif %}
               </div>
             </div>
@@ -184,16 +190,16 @@
               <div class="controls">
                 {{form.profession}}
                 {% if form.profession.errors %}
-                  {{ form.profession.errors }}                
+                  {{ form.profession.errors }}
                 {% endif %}
               </div>
             </div>
             <div class="controls">
               <button type="submit" class="btn">{% trans 'Guardar' %}</button>
             </div>
-          </form> 
-                   
+          </form>
+
         </div>
-      </div>      
+      </div>
     </div>
 {% endblock body %}
