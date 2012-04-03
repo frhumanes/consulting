@@ -15,7 +15,8 @@ class Report(models.Model):
     )
 
     patient = models.ForeignKey(User, related_name='userreports')
-    visit = models.ForeignKey('Visit', related_name='visitreports')
+    appointment = models.ForeignKey('Appointment',
+                                    related_name='appointmentreports')
 
     kind = models.IntegerField(_(u'Kind of report'), choices=KIND)
     name = models.CharField(max_length=255)
@@ -25,17 +26,21 @@ class Report(models.Model):
     date = models.DateTimeField()
 
 
-class Visit(models.Model):
-    patient = models.ForeignKey(User, related_name="patientvisits")
-    doctor = models.ForeignKey(User, related_name="doctorvisits")
+class Appointment(models.Model):
+    patient = models.ForeignKey(User, related_name="patientappointments")
+    doctor = models.ForeignKey(User, related_name="doctorappointments")
     questionnaire = models.ForeignKey('Questionnaire',
-                    related_name='questionnairevisits', blank=True, null=True)
-    answers = models.ManyToManyField('Answer', related_name="answervisits",
-                blank=True, null=True)
-    treatment = models.ForeignKey('Treatment', related_name="treatmentvisits",
-                blank=True, null=True)
+                    related_name='questionnaireappointments', blank=True,
+                    null=True)
+    answers = models.ManyToManyField('Answer',
+                                    related_name="answerappointments",
+                                    blank=True, null=True)
+    treatment = models.ForeignKey('Treatment',
+                                    related_name="treatmentappointments",
+                                    blank=True, null=True)
 
-    date = models.DateTimeField()
+    date = models.DateField(_(u'Date of appointment'))
+    hour = models.TimeField(_(u'Hour of appointment'))
 
     def __unicode__(self):
         return u'%s - %s' % (self.patient, self.questionnaire)
@@ -75,7 +80,7 @@ class Treatment(models.Model):
     medications = models.ManyToManyField('Medication',
                     related_name='medicationstreatments')
 
-    from_visit = models.BooleanField()
+    from_appointment = models.BooleanField()
     date = models.DateTimeField(_(u'Date'))
 
     def __unicode__(self):

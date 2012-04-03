@@ -3,25 +3,26 @@ from consulting.models import *
 
 
 class ReportAdmin(admin.ModelAdmin):
-    fieldsets = [('Reports', {'fields': ['name', 'patient', 'visit', 'kind',
-                'observations', 'date']})]
-    list_display = ('name', 'patient', 'visit', 'kind', 'observations', 'date')
-    search_fields = ('name', 'patient', 'visit', 'kind', 'observations',
+    fieldsets = [('Reports', {'fields': ['name', 'patient', 'appointment',
+                'kind', 'observations', 'date']})]
+    list_display = ('name', 'patient', 'appointment', 'kind', 'observations',
+                    'date')
+    search_fields = ('name', 'patient', 'appointment', 'kind', 'observations',
                     'date')
     ordering = ('name', 'patient', 'date')
 
 admin.site.register(Report, ReportAdmin)
 
 
-class VisitAdmin(admin.ModelAdmin):
-    fieldsets = [('Visits', {'fields': ['patient', 'doctor', 'questionnaire',
-                'answers', 'treatment', 'date']})]
+class AppointmentAdmin(admin.ModelAdmin):
+    fieldsets = [('Appointments', {'fields': ['patient', 'doctor',
+                'questionnaire', 'answers', 'treatment', 'date']})]
     list_display = ('patient', 'doctor', 'questionnaire', 'treatment', 'date')
     search_fields = ('patient', 'doctor', 'questionnaire', 'treatment', 'date')
     ordering = ('patient', 'date')
 
 
-admin.site.register(Visit, VisitAdmin)
+admin.site.register(Appointment, AppointmentAdmin)
 
 
 class QuestionnaireAdmin(admin.ModelAdmin):

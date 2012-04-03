@@ -1,11 +1,32 @@
 {% extends "ui/app.html" %}
-{% load i18n%}
+{% load i18n%} 
+{% block extend_js_files %}
+    <script src="{{ STATIC_URL }}js/jquery-ui-1.8.18.custom.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.ui.core.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.ui.position.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
+{% endblock %}
 {% block jquery_init %}
-    $('#newpatient').click(function(){
-        $('#aux').load('{% url prueba %}');
-        <!-- alert('HOLAAAAAAAAAAAAAAAAAAAa') -->
-    })
-{% endblock %} 
+    $("#searcher").autocomplete({
+            source: function(request, response){
+                $.ajax({
+                    url: '{% url searcher %}',
+                    type:'POST',
+                    data: {
+                        start: function() { return $("#searcher").val(); },
+                        csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val()
+                    },
+                    dataType: "json",
+                    success: function(data){                        
+                        response(data['usernames'])
+                    }
+                })
+            }
+    });
+        
+
+{% endblock %}
+
 {% block body %}
     {% include "ui/includes/header.html" %}
     <div class="container">
@@ -18,19 +39,16 @@
                 <label class="control-label span2" style="text-align: center;">
                         {% trans 'PACIENTE' %}
                 </label>
-                <input type="text" class="input-medium search-query span3">
+                <input type="text" id="searcher" class="input-medium span3">
             </form>
             </div>
-        </div>
+        </div>        
         <div class="row">
-            <div class="span4 offset4" style="padding-left:5px;"> 
-                <a id="newpatient" class="btn btn-large btn-primary span3" href="">
-                    {% trans 'ALTA PACIENTE' %}
+            <div style="padding-left:15px;" class="span4 offset4"> 
+                <a href="{% url newpatient %}" class="btn btn-large btn-primary span3">
+                {% trans 'ALTA PACIENTE' %}
                 </a>
             </div>            
-        </div>
-        <div id="aux"></div>
-        
+        </div>        
     </div>
-
 {% endblock body %}
