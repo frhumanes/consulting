@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.utils import simplejson
 from django.contrib.auth.models import User
+from django.db.models import Q
 from userprofile.models import Profile
 from userprofile.forms import ProfileForm
 from consulting.forms import AppointmentForm
@@ -20,7 +21,7 @@ def administrative(request):
                               context_instance=RequestContext(request))
 
 
-def generar_username(name, first_surname, nif):
+def generate_username(name, first_surname, nif):
 
     LEN_NIF = -3
     split_name = name.lower().split()
@@ -34,11 +35,6 @@ def generar_username(name, first_surname, nif):
     sub_nif = nif[LEN_NIF:]
 
     username = first_letter + second_letter + first_surname.lower() + sub_nif
-
-    # num_repeated = Profile.objects.filter(username__contains=username).\
-    #                     count()
-    # if num_repeated > 0:
-    #     username = username + str(num_repeated)
 
     return username
 
@@ -58,7 +54,7 @@ def newpatient(request):
                 second_surname = form.cleaned_data['second_surname']
                 email = form.cleaned_data['email']
 
-                username = generar_username(strip_accents(name),
+                username = generate_username(strip_accents(name),
                                             strip_accents(first_surname),
                                             nif)
 
@@ -145,9 +141,13 @@ def searcher(request):
     print 'View searcher'
     start = request.POST.get("start", "")
 
-    usernames = User.objects.filter(username__startswith=start)
+    # usernames = User.objects.filter(username__startswith=start)
 
-     # Object json
-    data = {'usernames': [u.username for u in usernames]}
+    #  # Object json
+    # data = {'usernames': [u.username for u in usernames]}
+
+    profiles = Profile.objects.filter(Q(nif__startswith=start) |
+                                    Q(username__startswith=start))
+    data = {'usernames': [p.username for p in profiles]}
 
     return HttpResponse(simplejson.dumps(data))
