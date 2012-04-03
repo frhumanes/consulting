@@ -1,0 +1,10 @@
+{% if appointments_doctor %}
+    <ul>
+        {% for  appointment in appointments_doctor %}
+            <li>
+                {{appointment.date}}
+                {{appointment.hour}}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
