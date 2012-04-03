@@ -1,5 +1,5 @@
 {% extends "ui/app.html" %}
-
+{% load i18n%}
 {% block body %}
 <div class="container" style="padding-top:50px;">
     <div class="row" >
@@ -8,7 +8,7 @@
             {% if  form.non_field_errors  %}
                 <div class="alert alert-error">
                     {% for error in form.non_field_errors %}
-                        <strong>¡Error!</strong>
+                        <strong>{% trans '¡Error!' %}</strong>
                         {{ error|escape }}
                     {% endfor %}
                 </div>
@@ -20,49 +20,49 @@
                 <legend>Login</legend>
                 <!-- USERNAME -->
                 {% if form.username.errors %}
-                    <div class="control-group error">
-                      <label for="id_username" class="control-label">{{form.username.label}}</label>
-                      <div class="controls">
-                        {{ form.username }}
-                        {% for error in form.username.errors %}
-                           <span class="help-inline">{{ error|escape }}</span>
-                        {% endfor %}
-                      </div>
+                  <div class="control-group error">
+                    <label for="id_username" class="control-label">{{form.username.label}}</label>
+                    <div class="controls">
+                      {{ form.username }}
+                      {% for error in form.username.errors %}
+                         <span class="help-inline">{{ error|escape }}</span>
+                      {% endfor %}
                     </div>
-                  {% else %}
-                    <div class="control-group">
-                      <label for="id_username" class="control-label">{{form.username.label}}</label>
-                      <div class="controls">
-                        {{ form.username }}
-                      </div>
-                    </div>
-                  {% endif %}
-                  <!-- END USERNAME -->
-
-                  <!-- PASSWORD -->
-                  {% if form.password.errors %}
-                    <div class="control-group error">
-                      <label for="id_password" class="control-label">{{form.password.label}}</label>
-                      <div class="controls">
-                        {{ form.password }}
-                        {% for error in form.password.errors %}
-                           <span class="help-inline">{{ error|escape }}</span>
-                        {% endfor %}
-                      </div>
-                    </div>
-                  {% else %}
-                    <div class="control-group">
-                      <label for="focusedInput" class="control-label">{{form.password.label}}</label>
-                      <div class="controls">
-                        {{ form.password }}
-                      </div>
-                    </div>
-                  {% endif %}
-                  <!-- END PASSWORD -->
-
-                  <div class="form-actions">
-                    <button class="btn btn-large btn-primary span2" type="submit">Login</button>
                   </div>
+                {% else %}
+                  <div class="control-group">
+                    <label for="id_username" class="control-label">{{form.username.label}}</label>
+                    <div class="controls">
+                      {{ form.username }}
+                    </div>
+                  </div>
+                {% endif %}
+                <!-- END USERNAME -->
+
+                <!-- PASSWORD -->
+                {% if form.password.errors %}
+                  <div class="control-group error">
+                    <label for="id_password" class="control-label">{{form.password.label}}</label>
+                    <div class="controls">
+                      {{ form.password }}
+                      {% for error in form.password.errors %}
+                         <span class="help-inline">{{ error|escape }}</span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% else %}
+                  <div class="control-group">
+                    <label for="focusedInput" class="control-label">{{form.password.label}}</label>
+                    <div class="controls">
+                      {{ form.password }}
+                    </div>
+                  </div>
+                {% endif %}
+                <!-- END PASSWORD -->
+
+                <div class="form-actions">
+                  <button class="btn btn-large btn-primary span2" type="submit">Login</button>
+                </div>
               </fieldset>
             </form>
         </div>

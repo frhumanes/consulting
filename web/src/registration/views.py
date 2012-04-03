@@ -4,15 +4,15 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from registration.forms import UserRegistrationForm
-from django.contrib.auth import REDIRECT_FIELD_NAME
-from django.utils.translation import ugettext_lazy as _
 
 
-def login_consulting(request, redirect_field_name=REDIRECT_FIELD_NAME,
-                        form_class=UserRegistrationForm):
+def login_consulting(request, form_class=UserRegistrationForm):
 
     if request.method == 'POST':
         form = form_class(data=request.POST)
+
+        print form.is_valid()
+
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
@@ -33,9 +33,8 @@ def login_consulting(request, redirect_field_name=REDIRECT_FIELD_NAME,
     else:
         form = form_class()
 
-    return render_to_response('registration/login.html',
-        {'form': form},
-        context_instance=RequestContext(request))
+    return render_to_response('registration/login.html', {'form': form},
+                                context_instance=RequestContext(request))
 
 
 def logout(request):

@@ -6,6 +6,9 @@
     <script src="{{ STATIC_URL }}js/jquery.ui.position.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
 {% endblock %}
+{% block extend_css_files %}
+  <link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+{% endblock %}
 {% block jquery_init %}
     $("#searcher").autocomplete({
             source: function(request, response){

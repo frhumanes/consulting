@@ -10,29 +10,15 @@
     {% block js_files %}
       <script src="{{ STATIC_URL }}js/jquery.js"></script>
       <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
-      <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
-      <script src="{{ STATIC_URL }}js/calendar.js"></script>
-      <script src="{{ STATIC_URL }}js/pyramid.js"></script>
-
     {% endblock %}
-	{% block extend_js_files %}
+	  {% block extend_js_files %}
     {% endblock %}
 
     {% block css %}
-      <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" />
-      <link href="{{ STATIC_URL }}css/app.css" rel="stylesheet" />
-      <link href="{{ STATIC_URL }}css/calendar.css" rel="stylesheet" />
-	  <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet">
-      <link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
-    </style>
+      <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet"/>
+      <link href="{{ STATIC_URL }}css/app.css" rel="stylesheet"/>      	    
+    {% endblock %}
+    {% block extend_css_files %}
     {% endblock %}
 
     <script type="text/javascript">

@@ -1,6 +1,11 @@
 {% extends "ui/app.html" %}
 {% load i18n%}
-
+{% block extend_js_files %}
+  <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
+{% endblock %}
+{% block extend_css_files %}
+  <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet">
+{% endblock %}
 {% block jquery_init %}
   $('#dp').datepicker().on('changeDate', 
     function(ev){$('#dp').datepicker('hide');
