@@ -148,6 +148,7 @@ def searcher(request):
 
     profiles = Profile.objects.filter(Q(nif__startswith=start) |
                                     Q(username__startswith=start))
-    data = {'usernames': [p.username for p in profiles]}
+    data = {'usernames': [(p.name + ' ' + p.first_surname + ' ' +
+                            p.second_surname) for p in profiles]}
 
     return HttpResponse(simplejson.dumps(data))
