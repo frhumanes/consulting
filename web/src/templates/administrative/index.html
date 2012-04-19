@@ -1,0 +1,65 @@
+{% extends "ui/app.html" %}
+
+{% load i18n%}
+
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/jquery-ui-1.8.18.custom.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.ui.core.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.ui.position.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
+{% endblock %}
+
+{% block css_files %}
+  {{ block.super }}
+  <link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+{% endblock %}
+
+{% block jquery_init %}  
+  $("#searcher").autocomplete({
+    source: function(request, response){
+              $.ajax({
+                  url: '{% url searcher %}',
+                  type:'POST',
+                  data: {
+                      start: function() { return $("#searcher").val(); },
+                      csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val()
+                  },
+                  dataType: "json",
+                  success: function(data){
+                      response(data['completed_names'])
+                  }
+              })
+            },
+    select: function(event, ui){
+              $('#overwrite').load('{% url patient_appointments %}',
+                                      {'patient_id': ui.item.id,
+                                      'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()});
+            },
+    
+  }); 
+
+{% endblock %}
+
+{% block header%}
+  {% include "ui/includes/header.html" %}
+{% endblock  %}
+
+{% block nav-bar%}
+    {% include "ui/includes/nav-bar-administrative.html" %}
+{% endblock  %}
+
+{% block body %}
+  <div id="overwrite" class="container">
+      <div class="row" style="padding-top:170px;">
+          <div class="span6 offset3">
+          <form class="well form-horizontal">{% csrf_token %}
+              <label class="control-label span2" style="text-align: center;">
+                      {% trans 'BUSCAR PACIENTE' %}
+              </label>
+              <input type="text" id="searcher" class="input-medium span3">
+          </form>
+          </div>
+      </div>        
+  </div>
+{% endblock body %}
