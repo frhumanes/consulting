@@ -1,22 +1,26 @@
-<div class="subnav">
-  <ul class="nav nav-pills">
-    <!-- <li class="dropdown active">
-      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Buttons <b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <li class="active"><a href="#buttonGroups">Button groups</a></li>
-        <li><a href="#buttonDropdowns">Button dropdowns</a></li>
-      </ul>
-    </li>
-    <li class="dropdown">
-      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Navigation <b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <li><a href="#navs">Nav, tabs, pills</a></li>
-        <li><a href="#navbar">Navbar</a></li>
-        <li><a href="#breadcrumbs">Breadcrumbs</a></li>
-        <li><a href="#pagination">Pagination</a></li>
-      </ul>
-    </li>-->
-    <li class="active"><a href="{% url administrative_index%}">Inicio</a></li>
-    <li><a href="{% url newpatient %}">Alta Paciente</a></li>
-  </ul>
+{% load i18n%}
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('li a').click(function(event){       
+      $(this).parent().addClass('active').siblings().removeClass('active');
+    });   
+  })
+</script>
+<div class="container">
+  <div class="subnav">
+    <ul class="nav nav-pills">      
+      <li>
+        <a href="#">{% trans 'Inicio' %}</a>
+      </li>
+      <li id="bea">
+        <a href="#">{% trans 'Alta Paciente' %}</a>
+      </li>
+      <li>
+        <a href="#">{% trans 'Baja Paciente' %}</a>
+      </li>
+      <li>
+        <a href="#">{% trans 'Activar Paciente' %}</a>
+      </li>
+    </ul>
+  </div>
 </div>

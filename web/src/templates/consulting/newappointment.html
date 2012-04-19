@@ -25,11 +25,15 @@
   });
 {% endblock %}
 
-{% block body %}
+{% block header%}
     {% include "ui/includes/header.html" %}
-    <div class="container">
-        {% include "ui/includes/nav-bar.html" %}
-    </div>
+{% endblock  %}
+
+{% block nav-bar%}
+    {% include "ui/includes/nav-bar-administrative.html" %}
+{% endblock  %}
+
+{% block body %}
     <div class="container" style="padding-top:100px;">
       <div class="row" >
         <div class="span8 offset2 well">

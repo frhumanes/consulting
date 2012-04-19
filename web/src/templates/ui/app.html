@@ -12,7 +12,7 @@
       <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
     {% endblock %}
 
-    {% block css %}
+    {% block css_files %}
       <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet"/>
       <link href="{{ STATIC_URL }}css/app.css" rel="stylesheet"/>
     {% endblock %}
@@ -38,11 +38,13 @@
     {% block header%}
     {% endblock  %}
 
+    {% block nav-bar%}
+    {% endblock  %}
+
     {% block body %}
     {% endblock body %}
 
-    {% block footer%}
-       {% include "ui/includes/footer.html" %}
+    {% block footer%}       
     {% endblock %}
   </body>
 </html>

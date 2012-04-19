@@ -3,6 +3,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.forms.widgets import DateInput
+from django.conf import settings
 from userprofile.models import Profile
 from consulting.models import Appointment
 from consulting.validators import validate_choice
@@ -17,7 +18,7 @@ class AppointmentForm(forms.ModelForm):
     format = _(u'%d/%m/%Y')
     input_formats = [format]
 
-    profiles_doctor = Profile.objects.filter(role=Profile.DOCTOR)
+    profiles_doctor = Profile.objects.filter(role=settings.DOCTOR)
 
     id_doctor_users = [profile.user.id for profile in profiles_doctor]
     queryset = User.objects.filter(pk__in=id_doctor_users)

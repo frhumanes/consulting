@@ -16,9 +16,11 @@ admin.site.register(Report, ReportAdmin)
 
 class AppointmentAdmin(admin.ModelAdmin):
     fieldsets = [('Appointments', {'fields': ['patient', 'doctor',
-                'questionnaire', 'answers', 'treatment', 'date']})]
-    list_display = ('patient', 'doctor', 'questionnaire', 'treatment', 'date')
-    search_fields = ('patient', 'doctor', 'questionnaire', 'treatment', 'date')
+                'questionnaire', 'answers', 'treatment', 'date', 'hour']})]
+    list_display = ('patient', 'doctor', 'questionnaire', 'treatment', 'date',
+                    'hour')
+    search_fields = ('patient', 'doctor', 'questionnaire', 'treatment', 'date',
+                    'hour')
     ordering = ('patient', 'date')
 
 

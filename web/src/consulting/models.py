@@ -10,19 +10,19 @@ from medicament.models import Medicine
 
 class Report(models.Model):
     KIND = (
-        (1, _(u'Default')),
-        (2, _(u'Successive')),
+        (1, _(u'Por fedecto')),
+        (2, _(u'Sucesivo')),
     )
 
     patient = models.ForeignKey(User, related_name='userreports')
     appointment = models.ForeignKey('Appointment',
                                     related_name='appointmentreports')
 
-    kind = models.IntegerField(_(u'Kind of report'), choices=KIND)
+    kind = models.IntegerField(_(u'Tipo de Informe'), choices=KIND)
     name = models.CharField(max_length=255)
-    observations = models.TextField(_(u'Observations'), blank=True)
-    recommendations_treatment = models.TextField(_(u'recommendations_treatment'
-                                ), blank=True)
+    observations = models.TextField(_(u'Observaciones'), blank=True)
+    recommendations_treatment = models.TextField(
+                                _(u'Recomendaciones/Tratamiento'), blank=True)
     date = models.DateTimeField()
 
 
@@ -39,8 +39,8 @@ class Appointment(models.Model):
                                     related_name="treatmentappointments",
                                     blank=True, null=True)
 
-    date = models.DateField(_(u'Date of appointment'))
-    hour = models.TimeField(_(u'Hour of appointment'))
+    date = models.DateField(_(u'Fecha de la Cita'))
+    hour = models.TimeField(_(u'Hora de la Cita'))
 
     def __unicode__(self):
         return u'%s - %s' % (self.patient, self.questionnaire)
@@ -66,7 +66,7 @@ class Questionnaire(models.Model):
 class Answer(models.Model):
     option = models.ForeignKey(Option, related_name="answers")
 
-    text = models.CharField(_(u'Text'), max_length=255, blank=True)
+    text = models.CharField(_(u'Texto'), max_length=255, blank=True)
 
     def __unicode__(self):
         return u'%s' % self.option
@@ -81,7 +81,7 @@ class Treatment(models.Model):
                     related_name='medicationstreatments')
 
     from_appointment = models.BooleanField()
-    date = models.DateTimeField(_(u'Date'))
+    date = models.DateTimeField(_(u'Fecha'))
 
     def __unicode__(self):
         return u'%s - %s' % (self.patient, self.date)
@@ -89,19 +89,19 @@ class Treatment(models.Model):
 
 class Medication(models.Model):
     BEFORE_AFTER_CHOICES = (
-        ('B', _(u'Before')),
-        ('A', _(u'After')),
+        ('B', _(u'Antes')),
+        ('A', _(u'Después')),
     )
 
     medicine = models.ForeignKey(Medicine, unique=True,
                 related_name='medications')
 
-    posology = models.CharField(_(u'Posology (mg/day)'), max_length=255)
-    time = models.IntegerField(_(u'Treatment time before or after begining of \
-            symptoms (months)'))
-    before_after = models.CharField(_(u'Treatment BEFORE or AFTER begining of \
-                    apsychiatric symptoms'),
-                    max_length=9, choices=BEFORE_AFTER_CHOICES)
+    posology = models.CharField(_(u'Posología (mg/día)'), max_length=255)
+    time = models.IntegerField(_(u'Tiempo de tratamiento antes del comienzo \
+                                de los síntomas (meses)'))
+    before_after = models.CharField(_(u'Tratmiento ANTERIOR/POSTERIOR al \
+                                    comienzo de los síntomas psiquiátricos'),
+                                    max_length=9, choices=BEFORE_AFTER_CHOICES)
 
     def __unicode__(self):
             return u'%s' % self.medicine

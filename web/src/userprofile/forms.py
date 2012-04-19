@@ -5,6 +5,7 @@ from django.contrib.localflavor.es.forms import ESPostalCodeField
 from django.contrib.localflavor.es.forms import ESPhoneNumberField
 from django.utils.translation import ugettext_lazy as _
 from django.forms.widgets import DateInput
+from django.conf import settings
 from models import Profile
 from consulting.validators import validate_choice
 
@@ -17,36 +18,41 @@ class ProfileForm(forms.ModelForm):
     )
     STATUS = (
         (-1, _(u'Seleccione el estado civil')),
-        (1, _(u'Casado')),
+        (1, _(u'Casado/a')),
         (2, _(u'Pareja estable')),
-        (3, _(u'Divorciado')),
-        (4, _(u'Viudo')),
+        (3, _(u'Divorciado/a')),
+        (4, _(u'Viudo/a')),
         (5, _(u'Soltero/a')),
         (6, _(u'Otros')),
     )
 
     ROLE = (
-        (Profile.DOCTOR, _(u'Médico')),
-        (Profile.ADMINISTRATIVE, _(u'Administrativo')),
-        (Profile.PATIENT, _(u'Paciente')),
+        (settings.DOCTOR, _(u'Médico')),
+        (settings.ADMINISTRATIVE, _(u'Administrativo')),
+        (settings.PATIENT, _(u'Paciente')),
     )
 
-    name = forms.CharField(max_length=150)
-    first_surname = forms.CharField(max_length=150)
-    second_surname = forms.CharField(max_length=150)
-    nif = ESIdentityCardNumberField()
-    sex = forms.ChoiceField(choices=SEX, validators=[validate_choice])
-    address = forms.CharField(max_length=150)
-    town = forms.CharField(max_length=150)
-    postcode = ESPostalCodeField()
-    dob = forms.DateField(widget=DateInput(
+    name = forms.CharField(label=_(u'Nombre'), max_length=150)
+    first_surname = forms.CharField(label=_(u'Primer Apellido'),
+                                    max_length=150)
+    second_surname = forms.CharField(label=_(u'Segundo Apellido'),
+                                        max_length=150)
+    nif = ESIdentityCardNumberField(label=_(u'NIF'))
+    sex = forms.ChoiceField(label=_(u'Sexo'), choices=SEX,
+                            validators=[validate_choice])
+    address = forms.CharField(label=_(u'Dirección'), max_length=150)
+    town = forms.CharField(label=_(u'Municipio'), max_length=150)
+    postcode = ESPostalCodeField(label=_(u'Código Postal'))
+    dob = forms.DateField(label=_(u'Fecha de Nacimiento'), widget=DateInput(
                             attrs={'class': 'span2', 'size': '16'}))
-    status = forms.ChoiceField(choices=STATUS, validators=[validate_choice])
-    phone1 = ESPhoneNumberField()
-    phone2 = ESPhoneNumberField(required=False)
-    email = forms.EmailField(required=False)
-    profession = forms.CharField(max_length=150, required=False)
+    status = forms.ChoiceField(label=_(u'Estado Civil'), choices=STATUS,
+                                validators=[validate_choice])
+    phone1 = ESPhoneNumberField(label=_(u'Teléfono 1'))
+    phone2 = ESPhoneNumberField(label=_(u'Teléfono 2'), required=False)
+    email = forms.EmailField(label=_(u'Correo Electrónico'), required=False)
+    profession = forms.CharField(label=_(u'Profesión'), max_length=150,
+                                required=False)
 
     class Meta:
         model = Profile
-        exclude = ('user', 'role', 'doctor')
+        exclude = ('user', 'role', 'doctor', 'search_field')

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -10,26 +11,17 @@ def login_consulting(request, form_class=UserRegistrationForm):
 
     if request.method == 'POST':
         form = form_class(data=request.POST)
-
-        print form.is_valid()
+        # form.non_field_errors(in template login.html) controls
+        # if account isn't active or username or password aren't correct
+        # If username and password are correct you can carry on
 
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-
             user = authenticate(username=username, password=password)
+            login(request, user)
 
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    # Redirect to a success page.
-                    return HttpResponseRedirect(reverse('main_index'))
-                else:
-                    # Return a 'disabled account' error message
-                    return HttpResponseRedirect(reverse('main_index'))
-            else:
-                # Return an 'invalid login' error message.
-                return HttpResponseRedirect(reverse('main_index'))
+            return HttpResponseRedirect(reverse('main_index'))
     else:
         form = form_class()
 
