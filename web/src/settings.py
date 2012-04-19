@@ -27,6 +27,23 @@ DATABASES = {
 
 DEFAULT_PASSWORD = '1234'
 
+#ROLES
+DOCTOR = 1
+ADMINISTRATIVE = 2
+PATIENT = 3
+
+#STATUS
+MARRIED = 1
+STABLE_PARTNER = 2
+DIVORCED = 3
+WIDOW_ER = 4
+SINGLE = 5
+OTHER = 6
+
+#SEX
+WOMAN = 1
+MAN = 2
+
 # The absolute path to the directory where collectstatic will collect static
 # files for deployment.
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'statics')
