@@ -33,7 +33,10 @@ class Profile(models.Model):
     )
     #username is the nick with you login in app
     user = models.ForeignKey(User, unique=True)
-    doctor = models.ForeignKey('self', blank=True, null=True)
+    doctor = models.ForeignKey(User, blank=True, null=True,
+                related_name='doctor_user')
+    patients = models.ManyToMany(User, blan=True, null=True,
+                related_name='patients_doctor')
     search_field = models.CharField(_(u'Campo buscador'),
                     max_length=200, blank=True)
     username = models.CharField(_(u'Nombre de usuario'), max_length=50,

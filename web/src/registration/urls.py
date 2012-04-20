@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 from django.conf.urls.defaults import *
-from registration.views import login_consulting, logout
+import views
 
 
 urlpatterns = patterns('',
-    url(r'^login/$', login_consulting, name='login'),
-    url(r'^logout/$', logout, name='logout'),
+    url(r'^login/$', views.login_consulting, name='login'),
+    url(r'^logout/$', views.logout, name='logout'),
 )

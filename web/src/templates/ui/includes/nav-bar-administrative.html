@@ -1,19 +1,22 @@
 {% load i18n%}
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('li a').click(function(event){       
-      $(this).parent().addClass('active').siblings().removeClass('active');
-    });   
-  })
-</script>
+{% load consulting %}
+
+{% url main_index as main_index %}
+{% url newpatient as newpatient %}
+
+
 <div class="container">
   <div class="subnav">
-    <ul class="nav nav-pills">      
-      <li>
-        <a href="#">{% trans 'Inicio' %}</a>
-      </li>
-      <li id="bea">
-        <a href="#">{% trans 'Alta Paciente' %}</a>
+    <ul class="nav nav-pills">
+        
+      <li class="{% active request main_index %}">
+        <a href="{% url main_index %}">
+          {% trans 'Inicio' %}
+        </a>
+      <li class="{% active request newpatient %}">
+        <a href="{% url newpatient %}">
+          {% trans 'Alta Paciente' %}
+        </a>
       </li>
       <li>
         <a href="#">{% trans 'Baja Paciente' %}</a>

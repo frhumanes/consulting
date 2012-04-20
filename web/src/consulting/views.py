@@ -35,6 +35,8 @@ def newpatient(request):
     exist_user = False
     same_username = False
 
+    print request.method
+
     if request.method == "POST":
         form = ProfileForm(request.POST)
         if form.is_valid():
@@ -127,6 +129,7 @@ def newappointment(request, id_newpatient):
                                 context_instance=RequestContext(request))
 
 
+# REPASAR
 def appointments_doctor(request):
     if request.method == 'POST':
         id_doctor = request.POST.get("id_doctor", "")
@@ -163,7 +166,11 @@ def patient_appointments(request):
         profile = Profile.objects.get(id=patient_id)
 
         patient_appointments = Appointment.objects.filter(patient=patient_id)
-    return render_to_response('patient/list_appointments.html',
+
+        return render_to_response('patient/list_appointments.html',
                             {'patient_appointments': patient_appointments,
                             'profile': profile},
                             context_instance=RequestContext(request))
+
+    return render_to_response('administrative/index.html', {},
+                                context_instance=RequestContext(request))

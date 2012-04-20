@@ -1,15 +1,15 @@
 # -*- encoding: utf-8 -*-
 from django.conf.urls.defaults import *
-from consulting.views import *
+import views
 
 
 urlpatterns = patterns('',
-    url(r'^newpatient/', newpatient, name='newpatient'),
-    url(r'^newappointment/(?P<id_newpatient>\d+)$', newappointment,
+    url(r'^newpatient/', views.newpatient, name='newpatient'),
+    url(r'^newappointment/(?P<id_newpatient>\d+)$', views.newappointment,
         name='newappointment'),
-    url(r'^appointments_doctor/', appointments_doctor,
+    url(r'^appointments_doctor/', views.appointments_doctor,
         name='appointments_doctor'),
-    url(r'^searcher/', searcher, name='searcher'),
-    url(r'^patient_appointments/', patient_appointments,
+    url(r'^searcher/', views.searcher, name='searcher'),
+    url(r'^patient_appointments/', views.patient_appointments,
         name='patient_appointments'),
 )
