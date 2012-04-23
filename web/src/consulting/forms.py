@@ -18,8 +18,15 @@ class AppointmentForm(forms.ModelForm):
     format = _(u'%d/%m/%Y')
     input_formats = [format]
 
-    profiles_doctor = Profile.objects.filter(role=settings.DOCTOR)
+    #PATIENT
+    profiles_patient = Profile.objects.filter(role=settings.PATIENT)
+    id_patient_users = [profile.user.id for profile in profiles_patient]
+    queryset = User.objects.filter(pk__in=id_patient_users)
+    patient = forms.ModelChoiceField(queryset=queryset,
+                                    widget=forms.HiddenInput)
 
+    #DOCTOR
+    profiles_doctor = Profile.objects.filter(role=settings.DOCTOR)
     id_doctor_users = [profile.user.id for profile in profiles_doctor]
     queryset = User.objects.filter(pk__in=id_doctor_users)
     doctor = RecipientChoiceField(queryset=queryset,
@@ -32,4 +39,4 @@ class AppointmentForm(forms.ModelForm):
 
     class Meta:
         model = Appointment
-        exclude = ('patient', 'questionnaire', 'answers', 'treatment')
+        exclude = ('questionnaire', 'answers', 'treatment')

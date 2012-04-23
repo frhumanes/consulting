@@ -2,8 +2,6 @@
 from django.conf import settings
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
-from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, HttpResponse
 from django.utils import simplejson
 from django.contrib.auth.models import User
 from userprofile.models import Profile
@@ -34,8 +32,6 @@ def generate_username(name, first_surname, nif):
 def newpatient(request):
     exist_user = False
     same_username = False
-
-    print request.method
 
     if request.method == "POST":
         form = ProfileForm(request.POST)
@@ -89,7 +85,7 @@ def newpatient(request):
                     id_newpatient = user.id
 
                     return render_to_response(
-                        'administrative/administrative_info_newpatient.html',
+                        'administrative/newpatient_info.html',
                         {'username': username,
                         'id_newpatient': id_newpatient},
                         context_instance=RequestContext(request))
@@ -103,27 +99,34 @@ def newpatient(request):
 
 
 def newappointment(request, id_newpatient):
-    user = get_object_or_404(User, pk=int(id_newpatient))
+    patient_user = get_object_or_404(User, pk=int(id_newpatient))
+    patientfullname = patient_user.first_name + ' ' + patient_user.last_name
 
     if request.method == "POST":
         form = AppointmentForm(request.POST)
         if form.is_valid():
-            doctor = form.cleaned_data['doctor']
-            profile_patient = user.get_profile()
-            profile_patient.doctor = doctor.get_profile()
-            profile_patient.save()
-            new_appointment = Appointment(patient=user,
-                        doctor=form.cleaned_data['doctor'],
-                        date=form.cleaned_data['date'],
-                        hour=form.cleaned_data['hour'])
-            new_appointment.save()
-            return HttpResponseRedirect(reverse('administrative_index'))
+            #UPDATE PROFILE DOCTOR
+            doctor_user = form.cleaned_data['doctor']
+            profile_doctor = doctor_user.get_profile()
+            profile_doctor.patients.add(patient_user)
+            profile_doctor.save()
+
+            #UPDATE PROFILE PATIENT
+            #IF IT'S FIRST APPOINTMENT OF PATIENT
+            if Appointment.objects.filter(patient=id_newpatient).count() == 0:
+                profile_patient = patient_user.get_profile()
+                profile_patient.doctor = doctor_user
+                profile_patient.save()
+
+            form.save()
+
+            return render_to_response('administrative/index.html', {},
+                            context_instance=RequestContext(request))
     else:
-        form = AppointmentForm()
+        form = AppointmentForm(initial={'patient': patient_user})
 
     return render_to_response('consulting/newappointment.html',
-                                {'name': user.first_name,
-                                'surnames': user.last_name,
+                                {'patientfullname': patientfullname,
                                 'form': form,
                                 'id_newpatient': id_newpatient},
                                 context_instance=RequestContext(request))

@@ -41,6 +41,7 @@
                 action="{% url newappointment id_newpatient %}"
                 method="post" accept-charset="utf-8">{% csrf_token %}
             <h2>{% trans 'NUEVA CITA' %}</h2>
+            {{form.patient}}
             <div class="control-group span4">
               <div>
                 <label class="control-label">
@@ -62,7 +63,7 @@
                 {% trans 'Paciente' %}
               </label>
               <div class="controls" style="padding-top:5px;" >
-                {{name}} {{surnames}}
+                {{patientfullname}}
               </div>
             </div>
             <div class="control-group span8">

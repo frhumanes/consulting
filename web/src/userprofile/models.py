@@ -35,7 +35,7 @@ class Profile(models.Model):
     user = models.ForeignKey(User, unique=True)
     doctor = models.ForeignKey(User, blank=True, null=True,
                 related_name='doctor_user')
-    patients = models.ManyToMany(User, blan=True, null=True,
+    patients = models.ManyToManyField(User, blank=True, null=True,
                 related_name='patients_doctor')
     search_field = models.CharField(_(u'Campo buscador'),
                     max_length=200, blank=True)
