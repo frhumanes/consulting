@@ -1,0 +1,81 @@
+{% load i18n messages%}
+
+{% match_referer "inbox" as match_inbox %}
+{% match_referer "outbox" as match_outbox %}
+
+<div id="loading"></div>
+
+<div id="message">
+  <dl class="dl-horizontal">
+    {% if match_inbox %}
+      <dt>{% trans 'From' %}</dt>
+      <dd><span>{{ message.author }}</span></dd>
+
+      <dt>{% trans 'To' %}</dt>
+      <dd><span>{{ message.recipient }}</span></dd>
+    {% endif %}
+
+    {% if match_outbox %}
+      <dt>{% trans 'To' %}</dt>
+      <dd><span>{{ message.recipient }}</span></dd>
+    {% endif %}
+
+    <dt>{% trans 'Date' %}</dt>
+      <dd><span>{{ message.sent_at|date:"d M H:i" }}</span></dd>
+
+    <dt>{% trans 'Subject' %}</dt>
+    <dd><span>{{ message.subject }}</span></dd>
+
+    <dt>{% trans 'Body' %}</dt>
+    <dd><span>{{ message.body|linebreaks}}</span></dd>
+  </dl>
+
+  <!-- END BODY -->
+  {% if match_inbox %}
+    <button id="reply" class="btn btn-medium btn-primary span2 offset1" type="submit">{% trans 'Responder' %}</button>
+  {% endif %}
+</div>
+
+
+<script>
+$('#reply').on('click', function(event){
+  var sp = start_spinner('loading');
+
+  $('#message').load('{% url private_messages_reply  message.id %}', function() {
+     sp.stop();
+     $('#message').show();
+     $("textarea:visible:first").focus();
+  });
+
+});
+
+function start_spinner(el){
+  $('#message').hide();
+  $('.pull-right').hide();
+  return create_spinner_on(el);
+}
+
+function create_spinner_on(el){
+  var opts = {
+    lines: 13, // The number of lines to draw
+    length: 7, // The length of each line
+    width: 4, // The line thickness
+    radius: 10, // The radius of the inner circle
+    rotate: 0, // The rotation offset
+    color: '#000', // #rgb or #rrggbb
+    speed: 1, // Rounds per second
+    trail: 60, // Afterglow percentage
+    shadow: false, // Whether to render a shadow
+    hwaccel: false, // Whether to use hardware acceleration
+    className: 'spinner', // The CSS class to assign to the spinner
+    zIndex: 2e9, // The z-index (defaults to 2000000000)
+    top: '0px', // Top position relative to parent in px
+    left: '0px' // Left position relative to parent in px
+  };
+
+  var target =  document.getElementById(el);
+  var spinner = new Spinner(opts).spin(target);
+  return spinner;
+}
+
+</script>

@@ -1,0 +1,7 @@
+{% load i18n messages %}
+
+ <ul class="nav nav-pills nav-stacked">
+    <li><a href="{% url private_messages_new %}">{% trans "Redactar" %}</a></li>
+    <li><a href="{% url private_messages_inbox %}" >{% trans "Recibidos" %} ({{ request.user|unread_messages }}) </a></li>
+    <li><a href="{% url private_messages_outbox %}">{% trans "Enviados" %}</a></li>
+</ul>

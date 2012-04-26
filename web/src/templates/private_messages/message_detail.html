@@ -1,0 +1,26 @@
+{% load i18n messages%}
+
+{% match_url "private_messages_outbox" as match_outbox %}
+{% match_url "private_messages_inbox" as match_inbox %}
+
+<tr data-msg="{{ message.id }}" style="cursor:pointer" >
+
+{% if match_outbox %}
+  <td><i class="icon-share"></i></td>
+  <td>{{ message.recipient }}</td>
+{% endif %}
+
+{% if match_inbox %}
+    {% if message.unread %}
+        <td><i class="icon-envelope"></i></td>
+    {% else %}
+        <td><i class="icon-eye-open"></i></td>
+    {% endif %}
+   <td>{{ message.author }}</td>
+{% endif %}
+
+
+  <!-- <td>{{ message.subject }}</td> -->
+  <td>{{ message.body|safe|truncatewords:22 }}</td>
+  <td>{{ message.sent_at|date:"d M" }}</td>
+</tr>

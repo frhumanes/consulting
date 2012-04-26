@@ -167,6 +167,7 @@ INSTALLED_APPS = (
     'consulting',
     'main',
     'registration',
+    'private_messages',
 )
 
 AUTH_PROFILE_MODULE = 'userprofile.Profile'

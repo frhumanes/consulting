@@ -1,6 +1,5 @@
 {% load i18n%}
-<div class="container">
-  <div class="subnav">
+ <div class="subnav">
     <ul class="nav nav-pills">
       <!-- <li class="dropdown active">
         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Buttons <b class="caret"></b></a>
@@ -31,8 +30,7 @@
         <a href="#dates">{% trans 'Estadística' %}</a>
       </li>
       <li>
-        <a href="#dates">{% trans 'Mensajería' %}</a>
+        <a href="{% url private_messages_inbox %}">{% trans 'Mensajería' %}</a>
       </li>
     </ul>
   </div>
-</div>

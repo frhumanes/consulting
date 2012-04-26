@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     (r'^account/', include('registration.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^consulting/', include('consulting.urls')),
+
+    (r'^messages/', include('private_messages.urls')),
 )
 
 

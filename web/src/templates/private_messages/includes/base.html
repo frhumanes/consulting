@@ -1,0 +1,31 @@
+{% extends "ui/app.html" %}
+
+{% load i18n%}
+
+{% block header%}
+  {% include "ui/includes/header.html" %}
+{% endblock  %}
+
+
+{% block body %}
+
+<div class="container">
+    {% block nav-bar%}
+        {%if request.user.get_profile.is_doctor %}
+            {% include "ui/includes/nav-bar-doctor.html" %}
+        {% else %}
+            {% include "ui/includes/nav-bar-patient.html" %}
+        {% endif %}
+    {% endblock  %}
+    <div class="row">
+        <div class="span2">
+            {% block left_panel %}{% endblock %}
+        </div>
+
+        <div class="span10">
+          {% block right_panel %}{% endblock %}
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

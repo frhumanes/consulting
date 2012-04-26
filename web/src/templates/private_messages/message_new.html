@@ -1,0 +1,102 @@
+{% extends "private_messages/includes/base.html" %}
+
+{% load i18n%}
+
+{% block title %}{% trans 'Message New' %}{% endblock %}
+
+
+{% block left_panel %}
+  {% include "private_messages/includes/mail_actions.html" %}
+{% endblock %}
+
+
+{% block right_panel %}
+
+{% if replying %}
+  {% include "private_messages/message_detail.html" with message=parent_message replying=replying %}
+{% endif %}
+
+{% if  form.non_field_errors  %}
+    <div class="alert alert-error">
+        {% for error in form.non_field_errors %}
+            <strong>{% trans '¡Error!' %}</strong>
+            {{ error|escape }}
+        {% endfor %}
+    </div>
+{% endif %}
+
+<form class="form-horizontal" method="post" action="">{% csrf_token %}
+  <fieldset>
+    <legend>{% trans 'Redactar correo' %}</legend>
+      <!-- SUBJECT -->
+      {% if form.subject.errors %}
+        <div class="control-group error">
+          <label for="id_subject" class="control-label">{{form.subject.label}}</label>
+          <div class="controls">
+            {{ form.subject }}
+            {% for error in form.subject.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_subject" class="control-label">{{form.subject.label}}</label>
+          <div class="controls">
+            {{ form.subject }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END SUBJECT -->
+
+      <!-- BODY -->
+      {% if form.body.errors %}
+        <div class="control-group error">
+          <label for="id_body" class="control-label">{{form.body.label}}</label>
+          <div class="controls">
+            {{ form.body }}
+            {% for error in form.body.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_body" class="control-label">{{form.body.label}}</label>
+          <div class="controls">
+            {{ form.body }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END BODY -->
+
+       <!-- RECIPIENT -->
+      {% if form.recipient.errors %}
+        <div class="control-group error">
+          <label for="id_recipient" class="control-label">{{form.recipient.label}}</label>
+          <div class="controls">
+            {{ form.recipient }}
+            {% for error in form.recipient.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_recipient" class="control-label">{{form.recipient.label}}</label>
+          <div class="controls">
+            {{ form.recipient }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END RECIPIENT -->
+
+
+      <div class="form-actions">
+        <button class="btn btn-large btn-primary span3 offset1" type="submit">{% trans 'Enviar' %}</button>
+      </div>
+
+  </fieldset>
+</form>
+
+{% endblock %}

@@ -34,9 +34,9 @@ class Profile(models.Model):
     #username is the nick with you login in app
     user = models.ForeignKey(User, unique=True)
     doctor = models.ForeignKey(User, blank=True, null=True,
-                related_name='doctor_user')
+                related_name='doctor')
     patients = models.ManyToManyField(User, blank=True, null=True,
-                related_name='patients_doctor')
+                related_name='patients')
     search_field = models.CharField(_(u'Campo buscador'),
                     max_length=200, blank=True)
     username = models.CharField(_(u'Nombre de usuario'), max_length=50,
@@ -61,6 +61,9 @@ class Profile(models.Model):
     profession = models.CharField(_(u'Profesión'), max_length=150, blank=True)
     role = models.IntegerField(_(u'Rol'), choices=ROLE, blank=True,
                                 null=True)
+
+    def is_doctor(self):
+        return self.role == settings.DOCTOR
 
     def __unicode__(self):
         return u'%s %s %s' % (self.name, self.first_surname,
@@ -118,12 +121,3 @@ class Profile(models.Model):
             nextAppointment = ''
 
         return nextAppointment
-
-
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        profile, created = Profile.objects.get_or_create(user=instance)
-
-
-# Adding a profile automatically when you create a user: we use a signal
-post_save.connect(create_user_profile, sender=User)

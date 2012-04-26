@@ -38,13 +38,11 @@
     {% block header%}
     {% endblock  %}
 
-    {% block nav-bar%}
-    {% endblock  %}
-
     {% block body %}
+      {% block nav-bar%}{% endblock  %}
     {% endblock body %}
 
-    {% block footer%}       
+    {% block footer%}
     {% endblock %}
   </body>
 </html>

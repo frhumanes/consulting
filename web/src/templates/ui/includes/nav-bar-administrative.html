@@ -4,10 +4,9 @@
 {% url main_index as main_index %}
 {% url newpatient as newpatient %}
 
-<div class="container">
-  <div class="subnav">
+ <div class="subnav">
     <ul class="nav nav-pills">
-        
+
       <li class="{% active request main_index %}">
         <a href="{% url main_index %}">
           {% trans 'Inicio' %}
@@ -25,4 +24,3 @@
       </li>
     </ul>
   </div>
-</div>

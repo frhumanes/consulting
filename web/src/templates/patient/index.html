@@ -67,12 +67,13 @@
   {% include "ui/includes/header.html" %}
 {% endblock  %}
 
-{% block nav-bar%}
-    {% include "ui/includes/nav-bar-main.html" %}
-{% endblock  %}
-
 {% block body %}
     <div class="container">
+
+    {% block nav-bar%}
+        {% include "ui/includes/nav-bar-patient.html" %}
+    {% endblock  %}
+
     <!-- ALERTS -->
     <div class="alert alert-info">
         <a class="close" data-dismiss="alert">×</a>
