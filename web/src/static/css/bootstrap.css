@@ -1853,7 +1853,7 @@ table .span24 {
 .dropdown-menu .active > a:hover {
   color: #ffffff;
   text-decoration: none;
-  background-color: #0088cc;
+  background-color: #2fb8ed;
 }
 .dropdown.open {
   *z-index: 1000;
@@ -2481,7 +2481,7 @@ input[type="submit"].btn.btn-mini {
 }
 .nav > li > a:hover {
   text-decoration: none;
-  background-color: #eeeeee;
+  background-color: #CCEDF6;
 }
 .nav .nav-header {
   display: block;
@@ -2663,7 +2663,7 @@ input[type="submit"].btn.btn-mini {
 .nav-pills .open .dropdown-toggle,
 .nav > .open.active > a:hover {
   color: #ffffff;
-  background-color: #999999;
+  background-color: #2FB8ED;
   border-color: #999999;
 }
 .nav .open .caret,
