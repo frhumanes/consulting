@@ -189,3 +189,8 @@ def patient_appointments(request):
 
     return render_to_response('administrative/index.html', {},
                                 context_instance=RequestContext(request))
+
+
+def patient_management(request):
+    return render_to_response('doctor/patient_management.html', {},
+                            context_instance=RequestContext(request))
