@@ -12,4 +12,6 @@ urlpatterns = patterns('',
     url(r'^searcher/', views.searcher, name='searcher'),
     url(r'^patient_appointments/', views.patient_appointments,
         name='patient_appointments'),
+    url(r'^patient_management/', views.patient_management,
+        name='patient_management'),
 )
