@@ -61,7 +61,7 @@ def newpatient(request):
                     user.last_name = first_surname + ' ' + second_surname
                     user.email = email
                     user.profile = create_or_update_profile(user,
-                        form, Profile.PATIENT)
+                        form, username, settings.PATIENT)
                     user.save()
 
                     id_newpatient = user.id
@@ -80,14 +80,22 @@ def newpatient(request):
                                 context_instance=RequestContext(request))
 
 
-def create_or_update_profile(user, form, role):
-    profile = Profile()
-    profile.name = form.cleaned_data['name']
-    profile.first_surname = form.cleaned_data['first_surname']
-    profile.second_surname = form.cleaned_data['second_surname']
-    profile.nif = form.cleaned_data['nif']
-    profile.email = form.cleaned_data['email']
+def create_or_update_profile(user, form, username, role):
+    name = form.cleaned_data['name']
+    first_surname = form.cleaned_data['first_surname']
+    second_surname = form.cleaned_data['second_surname']
+    nif = form.cleaned_data['nif']
 
+    profile = Profile()
+    profile.user = user
+    profile.search_field = name + ' ' + first_surname + ' ' +\
+                            second_surname + ' ' + nif
+    profile.username = username
+    profile.name = name
+    profile.first_surname = first_surname
+    profile.second_surname = second_surname
+    profile.nif = nif
+    profile.email = form.cleaned_data['email']
     profile.sex = form.cleaned_data['sex']
     profile.address = form.cleaned_data['address']
     profile.town = form.cleaned_data['town']
@@ -98,7 +106,7 @@ def create_or_update_profile(user, form, role):
     profile.phone2 = form.cleaned_data['phone2']
     profile.profession = form.cleaned_data['profession']
     profile.role = role
-    profile.user = user
+
     profile.save()
 
 
