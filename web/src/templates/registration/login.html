@@ -5,7 +5,8 @@
 {% block body %}
 <div class="container" style="padding-top:50px;">
     <div class="row" >
-        <div class="span6 offset3">
+        <div class="span3">&nbsp;</div>
+        <div class="span6">
           {% if  form.non_field_errors  %}
               <div class="alert alert-error">
                   {% for error in form.non_field_errors %}
@@ -62,13 +63,15 @@
               {% endif %}
               <!-- END PASSWORD -->
 
-              <div class="well">
-                <button class="btn btn-large btn-primary offset2" type="submit">  Login
+              <div class="well center">
+                <button class="btn btn-primary btn-large" type="submit">
+                  Login
                 </button>
               </div>
             </fieldset>
           </form>
         </div>
+        <div class="span3">&nbsp;</div>
     </div>
 </div>
 {% endblock %}
