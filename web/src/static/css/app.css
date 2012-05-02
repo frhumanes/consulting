@@ -8,3 +8,6 @@ body {
 .card{
     overflow-x: auto;
 }
+.center{
+    text-align: center;
+}
