@@ -35,71 +35,7 @@
       {% endif %}
     </div>
     <div class="span4">
-      <div class="alert alert-info" style="margin-left:30px;">        
-        <table class="table-condensed">  
-          <thead>
-            <tr>            
-              <th colspan="2" style="text-align:center;">
-                <h3>
-                  {{profile.name|upper}} {{profile.first_surname|upper}} {{profile.second_surname|upper}}
-                </h3>
-              </th>
-            </tr>
-          </thead>        
-          <tbody>           
-              <tr>            
-                <td>{% trans 'NIF' %}</td>
-                <td>{{profile.nif}}</td>
-              </tr>
-              <tr>            
-                <td>{% trans 'EDAD' %}</td>
-                <td>{{profile.get_age}}</td>
-              </tr>
-              <tr>            
-                <td>{% trans 'ESTADO CIVIL' %}</td>
-                <td>{{profile.get_status}}</td>
-              </tr>
-              <tr>            
-                <td>{% trans 'TELÉFONO 1' %}</td>
-                <td>{{profile.phone1}}</td>
-              </tr>
-              <tr>            
-                <td>{% trans 'TELÉFONO 2' %}</td>
-                <td>{{profile.phone2}}</td>
-              </tr>
-              <tr>            
-                <td>{% trans 'DOMICILIO' %}</td>
-                <td>{{profile.address}}</td>
-              </tr>
-              <tr>            
-                <td>{% trans 'MUNICIPIO' %}</td>
-                <td>{{profile.town}}</td>
-              </tr>
-              <tr>            
-                <td>{% trans 'CÓDIGO POSTAL' %}</td>
-                <td>{{profile.postcode}}</td>
-              </tr>
-              <tr>            
-                <td>{% trans 'PROFESIÓN' %}</td>
-                <td>{{profile.profession}}</td>
-              </tr>
-              <tr>            
-                <td>{% trans 'ÚLTIMA CITA' %}</td>
-                <td>{{profile.get_lastAppointment}}</td>
-              </tr>
-              <tr>            
-                <td>{% trans 'PRÓXIMA CITA' %}</td>
-                <td>{{profile.get_nextAppointment}}</td>
-              </tr>
-              <tr>            
-                <td>{% trans 'NIVEL ESTRATIFICACIÓN' %}</td>
-                <td>
-                  PENDIENTE DE CORREGIR 1234567894561234567894561234567894561
-                </td>
-              </tr>              
-          </tbody>
-        </table>        
-      </div>
+      {% include "consulting/card.html" %}
     </div>
   </div>
 </section>
