@@ -16,8 +16,7 @@
 {% block right_panel %}
 
 <legend>{% get_header request %}</legend>
-
-  {% if messages %}
+  {% if messages.object_list.count > 0 %}
     <div id="message-paginator" class="pull-right">
       <ul class="pagination ">
         {% if messages.has_previous %}
