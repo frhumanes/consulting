@@ -11,11 +11,20 @@ class GroupAdmin(admin.ModelAdmin):
 admin.site.register(Group, GroupAdmin)
 
 
+class ActiveIngredientAdmin(admin.ModelAdmin):
+    fieldsets = [('ActiveIngredients', {'fields': ['name']})]
+    list_display = ('name',)
+    search_fields = ('name',)
+    ordering = ('name',)
+
+admin.site.register(ActiveIngredient, ActiveIngredientAdmin)
+
+
 class MedicineAdmin(admin.ModelAdmin):
     fieldsets = [('Medicines', {'fields': ['group', 'name',
-                'active_ingredient']})]
-    list_display = ('group', 'name', 'active_ingredient')
-    search_fields = ('group', 'name', 'active_ingredient')
-    ordering = ('group', 'name', 'active_ingredient')
+                                'active_ingredients']})]
+    list_display = ('name', 'group')
+    search_fields = ('group', 'name')
+    ordering = ('group', 'name')
 
 admin.site.register(Medicine, MedicineAdmin)
