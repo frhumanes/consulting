@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from survey.models import Option, Survey
 from medicament.models import Medicine
+from django.conf import settings
 
 
 class Report(models.Model):
@@ -78,30 +79,37 @@ class Answer(models.Model):
 class Treatment(models.Model):
     patient = models.ForeignKey(User, related_name='patienttreatments')
     medications = models.ManyToManyField('Medication',
-                    related_name='medicationstreatments')
+                related_name='medicationstreatments')
 
     from_appointment = models.BooleanField()
     date = models.DateTimeField(_(u'Fecha'))
 
     def __unicode__(self):
-        return u'%s - %s' % (self.patient, self.date)
+        return u'%s' % self.date
 
 
 class Medication(models.Model):
     BEFORE_AFTER_CHOICES = (
-        ('B', _(u'Antes')),
-        ('A', _(u'Después')),
+        (settings.BEFORE, _(u'Anterior')),
+        (settings.AFTER, _(u'Posterior')),
     )
 
-    medicine = models.ForeignKey(Medicine, unique=True,
-                related_name='medications')
+    medicine = models.ForeignKey(Medicine, related_name='medications')
 
     posology = models.CharField(_(u'Posología (mg/día)'), max_length=255)
     time = models.IntegerField(_(u'Tiempo de tratamiento antes del comienzo \
                                 de los síntomas (meses)'))
-    before_after = models.CharField(_(u'Tratmiento ANTERIOR/POSTERIOR al \
+    before_after = models.IntegerField(_(u'Tratamiento ANTERIOR/POSTERIOR al \
                                     comienzo de los síntomas psiquiátricos'),
-                                    max_length=9, choices=BEFORE_AFTER_CHOICES)
+                                    choices=BEFORE_AFTER_CHOICES)
 
     def __unicode__(self):
             return u'%s' % self.medicine
+
+    def get_before_after(self):
+        if self.before_after == settings.BEFORE:
+            before_after = _(u'Anterior')
+        else:
+            before_after = _(u'Posterior')
+
+        return before_after
