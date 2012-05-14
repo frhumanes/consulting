@@ -1,0 +1,47 @@
+{% load i18n%}
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li>
+      <a href="#">
+        {% trans 'DATOS PERSONALES' %}
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        {% trans 'INFORMES' %}
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        {% trans 'RECOMENDACIONES' %}
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        {% trans 'PARÁMETROS' %}
+      </a>
+    </li>
+    <li class="dropdown">
+      <a id="medicine" class="dropdown-toggle" href="#" >
+        {% trans 'FÁRMACOS' %} <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="#">
+            {% trans 'Listado de Tratamientos Farmacológicos' %}
+          </a>
+        </li>
+        <li>
+          <a href="{% url newtreatment_pm%}">
+            {% trans 'Nuevo Tratamiento Farmacológico' %}
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">
+        {% trans 'CITAS' %}
+      </a>
+    </li>
+  </ul>
+</div>
