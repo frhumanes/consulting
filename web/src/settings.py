@@ -44,6 +44,11 @@ OTHER = 6
 WOMAN = 1
 MAN = 2
 
+
+#TREATMENT
+BEFORE = 1
+AFTER = 2
+
 # The absolute path to the directory where collectstatic will collect static
 # files for deployment.
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'statics')
