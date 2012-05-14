@@ -14,13 +14,19 @@ class Group(models.Model):
         return u'%s' % (self.name)
 
 
-class Medicine(models.Model):
-    group = models.ForeignKey(Group, related_name='medicines')
-
-    name = models.CharField(_(u'Nombre del medicamento'), max_length=40)
-    active_ingredient = models.CharField(_(u'Principio Activo'),
-                        max_length=255)
+class ActiveIngredient(models.Model):
+    name = models.CharField(_(u'Principio Activo'), max_length=40, blank=True)
 
     def __unicode__(self):
-                return u'%s - %s - %s' % (self.group, self.name,
-                self.active_ingredient)
+        return u'%s' % (self.name)
+
+
+class Medicine(models.Model):
+    group = models.ForeignKey(Group, related_name='medicines')
+    active_ingredients = models.ManyToManyField(ActiveIngredient,
+                                                related_name='medicines')
+
+    name = models.CharField(_(u'Nombre del medicamento'), max_length=40)
+
+    def __unicode__(self):
+        return u'%s' % (self.name)
