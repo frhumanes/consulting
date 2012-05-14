@@ -64,6 +64,12 @@ class Profile(models.Model):
     def is_doctor(self):
         return self.role == settings.DOCTOR
 
+    def is_administrative(self):
+        return self.role == settings.ADMINISTRATIVE
+
+    def is_patient(self):
+        return self.role == settings.PATIENT
+
     def __unicode__(self):
         return u'%s %s %s' % (self.name, self.first_surname,
                                 self.second_surname)
