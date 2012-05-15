@@ -33,7 +33,7 @@ class Command(BaseCommand):
                           stream=sys.stdout)
 
     def handle(self, *args, **options):
-        # self.setup_log()
+        self.setup_log()
         logging.info(datetime.now().isoformat())
         logging.info("Fetching comments")
         logging.info("----------START HANDLE----------")
