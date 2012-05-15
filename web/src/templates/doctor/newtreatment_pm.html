@@ -16,15 +16,6 @@
 {% endblock %}
 
 {% block jquery_init %}
-  <!-- COUNT ROWS -->
-  if ($('#treatment >tbody >tr').length == 0){
-    $("#id_empty_table").attr('value', 'True');
-    $("#aux").attr('value', 'True');
-  }
-  else{
-    $("#id_empty_table").attr('value', 'False');
-    $("#aux").attr('value', 'False');
-  }
   <!-- LOOK FOR MEDICINE -->
   $("#id_searcher_medicine").autocomplete({
     source: function(request, response){
@@ -82,9 +73,7 @@
         <form class="form-horizontal" id="form" action="." method="post" accept-charset="utf-8">{% csrf_token %}
           <fieldset class="control-group">
             <legend>{% trans 'FÁRMACO' %}</legend>
-            <input id="aux" type="hidden">
             {{form.treatment}}
-            {{form.empty_table}}
             {{form.medicine}}                       
             <div class="control-group">
               <label class="control-label">

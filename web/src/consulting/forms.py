@@ -49,7 +49,6 @@ class MedicationForm(forms.ModelForm):
         (settings.BEFORE, _(u'Anterior')),
         (settings.AFTER, _(u'Posterior')),
     )
-    empty_table = forms.CharField(max_length=10, widget=forms.HiddenInput)
     treatment = forms.IntegerField(widget=forms.HiddenInput, required=False)
     searcher_medicine = forms.CharField(label=_(u'FÁRMACO'), max_length=150)
     medicine = forms.ModelChoiceField(queryset=Medicine.objects.all(),
