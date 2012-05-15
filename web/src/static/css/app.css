@@ -11,6 +11,12 @@ body {
 .center{
     text-align: center;
 }
+/* Space out sub-sections more
+-------------------------------------------------- */
+section {
+  /*padding-top: 60px;*/
+}
+
 /************************************SUBNAV***********************************/
 .subnav {
   width: 100%;
@@ -93,6 +99,10 @@ img {
 
 
 @media (max-width: 768px) {
+  /* Remove any padding from the body */
+  body {
+    padding-top: 0;
+  }
 
   /* Subnav */
   .subnav {
