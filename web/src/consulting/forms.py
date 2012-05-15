@@ -50,15 +50,14 @@ class MedicationForm(forms.ModelForm):
         (settings.AFTER, _(u'Posterior')),
     )
     treatment = forms.IntegerField(widget=forms.HiddenInput, required=False)
-    searcher_medicine = forms.CharField(label=_(u'FÁRMACO'), max_length=150)
+    searcher_medicine = forms.CharField(label=_(u'Fármaco'), max_length=150)
     medicine = forms.ModelChoiceField(queryset=Medicine.objects.all(),
                                     widget=forms.HiddenInput, initial='-1')
-    before_after = forms.ChoiceField(label=_(u'Tratamiento ANTERIOR/POSTERIOR \
-                            al comienzo de los síntomas psiquiátricos'),
-                            choices=BEFORE_AFTER_CHOICES,
-                            validators=[validate_choice])
-    time = forms.IntegerField(label=_(u'Tiempo de tratamiento antes del \
-                                        comienzo de los síntomas (meses)'))
+    before_after = forms.ChoiceField(label=_(u'Anterior/Posterior\
+                                    síntomas psiquiátricos'),
+                                    choices=BEFORE_AFTER_CHOICES,
+                                    validators=[validate_choice])
+    time = forms.IntegerField(label=_(u'Tiempo (meses)'))
 
     posology = forms.IntegerField(label=_(u'Posología (mg/día)'))
 
