@@ -173,7 +173,6 @@ INSTALLED_APPS = (
     'formula',
     'medicament',
     'consulting',
-    'main',
     'registration',
     'private_messages',
     'connector',
