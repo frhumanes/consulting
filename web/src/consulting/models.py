@@ -95,13 +95,12 @@ class Medication(models.Model):
     )
 
     medicine = models.ForeignKey(Medicine, related_name='medications')
-
-    posology = models.CharField(_(u'Posología (mg/día)'), max_length=255)
-    time = models.IntegerField(_(u'Tiempo de tratamiento antes del comienzo \
-                                de los síntomas (meses)'))
-    before_after = models.IntegerField(_(u'Tratamiento ANTERIOR/POSTERIOR al \
-                                    comienzo de los síntomas psiquiátricos'),
+    before_after = models.IntegerField(_(u'Anterior/Posterior\
+                                    síntomas psiquiátricos'),
                                     choices=BEFORE_AFTER_CHOICES)
+    date = models.DateField(_(u'Fecha comienzo medicamento'),
+                                blank=True, null=True)
+    posology = models.CharField(_(u'Posología (mg/día)'), max_length=255)
 
     def __unicode__(self):
             return u'%s' % self.medicine
