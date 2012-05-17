@@ -1,0 +1,41 @@
+{% load i18n%}
+<section id="code">
+  <div class="page-header">
+    <h2>{% trans 'CITAS' %}</h2>
+  </div>
+
+  <div class="row">
+    <div class="span8">
+      {% if patient_appointments %}
+        <table class="table">
+          <thead>
+            <tr>            
+              <th>{% trans 'FECHA' %}</th>
+              <th>{% trans 'HORA' %}</th>
+              <th>{% trans 'MÉDICO' %}</th>
+            </tr>
+          </thead>
+          <tbody>      
+            {% for  appointment in patient_appointments %}
+              <tr>            
+                <td>{{appointment.date}}</td>
+                <td>{{appointment.hour}}</td>
+                <td>{{appointment.doctor.first_name}} {{appointment.doctor.last_name}}
+                </td>
+              </tr>
+            {% endfor %}              
+          </tbody>
+        </table>
+      {% else %}
+        <div class="alert alert-block alert-error fade in">
+          <h4 class="alert-heading">
+            {% trans 'El paciente no tiene citas' %}
+          </h4>
+        </div>        
+      {% endif %}
+    </div>
+    <div class="span4">
+      {% include "consulting/card.html" %}
+    </div>
+  </div>
+</section>

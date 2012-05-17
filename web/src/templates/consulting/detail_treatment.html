@@ -1,0 +1,36 @@
+{% load i18n%}
+{% if medications %}
+<table class="table table-condensed">  
+  <thead>
+    <tr>            
+      <th style="text-align:center;">
+        {% trans 'FÁRMACO' %}
+      </th>
+      <th style="text-align:center;">
+        {% trans 'ANTERIOR/POSTERIOR SÍNTOMAS' %}
+      </th>
+      <th style="text-align:center;">
+        {% trans 'FECHA COMIENZO FÁRMACO' %}
+      </th>
+      <th style="text-align:center;">
+        {% trans 'POSOLOGÍA (mg/día)' %}
+      </th>
+      <th style="text-align:center;"></th>
+    </tr>
+  </thead>        
+  <tbody>
+    {% for medication in medications %}
+      <tr>
+        <td>{{medication.medicine}}</td>
+        <td>{{medication.get_before_after}}</td>
+        <td>{{medication.date}}</td>
+        <td>{{medication.posology}}</td>          
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+  <h6>
+    {% trans 'El tratamiento no tiene medicamentos' %}
+  <h6>
+{% endif %}
