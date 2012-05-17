@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 from datetime import datetime
+from django.middleware.csrf import get_token
 from django.conf import settings
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
@@ -9,12 +10,30 @@ from django.db.models import Q
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from decorators import paginate
 from userprofile.models import Profile
 from userprofile.forms import ProfileForm
 from consulting.forms import AppointmentForm, MedicationForm
 from consulting.models import Appointment, Treatment, Medication
 from consulting.helper import strip_accents
 from medicament.models import Medicine, Group
+
+
+@login_required()
+def index(request):
+
+    profile = request.user.get_profile()
+
+    if profile.role == settings.DOCTOR:
+        return render_to_response('consulting/index_doctor.html', {},
+                                context_instance=RequestContext(request))
+    elif profile.role == settings.ADMINISTRATIVE:
+        return render_to_response('consulting/index_administrative.html', {},
+                                context_instance=RequestContext(request))
+    else:
+        #profile.role == settings.PATIENT
+        return render_to_response('consulting/index_patient.html', {},
+                                context_instance=RequestContext(request))
 
 
 def generate_username(name, first_surname, nif):
@@ -77,14 +96,14 @@ def newpatient(request):
                         id_newpatient = user.id
 
                         return render_to_response(
-                            'administrative/newpatient_info.html',
+                            'consulting/newpatient_info.html',
                             {'username': username,
                             'id_newpatient': id_newpatient},
                             context_instance=RequestContext(request))
         else:
             form = ProfileForm()
 
-        return render_to_response('administrative/newpatient.html',
+        return render_to_response('consulting/newpatient.html',
                                     {'form': form, 'exist_user': exist_user,
                                     'same_username': same_username},
                                     context_instance=RequestContext(request))
@@ -144,12 +163,13 @@ def newappointment(request, id_newpatient):
 
             form.save()
 
-            return render_to_response('administrative/index.html', {},
+            return render_to_response('consulting/index_administrative.html',
+                            {},
                             context_instance=RequestContext(request))
     else:
         form = AppointmentForm(initial={'patient': patient_user})
 
-    return render_to_response('administrative/newappointment.html',
+    return render_to_response('consulting/newappointment.html',
                                 {'patientfullname': patientfullname,
                                 'form': form,
                                 'id_newpatient': id_newpatient},
@@ -215,12 +235,6 @@ def searcher_medicine(request):
     return HttpResponseRedirect(reverse('main_index'))
 
 
-def details_medicine_pm(request, medicine_id):
-    medicine = Medicine.objects.get(id=medicine_id)
-    return render_to_response('doctor/aux_pm.html',
-                    {'medicine': medicine},
-                    context_instance=RequestContext(request))
-
 #CAMBIAR: COINCIDENCIAS SOLO EN PROFILE DEL USUARIO LOGADO
 # def searcher_doctor_patients(request):
 #     data = {'ok': False}
@@ -249,12 +263,12 @@ def patient_appointments(request):
 
         patient_appointments = Appointment.objects.filter(patient=patient_id)
 
-        return render_to_response('patient/list_appointments.html',
+        return render_to_response('consulting/list_appointments_patient.html',
                             {'patient_appointments': patient_appointments,
                             'profile': profile},
                             context_instance=RequestContext(request))
 
-    return render_to_response('administrative/index.html', {},
+    return render_to_response('consulting/index_administrative.html', {},
                                 context_instance=RequestContext(request))
 
 
@@ -263,10 +277,10 @@ def patient_management(request):
     profile = request.user.get_profile()
 
     if profile.is_doctor():
-        return render_to_response('doctor/index_pm.html', {},
+        return render_to_response('consulting/index_pm.html', {},
                             context_instance=RequestContext(request))
     else:
-        return HttpResponseRedirect(reverse('main_index'))
+        return HttpResponseRedirect(reverse('consulting_index'))
 
 
 @login_required()
@@ -279,11 +293,73 @@ def personal_data_pm(request, patient_id):
         user = User.objects.get(id=patient_id)
         profile = user.get_profile()
 
-        return render_to_response('doctor/personal_data_pm.html',
+        return render_to_response('consulting/personal_data_pm.html',
                         {'profile': profile},
                         context_instance=RequestContext(request))
     else:
-        return HttpResponseRedirect(reverse('main_index'))
+        return HttpResponseRedirect(reverse('consulting_index'))
+
+
+@login_required()
+@paginate(template_name='consulting/list_treatments_pm.html',
+    list_name='treatments', objects_per_page=settings.OBJECTS_PER_PAGE)
+def list_treatments_pm(request):
+    profile = request.user.get_profile()
+
+    if profile.is_doctor():
+        patient_id = request.session['patient_id']
+        patient_user = User.objects.get(id=patient_id)
+        patient_profile = patient_user.get_profile()
+
+        treatments = Treatment.objects.filter(patient=patient_user)
+
+        template_data = {}
+        template_data.update({'profile': patient_profile,
+                                'treatments': treatments,
+                                'csrf_token': get_token(request)})
+        return template_data
+    else:
+        return HttpResponseRedirect(reverse('consulting_index'))
+
+
+# @login_required()
+# def list_treatments_pm(request):
+#     profile = request.user.get_profile()
+
+#     if profile.is_doctor():
+#         patient_id = request.session['patient_id']
+#         patient_user = User.objects.get(id=patient_id)
+#         patient_profile = patient_user.get_profile()
+
+#         treatments = Treatment.objects.filter(patient=patient_user)
+
+#         return render_to_response('doctor/list_treatments.html',
+#                         {'profile': patient_profile,
+#                         'treatments': treatments,
+#                         'csrf_token': get_token(request)},
+#                         context_instance=RequestContext(request))
+#     else:
+#         return HttpResponseRedirect(reverse('main_index'))
+
+
+@login_required()
+def detail_treatment_pm(request):
+    profile = request.user.get_profile()
+
+    if profile.is_doctor():
+        if request.method == 'POST':
+            treatment_id = request.POST.get("treatment_id", "")
+            try:
+                treatment = Treatment.objects.get(id=treatment_id)
+                medications = treatment.medications.all()
+
+                return render_to_response('consulting/detail_treatment.html',
+                        {'medications': medications},
+                        context_instance=RequestContext(request))
+            except Treatment.DoesNotExist:
+                    return HttpResponseRedirect(reverse('consulting_index'))
+
+    return HttpResponseRedirect(reverse('consulting_index'))
 
 
 @login_required()
@@ -336,7 +412,7 @@ def newtreatment_pm(request):
                     treatment_id = treatment.id
 
                 form = MedicationForm(initial={'treatment': treatment_id})
-                return render_to_response('doctor/newtreatment_pm.html',
+                return render_to_response('consulting/newtreatment_pm.html',
                                 {'form': form,
                                 'profile': profile,
                                 'treatment_id': treatment_id,
@@ -350,7 +426,7 @@ def newtreatment_pm(request):
                         treatment = Treatment.objects.get(id=treatment_id)
                         medications = treatment.medications.all()
                         return render_to_response(
-                                    'doctor/newtreatment_pm.html',
+                                    'consulting/newtreatment_pm.html',
                                     {'form': form,
                                     'profile': profile,
                                     'treatment_id': treatment_id,
@@ -358,26 +434,26 @@ def newtreatment_pm(request):
                                     context_instance=RequestContext(request))
                     except Treatment.DoesNotExist:
                         return render_to_response(
-                                    'doctor/newtreatment_pm.html',
+                                    'consulting/newtreatment_pm.html',
                                     {'form': form,
                                     'profile': profile},
                                     context_instance=RequestContext(request))
                 else:
                     return render_to_response(
-                                    'doctor/newtreatment_pm.html',
+                                    'consulting/newtreatment_pm.html',
                                     {'form': form,
                                     'profile': profile},
                                     context_instance=RequestContext(request))
         else:
             form = MedicationForm()
-        return render_to_response('doctor/newtreatment_pm.html',
+        return render_to_response('consulting/newtreatment_pm.html',
                                 {'form': form, 'profile': profile},
                                 context_instance=RequestContext(request))
-    return HttpResponseRedirect(reverse('main_index'))
+    return HttpResponseRedirect(reverse('consulting_index'))
 
 
 @login_required()
-def remove_medication(request):
+def remove_medication_pm(request):
     profile = request.user.get_profile()
 
     if profile.is_doctor():
@@ -392,12 +468,12 @@ def remove_medication(request):
                     treatment = Treatment.objects.get(id=treatment_id)
                     medications = treatment.medications.all()
                     return render_to_response(
-                                    'doctor/pharmacological_treatment.html',
-                                    {'medications': medications},
-                                    context_instance=RequestContext(request))
+                                'consulting/pharmacological_treatment_pm.html',
+                                {'medications': medications},
+                                context_instance=RequestContext(request))
                 except Treatment.DoesNotExist:
-                    return HttpResponseRedirect(reverse('main_index'))
+                    return HttpResponseRedirect(reverse('consulting_index'))
             except Medication.DoesNotExist:
-                return HttpResponseRedirect(reverse('main_index'))
+                return HttpResponseRedirect(reverse('consulting_index'))
 
-    return HttpResponseRedirect(reverse('main_index'))
+    return HttpResponseRedirect(reverse('consulting_index'))
