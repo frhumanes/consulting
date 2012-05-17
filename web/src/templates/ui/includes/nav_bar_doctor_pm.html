@@ -1,4 +1,10 @@
 {% load i18n%}
+{% load consulting %}
+
+{% url consulting_list_treatments_pm as consulting_list_treatments_pm %}
+{% url consulting_newtreatment_pm as consulting_newtreatment_pm %}
+
+
 <div class="subnav">
   <ul class="nav nav-pills">
     <li>
@@ -21,18 +27,18 @@
         {% trans 'PARÁMETROS' %}
       </a>
     </li>
-    <li class="dropdown">
+    <li class="dropdown {% active request consulting_list_treatments_pm %}">
       <a id="medicine" class="dropdown-toggle" href="#" >
         {% trans 'FÁRMACOS' %} <b class="caret"></b>
       </a>
       <ul class="dropdown-menu">
         <li>
-          <a href="#">
+          <a href="{% url consulting_list_treatments_pm %}">
             {% trans 'Listado de Tratamientos Farmacológicos' %}
           </a>
         </li>
-        <li>
-          <a href="{% url newtreatment_pm%}">
+        <li class="{% active request consulting_newtreatment_pm %}">
+          <a href="{% url consulting_newtreatment_pm %}">
             {% trans 'Nuevo Tratamiento Farmacológico' %}
           </a>
         </li>
