@@ -8,8 +8,13 @@ def active(request, pattern):
     # import re
     # if re.search(pattern, request.path):
     #     return 'active'
-    # return ''
+    # # return ''
 
+    # print '******REQUEST.PATH******'
+    # print request.path
+    # print '******PATTERN******'
+    # print pattern
+    # print '-------------------------------------------'
     if pattern == request.path:
         return 'active'
 
