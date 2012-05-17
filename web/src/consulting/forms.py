@@ -57,7 +57,8 @@ class MedicationForm(forms.ModelForm):
                                     síntomas psiquiátricos'),
                                     choices=BEFORE_AFTER_CHOICES,
                                     validators=[validate_choice])
-    time = forms.IntegerField(label=_(u'Tiempo (meses)'))
+    date = forms.DateField(label=_(u'Fecha comienzo medicamento'),
+                    widget=DateInput(attrs={'class': 'span2', 'size': '16'}))
 
     posology = forms.IntegerField(label=_(u'Posología (mg/día)'))
 
