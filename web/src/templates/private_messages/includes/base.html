@@ -3,7 +3,11 @@
 {% load i18n%}
 
 {% block header%}
-  {% include "ui/includes/header.html" %}
+    {%if request.user.get_profile.is_doctor %}
+        {% include "ui/includes/header_doctor.html" %}
+    {% else %}
+        {% include "ui/includes/header_patient.html" %}
+    {% endif %}
 {% endblock  %}
 
 
@@ -11,11 +15,7 @@
 
 <div class="container">
     {% block nav-bar%}
-        {%if request.user.get_profile.is_doctor %}
-            {% include "ui/includes/nav-bar-doctor.html" %}
-        {% else %}
-            {% include "ui/includes/nav-bar-patient.html" %}
-        {% endif %}
+        
     {% endblock  %}
     <div class="row">
         <div class="span2">
