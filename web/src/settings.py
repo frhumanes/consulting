@@ -49,6 +49,9 @@ MAN = 2
 BEFORE = 1
 AFTER = 2
 
+#PAGINATION
+OBJECTS_PER_PAGE = 10
+
 # The absolute path to the directory where collectstatic will collect static
 # files for deployment.
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'statics')
@@ -99,7 +102,7 @@ LANGUAGES = (
   ('en', gettext('English')),
 )
 
-LOGIN_URL = '/account/login/'
+LOGIN_URL = '/accounts/login/'
 
 SITE_ID = 1
 
