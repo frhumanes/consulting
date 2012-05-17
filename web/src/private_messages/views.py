@@ -4,18 +4,18 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
+from django.conf import settings
 from datetime import datetime
 
 from models import Message
-from forms import MessageForm, ReplyMessageForm
+from forms import MessageForm
 
-import conf
 from decorators import paginate
 
 
 @login_required
 @paginate(template_name='private_messages/message_list.html',
-    list_name='messages', objects_per_page=conf.OBJECTS_PER_PAGE)
+    list_name='messages', objects_per_page=settings.OBJECTS_PER_PAGE)
 def outbox(request):
     """
     List messages sent from an user
@@ -29,7 +29,7 @@ def outbox(request):
 
 @login_required
 @paginate(template_name='private_messages/message_list.html',
-    list_name='messages', objects_per_page=conf.OBJECTS_PER_PAGE)
+    list_name='messages', objects_per_page=settings.OBJECTS_PER_PAGE)
 def inbox(request):
     """
     List messages sent to an user
