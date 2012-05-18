@@ -1,7 +1,7 @@
 {% load i18n%}
 {% load consulting %}
 
-{% url consulting_index as consulting_index %}
+{% url consulting_index as index %}
 {% url private_messages_inbox as inbox %}
 
 <div class="navbar navbar-fixed-top">
@@ -15,7 +15,7 @@
         <a class="brand" href="./index.html">Consulting 3.0</a>
         <div class="nav-collapse collapse">
             <ul class="nav">
-                <li class="{% active request consulting_index %}">
+                <li class="{% active_root request index %}">
                     <a href="{% url consulting_index %}">
                         {% trans 'INICIO' %}
                     </a>
@@ -24,7 +24,7 @@
                       {% trans 'CUESTIONARIO' %}
                     </a>
                 </li>
-                <li class="{% active request inbox %}">
+                <li class="{% active_root request inbox %}">
                     <a href="{% url private_messages_inbox %}">
                         {% trans 'MENSAJERÍA' %}
                     </a>
