@@ -27,22 +27,26 @@ urlpatterns = patterns('',
         name='consulting_patient_appointments'),
 
     # PATIENT_MANAGEMENT
-    url(r'^patient_management/', consulting_views.patient_management,
+    url(r'^patient_management/$', consulting_views.patient_management,
         name='consulting_index_pm'),
 
-    url(r'^personal_data_pm/(?P<patient_id>\d+)$',
+    url(r'^patient_management/personal_data_pm/(?P<patient_id>\d+)$',
         consulting_views.personal_data_pm,
         name='consulting_personal_data_pm'),
 
-    url(r'^list_treatments_pm/', consulting_views.list_treatments_pm,
+    url(r'^patient_management/list_treatments_pm/',
+        consulting_views.list_treatments_pm,
         name='consulting_list_treatments_pm'),
 
-    url(r'^detail_treatment_pm/', consulting_views.detail_treatment_pm,
+    url(r'^patient_management/detail_treatment_pm/',
+        consulting_views.detail_treatment_pm,
         name='consulting_detail_treatment_pm'),
 
-    url(r'^newtreatment_pm/', consulting_views.newtreatment_pm,
+    url(r'^patient_management/newtreatment_pm/',
+        consulting_views.newtreatment_pm,
         name='consulting_newtreatment_pm'),
 
-    url(r'^remove_medication_pm/', consulting_views.remove_medication_pm,
+    url(r'^patient_management/remove_medication_pm/',
+        consulting_views.remove_medication_pm,
         name='consulting_remove_medication_pm'),
 )

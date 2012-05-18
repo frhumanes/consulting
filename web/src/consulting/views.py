@@ -208,7 +208,7 @@ def searcher(request):
                     }
 
         return HttpResponse(simplejson.dumps(data))
-    return HttpResponseRedirect(reverse('main_index'))
+    return HttpResponseRedirect(reverse('consulting_index'))
 
 
 @login_required()
@@ -232,7 +232,7 @@ def searcher_medicine(request):
                     }
 
         return HttpResponse(simplejson.dumps(data))
-    return HttpResponseRedirect(reverse('main_index'))
+    return HttpResponseRedirect(reverse('consulting_index'))
 
 
 #CAMBIAR: COINCIDENCIAS SOLO EN PROFILE DEL USUARIO LOGADO
@@ -292,9 +292,9 @@ def personal_data_pm(request, patient_id):
         request.session['patient_id'] = patient_id
         user = User.objects.get(id=patient_id)
         profile = user.get_profile()
-
         return render_to_response('consulting/personal_data_pm.html',
-                        {'profile': profile},
+                        {'profile': profile,
+                        'patient_id': patient_id},
                         context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect(reverse('consulting_index'))
@@ -316,6 +316,7 @@ def list_treatments_pm(request):
         template_data = {}
         template_data.update({'profile': patient_profile,
                                 'treatments': treatments,
+                                'patient_id': patient_id,
                                 'csrf_token': get_token(request)})
         return template_data
     else:
@@ -400,7 +401,8 @@ def newtreatment_pm(request):
                         return render_to_response(
                                 'doctor/newtreatment_pm.html',
                                 {'form': form,
-                                'profile': profile},
+                                'profile': profile,
+                                'patient_id': patient_id},
                                 context_instance=RequestContext(request))
                 else:
                     treatment = Treatment(patient=user,
@@ -415,6 +417,7 @@ def newtreatment_pm(request):
                 return render_to_response('consulting/newtreatment_pm.html',
                                 {'form': form,
                                 'profile': profile,
+                                'patient_id': patient_id,
                                 'treatment_id': treatment_id,
                                 'medications': treatment.medications.all()},
                                 context_instance=RequestContext(request))
@@ -429,6 +432,7 @@ def newtreatment_pm(request):
                                     'consulting/newtreatment_pm.html',
                                     {'form': form,
                                     'profile': profile,
+                                    'patient_id': patient_id,
                                     'treatment_id': treatment_id,
                                     'medications': medications},
                                     context_instance=RequestContext(request))
@@ -436,18 +440,22 @@ def newtreatment_pm(request):
                         return render_to_response(
                                     'consulting/newtreatment_pm.html',
                                     {'form': form,
-                                    'profile': profile},
+                                    'profile': profile,
+                                    'patient_id': patient_id},
                                     context_instance=RequestContext(request))
                 else:
                     return render_to_response(
                                     'consulting/newtreatment_pm.html',
                                     {'form': form,
-                                    'profile': profile},
+                                    'profile': profile,
+                                    'patient_id': patient_id},
                                     context_instance=RequestContext(request))
         else:
             form = MedicationForm()
         return render_to_response('consulting/newtreatment_pm.html',
-                                {'form': form, 'profile': profile},
+                                {'form': form,
+                                'profile': profile,
+                                'patient_id': patient_id},
                                 context_instance=RequestContext(request))
     return HttpResponseRedirect(reverse('consulting_index'))
 
