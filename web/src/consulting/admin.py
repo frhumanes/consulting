@@ -53,8 +53,7 @@ admin.site.register(Answer, AnswerAdmin)
 #--------------------------------- Treatment ---------------------------------#
 #-----------------------------------------------------------------------------#
 class TreatmentAdmin(admin.ModelAdmin):
-    fieldsets = [('Treatments', {'fields': ['patient', 'medications',
-                'date']})]
+    fieldsets = [('Treatments', {'fields': ['patient', 'date']})]
     list_display = ('patient', 'date')
     search_fields = ('patient', 'date')
     ordering = ('patient',)
@@ -63,10 +62,12 @@ admin.site.register(Treatment, TreatmentAdmin)
 
 
 class MedicationAdmin(admin.ModelAdmin):
-    fieldsets = [('Medications', {'fields': ['medicine', 'posology', 'date',
-                'before_after']})]
-    list_display = ('medicine', 'posology', 'date', 'before_after')
-    search_fields = ('medicine', 'posology', 'date', 'before_after')
+    fieldsets = [('Medications', {'fields': ['treatment', 'medicine',
+                'posology', 'months', 'before_after']})]
+    list_display = ('treatment', 'medicine', 'posology', 'months',
+                    'before_after')
+    search_fields = ('treatment', 'medicine', 'posology', 'months',
+                    'before_after')
     ordering = ('medicine',)
 
 admin.site.register(Medication, MedicationAdmin)
