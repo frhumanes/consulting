@@ -49,7 +49,6 @@ class MedicationForm(forms.ModelForm):
         (settings.BEFORE, _(u'Anterior')),
         (settings.AFTER, _(u'Posterior')),
     )
-    treatment = forms.IntegerField(widget=forms.HiddenInput, required=False)
     searcher_medicine = forms.CharField(label=_(u'Fármaco'), max_length=150)
     medicine = forms.ModelChoiceField(queryset=Medicine.objects.all(),
                                     widget=forms.HiddenInput, initial='-1')
@@ -57,10 +56,10 @@ class MedicationForm(forms.ModelForm):
                                     síntomas psiquiátricos'),
                                     choices=BEFORE_AFTER_CHOICES,
                                     validators=[validate_choice])
-    date = forms.DateField(label=_(u'Fecha comienzo medicamento'),
-                    widget=DateInput(attrs={'class': 'span2', 'size': '16'}))
-
+    months = forms.IntegerField(label=_(u'Número de meses de toma del\
+                                         fármaco'))
     posology = forms.IntegerField(label=_(u'Posología (mg/día)'))
 
     class Meta:
         model = Medication
+        exclude = ('treatment')
