@@ -3127,5 +3127,12 @@
     "fields": {
       "name": "Vincrisul"
     }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 448,
+    "fields": {
+      "name": "Fositens Plus"
+    }
   }
 ]
