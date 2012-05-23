@@ -4,7 +4,6 @@
 
 {% block js_files %}
   {{ block.super }}
-  <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
   <script src="{{ STATIC_URL }}js/jquery-ui-1.8.18.custom.js"></script>
   <script src="{{ STATIC_URL }}js/jquery.ui.core.js"></script>
   <script src="{{ STATIC_URL }}js/jquery.ui.position.js"></script>
@@ -14,14 +13,9 @@
 {% block css_files %}
   {{ block.super }}
   <link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet">
-  <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet">
 {% endblock %}
 
 {% block jquery_init %}
-  <!-- DATEPICKER -->
-  $('#dp').datepicker().on('changeDate',
-    function(ev){$('#dp').datepicker('hide');
-  });
   <!-- LOOK FOR MEDICINE -->
   $("#id_searcher_medicine").autocomplete({
     source: function(request, response){
@@ -79,8 +73,9 @@
       </div>
       <div class="row">
         <div class="span8">
-          <form class="form-horizontal" id="form" action="." method="post" accept-charset="utf-8">{% csrf_token %}
-              {{form.treatment}}
+          <form class="form-horizontal" id="form" action="{% url consulting_add_medications_treatment_pm treatment_id %}" method="post" accept-charset="utf-8">{% csrf_token %}
+            <input type="hidden" name="treatment_id"
+            value='{{treatment_id}}'>
               {{form.medicine}}                       
               <div class="control-group">
                 <label class="control-label">
@@ -106,20 +101,12 @@
               </div>
               <div class="control-group">
                 <label class="control-label">
-                  {{form.date.label}}
+                  {{form.months.label}}
                 </label>
                 <div class="controls">
-                  <div id="dp" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
-                    {{form.date}}
-                    <span class="add-on">
-                      <i class="icon-th"></i>
-                    </span>
-                    <span class="help-inline">
-                      {% trans 'Formato dd/mm/aaaa' %}
-                    </span>
-                  </div>
-                  {% if form.date.errors %}
-                    {{ form.date.errors }}
+                  {{form.months}}                    
+                  {% if form.months.errors %}
+                    {{ form.months.errors }}
                   {% endif %}
                 </div>
               </div>
@@ -140,58 +127,58 @@
                 </button>
               </div>
           </form>
+          <section>
+            <div class="page-header">
+              <h1>{% trans 'Tratamiento Farmacológico' %}</h1>
+            </div>
+            <div class="row">
+              <div id="overwrite" class="span8">
+                <table id="treatment" class="table table-bordered table-condensed">  
+                  <thead>
+                    <tr>            
+                      <th style="text-align:center;">
+                        {% trans 'FÁRMACO' %}
+                      </th>
+                      <th style="text-align:center;">
+                        {% trans 'ANTERIOR/POSTERIOR SÍNTOMAS' %}
+                      </th>
+                      <th style="text-align:center;">
+                        {% trans 'MESES' %}
+                      </th>
+                      <th style="text-align:center;">
+                        {% trans 'POSOLOGÍA (mg/día)' %}
+                      </th>
+                      <th style="text-align:center;"></th>
+                    </tr>
+                  </thead>        
+                  <tbody>
+                    {% if medications %}
+                      {% for medication in medications %}
+                        <tr>
+                          <td>{{medication.medicine}}</td>
+                          <td>{{medication.get_before_after}}</td>
+                          <td>{{medication.months}}</td>
+                          <td>{{medication.posology}}</td>
+                          <td>                      
+                            <a id="{{medication.id}}" class="icon-trash remove_medicament" data-toggle="modal" href="#check_remove_medication"></a>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                    {% endif %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
         </div>
         <!-- PATIENT CARD -->
         <div class="span4">
             {% include "consulting/card.html" %}
         </div>
       </div>
-    </section>
-    <section>
-      <div class="page-header">
-        <h1>{% trans 'Tratamiento Farmacológico' %}</h1>
-      </div>
-      <div class="row">
-        <div id="overwrite" class="span12">
-          <table id="treatment" class="table table-bordered table-condensed">  
-            <thead>
-              <tr>            
-                <th style="text-align:center;">
-                  {% trans 'FÁRMACO' %}
-                </th>
-                <th style="text-align:center;">
-                  {% trans 'ANTERIOR/POSTERIOR SÍNTOMAS' %}
-                </th>
-                <th style="text-align:center;">
-                  {% trans 'FECHA COMIENZO FÁRMACO' %}
-                </th>
-                <th style="text-align:center;">
-                  {% trans 'POSOLOGÍA (mg/día)' %}
-                </th>
-                <th style="text-align:center;"></th>
-              </tr>
-            </thead>        
-            <tbody>
-              {% if medications %}
-                {% for medication in medications %}
-                  <tr>
-                    <td>{{medication.medicine}}</td>
-                    <td>{{medication.get_before_after}}</td>
-                    <td>{{medication.date}}</td>
-                    <td>{{medication.posology}}</td>
-                    <td>                      
-                      <a id="{{medication.id}}" class="icon-trash remove_medicament" data-toggle="modal" href="#check_remove_medication"></a>
-                    </td>
-                  </tr>
-                {% endfor %}
-              {% endif %}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
+    </section>    
     <div id="check_remove_medication" class="modal hide fade" style="display: block;">
-      <input id="treatment_id" type="hidden" value='{{treatment_id}}'>
+      <input id="treatment_id" type="hidden" name="treatment" value='{{treatment_id}}'>
       <input id="medication_id" type="hidden">
       <div class="modal-header">
           <button class="close" data-dismiss="modal">
