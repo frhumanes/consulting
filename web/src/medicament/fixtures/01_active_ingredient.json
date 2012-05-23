@@ -1,0 +1,3131 @@
+[
+  {
+    "model": "medicament.activeingredient",
+    "pk": 1,
+    "fields": {
+      "name": "Zovirax"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 2,
+    "fields": {
+      "name": "Virmen"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 3,
+    "fields": {
+      "name": "Aciclotad"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 4,
+    "fields": {
+      "name": "Maynar"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 5,
+    "fields": {
+      "name": "Virherpes"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 6,
+    "fields": {
+      "name": "Amantadina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 7,
+    "fields": {
+      "name": "Dihidroestreptomicina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 8,
+    "fields": {
+      "name": "Rexgenta"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 9,
+    "fields": {
+      "name": "Tobramicina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 10,
+    "fields": {
+      "name": "Humatin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 11,
+    "fields": {
+      "name": "Amikacina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 12,
+    "fields": {
+      "name": "Dalinar"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 13,
+    "fields": {
+      "name": "Dextroanfetamina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 14,
+    "fields": {
+      "name": "Tedixamil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 15,
+    "fields": {
+      "name": "Pulzium"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 16,
+    "fields": {
+      "name": "Concerta"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 17,
+    "fields": {
+      "name": "Asmisedante"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 18,
+    "fields": {
+      "name": "Fludren"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 19,
+    "fields": {
+      "name": "Pazbronquial"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 20,
+    "fields": {
+      "name": "Tabletas Quimpe"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 21,
+    "fields": {
+      "name": "Vita Vox"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 22,
+    "fields": {
+      "name": "Voxfor"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 23,
+    "fields": {
+      "name": "Medinait"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 24,
+    "fields": {
+      "name": "Cinfatos Complex"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 25,
+    "fields": {
+      "name": "Vincitos"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 26,
+    "fields": {
+      "name": "Alercina plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 27,
+    "fields": {
+      "name": "Aligrip"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 28,
+    "fields": {
+      "name": "Frenadol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 29,
+    "fields": {
+      "name": "Inistolin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 30,
+    "fields": {
+      "name": "Iniston"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 31,
+    "fields": {
+      "name": "Lasa"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 32,
+    "fields": {
+      "name": "Novag grip con pseudoefedrina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 33,
+    "fields": {
+      "name": "Reactine plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 34,
+    "fields": {
+      "name": "Rinobactil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 35,
+    "fields": {
+      "name": "Rino-ebastel"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 36,
+    "fields": {
+      "name": "Sinutab"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 37,
+    "fields": {
+      "name": "Stopcold"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 38,
+    "fields": {
+      "name": "Vincigrip"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 39,
+    "fields": {
+      "name": "Isoefedrina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 40,
+    "fields": {
+      "name": "Pseudoefedrina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 41,
+    "fields": {
+      "name": "Clarytine"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 42,
+    "fields": {
+      "name": "Disofriol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 43,
+    "fields": {
+      "name": "Cortafriol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 44,
+    "fields": {
+      "name": "Polaramine expectorante"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 45,
+    "fields": {
+      "name": "Narine repetabs"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 46,
+    "fields": {
+      "name": "Modiodal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 47,
+    "fields": {
+      "name": "Rixdem"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 48,
+    "fields": {
+      "name": "Atomexetina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 49,
+    "fields": {
+      "name": "Strattera"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 50,
+    "fields": {
+      "name": "Analgilasa"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 51,
+    "fields": {
+      "name": "Aspirina plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 52,
+    "fields": {
+      "name": "Actron compuesto"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 53,
+    "fields": {
+      "name": "Biodramina cafeina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 54,
+    "fields": {
+      "name": "Cafergot"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 55,
+    "fields": {
+      "name": "Calmagrip"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 56,
+    "fields": {
+      "name": "Calmante vitaminado Perez Gimenez"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 57,
+    "fields": {
+      "name": "Cinfamar cafeina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 58,
+    "fields": {
+      "name": "Desenfriol C granulado"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 59,
+    "fields": {
+      "name": "Desenfriol-D"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 60,
+    "fields": {
+      "name": "Dolofarma"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 61,
+    "fields": {
+      "name": "Dolviran"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 62,
+    "fields": {
+      "name": "Durvitan"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 63,
+    "fields": {
+      "name": "Dynamin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 64,
+    "fields": {
+      "name": "Hemicraneal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 65,
+    "fields": {
+      "name": "Ilvico"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 66,
+    "fields": {
+      "name": "Longivol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 67,
+    "fields": {
+      "name": "Maxiwas"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 68,
+    "fields": {
+      "name": "Neocibalena"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 69,
+    "fields": {
+      "name": "Okaldol con cafeina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 70,
+    "fields": {
+      "name": "Pridio"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 71,
+    "fields": {
+      "name": "Quimpedor"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 72,
+    "fields": {
+      "name": "Rinomicine"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 73,
+    "fields": {
+      "name": "Salvarina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 74,
+    "fields": {
+      "name": "Saridon"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 75,
+    "fields": {
+      "name": "Yendol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 76,
+    "fields": {
+      "name": "Cafiaspirina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 77,
+    "fields": {
+      "name": "Optalidon"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 78,
+    "fields": {
+      "name": "Saldeva forte"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 79,
+    "fields": {
+      "name": "Mejoral cafeina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 80,
+    "fields": {
+      "name": "Lafor"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 81,
+    "fields": {
+      "name": "Cafintrina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 82,
+    "fields": {
+      "name": "Nootropil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 83,
+    "fields": {
+      "name": "Diemil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 84,
+    "fields": {
+      "name": "Ciclofalina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 85,
+    "fields": {
+      "name": "Anacervix"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 86,
+    "fields": {
+      "name": "Demanil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 87,
+    "fields": {
+      "name": "Dmae"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 88,
+    "fields": {
+      "name": "Esplenol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 89,
+    "fields": {
+      "name": "Actinico"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 90,
+    "fields": {
+      "name": "Denubil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 91,
+    "fields": {
+      "name": "Anti-anorex"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 92,
+    "fields": {
+      "name": "Somazina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 93,
+    "fields": {
+      "name": "Numatol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 94,
+    "fields": {
+      "name": "Mentis"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 95,
+    "fields": {
+      "name": "Vinpocetina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 96,
+    "fields": {
+      "name": "Astucor"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 97,
+    "fields": {
+      "name": "Balzak"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 98,
+    "fields": {
+      "name": "Dafiro"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 99,
+    "fields": {
+      "name": "Sevikar"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 100,
+    "fields": {
+      "name": "Capenon"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 101,
+    "fields": {
+      "name": "Arainno"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 102,
+    "fields": {
+      "name": "Astudal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 103,
+    "fields": {
+      "name": "Caduet"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 104,
+    "fields": {
+      "name": "Copalia"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 105,
+    "fields": {
+      "name": "Covercor"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 106,
+    "fields": {
+      "name": "Exforge HTA"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 107,
+    "fields": {
+      "name": "Norvas"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 108,
+    "fields": {
+      "name": "Imiprida"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 109,
+    "fields": {
+      "name": "Twynsta"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 110,
+    "fields": {
+      "name": "Zabart"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 111,
+    "fields": {
+      "name": "Logimax"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 112,
+    "fields": {
+      "name": "Perfudal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 113,
+    "fields": {
+      "name": "Plendil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 114,
+    "fields": {
+      "name": "Triapin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 115,
+    "fields": {
+      "name": "Lomir"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 116,
+    "fields": {
+      "name": "Dagan"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 117,
+    "fields": {
+      "name": "Lucemide"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 118,
+    "fields": {
+      "name": "Lecibral"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 119,
+    "fields": {
+      "name": "Lincil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 120,
+    "fields": {
+      "name": "Lucenfal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 121,
+    "fields": {
+      "name": "Nerdipina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 122,
+    "fields": {
+      "name": "Vasonase"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 123,
+    "fields": {
+      "name": "Adalat"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 124,
+    "fields": {
+      "name": "Admon"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 125,
+    "fields": {
+      "name": "Brainal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 126,
+    "fields": {
+      "name": "Calnit"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 127,
+    "fields": {
+      "name": "Kenesil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 128,
+    "fields": {
+      "name": "Modus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 129,
+    "fields": {
+      "name": "Nimotop"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 130,
+    "fields": {
+      "name": "Sular"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 131,
+    "fields": {
+      "name": "Syscor"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 132,
+    "fields": {
+      "name": "Baypresol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 133,
+    "fields": {
+      "name": "Eneas"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 134,
+    "fields": {
+      "name": "Enit"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 135,
+    "fields": {
+      "name": "Gericin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 136,
+    "fields": {
+      "name": "Tensogradal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 137,
+    "fields": {
+      "name": "Vastensium"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 138,
+    "fields": {
+      "name": "Vipres"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 139,
+    "fields": {
+      "name": "Lacimen"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 140,
+    "fields": {
+      "name": "Lacipil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 141,
+    "fields": {
+      "name": "Motens"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 142,
+    "fields": {
+      "name": "Artedil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 143,
+    "fields": {
+      "name": "Vivace"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 144,
+    "fields": {
+      "name": "Libradin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 145,
+    "fields": {
+      "name": "Barnix"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 146,
+    "fields": {
+      "name": "Tarka"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 147,
+    "fields": {
+      "name": "Manidon"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 148,
+    "fields": {
+      "name": "Latiazem"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 149,
+    "fields": {
+      "name": "Clobendian"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 150,
+    "fields": {
+      "name": "Angiodrox"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 151,
+    "fields": {
+      "name": "Cardiser"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 152,
+    "fields": {
+      "name": "Carreldon"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 153,
+    "fields": {
+      "name": "Cronodine"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 154,
+    "fields": {
+      "name": "Diaclan"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 155,
+    "fields": {
+      "name": "Diltiwas"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 156,
+    "fields": {
+      "name": "Dinisor"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 157,
+    "fields": {
+      "name": "Doclis"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 158,
+    "fields": {
+      "name": "Lacerol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 159,
+    "fields": {
+      "name": "Tilker"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 160,
+    "fields": {
+      "name": "Trumsal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 161,
+    "fields": {
+      "name": "Masdil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 162,
+    "fields": {
+      "name": "Uni-masdil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 163,
+    "fields": {
+      "name": "Etinilestradiol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 164,
+    "fields": {
+      "name": "Balianca"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 165,
+    "fields": {
+      "name": "Belara"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 166,
+    "fields": {
+      "name": "Bemasive"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 167,
+    "fields": {
+      "name": "Dialider"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 168,
+    "fields": {
+      "name": "Diane"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 169,
+    "fields": {
+      "name": "Donabel"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 170,
+    "fields": {
+      "name": "Dretine"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 171,
+    "fields": {
+      "name": "Dretinelle"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 172,
+    "fields": {
+      "name": "Drosure"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 173,
+    "fields": {
+      "name": "Drosurelle"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 174,
+    "fields": {
+      "name": "Edelsin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 175,
+    "fields": {
+      "name": "Eloine"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 176,
+    "fields": {
+      "name": "Evra"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 177,
+    "fields": {
+      "name": "Gestinyl"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 178,
+    "fields": {
+      "name": "Gracial"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 179,
+    "fields": {
+      "name": "Gyneplen"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 180,
+    "fields": {
+      "name": "Gynovin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 181,
+    "fields": {
+      "name": "Harmonet"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 182,
+    "fields": {
+      "name": "Liofora"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 183,
+    "fields": {
+      "name": "Loette"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 184,
+    "fields": {
+      "name": "Meliane"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 185,
+    "fields": {
+      "name": "Melodene"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 186,
+    "fields": {
+      "name": "Melteva"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 187,
+    "fields": {
+      "name": "Microdiol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 188,
+    "fields": {
+      "name": "Microgynon"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 189,
+    "fields": {
+      "name": "Minesse"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 190,
+    "fields": {
+      "name": "Minulet"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 191,
+    "fields": {
+      "name": "Nuvaring"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 192,
+    "fields": {
+      "name": "Ovoplex"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 193,
+    "fields": {
+      "name": "Regulon"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 194,
+    "fields": {
+      "name": "Suavuret"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 195,
+    "fields": {
+      "name": "Tevalet"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 196,
+    "fields": {
+      "name": "Triagynon"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 197,
+    "fields": {
+      "name": "Triciclor"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 198,
+    "fields": {
+      "name": "Trigynovin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 199,
+    "fields": {
+      "name": "Tri-minulet"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 200,
+    "fields": {
+      "name": "Yasmin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 201,
+    "fields": {
+      "name": "Yasmielle"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 202,
+    "fields": {
+      "name": "Yaz"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 203,
+    "fields": {
+      "name": "Yira"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 204,
+    "fields": {
+      "name": "Orgametril"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 205,
+    "fields": {
+      "name": "Mirena"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 206,
+    "fields": {
+      "name": "Norlevo"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 207,
+    "fields": {
+      "name": "Postinor"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 208,
+    "fields": {
+      "name": "Jadelle"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 209,
+    "fields": {
+      "name": "Progyluton"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 210,
+    "fields": {
+      "name": "Levonorgestrel"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 211,
+    "fields": {
+      "name": "Coropres"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 212,
+    "fields": {
+      "name": "Normotride"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 213,
+    "fields": {
+      "name": "Palacimol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 214,
+    "fields": {
+      "name": "Trandate"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 215,
+    "fields": {
+      "name": "Solgol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 216,
+    "fields": {
+      "name": "Sumial"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 217,
+    "fields": {
+      "name": "Blokium"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 218,
+    "fields": {
+      "name": "Kalten"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 219,
+    "fields": {
+      "name": "Neatenol Diu"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 220,
+    "fields": {
+      "name": "Normopresil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 221,
+    "fields": {
+      "name": "Tanser"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 222,
+    "fields": {
+      "name": "Tenoretic"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 223,
+    "fields": {
+      "name": "Tenormin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 224,
+    "fields": {
+      "name": "Oxodal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 225,
+    "fields": {
+      "name": "Bisoprolol/hidroclorotiazida"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 226,
+    "fields": {
+      "name": "Euradal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 227,
+    "fields": {
+      "name": "Emcoretic"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 228,
+    "fields": {
+      "name": "Emconcor"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 229,
+    "fields": {
+      "name": "Cardem"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 230,
+    "fields": {
+      "name": "Brevibloc"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 231,
+    "fields": {
+      "name": "Higrotensin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 232,
+    "fields": {
+      "name": "Lopresor"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 233,
+    "fields": {
+      "name": "Beloken"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 234,
+    "fields": {
+      "name": "Noiafren"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 235,
+    "fields": {
+      "name": "Tranxilium"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 236,
+    "fields": {
+      "name": "Huberplex"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 237,
+    "fields": {
+      "name": "Aneurol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 238,
+    "fields": {
+      "name": "Ansium"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 239,
+    "fields": {
+      "name": "Gobanal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 240,
+    "fields": {
+      "name": "Tepazepam"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 241,
+    "fields": {
+      "name": "Tropargal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 242,
+    "fields": {
+      "name": "Valium"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 243,
+    "fields": {
+      "name": "Vincosedan"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 244,
+    "fields": {
+      "name": "Dormodor"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 245,
+    "fields": {
+      "name": "Rivotril"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 246,
+    "fields": {
+      "name": "Lexatin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 247,
+    "fields": {
+      "name": "Trankimazin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 248,
+    "fields": {
+      "name": "Aldosomnil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 249,
+    "fields": {
+      "name": "Loramet"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 250,
+    "fields": {
+      "name": "Noctamid"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 251,
+    "fields": {
+      "name": "Orfidal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 252,
+    "fields": {
+      "name": "Placinoral"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 253,
+    "fields": {
+      "name": "Idalprem"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 254,
+    "fields": {
+      "name": "Donix"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 255,
+    "fields": {
+      "name": "Sintonal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 256,
+    "fields": {
+      "name": "Nobritol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 257,
+    "fields": {
+      "name": "Duna"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 258,
+    "fields": {
+      "name": "Ditensan"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 259,
+    "fields": {
+      "name": "Rohipnol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 260,
+    "fields": {
+      "name": "Suxidina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 261,
+    "fields": {
+      "name": "Buspar"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 262,
+    "fields": {
+      "name": "Parlodel"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 263,
+    "fields": {
+      "name": "Tegretol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 264,
+    "fields": {
+      "name": "Sandimmum"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 265,
+    "fields": {
+      "name": "Catapresan"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 266,
+    "fields": {
+      "name": "Aftasone"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 267,
+    "fields": {
+      "name": "Actocortina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 268,
+    "fields": {
+      "name": "Bucodorsen"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 269,
+    "fields": {
+      "name": "Astonin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 270,
+    "fields": {
+      "name": "Alergical"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 271,
+    "fields": {
+      "name": "Oralsone"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 272,
+    "fields": {
+      "name": "Dezacor"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 273,
+    "fields": {
+      "name": "Zamene"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 274,
+    "fields": {
+      "name": "Solu-Moderin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 275,
+    "fields": {
+      "name": "Urbason"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 276,
+    "fields": {
+      "name": "Metil-prednisolona"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 277,
+    "fields": {
+      "name": "Estilsona"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 278,
+    "fields": {
+      "name": "Dacortin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 279,
+    "fields": {
+      "name": "Trigon"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 280,
+    "fields": {
+      "name": "Triesence"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 281,
+    "fields": {
+      "name": "Rinalmen"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 282,
+    "fields": {
+      "name": "Cortidene"
+    }
+  },  
+  {
+    "model": "medicament.activeingredient",
+    "pk": 283,
+    "fields": {
+      "name": "Broncoformo Muco-dexa"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 284,
+    "fields": {
+      "name": "Cresophene"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 285,
+    "fields": {
+      "name": "Dexa-Tavegil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 286,
+    "fields": {
+      "name": "Fortecortin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 287,
+    "fields": {
+      "name": "Inzitan"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 288,
+    "fields": {
+      "name": "Celesemine"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 289,
+    "fields": {
+      "name": "Celestone"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 290,
+    "fields": {
+      "name": "Bronsal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 291,
+    "fields": {
+      "name": "Rakivit"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 292,
+    "fields": {
+      "name": "Trimetropim/sulfatetroxazol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 293,
+    "fields": {
+      "name": "Soltrim"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 294,
+    "fields": {
+      "name": "Septrim"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 295,
+    "fields": {
+      "name": "Lanacordin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 296,
+    "fields": {
+      "name": "Lanirapid"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 297,
+    "fields": {
+      "name": "Antabus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 298,
+    "fields": {
+      "name": "Butazolidina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 299,
+    "fields": {
+      "name": "Zestoretic"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 300,
+    "fields": {
+      "name": "Valsartan/Hidroclorotiazida"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 301,
+    "fields": {
+      "name": "Tevetens Plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 302,
+    "fields": {
+      "name": "Tenso-stop Plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 303,
+    "fields": {
+      "name": "Tensikey Complex"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 304,
+    "fields": {
+      "name": "Silostar Plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 305,
+    "fields": {
+      "name": "Secubar Diu"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 306,
+    "fields": {
+      "name": "Riprazo"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 307,
+    "fields": {
+      "name": "Renitecmax"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 308,
+    "fields": {
+      "name": "Regulaten plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 309,
+    "fields": {
+      "name": "Ramipril/hidroclorotiazida"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 310,
+    "fields": {
+      "name": "Quinapril/hidroclorotiazida"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 311,
+    "fields": {
+      "name": "Pritorplus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 312,
+    "fields": {
+      "name": "Prinivil Plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 313,
+    "fields": {
+      "name": "Pressitan Plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 314,
+    "fields": {
+      "name": "Parapres Plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 315,
+    "fields": {
+      "name": "Openvas Plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 316,
+    "fields": {
+      "name": "Olmetec Plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 317,
+    "fields": {
+      "name": "Neotensin Diu"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 318,
+    "fields": {
+      "name": "Navixen Plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 319,
+    "fields": {
+      "name": "Moonval plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 320,
+    "fields": {
+      "name": "Miten plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 321,
+    "fields": {
+      "name": "Micardis plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 322,
+    "fields": {
+      "name": "Losartan/hidroclorotiazida"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 323,
+    "fields": {
+      "name": "Lobivon Plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 324,
+    "fields": {
+      "name": "Lisinopril/hidroclorotiazida"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 325,
+    "fields": {
+      "name": "Lidaltrin-Diu"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 326,
+    "fields": {
+      "name": "Karvezide"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 327,
+    "fields": {
+      "name": "Kalpress Plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 328,
+    "fields": {
+      "name": "Ixia plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 329,
+    "fields": {
+      "name": "Iricil plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 330,
+    "fields": {
+      "name": "Irbesartan/HCTZ"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 331,
+    "fields": {
+      "name": "Irbesartan/Hidroclorotiazida"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 332,
+    "fields": {
+      "name": "Inocar Plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 333,
+    "fields": {
+      "name": "Ihibace plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 334,
+    "fields": {
+      "name": "Hipoartel Plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 335,
+    "fields": {
+      "name": "Hidrosaluretil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 336,
+    "fields": {
+      "name": "Herten Plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 337,
+    "fields": {
+      "name": "Futuran plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 338,
+    "fields": {
+      "name": "Fosinopril/hidroclorotiazida"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 339,
+    "fields": {
+      "name": "Fortzaar"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 340,
+    "fields": {
+      "name": "Exforge"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 341,
+    "fields": {
+      "name": "Esidrex"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 342,
+    "fields": {
+      "name": "Enalapril/Hidroclorotiazida"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 343,
+    "fields": {
+      "name": "Ecacide"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 344,
+    "fields": {
+      "name": "Ecadiu"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 345,
+    "fields": {
+      "name": "Doneka Plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 346,
+    "fields": {
+      "name": "Diuzine"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 347,
+    "fields": {
+      "name": "Dilabar Diu"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 348,
+    "fields": {
+      "name": "Dabonal"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 349,
+    "fields": {
+      "name": "Crinoretic"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 350,
+    "fields": {
+      "name": "Co-Vals"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 351,
+    "fields": {
+      "name": "Co-Renitec"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 352,
+    "fields": {
+      "name": "Co-Diovan"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 353,
+    "fields": {
+      "name": "Coaprovel"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 354,
+    "fields": {
+      "name": "Cibadrex"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 355,
+    "fields": {
+      "name": "Captopril/hidroclorotiazida"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 356,
+    "fields": {
+      "name": "Candesartan/hidroclorotiazida"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 357,
+    "fields": {
+      "name": "Bopress plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 358,
+    "fields": {
+      "name": "Bopress forte"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 359,
+    "fields": {
+      "name": "Bitensil Diu"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 360,
+    "fields": {
+      "name": "Bicetil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 361,
+    "fields": {
+      "name": "Baripril-Diu"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 362,
+    "fields": {
+      "name": "Balzak plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 363,
+    "fields": {
+      "name": "Atacand plus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 364,
+    "fields": {
+      "name": "Ameride"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 365,
+    "fields": {
+      "name": "Acuretic"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 366,
+    "fields": {
+      "name": "Acetensil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 367,
+    "fields": {
+      "name": "Acediur"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 368,
+    "fields": {
+      "name": "Hydrapres"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 369,
+    "fields": {
+      "name": "Indonilo"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 370,
+    "fields": {
+      "name": "Indolgina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 371,
+    "fields": {
+      "name": "Inacid"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 372,
+    "fields": {
+      "name": "Flogoter"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 373,
+    "fields": {
+      "name": "Artrinovo"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 374,
+    "fields": {
+      "name": "Aliviosin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 375,
+    "fields": {
+      "name": "Interferón"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 376,
+    "fields": {
+      "name": "Peginterferón"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 377,
+    "fields": {
+      "name": "Aldesleukina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 378,
+    "fields": {
+      "name": "Interleukina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 379,
+    "fields": {
+      "name": "Proleukin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 380,
+    "fields": {
+      "name": "Levodopa/carbidopa"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 381,
+    "fields": {
+      "name": "Stalevo"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 382,
+    "fields": {
+      "name": "Sinemet"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 383,
+    "fields": {
+      "name": "Madopar"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 384,
+    "fields": {
+      "name": "Aldomet"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 385,
+    "fields": {
+      "name": "Flagyl"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 386,
+    "fields": {
+      "name": "Rhodogil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 387,
+    "fields": {
+      "name": "Dolq"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 388,
+    "fields": {
+      "name": "Zomorph"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 389,
+    "fields": {
+      "name": "Skenan"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 390,
+    "fields": {
+      "name": "Sevredol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 391,
+    "fields": {
+      "name": "Oramorph"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 392,
+    "fields": {
+      "name": "MST Continus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 393,
+    "fields": {
+      "name": "Migraleve"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 394,
+    "fields": {
+      "name": "Histaverin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 395,
+    "fields": {
+      "name": "Fludeten"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 396,
+    "fields": {
+      "name": "Dolomedil"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 397,
+    "fields": {
+      "name": "Dolodens"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 398,
+    "fields": {
+      "name": "Dolmen"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 399,
+    "fields": {
+      "name": "Diminex"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 400,
+    "fields": {
+      "name": "Codeisan"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 401,
+    "fields": {
+      "name": "Cod-efferalgan"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 402,
+    "fields": {
+      "name": "Calmoplex"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 403,
+    "fields": {
+      "name": "Analgiplus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 404,
+    "fields": {
+      "name": "Algidol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 405,
+    "fields": {
+      "name": "Nidol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 406,
+    "fields": {
+      "name": "Notusín"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 407,
+    "fields": {
+      "name": "Toseína"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 408,
+    "fields": {
+      "name": "Dolocatil Codeína"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 409,
+    "fields": {
+      "name": "Astefor"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 410,
+    "fields": {
+      "name": "Bisoltus"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 411,
+    "fields": {
+      "name": "Paracetamol/codeína pharmaken"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 412,
+    "fields": {
+      "name": "Fimol Busto"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 413,
+    "fields": {
+      "name": "Codeína"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 414,
+    "fields": {
+      "name": "Metilforfina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 415,
+    "fields": {
+      "name": "Pastillas Wilfe"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 416,
+    "fields": {
+      "name": "Demusin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 417,
+    "fields": {
+      "name": "Etilmorfina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 418,
+    "fields": {
+      "name": "Codetilina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 419,
+    "fields": {
+      "name": "Apo-Go"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 420,
+    "fields": {
+      "name": "Apomorfina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 421,
+    "fields": {
+      "name": "Apomorfina Archimedes"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 422,
+    "fields": {
+      "name": "Mysoline"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 423,
+    "fields": {
+      "name": "Deprancol"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 424,
+    "fields": {
+      "name": "Rifaldin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 425,
+    "fields": {
+      "name": "Rifater"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 426,
+    "fields": {
+      "name": "Rifinah"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 427,
+    "fields": {
+      "name": "Rimactan"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 428,
+    "fields": {
+      "name": "Rimatazid"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 429,
+    "fields": {
+      "name": "Rimcure"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 430,
+    "fields": {
+      "name": "Rimstar"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 431,
+    "fields": {
+      "name": "Tisobrif"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 432,
+    "fields": {
+      "name": "Aldoleo"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 433,
+    "fields": {
+      "name": "Blokium-Diu"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 434,
+    "fields": {
+      "name": "Higrotona"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 435,
+    "fields": {
+      "name": "Trasitensin"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 436,
+    "fields": {
+      "name": "Diclofenmida"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 437,
+    "fields": {
+      "name": "Gluconide"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 438,
+    "fields": {
+      "name": "Bipreterax"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 439,
+    "fields": {
+      "name": "Preterax"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 440,
+    "fields": {
+      "name": "Tertensif"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 441,
+    "fields": {
+      "name": "Extur"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 442,
+    "fields": {
+      "name": "Perinidopril/indapamida"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 443,
+    "fields": {
+      "name": "Firazyr"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 444,
+    "fields": {
+      "name": "Diurex"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 445,
+    "fields": {
+      "name": "Vinblastina Faulding"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 446,
+    "fields": {
+      "name": "Vincristina"
+    }
+  },
+  {
+    "model": "medicament.activeingredient",
+    "pk": 447,
+    "fields": {
+      "name": "Vincrisul"
+    }
+  }
+]
