@@ -311,7 +311,8 @@ def list_treatments_pm(request):
         patient_user = User.objects.get(id=patient_id)
         patient_profile = patient_user.get_profile()
 
-        treatments = Treatment.objects.filter(patient=patient_user)
+        treatments = Treatment.objects.filter(patient=patient_user).\
+                                                order_by('-date')
 
         template_data = {}
         template_data.update({'profile': patient_profile,
@@ -352,10 +353,9 @@ def detail_treatment_pm(request):
             treatment_id = request.POST.get("treatment_id", "")
             try:
                 treatment = Treatment.objects.get(id=treatment_id)
-                medications = treatment.medications.all()
 
                 return render_to_response('consulting/detail_treatment.html',
-                        {'medications': medications},
+                        {'medications': treatment.treatmentmedications.all()},
                         context_instance=RequestContext(request))
             except Treatment.DoesNotExist:
                     return HttpResponseRedirect(reverse('consulting_index'))
@@ -365,99 +365,260 @@ def detail_treatment_pm(request):
 
 @login_required()
 def newtreatment_pm(request):
-    profile = request.user.get_profile()
+    profile_logged_user = request.user.get_profile()
 
-    if profile.is_doctor():
+    if profile_logged_user.is_doctor():
         patient_id = request.session['patient_id']
-        user = User.objects.get(id=patient_id)
-        profile = user.get_profile()
+        user_patient = User.objects.get(id=patient_id)
+
+        treatment = Treatment(patient=user_patient,
+                                from_appointment=False,
+                                date=datetime.now())
+        treatment.save()
+
+        return HttpResponseRedirect(
+            reverse('consulting_add_medications_treatment_pm',
+            args=[treatment.id]))
+
+    return HttpResponseRedirect(reverse('consulting_index'))
+
+
+@login_required()
+def add_medications_treatment_pm(request, treatment_id):
+    profile_logged_user = request.user.get_profile()
+
+    if profile_logged_user.is_doctor():
+        patient_id = request.session['patient_id']
+        user_patient = User.objects.get(id=patient_id)
+        profile_patient = user_patient.get_profile()
 
         if request.method == "POST":
-            form = MedicationForm(request.POST)
-            if form.is_valid():
-                medicine_id = form.cleaned_data['medicine'].id
-                # Medicine can be new or not
-                if medicine_id == -1:
+            try:
+                treatment = Treatment.objects.get(id=treatment_id)
+                form = MedicationForm(request.POST)
+                if form.is_valid():
+                    # MEDICINE CAN BE NEW OR ALREADY EXISTED
                     medicine_name = form.cleaned_data['searcher_medicine']
-                    medicine_group = Group.objects.get(id=-1)
-                    medicine = Medicine(name=medicine_name,
-                                        group=medicine_group)
-                    medicine.save()
-
-                    medication = Medication(medicine=medicine,
+                    try:
+                        medicine = Medicine.objects.get(name=medicine_name)
+                        if form.cleaned_data['medicine'].id == -1:
+                            medication = Medication(treatment=treatment,
+                                medicine=medicine,
                                 posology=form.cleaned_data['posology'],
-                                time=form.cleaned_data['time'],
+                                months=form.cleaned_data['months'],
                                 before_after=form.cleaned_data['before_after'])
-                    medication.save()
-                else:
-                    medication = form.save()
-                #Saving treatment is distinct if table is empty or not
-                treatment_id = form.cleaned_data['treatment']
-                if treatment_id:
-                    try:
-                        treatment = Treatment.objects.get(id=treatment_id)
-                        treatment.medications.add(medication)
-                    except Treatment.DoesNotExist:
-                        return render_to_response(
-                                'doctor/newtreatment_pm.html',
-                                {'form': form,
-                                'profile': profile,
-                                'patient_id': patient_id},
-                                context_instance=RequestContext(request))
-                else:
-                    treatment = Treatment(patient=user,
-                                            from_appointment=False,
-                                            date=datetime.now())
-                    treatment.save()
-                    treatment.medications.add(medication)
-                    treatment.save()
-                    treatment_id = treatment.id
+                            medication.save()
+                        else:
+                            medication = form.save(commit=False)
+                            medication.treatment = treatment
+                            medication.save()
+                    except Medicine.DoesNotExist:
+                        medicine_group = Group.objects.get(id=-1)
+                        medicine = Medicine(name=medicine_name,
+                                            group=medicine_group)
+                        medicine.save()
 
-                form = MedicationForm(initial={'treatment': treatment_id})
-                return render_to_response('consulting/newtreatment_pm.html',
-                                {'form': form,
-                                'profile': profile,
-                                'patient_id': patient_id,
-                                'treatment_id': treatment_id,
-                                'medications': treatment.medications.all()},
-                                context_instance=RequestContext(request))
-            else:
-                #Saving treatment is distinct if table is empty or not
-                treatment_id = request.POST['treatment']
-                if treatment_id:
+                        medication = Medication(treatment=treatment,
+                                medicine=medicine,
+                                posology=form.cleaned_data['posology'],
+                                months=form.cleaned_data['months'],
+                                before_after=form.cleaned_data['before_after'])
+                        medication.save()
+                    #INICIALIZE FORM
+                    form = MedicationForm()
+                else:
+                    # ONLY GET TREATMENT OBJECT TO CAN GET ITS MEDICATIONS
                     try:
                         treatment = Treatment.objects.get(id=treatment_id)
-                        medications = treatment.medications.all()
-                        return render_to_response(
-                                    'consulting/newtreatment_pm.html',
-                                    {'form': form,
-                                    'profile': profile,
-                                    'patient_id': patient_id,
-                                    'treatment_id': treatment_id,
-                                    'medications': medications},
-                                    context_instance=RequestContext(request))
                     except Treatment.DoesNotExist:
-                        return render_to_response(
-                                    'consulting/newtreatment_pm.html',
-                                    {'form': form,
-                                    'profile': profile,
-                                    'patient_id': patient_id},
-                                    context_instance=RequestContext(request))
-                else:
-                    return render_to_response(
-                                    'consulting/newtreatment_pm.html',
-                                    {'form': form,
-                                    'profile': profile,
-                                    'patient_id': patient_id},
-                                    context_instance=RequestContext(request))
+                        return HttpResponseRedirect(
+                                                reverse('consulting_index'))
+            except Treatment.DoesNotExist:
+                return HttpResponseRedirect(reverse('consulting_index'))
         else:
             form = MedicationForm()
-        return render_to_response('consulting/newtreatment_pm.html',
-                                {'form': form,
-                                'profile': profile,
-                                'patient_id': patient_id},
-                                context_instance=RequestContext(request))
+
+            try:
+                treatment = Treatment.objects.get(id=treatment_id)
+            except Treatment.DoesNotExist:
+                return HttpResponseRedirect(reverse('consulting_index'))
+
+        return render_to_response(
+                        'consulting/newtreatment_pm.html',
+                        {'form': form,
+                        'profile': profile_patient,
+                        'patient_id': patient_id,
+                        'treatment_id': treatment_id,
+                        'medications': treatment.treatmentmedications.all()},
+                        context_instance=RequestContext(request))
     return HttpResponseRedirect(reverse('consulting_index'))
+
+# @login_required()
+# def add_medications_treatment_pm(request, treatment_id):
+#     profile_logged_user = request.user.get_profile()
+
+#     if profile_logged_user.is_doctor():
+#         patient_id = request.session['patient_id']
+#         user_patient = User.objects.get(id=patient_id)
+#         profile_patient = user_patient.get_profile()
+
+#         if request.method == "POST":
+#             form = MedicationForm(request.POST)
+#             if form.is_valid():
+#                 # MEDICINE CAN BE NEW OR ALREADY EXISTED
+#                 medicine_name = form.cleaned_data['searcher_medicine']
+#                 try:
+#                     medicine = Medicine.objects.get(name=medicine_name)
+#                     if form.cleaned_data['medicine'].id == -1:
+#                         medication = Medication(medicine=medicine,
+#                             posology=form.cleaned_data['posology'],
+#                             months=form.cleaned_data['months'],
+#                             before_after=form.cleaned_data['before_after'])
+#                         medication.save()
+#                     else:
+#                         medication = form.save()
+#                 except Medicine.DoesNotExist:
+#                     medicine_group = Group.objects.get(id=-1)
+#                     medicine = Medicine(name=medicine_name,
+#                                         group=medicine_group)
+#                     medicine.save()
+
+#                     medication = Medication(medicine=medicine,
+#                             posology=form.cleaned_data['posology'],
+#                             months=form.cleaned_data['months'],
+#                             before_after=form.cleaned_data['before_after'])
+#                     medication.save()
+#                 # ADD MEDICATION TO TREATMENT
+#                 try:
+#                     treatment = Treatment.objects.get(id=treatment_id)
+#                     treatment.medications.add(medication)
+#                     treatment.save()
+#                 except Treatment.DoesNotExist:
+#                     return HttpResponseRedirect(reverse('consulting_index'))
+#                 #INICIALIZE FORM
+#                 form = MedicationForm()
+#             else:
+#                 # ONLY GET TREATMENT OBJECT TO CAN GET ITS MEDICATIONS
+#                 try:
+#                     treatment = Treatment.objects.get(id=treatment_id)
+#                 except Treatment.DoesNotExist:
+#                     return HttpResponseRedirect(reverse('consulting_index'))
+#         else:
+#             form = MedicationForm()
+
+#             try:
+#                 treatment = Treatment.objects.get(id=treatment_id)
+#             except Treatment.DoesNotExist:
+#                 return HttpResponseRedirect(reverse('consulting_index'))
+
+#         return render_to_response(
+#                                 'consulting/newtreatment_pm.html',
+#                                 {'form': form,
+#                                 'profile': profile_patient,
+#                                 'patient_id': patient_id,
+#                                 'treatment_id': treatment_id,
+#                                 'medications': treatment.medications.all()},
+#                                 context_instance=RequestContext(request))
+#     return HttpResponseRedirect(reverse('consulting_index'))
+
+
+# @login_required()
+# def newtreatment_pm(request):
+#     profile = request.user.get_profile()
+
+#     if profile.is_doctor():
+#         patient_id = request.session['patient_id']
+#         user = User.objects.get(id=patient_id)
+#         profile = user.get_profile()
+
+#         if request.method == "POST":
+#             form = MedicationForm(request.POST)
+#             if form.is_valid():
+#                 medicine_id = form.cleaned_data['medicine'].id
+#                 # Medicine can be new or not
+#                 if medicine_id == -1:
+#                     medicine_name = form.cleaned_data['searcher_medicine']
+#                     medicine_group = Group.objects.get(id=-1)
+#                     medicine = Medicine(name=medicine_name,
+#                                         group=medicine_group)
+#                     medicine.save()
+
+#                     medication = Medication(medicine=medicine,
+#                               posology=form.cleaned_data['posology'],
+#                               months=form.cleaned_data['months'],
+#                               before_after=form.cleaned_data['before_after'])
+#                     medication.save()
+#                 else:
+#                     medication = form.save()
+#                 #Saving treatment is distinct if table is empty or not
+#                 # treatment_id = form.cleaned_data['treatment']
+#                 treatment_id = request.POST['treatment_id']
+#                 if treatment_id:
+#                     try:
+#                         treatment = Treatment.objects.get(id=treatment_id)
+#                         treatment.medications.add(medication)
+#                         treatment.save()
+#                     except Treatment.DoesNotExist:
+#                         return render_to_response(
+#                                 'consulting/newtreatment_pm.html',
+#                                 {'form': form,
+#                                 'profile': profile,
+#                                 'patient_id': patient_id},
+#                                 context_instance=RequestContext(request))
+#                 else:
+#                     treatment = Treatment(patient=user,
+#                                             from_appointment=False,
+#                                             date=datetime.now())
+#                     treatment.save()
+#                     treatment.medications.add(medication)
+#                     treatment.save()
+#                     treatment_id = treatment.id
+
+#                 form = MedicationForm()
+#                 return render_to_response('consulting/newtreatment_pm.html',
+#                                 {'form': form,
+#                                 'profile': profile,
+#                                 'patient_id': patient_id,
+#                                 'treatment_id': treatment_id,
+#                                 'medications': treatment.medications.all()},
+#                                 context_instance=RequestContext(request))
+#             else:
+#                 #Saving treatment is distinct if table is empty or not
+#                 treatment_id = request.POST['treatment_id']
+#                 if treatment_id:
+#                     try:
+#                         treatment = Treatment.objects.get(id=treatment_id)
+#                         medications = treatment.medications.all()
+#                         return render_to_response(
+#                                     'consulting/newtreatment_pm.html',
+#                                     {'form': form,
+#                                     'profile': profile,
+#                                     'patient_id': patient_id,
+#                                     'treatment_id': treatment_id,
+#                                     'medications': medications},
+#                                     context_instance=RequestContext(request))
+#                     except Treatment.DoesNotExist:
+#                         return render_to_response(
+#                                     'consulting/newtreatment_pm.html',
+#                                     {'form': form,
+#                                     'profile': profile,
+#                                     'patient_id': patient_id},
+#                                     context_instance=RequestContext(request))
+#                 else:
+#                     return render_to_response(
+#                                     'consulting/newtreatment_pm.html',
+#                                     {'form': form,
+#                                     'profile': profile,
+#                                     'patient_id': patient_id},
+#                                     context_instance=RequestContext(request))
+#         else:
+#             form = MedicationForm()
+#         return render_to_response('consulting/newtreatment_pm.html',
+#                                 {'form': form,
+#                                 'profile': profile,
+#                                 'patient_id': patient_id},
+#                                 context_instance=RequestContext(request))
+#     return HttpResponseRedirect(reverse('consulting_index'))
 
 
 @login_required()
@@ -474,14 +635,38 @@ def remove_medication_pm(request):
                 treatment_id = request.POST.get("treatment_id", "")
                 try:
                     treatment = Treatment.objects.get(id=treatment_id)
-                    medications = treatment.medications.all()
                     return render_to_response(
-                                'consulting/pharmacological_treatment_pm.html',
-                                {'medications': medications},
+                        'consulting/pharmacological_treatment_pm.html',
+                        {'medications': treatment.treatmentmedications.all()},
                                 context_instance=RequestContext(request))
                 except Treatment.DoesNotExist:
                     return HttpResponseRedirect(reverse('consulting_index'))
             except Medication.DoesNotExist:
                 return HttpResponseRedirect(reverse('consulting_index'))
 
+    return HttpResponseRedirect(reverse('consulting_index'))
+
+
+@login_required()
+@paginate(template_name='consulting/list_treatments_ajax_pm.html',
+    list_name='treatments', objects_per_page=settings.OBJECTS_PER_PAGE)
+def remove_treatment_pm(request):
+    profile = request.user.get_profile()
+    if profile.is_doctor():
+        if request.method == 'POST':
+            patient_id = request.session['patient_id']
+            patient_user = User.objects.get(id=patient_id)
+            treatment_id = request.POST.get("treatment_id", "")
+            try:
+                treatment = Treatment.objects.get(id=treatment_id)
+                treatment.delete()
+
+                treatments = Treatment.objects.filter(\
+                                patient=patient_user).order_by('-date')
+
+                template_data = {}
+                template_data.update({'treatments': treatments})
+                return template_data
+            except Treatment.DoesNotExist:
+                return HttpResponseRedirect(reverse('consulting_index'))
     return HttpResponseRedirect(reverse('consulting_index'))
