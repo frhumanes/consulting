@@ -18,7 +18,7 @@
         {% trans 'ANTERIOR/POSTERIOR SÍNTOMAS' %}
       </th>
       <th style="text-align:center;">
-        {% trans 'FECHA COMIENZO FÁRMACO' %}
+        {% trans 'MESES' %}
       </th>
       <th style="text-align:center;">
         {% trans 'POSOLOGÍA (mg/día)' %}
@@ -32,7 +32,7 @@
         <tr>
           <td>{{medication.medicine}}</td>
           <td>{{medication.get_before_after}}</td>
-          <td>{{medication.date}}</td>
+          <td>{{medication.months}}</td>
           <td>{{medication.posology}}</td>
           <td>                      
             <a id="{{medication.id}}" class="icon-trash remove_medicament" data-toggle="modal" href="#check_remove_medication"></a>
