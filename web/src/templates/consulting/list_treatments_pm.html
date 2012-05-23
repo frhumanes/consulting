@@ -3,17 +3,34 @@
 {% load i18n%}
 
 {% block jquery_init %}
-    $('.treatment').each(function(){
-        $(this).on("click", function(){ 
-            var treatment_id = $(this).attr("id");
-            $('#overwrite').load(
-                  '{% url consulting_detail_treatment_pm %}',
-                  {'treatment_id': treatment_id,
-                  'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()});
-            });
-    }); 
+  $('.treatment').each(function(){
+      $(this).on("click", function(){ 
+          var treatment_id = $(this).attr("id");
 
-    
+          $(this).css("background", "#D9EDF7").siblings().removeAttr("style")
+
+          $('#overwrite').load(
+                '{% url consulting_detail_treatment_pm %}',
+                {'treatment_id': treatment_id,
+                'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()});
+          });
+  });
+
+  <!-- REMOVE MEDICATION -->
+  $('.remove_treatment').each(function(){
+    $(this).on("click", function(){ 
+                            var id = $(this).attr("id");
+                            $('#treatment_id').val(id);     
+                        });      
+  });
+
+  $("#yes").click(function(){
+                    treatment_id = $('#treatment_id').val()
+                    $('#overwrite_list').load(
+                                  '{% url consulting_remove_treatment_pm %}',
+                                  {'treatment_id': treatment_id,
+                                  'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()});
+  });
 {% endblock %}
 
 {% block header%}
@@ -31,21 +48,26 @@
       <div class="page-header">
           <h1>{% trans 'Listado de Tratamientos' %}</h1>                
       </div>
-      <div class="row">
-        {% if treatments.object_list %}
-          <div class="span8">                         
+      <div class="row">        
+        <div class="span8">
+          <div id="overwrite_list">
+            {% if treatments.object_list %}                         
             <table id="list_treatment" class="table table-bordered table-condensed">  
                 <thead>
                   <tr>            
                     <th style="text-align:center;">
                       {% trans 'FECHA' %}
-                    </th>                
+                    </th>
+                    <th></th>                
                   </tr>
                 </thead>        
-                <tbody>                  
+                <tbody id="overwrite_list">                  
                   {% for treatment in treatments.object_list %}
                     <tr id="{{treatment.id}}" class="treatment">
                       <td style="text-align:center;">{{treatment.date}}</td>
+                      <td>                      
+                        <a id="{{treatment.id}}" class="icon-trash remove_treatment" data-toggle="modal" href="#check_remove_treatment"></a>
+                      </td>
                     </tr>
                   {% endfor %}
                 </tbody>
@@ -65,17 +87,34 @@
                 {% endif %}
               </ul>
             </div>             
-            <div id="overwrite"></div>
-          </div>            
-        {% else %}
-          <div class="span8">
-            <h6>{% trans "No hay tratamientos" %}</h6>
+            <div id="overwrite"></div>                                         
+            {% else %}
+                <h6>{% trans "No hay tratamientos" %}</h6>
+            {% endif %}
           </div>
-        {% endif %}
-          <!-- PATIENT CARD -->
-          <div class="span4">
-              {% include "consulting/card.html" %}
+        </div>
+        <div id="check_remove_treatment" class="modal hide fade" style="display: block;">
+          <input id="treatment_id" type="hidden">
+          <div class="modal-header">
+              <button class="close" data-dismiss="modal">
+                ×
+              </button>
+              <h3>Borrar Tratamiento</h3>
           </div>
+          <div class="modal-body">
+              <p>
+                {% trans '¿Está seguro que quiere borrar éste tratamiento?' %}
+              </p>
+          </div>
+          <div class="modal-footer">
+            <a id="yes" data-dismiss="modal" href="#" class="btn">Sí</a>
+            <a data-dismiss="modal" href="#" class="btn btn-primary">No</a>
+          </div>    
+        </div>
+        <!-- PATIENT CARD -->
+        <div class="span4">
+            {% include "consulting/card.html" %}
+        </div>
       </div>
     </section>                
   </div>
