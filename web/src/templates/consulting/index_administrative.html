@@ -19,7 +19,7 @@
   $("#searcher").autocomplete({
     source: function(request, response){
               $.ajax({
-                  url: '{% url searcher %}',
+                  url: '{% url consulting_searcher %}',
                   type:'POST',
                   data: {
                       start: function() { return $("#searcher").val(); },
@@ -32,7 +32,7 @@
               })
             },
     select: function(event, ui){
-              $('#overwrite').load('{% url patient_appointments %}',
+              $('#overwrite').load('{% url consulting_patient_appointments %}',
                                       {'patient_id': ui.item.id,
                                       'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()});
             },
