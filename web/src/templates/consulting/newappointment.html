@@ -19,26 +19,23 @@
   $('#doctor').change(function() {
     var id_doctor = $("#id_doctor option:selected").val()
 
-    $('#appointments').load('{% url appointments_doctor %}',
+    $('#appointments').load('{% url consulting_appointments_doctor %}',
                             {'id_doctor': id_doctor,
                             'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()});
   });
 {% endblock %}
 <!--REPASAR-->
 {% block header%}
-    {% include "ui/includes/header.html" %}
+    {% include "ui/includes/header_administrative.html" %}
 {% endblock  %}
 
-{% block nav-bar%}
-    {% include "ui/includes/nav-bar-administrative.html" %}
-{% endblock  %}
 <!--FIN REPASAR-->
 {% block body %}
-    <div class="container" style="padding-top:100px;">
+  <div class="container" style="padding-top:100px;">
       <div class="row" >
         <div class="span8 offset2 well">
           <form class="form-horizontal" id="form"
-                action="{% url newappointment id_newpatient %}"
+                action="{% url consulting_newappointment id_newpatient %}"
                 method="post" accept-charset="utf-8">{% csrf_token %}
             <h2>{% trans 'NUEVA CITA' %}</h2>
             {{form.patient}}
