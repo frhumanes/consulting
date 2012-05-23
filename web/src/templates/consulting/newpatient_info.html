@@ -25,10 +25,10 @@
                     {% trans '¿Desea crear una cita al paciente que acaba de dar de alta?' %}
                 </h4>
                 <p>
-                    <a class="btn btn-danger" href="{% url newappointment id_newpatient %}">
+                    <a class="btn btn-danger" href="{% url consulting_newappointment id_newpatient %}">
                         Sí
                     </a>
-                    <a class="btn btn-danger" href="{% url main_index %}">
+                    <a class="btn btn-danger" href="{% url consulting_index %}">
                         No
                     </a>
                 </p>
