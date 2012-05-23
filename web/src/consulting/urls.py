@@ -34,19 +34,27 @@ urlpatterns = patterns('',
         consulting_views.personal_data_pm,
         name='consulting_personal_data_pm'),
 
-    url(r'^patient_management/list_treatments_pm/',
+    url(r'^patient_management/list_treatments_pm/$',
         consulting_views.list_treatments_pm,
         name='consulting_list_treatments_pm'),
 
-    url(r'^patient_management/detail_treatment_pm/',
+    url(r'^patient_management/detail_treatment_pm/$',
         consulting_views.detail_treatment_pm,
         name='consulting_detail_treatment_pm'),
 
-    url(r'^patient_management/newtreatment_pm/',
+    url(r'^patient_management/newtreatment_pm/$',
         consulting_views.newtreatment_pm,
         name='consulting_newtreatment_pm'),
 
-    url(r'^patient_management/remove_medication_pm/',
+    url(r'^patient_management/newtreatment_pm/add_medications_treatment_pm/(?P<treatment_id>\d+)$',
+        consulting_views.add_medications_treatment_pm,
+        name='consulting_add_medications_treatment_pm'),
+
+    url(r'^patient_management/remove_medication_pm/$',
         consulting_views.remove_medication_pm,
         name='consulting_remove_medication_pm'),
+
+    url(r'^patient_management/remove_treatment_pm/$',
+        consulting_views.remove_treatment_pm,
+        name='consulting_remove_treatment_pm'),
 )
