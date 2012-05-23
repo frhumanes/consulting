@@ -78,9 +78,6 @@ class Answer(models.Model):
 #-----------------------------------------------------------------------------#
 class Treatment(models.Model):
     patient = models.ForeignKey(User, related_name='patienttreatments')
-    medications = models.ManyToManyField('Medication',
-                related_name='medicationstreatments')
-
     from_appointment = models.BooleanField()
     date = models.DateTimeField(_(u'Fecha'))
 
@@ -94,12 +91,13 @@ class Medication(models.Model):
         (settings.AFTER, _(u'Posterior')),
     )
 
-    medicine = models.ForeignKey(Medicine, related_name='medications')
+    treatment = models.ForeignKey(Treatment,
+                                    related_name='treatmentmedications')
+    medicine = models.ForeignKey(Medicine, related_name='medicinemedications')
     before_after = models.IntegerField(_(u'Anterior/Posterior\
                                     síntomas psiquiátricos'),
                                     choices=BEFORE_AFTER_CHOICES)
-    date = models.DateField(_(u'Fecha comienzo medicamento'),
-                                blank=True, null=True)
+    months = models.IntegerField(_(u'Número de meses de toma del fármaco'))
     posology = models.CharField(_(u'Posología (mg/día)'), max_length=255)
 
     def __unicode__(self):
