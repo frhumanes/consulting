@@ -1,0 +1,635 @@
+[
+  {
+    "model": "survey.category",
+    "pk": 1,
+    "fields": {
+      "name": "Datos Administrativos",
+      "code": "DA"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 2,
+    "fields": {
+      "name": "Antecedentes familiares",
+      "code": "AF"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 3,
+    "fields": {
+      "name": "Antecedentes personales de enfermedad psíquica",
+      "code": "APEP"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 4,
+    "fields": {
+      "name": "Antecedentes personales de enfermedad orgánica",
+      "code": "APEO"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 5,
+    "fields": {
+      "name": "Medicación",
+      "code": "M"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 6,
+    "fields": {
+      "name": "Luz",
+      "code": "L"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 7,
+    "fields": {
+      "name": "Acontecimientos Vitales Estresantes",
+      "code": "AVE"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 8,
+    "fields": {
+      "name": "Apoyo Social",
+      "code": "AS"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 9,
+    "fields": {
+      "name": "Rasgos de la personalidad",
+      "code": "RP"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 10,
+    "fields": {
+      "name": "Tristeza",
+      "code": "T-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 11,
+    "fields": {
+      "name": "Tristeza",
+      "code": "T-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 12,
+    "fields": {
+      "name": "Pesimismo",
+      "code": "P-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 13,
+    "fields": {
+      "name": "Pesimismo",
+      "code": "P-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 14,
+    "fields": {
+      "name": "Sensación de fracaso",
+      "code": "SF-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 15,
+    "fields": {
+      "name": "Sensación de fracaso",
+      "code": "SF-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 16,
+    "fields": {
+      "name": "Insatisfacción",
+      "code": "I-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 17,
+    "fields": {
+      "name": "Insatisfacción",
+      "code": "I-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 18,
+    "fields": {
+      "name": "Culpa",
+      "code": "C-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 19,
+    "fields": {
+      "name": "Culpa",
+      "code": "C-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 20,
+    "fields": {
+      "name": "Expectativas de castigo",
+      "code": "EC-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 21,
+    "fields": {
+      "name": "Expectativas de castigo",
+      "code": "EC-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 22,
+    "fields": {
+      "name": "Autodesprecio",
+      "code": "A-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 23,
+    "fields": {
+      "name": "Autodesprecio",
+      "code": "A-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 24,
+    "fields": {
+      "name": "Autoacusación",
+      "code": "AU-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 25,
+    "fields": {
+      "name": "Autoacusación",
+      "code": "AU-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 26,
+    "fields": {
+      "name": "Ideas suicidas",
+      "code": "IS-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 27,
+    "fields": {
+      "name": "Ideas suicidas",
+      "code": "IS-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 28,
+    "fields": {
+      "name": "Episodios de llanto",
+      "code": "EL-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 29,
+    "fields": {
+      "name": "Episodios de llanto",
+      "code": "EL-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 30,
+    "fields": {
+      "name": "Irritabilidad",
+      "code": "IR-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 31,
+    "fields": {
+      "name": "Irritabilidad",
+      "code": "IR-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 32,
+    "fields": {
+      "name": "Retirada social",
+      "code": "RS-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 33,
+    "fields": {
+      "name": "Retirada social",
+      "code": "RS-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 34,
+    "fields": {
+      "name": "Indecisión",
+      "code": "IN-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 35,
+    "fields": {
+      "name": "Indecisión",
+      "code": "IN-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 36,
+    "fields": {
+      "name": "Miedo",
+      "code": "M-E"      
+    }
+  }, 
+  {
+    "model": "survey.category",
+    "pk": 37,
+    "fields": {
+      "name": "Miedo",
+      "code": "M-A"      
+    }
+  }, 
+  {
+    "model": "survey.category",
+    "pk": 38,
+    "fields": {
+      "name": "Cambios en la imagen corporal",
+      "code": "CIC-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 39,
+    "fields": {
+      "name": "Cambios en la imagen corporal",
+      "code": "CIC-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 40,
+    "fields": {
+      "name": "Ralentización",
+      "code": "R-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 41,
+    "fields": {
+      "name": "Ralentización",
+      "code": "R-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 42,
+    "fields": {
+      "name": "Concentración",
+      "code": "CO-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 43,
+    "fields": {
+      "name": "Tensión",
+      "code": "TE-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 44,
+    "fields": {
+      "name": "Tensión",
+      "code": "TE-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 45,
+    "fields": {
+      "name": "Insomnio",
+      "code": "INS-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 46,
+    "fields": {
+      "name": "Insomnio",
+      "code": "INS-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 47,
+    "fields": {
+      "name": "Fatigabilidad",
+      "code": "F-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 48,
+    "fields": {
+      "name": "Fatigabilidad",
+      "code": "F-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 49,
+    "fields": {
+      "name": "Síntomas somáticos musculares",
+      "code": "SSM-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 50,
+    "fields": {
+      "name": "Síntomas somáticos musculares",
+      "code": "SSM-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 51,
+    "fields": {
+      "name": "Síntomas somáticos sensoriales",
+      "code": "SSS-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 52,
+    "fields": {
+      "name": "Síntomas gastrointestinales",
+      "code": "SG-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 53,
+    "fields": {
+      "name": "Síntomas gastrointestinales",
+      "code": "SG-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 54,
+    "fields": {
+      "name": "Pérdida de apetito",
+      "code": "PA-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 55,
+    "fields": {
+      "name": "Pérdida de apetito",
+      "code": "PA-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 56,
+    "fields": {
+      "name": "Pérdida de peso",
+      "code": "PP-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 57,
+    "fields": {
+      "name": "Pérdida de peso",
+      "code": "PP-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 58,
+    "fields": {
+      "name": "Preocupaciones somáticas",
+      "code": "PS-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 59,
+    "fields": {
+      "name": "Preocupaciones somáticas",
+      "code": "PS-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 60,
+    "fields": {
+      "name": "Bajo nivel de energía",
+      "code": "BNE-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 61,
+    "fields": {
+      "name": "Bajo nivel de energía",
+      "code": "BNE-A"      
+    }
+  },  
+  {
+    "model": "survey.category",
+    "pk": 62,
+    "fields": {
+      "name": "Síntomas respiratorios",
+      "code": "SR-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 63,
+    "fields": {
+      "name": "Síntomas respiratorios",
+      "code": "SR-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 64,
+    "fields": {
+      "name": "Síntomas cardiovasculares",
+      "code": "SC-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 65,
+    "fields": {
+      "name": "Síntomas cardiovasculares",
+      "code": "SC-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 66,
+    "fields": {
+      "name": "Síntomas vegetativos",
+      "code": "SV-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 67,
+    "fields": {
+      "name": "Introspección",
+      "code": "INT-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 68,
+    "fields": {
+      "name": "Introspección",
+      "code": "INT-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 69,
+    "fields": {
+      "name": "Inhibición psicomotora",
+      "code": "IP-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 70,
+    "fields": {
+      "name": "Inhibición psicomotora",
+      "code": "IP-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 71,
+    "fields": {
+      "name": "Humor ansioso",
+      "code": "HA-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 72,
+    "fields": {
+      "name": "Funciones intelectuales (cognitivas)",
+      "code": "FI-A"      
+    }
+  },  
+  {
+    "model": "survey.category",
+    "pk": 73,
+    "fields": {
+      "name": "Humor depresivo",
+      "code": "HD-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 74,
+    "fields": {
+      "name": "Síntomas somáticos generales",
+      "code": "SSG-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 75,
+    "fields": {
+      "name": "Síntomas genitourinarios",
+      "code": "SGE-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 76,
+    "fields": {
+      "name": "Síntomas del sistema nervioso autónomo",
+      "code": "SSNA-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 77,
+    "fields": {
+      "name": "Conducta en el trascurso del test",
+      "code": "CTT-A"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 78,
+    "fields": {
+      "name": "Adherencia al Tratamiento",
+      "code": "AT"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 79,
+    "fields": {
+      "name": "Síntomas o empeoramiento",
+      "code": "SE"      
+    }
+  }
+  
+]

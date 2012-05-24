@@ -1429,5 +1429,662 @@
       "group": 19,
       "active_ingredients": [367]
     }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 159,
+    "fields": {
+      "name": "Aux87",
+      "group": 20,
+      "active_ingredients": [368]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 160,
+    "fields": {
+      "name": "Aux88",
+      "group": 21,
+      "active_ingredients": [369]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 161,
+    "fields": {
+      "name": "Aux89",
+      "group": 21,
+      "active_ingredients": [370]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 162,
+    "fields": {
+      "name": "Aux90",
+      "group": 21,
+      "active_ingredients": [371]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 163,
+    "fields": {
+      "name": "Aux91",
+      "group": 21,
+      "active_ingredients": [372]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 164,
+    "fields": {
+      "name": "Aux92",
+      "group": 21,
+      "active_ingredients": [373]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 165,
+    "fields": {
+      "name": "Aux93",
+      "group": 22,
+      "active_ingredients": [375]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 166,
+    "fields": {
+      "name": "Aux94",
+      "group": 22,
+      "active_ingredients": [376]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 167,
+    "fields": {
+      "name": "Aux95",
+      "group": 23,
+      "active_ingredients": [377]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 168,
+    "fields": {
+      "name": "Aux96",
+      "group": 23,
+      "active_ingredients": [378]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 169,
+    "fields": {
+      "name": "Aux97",
+      "group": 23,
+      "active_ingredients": [379]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 170,
+    "fields": {
+      "name": "Aux98",
+      "group": 24,
+      "active_ingredients": [380]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 171,
+    "fields": {
+      "name": "Aux99",
+      "group": 24,
+      "active_ingredients": [381]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 172,
+    "fields": {
+      "name": "Aux100",
+      "group": 24,
+      "active_ingredients": [382]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 173,
+    "fields": {
+      "name": "Aux101",
+      "group": 24,
+      "active_ingredients": [383]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 174,
+    "fields": {
+      "name": "Aux102",
+      "group": 25,
+      "active_ingredients": [384]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 175,
+    "fields": {
+      "name": "Aux103",
+      "group": 26,
+      "active_ingredients": [385]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 176,
+    "fields": {
+      "name": "Aux104",
+      "group": 26,
+      "active_ingredients": [386]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 177,
+    "fields": {
+      "name": "Aux105",
+      "group": 27,
+      "active_ingredients": [387]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 178,
+    "fields": {
+      "name": "Aux106",
+      "group": 27,
+      "active_ingredients": [388]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 179,
+    "fields": {
+      "name": "Aux107",
+      "group": 27,
+      "active_ingredients": [389]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 180,
+    "fields": {
+      "name": "Aux108",
+      "group": 27,
+      "active_ingredients": [390]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 181,
+    "fields": {
+      "name": "Aux109",
+      "group": 27,
+      "active_ingredients": [391]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 182,
+    "fields": {
+      "name": "Aux110",
+      "group": 27,
+      "active_ingredients": [392]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 183,
+    "fields": {
+      "name": "Aux111",
+      "group": 27,
+      "active_ingredients": [19]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 184,
+    "fields": {
+      "name": "Aux112",
+      "group": 27,
+      "active_ingredients": [393]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 185,
+    "fields": {
+      "name": "Aux113",
+      "group": 27,
+      "active_ingredients": [394]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 186,
+    "fields": {
+      "name": "Aux114",
+      "group": 27,
+      "active_ingredients": [395]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 187,
+    "fields": {
+      "name": "Aux115",
+      "group": 27,
+      "active_ingredients": [396]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 188,
+    "fields": {
+      "name": "Aux116",
+      "group": 27,
+      "active_ingredients": [397]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 189,
+    "fields": {
+      "name": "Aux117",
+      "group": 27,
+      "active_ingredients": [398]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 190,
+    "fields": {
+      "name": "Aux118",
+      "group": 27,
+      "active_ingredients": [399]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 191,
+    "fields": {
+      "name": "Aux119",
+      "group": 27,
+      "active_ingredients": [400]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 192,
+    "fields": {
+      "name": "Aux120",
+      "group": 27,
+      "active_ingredients": [401]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 193,
+    "fields": {
+      "name": "Aux121",
+      "group": 27,
+      "active_ingredients": [402]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 194,
+    "fields": {
+      "name": "Aux122",
+      "group": 27,
+      "active_ingredients": [403]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 195,
+    "fields": {
+      "name": "Aux123",
+      "group": 27,
+      "active_ingredients": [50]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 196,
+    "fields": {
+      "name": "Aux124",
+      "group": 27,
+      "active_ingredients": [404]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 197,
+    "fields": {
+      "name": "Aux125",
+      "group": 27,
+      "active_ingredients": [405]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 198,
+    "fields": {
+      "name": "Aux126",
+      "group": 27,
+      "active_ingredients": [406]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 199,
+    "fields": {
+      "name": "Aux127",
+      "group": 27,
+      "active_ingredients": [407]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 200,
+    "fields": {
+      "name": "Aux128",
+      "group": 27,
+      "active_ingredients": [408]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 201,
+    "fields": {
+      "name": "Aux129",
+      "group": 27,
+      "active_ingredients": [409]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 202,
+    "fields": {
+      "name": "Aux130",
+      "group": 27,
+      "active_ingredients": [410]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 203,
+    "fields": {
+      "name": "Aux131",
+      "group": 27,
+      "active_ingredients": [411]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 204,
+    "fields": {
+      "name": "Aux132",
+      "group": 27,
+      "active_ingredients": [412]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 205,
+    "fields": {
+      "name": "Aux133",
+      "group": 27,
+      "active_ingredients": [413]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 206,
+    "fields": {
+      "name": "Aux134",
+      "group": 27,
+      "active_ingredients": [414]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 207,
+    "fields": {
+      "name": "Aux135",
+      "group": 27,
+      "active_ingredients": [415]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 208,
+    "fields": {
+      "name": "Aux136",
+      "group": 27,
+      "active_ingredients": [416]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 209,
+    "fields": {
+      "name": "Aux137",
+      "group": 27,
+      "active_ingredients": [417]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 210,
+    "fields": {
+      "name": "Aux138",
+      "group": 27,
+      "active_ingredients": [418]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 211,
+    "fields": {
+      "name": "Aux139",
+      "group": 27,
+      "active_ingredients": [419]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 212,
+    "fields": {
+      "name": "Aux140",
+      "group": 27,
+      "active_ingredients": [420]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 213,
+    "fields": {
+      "name": "Aux141",
+      "group": 27,
+      "active_ingredients": [421]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 214,
+    "fields": {
+      "name": "Aux142",
+      "group": 28,
+      "active_ingredients": [422]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 215,
+    "fields": {
+      "name": "Dextropropoxifeno",
+      "group": 29,
+      "active_ingredients": [423]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 216,
+    "fields": {
+      "name": "Aux143",
+      "group": 30,
+      "active_ingredients": [424]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 217,
+    "fields": {
+      "name": "Aux144",
+      "group": 30,
+      "active_ingredients": [425]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 218,
+    "fields": {
+      "name": "Aux145",
+      "group": 30,
+      "active_ingredients": [426]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 219,
+    "fields": {
+      "name": "Aux146",
+      "group": 30,
+      "active_ingredients": [427]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 220,
+    "fields": {
+      "name": "Aux147",
+      "group": 30,
+      "active_ingredients": [428]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 221,
+    "fields": {
+      "name": "Aux148",
+      "group": 30,
+      "active_ingredients": [429]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 222,
+    "fields": {
+      "name": "Aux149",
+      "group": 30,
+      "active_ingredients": [430]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 223,
+    "fields": {
+      "name": "Aux150",
+      "group": 30,
+      "active_ingredients": [431]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 224,
+    "fields": {
+      "name": "Clortalidona",
+      "group": 31,
+      "active_ingredients": [432,433,434,220,222,435]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 225,
+    "fields": {
+      "name": "Clofenamida",
+      "group": 31,
+      "active_ingredients": [436,437]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 226,
+    "fields": {
+      "name": "Indapamida",
+      "group": 31,
+      "active_ingredients": [438,439,440,441,442]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 227,
+    "fields": {
+      "name": "Clorexolona",
+      "group": 31,
+      "active_ingredients": [443]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 228,
+    "fields": {
+      "name": "Xipamida",
+      "group": 31,
+      "active_ingredients": [444]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 229,
+    "fields": {
+      "name": "Aux151",
+      "group": 32,
+      "active_ingredients": [445]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 230,
+    "fields": {
+      "name": "Aux152",
+      "group": 33,
+      "active_ingredients": [446]
+    }
+  },
+  {
+    "model": "medicament.medicine",
+    "pk": 231,
+    "fields": {
+      "name": "Aux153",
+      "group": 33,
+      "active_ingredients": [447]
+    }
   }
 ]
