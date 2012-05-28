@@ -1,0 +1,4744 @@
+[
+  {
+    "model": "medicament.component",
+     "pk": -1,
+    "fields": {
+      "kind_component":1,
+      "name": "",
+      "groups": [-1]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 1,
+    "fields": {
+      "kind_component":1,
+      "name": "Aciclovir",
+      "groups": [1]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 2,
+    "fields": {
+      "kind_component":1,
+      "name": "Amantadina",
+      "groups": [2]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 3,
+    "fields": {
+      "kind_component":1,
+      "name": "Estreptomicina",
+      "groups": [3]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 4,
+    "fields": {
+      "kind_component":1,
+      "name": "Gentamicina",
+      "groups": [3]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 5,
+    "fields": {
+      "kind_component":1,
+      "name": "Tobramicina",
+      "groups": [3]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 6,
+    "fields": {
+      "kind_component":1,
+      "name": "Paromomicina",
+      "groups": [3]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 7,
+    "fields": {
+      "kind_component":1,
+      "name": "Amikacina",
+      "groups": [3]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 8,
+    "fields": {
+      "kind_component":1,
+      "name": "Netilmicina",
+      "groups": [3]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 9,
+    "fields": {
+      "kind_component":1,
+      "name": "Dexanfetamina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 10,
+    "fields": {
+      "kind_component":1,
+      "name": "Metilfenidato",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 11,
+    "fields": {
+      "kind_component":1,
+      "name": "Efedrina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 12,
+    "fields": {
+      "kind_component":1,
+      "name": "Modafinilo",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 13,
+    "fields": {
+      "kind_component":1,
+      "name": "Atomoxetina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 14,
+    "fields": {
+      "kind_component":1,
+      "name": "Cafeína",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 15,
+    "fields": {
+      "kind_component":1,
+      "name": "Piracetam",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 16,
+    "fields": {
+      "kind_component":1,
+      "name": "Deanol",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 17,
+    "fields": {
+      "kind_component":1,
+      "name": "Citicolina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 18,
+    "fields": {
+      "kind_component":1,
+      "name": "Pirisudanol",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 19,
+    "fields": {
+      "kind_component":1,
+      "name": "Vinpocetina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 20,
+    "fields": {
+      "kind_component":1,
+      "name": "Amlodipino",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 21,
+    "fields": {
+      "kind_component":1,
+      "name": "Felodipino",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 22,
+    "fields": {
+      "kind_component":1,
+      "name": "Isradipino",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 23,
+    "fields": {
+      "kind_component":1,
+      "name": "Nicardipino",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 24,
+    "fields": {
+      "kind_component":1,
+      "name": "Nifedipino",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 25,
+    "fields": {
+      "kind_component":1,
+      "name": "Nimodipino",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 26,
+    "fields": {
+      "kind_component":1,
+      "name": "Nisoldipino",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 27,
+    "fields": {
+      "kind_component":1,
+      "name": "Nitrendipino",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 28,
+    "fields": {
+      "kind_component":1,
+      "name": "Lacidipino",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 29,
+    "fields": {
+      "kind_component":1,
+      "name": "Manidipino",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 30,
+    "fields": {
+      "kind_component":1,
+      "name": "Barnidipino",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 31,
+    "fields": {
+      "kind_component":1,
+      "name": "Verapamilo",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 32,
+    "fields": {
+      "kind_component":1,
+      "name": "Diltazem",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 33,
+    "fields": {
+      "kind_component":1,
+      "name": "Con Etinilestradiol",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 34,
+    "fields": {
+      "kind_component":1,
+      "name": "Linestrenol",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 35,
+    "fields": {
+      "kind_component":1,
+      "name": "Norgestrel",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 36,
+    "fields": {
+      "kind_component":1,
+      "name": "Carvedilol",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 37,
+    "fields": {
+      "kind_component":1,
+      "name": "Labetalol",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 38,
+    "fields": {
+      "kind_component":1,
+      "name": "Nadolol",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 39,
+    "fields": {
+      "kind_component":1,
+      "name": "Propranolol",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 40,
+    "fields": {
+      "kind_component":1,
+      "name": "Atenolol",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 41,
+    "fields": {
+      "kind_component":1,
+      "name": "Betaxolol",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 42,
+    "fields": {
+      "kind_component":1,
+      "name": "Bisoprolol",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 43,
+    "fields": {
+      "kind_component":1,
+      "name": "Celiprolol",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 44,
+    "fields": {
+      "kind_component":1,
+      "name": "Esmolol",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 45,
+    "fields": {
+      "kind_component":1,
+      "name": "Metoprolol",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 46,
+    "fields": {
+      "kind_component":1,
+      "name": "Clobazam",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 47,
+    "fields": {
+      "kind_component":1,
+      "name": "Clorazepato",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 48,
+    "fields": {
+      "kind_component":1,
+      "name": "Clordiazepóxido",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 49,
+    "fields": {
+      "kind_component":1,
+      "name": "Diazepam",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 50,
+    "fields": {
+      "kind_component":1,
+      "name": "Fluracepam",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 51,
+    "fields": {
+      "kind_component":1,
+      "name": "Clonazepam",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 52,
+    "fields": {
+      "kind_component":1,
+      "name": "Bromazepam",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 53,
+    "fields": {
+      "kind_component":1,
+      "name": "Alprazolam",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 54,
+    "fields": {
+      "kind_component":1,
+      "name": "Lormetacepam",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 55,
+    "fields": {
+      "kind_component":1,
+      "name": "Lorazepam",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 56,
+    "fields": {
+      "kind_component":1,
+      "name": "Brotizolam",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 57,
+    "fields": {
+      "kind_component":1,
+      "name": "Medazepam",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 58,
+    "fields": {
+      "kind_component":1,
+      "name": "Pinazepam",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 59,
+    "fields": {
+      "kind_component":1,
+      "name": "Clotiazepam",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 60,
+    "fields": {
+      "kind_component":1,
+      "name": "Flunitrazepam",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 61,
+    "fields": {
+      "kind_component":1,
+      "name": "Oxazepam",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 62,
+    "fields": {
+      "kind_component":1,
+      "name": "Buspirona",
+      "groups": [8]
+    }
+  },  
+  {
+    "model": "medicament.component",
+    "pk": 63,
+    "fields": {
+      "kind_component":1,
+      "name": "Hidrocortisona",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 64,
+    "fields": {
+      "kind_component":1,
+      "name": "Deflazacort",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 65,
+    "fields": {
+      "kind_component":1,
+      "name": "Prednisolona",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 66,
+    "fields": {
+      "kind_component":1,
+      "name": "Prednisona",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 67,
+    "fields": {
+      "kind_component":1,
+      "name": "Triamcinolona",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 68,
+    "fields": {
+      "kind_component":1,
+      "name": "Parametasona",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 69,
+    "fields": {
+      "kind_component":1,
+      "name": "Fludrocortisona",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 70,
+    "fields": {
+      "kind_component":1,
+      "name": "Dexametasona",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 71,
+    "fields": {
+      "kind_component":1,
+      "name": "Betametasona",
+      "groups": [13]
+    }
+  },  
+  {
+    "model": "medicament.component",
+    "pk": 72,
+    "fields": {
+      "kind_component":1,
+      "name": "Digoxina",
+      "groups": [15]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 73,
+    "fields": {
+      "kind_component":1,
+      "name": "Dextropropoxifeno",
+      "groups": [29]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 74,
+    "fields": {
+      "kind_component":1,
+      "name": "Clortalidona",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 75,
+    "fields": {
+      "kind_component":1,
+      "name": "Clofenamida",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 76,
+    "fields": {
+      "kind_component":1,
+      "name": "Indapamida",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 77,
+    "fields": {
+      "kind_component":1,
+      "name": "Clorexolona",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 78,
+    "fields": {
+      "kind_component":1,
+      "name": "Xipamida",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 79,
+    "fields": {
+      "kind_component":0,
+      "name": "Zovirax",
+      "groups": [1]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 80,
+    "fields": {
+      "kind_component":0,
+      "name": "Virmen",
+      "groups": [1]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 81,
+    "fields": {
+      "kind_component":0,
+      "name": "Aciclotad",
+      "groups": [1]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 82,
+    "fields": {
+      "kind_component":0,
+      "name": "Maynar",
+      "groups":[1]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 83,
+    "fields": {
+      "kind_component":0,
+      "name": "Virherpes",
+      "groups": [1]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 84,
+    "fields": {
+      "kind_component":0,
+      "name": "Amantadina",
+      "groups": [2]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 85,
+    "fields": {
+      "kind_component":0,
+      "name": "Dihidroestreptomicina",
+      "groups": [3]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 86,
+    "fields": {
+      "kind_component":0,
+      "name": "Rexgenta",
+      "groups": [3]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 87,
+    "fields": {
+      "kind_component":0,
+      "name": "Tobramicina",
+      "groups": [3]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 88,
+    "fields": {
+      "kind_component":0,
+      "name": "Humatin",
+      "groups": [3]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 89,
+    "fields": {
+      "kind_component":0,
+      "name": "Amikacina",
+      "groups": [3]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 90,
+    "fields": {
+      "kind_component":0,
+      "name": "Dalinar",
+      "groups": [3]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 91,
+    "fields": {
+      "kind_component":0,
+      "name": "Dextroanfetamina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 92,
+    "fields": {
+      "kind_component":0,
+      "name": "Tedixamil",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 93,
+    "fields": {
+      "kind_component":0,
+      "name": "Pulzium",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 94,
+    "fields": {
+      "kind_component":0,
+      "name": "Concerta",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 95,
+    "fields": {
+      "kind_component":0,
+      "name": "Asmisedante",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 96,
+    "fields": {
+      "kind_component":0,
+      "name": "Fludren",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 97,
+    "fields": {
+      "kind_component":0,
+      "name": "Pazbronquial",
+      "groups": [4,27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 98,
+    "fields": {
+      "kind_component":0,
+      "name": "Tabletas Quimpe",
+      "groups": [4,27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 99,
+    "fields": {
+      "kind_component":0,
+      "name": "Vita Vox",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 100,
+    "fields": {
+      "kind_component":0,
+      "name": "Voxfor",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 101,
+    "fields": {
+      "kind_component":0,
+      "name": "Medinait",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 102,
+    "fields": {
+      "kind_component":0,
+      "name": "Cinfatos Complex",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 103,
+    "fields": {
+      "kind_component":0,
+      "name": "Vincitos",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 104,
+    "fields": {
+      "kind_component":0,
+      "name": "Alercina plus",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 105,
+    "fields": {
+      "kind_component":0,
+      "name": "Aligrip",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 106,
+    "fields": {
+      "kind_component":0,
+      "name": "Frenadol",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 107,
+    "fields": {
+      "kind_component":0,
+      "name": "Inistolin",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 108,
+    "fields": {
+      "kind_component":0,
+      "name": "Iniston",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 109,
+    "fields": {
+      "kind_component":0,
+      "name": "Lasa",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 110,
+    "fields": {
+      "kind_component":0,
+      "name": "Novag grip con pseudoefedrina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 111,
+    "fields": {
+      "kind_component":0,
+      "name": "Reactine plus",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 112,
+    "fields": {
+      "kind_component":0,
+      "name": "Rinobactil",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 113,
+    "fields": {
+      "kind_component":0,
+      "name": "Rino-ebastel",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 114,
+    "fields": {
+      "kind_component":0,
+      "name": "Sinutab",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 115,
+    "fields": {
+      "kind_component":0,
+      "name": "Stopcold",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 116,
+    "fields": {
+      "kind_component":0,
+      "name": "Vincigrip",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 117,
+    "fields": {
+      "kind_component":0,
+      "name": "Isoefedrina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 118,
+    "fields": {
+      "kind_component":0,
+      "name": "Pseudoefedrina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 119,
+    "fields": {
+      "kind_component":0,
+      "name": "Clarytine",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 120,
+    "fields": {
+      "kind_component":0,
+      "name": "Disofriol",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 121,
+    "fields": {
+      "kind_component":0,
+      "name": "Cortafriol",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 122,
+    "fields": {
+      "kind_component":0,
+      "name": "Polaramine expectorante",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 123,
+    "fields": {
+      "kind_component":0,
+      "name": "Narine repetabs",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 124,
+    "fields": {
+      "kind_component":0,
+      "name": "Modiodal",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 125,
+    "fields": {
+      "kind_component":0,
+      "name": "Rixdem",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 126,
+    "fields": {
+      "kind_component":0,
+      "name": "Atomexetina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 127,
+    "fields": {
+      "kind_component":0,
+      "name": "Strattera",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 128,
+    "fields": {
+      "kind_component":0,
+      "name": "Analgilasa",
+      "groups": [4,27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 129,
+    "fields": {
+      "kind_component":0,
+      "name": "Aspirina plus",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 130,
+    "fields": {
+      "kind_component":0,
+      "name": "Actron compuesto",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 131,
+    "fields": {
+      "kind_component":0,
+      "name": "Biodramina cafeina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 132,
+    "fields": {
+      "kind_component":0,
+      "name": "Cafergot",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 133,
+    "fields": {
+      "kind_component":0,
+      "name": "Calmagrip",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 134,
+    "fields": {
+      "kind_component":0,
+      "name": "Calmante vitaminado Perez Gimenez",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 135,
+    "fields": {
+      "kind_component":0,
+      "name": "Cinfamar cafeina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 136,
+    "fields": {
+      "kind_component":0,
+      "name": "Desenfriol C granulado",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 137,
+    "fields": {
+      "kind_component":0,
+      "name": "Desenfriol-D",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 138,
+    "fields": {
+      "kind_component":0,
+      "name": "Dolofarma",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 139,
+    "fields": {
+      "kind_component":0,
+      "name": "Dolviran",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 140,
+    "fields": {
+      "kind_component":0,
+      "name": "Durvitan",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 141,
+    "fields": {
+      "kind_component":0,
+      "name": "Dynamin",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 142,
+    "fields": {
+      "kind_component":0,
+      "name": "Hemicraneal",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 143,
+    "fields": {
+      "kind_component":0,
+      "name": "Ilvico",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 144,
+    "fields": {
+      "kind_component":0,
+      "name": "Longivol",
+      "groups": [4,6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 145,
+    "fields": {
+      "kind_component":0,
+      "name": "Maxiwas",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 146,
+    "fields": {
+      "kind_component":0,
+      "name": "Neocibalena",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 147,
+    "fields": {
+      "kind_component":0,
+      "name": "Okaldol con cafeina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 148,
+    "fields": {
+      "kind_component":0,
+      "name": "Pridio",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 149,
+    "fields": {
+      "kind_component":0,
+      "name": "Quimpedor",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 150,
+    "fields": {
+      "kind_component":0,
+      "name": "Rinomicine",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 151,
+    "fields": {
+      "kind_component":0,
+      "name": "Salvarina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 152,
+    "fields": {
+      "kind_component":0,
+      "name": "Saridon",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 153,
+    "fields": {
+      "kind_component":0,
+      "name": "Yendol",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 154,
+    "fields": {
+      "kind_component":0,
+      "name": "Cafiaspirina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 155,
+    "fields": {
+      "kind_component":0,
+      "name": "Optalidon",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 156,
+    "fields": {
+      "kind_component":0,
+      "name": "Saldeva forte",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 157,
+    "fields": {
+      "kind_component":0,
+      "name": "Mejoral cafeina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 158,
+    "fields": {
+      "kind_component":0,
+      "name": "Lafor",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 159,
+    "fields": {
+      "kind_component":0,
+      "name": "Cafintrina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 160,
+    "fields": {
+      "kind_component":0,
+      "name": "Nootropil",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 161,
+    "fields": {
+      "kind_component":0,
+      "name": "Diemil",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 162,
+    "fields": {
+      "kind_component":0,
+      "name": "Ciclofalina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 163,
+    "fields": {
+      "kind_component":0,
+      "name": "Anacervix",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 164,
+    "fields": {
+      "kind_component":0,
+      "name": "Demanil",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 165,
+    "fields": {
+      "kind_component":0,
+      "name": "Dmae",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 166,
+    "fields": {
+      "kind_component":0,
+      "name": "Esplenol",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 167,
+    "fields": {
+      "kind_component":0,
+      "name": "Actinico",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 168,
+    "fields": {
+      "kind_component":0,
+      "name": "Denubil",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 169,
+    "fields": {
+      "kind_component":0,
+      "name": "Anti-anorex",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 170,
+    "fields": {
+      "kind_component":0,
+      "name": "Somazina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 171,
+    "fields": {
+      "kind_component":0,
+      "name": "Numatol",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 172,
+    "fields": {
+      "kind_component":0,
+      "name": "Mentis",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 173,
+    "fields": {
+      "kind_component":0,
+      "name": "Vinpocetina",
+      "groups": [4]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 174,
+    "fields": {
+      "kind_component":0,
+      "name": "Astucor",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 175,
+    "fields": {
+      "kind_component":0,
+      "name": "Balzak",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 176,
+    "fields": {
+      "kind_component":0,
+      "name": "Dafiro",
+      "groups": [5,19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 177,
+    "fields": {
+      "kind_component":0,
+      "name": "Sevikar",
+      "groups": [5,19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 178,
+    "fields": {
+      "kind_component":0,
+      "name": "Capenon",
+      "groups": [5,19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 179,
+    "fields": {
+      "kind_component":0,
+      "name": "Arainno",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 180,
+    "fields": {
+      "kind_component":0,
+      "name": "Astudal",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 181,
+    "fields": {
+      "kind_component":0,
+      "name": "Caduet",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 182,
+    "fields": {
+      "kind_component":0,
+      "name": "Copalia",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 183,
+    "fields": {
+      "kind_component":0,
+      "name": "Covercor",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 184,
+    "fields": {
+      "kind_component":0,
+      "name": "Exforge HTA",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 185,
+    "fields": {
+      "kind_component":0,
+      "name": "Norvas",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 186,
+    "fields": {
+      "kind_component":0,
+      "name": "Imiprida",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 187,
+    "fields": {
+      "kind_component":0,
+      "name": "Twynsta",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 188,
+    "fields": {
+      "kind_component":0,
+      "name": "Zabart",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 189,
+    "fields": {
+      "kind_component":0,
+      "name": "Logimax",
+      "groups": [5,7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 190,
+    "fields": {
+      "kind_component":0,
+      "name": "Perfudal",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 191,
+    "fields": {
+      "kind_component":0,
+      "name": "Plendil",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 192,
+    "fields": {
+      "kind_component":0,
+      "name": "Triapin",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 193,
+    "fields": {
+      "kind_component":0,
+      "name": "Lomir",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 194,
+    "fields": {
+      "kind_component":0,
+      "name": "Dagan",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 195,
+    "fields": {
+      "kind_component":0,
+      "name": "Lucemide",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 196,
+    "fields": {
+      "kind_component":0,
+      "name": "Lecibral",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 197,
+    "fields": {
+      "kind_component":0,
+      "name": "Lincil",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 198,
+    "fields": {
+      "kind_component":0,
+      "name": "Lucenfal",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 199,
+    "fields": {
+      "kind_component":0,
+      "name": "Nerdipina",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 200,
+    "fields": {
+      "kind_component":0,
+      "name": "Vasonase",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 201,
+    "fields": {
+      "kind_component":0,
+      "name": "Adalat",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 202,
+    "fields": {
+      "kind_component":0,
+      "name": "Admon",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 203,
+    "fields": {
+      "kind_component":0,
+      "name": "Brainal",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 204,
+    "fields": {
+      "kind_component":0,
+      "name": "Calnit",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 205,
+    "fields": {
+      "kind_component":0,
+      "name": "Kenesil",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 206,
+    "fields": {
+      "kind_component":0,
+      "name": "Modus",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 207,
+    "fields": {
+      "kind_component":0,
+      "name": "Nimotop",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 208,
+    "fields": {
+      "kind_component":0,
+      "name": "Sular",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 209,
+    "fields": {
+      "kind_component":0,
+      "name": "Syscor",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 210,
+    "fields": {
+      "kind_component":0,
+      "name": "Baypresol",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 211,
+    "fields": {
+      "kind_component":0,
+      "name": "Eneas",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 212,
+    "fields": {
+      "kind_component":0,
+      "name": "Enit",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 213,
+    "fields": {
+      "kind_component":0,
+      "name": "Gericin",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 214,
+    "fields": {
+      "kind_component":0,
+      "name": "Tensogradal",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 215,
+    "fields": {
+      "kind_component":0,
+      "name": "Vastensium",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 216,
+    "fields": {
+      "kind_component":0,
+      "name": "Vipres",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 217,
+    "fields": {
+      "kind_component":0,
+      "name": "Lacimen",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 218,
+    "fields": {
+      "kind_component":0,
+      "name": "Lacipil",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 219,
+    "fields": {
+      "kind_component":0,
+      "name": "Motens",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 220,
+    "fields": {
+      "kind_component":0,
+      "name": "Artedil",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 221,
+    "fields": {
+      "kind_component":0,
+      "name": "Vivace",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 222,
+    "fields": {
+      "kind_component":0,
+      "name": "Libradin",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 223,
+    "fields": {
+      "kind_component":0,
+      "name": "Barnix",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 224,
+    "fields": {
+      "kind_component":0,
+      "name": "Tarka",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 225,
+    "fields": {
+      "kind_component":0,
+      "name": "Manidon",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 226,
+    "fields": {
+      "kind_component":0,
+      "name": "Latiazem",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 227,
+    "fields": {
+      "kind_component":0,
+      "name": "Clobendian",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 228,
+    "fields": {
+      "kind_component":0,
+      "name": "Angiodrox",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 229,
+    "fields": {
+      "kind_component":0,
+      "name": "Cardiser",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 230,
+    "fields": {
+      "kind_component":0,
+      "name": "Carreldon",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 231,
+    "fields": {
+      "kind_component":0,
+      "name": "Cronodine",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 232,
+    "fields": {
+      "kind_component":0,
+      "name": "Diaclan",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 233,
+    "fields": {
+      "kind_component":0,
+      "name": "Diltiwas",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 234,
+    "fields": {
+      "kind_component":0,
+      "name": "Dinisor",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 235,
+    "fields": {
+      "kind_component":0,
+      "name": "Doclis",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 236,
+    "fields": {
+      "kind_component":0,
+      "name": "Lacerol",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 237,
+    "fields": {
+      "kind_component":0,
+      "name": "Tilker",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 238,
+    "fields": {
+      "kind_component":0,
+      "name": "Trumsal",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 239,
+    "fields": {
+      "kind_component":0,
+      "name": "Masdil",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 240,
+    "fields": {
+      "kind_component":0,
+      "name": "Uni-masdil",
+      "groups": [5]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 241,
+    "fields": {
+      "kind_component":0,
+      "name": "Etinilestradiol",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 242,
+    "fields": {
+      "kind_component":0,
+      "name": "Balianca",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 243,
+    "fields": {
+      "kind_component":0,
+      "name": "Belara",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 244,
+    "fields": {
+      "kind_component":0,
+      "name": "Bemasive",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 245,
+    "fields": {
+      "kind_component":0,
+      "name": "Dialider",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 246,
+    "fields": {
+      "kind_component":0,
+      "name": "Diane",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 247,
+    "fields": {
+      "kind_component":0,
+      "name": "Donabel",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 248,
+    "fields": {
+      "kind_component":0,
+      "name": "Dretine",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 249,
+    "fields": {
+      "kind_component":0,
+      "name": "Dretinelle",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 250,
+    "fields": {
+      "kind_component":0,
+      "name": "Drosure",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 251,
+    "fields": {
+      "kind_component":0,
+      "name": "Drosurelle",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 252,
+    "fields": {
+      "kind_component":0,
+      "name": "Edelsin",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 253,
+    "fields": {
+      "kind_component":0,
+      "name": "Eloine",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 254,
+    "fields": {
+      "kind_component":0,
+      "name": "Evra",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 255,
+    "fields": {
+      "kind_component":0,
+      "name": "Gestinyl",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 256,
+    "fields": {
+      "kind_component":0,
+      "name": "Gracial",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 257,
+    "fields": {
+      "kind_component":0,
+      "name": "Gyneplen",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 258,
+    "fields": {
+      "kind_component":0,
+      "name": "Gynovin",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 259,
+    "fields": {
+      "kind_component":0,
+      "name": "Harmonet",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 260,
+    "fields": {
+      "kind_component":0,
+      "name": "Liofora",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 261,
+    "fields": {
+      "kind_component":0,
+      "name": "Loette",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 262,
+    "fields": {
+      "kind_component":0,
+      "name": "Meliane",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 263,
+    "fields": {
+      "kind_component":0,
+      "name": "Melodene",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 264,
+    "fields": {
+      "kind_component":0,
+      "name": "Melteva",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 265,
+    "fields": {
+      "kind_component":0,
+      "name": "Microdiol",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 266,
+    "fields": {
+      "kind_component":0,
+      "name": "Microgynon",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 267,
+    "fields": {
+      "kind_component":0,
+      "name": "Minesse",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 268,
+    "fields": {
+      "kind_component":0,
+      "name": "Minulet",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 269,
+    "fields": {
+      "kind_component":0,
+      "name": "Nuvaring",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 270,
+    "fields": {
+      "kind_component":0,
+      "name": "Ovoplex",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 271,
+    "fields": {
+      "kind_component":0,
+      "name": "Regulon",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 272,
+    "fields": {
+      "kind_component":0,
+      "name": "Suavuret",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 273,
+    "fields": {
+      "kind_component":0,
+      "name": "Tevalet",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 274,
+    "fields": {
+      "kind_component":0,
+      "name": "Triagynon",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 275,
+    "fields": {
+      "kind_component":0,
+      "name": "Triciclor",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 276,
+    "fields": {
+      "kind_component":0,
+      "name": "Trigynovin",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 277,
+    "fields": {
+      "kind_component":0,
+      "name": "Tri-minulet",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 278,
+    "fields": {
+      "kind_component":0,
+      "name": "Yasmin",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 279,
+    "fields": {
+      "kind_component":0,
+      "name": "Yasmielle",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 280,
+    "fields": {
+      "kind_component":0,
+      "name": "Yaz",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 281,
+    "fields": {
+      "kind_component":0,
+      "name": "Yira",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 282,
+    "fields": {
+      "kind_component":0,
+      "name": "Orgametril",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 283,
+    "fields": {
+      "kind_component":0,
+      "name": "Mirena",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 284,
+    "fields": {
+      "kind_component":0,
+      "name": "Norlevo",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 285,
+    "fields": {
+      "kind_component":0,
+      "name": "Postinor",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 286,
+    "fields": {
+      "kind_component":0,
+      "name": "Jadelle",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 287,
+    "fields": {
+      "kind_component":0,
+      "name": "Progyluton",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 288,
+    "fields": {
+      "kind_component":0,
+      "name": "Levonorgestrel",
+      "groups": [6]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 289,
+    "fields": {
+      "kind_component":0,
+      "name": "Coropres",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 290,
+    "fields": {
+      "kind_component":0,
+      "name": "Normotride",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 291,
+    "fields": {
+      "kind_component":0,
+      "name": "Palacimol",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 292,
+    "fields": {
+      "kind_component":0,
+      "name": "Trandate",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 293,
+    "fields": {
+      "kind_component":0,
+      "name": "Solgol",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 294,
+    "fields": {
+      "kind_component":0,
+      "name": "Sumial",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 295,
+    "fields": {
+      "kind_component":0,
+      "name": "Blokium",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 296,
+    "fields": {
+      "kind_component":0,
+      "name": "Kalten",
+      "groups": [7,19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 297,
+    "fields": {
+      "kind_component":0,
+      "name": "Neatenol Diu",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 298,
+    "fields": {
+      "kind_component":0,
+      "name": "Normopresil",
+      "groups": [7,31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 299,
+    "fields": {
+      "kind_component":0,
+      "name": "Tanser",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 300,
+    "fields": {
+      "kind_component":0,
+      "name": "Tenoretic",
+      "groups": [7,31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 301,
+    "fields": {
+      "kind_component":0,
+      "name": "Tenormin",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 302,
+    "fields": {
+      "kind_component":0,
+      "name": "Oxodal",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 303,
+    "fields": {
+      "kind_component":0,
+      "name": "Bisoprolol/hidroclorotiazida",
+      "groups": [7,19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 304,
+    "fields": {
+      "kind_component":0,
+      "name": "Euradal",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 305,
+    "fields": {
+      "kind_component":0,
+      "name": "Emcoretic",
+      "groups": [7,19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 306,
+    "fields": {
+      "kind_component":0,
+      "name": "Emconcor",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 307,
+    "fields": {
+      "kind_component":0,
+      "name": "Cardem",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 308,
+    "fields": {
+      "kind_component":0,
+      "name": "Brevibloc",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 309,
+    "fields": {
+      "kind_component":0,
+      "name": "Higrotensin",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 310,
+    "fields": {
+      "kind_component":0,
+      "name": "Lopresor",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 311,
+    "fields": {
+      "kind_component":0,
+      "name": "Beloken",
+      "groups": [7]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 312,
+    "fields": {
+      "kind_component":0,
+      "name": "Noiafren",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 313,
+    "fields": {
+      "kind_component":0,
+      "name": "Tranxilium",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 314,
+    "fields": {
+      "kind_component":0,
+      "name": "Huberplex",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 315,
+    "fields": {
+      "kind_component":0,
+      "name": "Aneurol",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 316,
+    "fields": {
+      "kind_component":0,
+      "name": "Ansium",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 317,
+    "fields": {
+      "kind_component":0,
+      "name": "Gobanal",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 318,
+    "fields": {
+      "kind_component":0,
+      "name": "Tepazepam",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 319,
+    "fields": {
+      "kind_component":0,
+      "name": "Tropargal",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 320,
+    "fields": {
+      "kind_component":0,
+      "name": "Valium",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 321,
+    "fields": {
+      "kind_component":0,
+      "name": "Vincosedan",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 322,
+    "fields": {
+      "kind_component":0,
+      "name": "Dormodor",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 323,
+    "fields": {
+      "kind_component":0,
+      "name": "Rivotril",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 324,
+    "fields": {
+      "kind_component":0,
+      "name": "Lexatin",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 325,
+    "fields": {
+      "kind_component":0,
+      "name": "Trankimazin",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 326,
+    "fields": {
+      "kind_component":0,
+      "name": "Aldosomnil",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 327,
+    "fields": {
+      "kind_component":0,
+      "name": "Loramet",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 328,
+    "fields": {
+      "kind_component":0,
+      "name": "Noctamid",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 329,
+    "fields": {
+      "kind_component":0,
+      "name": "Orfidal",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 330,
+    "fields": {
+      "kind_component":0,
+      "name": "Placinoral",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 331,
+    "fields": {
+      "kind_component":0,
+      "name": "Idalprem",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 332,
+    "fields": {
+      "kind_component":0,
+      "name": "Donix",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 333,
+    "fields": {
+      "kind_component":0,
+      "name": "Sintonal",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 334,
+    "fields": {
+      "kind_component":0,
+      "name": "Nobritol",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 335,
+    "fields": {
+      "kind_component":0,
+      "name": "Duna",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 336,
+    "fields": {
+      "kind_component":0,
+      "name": "Ditensan",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 337,
+    "fields": {
+      "kind_component":0,
+      "name": "Rohipnol",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 338,
+    "fields": {
+      "kind_component":0,
+      "name": "Suxidina",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 339,
+    "fields": {
+      "kind_component":0,
+      "name": "Buspar",
+      "groups": [8]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 340,
+    "fields": {
+      "kind_component":0,
+      "name": "Parlodel",
+      "groups": [9]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 341,
+    "fields": {
+      "kind_component":0,
+      "name": "Tegretol",
+      "groups": [10]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 342,
+    "fields": {
+      "kind_component":0,
+      "name": "Sandimmum",
+      "groups": [11]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 343,
+    "fields": {
+      "kind_component":0,
+      "name": "Catapresan",
+      "groups": [12]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 344,
+    "fields": {
+      "kind_component":0,
+      "name": "Aftasone",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 345,
+    "fields": {
+      "kind_component":0,
+      "name": "Actocortina",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 346,
+    "fields": {
+      "kind_component":0,
+      "name": "Bucodorsen",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 347,
+    "fields": {
+      "kind_component":0,
+      "name": "Astonin",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 348,
+    "fields": {
+      "kind_component":0,
+      "name": "Alergical",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 349,
+    "fields": {
+      "kind_component":0,
+      "name": "Oralsone",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 350,
+    "fields": {
+      "kind_component":0,
+      "name": "Dezacor",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 351,
+    "fields": {
+      "kind_component":0,
+      "name": "Zamene",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 352,
+    "fields": {
+      "kind_component":0,
+      "name": "Solu-Moderin",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 353,
+    "fields": {
+      "kind_component":0,
+      "name": "Urbason",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 354,
+    "fields": {
+      "kind_component":0,
+      "name": "Metil-prednisolona",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 355,
+    "fields": {
+      "kind_component":0,
+      "name": "Estilsona",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 356,
+    "fields": {
+      "kind_component":0,
+      "name": "Dacortin",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 357,
+    "fields": {
+      "kind_component":0,
+      "name": "Trigon",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 358,
+    "fields": {
+      "kind_component":0,
+      "name": "Triesence",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 359,
+    "fields": {
+      "kind_component":0,
+      "name": "Rinalmen",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 360,
+    "fields": {
+      "kind_component":0,
+      "name": "Cortidene",
+      "groups": [13]
+    }
+  },  
+  {
+    "model": "medicament.component",
+    "pk": 361,
+    "fields": {
+      "kind_component":0,
+      "name": "Broncoformo Muco-dexa",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 362,
+    "fields": {
+      "kind_component":0,
+      "name": "Cresophene",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 363,
+    "fields": {
+      "kind_component":0,
+      "name": "Dexa-Tavegil",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 364,
+    "fields": {
+      "kind_component":0,
+      "name": "Fortecortin",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 365,
+    "fields": {
+      "kind_component":0,
+      "name": "Inzitan",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 366,
+    "fields": {
+      "kind_component":0,
+      "name": "Celesemine",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 367,
+    "fields": {
+      "kind_component":0,
+      "name": "Celestone",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 368,
+    "fields": {
+      "kind_component":0,
+      "name": "Bronsal",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 369,
+    "fields": {
+      "kind_component":0,
+      "name": "Rakivit",
+      "groups": [13]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 370,
+    "fields": {
+      "kind_component":0,
+      "name": "Trimetropim/sulfatetroxazol",
+      "groups": [14]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 371,
+    "fields": {
+      "kind_component":0,
+      "name": "Soltrim",
+      "groups": [14]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 372,
+    "fields": {
+      "kind_component":0,
+      "name": "Septrim",
+      "groups": [14]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 373,
+    "fields": {
+      "kind_component":0,
+      "name": "Lanacordin",
+      "groups": [15]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 374,
+    "fields": {
+      "kind_component":0,
+      "name": "Lanirapid",
+      "groups": [15]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 375,
+    "fields": {
+      "kind_component":0,
+      "name": "Antabus",
+      "groups": [16]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 376,
+    "fields": {
+      "kind_component":0,
+      "name": "Butazolidina",
+      "groups": [17]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 377,
+    "fields": {
+      "kind_component":0,
+      "name": "Zestoretic",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 378,
+    "fields": {
+      "kind_component":0,
+      "name": "Valsartan/Hidroclorotiazida",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 379,
+    "fields": {
+      "kind_component":0,
+      "name": "Tevetens Plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 380,
+    "fields": {
+      "kind_component":0,
+      "name": "Tenso-stop Plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 381,
+    "fields": {
+      "kind_component":0,
+      "name": "Tensikey Complex",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 382,
+    "fields": {
+      "kind_component":0,
+      "name": "Silostar Plus"
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 383,
+    "fields": {
+      "kind_component":0,
+      "name": "Secubar Diu",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 384,
+    "fields": {
+      "kind_component":0,
+      "name": "Riprazo",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 385,
+    "fields": {
+      "kind_component":0,
+      "name": "Renitecmax",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 386,
+    "fields": {
+      "kind_component":0,
+      "name": "Regulaten plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 387,
+    "fields": {
+      "kind_component":0,
+      "name": "Ramipril/hidroclorotiazida",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 388,
+    "fields": {
+      "kind_component":0,
+      "name": "Quinapril/hidroclorotiazida",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 389,
+    "fields": {
+      "kind_component":0,
+      "name": "Pritorplus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 390,
+    "fields": {
+      "kind_component":0,
+      "name": "Prinivil Plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 391,
+    "fields": {
+      "kind_component":0,
+      "name": "Pressitan Plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 392,
+    "fields": {
+      "kind_component":0,
+      "name": "Parapres Plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 393,
+    "fields": {
+      "kind_component":0,
+      "name": "Openvas Plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 394,
+    "fields": {
+      "kind_component":0,
+      "name": "Olmetec Plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 395,
+    "fields": {
+      "kind_component":0,
+      "name": "Neotensin Diu",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 396,
+    "fields": {
+      "kind_component":0,
+      "name": "Navixen Plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 397,
+    "fields": {
+      "kind_component":0,
+      "name": "Moonval plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 398,
+    "fields": {
+      "kind_component":0,
+      "name": "Miten plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 399,
+    "fields": {
+      "kind_component":0,
+      "name": "Micardis plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 400,
+    "fields": {
+      "kind_component":0,
+      "name": "Losartan/hidroclorotiazida",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 401,
+    "fields": {
+      "kind_component":0,
+      "name": "Lobivon Plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 402,
+    "fields": {
+      "kind_component":0,
+      "name": "Lisinopril/hidroclorotiazida",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 403,
+    "fields": {
+      "kind_component":0,
+      "name": "Lidaltrin-Diu",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 404,
+    "fields": {
+      "kind_component":0,
+      "name": "Karvezide",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 405,
+    "fields": {
+      "kind_component":0,
+      "name": "Kalpress Plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 406,
+    "fields": {
+      "kind_component":0,
+      "name": "Ixia plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 407,
+    "fields": {
+      "kind_component":0,
+      "name": "Iricil plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 408,
+    "fields": {
+      "kind_component":0,
+      "name": "Irbesartan/HCTZ",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 409,
+    "fields": {
+      "kind_component":0,
+      "name": "Irbesartan/Hidroclorotiazida",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 410,
+    "fields": {
+      "kind_component":0,
+      "name": "Inocar Plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 411,
+    "fields": {
+      "kind_component":0,
+      "name": "Ihibace plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 412,
+    "fields": {
+      "kind_component":0,
+      "name": "Hipoartel Plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 413,
+    "fields": {
+      "kind_component":0,
+      "name": "Hidrosaluretil",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 414,
+    "fields": {
+      "kind_component":0,
+      "name": "Herten Plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 415,
+    "fields": {
+      "kind_component":0,
+      "name": "Futuran plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 416,
+    "fields": {
+      "kind_component":0,
+      "name": "Fosinopril/hidroclorotiazida",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 417,
+    "fields": {
+      "kind_component":0,
+      "name": "Fortzaar",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 418,
+    "fields": {
+      "kind_component":0,
+      "name": "Exforge",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 419,
+    "fields": {
+      "kind_component":0,
+      "name": "Esidrex",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 420,
+    "fields": {
+      "kind_component":0,
+      "name": "Enalapril/Hidroclorotiazida",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 421,
+    "fields": {
+      "kind_component":0,
+      "name": "Ecacide",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 422,
+    "fields": {
+      "kind_component":0,
+      "name": "Ecadiu",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 423,
+    "fields": {
+      "kind_component":0,
+      "name": "Doneka Plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 424,
+    "fields": {
+      "kind_component":0,
+      "name": "Diuzine",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 425,
+    "fields": {
+      "kind_component":0,
+      "name": "Dilabar Diu",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 426,
+    "fields": {
+      "kind_component":0,
+      "name": "Dabonal",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 427,
+    "fields": {
+      "kind_component":0,
+      "name": "Crinoretic",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 428,
+    "fields": {
+      "kind_component":0,
+      "name": "Co-Vals",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 429,
+    "fields": {
+      "kind_component":0,
+      "name": "Co-Renitec",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 430,
+    "fields": {
+      "kind_component":0,
+      "name": "Co-Diovan",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 431,
+    "fields": {
+      "kind_component":0,
+      "name": "Coaprovel",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 432,
+    "fields": {
+      "kind_component":0,
+      "name": "Cibadrex",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 433,
+    "fields": {
+      "kind_component":0,
+      "name": "Captopril/hidroclorotiazida",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 434,
+    "fields": {
+      "kind_component":0,
+      "name": "Candesartan/hidroclorotiazida",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 435,
+    "fields": {
+      "kind_component":0,
+      "name": "Bopress plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 436,
+    "fields": {
+      "kind_component":0,
+      "name": "Bopress forte",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 437,
+    "fields": {
+      "kind_component":0,
+      "name": "Bitensil Diu",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 438,
+    "fields": {
+      "kind_component":0,
+      "name": "Bicetil",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 439,
+    "fields": {
+      "kind_component":0,
+      "name": "Baripril-Diu",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 440,
+    "fields": {
+      "kind_component":0,
+      "name": "Balzak plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 441,
+    "fields": {
+      "kind_component":0,
+      "name": "Atacand plus",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 442,
+    "fields": {
+      "kind_component":0,
+      "name": "Ameride",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 443,
+    "fields": {
+      "kind_component":0,
+      "name": "Acuretic",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 444,
+    "fields": {
+      "kind_component":0,
+      "name": "Acetensil",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 445,
+    "fields": {
+      "kind_component":0,
+      "name": "Acediur",
+      "groups": [19]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 446,
+    "fields": {
+      "kind_component":0,
+      "name": "Hydrapres",
+      "groups": [20]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 447,
+    "fields": {
+      "kind_component":0,
+      "name": "Indonilo",
+      "groups": [21]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 448,
+    "fields": {
+      "kind_component":0,
+      "name": "Indolgina",
+      "groups": [21]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 449,
+    "fields": {
+      "kind_component":0,
+      "name": "Inacid",
+      "groups": [21]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 450,
+    "fields": {
+      "kind_component":0,
+      "name": "Flogoter",
+      "groups": [21]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 451,
+    "fields": {
+      "kind_component":0,
+      "name": "Artrinovo",
+      "groups": [21]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 452,
+    "fields": {
+      "kind_component":0,
+      "name": "Aliviosin",
+      "groups": [21]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 453,
+    "fields": {
+      "kind_component":0,
+      "name": "Interferón",
+      "groups": [22]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 454,
+    "fields": {
+      "kind_component":0,
+      "name": "Peginterferón",
+      "groups": [22]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 455,
+    "fields": {
+      "kind_component":0,
+      "name": "Aldesleukina",
+      "groups": [23]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 456,
+    "fields": {
+      "kind_component":0,
+      "name": "Interleukina",
+      "groups": [23]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 457,
+    "fields": {
+      "kind_component":0,
+      "name": "Proleukin",
+      "groups": [23]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 458,
+    "fields": {
+      "kind_component":0,
+      "name": "Levodopa/carbidopa",
+      "groups": [24]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 459,
+    "fields": {
+      "kind_component":0,
+      "name": "Stalevo",
+      "groups": [24]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 460,
+    "fields": {
+      "kind_component":0,
+      "name": "Sinemet",
+      "groups": [24]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 461,
+    "fields": {
+      "kind_component":0,
+      "name": "Madopar",
+      "groups": [24]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 462,
+    "fields": {
+      "kind_component":0,
+      "name": "Aldomet",
+      "groups": [25]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 463,
+    "fields": {
+      "kind_component":0,
+      "name": "Flagyl",
+      "groups": [26]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 464,
+    "fields": {
+      "kind_component":0,
+      "name": "Rhodogil",
+      "groups": [26]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 465,
+    "fields": {
+      "kind_component":0,
+      "name": "Dolq",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 466,
+    "fields": {
+      "kind_component":0,
+      "name": "Zomorph",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 467,
+    "fields": {
+      "kind_component":0,
+      "name": "Skenan",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 468,
+    "fields": {
+      "kind_component":0,
+      "name": "Sevredol",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 469,
+    "fields": {
+      "kind_component":0,
+      "name": "Oramorph",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 470,
+    "fields": {
+      "kind_component":0,
+      "name": "MST Continus",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 471,
+    "fields": {
+      "kind_component":0,
+      "name": "Migraleve",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 472,
+    "fields": {
+      "kind_component":0,
+      "name": "Histaverin",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 473,
+    "fields": {
+      "kind_component":0,
+      "name": "Fludeten",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 474,
+    "fields": {
+      "kind_component":0,
+      "name": "Dolomedil",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 475,
+    "fields": {
+      "kind_component":0,
+      "name": "Dolodens",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 476,
+    "fields": {
+      "kind_component":0,
+      "name": "Dolmen",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 477,
+    "fields": {
+      "kind_component":0,
+      "name": "Diminex",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 478,
+    "fields": {
+      "kind_component":0,
+      "name": "Codeisan",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 479,
+    "fields": {
+      "kind_component":0,
+      "name": "Cod-efferalgan",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 480,
+    "fields": {
+      "kind_component":0,
+      "name": "Calmoplex",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 481,
+    "fields": {
+      "kind_component":0,
+      "name": "Analgiplus",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 482,
+    "fields": {
+      "kind_component":0,
+      "name": "Algidol",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 483,
+    "fields": {
+      "kind_component":0,
+      "name": "Nidol",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 484,
+    "fields": {
+      "kind_component":0,
+      "name": "Notusín",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 485,
+    "fields": {
+      "kind_component":0,
+      "name": "Toseína",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 486,
+    "fields": {
+      "kind_component":0,
+      "name": "Dolocatil Codeína",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 487,
+    "fields": {
+      "kind_component":0,
+      "name": "Astefor",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 488,
+    "fields": {
+      "kind_component":0,
+      "name": "Bisoltus",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 489,
+    "fields": {
+      "kind_component":0,
+      "name": "Paracetamol/codeína pharmaken",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 490,
+    "fields": {
+      "kind_component":0,
+      "name": "Fimol Busto",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 491,
+    "fields": {
+      "kind_component":0,
+      "name": "Codeína",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 492,
+    "fields": {
+      "kind_component":0,
+      "name": "Metilforfina",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 493,
+    "fields": {
+      "kind_component":0,
+      "name": "Pastillas Wilfe",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 494,
+    "fields": {
+      "kind_component":0,
+      "name": "Demusin",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 495,
+    "fields": {
+      "kind_component":0,
+      "name": "Etilmorfina",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 496,
+    "fields": {
+      "kind_component":0,
+      "name": "Codetilina",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 497,
+    "fields": {
+      "kind_component":0,
+      "name": "Apo-Go",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 498,
+    "fields": {
+      "kind_component":0,
+      "name": "Apomorfina",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 499,
+    "fields": {
+      "kind_component":0,
+      "name": "Apomorfina Archimedes",
+      "groups": [27]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 500,
+    "fields": {
+      "kind_component":0,
+      "name": "Mysoline",
+      "groups": [28]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 501,
+    "fields": {
+      "kind_component":0,
+      "name": "Deprancol",
+      "groups": [29]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 502,
+    "fields": {
+      "kind_component":0,
+      "name": "Rifaldin",
+      "groups": [30]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 503,
+    "fields": {
+      "kind_component":0,
+      "name": "Rifater",
+      "groups": [30]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 504,
+    "fields": {
+      "kind_component":0,
+      "name": "Rifinah",
+      "groups": [30]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 505,
+    "fields": {
+      "kind_component":0,
+      "name": "Rimactan",
+      "groups": [30]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 506,
+    "fields": {
+      "kind_component":0,
+      "name": "Rimatazid",
+      "groups": [30]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 507,
+    "fields": {
+      "kind_component":0,
+      "name": "Rimcure",
+      "groups": [30]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 508,
+    "fields": {
+      "kind_component":0,
+      "name": "Rimstar",
+      "groups": [30]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 509,
+    "fields": {
+      "kind_component":0,
+      "name": "Tisobrif",
+      "groups": [30]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 510,
+    "fields": {
+      "kind_component":0,
+      "name": "Aldoleo",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 511,
+    "fields": {
+      "kind_component":0,
+      "name": "Blokium-Diu",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 512,
+    "fields": {
+      "kind_component":0,
+      "name": "Higrotona",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 513,
+    "fields": {
+      "kind_component":0,
+      "name": "Trasitensin",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 514,
+    "fields": {
+      "kind_component":0,
+      "name": "Diclofenmida",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 515,
+    "fields": {
+      "kind_component":0,
+      "name": "Gluconide",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 516,
+    "fields": {
+      "kind_component":0,
+      "name": "Bipreterax",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 517,
+    "fields": {
+      "kind_component":0,
+      "name": "Preterax",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 518,
+    "fields": {
+      "kind_component":0,
+      "name": "Tertensif",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 519,
+    "fields": {
+      "kind_component":0,
+      "name": "Extur",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 520,
+    "fields": {
+      "kind_component":0,
+      "name": "Perinidopril/indapamida",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 521,
+    "fields": {
+      "kind_component":0,
+      "name": "Firazyr",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 522,
+    "fields": {
+      "kind_component":0,
+      "name": "Diurex",
+      "groups": [31]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 523,
+    "fields": {
+      "kind_component":0,
+      "name": "Vinblastina Faulding",
+      "groups": [32]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 524,
+    "fields": {
+      "kind_component":0,
+      "name": "Vincristina",
+      "groups": [33]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 525,
+    "fields": {
+      "kind_component":0,
+      "name": "Vincrisul",
+      "groups": [33]
+    }
+  },
+  {
+    "model": "medicament.component",
+    "pk": 526,
+    "fields": {
+      "kind_component":0,
+      "name": "Fositens Plus",
+      "groups": [19]
+    }
+  }
+]

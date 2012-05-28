@@ -1,0 +1,274 @@
+[
+  {
+    "model": "medicament.group",
+    "pk": -1,
+    "fields": {
+      "name": "M0. Genérico",
+      "adverse_reaction": ""
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 1,
+    "fields": {
+      "name": "M1. Aciclovir",
+      "adverse_reaction": "Fatiga, reacciones neurológicas leves"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 2,
+    "fields": {
+      "name": "M2. Amantadina",
+      "adverse_reaction": "Irritabilidad, depresión, pesadillas, ataxia, confusión, fatiga, alucinaciones, insomnio, nerviosismo, ansiedad, psicosis"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 3,
+    "fields": {
+      "name": "M3. Aminoglucósidos",
+      "adverse_reaction": "Mareo, vértigo, zumbido de oídos, adormecimiento, hormigueo, letargia, confusión, disminución de apetito, pérdida de peso."
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 4,
+    "fields": {
+      "name": "M4. Anfetaminas/ estimulantes SNC",
+      "adverse_reaction": "Anorexia, disminución del apetito, insomnio, nerviosismo, tics, agresividad, ansiedad, labilidad emocional, agitación, depresión, comportamiento anormal, discinesia, hiperactividad psicomotora, somnolencia, taquicardia, palpitaciones"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 5,
+    "fields": {
+      "name": "M5. Antagonistas del calcio",
+      "adverse_reaction": "Somnolencia, mareo, debilidad; palpitaciones; náuseas, dispepsia, dolor abdominal."
+    }
+  },  
+  {
+    "model": "medicament.group",
+    "pk": 6,
+    "fields": {
+      "name": "M6. Anticonceptivos orales",
+      "adverse_reaction": "Cambios de humor, depresión; cambios en la libido, trastornos del sistema nervioso, nerviosismo, vértigo, cambios de peso."
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 7,
+    "fields": {
+      "name": "M7. Betabloqueantes",
+      "adverse_reaction": "Mareo, vértigo, cansancio, fatiga, letargo, depresión, diarrea, náuseas, trastornos del sueño"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 8,
+    "fields": {
+      "name": "M8. Hipnóticos y sedantes",
+      "adverse_reaction": "Somnolencia, embotamiento afectivo, reducción del estado de alerta, confusión, fatiga, cefalea, mareo, debilidad muscular, ataxia o diplopía, amnesia, depresión, reacciones psiquiátricas y paradójicas"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 9,
+    "fields": {
+      "name": "M9. Bromocriptina",
+      "adverse_reaction": "Somnolencia, alucinaciones, manía, trastornos del comportamiento, hipercinesia "
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 10,
+    "fields": {
+      "name": "M10. Carbamacepina",
+      "adverse_reaction": "Activación de psicosis latente, ideación suicida, depresión, fatiga, agitación"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 11,
+    "fields": {
+      "name": "M11. Ciclosporinas",
+      "adverse_reaction": "Temblor, anorexia, fatiga"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 12,
+    "fields": {
+      "name": "M12. Clonidina",
+      "adverse_reaction": "Sedación, somnolencia, anorexia, alteraciones del sueño, fatiga."
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 13,
+    "fields": {
+      "name": "M13. Corticoides",
+      "adverse_reaction": "Cefaleas, insomnio, vértigo, alteraciones mentales tales como depresión, ansiedad, euforia, cambios de personalidad y psicosis"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 14,
+    "fields": {
+      "name": "M14. Cotrimoxazol",
+      "adverse_reaction": "Fatiga, vértigos, otras alteraciones SNC, dolor abdominal"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 15,
+    "fields": {
+      "name": "M15. Digital",
+      "adverse_reaction": "Anorexia, náuseas, vómitos, diarrea, debilidad, apatía, fatiga, malestar,  depresión e incluso psicosis"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 16,
+    "fields": {
+      "name": "M16. Disulfiram",
+      "adverse_reaction": "Cansancio, fatiga, temblores, inquietud, menor potencia sexual, dolor de cabeza, mareos, ligeras perturbaciones gastrointestinales"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 17,
+    "fields": {
+      "name": "M17. Fenilbutazona",
+      "adverse_reaction": "Agitación, confusión, somnolencia,incoherencia, trastorno de movimiento"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 18,
+    "fields": {
+      "name": "M18. Fluoruracilo",
+      "adverse_reaction": "Ataxia, confusión, somnolencia, desorientación, euforia, cefaleas, nistagmo y alteraciones visuales"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 19,
+    "fields": {
+      "name": "M19. Hidroclorotiazida",
+      "adverse_reaction": "Cefaleas, parestesias, mareos, vértigo,  anorexia, irritación gástrica, náuseas y vómitos, calambres abdominales, diarrea"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 20,
+    "fields": {
+      "name": "M20. Hidralacina",
+      "adverse_reaction": "Cefaleas, palpitaciones, taquicardia sinusal, anorexia, náusea/vómitos y diarrea, parestesias. "
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 21,
+    "fields": {
+      "name": "M21. Indometacina",
+      "adverse_reaction": "Cefaleas matutinas, somnolencia y mareos, náuseas y vómitos, dolor abdominal o diarrea."
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 22,
+    "fields": {
+      "name": "M22. Interferón",
+      "adverse_reaction": "Depresión, ansiedad, labilidad emocional, concentración alterada, insomnio, anorexia, cefalea, mareo, vómitos, náuseas, dolor abdominal, fatiga, astenia, irritabilidad"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 23,
+    "fields": {
+      "name": "M23. Interleucina 2",
+      "adverse_reaction": "Ansiedad, confusión/mareo, somnolencia, malestar, fatiga, dolor de cabeza, vómitos, diarrea, anorexia."
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 24,
+    "fields": {
+      "name": "M24. Levodopa",
+      "adverse_reaction": " Somnolencia y episodios de sueño repentinos, discinesia, náusea, anorexia; alucinaciones, confusión, pesadillas, cansancio, insomnio, depresión, euforia, demencia, episodios psicóticos, estimulación; episodios on-off, mareos; palpitaciones"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 25,
+    "fields": {
+      "name": "M25. Metildopa",
+      "adverse_reaction": "Sedación, dolor de cabeza, astenia, decaimiento"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 26,
+    "fields": {
+      "name": "M26. Metronidazol",
+      "adverse_reaction": "Dolor epigástrico, náuseas, vómitos, diarrea, vértigo, trastorno psicótico, confusión, alucinación, comportamiento depresivo"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 27,
+    "fields": {
+      "name": "M27. Morfina",
+      "adverse_reaction": "Náuseas, vómitos, estreñimiento, somnolencia, desorientación, sudoración, euforia."
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 28,
+    "fields": {
+      "name": "M28. Primidona",
+      "adverse_reaction": "Somnolencia, apatía, alteraciones visuales, náuseas, cefalea, mareo, vómitos, nistagmo y ataxia"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 29,
+    "fields": {
+      "name": "M29. Propoxifeno",
+      "adverse_reaction": "Desorientación, euforia, agitación, alteraciones del humor, ansiedad, depresión e insomnio; somnolencia; náuseas, vómitos, estreñimiento"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 30,
+    "fields": {
+      "name": "M30. Rifampicina",
+      "adverse_reaction": " Somnolencia, fatiga, mareos, alteraciones del comportaminento y entumecimiento generalizado"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 31,
+    "fields": {
+      "name": "M31. Sulfonamidas",
+      "adverse_reaction": "Vértigo, mareos, parestesias, anorexia, irritación gástrica, náusea, vómito,  diarrea, estreñimiento, impotencia."
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 32,
+    "fields": {
+      "name": "M32. Vinblastina",
+      "adverse_reaction": "Debilidad, mareos, pérdida de reflejos"
+    }
+  },
+  {
+    "model": "medicament.group",
+    "pk": 33,
+    "fields": {
+      "name": "M33. Vincristina",
+      "adverse_reaction": "Perdida sensorial, parestesias, dificultad para caminar, marcha atáxica."
+    }
+  }
+]
