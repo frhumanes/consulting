@@ -41,6 +41,8 @@ class Block(models.Model):
 
 
 class Question(models.Model):
+    #Es ManyToMany, ejemplo Pregunta B5 esta en la categoria Culpa-Abreviada y
+    #en Culpa-Extensa
     categories = models.ManyToManyField('Category', related_name='questions')
 
     text = models.CharField(_(u'Text'), max_length=255)
@@ -57,6 +59,8 @@ class Option(models.Model):
     )
 
     question = models.ForeignKey('Question', related_name="options")
+    #REPASAR RELACION: creo que es OneToMany
+    #Un hijo solo puede pertenecer a un padre. Ejemplo F9.1 su padre es solo F9
     children = models.ManyToManyField('self', blank=True, null=True,
                 related_name='childrenoptions')
 
