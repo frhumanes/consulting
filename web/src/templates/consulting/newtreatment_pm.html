@@ -16,43 +16,56 @@
 {% endblock %}
 
 {% block jquery_init %}
-  <!-- LOOK FOR MEDICINE -->
-  $("#id_searcher_medicine").autocomplete({
+  <!-- DISABLED searcher_component BY DEFAULT-->
+  if($("input[type='radio']:checked").val() == undefined){
+    $('#id_searcher_component').attr('disabled','disabled')
+  }
+
+  <!-- ENABLED searcher_component WHEN CLICK SOME OF INPUT TYPE RADIO -->
+  $('.radio_js').each(function(){
+    $(this).on("click", function(){ 
+      $('#id_searcher_component').removeAttr('disabled');     
+    });      
+  });     
+
+  <!-- LOOK FOR COMPONENT -->
+  $("#id_searcher_component").autocomplete({
     source: function(request, response){
               $.ajax({
-                  url: '{% url consulting_searcher_medicine %}',
+                  url: '{% url consulting_searcher_component %}',
                   type:'POST',
-                  data: {
-                      start: function() { return $("#id_searcher_medicine").val(); },
+                  data: { 
+                      kind_component: $("input[type='radio']:checked").val(),
+                      start: function() { return $("#id_searcher_component").val(); },
                       csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val()
                   },
                   dataType: "json",
                   success: function(data){
-                      response(data['medicines'])
+                      response(data['components'])
                   }
               })
             },
     select: function(event, ui){
-              $("#id_medicine").attr('value', ui.item.id);            
+              $("#id_components").attr('value', ui.item.id);            
             },
     
   }); 
 
-  <!-- REMOVE MEDICATION -->
- $('.remove_medicament').each(function(){
+  <!-- REMOVE PRESCRIPTION -->
+ $('.remove_prescription').each(function(){
     $(this).on("click", function(){ 
                             var id = $(this).attr("id");
-                            $('#medication_id').val(id);     
+                            $('#prescription_id').val(id);     
                         });      
   });   
  
   $("#yes").click(function(){
                     treatment_id = $('#treatment_id').val()
-                    medication_id = $('#medication_id').val()
+                    prescription_id = $('#prescription_id').val()
                     $('#overwrite').load(
-                                  '{% url consulting_remove_medication_pm %}',
+                                  '{% url consulting_remove_prescription_pm %}',
                                   {'treatment_id': treatment_id,
-                                  'medication_id': medication_id,
+                                  'prescription_id': prescription_id,
                                   'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()});
 }); 
 
@@ -73,18 +86,29 @@
       </div>
       <div class="row">
         <div class="span8">
-          <form class="form-horizontal" id="form" action="{% url consulting_add_medications_treatment_pm treatment_id %}" method="post" accept-charset="utf-8">{% csrf_token %}
+          <form class="form-horizontal" id="form" action="{% url consulting_add_prescriptions_treatment_pm treatment_id %}" method="post" accept-charset="utf-8">{% csrf_token %}
             <input type="hidden" name="treatment_id"
             value='{{treatment_id}}'>
-              {{form.medicine}}                       
+              {{form.component}}                                  
               <div class="control-group">
                 <label class="control-label">
-                  {{form.searcher_medicine.label}}
+                  {{form.kind_component.label}}
+                </label>
+                <div class="controls without_text_decorator">
+                  {{form.kind_component}}
+                  {% if form.kind_component.errors %}
+                    {{ form.kind_component.errors }}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">
+                  {{form.searcher_component.label}}
                 </label>
                 <div class="controls">
-                  {{form.searcher_medicine}}
-                  {% if form.searcher_medicine.errors %}
-                    {{ form.searcher_medicine.errors }}
+                  {{form.searcher_component}}
+                  {% if form.searcher_component.errors %}
+                    {{ form.searcher_component.errors }}
                   {% endif %}
                 </div>
               </div>
@@ -152,15 +176,15 @@
                     </tr>
                   </thead>        
                   <tbody>
-                    {% if medications %}
-                      {% for medication in medications %}
+                    {% if prescriptions %}
+                      {% for prescription in prescriptions %}
                         <tr>
-                          <td>{{medication.medicine}}</td>
-                          <td>{{medication.get_before_after}}</td>
-                          <td>{{medication.months}}</td>
-                          <td>{{medication.posology}}</td>
+                          <td>{{prescription.component}}</td>
+                          <td>{{prescription.get_before_after}}</td>
+                          <td>{{prescription.months}}</td>
+                          <td>{{prescription.posology}}</td>
                           <td>                      
-                            <a id="{{medication.id}}" class="icon-trash remove_medicament" data-toggle="modal" href="#check_remove_medication"></a>
+                            <a id="{{prescription.id}}" class="icon-trash remove_prescription" data-toggle="modal" href="#check_remove_prescription"></a>
                           </td>
                         </tr>
                       {% endfor %}
@@ -177,18 +201,18 @@
         </div>
       </div>
     </section>    
-    <div id="check_remove_medication" class="modal hide fade" style="display: block;">
+    <div id="check_remove_prescription" class="modal hide fade" style="display: block;">
       <input id="treatment_id" type="hidden" name="treatment" value='{{treatment_id}}'>
-      <input id="medication_id" type="hidden">
+      <input id="prescription_id" type="hidden">
       <div class="modal-header">
           <button class="close" data-dismiss="modal">
             ×
           </button>
-          <h3>Borrar Fármaco</h3>
+          <h3>Borrar Componente</h3>
       </div>
       <div class="modal-body">
           <p>
-            {% trans '¿Está seguro que quiere borrar éste fármaco?' %}
+            {% trans '¿Está seguro que quiere borrar éste componente?' %}
           </p>
       </div>
       <div class="modal-footer">

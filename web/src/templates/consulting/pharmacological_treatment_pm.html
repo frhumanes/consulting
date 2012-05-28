@@ -1,9 +1,9 @@
 {% load i18n%}
 <script type="text/javascript">
-  $('.remove_medicament').each(function(){
+  $('.remove_prescription').each(function(){
     $(this).on("click", function(){ 
                             var id = $(this).attr("id");
-                            $('#medication_id').val(id);     
+                            $('#prescription_id').val(id);     
                         });      
   });
 </script>
@@ -27,15 +27,15 @@
     </tr>
   </thead>        
   <tbody>
-    {% if medications %}
-      {% for medication in medications %}
+    {% if prescriptions %}
+      {% for prescription in prescriptions %}
         <tr>
-          <td>{{medication.medicine}}</td>
-          <td>{{medication.get_before_after}}</td>
-          <td>{{medication.months}}</td>
-          <td>{{medication.posology}}</td>
+          <td>{{prescription.component}}</td>
+          <td>{{prescription.get_before_after}}</td>
+          <td>{{prescription.months}}</td>
+          <td>{{prescription.posology}}</td>
           <td>                      
-            <a id="{{medication.id}}" class="icon-trash remove_medicament" data-toggle="modal" href="#check_remove_medication"></a>
+            <a id="{{prescription.id}}" class="icon-trash remove_prescription" data-toggle="modal" href="#check_remove_prescription"></a>
           </td>
         </tr>
       {% endfor %}

@@ -1,5 +1,5 @@
 {% load i18n%}
-{% if medications %}
+{% if prescriptions %}
 <table class="table table-condensed">  
   <thead>
     <tr>            
@@ -19,12 +19,12 @@
     </tr>
   </thead>        
   <tbody>
-    {% for medication in medications %}
+    {% for prescription in prescriptions %}
       <tr>
-        <td>{{medication.medicine}}</td>
-        <td>{{medication.get_before_after}}</td>
-        <td>{{medication.months}}</td>
-        <td>{{medication.posology}}</td>          
+        <td>{{prescription.component}}</td>
+        <td>{{prescription.get_before_after}}</td>
+        <td>{{prescription.months}}</td>
+        <td>{{prescription.posology}}</td>          
       </tr>
     {% endfor %}
   </tbody>

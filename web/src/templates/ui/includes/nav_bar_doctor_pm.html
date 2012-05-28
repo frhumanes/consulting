@@ -5,10 +5,10 @@
   $(document).ready(function(){
     if($("#list").attr('class')=='active' || $("#new").attr('class')=='active')
     {      
-      $("#medicine").addClass('active')
+      $("#component").addClass('active')
     }
     else{
-      $("#medicine").removeClass('active')
+      $("#component").removeClass('active')
     }
   })
 </script>
@@ -39,7 +39,7 @@
         {% trans 'PARÁMETROS' %}
       </a>
     </li>
-    <li id="medicine" class="dropdown">
+    <li id="component" class="dropdown">
       <a class="dropdown-toggle" href="#" data-toggle="dropdown">
         {% trans 'FÁRMACOS' %} <b class="caret"></b>
       </a>
