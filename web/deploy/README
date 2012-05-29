@@ -1,0 +1,17 @@
+-------------
+HOW TO DEPLOY
+-------------
+
+1.- Install wtdeploy:
+
+    1.1.- workon your_virtual_env
+    1.2.- pip install fabric
+    1.3.- pip install -U -e git+git://github.com/ahmontero/wtdeploy.git#egg=wtdeploy
+
+2.- Set your svn username and password in 'development' method at 'fabfile.py':
+    env.repo_user = 'your_username'
+    env.repo_password = 'your_password'
+
+3.- cd project_root
+
+4.- fab development push
