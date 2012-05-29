@@ -1,4 +1,6 @@
-django == 1.3
+django==1.3
 PIL
 south
 MySQL-python
+gunicorn==0.13.4
+django-extensions
