@@ -1,0 +1,2683 @@
+[
+  {
+    "model": "survey.option",
+    "pk": 1,
+    "fields": {
+      "code": "DA4.0",
+      "kind": 0,
+      "text": "Hombre",
+      "weight": 0,
+      "question": 4
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 2,
+    "fields": {
+      "code": "DA4.1",
+      "kind": 0,
+      "text": "Mujer",
+      "weight": 1,
+      "question": 4
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 3,
+    "fields": {
+      "code": "DA9.1",
+      "kind": 0,
+      "text": "Casado/a",
+      "weight": 0,
+      "question": 9
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 4,
+    "fields": {
+      "code": "DA9.2",
+      "kind": 0,
+      "text": "Pareja estable",
+      "weight": 0,
+      "question": 9
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 5,
+    "fields": {
+      "code": "DA9.3",
+      "kind": 0,
+      "text": "Divorciado/a",
+      "weight": 1,
+      "question": 9
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 6,
+    "fields": {
+      "code": "DA9.4",
+      "kind": 0,
+      "text": "Viudo/a",
+      "weight": 1,
+      "question": 9
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 7,
+    "fields": {
+      "code": "DA9.5",
+      "kind": 0,
+      "text": "Soltero/a",
+      "weight": 1,
+      "question": 9
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 8,
+    "fields": {
+      "code": "DA9.6",
+      "kind": 0,
+      "text": "Otro",
+      "weight": 1,
+      "question": 9
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 9,
+    "fields": {
+      "code": "AF1",
+      "kind": 0,
+      "text": "Ansiedad",
+      "question": 11
+    }
+  }, 
+  {
+    "model": "survey.option",
+    "pk": 10,
+    "fields": {
+      "code": "AF1.1",
+      "kind": 0,
+      "text": "Madre",
+      "weight": 1,
+      "question": 11,
+      "father": 9
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 11,
+    "fields": {
+      "code": "AF1.2",
+      "kind": 0,
+      "text": "Padre",
+      "weight": 2,
+      "question": 11,
+      "father": 9
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 12,
+    "fields": {
+      "code": "AF1.3",
+      "kind": 0,
+      "text": "Hermano/a",
+      "weight": 3,
+      "question": 11,
+      "father": 9
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 13,
+    "fields": {
+      "code": "AF1.4",
+      "kind": 0,
+      "text": "Hijo/a",
+      "weight": 4,
+      "question": 11,
+      "father": 9
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 14,
+    "fields": {
+      "code": "AF1.5",
+      "kind": 0,
+      "text": "Otros",
+      "weight": 5,
+      "question": 11,
+      "father": 9
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 15,
+    "fields": {
+      "code": "AF2",
+      "kind": 0,
+      "text": "Síndromes fóbicos",
+      "question": 11
+    }
+  }, 
+  {
+    "model": "survey.option",
+    "pk": 16,
+    "fields": {
+      "code": "AF2.1",
+      "kind": 0,
+      "text": "Madre",
+      "weight": 1,
+      "question": 11,
+      "father": 15
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 17,
+    "fields": {
+      "code": "AF2.2",
+      "kind": 0,
+      "text": "Padre",
+      "weight": 2,
+      "question": 11,
+      "father": 15
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 18,
+    "fields": {
+      "code": "AF2.3",
+      "kind": 0,
+      "text": "Hermano/a",
+      "weight": 3,
+      "question": 11,
+      "father": 15
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 19,
+    "fields": {
+      "code": "AF2.4",
+      "kind": 0,
+      "text": "Hijo/a",
+      "weight": 4,
+      "question": 11,
+      "father": 15
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 20,
+    "fields": {
+      "code": "AF2.5",
+      "kind": 0,
+      "text": "Otros",
+      "weight": 5,
+      "question": 11,
+      "father": 15
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 21,
+    "fields": {
+      "code": "AF3",
+      "kind": 0,
+      "text": "Trastornos de pánico",
+      "question": 11
+    }
+  }, 
+  {
+    "model": "survey.option",
+    "pk": 22,
+    "fields": {
+      "code": "AF3.1",
+      "kind": 0,
+      "text": "Madre",
+      "weight": 1,
+      "question": 11,
+      "father": 21
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 23,
+    "fields": {
+      "code": "AF3.2",
+      "kind": 0,
+      "text": "Padre",
+      "weight": 2,
+      "question": 11,
+      "father": 21
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 24,
+    "fields": {
+      "code": "AF3.3",
+      "kind": 0,
+      "text": "Hermano/a",
+      "weight": 3,
+      "question": 11,
+      "father": 21
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 25,
+    "fields": {
+      "code": "AF3.4",
+      "kind": 0,
+      "text": "Hijo/a",
+      "weight": 4,
+      "question": 11,
+      "father": 21
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 26,
+    "fields": {
+      "code": "AF3.5",
+      "kind": 0,
+      "text": "Otros",
+      "weight": 5,
+      "question": 11,
+      "father": 21
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 27,
+    "fields": {
+      "code": "AF4",
+      "kind": 0,
+      "text": "Distimia",
+      "question": 11
+    }
+  }, 
+  {
+    "model": "survey.option",
+    "pk": 28,
+    "fields": {
+      "code": "AF4.1",
+      "kind": 0,
+      "text": "Madre",
+      "weight": 1,
+      "question": 11,
+      "father": 27
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 29,
+    "fields": {
+      "code": "AF4.2",
+      "kind": 0,
+      "text": "Padre",
+      "weight": 2,
+      "question": 11,
+      "father": 27
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 30,
+    "fields": {
+      "code": "AF4.3",
+      "kind": 0,
+      "text": "Hermano/a",
+      "weight": 3,
+      "question": 11,
+      "father": 27
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 31,
+    "fields": {
+      "code": "AF4.4",
+      "kind": 0,
+      "text": "Hijo/a",
+      "weight": 4,
+      "question": 11,
+      "father": 27
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 32,
+    "fields": {
+      "code": "AF4.5",
+      "kind": 0,
+      "text": "Otros",
+      "weight": 5,
+      "question": 11,
+      "father": 27
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 33,
+    "fields": {
+      "code": "AF5",
+      "kind": 0,
+      "text": "Trastorno depresivo",
+      "question": 11
+    }
+  }, 
+  {
+    "model": "survey.option",
+    "pk": 34,
+    "fields": {
+      "code": "AF5.1",
+      "kind": 0,
+      "text": "Madre",
+      "weight": 1,
+      "question": 11,
+      "father": 33
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 35,
+    "fields": {
+      "code": "AF5.2",
+      "kind": 0,
+      "text": "Padre",
+      "weight": 2,
+      "question": 11,
+      "father": 33
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 36,
+    "fields": {
+      "code": "AF5.3",
+      "kind": 0,
+      "text": "Hermano/a",
+      "weight": 3,
+      "question": 11,
+      "father": 33
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 37,
+    "fields": {
+      "code": "AF5.4",
+      "kind": 0,
+      "text": "Hijo/a",
+      "weight": 4,
+      "question": 11,
+      "father": 33
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 38,
+    "fields": {
+      "code": "AF5.5",
+      "kind": 0,
+      "text": "Otros",
+      "weight": 5,
+      "question": 11,
+      "father": 33
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 39,
+    "fields": {
+      "code": "AF6",
+      "kind": 0,
+      "text": "Trastorno bipolar",
+      "question": 11
+    }
+  }, 
+  {
+    "model": "survey.option",
+    "pk": 40,
+    "fields": {
+      "code": "AF6.1",
+      "kind": 0,
+      "text": "Madre",
+      "weight": 1,
+      "question": 11,
+      "father": 39
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 41,
+    "fields": {
+      "code": "AF6.2",
+      "kind": 0,
+      "text": "Padre",
+      "weight": 2,
+      "question": 11,
+      "father": 39
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 42,
+    "fields": {
+      "code": "AF6.3",
+      "kind": 0,
+      "text": "Hermano/a",
+      "weight": 3,
+      "question": 11,
+      "father": 39
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 43,
+    "fields": {
+      "code": "AF6.4",
+      "kind": 0,
+      "text": "Hijo/a",
+      "weight": 4,
+      "question": 11,
+      "father": 39
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 44,
+    "fields": {
+      "code": "AF6.5",
+      "kind": 0,
+      "text": "Otros",
+      "weight": 5,
+      "question": 11,
+      "father": 39
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 45,
+    "fields": {
+      "code": "AF7",
+      "kind": 0,
+      "text": "Manía",
+      "question": 11
+    }
+  }, 
+  {
+    "model": "survey.option",
+    "pk": 46,
+    "fields": {
+      "code": "AF7.1",
+      "kind": 0,
+      "text": "Madre",
+      "weight": 1,
+      "question": 11,
+      "father": 45
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 47,
+    "fields": {
+      "code": "AF7.2",
+      "kind": 0,
+      "text": "Padre",
+      "weight": 2,
+      "question": 11,
+      "father": 45
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 48,
+    "fields": {
+      "code": "AF7.3",
+      "kind": 0,
+      "text": "Hermano/a",
+      "weight": 3,
+      "question": 11,
+      "father": 45
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 49,
+    "fields": {
+      "code": "AF7.4",
+      "kind": 0,
+      "text": "Hijo/a",
+      "weight": 4,
+      "question": 11,
+      "father": 45
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 50,
+    "fields": {
+      "code": "AF7.5",
+      "kind": 0,
+      "text": "Otros",
+      "weight": 5,
+      "question": 11,
+      "father": 45
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 51,
+    "fields": {
+      "code": "AF8",
+      "kind": 0,
+      "text": "Toxicomanía",
+      "question": 11
+    }
+  }, 
+  {
+    "model": "survey.option",
+    "pk": 52,
+    "fields": {
+      "code": "AF8.1",
+      "kind": 0,
+      "text": "Madre",
+      "weight": 1,
+      "question": 11,
+      "father": 51
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 53,
+    "fields": {
+      "code": "AF8.2",
+      "kind": 0,
+      "text": "Padre",
+      "weight": 2,
+      "question": 11,
+      "father": 51
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 54,
+    "fields": {
+      "code": "AF8.3",
+      "kind": 0,
+      "text": "Hermano/a",
+      "weight": 3,
+      "question": 11,
+      "father": 51
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 55,
+    "fields": {
+      "code": "AF8.4",
+      "kind": 0,
+      "text": "Hijo/a",
+      "weight": 4,
+      "question": 11,
+      "father": 51
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 56,
+    "fields": {
+      "code": "AF8.5",
+      "kind": 0,
+      "text": "Otros",
+      "weight": 5,
+      "question": 11,
+      "father": 51
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 57,
+    "fields": {
+      "code": "AF9",
+      "kind": 0,
+      "text": "Abuso Alcohol",
+      "question": 11
+    }
+  }, 
+  {
+    "model": "survey.option",
+    "pk": 58,
+    "fields": {
+      "code": "AF9.1",
+      "kind": 0,
+      "text": "Madre",
+      "weight": 1,
+      "question": 11,
+      "father": 57
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 59,
+    "fields": {
+      "code": "AF9.2",
+      "kind": 0,
+      "text": "Padre",
+      "weight": 2,
+      "question": 11,
+      "father": 57
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 60,
+    "fields": {
+      "code": "AF9.3",
+      "kind": 0,
+      "text": "Hermano/a",
+      "weight": 3,
+      "question": 11,
+      "father": 57
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 61,
+    "fields": {
+      "code": "AF9.4",
+      "kind": 0,
+      "text": "Hijo/a",
+      "weight": 4,
+      "question": 11,
+      "father": 57
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 62,
+    "fields": {
+      "code": "AF9.5",
+      "kind": 0,
+      "text": "Otros",
+      "weight": 5,
+      "question": 11,
+      "father": 57
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 63,
+    "fields": {
+      "code": "AF10",
+      "kind": 0,
+      "text": "Trastorno obsesivo-compulsivo",
+      "question": 11
+    }
+  }, 
+  {
+    "model": "survey.option",
+    "pk": 64,
+    "fields": {
+      "code": "AF10.1",
+      "kind": 0,
+      "text": "Madre",
+      "weight": 1,
+      "question": 11,
+      "father": 63
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 65,
+    "fields": {
+      "code": "AF10.2",
+      "kind": 0,
+      "text": "Padre",
+      "weight": 2,
+      "question": 11,
+      "father": 63
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 66,
+    "fields": {
+      "code": "AF10.3",
+      "kind": 0,
+      "text": "Hermano/a",
+      "weight": 3,
+      "question": 11,
+      "father": 63
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 67,
+    "fields": {
+      "code": "AF10.4",
+      "kind": 0,
+      "text": "Hijo/a",
+      "weight": 4,
+      "question": 11,
+      "father": 63
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 68,
+    "fields": {
+      "code": "AF10.5",
+      "kind": 0,
+      "text": "Otros",
+      "weight": 5,
+      "question": 11,
+      "father": 63
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 69,
+    "fields": {
+      "code": "AF11",
+      "kind": 0,
+      "text": "Esquizofrenia",
+      "question": 11
+    }
+  }, 
+  {
+    "model": "survey.option",
+    "pk": 70,
+    "fields": {
+      "code": "AF11.1",
+      "kind": 0,
+      "text": "Madre",
+      "weight": 1,
+      "question": 11,
+      "father": 69
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 71,
+    "fields": {
+      "code": "AF11.2",
+      "kind": 0,
+      "text": "Padre",
+      "weight": 2,
+      "question": 11,
+      "father": 69
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 72,
+    "fields": {
+      "code": "AF11.3",
+      "kind": 0,
+      "text": "Hermano/a",
+      "weight": 3,
+      "question": 11,
+      "father": 69
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 73,
+    "fields": {
+      "code": "AF11.4",
+      "kind": 0,
+      "text": "Hijo/a",
+      "weight": 4,
+      "question": 11,
+      "father": 69
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 74,
+    "fields": {
+      "code": "AF11.5",
+      "kind": 0,
+      "text": "Otros",
+      "weight": 5,
+      "question": 11,
+      "father": 69
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 75,
+    "fields": {
+      "code": "AF12",
+      "kind": 0,
+      "text": "Trastorno de personalidad",
+      "question": 11
+    }
+  }, 
+  {
+    "model": "survey.option",
+    "pk": 76,
+    "fields": {
+      "code": "AF12.1",
+      "kind": 0,
+      "text": "Madre",
+      "weight": 1,
+      "question": 11,
+      "father": 75
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 77,
+    "fields": {
+      "code": "AF12.2",
+      "kind": 0,
+      "text": "Padre",
+      "weight": 2,
+      "question": 11,
+      "father": 75
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 78,
+    "fields": {
+      "code": "AF12.3",
+      "kind": 0,
+      "text": "Hermano/a",
+      "weight": 3,
+      "question": 11,
+      "father": 75
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 79,
+    "fields": {
+      "code": "AF12.4",
+      "kind": 0,
+      "text": "Hijo/a",
+      "weight": 4,
+      "question": 11,
+      "father": 75
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 80,
+    "fields": {
+      "code": "AF12.5",
+      "kind": 0,
+      "text": "Otros",
+      "weight": 5,
+      "question": 11,
+      "father": 75
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 81,
+    "fields": {
+      "code": "AF13",
+      "kind": 0,
+      "text": "Otras",
+      "question": 11
+    }
+  }, 
+  {
+    "model": "survey.option",
+    "pk": 82,
+    "fields": {
+      "code": "AF13.1",
+      "kind": 0,
+      "text": "Madre",
+      "weight": 1,
+      "question": 11,
+      "father": 81
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 83,
+    "fields": {
+      "code": "AF13.2",
+      "kind": 0,
+      "text": "Padre",
+      "weight": 2,
+      "question": 11,
+      "father": 81
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 84,
+    "fields": {
+      "code": "AF13.3",
+      "kind": 0,
+      "text": "Hermano/a",
+      "weight": 3,
+      "question": 11,
+      "father": 81
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 85,
+    "fields": {
+      "code": "AF13.4",
+      "kind": 0,
+      "text": "Hijo/a",
+      "weight": 4,
+      "question": 11,
+      "father": 81
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 86,
+    "fields": {
+      "code": "AF13.5",
+      "kind": 0,
+      "text": "Otros",
+      "weight": 5,
+      "question": 11,
+      "father": 81
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 87,
+    "fields": {
+      "code": "AP1",
+      "kind": 0,
+      "text": "Ansiedad",
+      "weight": 1,
+      "question": 12
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 88,
+    "fields": {
+      "code": "AP2",
+      "kind": 0,
+      "text": "Síndromes fóbicos",
+      "weight": 2,
+      "question": 12
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 89,
+    "fields": {
+      "code": "AP3",
+      "kind": 0,
+      "text": "Trastornos de pánico",
+      "weight": 3,
+      "question": 12
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 90,
+    "fields": {
+      "code": "AP4",
+      "kind": 0,
+      "text": "Distimia",
+      "weight": 4,
+      "question": 12
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 91,
+    "fields": {
+      "code": "AP5",
+      "kind": 0,
+      "text": "Trastorno depresivo",
+      "weight": 5,
+      "question": 12
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 92,
+    "fields": {
+      "code": "AP6",
+      "kind": 0,
+      "text": "Trastorno bipolar",
+      "weight": 6,
+      "question": 12
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 93,
+    "fields": {
+      "code": "AP7",
+      "kind": 0,
+      "text": "Manía",
+      "weight": 7,
+      "question": 12
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 94,
+    "fields": {
+      "code": "AP8",
+      "kind": 0,
+      "text": "Toxicomanía",
+      "weight": 8,
+      "question": 12
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 95,
+    "fields": {
+      "code": "AP9",
+      "kind": 0,
+      "text": "Abuso de Alcohol",
+      "weight": 9,
+      "question": 12
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 96,
+    "fields": {
+      "code": "AP10",
+      "kind": 0,
+      "text": "Trastorno obsesivo-compulsivo",
+      "weight": 10,
+      "question": 12
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 97,
+    "fields": {
+      "code": "AP11",
+      "kind": 0,
+      "text": "Esquizofrenia",
+      "weight": 11,
+      "question": 12
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 98,
+    "fields": {
+      "code": "AP12",
+      "kind": 0,
+      "text": "Trastorno de personalidad",
+      "weight": 12,
+      "question": 12
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 99,
+    "fields": {
+      "code": "AP13",
+      "kind": 0,
+      "text": "Otras",
+      "weight": 13,
+      "question": 12
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 100,
+    "fields": {
+      "code": "DS1",
+      "kind": 0,
+      "text": "Semanas",
+      "weight": 1,
+      "question": 13
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 101,
+    "fields": {
+      "code": "DS2",
+      "kind": 0,
+      "text": "Meses",
+      "weight": 2,
+      "question": 13
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 102,
+    "fields": {
+      "code": "AN1",
+      "kind": 0,
+      "text": "Parkinson",
+      "weight": 1,
+      "question": 14
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 103,
+    "fields": {
+      "code": "AN2",
+      "kind": 0,
+      "text": "Demencia",
+      "weight": 2,
+      "question": 14
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 104,
+    "fields": {
+      "code": "AN3",
+      "kind": 0,
+      "text": "AVC en hemisferio no dominante",
+      "weight": 3,
+      "question": 14
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 105,
+    "fields": {
+      "code": "AN4",
+      "kind": 0,
+      "text": "Arteriosclerosis cerebral",
+      "weight": 4,
+      "question": 14
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 106,
+    "fields": {
+      "code": "AN5",
+      "kind": 0,
+      "text": "Lesiones y contusiones SNC",
+      "weight": 5,
+      "question": 14
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 107,
+    "fields": {
+      "code": "AN6",
+      "kind": 0,
+      "text": "Esclerosis múltiple",
+      "weight": 6,
+      "question": 14
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 108,
+    "fields": {
+      "code": "AN7",
+      "kind": 0,
+      "text": "Hidorcefalia normotensiva",
+      "weight": 7,
+      "question": 14
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 109,
+    "fields": {
+      "code": "AN8",
+      "kind": 0,
+      "text": "Narcolepsia",
+      "weight": 8,
+      "question": 14
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 110,
+    "fields": {
+      "code": "AN9",
+      "kind": 0,
+      "text": "Miastenia gravis",
+      "weight": 9,
+      "question": 14
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 111,
+    "fields": {
+      "code": "AN10",
+      "kind": 0,
+      "text": "Neurosífilis",
+      "weight": 10,
+      "question": 14
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 112,
+    "fields": {
+      "code": "AN11",
+      "kind": 0,
+      "text": "Hungtinton",
+      "weight": 11,
+      "question": 14
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 113,
+    "fields": {
+      "code": "AN12",
+      "kind": 0,
+      "text": "Otra",
+      "weight": 12,
+      "question": 14
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 114,
+    "fields": {
+      "code": "AE1",
+      "kind": 0,
+      "text": "Hipotiroidismo",
+      "weight": 1,
+      "question": 15
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 115,
+    "fields": {
+      "code": "AE2",
+      "kind": 0,
+      "text": "Diabetes Mellitus",
+      "weight": 2,
+      "question": 15
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 116,
+    "fields": {
+      "code": "AE3",
+      "kind": 0,
+      "text": "Hipertiroidismo",
+      "weight": 3,
+      "question": 15
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 117,
+    "fields": {
+      "code": "AE4",
+      "kind": 0,
+      "text": "Hiperaratiroidismo",
+      "weight": 4,
+      "question": 15
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 118,
+    "fields": {
+      "code": "AE5",
+      "kind": 0,
+      "text": "Addison",
+      "weight": 5,
+      "question": 15
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 119,
+    "fields": {
+      "code": "AE6",
+      "kind": 0,
+      "text": "Cushing",
+      "weight": 6,
+      "question": 15
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 120,
+    "fields": {
+      "code": "AE7",
+      "kind": 0,
+      "text": "Síndrome Adiposo General",
+      "weight": 7,
+      "question": 15
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 121,
+    "fields": {
+      "code": "AE8",
+      "kind": 0,
+      "text": "Otra",
+      "weight": 8,
+      "question": 15
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 122,
+    "fields": {
+      "code": "AT1",
+      "kind": 0,
+      "text": "Tumores del SNC",
+      "weight": 1,
+      "question": 16
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 123,
+    "fields": {
+      "code": "AT2",
+      "kind": 0,
+      "text": "Metástasis cerebrales",
+      "weight": 2,
+      "question": 16
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 124,
+    "fields": {
+      "code": "AT3",
+      "kind": 0,
+      "text": "Carcinoma gástrico",
+      "weight": 3,
+      "question": 16
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 125,
+    "fields": {
+      "code": "AT4",
+      "kind": 0,
+      "text": "Carcinoma de cabeza de páncreas",
+      "weight": 4,
+      "question": 16
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 126,
+    "fields": {
+      "code": "AT5",
+      "kind": 0,
+      "text": "Síndrome caarcinoide",
+      "weight": 5,
+      "question": 16
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 127,
+    "fields": {
+      "code": "AT6",
+      "kind": 0,
+      "text": "Otra",
+      "weight": 6,
+      "question": 16
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 128,
+    "fields": {
+      "code": "AI1",
+      "kind": 0,
+      "text": "Hepatitis",
+      "weight": 1,
+      "question": 17
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 129,
+    "fields": {
+      "code": "AI2",
+      "kind": 0,
+      "text": "TBC",
+      "weight": 2,
+      "question": 17
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 130,
+    "fields": {
+      "code": "AI3",
+      "kind": 0,
+      "text": "Mononucleosis infecciosa",
+      "weight": 3,
+      "question": 17
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 131,
+    "fields": {
+      "code": "AI4",
+      "kind": 0,
+      "text": "Fiebre Tifoidea",
+      "weight": 4,
+      "question": 17
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 132,
+    "fields": {
+      "code": "AI5",
+      "kind": 0,
+      "text": "Encefalitis",
+      "weight": 5,
+      "question": 17
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 133,
+    "fields": {
+      "code": "AI6",
+      "kind": 0,
+      "text": "Sepsis",
+      "weight": 6,
+      "question": 17
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 134,
+    "fields": {
+      "code": "AI7",
+      "kind": 0,
+      "text": "Neumonía",
+      "weight": 7,
+      "question": 17
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 135,
+    "fields": {
+      "code": "AI8",
+      "kind": 0,
+      "text": "SIDA",
+      "weight": 8,
+      "question": 17
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 136,
+    "fields": {
+      "code": "AO1",
+      "kind": 0,
+      "text": "Anemia",
+      "weight": 1,
+      "question": 18
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 137,
+    "fields": {
+      "code": "AO2",
+      "kind": 0,
+      "text": "Infarto agudo de miocardio",
+      "weight": 2,
+      "question": 18
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 138,
+    "fields": {
+      "code": "AO3",
+      "kind": 0,
+      "text": "Insuficiencia renal",
+      "weight": 3,
+      "question": 18
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 139,
+    "fields": {
+      "code": "AO4",
+      "kind": 0,
+      "text": "Dolor crónico",
+      "weight": 4,
+      "question": 18
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 140,
+    "fields": {
+      "code": "AO5",
+      "kind": 0,
+      "text": "Gota",
+      "weight": 5,
+      "question": 18
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 141,
+    "fields": {
+      "code": "AO6",
+      "kind": 0,
+      "text": "Artritis reumatoide",
+      "weight": 6,
+      "question": 18
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 142,
+    "fields": {
+      "code": "AO7",
+      "kind": 0,
+      "text": "Psoriasis",
+      "weight": 7,
+      "question": 18
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 143,
+    "fields": {
+      "code": "AO8",
+      "kind": 0,
+      "text": "Cirrosis",
+      "weight": 8,
+      "question": 18
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 144,
+    "fields": {
+      "code": "AO9",
+      "kind": 0,
+      "text": "Lupus eritematoso",
+      "weight": 9,
+      "question": 18
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 145,
+    "fields": {
+      "code": "A10",
+      "kind": 0,
+      "text": "Policitemia Vera",
+      "weight": 10,
+      "question": 18
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 146,
+    "fields": {
+      "code": "A11",
+      "kind": 0,
+      "text": "Porfiria aguda intermitente",
+      "weight": 11,
+      "question": 18
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 147,
+    "fields": {
+      "code": "A12",
+      "kind": 0,
+      "text": "Déficit vitamínicos(B12, Ac. fólico)",
+      "weight": 12,
+      "question": 18
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 148,
+    "fields": {
+      "code": "A13",
+      "kind": 0,
+      "text": "Otra",
+      "weight": 13,
+      "question": 18
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 149,
+    "fields": {
+      "code": "L1.0",
+      "kind": 0,
+      "text": "No",
+      "weight": 0,
+      "question": 20
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 150,
+    "fields": {
+      "code": "L1.1",
+      "kind": 0,
+      "text": "A veces",
+      "weight": 1,
+      "question": 20
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 151,
+    "fields": {
+      "code": "L1.2",
+      "kind": 0,
+      "text": "Habitualmente",
+      "weight": 2,
+      "question": 20
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 152,
+    "fields": {
+      "code": "L2.0",
+      "kind": 0,
+      "text": "Luminosa",
+      "weight": 0,
+      "question": 21
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 153,
+    "fields": {
+      "code": "L2.1",
+      "kind": 0,
+      "text": "Poco luminosa",
+      "weight": 1,
+      "question": 21
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 154,
+    "fields": {
+      "code": "L2.3",
+      "kind": 0,
+      "text": "Oscura",
+      "weight": 3,
+      "question": 21
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 155,
+    "fields": {
+      "code": "L3.0",
+      "kind": 0,
+      "text": "Sí",
+      "weight": 0,
+      "question": 22
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 156,
+    "fields": {
+      "code": "L3.1",
+      "kind": 0,
+      "text": "No",
+      "weight": 1,
+      "question": 22
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 157,
+    "fields": {
+      "code": "AVE1",
+      "kind": 0,
+      "text": "Muerte del cónyuge",
+      "weight": 1,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 158,
+    "fields": {
+      "code": "AVE2",
+      "kind": 0,
+      "text": "Separación Matrimonial",
+      "weight": 2,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 159,
+    "fields": {
+      "code": "AVE3",
+      "kind": 0,
+      "text": "Divorcio",
+      "weight": 3,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 160,
+    "fields": {
+      "code": "AVE4",
+      "kind": 0,
+      "text": "Matrimonio",
+      "weight": 4,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 161,
+    "fields": {
+      "code": "AVE5",
+      "kind": 0,
+      "text": "Reconciliación con el cónyuge",
+      "weight": 5,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 162,
+    "fields": {
+      "code": "AVE6",
+      "kind": 0,
+      "text": "Rotura de un noviazgo o situación similar",
+      "weight": 6,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 163,
+    "fields": {
+      "code": "AVE7",
+      "kind": 0,
+      "text": "Enamorarse o iniciar una amistad íntima",
+      "weight": 7,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 164,
+    "fields": {
+      "code": "AVE8",
+      "kind": 0,
+      "text": "Embarazo deseado",
+      "weight": 8,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 165,
+    "fields": {
+      "code": "AVE9",
+      "kind": 0,
+      "text": "Embarazo no deseado",
+      "weight": 9,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 166,
+    "fields": {
+      "code": "AVE10",
+      "kind": 0,
+      "text": "Aborto provocado",
+      "weight": 10,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 167,
+    "fields": {
+      "code": "AVE11",
+      "kind": 0,
+      "text": "Aborto no deseado",
+      "weight": 11,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 168,
+    "fields": {
+      "code": "AVE12",
+      "kind": 0,
+      "text": "Relación sexual al margen del matrimonio",
+      "weight": 12,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 169,
+    "fields": {
+      "code": "AVE13",
+      "kind": 0,
+      "text": "Ruptura de relación sexual al margen del matrimonio",
+      "weight": 13,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 170,
+    "fields": {
+      "code": "AVE14",
+      "kind": 0,
+      "text": "Dificultades sexuales",
+      "weight": 14,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 171,
+    "fields": {
+      "code": "AVE15",
+      "kind": 0,
+      "text": "Dificultades para la educación de los hijos",
+      "weight": 15,
+      "question": 23
+    }
+  } ,
+  {
+    "model": "survey.option",
+    "pk": 172,
+    "fields": {
+      "code": "AVE16",
+      "kind": 0,
+      "text": "Niños bajo el cuidado de otras personas",
+      "weight": 16,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 173,
+    "fields": {
+      "code": "AVE17",
+      "kind": 0,
+      "text": "Muerte de un familiar cercano",
+      "weight": 17,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 174,
+    "fields": {
+      "code": "AVE18",
+      "kind": 0,
+      "text": "Enfermedad o mejoría de enfermedad de un miembro de la familia",
+      "weight": 18,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 175,
+    "fields": {
+      "code": "AVE19",
+      "kind": 0,
+      "text": "Incorporación de un nuevo miembro a la familia",
+      "weight": 19,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 176,
+    "fields": {
+      "code": "AVE20",
+      "kind": 0,
+      "text": "Un miembro de la familia abandona el hogar",
+      "weight": 20,
+      "question": 23
+    }
+  },  
+  {
+    "model": "survey.option",
+    "pk": 177,
+    "fields": {
+      "code": "AVE21",
+      "kind": 0,
+      "text": "Ruptura de la familia(separación padres)",
+      "weight": 21,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 178,
+    "fields": {
+      "code": "AVE22",
+      "kind": 0,
+      "text": "Problemas con vecinos o familiares que no vivan en hogar",
+      "weight": 22,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 179,
+    "fields": {
+      "code": "AVE23",
+      "kind": 0,
+      "text": "Desaparición problemas con vecinos o familiares que no vivan en hogar",
+      "weight": 23,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 180,
+    "fields": {
+      "code": "AVE24",
+      "kind": 0,
+      "text": "Periodo de alejamiento del  hogar",
+      "weight": 24,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 181,
+    "fields": {
+      "code": "AVE25",
+      "kind": 0,
+      "text": "Hijos lejos del hogar",
+      "weight": 25,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 182,
+    "fields": {
+      "code": "AVE26",
+      "kind": 0,
+      "text": "Quedarse sin trabajo",
+      "weight": 26,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 183,
+    "fields": {
+      "code": "AVE27",
+      "kind": 0,
+      "text": "Jubilación",
+      "weight": 27,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 184,
+    "fields": {
+      "code": "AVE28",
+      "kind": 0,
+      "text": "Despido",
+      "weight": 28,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 185,
+    "fields": {
+      "code": "AVE29",
+      "kind": 0,
+      "text": "Cambio de lugar de trabajo",
+      "weight": 29,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 186,
+    "fields": {
+      "code": "AVE30",
+      "kind": 0,
+      "text": "El cónyuge comienza a deja de trabajar fuera de casa",
+      "weight": 30,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 187,
+    "fields": {
+      "code": "AVE31",
+      "kind": 0,
+      "text": "Ascenso en el trabajo",
+      "weight": 31,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 188,
+    "fields": {
+      "code": "AVE32",
+      "kind": 0,
+      "text": "Problemas importantes en el trabajo",
+      "weight": 32,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 189,
+    "fields": {
+      "code": "AVE33",
+      "kind": 0,
+      "text": "Nuevo empleo en misma línea de trabajo",
+      "weight": 33,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 190,
+    "fields": {
+      "code": "AVE34",
+      "kind": 0,
+      "text": "Nuevo empleo en nueva línea de trabajo",
+      "weight": 34,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 191,
+    "fields": {
+      "code": "AVE35",
+      "kind": 0,
+      "text": "Cambio en horario o condiciones de trabajo",
+      "weight": 35,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 192,
+    "fields": {
+      "code": "AVE36",
+      "kind": 0,
+      "text": "Problemas con compañeros de trabajo",
+      "weight": 36,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 193,
+    "fields": {
+      "code": "AVE37",
+      "kind": 0,
+      "text": "Préstamo o hipoteca",
+      "weight": 37,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 194,
+    "fields": {
+      "code": "AVE38",
+      "kind": 0,
+      "text": "Aumento sustancial de ingresos(25%)",
+      "weight": 38,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 195,
+    "fields": {
+      "code": "AVE39",
+      "kind": 0,
+      "text": "Reducción sustancial de ingresos(25%)",
+      "weight": 39,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 196,
+    "fields": {
+      "code": "AVE40",
+      "kind": 0,
+      "text": "Problema legal grave que puede terminar en encarcelamiento",
+      "weight": 40,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 197,
+    "fields": {
+      "code": "AVE41",
+      "kind": 0,
+      "text": "Problema legal menor",
+      "weight": 41,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 198,
+    "fields": {
+      "code": "AVE42",
+      "kind": 0,
+      "text": "Compliación en una pelea",
+      "weight": 42,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 199,
+    "fields": {
+      "code": "AVE43",
+      "kind": 0,
+      "text": "Enfermedad o accidente que requiera guardar cama",
+      "weight": 43,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 200,
+    "fields": {
+      "code": "AVE44",
+      "kind": 0,
+      "text": "Muerte de un amigo",
+      "weight": 44,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 201,
+    "fields": {
+      "code": "AVE45",
+      "kind": 0,
+      "text": "Cambio de cas",
+      "weight": 45,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 202,
+    "fields": {
+      "code": "AVE46",
+      "kind": 0,
+      "text": "Compra de casa",
+      "weight": 46,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 203,
+    "fields": {
+      "code": "AVE47",
+      "kind": 0,
+      "text": "Accidente o situación de violencia física",
+      "weight": 47,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 204,
+    "fields": {
+      "code": "AVE48",
+      "kind": 0,
+      "text": "Éxito personal de gran envergadura",
+      "weight": 48,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 205,
+    "fields": {
+      "code": "AVE49",
+      "kind": 0,
+      "text": "Exámenes",
+      "weight": 49,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 206,
+    "fields": {
+      "code": "AVE50",
+      "kind": 0,
+      "text": "Reformas en la casa",
+      "weight": 50,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 207,
+    "fields": {
+      "code": "AVE51",
+      "kind": 0,
+      "text": "Cambio en las costumbres personales (salir, vestir...)",
+      "weight": 51,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 208,
+    "fields": {
+      "code": "AVE52",
+      "kind": 0,
+      "text": "Cambio en opinios religiosas",
+      "weight": 52,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 209,
+    "fields": {
+      "code": "AVE53",
+      "kind": 0,
+      "text": "Cambio en opiniones políticas",
+      "weight": 53,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 210,
+    "fields": {
+      "code": "AVE54",
+      "kind": 0,
+      "text": "Cambio en costumbres sociales",
+      "weight": 54,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 211,
+    "fields": {
+      "code": "AVE55",
+      "kind": 0,
+      "text": "Cambio en el ritmo de sueño",
+      "weight": 55,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 212,
+    "fields": {
+      "code": "AVE56",
+      "kind": 0,
+      "text": "Cambio en costumbres alimentarias o apetito",
+      "weight": 56,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 213,
+    "fields": {
+      "code": "AVE57",
+      "kind": 0,
+      "text": "Vacaciones fuera de casa",
+      "weight": 57,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 214,
+    "fields": {
+      "code": "AVE58",
+      "kind": 0,
+      "text": "Fiestas de Navidad y Reyes",
+      "weight": 58,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 215,
+    "fields": {
+      "code": "AVE59",
+      "kind": 0,
+      "text": "Problemasrelacionados con el alcohol o las drogas",
+      "weight": 59,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 216,
+    "fields": {
+      "code": "AVE60",
+      "kind": 0,
+      "text": "Enfermedad prolongada que requiere tratamiento médico",
+      "weight": 60,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 217,
+    "fields": {
+      "code": "AVE61",
+      "kind": 0,
+      "text": "Repentino y serio deterioro de la udición y/o visión",
+      "weight": 61,
+      "question": 23
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 218,
+    "fields": {
+      "code": "AS1.1",
+      "kind": 0,
+      "text": "Falso",
+      "weight": 1,
+      "question": 24
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 219,
+    "fields": {
+      "code": "AS1.2",
+      "kind": 0,
+      "text": "A veces",
+      "weight": 2,
+      "question": 24
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 220,
+    "fields": {
+      "code": "AS1.3",
+      "kind": 0,
+      "text": "Verdadero",
+      "weight": 3,
+      "question": 24
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 221,
+    "fields": {
+      "code": "AS2.1",
+      "kind": 0,
+      "text": "Falso",
+      "weight": 1,
+      "question": 25
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 222,
+    "fields": {
+      "code": "AS2.2",
+      "kind": 0,
+      "text": "A veces",
+      "weight": 2,
+      "question": 25
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 223,
+    "fields": {
+      "code": "AS2.3",
+      "kind": 0,
+      "text": "Verdadero",
+      "weight": 3,
+      "question": 25
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 224,
+    "fields": {
+      "code": "AS3.1",
+      "kind": 0,
+      "text": "Falso",
+      "weight": 1,
+      "question": 26
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 225,
+    "fields": {
+      "code": "AS3.2",
+      "kind": 0,
+      "text": "A veces",
+      "weight": 2,
+      "question": 26
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 226,
+    "fields": {
+      "code": "AS3.3",
+      "kind": 0,
+      "text": "Verdadero",
+      "weight": 3,
+      "question": 26
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 227,
+    "fields": {
+      "code": "AS4.1",
+      "kind": 0,
+      "text": "Falso",
+      "weight": 1,
+      "question": 27
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 228,
+    "fields": {
+      "code": "AS4.2",
+      "kind": 0,
+      "text": "A veces",
+      "weight": 2,
+      "question": 27
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 229,
+    "fields": {
+      "code": "AS4.3",
+      "kind": 0,
+      "text": "Verdadero",
+      "weight": 3,
+      "question": 27
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 230,
+    "fields": {
+      "code": "AS5.1",
+      "kind": 0,
+      "text": "Falso",
+      "weight": 1,
+      "question": 28
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 231,
+    "fields": {
+      "code": "AS5.2",
+      "kind": 0,
+      "text": "A veces",
+      "weight": 2,
+      "question": 28
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 232,
+    "fields": {
+      "code": "AS5.3",
+      "kind": 0,
+      "text": "Verdadero",
+      "weight": 3,
+      "question": 28
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 233,
+    "fields": {
+      "code": "AS6.1",
+      "kind": 0,
+      "text": "Falso",
+      "weight": 1,
+      "question": 29
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 234,
+    "fields": {
+      "code": "AS6.2",
+      "kind": 0,
+      "text": "A veces",
+      "weight": 2,
+      "question": 29
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 235,
+    "fields": {
+      "code": "AS6.3",
+      "kind": 0,
+      "text": "Verdadero",
+      "weight": 3,
+      "question": 29
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 236,
+    "fields": {
+      "code": "AS7.1",
+      "kind": 0,
+      "text": "Falso",
+      "weight": 1,
+      "question": 30
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 237,
+    "fields": {
+      "code": "AS7.2",
+      "kind": 0,
+      "text": "A veces",
+      "weight": 2,
+      "question": 30
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 238,
+    "fields": {
+      "code": "AS7.3",
+      "kind": 0,
+      "text": "Verdadero",
+      "weight": 3,
+      "question": 30
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 239,
+    "fields": {
+      "code": "RP1",
+      "kind": 0,
+      "text": "Afán de orden",
+      "weight": ,
+      "question": 30
+    }
+  } 
+]
