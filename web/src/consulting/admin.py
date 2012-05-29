@@ -61,13 +61,11 @@ class TreatmentAdmin(admin.ModelAdmin):
 admin.site.register(Treatment, TreatmentAdmin)
 
 
-class MedicationAdmin(admin.ModelAdmin):
-    fieldsets = [('Medications', {'fields': ['treatment', 'medicine',
-                'posology', 'months', 'before_after']})]
-    list_display = ('treatment', 'medicine', 'posology', 'months',
-                    'before_after')
-    search_fields = ('treatment', 'medicine', 'posology', 'months',
-                    'before_after')
-    ordering = ('medicine',)
+class PrescriptionAdmin(admin.ModelAdmin):
+    fieldsets = [('Prescriptions', {'fields': ['treatment', 'component',
+                    'before_after', 'months', 'posology']})]
+    list_display = ('treatment', 'before_after', 'months', 'posology')
+    search_fields = ('treatment', 'before_after', 'months', 'posology')
+    ordering = ('component',)
 
-admin.site.register(Medication, MedicationAdmin)
+admin.site.register(Prescription, PrescriptionAdmin)

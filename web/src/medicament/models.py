@@ -3,6 +3,7 @@
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 
 class Group(models.Model):
@@ -14,19 +15,18 @@ class Group(models.Model):
         return u'%s' % (self.name)
 
 
-class ActiveIngredient(models.Model):
-    name = models.CharField(_(u'Principio Activo'), max_length=40, blank=True)
+class Component(models.Model):
+    KIND = (
+        (settings.ACTIVE_INGREDIENT, _(u'Principio Activo')),
+        (settings.MEDICINE, _(u'Fármaco(nombre comercial)')),
+    )
 
-    def __unicode__(self):
-        return u'%s' % (self.name)
+    groups = models.ManyToManyField(Group, related_name='groupcomponents')
 
-
-class Medicine(models.Model):
-    group = models.ForeignKey(Group, related_name='medicines')
-    active_ingredients = models.ManyToManyField(ActiveIngredient,
-                                                related_name='medicines')
-
-    name = models.CharField(_(u'Nombre del medicamento'), max_length=40)
+    kind_component = models.IntegerField(_(u'Tipo de componente'),
+                                        choices=KIND)
+    name = models.CharField(_(u'Nombre del componente'), max_length=255,
+                            blank=True)
 
     def __unicode__(self):
         return u'%s' % (self.name)

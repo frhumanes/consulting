@@ -5,7 +5,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from survey.models import Option, Survey
-from medicament.models import Medicine
+from medicament.models import Component
 from django.conf import settings
 
 
@@ -33,6 +33,7 @@ class Appointment(models.Model):
     questionnaire = models.ForeignKey('Questionnaire',
                     related_name='questionnaireappointments', blank=True,
                     null=True)
+    #REPASAR RELACION answers
     answers = models.ManyToManyField('Answer',
                                     related_name="answerappointments",
                                     blank=True, null=True)
@@ -85,15 +86,16 @@ class Treatment(models.Model):
         return u'%s' % self.date
 
 
-class Medication(models.Model):
+class Prescription(models.Model):
     BEFORE_AFTER_CHOICES = (
         (settings.BEFORE, _(u'Anterior')),
         (settings.AFTER, _(u'Posterior')),
     )
 
     treatment = models.ForeignKey(Treatment,
-                                    related_name='treatmentmedications')
-    medicine = models.ForeignKey(Medicine, related_name='medicinemedications')
+                                    related_name='treatmentprescriptions')
+    component = models.ForeignKey(Component,
+                              related_name='componentprescriptions')
     before_after = models.IntegerField(_(u'Anterior/Posterior\
                                     síntomas psiquiátricos'),
                                     choices=BEFORE_AFTER_CHOICES)
@@ -101,7 +103,7 @@ class Medication(models.Model):
     posology = models.CharField(_(u'Posología (mg/día)'), max_length=255)
 
     def __unicode__(self):
-            return u'%s' % self.medicine
+            return u'%s' % self.treatment
 
     def get_before_after(self):
         if self.before_after == settings.BEFORE:

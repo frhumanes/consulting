@@ -34,16 +34,17 @@ class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [('Questions', {'fields': ['text', 'code', 'categories']})]
     list_display = ('code', 'text')
     search_fields = ('code', 'text')
-    ordering = ('code', 'text')
+    ordering = ('code',)
 
 admin.site.register(Question, QuestionAdmin)
 
 
 class OptionAdmin(admin.ModelAdmin):
     fieldsets = [('Options', {'fields': ['text', 'code', 'kind', 'weight',
-                'question', 'children']})]
-    list_display = ('code', 'text', 'weight', 'kind', 'question')
-    search_fields = ('code', 'text', 'kind', 'weight', 'kind', 'question')
-    ordering = ('question',)
+                'question', 'father']})]
+    list_display = ('code', 'text', 'weight', 'kind', 'question', 'father')
+    search_fields = ('code', 'text', 'kind', 'weight', 'kind', 'question',
+                        'father')
+    ordering = ('text', 'code', 'father')
 
 admin.site.register(Option, OptionAdmin)

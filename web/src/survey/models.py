@@ -45,7 +45,7 @@ class Question(models.Model):
     #en Culpa-Extensa
     categories = models.ManyToManyField('Category', related_name='questions')
 
-    text = models.CharField(_(u'Text'), max_length=255)
+    text = models.CharField(_(u'Text'), max_length=500)
     code = models.CharField(_(u'Código'), max_length=10)
 
     def __unicode__(self):
@@ -54,15 +54,15 @@ class Question(models.Model):
 
 class Option(models.Model):
     KIND = (
-        (1, _(u'Obligatorio')),
-        (2, _(u'Libre')),
+        (0, _(u'Obligatorio')),
+        (1, _(u'Libre')),
     )
 
     question = models.ForeignKey('Question', related_name="options")
     #REPASAR RELACION: creo que es OneToMany
     #Un hijo solo puede pertenecer a un padre. Ejemplo F9.1 su padre es solo F9
-    children = models.ManyToManyField('self', blank=True, null=True,
-                related_name='childrenoptions')
+    father = models.ForeignKey('self', blank=True, null=True,
+                related_name='fatheroptions')
 
     kind = models.IntegerField(_(u'Tipo'), choices=KIND)
     code = models.CharField(_(u'Código'), max_length=10)

@@ -13,10 +13,10 @@ from django.contrib.auth.models import User
 from decorators import paginate
 from userprofile.models import Profile
 from userprofile.forms import ProfileForm
-from consulting.forms import AppointmentForm, MedicationForm
-from consulting.models import Appointment, Treatment, Medication
+from consulting.forms import AppointmentForm, PrescriptionForm
+from consulting.models import Appointment, Treatment, Prescription
 from consulting.helper import strip_accents
-from medicament.models import Medicine, Group
+from medicament.models import Component, Group
 
 
 @login_required()
@@ -212,24 +212,77 @@ def searcher(request):
 
 
 @login_required()
-def searcher_medicine(request):
+def searcher_component(request):
     profile = request.user.get_profile()
 
     if profile.is_doctor():
         data = {'ok': False}
 
         if request.method == 'POST':
+            kind_component = request.POST.get("kind_component", "")
             start = request.POST.get("start", "").lower()
-            medicines = Medicine.objects.filter(Q(name__icontains=start) | \
-                                Q(group__name__icontains=start) | \
-                                Q(active_ingredients__name__icontains=start)).\
-                                distinct()
+
+            if int(kind_component) == settings.ACTIVE_INGREDIENT:
+                components = Component.objects.filter(
+                Q(kind_component__exact=settings.ACTIVE_INGREDIENT),
+                Q(name__icontains=start) | Q(groups__name__icontains=start))\
+                .distinct()
+            else:
+                #settings.MEDICINE
+                components = Component.objects.filter(
+                Q(kind_component__exact=settings.MEDICINE),
+                Q(name__icontains=start) | Q(groups__name__icontains=start))\
+                .distinct()
 
             data = {'ok': True,
-                    'medicines':
-                        [{'id': m.id, 'label': (m.name)} for m in medicines],
-                    'lenght': medicines.count()
-                    }
+                    'components':
+                        [{'id': c.id, 'label': (c.name)} for c in components]}
+            # medicines = Medicine.objects.filter(Q(name__icontains=start) | \
+            #                   Q(group__name__icontains=start) | \
+            #                   Q(active_ingredients__name__icontains=start)).\
+            #                     distinct()
+            ####### PRIMERA VERSION #######
+            # data = {'ok': True,
+            #         'medicines':
+            #             [{'id': m.id, 'label': (m.name)} for m in medicines],
+            #         'lenght': medicines.count()
+            #         }
+
+            ####### SEGUNDA VERSION #######
+            # data = {'ok': True,
+            #         'medicines':
+            #[{'id': m.id, 'label': (m.group.name + '-' + m.name)}
+            # for m in medicines],
+            #         'lenght': medicines.count()
+            #         }
+            ####### TERCERA VERSION #######
+            # elto = {}
+            # medicines_list = []
+
+            # for m in medicines:
+            #     str_label = ""
+            #     str_label = str_label + m.name + ': '
+            #     for ai in m.active_ingredients.all():
+            #         str_label = str_label + ai.name + '+'
+
+            #     elto = {'id': m.id, 'label': str_label}
+
+            #     medicines_list.append(elto)
+
+            # data = {'ok': True,
+            #         'medicines': medicines_list,
+            #         'lenght': medicines.count()
+            #         }
+
+            ####### CUARTA VERSION #######
+            # active_ingredients = ActiveIngredient.objects.
+            #filter(name__icontains=start).order_by('name')
+
+            # data = {'ok': True,
+            #         'medicines':
+            #             [{'id': ai.id, 'label': ai.name}
+            #for ai in active_ingredients]
+            #         }
 
         return HttpResponse(simplejson.dumps(data))
     return HttpResponseRedirect(reverse('consulting_index'))
@@ -355,7 +408,7 @@ def detail_treatment_pm(request):
                 treatment = Treatment.objects.get(id=treatment_id)
 
                 return render_to_response('consulting/detail_treatment.html',
-                        {'medications': treatment.treatmentmedications.all()},
+                    {'prescriptions': treatment.treatmentprescriptions.all()},
                         context_instance=RequestContext(request))
             except Treatment.DoesNotExist:
                     return HttpResponseRedirect(reverse('consulting_index'))
@@ -377,14 +430,14 @@ def newtreatment_pm(request):
         treatment.save()
 
         return HttpResponseRedirect(
-            reverse('consulting_add_medications_treatment_pm',
+            reverse('consulting_add_prescriptions_treatment_pm',
             args=[treatment.id]))
 
     return HttpResponseRedirect(reverse('consulting_index'))
 
 
 @login_required()
-def add_medications_treatment_pm(request, treatment_id):
+def add_prescriptions_treatment_pm(request, treatment_id):
     profile_logged_user = request.user.get_profile()
 
     if profile_logged_user.is_doctor():
@@ -395,39 +448,35 @@ def add_medications_treatment_pm(request, treatment_id):
         if request.method == "POST":
             try:
                 treatment = Treatment.objects.get(id=treatment_id)
-                form = MedicationForm(request.POST)
+                form = PrescriptionForm(request.POST)
                 if form.is_valid():
                     # MEDICINE CAN BE NEW OR ALREADY EXISTED
-                    medicine_name = form.cleaned_data['searcher_medicine']
+                    component_name = form.cleaned_data['searcher_component']
                     try:
-                        medicine = Medicine.objects.get(name=medicine_name)
-                        if form.cleaned_data['medicine'].id == -1:
-                            medication = Medication(treatment=treatment,
-                                medicine=medicine,
-                                posology=form.cleaned_data['posology'],
-                                months=form.cleaned_data['months'],
-                                before_after=form.cleaned_data['before_after'])
-                            medication.save()
-                        else:
-                            medication = form.save(commit=False)
-                            medication.treatment = treatment
-                            medication.save()
-                    except Medicine.DoesNotExist:
-                        medicine_group = Group.objects.get(id=-1)
-                        medicine = Medicine(name=medicine_name,
-                                            group=medicine_group)
-                        medicine.save()
+                        component = Component.objects.get(name=component_name)
+                        prescription = form.save(commit=False)
+                        prescription.treatment = treatment
+                        prescription.component = component
+                        prescription.save()
+                    except Component.DoesNotExist:
+                        kind_component = form.cleaned_data['kind_component']
+                        component_group = Group.objects.get(id=-1)
+                        component = Component(name=component_name,
+                                            kind_component=kind_component)
+                        component.save()
+                        component.groups.add(component_group)
+                        component.save()
 
-                        medication = Medication(treatment=treatment,
-                                medicine=medicine,
-                                posology=form.cleaned_data['posology'],
+                        prescription = Prescription(treatment=treatment,
+                                component=component,
+                                before_after=form.cleaned_data['before_after'],
                                 months=form.cleaned_data['months'],
-                                before_after=form.cleaned_data['before_after'])
-                        medication.save()
+                                posology=form.cleaned_data['posology'])
+                        prescription.save()
                     #INICIALIZE FORM
-                    form = MedicationForm()
+                    form = PrescriptionForm()
                 else:
-                    # ONLY GET TREATMENT OBJECT TO CAN GET ITS MEDICATIONS
+                    # ONLY GET TREATMENT OBJECT TO CAN GET ITS PRESCRIPTIONS
                     try:
                         treatment = Treatment.objects.get(id=treatment_id)
                     except Treatment.DoesNotExist:
@@ -436,7 +485,7 @@ def add_medications_treatment_pm(request, treatment_id):
             except Treatment.DoesNotExist:
                 return HttpResponseRedirect(reverse('consulting_index'))
         else:
-            form = MedicationForm()
+            form = PrescriptionForm()
 
             try:
                 treatment = Treatment.objects.get(id=treatment_id)
@@ -444,13 +493,13 @@ def add_medications_treatment_pm(request, treatment_id):
                 return HttpResponseRedirect(reverse('consulting_index'))
 
         return render_to_response(
-                        'consulting/newtreatment_pm.html',
-                        {'form': form,
-                        'profile': profile_patient,
-                        'patient_id': patient_id,
-                        'treatment_id': treatment_id,
-                        'medications': treatment.treatmentmedications.all()},
-                        context_instance=RequestContext(request))
+                    'consulting/newtreatment_pm.html',
+                    {'form': form,
+                    'profile': profile_patient,
+                    'patient_id': patient_id,
+                    'treatment_id': treatment_id,
+                    'prescriptions': treatment.treatmentprescriptions.all()},
+                    context_instance=RequestContext(request))
     return HttpResponseRedirect(reverse('consulting_index'))
 
 # @login_required()
@@ -622,26 +671,27 @@ def add_medications_treatment_pm(request, treatment_id):
 
 
 @login_required()
-def remove_medication_pm(request):
+def remove_prescription_pm(request):
     profile = request.user.get_profile()
 
     if profile.is_doctor():
         if request.method == 'POST':
-            medication_id = request.POST.get("medication_id", "")
+            prescription_id = request.POST.get("prescription_id", "")
             try:
-                medication = Medication.objects.get(id=medication_id)
-                medication.delete()
+                prescription = Prescription.objects.get(id=prescription_id)
+                prescription.delete()
 
                 treatment_id = request.POST.get("treatment_id", "")
                 try:
                     treatment = Treatment.objects.get(id=treatment_id)
                     return render_to_response(
                         'consulting/pharmacological_treatment_pm.html',
-                        {'medications': treatment.treatmentmedications.all()},
+                        {'prescriptions':
+                                treatment.treatmentprescriptions.all()},
                                 context_instance=RequestContext(request))
                 except Treatment.DoesNotExist:
                     return HttpResponseRedirect(reverse('consulting_index'))
-            except Medication.DoesNotExist:
+            except Prescription.DoesNotExist:
                 return HttpResponseRedirect(reverse('consulting_index'))
 
     return HttpResponseRedirect(reverse('consulting_index'))
