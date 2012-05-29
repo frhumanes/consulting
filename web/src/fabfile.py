@@ -18,8 +18,8 @@ def development():
     env.local_conf_folder = "deploy/89.140.10.57"
 
     env.repo = "https://intranet.wtelecom.es/svn/consulting30/trunk/web/src"
-    env.repo_user = 'ahinojo'
-    env.repo_password = 'WTelecom0000'
+    env.repo_user = ''
+    env.repo_password = ''
 
     env.database_admin = 'root'
     env.database_admin_pass = 'cmglpa'
