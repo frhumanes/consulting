@@ -14,3 +14,4 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^messages/', include('private_messages.urls')),
 )
+urlpatterns += staticfiles_urlpatterns()
