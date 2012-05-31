@@ -108,6 +108,8 @@ LANGUAGES = (
 
 LOGIN_URL = '/accounts/login/'
 
+LOGIN_REDIRECT_URL = '/'
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
