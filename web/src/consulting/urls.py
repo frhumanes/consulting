@@ -33,6 +33,10 @@ urlpatterns = patterns('',
         consulting_views.personal_data_pm,
         name='consulting_personal_data_pm'),
 
+    url(r'^searcher_patients_doctor/',
+        consulting_views.searcher_patients_doctor,
+        name='consulting_searcher_patients_doctor'),
+
     url(r'^patient_management/list_treatments_pm/$',
         consulting_views.list_treatments_pm,
         name='consulting_list_treatments_pm'),

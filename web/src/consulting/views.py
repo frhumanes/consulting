@@ -212,6 +212,28 @@ def searcher(request):
 
 
 @login_required()
+def searcher_patients_doctor(request):
+    data = {'ok': False}
+
+    if request.method == 'POST':
+        doctor_user = request.user
+        start = request.POST.get("start", "")
+        profiles = Profile.objects.filter(doctor=doctor_user,
+                    search_field__icontains=start,
+                    role__exact=settings.PATIENT).order_by(
+                    'name', 'first_surname', 'second_surname')
+
+        data = {'ok': True,
+                'completed_names':
+                [{'id': p.id,
+                'label':
+                (p.name + ' ' + p.first_surname + ' ' + p.second_surname)}\
+                 for p in profiles]
+                }
+
+    return HttpResponse(simplejson.dumps(data))
+
+@login_required()
 def searcher_component(request):
     profile = request.user.get_profile()
 
@@ -286,27 +308,6 @@ def searcher_component(request):
 
         return HttpResponse(simplejson.dumps(data))
     return HttpResponseRedirect(reverse('consulting_index'))
-
-
-#CAMBIAR: COINCIDENCIAS SOLO EN PROFILE DEL USUARIO LOGADO
-# def searcher_doctor_patients(request):
-#     data = {'ok': False}
-
-#     if request.method == 'POST':
-#         start = request.POST.get("start", "")
-#         profiles = Profile.objects.filter(search_field__icontains=start,
-#                     role__exact=settings.PATIENT).order_by(
-#                     'name', 'first_surname', 'second_surname')
-
-#         data = {'ok': True,
-#                 'completed_names':
-#                 [{'id': p.id,
-#                 'label':
-#                 (p.name + ' ' + p.first_surname + ' ' + p.second_surname)}\
-#                  for p in profiles]
-#                 }
-
-#     return HttpResponse(simplejson.dumps(data))
 
 
 def patient_appointments(request):

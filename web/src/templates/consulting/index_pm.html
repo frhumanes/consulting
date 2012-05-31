@@ -19,7 +19,7 @@
   $("#searcher").autocomplete({
     source: function(request, response){
               $.ajax({
-                  url: '{% url consulting_searcher %}',
+                  url: '{% url consulting_searcher_patients_doctor %}',
                   type:'POST',
                   data: {
                       start: function() { return $("#searcher").val(); },
