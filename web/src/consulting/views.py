@@ -452,14 +452,15 @@ def add_prescriptions_treatment_pm(request, treatment_id):
                 if form.is_valid():
                     # MEDICINE CAN BE NEW OR ALREADY EXISTED
                     component_name = form.cleaned_data['searcher_component']
+                    kind_component = form.cleaned_data['kind_component']
                     try:
-                        component = Component.objects.get(name=component_name)
+                        component = Component.objects.get(name=component_name,
+                                    kind_component=kind_component)
                         prescription = form.save(commit=False)
                         prescription.treatment = treatment
                         prescription.component = component
                         prescription.save()
                     except Component.DoesNotExist:
-                        kind_component = form.cleaned_data['kind_component']
                         component_group = Group.objects.get(id=-1)
                         component = Component(name=component_name,
                                             kind_component=kind_component)
