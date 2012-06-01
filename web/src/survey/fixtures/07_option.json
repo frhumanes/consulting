@@ -104,7 +104,6 @@
       "code": "AF1.1",
       "kind": 0,
       "text": "Madre",
-      "weight": 1,
       "question": 11,
       "father": 9
     }
@@ -116,7 +115,6 @@
       "code": "AF1.2",
       "kind": 0,
       "text": "Padre",
-      "weight": 2,
       "question": 11,
       "father": 9
     }
@@ -128,7 +126,6 @@
       "code": "AF1.3",
       "kind": 0,
       "text": "Hermano/a",
-      "weight": 3,
       "question": 11,
       "father": 9
     }
@@ -140,7 +137,6 @@
       "code": "AF1.4",
       "kind": 0,
       "text": "Hijo/a",
-      "weight": 4,
       "question": 11,
       "father": 9
     }
@@ -152,7 +148,6 @@
       "code": "AF1.5",
       "kind": 0,
       "text": "Otros",
-      "weight": 5,
       "question": 11,
       "father": 9
     }
@@ -174,7 +169,6 @@
       "code": "AF2.1",
       "kind": 0,
       "text": "Madre",
-      "weight": 1,
       "question": 11,
       "father": 15
     }
@@ -186,7 +180,6 @@
       "code": "AF2.2",
       "kind": 0,
       "text": "Padre",
-      "weight": 2,
       "question": 11,
       "father": 15
     }
@@ -198,7 +191,6 @@
       "code": "AF2.3",
       "kind": 0,
       "text": "Hermano/a",
-      "weight": 3,
       "question": 11,
       "father": 15
     }
@@ -210,7 +202,6 @@
       "code": "AF2.4",
       "kind": 0,
       "text": "Hijo/a",
-      "weight": 4,
       "question": 11,
       "father": 15
     }
@@ -222,7 +213,6 @@
       "code": "AF2.5",
       "kind": 0,
       "text": "Otros",
-      "weight": 5,
       "question": 11,
       "father": 15
     }
@@ -244,7 +234,6 @@
       "code": "AF3.1",
       "kind": 0,
       "text": "Madre",
-      "weight": 1,
       "question": 11,
       "father": 21
     }
@@ -256,7 +245,6 @@
       "code": "AF3.2",
       "kind": 0,
       "text": "Padre",
-      "weight": 2,
       "question": 11,
       "father": 21
     }
@@ -268,7 +256,6 @@
       "code": "AF3.3",
       "kind": 0,
       "text": "Hermano/a",
-      "weight": 3,
       "question": 11,
       "father": 21
     }
@@ -280,7 +267,6 @@
       "code": "AF3.4",
       "kind": 0,
       "text": "Hijo/a",
-      "weight": 4,
       "question": 11,
       "father": 21
     }
@@ -292,7 +278,6 @@
       "code": "AF3.5",
       "kind": 0,
       "text": "Otros",
-      "weight": 5,
       "question": 11,
       "father": 21
     }
@@ -314,7 +299,6 @@
       "code": "AF4.1",
       "kind": 0,
       "text": "Madre",
-      "weight": 1,
       "question": 11,
       "father": 27
     }
@@ -326,7 +310,6 @@
       "code": "AF4.2",
       "kind": 0,
       "text": "Padre",
-      "weight": 2,
       "question": 11,
       "father": 27
     }
@@ -338,7 +321,6 @@
       "code": "AF4.3",
       "kind": 0,
       "text": "Hermano/a",
-      "weight": 3,
       "question": 11,
       "father": 27
     }
@@ -350,7 +332,6 @@
       "code": "AF4.4",
       "kind": 0,
       "text": "Hijo/a",
-      "weight": 4,
       "question": 11,
       "father": 27
     }
@@ -362,7 +343,6 @@
       "code": "AF4.5",
       "kind": 0,
       "text": "Otros",
-      "weight": 5,
       "question": 11,
       "father": 27
     }
@@ -384,7 +364,6 @@
       "code": "AF5.1",
       "kind": 0,
       "text": "Madre",
-      "weight": 1,
       "question": 11,
       "father": 33
     }
@@ -396,7 +375,6 @@
       "code": "AF5.2",
       "kind": 0,
       "text": "Padre",
-      "weight": 2,
       "question": 11,
       "father": 33
     }
@@ -408,7 +386,6 @@
       "code": "AF5.3",
       "kind": 0,
       "text": "Hermano/a",
-      "weight": 3,
       "question": 11,
       "father": 33
     }
@@ -420,7 +397,6 @@
       "code": "AF5.4",
       "kind": 0,
       "text": "Hijo/a",
-      "weight": 4,
       "question": 11,
       "father": 33
     }
@@ -432,7 +408,6 @@
       "code": "AF5.5",
       "kind": 0,
       "text": "Otros",
-      "weight": 5,
       "question": 11,
       "father": 33
     }
@@ -454,7 +429,6 @@
       "code": "AF6.1",
       "kind": 0,
       "text": "Madre",
-      "weight": 1,
       "question": 11,
       "father": 39
     }
@@ -466,7 +440,6 @@
       "code": "AF6.2",
       "kind": 0,
       "text": "Padre",
-      "weight": 2,
       "question": 11,
       "father": 39
     }
@@ -478,7 +451,6 @@
       "code": "AF6.3",
       "kind": 0,
       "text": "Hermano/a",
-      "weight": 3,
       "question": 11,
       "father": 39
     }
@@ -490,7 +462,6 @@
       "code": "AF6.4",
       "kind": 0,
       "text": "Hijo/a",
-      "weight": 4,
       "question": 11,
       "father": 39
     }
@@ -502,7 +473,6 @@
       "code": "AF6.5",
       "kind": 0,
       "text": "Otros",
-      "weight": 5,
       "question": 11,
       "father": 39
     }
@@ -524,7 +494,6 @@
       "code": "AF7.1",
       "kind": 0,
       "text": "Madre",
-      "weight": 1,
       "question": 11,
       "father": 45
     }
@@ -536,7 +505,6 @@
       "code": "AF7.2",
       "kind": 0,
       "text": "Padre",
-      "weight": 2,
       "question": 11,
       "father": 45
     }
@@ -548,7 +516,6 @@
       "code": "AF7.3",
       "kind": 0,
       "text": "Hermano/a",
-      "weight": 3,
       "question": 11,
       "father": 45
     }
@@ -560,7 +527,6 @@
       "code": "AF7.4",
       "kind": 0,
       "text": "Hijo/a",
-      "weight": 4,
       "question": 11,
       "father": 45
     }
@@ -572,7 +538,6 @@
       "code": "AF7.5",
       "kind": 0,
       "text": "Otros",
-      "weight": 5,
       "question": 11,
       "father": 45
     }
@@ -594,7 +559,6 @@
       "code": "AF8.1",
       "kind": 0,
       "text": "Madre",
-      "weight": 1,
       "question": 11,
       "father": 51
     }
@@ -606,7 +570,6 @@
       "code": "AF8.2",
       "kind": 0,
       "text": "Padre",
-      "weight": 2,
       "question": 11,
       "father": 51
     }
@@ -618,7 +581,6 @@
       "code": "AF8.3",
       "kind": 0,
       "text": "Hermano/a",
-      "weight": 3,
       "question": 11,
       "father": 51
     }
@@ -630,7 +592,6 @@
       "code": "AF8.4",
       "kind": 0,
       "text": "Hijo/a",
-      "weight": 4,
       "question": 11,
       "father": 51
     }
@@ -642,7 +603,6 @@
       "code": "AF8.5",
       "kind": 0,
       "text": "Otros",
-      "weight": 5,
       "question": 11,
       "father": 51
     }
@@ -664,7 +624,6 @@
       "code": "AF9.1",
       "kind": 0,
       "text": "Madre",
-      "weight": 1,
       "question": 11,
       "father": 57
     }
@@ -676,7 +635,6 @@
       "code": "AF9.2",
       "kind": 0,
       "text": "Padre",
-      "weight": 2,
       "question": 11,
       "father": 57
     }
@@ -688,7 +646,6 @@
       "code": "AF9.3",
       "kind": 0,
       "text": "Hermano/a",
-      "weight": 3,
       "question": 11,
       "father": 57
     }
@@ -700,7 +657,6 @@
       "code": "AF9.4",
       "kind": 0,
       "text": "Hijo/a",
-      "weight": 4,
       "question": 11,
       "father": 57
     }
@@ -712,7 +668,6 @@
       "code": "AF9.5",
       "kind": 0,
       "text": "Otros",
-      "weight": 5,
       "question": 11,
       "father": 57
     }
@@ -734,7 +689,6 @@
       "code": "AF10.1",
       "kind": 0,
       "text": "Madre",
-      "weight": 1,
       "question": 11,
       "father": 63
     }
@@ -746,7 +700,6 @@
       "code": "AF10.2",
       "kind": 0,
       "text": "Padre",
-      "weight": 2,
       "question": 11,
       "father": 63
     }
@@ -758,7 +711,6 @@
       "code": "AF10.3",
       "kind": 0,
       "text": "Hermano/a",
-      "weight": 3,
       "question": 11,
       "father": 63
     }
@@ -770,7 +722,6 @@
       "code": "AF10.4",
       "kind": 0,
       "text": "Hijo/a",
-      "weight": 4,
       "question": 11,
       "father": 63
     }
@@ -782,7 +733,6 @@
       "code": "AF10.5",
       "kind": 0,
       "text": "Otros",
-      "weight": 5,
       "question": 11,
       "father": 63
     }
@@ -804,7 +754,6 @@
       "code": "AF11.1",
       "kind": 0,
       "text": "Madre",
-      "weight": 1,
       "question": 11,
       "father": 69
     }
@@ -816,7 +765,6 @@
       "code": "AF11.2",
       "kind": 0,
       "text": "Padre",
-      "weight": 2,
       "question": 11,
       "father": 69
     }
@@ -828,7 +776,6 @@
       "code": "AF11.3",
       "kind": 0,
       "text": "Hermano/a",
-      "weight": 3,
       "question": 11,
       "father": 69
     }
@@ -840,7 +787,6 @@
       "code": "AF11.4",
       "kind": 0,
       "text": "Hijo/a",
-      "weight": 4,
       "question": 11,
       "father": 69
     }
@@ -852,7 +798,6 @@
       "code": "AF11.5",
       "kind": 0,
       "text": "Otros",
-      "weight": 5,
       "question": 11,
       "father": 69
     }
@@ -874,7 +819,6 @@
       "code": "AF12.1",
       "kind": 0,
       "text": "Madre",
-      "weight": 1,
       "question": 11,
       "father": 75
     }
@@ -886,7 +830,6 @@
       "code": "AF12.2",
       "kind": 0,
       "text": "Padre",
-      "weight": 2,
       "question": 11,
       "father": 75
     }
@@ -898,7 +841,6 @@
       "code": "AF12.3",
       "kind": 0,
       "text": "Hermano/a",
-      "weight": 3,
       "question": 11,
       "father": 75
     }
@@ -910,7 +852,6 @@
       "code": "AF12.4",
       "kind": 0,
       "text": "Hijo/a",
-      "weight": 4,
       "question": 11,
       "father": 75
     }
@@ -922,7 +863,6 @@
       "code": "AF12.5",
       "kind": 0,
       "text": "Otros",
-      "weight": 5,
       "question": 11,
       "father": 75
     }
@@ -944,7 +884,6 @@
       "code": "AF13.1",
       "kind": 0,
       "text": "Madre",
-      "weight": 1,
       "question": 11,
       "father": 81
     }
@@ -956,7 +895,6 @@
       "code": "AF13.2",
       "kind": 0,
       "text": "Padre",
-      "weight": 2,
       "question": 11,
       "father": 81
     }
@@ -968,7 +906,6 @@
       "code": "AF13.3",
       "kind": 0,
       "text": "Hermano/a",
-      "weight": 3,
       "question": 11,
       "father": 81
     }
@@ -980,7 +917,6 @@
       "code": "AF13.4",
       "kind": 0,
       "text": "Hijo/a",
-      "weight": 4,
       "question": 11,
       "father": 81
     }
@@ -992,7 +928,6 @@
       "code": "AF13.5",
       "kind": 0,
       "text": "Otros",
-      "weight": 5,
       "question": 11,
       "father": 81
     }
@@ -1004,7 +939,6 @@
       "code": "AP1",
       "kind": 0,
       "text": "Ansiedad",
-      "weight": 1,
       "question": 12
     }
   },
@@ -1015,7 +949,6 @@
       "code": "AP2",
       "kind": 0,
       "text": "Síndromes fóbicos",
-      "weight": 2,
       "question": 12
     }
   },
@@ -1026,7 +959,6 @@
       "code": "AP3",
       "kind": 0,
       "text": "Trastornos de pánico",
-      "weight": 3,
       "question": 12
     }
   },
@@ -1037,7 +969,6 @@
       "code": "AP4",
       "kind": 0,
       "text": "Distimia",
-      "weight": 4,
       "question": 12
     }
   },
@@ -1048,7 +979,6 @@
       "code": "AP5",
       "kind": 0,
       "text": "Trastorno depresivo",
-      "weight": 5,
       "question": 12
     }
   },
@@ -1059,7 +989,6 @@
       "code": "AP6",
       "kind": 0,
       "text": "Trastorno bipolar",
-      "weight": 6,
       "question": 12
     }
   },
@@ -1070,7 +999,6 @@
       "code": "AP7",
       "kind": 0,
       "text": "Manía",
-      "weight": 7,
       "question": 12
     }
   },
@@ -1081,7 +1009,6 @@
       "code": "AP8",
       "kind": 0,
       "text": "Toxicomanía",
-      "weight": 8,
       "question": 12
     }
   },
@@ -1092,7 +1019,6 @@
       "code": "AP9",
       "kind": 0,
       "text": "Abuso de Alcohol",
-      "weight": 9,
       "question": 12
     }
   },
@@ -1103,7 +1029,6 @@
       "code": "AP10",
       "kind": 0,
       "text": "Trastorno obsesivo-compulsivo",
-      "weight": 10,
       "question": 12
     }
   },
@@ -1114,7 +1039,6 @@
       "code": "AP11",
       "kind": 0,
       "text": "Esquizofrenia",
-      "weight": 11,
       "question": 12
     }
   },
@@ -1125,7 +1049,6 @@
       "code": "AP12",
       "kind": 0,
       "text": "Trastorno de personalidad",
-      "weight": 12,
       "question": 12
     }
   },
@@ -1136,7 +1059,6 @@
       "code": "AP13",
       "kind": 0,
       "text": "Otras",
-      "weight": 13,
       "question": 12
     }
   },
@@ -1147,7 +1069,6 @@
       "code": "DS1",
       "kind": 0,
       "text": "Semanas",
-      "weight": 1,
       "question": 13
     }
   },
@@ -1158,7 +1079,6 @@
       "code": "DS2",
       "kind": 0,
       "text": "Meses",
-      "weight": 2,
       "question": 13
     }
   },
@@ -1169,7 +1089,6 @@
       "code": "AN1",
       "kind": 0,
       "text": "Parkinson",
-      "weight": 1,
       "question": 14
     }
   },
@@ -1180,7 +1099,6 @@
       "code": "AN2",
       "kind": 0,
       "text": "Demencia",
-      "weight": 2,
       "question": 14
     }
   },
@@ -1191,7 +1109,6 @@
       "code": "AN3",
       "kind": 0,
       "text": "AVC en hemisferio no dominante",
-      "weight": 3,
       "question": 14
     }
   },
@@ -1202,7 +1119,6 @@
       "code": "AN4",
       "kind": 0,
       "text": "Arteriosclerosis cerebral",
-      "weight": 4,
       "question": 14
     }
   },
@@ -1213,7 +1129,6 @@
       "code": "AN5",
       "kind": 0,
       "text": "Lesiones y contusiones SNC",
-      "weight": 5,
       "question": 14
     }
   },
@@ -1224,7 +1139,6 @@
       "code": "AN6",
       "kind": 0,
       "text": "Esclerosis múltiple",
-      "weight": 6,
       "question": 14
     }
   },
@@ -1235,7 +1149,6 @@
       "code": "AN7",
       "kind": 0,
       "text": "Hidorcefalia normotensiva",
-      "weight": 7,
       "question": 14
     }
   },
@@ -1246,7 +1159,6 @@
       "code": "AN8",
       "kind": 0,
       "text": "Narcolepsia",
-      "weight": 8,
       "question": 14
     }
   },
@@ -1257,7 +1169,6 @@
       "code": "AN9",
       "kind": 0,
       "text": "Miastenia gravis",
-      "weight": 9,
       "question": 14
     }
   },
@@ -1268,7 +1179,6 @@
       "code": "AN10",
       "kind": 0,
       "text": "Neurosífilis",
-      "weight": 10,
       "question": 14
     }
   },
@@ -1279,7 +1189,6 @@
       "code": "AN11",
       "kind": 0,
       "text": "Hungtinton",
-      "weight": 11,
       "question": 14
     }
   },
@@ -1290,7 +1199,6 @@
       "code": "AN12",
       "kind": 0,
       "text": "Otra",
-      "weight": 12,
       "question": 14
     }
   },
@@ -1301,7 +1209,6 @@
       "code": "AE1",
       "kind": 0,
       "text": "Hipotiroidismo",
-      "weight": 1,
       "question": 15
     }
   },
@@ -1312,7 +1219,6 @@
       "code": "AE2",
       "kind": 0,
       "text": "Diabetes Mellitus",
-      "weight": 2,
       "question": 15
     }
   },
@@ -1323,7 +1229,6 @@
       "code": "AE3",
       "kind": 0,
       "text": "Hipertiroidismo",
-      "weight": 3,
       "question": 15
     }
   },
@@ -1334,7 +1239,6 @@
       "code": "AE4",
       "kind": 0,
       "text": "Hiperaratiroidismo",
-      "weight": 4,
       "question": 15
     }
   },
@@ -1345,7 +1249,6 @@
       "code": "AE5",
       "kind": 0,
       "text": "Addison",
-      "weight": 5,
       "question": 15
     }
   },
@@ -1356,7 +1259,6 @@
       "code": "AE6",
       "kind": 0,
       "text": "Cushing",
-      "weight": 6,
       "question": 15
     }
   },
@@ -1367,7 +1269,6 @@
       "code": "AE7",
       "kind": 0,
       "text": "Síndrome Adiposo General",
-      "weight": 7,
       "question": 15
     }
   },
@@ -1378,7 +1279,6 @@
       "code": "AE8",
       "kind": 0,
       "text": "Otra",
-      "weight": 8,
       "question": 15
     }
   },
@@ -1389,7 +1289,6 @@
       "code": "AT1",
       "kind": 0,
       "text": "Tumores del SNC",
-      "weight": 1,
       "question": 16
     }
   },
@@ -1400,7 +1299,6 @@
       "code": "AT2",
       "kind": 0,
       "text": "Metástasis cerebrales",
-      "weight": 2,
       "question": 16
     }
   },
@@ -1411,7 +1309,6 @@
       "code": "AT3",
       "kind": 0,
       "text": "Carcinoma gástrico",
-      "weight": 3,
       "question": 16
     }
   },
@@ -1422,7 +1319,6 @@
       "code": "AT4",
       "kind": 0,
       "text": "Carcinoma de cabeza de páncreas",
-      "weight": 4,
       "question": 16
     }
   },
@@ -1433,7 +1329,6 @@
       "code": "AT5",
       "kind": 0,
       "text": "Síndrome caarcinoide",
-      "weight": 5,
       "question": 16
     }
   },
@@ -1444,7 +1339,6 @@
       "code": "AT6",
       "kind": 0,
       "text": "Otra",
-      "weight": 6,
       "question": 16
     }
   },
@@ -1455,7 +1349,6 @@
       "code": "AI1",
       "kind": 0,
       "text": "Hepatitis",
-      "weight": 1,
       "question": 17
     }
   },
@@ -1466,7 +1359,6 @@
       "code": "AI2",
       "kind": 0,
       "text": "TBC",
-      "weight": 2,
       "question": 17
     }
   },
@@ -1477,7 +1369,6 @@
       "code": "AI3",
       "kind": 0,
       "text": "Mononucleosis infecciosa",
-      "weight": 3,
       "question": 17
     }
   },
@@ -1488,7 +1379,6 @@
       "code": "AI4",
       "kind": 0,
       "text": "Fiebre Tifoidea",
-      "weight": 4,
       "question": 17
     }
   },
@@ -1499,7 +1389,6 @@
       "code": "AI5",
       "kind": 0,
       "text": "Encefalitis",
-      "weight": 5,
       "question": 17
     }
   },
@@ -1510,7 +1399,6 @@
       "code": "AI6",
       "kind": 0,
       "text": "Sepsis",
-      "weight": 6,
       "question": 17
     }
   },
@@ -1521,7 +1409,6 @@
       "code": "AI7",
       "kind": 0,
       "text": "Neumonía",
-      "weight": 7,
       "question": 17
     }
   },
@@ -1532,7 +1419,6 @@
       "code": "AI8",
       "kind": 0,
       "text": "SIDA",
-      "weight": 8,
       "question": 17
     }
   },
@@ -1543,7 +1429,6 @@
       "code": "AO1",
       "kind": 0,
       "text": "Anemia",
-      "weight": 1,
       "question": 18
     }
   },
@@ -1554,7 +1439,6 @@
       "code": "AO2",
       "kind": 0,
       "text": "Infarto agudo de miocardio",
-      "weight": 2,
       "question": 18
     }
   },
@@ -1565,7 +1449,6 @@
       "code": "AO3",
       "kind": 0,
       "text": "Insuficiencia renal",
-      "weight": 3,
       "question": 18
     }
   },
@@ -1576,7 +1459,6 @@
       "code": "AO4",
       "kind": 0,
       "text": "Dolor crónico",
-      "weight": 4,
       "question": 18
     }
   },
@@ -1587,7 +1469,6 @@
       "code": "AO5",
       "kind": 0,
       "text": "Gota",
-      "weight": 5,
       "question": 18
     }
   },
@@ -1598,7 +1479,6 @@
       "code": "AO6",
       "kind": 0,
       "text": "Artritis reumatoide",
-      "weight": 6,
       "question": 18
     }
   },
@@ -1609,7 +1489,6 @@
       "code": "AO7",
       "kind": 0,
       "text": "Psoriasis",
-      "weight": 7,
       "question": 18
     }
   },
@@ -1620,7 +1499,6 @@
       "code": "AO8",
       "kind": 0,
       "text": "Cirrosis",
-      "weight": 8,
       "question": 18
     }
   },
@@ -1631,7 +1509,6 @@
       "code": "AO9",
       "kind": 0,
       "text": "Lupus eritematoso",
-      "weight": 9,
       "question": 18
     }
   },
@@ -1639,10 +1516,9 @@
     "model": "survey.option",
     "pk": 145,
     "fields": {
-      "code": "A10",
+      "code": "AO10",
       "kind": 0,
       "text": "Policitemia Vera",
-      "weight": 10,
       "question": 18
     }
   },
@@ -1650,10 +1526,9 @@
     "model": "survey.option",
     "pk": 146,
     "fields": {
-      "code": "A11",
+      "code": "AO11",
       "kind": 0,
       "text": "Porfiria aguda intermitente",
-      "weight": 11,
       "question": 18
     }
   },
@@ -1661,10 +1536,9 @@
     "model": "survey.option",
     "pk": 147,
     "fields": {
-      "code": "A12",
+      "code": "AO12",
       "kind": 0,
       "text": "Déficit vitamínicos(B12, Ac. fólico)",
-      "weight": 12,
       "question": 18
     }
   },
@@ -1672,10 +1546,9 @@
     "model": "survey.option",
     "pk": 148,
     "fields": {
-      "code": "A13",
+      "code": "AO13",
       "kind": 0,
       "text": "Otra",
-      "weight": 13,
       "question": 18
     }
   },
@@ -1686,7 +1559,6 @@
       "code": "L1.0",
       "kind": 0,
       "text": "No",
-      "weight": 0,
       "question": 20
     }
   },
@@ -1774,7 +1646,7 @@
       "code": "AVE1",
       "kind": 0,
       "text": "Muerte del cónyuge",
-      "weight": 1,
+      "weight": 92,
       "question": 23
     }
   },
@@ -1785,7 +1657,7 @@
       "code": "AVE2",
       "kind": 0,
       "text": "Separación Matrimonial",
-      "weight": 2,
+      "weight": 58,
       "question": 23
     }
   },
@@ -1796,7 +1668,7 @@
       "code": "AVE3",
       "kind": 0,
       "text": "Divorcio",
-      "weight": 3,
+      "weight": 50,
       "question": 23
     }
   },
@@ -1807,7 +1679,7 @@
       "code": "AVE4",
       "kind": 0,
       "text": "Matrimonio",
-      "weight": 4,
+      "weight": 60,
       "question": 23
     }
   },
@@ -1818,7 +1690,7 @@
       "code": "AVE5",
       "kind": 0,
       "text": "Reconciliación con el cónyuge",
-      "weight": 5,
+      "weight": 62,
       "question": 23
     }
   },
@@ -1829,7 +1701,7 @@
       "code": "AVE6",
       "kind": 0,
       "text": "Rotura de un noviazgo o situación similar",
-      "weight": 6,
+      "weight": 50,
       "question": 23
     }
   },
@@ -1840,7 +1712,7 @@
       "code": "AVE7",
       "kind": 0,
       "text": "Enamorarse o iniciar una amistad íntima",
-      "weight": 7,
+      "weight": 57,
       "question": 23
     }
   },
@@ -1851,7 +1723,7 @@
       "code": "AVE8",
       "kind": 0,
       "text": "Embarazo deseado",
-      "weight": 8,
+      "weight": 67,
       "question": 23
     }
   },
@@ -1862,7 +1734,7 @@
       "code": "AVE9",
       "kind": 0,
       "text": "Embarazo no deseado",
-      "weight": 9,
+      "weight": 65,
       "question": 23
     }
   },
@@ -1873,7 +1745,7 @@
       "code": "AVE10",
       "kind": 0,
       "text": "Aborto provocado",
-      "weight": 10,
+      "weight": 51,
       "question": 23
     }
   },
@@ -1884,7 +1756,7 @@
       "code": "AVE11",
       "kind": 0,
       "text": "Aborto no deseado",
-      "weight": 11,
+      "weight": 71,
       "question": 23
     }
   },
@@ -1895,7 +1767,7 @@
       "code": "AVE12",
       "kind": 0,
       "text": "Relación sexual al margen del matrimonio",
-      "weight": 12,
+      "weight": 58,
       "question": 23
     }
   },
@@ -1906,7 +1778,7 @@
       "code": "AVE13",
       "kind": 0,
       "text": "Ruptura de relación sexual al margen del matrimonio",
-      "weight": 13,
+      "weight": 49,
       "question": 23
     }
   },
@@ -1917,7 +1789,7 @@
       "code": "AVE14",
       "kind": 0,
       "text": "Dificultades sexuales",
-      "weight": 14,
+      "weight": 67,
       "question": 23
     }
   },
@@ -1928,7 +1800,7 @@
       "code": "AVE15",
       "kind": 0,
       "text": "Dificultades para la educación de los hijos",
-      "weight": 15,
+      "weight": 70,
       "question": 23
     }
   } ,
@@ -1939,7 +1811,7 @@
       "code": "AVE16",
       "kind": 0,
       "text": "Niños bajo el cuidado de otras personas",
-      "weight": 16,
+      "weight": 57,
       "question": 23
     }
   },
@@ -1950,7 +1822,7 @@
       "code": "AVE17",
       "kind": 0,
       "text": "Muerte de un familiar cercano",
-      "weight": 17,
+      "weight": 73,
       "question": 23
     }
   },
@@ -1961,7 +1833,7 @@
       "code": "AVE18",
       "kind": 0,
       "text": "Enfermedad o mejoría de enfermedad de un miembro de la familia",
-      "weight": 18,
+      "weight": 61,
       "question": 23
     }
   },
@@ -1972,7 +1844,7 @@
       "code": "AVE19",
       "kind": 0,
       "text": "Incorporación de un nuevo miembro a la familia",
-      "weight": 19,
+      "weight": 52,
       "question": 23
     }
   },
@@ -1983,7 +1855,7 @@
       "code": "AVE20",
       "kind": 0,
       "text": "Un miembro de la familia abandona el hogar",
-      "weight": 20,
+      "weight": 50,
       "question": 23
     }
   },  
@@ -1994,7 +1866,7 @@
       "code": "AVE21",
       "kind": 0,
       "text": "Ruptura de la familia(separación padres)",
-      "weight": 21,
+      "weight": 79,
       "question": 23
     }
   },
@@ -2005,7 +1877,7 @@
       "code": "AVE22",
       "kind": 0,
       "text": "Problemas con vecinos o familiares que no vivan en hogar",
-      "weight": 22,
+      "weight": 40,
       "question": 23
     }
   },
@@ -2016,7 +1888,7 @@
       "code": "AVE23",
       "kind": 0,
       "text": "Desaparición problemas con vecinos o familiares que no vivan en hogar",
-      "weight": 23,
+      "weight": 34,
       "question": 23
     }
   },
@@ -2027,7 +1899,7 @@
       "code": "AVE24",
       "kind": 0,
       "text": "Periodo de alejamiento del  hogar",
-      "weight": 24,
+      "weight": 53,
       "question": 23
     }
   },
@@ -2038,7 +1910,7 @@
       "code": "AVE25",
       "kind": 0,
       "text": "Hijos lejos del hogar",
-      "weight": 25,
+      "weight": 68,
       "question": 23
     }
   },
@@ -2049,7 +1921,7 @@
       "code": "AVE26",
       "kind": 0,
       "text": "Quedarse sin trabajo",
-      "weight": 26,
+      "weight": 82,
       "question": 23
     }
   },
@@ -2060,7 +1932,7 @@
       "code": "AVE27",
       "kind": 0,
       "text": "Jubilación",
-      "weight": 27,
+      "weight": 58,
       "question": 23
     }
   },
@@ -2071,7 +1943,7 @@
       "code": "AVE28",
       "kind": 0,
       "text": "Despido",
-      "weight": 28,
+      "weight": 81,
       "question": 23
     }
   },
@@ -2082,7 +1954,7 @@
       "code": "AVE29",
       "kind": 0,
       "text": "Cambio de lugar de trabajo",
-      "weight": 29,
+      "weight": 42,
       "question": 23
     }
   },
@@ -2093,7 +1965,7 @@
       "code": "AVE30",
       "kind": 0,
       "text": "El cónyuge comienza a deja de trabajar fuera de casa",
-      "weight": 30,
+      "weight": 47,
       "question": 23
     }
   },
@@ -2104,7 +1976,7 @@
       "code": "AVE31",
       "kind": 0,
       "text": "Ascenso en el trabajo",
-      "weight": 31,
+      "weight": 57,
       "question": 23
     }
   },
@@ -2115,7 +1987,7 @@
       "code": "AVE32",
       "kind": 0,
       "text": "Problemas importantes en el trabajo",
-      "weight": 32,
+      "weight": 55,
       "question": 23
     }
   },
@@ -2126,7 +1998,7 @@
       "code": "AVE33",
       "kind": 0,
       "text": "Nuevo empleo en misma línea de trabajo",
-      "weight": 33,
+      "weight": 42,
       "question": 23
     }
   },
@@ -2137,7 +2009,7 @@
       "code": "AVE34",
       "kind": 0,
       "text": "Nuevo empleo en nueva línea de trabajo",
-      "weight": 34,
+      "weight": 52,
       "question": 23
     }
   },
@@ -2148,7 +2020,7 @@
       "code": "AVE35",
       "kind": 0,
       "text": "Cambio en horario o condiciones de trabajo",
-      "weight": 35,
+      "weight": 37,
       "question": 23
     }
   },
@@ -2159,7 +2031,7 @@
       "code": "AVE36",
       "kind": 0,
       "text": "Problemas con compañeros de trabajo",
-      "weight": 36,
+      "weight": 46,
       "question": 23
     }
   },
@@ -2170,7 +2042,7 @@
       "code": "AVE37",
       "kind": 0,
       "text": "Préstamo o hipoteca",
-      "weight": 37,
+      "weight": 67,
       "question": 23
     }
   },
@@ -2181,7 +2053,7 @@
       "code": "AVE38",
       "kind": 0,
       "text": "Aumento sustancial de ingresos(25%)",
-      "weight": 38,
+      "weight": 48,
       "question": 23
     }
   },
@@ -2192,7 +2064,7 @@
       "code": "AVE39",
       "kind": 0,
       "text": "Reducción sustancial de ingresos(25%)",
-      "weight": 39,
+      "weight": 61,
       "question": 23
     }
   },
@@ -2203,7 +2075,7 @@
       "code": "AVE40",
       "kind": 0,
       "text": "Problema legal grave que puede terminar en encarcelamiento",
-      "weight": 40,
+      "weight": 84,
       "question": 23
     }
   },
@@ -2214,7 +2086,7 @@
       "code": "AVE41",
       "kind": 0,
       "text": "Problema legal menor",
-      "weight": 41,
+      "weight": 47,
       "question": 23
     }
   },
@@ -2225,7 +2097,7 @@
       "code": "AVE42",
       "kind": 0,
       "text": "Compliación en una pelea",
-      "weight": 42,
+      "weight": 52,
       "question": 23
     }
   },
@@ -2236,7 +2108,7 @@
       "code": "AVE43",
       "kind": 0,
       "text": "Enfermedad o accidente que requiera guardar cama",
-      "weight": 43,
+      "weight": 66,
       "question": 23
     }
   },
@@ -2247,7 +2119,7 @@
       "code": "AVE44",
       "kind": 0,
       "text": "Muerte de un amigo",
-      "weight": 44,
+      "weight": 68,
       "question": 23
     }
   },
@@ -2257,8 +2129,8 @@
     "fields": {
       "code": "AVE45",
       "kind": 0,
-      "text": "Cambio de cas",
-      "weight": 45,
+      "text": "Cambio de casa",
+      "weight": 37,
       "question": 23
     }
   },
@@ -2269,7 +2141,7 @@
       "code": "AVE46",
       "kind": 0,
       "text": "Compra de casa",
-      "weight": 46,
+      "weight": 51,
       "question": 23
     }
   },
@@ -2280,7 +2152,7 @@
       "code": "AVE47",
       "kind": 0,
       "text": "Accidente o situación de violencia física",
-      "weight": 47,
+      "weight": 66,
       "question": 23
     }
   },
@@ -2291,7 +2163,7 @@
       "code": "AVE48",
       "kind": 0,
       "text": "Éxito personal de gran envergadura",
-      "weight": 48,
+      "weight": 67,
       "question": 23
     }
   },
@@ -2302,7 +2174,7 @@
       "code": "AVE49",
       "kind": 0,
       "text": "Exámenes",
-      "weight": 49,
+      "weight": 61,
       "question": 23
     }
   },
@@ -2313,7 +2185,7 @@
       "code": "AVE50",
       "kind": 0,
       "text": "Reformas en la casa",
-      "weight": 50,
+      "weight": 41,
       "question": 23
     }
   },
@@ -2324,7 +2196,7 @@
       "code": "AVE51",
       "kind": 0,
       "text": "Cambio en las costumbres personales (salir, vestir...)",
-      "weight": 51,
+      "weight": 40,
       "question": 23
     }
   },
@@ -2335,7 +2207,7 @@
       "code": "AVE52",
       "kind": 0,
       "text": "Cambio en opinios religiosas",
-      "weight": 52,
+      "weight": 37,
       "question": 23
     }
   },
@@ -2346,7 +2218,7 @@
       "code": "AVE53",
       "kind": 0,
       "text": "Cambio en opiniones políticas",
-      "weight": 53,
+      "weight": 32,
       "question": 23
     }
   },
@@ -2357,7 +2229,7 @@
       "code": "AVE54",
       "kind": 0,
       "text": "Cambio en costumbres sociales",
-      "weight": 54,
+      "weight": 34,
       "question": 23
     }
   },
@@ -2368,7 +2240,7 @@
       "code": "AVE55",
       "kind": 0,
       "text": "Cambio en el ritmo de sueño",
-      "weight": 55,
+      "weight": 43,
       "question": 23
     }
   },
@@ -2379,7 +2251,7 @@
       "code": "AVE56",
       "kind": 0,
       "text": "Cambio en costumbres alimentarias o apetito",
-      "weight": 56,
+      "weight": 39,
       "question": 23
     }
   },
@@ -2390,7 +2262,7 @@
       "code": "AVE57",
       "kind": 0,
       "text": "Vacaciones fuera de casa",
-      "weight": 57,
+      "weight": 48,
       "question": 23
     }
   },
@@ -2401,7 +2273,7 @@
       "code": "AVE58",
       "kind": 0,
       "text": "Fiestas de Navidad y Reyes",
-      "weight": 58,
+      "weight": 51,
       "question": 23
     }
   },
@@ -2411,8 +2283,8 @@
     "fields": {
       "code": "AVE59",
       "kind": 0,
-      "text": "Problemasrelacionados con el alcohol o las drogas",
-      "weight": 59,
+      "text": "Problemas relacionados con el alcohol o las drogas",
+      "weight": 71,
       "question": 23
     }
   },
@@ -2423,7 +2295,7 @@
       "code": "AVE60",
       "kind": 0,
       "text": "Enfermedad prolongada que requiere tratamiento médico",
-      "weight": 60,
+      "weight": 73,
       "question": 23
     }
   },
@@ -2434,7 +2306,7 @@
       "code": "AVE61",
       "kind": 0,
       "text": "Repentino y serio deterioro de la udición y/o visión",
-      "weight": 61,
+      "weight": 81,
       "question": 23
     }
   },
@@ -2676,8 +2548,7240 @@
       "code": "RP1",
       "kind": 0,
       "text": "Afán de orden",
-      "weight": ,
-      "question": 30
+      "question": 31
     }
-  } 
+  },
+  {
+    "model": "survey.option",
+    "pk": 240,
+    "fields": {
+      "code": "RP2",
+      "kind": 0,
+      "text": "Responsabilidad y honestidad",
+      "question": 31
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 241,
+    "fields": {
+      "code": "RP3",
+      "kind": 0,
+      "text": "Escrupulosidad (conciencia)",
+      "question": 31
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 242,
+    "fields": {
+      "code": "RP4",
+      "kind": 0,
+      "text": "Sentido del deber",
+      "question": 31
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 243,
+    "fields": {
+      "code": "RP5",
+      "kind": 0,
+      "text": "Autoexigencia e intelerancia",
+      "question": 31
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 244,
+    "fields": {
+      "code": "RP6",
+      "kind": 0,
+      "text": "Exactitud, trabajador/a ejemplar",
+      "question": 31
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 245,
+    "fields": {
+      "code": "RP7",
+      "kind": 0,
+      "text": "Dependencia hacia los demás y atención hacia ellos",
+      "question": 31
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 246,
+    "fields": {
+      "code": "B1.0",
+      "kind": 0,
+      "text": "No me siento triste",
+      "weight": 0,
+      "question": 32
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 247,
+    "fields": {
+      "code": "B1.1",
+      "kind": 0,
+      "text": "Me siento triste",
+      "weight": 1,
+      "question": 32
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 248,
+    "fields": {
+      "code": "B1.2",
+      "kind": 0,
+      "text": "Me siento triste continuamente y no puedo dejar de estarlo",
+      "weight": 2,
+      "question": 32
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 249,
+    "fields": {
+      "code": "B1.3",
+      "kind": 0,
+      "text": "Me siento tan triste o desgraciado que no puedo soportarlo",
+      "weight": 3,
+      "question": 32
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 250,
+    "fields": {
+      "code": "B2.0",
+      "kind": 0,
+      "text": "No me siento especialmente desanimado de cara al futuro",
+      "weight": 0,
+      "question": 34
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 251,
+    "fields": {
+      "code": "B2.1",
+      "kind": 0,
+      "text": "Me siento desanimado de cara al futuro",
+      "weight": 1,
+      "question": 34
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 252,
+    "fields": {
+      "code": "B2.2",
+      "kind": 0,
+      "text": "Siento que no hay nada por lo que luchar",
+      "weight": 2,
+      "question": 34
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 253,
+    "fields": {
+      "code": "B2.3",
+      "kind": 0,
+      "text": "El futuro es deseseranzador y las cosas no mejorarán",
+      "weight": 3,
+      "question": 34
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 254,
+    "fields": {
+      "code": "H1.2.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 35
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 255,
+    "fields": {
+      "code": "H1.2.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 35
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 256,
+    "fields": {
+      "code": "H1.2.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 35
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 257,
+    "fields": {
+      "code": "H1.2.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 35
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 258,
+    "fields": {
+      "code": "H1.2.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 35
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 259,
+    "fields": {
+      "code": "B3.0",
+      "kind": 0,
+      "text": "No me siento fracasado",
+      "weight": 0,
+      "question": 37
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 260,
+    "fields": {
+      "code": "B3.1",
+      "kind": 0,
+      "text": "He fracasado más que la mayoría de las personas",
+      "weight": 1,
+      "question": 37
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 261,
+    "fields": {
+      "code": "B3.2",
+      "kind": 0,
+      "text": "Cuando miro hacia atrás lo único que veo es un fracaso tras otro",
+      "weight": 2,
+      "question": 37
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 262,
+    "fields": {
+      "code": "B3.3",
+      "kind": 0,
+      "text": "Soy un fracaso total como persona",
+      "weight": 3,
+      "question": 37
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 263,
+    "fields": {
+      "code": "B4.0",
+      "kind": 0,
+      "text": "Las cosas me satisfacen tanto como antes",
+      "weight": 0,
+      "question": 38
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 264,
+    "fields": {
+      "code": "B4.1",
+      "kind": 0,
+      "text": "No disfruto de las cosas tanto como antes",
+      "weight": 1,
+      "question": 38
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 265,
+    "fields": {
+      "code": "B4.2",
+      "kind": 0,
+      "text": "Ya no obtengo ninguna satisfacción de las cosas",
+      "weight": 2,
+      "question": 38
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 266,
+    "fields": {
+      "code": "B4.3",
+      "kind": 0,
+      "text": "Estoy insatisfecho o aburrido con respecto a todo",
+      "weight": 3,
+      "question": 38
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 267,
+    "fields": {
+      "code": "H6.2.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 39
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 268,
+    "fields": {
+      "code": "H6.2.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 39
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 269,
+    "fields": {
+      "code": "H6.2.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 39
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 270,
+    "fields": {
+      "code": "H6.2.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 39
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 271,
+    "fields": {
+      "code": "H6.2.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 39
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 272,
+    "fields": {
+      "code": "H6.1.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 40
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 273,
+    "fields": {
+      "code": "H6.1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 40
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 274,
+    "fields": {
+      "code": "H6.1.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 40
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 275,
+    "fields": {
+      "code": "H6.1.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 40
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 276,
+    "fields": {
+      "code": "H6.1.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 40
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 277,
+    "fields": {
+      "code": "B5.0",
+      "kind": 0,
+      "text": "No me siento especialmente culpable",
+      "weight": 0,
+      "question": 41
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 278,
+    "fields": {
+      "code": "B5.1",
+      "kind": 0,
+      "text": "Me siento culpable en bastantes ocasiones",
+      "weight": 1,
+      "question": 41
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 279,
+    "fields": {
+      "code": "B5.2",
+      "kind": 0,
+      "text": "Me siento culpable en la mayoría de las ocasiones",
+      "weight": 2,
+      "question": 41
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 280,
+    "fields": {
+      "code": "B5.3",
+      "kind": 0,
+      "text": "Me siento culpable constantemente",
+      "weight": 3,
+      "question": 41
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 281,
+    "fields": {
+      "code": "B6.0",
+      "kind": 0,
+      "text": "No creo que esté siendo castigado",
+      "weight": 0,
+      "question": 42
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 282,
+    "fields": {
+      "code": "B6.1",
+      "kind": 0,
+      "text": "Siento que quizás esté siendo castigado",
+      "weight": 1,
+      "question": 42
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 283,
+    "fields": {
+      "code": "B6.2",
+      "kind": 0,
+      "text": "Espero ser castigado",
+      "weight": 2,
+      "question": 42
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 284,
+    "fields": {
+      "code": "B6.3",
+      "kind": 0,
+      "text": "Siento que estoy castigado",
+      "weight": 3,
+      "question": 42
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 285,
+    "fields": {
+      "code": "B7.0",
+      "kind": 0,
+      "text": "No estoy descontento de mí mismo",
+      "weight": 0,
+      "question": 43
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 286,
+    "fields": {
+      "code": "B7.1",
+      "kind": 0,
+      "text": "Estoy descontento de mí mismo",
+      "weight": 1,
+      "question": 43
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 287,
+    "fields": {
+      "code": "B7.2",
+      "kind": 0,
+      "text": "Estoy conmigo mismo",
+      "weight": 2,
+      "question": 43
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 288,
+    "fields": {
+      "code": "B7.3",
+      "kind": 0,
+      "text": "Me detesto",
+      "weight": 3,
+      "question": 43
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 289,
+    "fields": {
+      "code": "B8.0",
+      "kind": 0,
+      "text": "No me considero peor que cualquier otro",
+      "weight": 0,
+      "question": 44
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 290,
+    "fields": {
+      "code": "B8.1",
+      "kind": 0,
+      "text": "Me autocritico por mi debilidad o por mis errores",
+      "weight": 1,
+      "question": 44
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 291,
+    "fields": {
+      "code": "B8.2",
+      "kind": 0,
+      "text": "Continuamente me culpo por mis faltas",
+      "weight": 2,
+      "question": 44
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 292,
+    "fields": {
+      "code": "B8.3",
+      "kind": 0,
+      "text": "Me culpo por todo lo malo que sucede",
+      "weight": 3,
+      "question": 44
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 293,
+    "fields": {
+      "code": "B9.0",
+      "kind": 0,
+      "text": "No tengo ningún pensamiento de suicidio",
+      "weight": 0,
+      "question": 45
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 294,
+    "fields": {
+      "code": "B9.1",
+      "kind": 0,
+      "text": "A veces pienso en suicidarme pero no lo haré",
+      "weight": 1,
+      "question": 45
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 295,
+    "fields": {
+      "code": "B9.2",
+      "kind": 0,
+      "text": "Desearía poner fin a mi vida",
+      "weight": 2,
+      "question": 45
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 296,
+    "fields": {
+      "code": "B9.3",
+      "kind": 0,
+      "text": "Me suicidaría si tuviese oportunidad",
+      "weight": 3,
+      "question": 45
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 297,
+    "fields": {
+      "code": "B10.0",
+      "kind": 0,
+      "text": "No lloro mas de lo normal",
+      "weight": 0,
+      "question": 46
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 298,
+    "fields": {
+      "code": "B10.1",
+      "kind": 0,
+      "text": "Ahora lloro más que antes",
+      "weight": 1,
+      "question": 46
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 299,
+    "fields": {
+      "code": "B10.2",
+      "kind": 0,
+      "text": "Lloro continuamente",
+      "weight": 2,
+      "question": 46
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 300,
+    "fields": {
+      "code": "B10.3",
+      "kind": 0,
+      "text": "No puedo dejar de llorar aunque me lo proponga",
+      "weight": 3,
+      "question": 46
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 301,
+    "fields": {
+      "code": "B11.0",
+      "kind": 0,
+      "text": "No estoy especialmente irritado",
+      "weight": 0,
+      "question": 48
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 302,
+    "fields": {
+      "code": "B11.1",
+      "kind": 0,
+      "text": "Me molesto o irrito más fácilmente que antes",
+      "weight": 1,
+      "question": 48
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 303,
+    "fields": {
+      "code": "B11.2",
+      "kind": 0,
+      "text": "Me siento irritado continuamente",
+      "weight": 2,
+      "question": 48
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 304,
+    "fields": {
+      "code": "B11.3",
+      "kind": 0,
+      "text": "Ahora no me irritan en absoluto cosas que antes me molestaban",
+      "weight": 3,
+      "question": 48
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 305,
+    "fields": {
+      "code": "B12.0",
+      "kind": 0,
+      "text": "No he perdido el interés por los demás",
+      "weight": 0,
+      "question": 50
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 306,
+    "fields": {
+      "code": "B12.1",
+      "kind": 0,
+      "text": "Estoy menos interesado en los demás que antes",
+      "weight": 1,
+      "question": 50
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 307,
+    "fields": {
+      "code": "B12.2",
+      "kind": 0,
+      "text": "He perdido gran parte del interés por los demás",
+      "weight": 2,
+      "question": 50
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 308,
+    "fields": {
+      "code": "B12.3",
+      "kind": 0,
+      "text": "He perdido todo interés por los demás",
+      "weight": 3,
+      "question": 50
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 309,
+    "fields": {
+      "code": "B13.0",
+      "kind": 0,
+      "text": "Tomo mis propias decisiones igual que antes",
+      "weight": 0,
+      "question": 51
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 310,
+    "fields": {
+      "code": "B13.1",
+      "kind": 0,
+      "text": "Evito tomar deciciones más que antes",
+      "weight": 1,
+      "question": 51
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 311,
+    "fields": {
+      "code": "B13.2",
+      "kind": 0,
+      "text": "Tomar decisiones me resulta mucho más difícil que antes",
+      "weight": 2,
+      "question": 51
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 312,
+    "fields": {
+      "code": "B13.3",
+      "kind": 0,
+      "text": "Me es imposible tomar decisiones",
+      "weight": 3,
+      "question": 51
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 313,
+    "fields": {
+      "code": "H3.1.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 52
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 314,
+    "fields": {
+      "code": "H3.1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 52
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 315,
+    "fields": {
+      "code": "H3.1.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 52
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 316,
+    "fields": {
+      "code": "H3.1.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 52
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 317,
+    "fields": {
+      "code": "H3.1.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 52
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 318,
+    "fields": {
+      "code": "H3.2.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 53
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 319,
+    "fields": {
+      "code": "H3.2.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 53
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 320,
+    "fields": {
+      "code": "H3.2.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 53
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 321,
+    "fields": {
+      "code": "H3.2.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 53
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 322,
+    "fields": {
+      "code": "H3.2.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 53
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 323,
+    "fields": {
+      "code": "H3.3.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 54
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 324,
+    "fields": {
+      "code": "H3.3.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 54
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 325,
+    "fields": {
+      "code": "H3.3.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 54
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 326,
+    "fields": {
+      "code": "H3.3.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 54
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 327,
+    "fields": {
+      "code": "H3.3.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 54
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 328,
+    "fields": {
+      "code": "H3.4.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 55
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 329,
+    "fields": {
+      "code": "H3.4.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 55
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 330,
+    "fields": {
+      "code": "H3.4.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 55
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 331,
+    "fields": {
+      "code": "H3.4.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 55
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 332,
+    "fields": {
+      "code": "H3.4.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 55
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 333,
+    "fields": {
+      "code": "H3.5.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 56
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 334,
+    "fields": {
+      "code": "H3.5.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 56
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 335,
+    "fields": {
+      "code": "H3.5.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 56
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 336,
+    "fields": {
+      "code": "H3.5.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 56
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 337,
+    "fields": {
+      "code": "H3.5.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 56
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 338,
+    "fields": {
+      "code": "H3.6.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 57
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 339,
+    "fields": {
+      "code": "H3.6.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 57
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 340,
+    "fields": {
+      "code": "H3.6.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 57
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 341,
+    "fields": {
+      "code": "H3.6.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 57
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 342,
+    "fields": {
+      "code": "H3.6.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 57
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 343,
+    "fields": {
+      "code": "H3.7.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 58
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 344,
+    "fields": {
+      "code": "H3.7.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 58
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 345,
+    "fields": {
+      "code": "H3.7.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 58
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 346,
+    "fields": {
+      "code": "H3.7.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 58
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 347,
+    "fields": {
+      "code": "H3.7.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 58
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 348,
+    "fields": {
+      "code": "B14.0",
+      "kind": 0,
+      "text": "No creo tener peor aspecto que antes",
+      "weight": 0,
+      "question": 59
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 349,
+    "fields": {
+      "code": "B14.1",
+      "kind": 0,
+      "text": "Estoy preocupado porque parezco envejecido y poco atractivo",
+      "weight": 1,
+      "question": 59
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 350,
+    "fields": {
+      "code": "B14.2",
+      "kind": 0,
+      "text": "Noto cambios constantes en mi aspecto físico que me hacen parecer poco atractivo",
+      "weight": 2,
+      "question": 59
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 351,
+    "fields": {
+      "code": "B14.3",
+      "kind": 0,
+      "text": "Creo que tengo un aspecto horrible",
+      "weight": 3,
+      "question": 59
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 352,
+    "fields": {
+      "code": "B15.0",
+      "kind": 0,
+      "text": "Trabajo igual que antes",
+      "weight": 0,
+      "question": 60
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 353,
+    "fields": {
+      "code": "B15.1",
+      "kind": 0,
+      "text": "Me cuesta más esfuerzo de lo habitual comenzar a hacer algo",
+      "weight": 1,
+      "question": 60
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 354,
+    "fields": {
+      "code": "B15.2",
+      "kind": 0,
+      "text": "Tengo que obligarme a mí mismo para hacer algo",
+      "weight": 2,
+      "question": 60
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 355,
+    "fields": {
+      "code": "B15.3",
+      "kind": 0,
+      "text": "Soy incapaz de llevar a cabo ninguna tarea",
+      "weight": 3,
+      "question": 60
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 356,
+    "fields": {
+      "code": "H5.1.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 61
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 357,
+    "fields": {
+      "code": "H5.1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 61
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 358,
+    "fields": {
+      "code": "H5.1.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 61
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 359,
+    "fields": {
+      "code": "H5.1.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 61
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 360,
+    "fields": {
+      "code": "H5.1.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 61
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 361,
+    "fields": {
+      "code": "H5.2.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 62
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 362,
+    "fields": {
+      "code": "H5.2.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 62
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 363,
+    "fields": {
+      "code": "H5.2.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 62
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 364,
+    "fields": {
+      "code": "H5.2.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 62
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 365,
+    "fields": {
+      "code": "H5.2.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 62
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 366,
+    "fields": {
+      "code": "H5.3.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 63
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 367,
+    "fields": {
+      "code": "H5.3.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 63
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 368,
+    "fields": {
+      "code": "H5.3.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 63
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 369,
+    "fields": {
+      "code": "H5.3.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 63
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 370,
+    "fields": {
+      "code": "H5.3.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 63
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 371,
+    "fields": {
+      "code": "H2.1.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 64
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 372,
+    "fields": {
+      "code": "H2.1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 64
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 373,
+    "fields": {
+      "code": "H2.1.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 64
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 374,
+    "fields": {
+      "code": "H2.1.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 64
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 375,
+    "fields": {
+      "code": "H2.1.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 64
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 376,
+    "fields": {
+      "code": "H2.3.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 65
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 377,
+    "fields": {
+      "code": "H2.3.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 65
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 378,
+    "fields": {
+      "code": "H2.3.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 65
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 379,
+    "fields": {
+      "code": "H2.3.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 65
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 380,
+    "fields": {
+      "code": "H2.3.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 65
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 381,
+    "fields": {
+      "code": "H2.5.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 66
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 382,
+    "fields": {
+      "code": "H2.5.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 66
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 383,
+    "fields": {
+      "code": "H2.5.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 66
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 384,
+    "fields": {
+      "code": "H2.5.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 66
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 385,
+    "fields": {
+      "code": "H2.5.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 66
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 386,
+    "fields": {
+      "code": "H2.6.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 67
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 387,
+    "fields": {
+      "code": "H2.6.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 67
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 388,
+    "fields": {
+      "code": "H2.6.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 67
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 389,
+    "fields": {
+      "code": "H2.6.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 67
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 390,
+    "fields": {
+      "code": "H2.6.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 67
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 391,
+    "fields": {
+      "code": "H2.7.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 68
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 392,
+    "fields": {
+      "code": "H2.7.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 68
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 393,
+    "fields": {
+      "code": "H2.7.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 68
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 394,
+    "fields": {
+      "code": "H2.7.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 68
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 395,
+    "fields": {
+      "code": "H2.7.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 68
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 396,
+    "fields": {
+      "code": "H2.8.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 69
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 397,
+    "fields": {
+      "code": "H2.8.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 69
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 398,
+    "fields": {
+      "code": "H2.8.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 69
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 399,
+    "fields": {
+      "code": "H2.8.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 69
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 400,
+    "fields": {
+      "code": "H2.8.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 69
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 401,
+    "fields": {
+      "code": "B16.0",
+      "kind": 0,
+      "text": "Duermo tan bien como siempre",
+      "weight": 0,
+      "question": 70
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 402,
+    "fields": {
+      "code": "B16.1",
+      "kind": 0,
+      "text": "No duermo tan bien como antes",
+      "weight": 1,
+      "question": 70
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 403,
+    "fields": {
+      "code": "B16.2",
+      "kind": 0,
+      "text": "Me despierto una o dos horas antes de los habitual y ya no puedo volver a domirme",
+      "weight": 2,
+      "question": 70
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 404,
+    "fields": {
+      "code": "B16.3",
+      "kind": 0,
+      "text": "Me despierto varias horas antes de lo habitual y ya no puedo volver a domir",
+      "weight": 3,
+      "question": 70
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 405,
+    "fields": {
+      "code": "H4.1.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 71
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 406,
+    "fields": {
+      "code": "H4.1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 71
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 407,
+    "fields": {
+      "code": "H4.1.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 71
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 408,
+    "fields": {
+      "code": "H4.1.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 71
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 409,
+    "fields": {
+      "code": "H4.1.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 71
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 410,
+    "fields": {
+      "code": "H4.2.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 72
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 411,
+    "fields": {
+      "code": "H4.2.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 72
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 412,
+    "fields": {
+      "code": "H4.2.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 72
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 413,
+    "fields": {
+      "code": "H4.2.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 72
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 414,
+    "fields": {
+      "code": "H4.2.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 72
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 415,
+    "fields": {
+      "code": "H4.3.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 73
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 416,
+    "fields": {
+      "code": "H4.3.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 73
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 417,
+    "fields": {
+      "code": "H4.3.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 73
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 418,
+    "fields": {
+      "code": "H4.3.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 73
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 419,
+    "fields": {
+      "code": "H4.3.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 73
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 420,
+    "fields": {
+      "code": "H4.4.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 74
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 421,
+    "fields": {
+      "code": "H4.4.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 74
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 422,
+    "fields": {
+      "code": "H4.4.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 74
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 423,
+    "fields": {
+      "code": "H4.4.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 74
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 424,
+    "fields": {
+      "code": "H4.4.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 74
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 425,
+    "fields": {
+      "code": "H4.5.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 75
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 426,
+    "fields": {
+      "code": "H4.5.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 75
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 427,
+    "fields": {
+      "code": "H4.5.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 75
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 428,
+    "fields": {
+      "code": "H4.5.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 75
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 429,
+    "fields": {
+      "code": "H4.5.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 75
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 430,
+    "fields": {
+      "code": "H4.6.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 76
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 431,
+    "fields": {
+      "code": "H4.6.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 76
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 432,
+    "fields": {
+      "code": "H4.6.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 76
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 433,
+    "fields": {
+      "code": "H4.6.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 76
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 434,
+    "fields": {
+      "code": "H4.6.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 76
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 435,
+    "fields": {
+      "code": "H6.4.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 77
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 436,
+    "fields": {
+      "code": "H6.4.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 77
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 437,
+    "fields": {
+      "code": "H6.4.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 77
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 438,
+    "fields": {
+      "code": "H6.4.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 77
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 439,
+    "fields": {
+      "code": "H6.4.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 77
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 440,
+    "fields": {
+      "code": "B17.0",
+      "kind": 0,
+      "text": "No me siento más cansado de lo normal",
+      "weight": 0,
+      "question": 78
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 441,
+    "fields": {
+      "code": "B17.1",
+      "kind": 0,
+      "text": "Me canso más que antes",
+      "weight": 1,
+      "question": 78
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 442,
+    "fields": {
+      "code": "B17.2",
+      "kind": 0,
+      "text": "Me canso en cuanto hago cualquier cosa",
+      "weight": 2,
+      "question": 78
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 443,
+    "fields": {
+      "code": "B17.3",
+      "kind": 0,
+      "text": "Estoy demasiado cansado para hacer nada",
+      "weight": 3,
+      "question": 78
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 444,
+    "fields": {
+      "code": "H2.2.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 79
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 445,
+    "fields": {
+      "code": "H2.2.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 79
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 446,
+    "fields": {
+      "code": "H2.2.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 79
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 447,
+    "fields": {
+      "code": "H2.2.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 79
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 448,
+    "fields": {
+      "code": "H2.2.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 79
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 449,
+    "fields": {
+      "code": "H7.1.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 80
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 450,
+    "fields": {
+      "code": "H7.1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 80
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 451,
+    "fields": {
+      "code": "H7.1.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 80
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 452,
+    "fields": {
+      "code": "H7.1.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 80
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 453,
+    "fields": {
+      "code": "H7.1.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 80
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 454,
+    "fields": {
+      "code": "H7.2.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 81
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 455,
+    "fields": {
+      "code": "H7.2.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 81
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 456,
+    "fields": {
+      "code": "H7.2.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 81
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 457,
+    "fields": {
+      "code": "H7.2.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 81
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 458,
+    "fields": {
+      "code": "H7.2.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 81
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 459,
+    "fields": {
+      "code": "H7.3.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 82
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 460,
+    "fields": {
+      "code": "H7.3.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 82
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 461,
+    "fields": {
+      "code": "H7.3.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 82
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 462,
+    "fields": {
+      "code": "H7.3.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 82
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 463,
+    "fields": {
+      "code": "H7.3.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 82
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 464,
+    "fields": {
+      "code": "H7.4.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 83
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 465,
+    "fields": {
+      "code": "H7.4.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 83
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 466,
+    "fields": {
+      "code": "H7.4.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 83
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 467,
+    "fields": {
+      "code": "H7.4.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 83
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 468,
+    "fields": {
+      "code": "H7.4.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 83
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 469,
+    "fields": {
+      "code": "H7.5.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 84
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 470,
+    "fields": {
+      "code": "H7.5.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 84
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 471,
+    "fields": {
+      "code": "H7.5.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 84
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 472,
+    "fields": {
+      "code": "H7.5.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 84
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 473,
+    "fields": {
+      "code": "H7.5.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 84
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 474,
+    "fields": {
+      "code": "H7.6.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 85
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 475,
+    "fields": {
+      "code": "H7.6.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 85
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 476,
+    "fields": {
+      "code": "H7.6.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 85
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 477,
+    "fields": {
+      "code": "H7.6.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 85
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 478,
+    "fields": {
+      "code": "H7.6.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 85
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 479,
+    "fields": {
+      "code": "H7.7.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 86
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 480,
+    "fields": {
+      "code": "H7.7.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 86
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 481,
+    "fields": {
+      "code": "H7.7.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 86
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 482,
+    "fields": {
+      "code": "H7.7.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 86
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 483,
+    "fields": {
+      "code": "H7.7.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 86
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 484,
+    "fields": {
+      "code": "H8.1.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 87
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 485,
+    "fields": {
+      "code": "H8.1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 87
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 486,
+    "fields": {
+      "code": "H8.1.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 87
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 487,
+    "fields": {
+      "code": "H8.1.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 87
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 488,
+    "fields": {
+      "code": "H8.1.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 87
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 489,
+    "fields": {
+      "code": "H8.2.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 88
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 490,
+    "fields": {
+      "code": "H8.2.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 88
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 491,
+    "fields": {
+      "code": "H8.2.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 88
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 492,
+    "fields": {
+      "code": "H8.2.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 88
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 493,
+    "fields": {
+      "code": "H8.2.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 88
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 494,
+    "fields": {
+      "code": "H8.3.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 89
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 495,
+    "fields": {
+      "code": "H8.3.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 89
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 496,
+    "fields": {
+      "code": "H8.3.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 89
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 497,
+    "fields": {
+      "code": "H8.3.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 89
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 498,
+    "fields": {
+      "code": "H8.3.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 89
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 499,
+    "fields": {
+      "code": "H8.4.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 90
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 500,
+    "fields": {
+      "code": "H8.4.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 90
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 501,
+    "fields": {
+      "code": "H8.4.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 90
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 502,
+    "fields": {
+      "code": "H8.4.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 90
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 503,
+    "fields": {
+      "code": "H8.4.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 90
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 504,
+    "fields": {
+      "code": "H8.5.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 91
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 505,
+    "fields": {
+      "code": "H8.5.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 91
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 506,
+    "fields": {
+      "code": "H8.5.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 91
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 507,
+    "fields": {
+      "code": "H8.5.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 91
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 508,
+    "fields": {
+      "code": "H8.5.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 91
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 509,
+    "fields": {
+      "code": "H11.1.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 92
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 510,
+    "fields": {
+      "code": "H11.1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 92
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 511,
+    "fields": {
+      "code": "H11.1.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 92
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 512,
+    "fields": {
+      "code": "H11.1.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 92
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 513,
+    "fields": {
+      "code": "H11.1.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 92
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 514,
+    "fields": {
+      "code": "H11.2.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 93
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 515,
+    "fields": {
+      "code": "H11.2.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 93
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 516,
+    "fields": {
+      "code": "H11.2.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 93
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 517,
+    "fields": {
+      "code": "H11.2.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 93
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 518,
+    "fields": {
+      "code": "H11.2.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 93
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 519,
+    "fields": {
+      "code": "H11.3.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 94
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 520,
+    "fields": {
+      "code": "H11.3.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 94
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 521,
+    "fields": {
+      "code": "H11.3.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 94
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 522,
+    "fields": {
+      "code": "H11.3.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 94
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 523,
+    "fields": {
+      "code": "H11.3.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 94
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 524,
+    "fields": {
+      "code": "H11.4.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 95
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 525,
+    "fields": {
+      "code": "H11.4.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 95
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 526,
+    "fields": {
+      "code": "H11.4.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 95
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 527,
+    "fields": {
+      "code": "H11.4.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 95
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 528,
+    "fields": {
+      "code": "H11.4.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 95
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 529,
+    "fields": {
+      "code": "H11.5.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 96
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 530,
+    "fields": {
+      "code": "H11.5.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 96
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 531,
+    "fields": {
+      "code": "H11.5.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 96
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 532,
+    "fields": {
+      "code": "H11.5.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 96
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 533,
+    "fields": {
+      "code": "H11.5.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 96
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 534,
+    "fields": {
+      "code": "H11.6.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 97
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 535,
+    "fields": {
+      "code": "H11.6.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 97
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 536,
+    "fields": {
+      "code": "H11.6.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 97
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 537,
+    "fields": {
+      "code": "H11.6.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 97
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 538,
+    "fields": {
+      "code": "H11.6.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 97
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 539,
+    "fields": {
+      "code": "H11.7.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 98
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 540,
+    "fields": {
+      "code": "H11.7.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 98
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 541,
+    "fields": {
+      "code": "H11.7.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 98
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 542,
+    "fields": {
+      "code": "H11.7.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 98
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 543,
+    "fields": {
+      "code": "H11.7.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 98
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 544,
+    "fields": {
+      "code": "H11.8.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 99
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 545,
+    "fields": {
+      "code": "H11.8.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 99
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 546,
+    "fields": {
+      "code": "H11.8.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 99
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 547,
+    "fields": {
+      "code": "H11.8.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 99
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 548,
+    "fields": {
+      "code": "H11.8.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 99
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 549,
+    "fields": {
+      "code": "H11.9.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 100
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 550,
+    "fields": {
+      "code": "H11.9.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 100
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 551,
+    "fields": {
+      "code": "H11.9.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 100
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 552,
+    "fields": {
+      "code": "H11.9.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 100
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 553,
+    "fields": {
+      "code": "H11.9.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 100
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 554,
+    "fields": {
+      "code": "H11.10.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 101
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 555,
+    "fields": {
+      "code": "H11.10.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 101
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 556,
+    "fields": {
+      "code": "H11.10.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 101
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 557,
+    "fields": {
+      "code": "H11.10.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 101
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 558,
+    "fields": {
+      "code": "H11.10.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 101
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 559,
+    "fields": {
+      "code": "H11.11.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 102
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 560,
+    "fields": {
+      "code": "H11.1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 102
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 561,
+    "fields": {
+      "code": "H11.11.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 102
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 562,
+    "fields": {
+      "code": "H11.11.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 102
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 563,
+    "fields": {
+      "code": "H11.11.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 102
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 564,
+    "fields": {
+      "code": "H11.12.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 103
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 565,
+    "fields": {
+      "code": "H11.12.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 103
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 566,
+    "fields": {
+      "code": "H11.12.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 103
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 567,
+    "fields": {
+      "code": "H11.12.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 103
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 568,
+    "fields": {
+      "code": "H11.12.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 103
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 569,
+    "fields": {
+      "code": "H11.13.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 104
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 570,
+    "fields": {
+      "code": "H11.13.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 104
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 571,
+    "fields": {
+      "code": "H11.13.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 104
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 572,
+    "fields": {
+      "code": "H11.13.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 104
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 573,
+    "fields": {
+      "code": "H11.13.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 104
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 574,
+    "fields": {
+      "code": "H11.14.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 105
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 575,
+    "fields": {
+      "code": "H11.14.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 105
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 576,
+    "fields": {
+      "code": "H11.14.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 105
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 577,
+    "fields": {
+      "code": "H11.14.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 105
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 578,
+    "fields": {
+      "code": "H11.14.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 105
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 579,
+    "fields": {
+      "code": "B18.0",
+      "kind": 0,
+      "text": "Mi apetito no ha disminuido",
+      "weight": 0,
+      "question": 106
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 580,
+    "fields": {
+      "code": "B18.1",
+      "kind": 0,
+      "text": "No tengo tan buen apetito como antes",
+      "weight": 1,
+      "question": 106
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 581,
+    "fields": {
+      "code": "B18.2",
+      "kind": 0,
+      "text": "Ahora tengo mucho menos apetito",
+      "weight": 2,
+      "question": 106
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 582,
+    "fields": {
+      "code": "B18.3",
+      "kind": 0,
+      "text": "He perdido completamente el apetito",
+      "weight": 3,
+      "question": 106
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 583,
+    "fields": {
+      "code": "B19.0",
+      "kind": 0,
+      "text": "No he perdido peso últimamente",
+      "weight": 0,
+      "question": 107
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 584,
+    "fields": {
+      "code": "B19.1",
+      "kind": 0,
+      "text": "He perdido más de 2 kilos",
+      "weight": 1,
+      "question": 107
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 585,
+    "fields": {
+      "code": "B19.2",
+      "kind": 0,
+      "text": "He perdido más de 4 kilos",
+      "weight": 2,
+      "question": 107
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 586,
+    "fields": {
+      "code": "B19.3",
+      "kind": 0,
+      "text": "He perdido más de 7 kilos",
+      "weight": 3,
+      "question": 107
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 587,
+    "fields": {
+      "code": "B20.0",
+      "kind": 0,
+      "text": "No estoy preocupado por mi salud",
+      "weight": 0,
+      "question": 108
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 588,
+    "fields": {
+      "code": "B20.1",
+      "kind": 0,
+      "text": "Me preocupan los problemas físicos como dolores, malestar de estómago, catarros, etc.",
+      "weight": 1,
+      "question": 108
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 589,
+    "fields": {
+      "code": "B20.2",
+      "kind": 0,
+      "text": "Me preocupas las enfermedades y me resulta difícil pensar en otras cosas",
+      "weight": 2,
+      "question": 108
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 590,
+    "fields": {
+      "code": "B20.3",
+      "kind": 0,
+      "text": "Estoy tan preocupada por las enfermedades que soy incapaz de pensar en otras cosas",
+      "weight": 3,
+      "question": 108
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 591,
+    "fields": {
+      "code": "B21.0",
+      "kind": 0,
+      "text": "No he observado ningún cambio en mi interés por el sexo",
+      "weight": 0,
+      "question": 109
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 592,
+    "fields": {
+      "code": "B21.1",
+      "kind": 0,
+      "text": "La relación sexual me atrae menos que antes",
+      "weight": 1,
+      "question": 109
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 593,
+    "fields": {
+      "code": "B21.2",
+      "kind": 0,
+      "text": "Estoy menos interesado por el sexo que antes",
+      "weight": 2,
+      "question": 109
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 594,
+    "fields": {
+      "code": "B21.3",
+      "kind": 0,
+      "text": "He perdido totalmente el interés sexual",
+      "weight": 3,
+      "question": 109
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 595,
+    "fields": {
+      "code": "H12.5.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 110
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 596,
+    "fields": {
+      "code": "H12.5.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 110
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 597,
+    "fields": {
+      "code": "H12.5.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 110
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 598,
+    "fields": {
+      "code": "H12.5.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 110
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 599,
+    "fields": {
+      "code": "H12.5.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 110
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 600,
+    "fields": {
+      "code": "H12.6.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 111
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 601,
+    "fields": {
+      "code": "H12.6.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 111
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 602,
+    "fields": {
+      "code": "H12.6.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 111
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 603,
+    "fields": {
+      "code": "H12.6.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 111
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 604,
+    "fields": {
+      "code": "H12.6.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 111
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 605,
+    "fields": {
+      "code": "H12.7.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 112
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 606,
+    "fields": {
+      "code": "H12.7.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 112
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 607,
+    "fields": {
+      "code": "H12.7.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 112
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 608,
+    "fields": {
+      "code": "H12.7.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 112
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 609,
+    "fields": {
+      "code": "H12.7.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 112
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 610,
+    "fields": {
+      "code": "H12.3.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 113
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 611,
+    "fields": {
+      "code": "H12.3.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 113
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 612,
+    "fields": {
+      "code": "H12.3.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 113
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 613,
+    "fields": {
+      "code": "H12.3.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 113
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 614,
+    "fields": {
+      "code": "H12.3.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 113
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 615,
+    "fields": {
+      "code": "H12.2.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 114
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 616,
+    "fields": {
+      "code": "H12.2.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 114
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 617,
+    "fields": {
+      "code": "H12.2.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 114
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 618,
+    "fields": {
+      "code": "H12.2.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 114
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 619,
+    "fields": {
+      "code": "H12.2.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 114
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 620,
+    "fields": {
+      "code": "H12.1.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 115
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 621,
+    "fields": {
+      "code": "H12.1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 115
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 622,
+    "fields": {
+      "code": "H12.1.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 115
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 623,
+    "fields": {
+      "code": "H12.1.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 115
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 624,
+    "fields": {
+      "code": "H12.1.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 115
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 625,
+    "fields": {
+      "code": "H12.4.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 116
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 626,
+    "fields": {
+      "code": "H12.4.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 116
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 627,
+    "fields": {
+      "code": "H12.4.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 116
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 628,
+    "fields": {
+      "code": "H12.4.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 116
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 629,
+    "fields": {
+      "code": "H12.4.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 116
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 630,
+    "fields": {
+      "code": "H10.1.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 117
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 631,
+    "fields": {
+      "code": "H10.1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 117
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 632,
+    "fields": {
+      "code": "H10.1.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 117
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 633,
+    "fields": {
+      "code": "H10.1.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 117
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 634,
+    "fields": {
+      "code": "H10.1.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 117
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 635,
+    "fields": {
+      "code": "H10.2.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 118
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 636,
+    "fields": {
+      "code": "H10.2.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 118
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 637,
+    "fields": {
+      "code": "H10.2.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 118
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 638,
+    "fields": {
+      "code": "H10.2.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 118
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 639,
+    "fields": {
+      "code": "H10.2.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 118
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 640,
+    "fields": {
+      "code": "H10.3.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 119
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 641,
+    "fields": {
+      "code": "H10.3.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 119
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 642,
+    "fields": {
+      "code": "H10.3.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 119
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 643,
+    "fields": {
+      "code": "H10.3.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 119
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 644,
+    "fields": {
+      "code": "H10.3.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 119
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 645,
+    "fields": {
+      "code": "H10.4.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 120
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 646,
+    "fields": {
+      "code": "H10.4.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 120
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 647,
+    "fields": {
+      "code": "H10.4.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 120
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 648,
+    "fields": {
+      "code": "H10.4.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 120
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 649,
+    "fields": {
+      "code": "H10.4.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 120
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 650,
+    "fields": {
+      "code": "H9.1.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 121
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 651,
+    "fields": {
+      "code": "H9.1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 121
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 652,
+    "fields": {
+      "code": "H9.1.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 121
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 653,
+    "fields": {
+      "code": "H9.1.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 121
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 654,
+    "fields": {
+      "code": "H9.1.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 121
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 655,
+    "fields": {
+      "code": "H9.2.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 122
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 656,
+    "fields": {
+      "code": "H9.2.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 122
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 657,
+    "fields": {
+      "code": "H9.2.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 122
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 658,
+    "fields": {
+      "code": "H9.2.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 122
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 659,
+    "fields": {
+      "code": "H9.2.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 122
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 660,
+    "fields": {
+      "code": "H9.3.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 123
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 661,
+    "fields": {
+      "code": "H9.3.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 123
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 662,
+    "fields": {
+      "code": "H9.3.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 123
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 663,
+    "fields": {
+      "code": "H9.3.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 123
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 664,
+    "fields": {
+      "code": "H9.3.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 123
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 665,
+    "fields": {
+      "code": "H9.4.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 124
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 666,
+    "fields": {
+      "code": "H9.4.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 124
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 667,
+    "fields": {
+      "code": "H9.4.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 124
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 668,
+    "fields": {
+      "code": "H9.4.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 124
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 669,
+    "fields": {
+      "code": "H9.4.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 124
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 670,
+    "fields": {
+      "code": "H13.1.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 125
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 671,
+    "fields": {
+      "code": "H13.1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 125
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 672,
+    "fields": {
+      "code": "H13.1.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 125
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 673,
+    "fields": {
+      "code": "H13.1.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 125
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 674,
+    "fields": {
+      "code": "H13.1.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 125
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 675,
+    "fields": {
+      "code": "H13.2.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 126
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 676,
+    "fields": {
+      "code": "H13.2.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 126
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 677,
+    "fields": {
+      "code": "H13.2.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 126
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 678,
+    "fields": {
+      "code": "H13.2.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 126
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 679,
+    "fields": {
+      "code": "H13.2.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 126
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 680,
+    "fields": {
+      "code": "H13.3.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 127
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 681,
+    "fields": {
+      "code": "H13.3.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 127
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 682,
+    "fields": {
+      "code": "H13.3.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 127
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 683,
+    "fields": {
+      "code": "H13.3.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 127
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 684,
+    "fields": {
+      "code": "H13.3.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 127
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 685,
+    "fields": {
+      "code": "H13.4.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 128
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 686,
+    "fields": {
+      "code": "H13.4.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 128
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 687,
+    "fields": {
+      "code": "H13.4.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 128
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 688,
+    "fields": {
+      "code": "H13.4.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 128
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 689,
+    "fields": {
+      "code": "H13.4.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 128
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 690,
+    "fields": {
+      "code": "H13.5.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 129
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 691,
+    "fields": {
+      "code": "H13.5.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 129
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 692,
+    "fields": {
+      "code": "H13.5.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 129
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 693,
+    "fields": {
+      "code": "H13.5.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 129
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 694,
+    "fields": {
+      "code": "H13.5.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 129
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 695,
+    "fields": {
+      "code": "H13.6.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 130
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 696,
+    "fields": {
+      "code": "H13.6.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 130
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 697,
+    "fields": {
+      "code": "H13.6.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 130
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 698,
+    "fields": {
+      "code": "H13.6.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 130
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 699,
+    "fields": {
+      "code": "H13.6.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 130
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 700,
+    "fields": {
+      "code": "H13.7.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 131
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 701,
+    "fields": {
+      "code": "H13.7.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 131
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 702,
+    "fields": {
+      "code": "H13.7.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 131
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 703,
+    "fields": {
+      "code": "H13.7.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 131
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 704,
+    "fields": {
+      "code": "H13.7.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 131
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 705,
+    "fields": {
+      "code": "Hd17.0",
+      "kind": 0,
+      "text": "Se da cuenta de que está deprimido y enfermo",
+      "weight": 0,
+      "question": 132
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 706,
+    "fields": {
+      "code": "Hd17.1",
+      "kind": 0,
+      "text": "Se da cuenta de su enfermedad pero atribuye la causa a la mala alimentación, clima, exceso, virus, etc.",
+      "weight": 1,
+      "question": 132
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 707,
+    "fields": {
+      "code": "Hd17.2",
+      "kind": 0,
+      "text": "Niega estar enfermo",
+      "weight": 2,
+      "question": 132
+    }
+  },  
+  {
+    "model": "survey.option",
+    "pk": 708,
+    "fields": {
+      "code": "Hd8.0",
+      "kind": 0,
+      "text": "Palabra y pensamiento normales",
+      "weight": 0,
+      "question": 169
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 709,
+    "fields": {
+      "code": "Hd8.1",
+      "kind": 0,
+      "text": "Ligero retraso en el diálogo",
+      "weight": 1,
+      "question": 169
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 710,
+    "fields": {
+      "code": "Hd8.2",
+      "kind": 0,
+      "text": "Evidente retraso en el diálogo",
+      "weight": 2,
+      "question": 169
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 711,
+    "fields": {
+      "code": "Hd8.3",
+      "kind": 0,
+      "text": "Diálogo difícil",
+      "weight": 2,
+      "question": 169
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 712,
+    "fields": {
+      "code": "Hd8.4",
+      "kind": 0,
+      "text": "Torpeza absoluta",
+      "weight": 2,
+      "question": 169
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 713,
+    "fields": {
+      "code": "H14.1.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 133
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 714,
+    "fields": {
+      "code": "H14.1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 133
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 715,
+    "fields": {
+      "code": "H14.1.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 133
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 716,
+    "fields": {
+      "code": "H14.1.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 133
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 717,
+    "fields": {
+      "code": "H14.1.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 133
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 718,
+    "fields": {
+      "code": "H14.2.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 134
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 719,
+    "fields": {
+      "code": "H14.2.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 134
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 720,
+    "fields": {
+      "code": "H14.2.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 134
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 721,
+    "fields": {
+      "code": "H14.2.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 134
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 722,
+    "fields": {
+      "code": "H14.2.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 134
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 723,
+    "fields": {
+      "code": "H14.3.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 135
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 724,
+    "fields": {
+      "code": "H14.3.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 135
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 725,
+    "fields": {
+      "code": "H14.3.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 135
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 726,
+    "fields": {
+      "code": "H14.3.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 135
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 727,
+    "fields": {
+      "code": "H14.3.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 135
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 728,
+    "fields": {
+      "code": "H14.4.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 136
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 729,
+    "fields": {
+      "code": "H14.4.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 136
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 730,
+    "fields": {
+      "code": "H14.4.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 136
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 731,
+    "fields": {
+      "code": "H14.4.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 136
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 732,
+    "fields": {
+      "code": "H14.4.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 136
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 733,
+    "fields": {
+      "code": "H14.5.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 137
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 734,
+    "fields": {
+      "code": "H14.5.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 137
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 735,
+    "fields": {
+      "code": "H14.5.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 137
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 736,
+    "fields": {
+      "code": "H14.5.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 137
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 737,
+    "fields": {
+      "code": "H14.5.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 137
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 738,
+    "fields": {
+      "code": "H14.6.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 138
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 739,
+    "fields": {
+      "code": "H14.6.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 138
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 740,
+    "fields": {
+      "code": "H14.6.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 138
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 741,
+    "fields": {
+      "code": "H14.6.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 138
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 742,
+    "fields": {
+      "code": "H14.6.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 138
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 743,
+    "fields": {
+      "code": "H14.7.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 139
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 744,
+    "fields": {
+      "code": "H14.7.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 139
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 745,
+    "fields": {
+      "code": "H14.7.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 139
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 746,
+    "fields": {
+      "code": "H14.7.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 139
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 747,
+    "fields": {
+      "code": "H14.7.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 139
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 748,
+    "fields": {
+      "code": "H14.8.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 140
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 749,
+    "fields": {
+      "code": "H14.8.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 140
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 750,
+    "fields": {
+      "code": "H14.8.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 140
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 751,
+    "fields": {
+      "code": "H14.8.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 140
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 752,
+    "fields": {
+      "code": "H14.8.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 140
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 753,
+    "fields": {
+      "code": "H14.9.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 141
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 754,
+    "fields": {
+      "code": "H14.9.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 141
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 755,
+    "fields": {
+      "code": "H14.9.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 141
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 756,
+    "fields": {
+      "code": "H14.9.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 141
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 757,
+    "fields": {
+      "code": "H14.9.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 141
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 758,
+    "fields": {
+      "code": "H14.10.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 142
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 759,
+    "fields": {
+      "code": "H14.10.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 142
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 760,
+    "fields": {
+      "code": "H14.10.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 142
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 761,
+    "fields": {
+      "code": "H14.10.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 142
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 762,
+    "fields": {
+      "code": "H14.10.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 142
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 763,
+    "fields": {
+      "code": "H14.11.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 143
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 764,
+    "fields": {
+      "code": "H14.11.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 143
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 765,
+    "fields": {
+      "code": "H14.11.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 143
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 766,
+    "fields": {
+      "code": "H14.11.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 143
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 767,
+    "fields": {
+      "code": "H14.11.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 143
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 768,
+    "fields": {
+      "code": "H14.12.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 144
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 769,
+    "fields": {
+      "code": "H14.12.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 144
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 770,
+    "fields": {
+      "code": "H14.12.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 144
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 771,
+    "fields": {
+      "code": "H14.12.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 144
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 772,
+    "fields": {
+      "code": "H14.12.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 144
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 773,
+    "fields": {
+      "code": "H14.13.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 145
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 774,
+    "fields": {
+      "code": "H14.13.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 145
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 775,
+    "fields": {
+      "code": "H14.13.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 145
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 776,
+    "fields": {
+      "code": "H14.13.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 145
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 777,
+    "fields": {
+      "code": "H14.13.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 145
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 778,
+    "fields": {
+      "code": "H14.14.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 146
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 779,
+    "fields": {
+      "code": "H14.14.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 146
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 780,
+    "fields": {
+      "code": "H14.14.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 146
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 781,
+    "fields": {
+      "code": "H14.14.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 146
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 782,
+    "fields": {
+      "code": "H14.14.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 146
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 783,
+    "fields": {
+      "code": "H14.15.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 147
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 784,
+    "fields": {
+      "code": "H14.15.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 147
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 785,
+    "fields": {
+      "code": "H14.15.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 147
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 786,
+    "fields": {
+      "code": "H14.15.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 147
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 787,
+    "fields": {
+      "code": "H14.15.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 147
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 788,
+    "fields": {
+      "code": "H14.16.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 148
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 789,
+    "fields": {
+      "code": "H14.16.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 148
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 790,
+    "fields": {
+      "code": "H14.16.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 148
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 791,
+    "fields": {
+      "code": "H14.16.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 148
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 792,
+    "fields": {
+      "code": "H14.16.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 148
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 793,
+    "fields": {
+      "code": "H14.17.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 149
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 794,
+    "fields": {
+      "code": "H14.17.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 149
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 795,
+    "fields": {
+      "code": "H14.17.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 149
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 796,
+    "fields": {
+      "code": "H14.17.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 149
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 797,
+    "fields": {
+      "code": "H14.17.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 149
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 798,
+    "fields": {
+      "code": "H14.18.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 150
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 799,
+    "fields": {
+      "code": "H14.18.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 150
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 800,
+    "fields": {
+      "code": "H14.18.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 150
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 801,
+    "fields": {
+      "code": "H14.18.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 150
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 802,
+    "fields": {
+      "code": "H14.18.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 150
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 803,
+    "fields": {
+      "code": "H14.19.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 151
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 804,
+    "fields": {
+      "code": "H14.19.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 151
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 805,
+    "fields": {
+      "code": "H14.19.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 151
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 806,
+    "fields": {
+      "code": "H14.19.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 151
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 807,
+    "fields": {
+      "code": "H14.19.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 151
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 808,
+    "fields": {
+      "code": "H14.20.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 152
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 809,
+    "fields": {
+      "code": "H14.20.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 152
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 810,
+    "fields": {
+      "code": "H14.20.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 152
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 811,
+    "fields": {
+      "code": "H14.20.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 152
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 812,
+    "fields": {
+      "code": "H14.20.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 152
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 813,
+    "fields": {
+      "code": "H14.21.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 153
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 814,
+    "fields": {
+      "code": "H14.21.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 153
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 815,
+    "fields": {
+      "code": "H14.21.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 153
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 816,
+    "fields": {
+      "code": "H14.21.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 153
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 817,
+    "fields": {
+      "code": "H14.21.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 153
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 818,
+    "fields": {
+      "code": "H14.22.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 154
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 819,
+    "fields": {
+      "code": "H14.22.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 154
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 820,
+    "fields": {
+      "code": "H14.22.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 154
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 821,
+    "fields": {
+      "code": "H14.22.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 154
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 822,
+    "fields": {
+      "code": "H14.22.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 154
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 823,
+    "fields": {
+      "code": "H1.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 155
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 824,
+    "fields": {
+      "code": "H1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 155
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 825,
+    "fields": {
+      "code": "H1.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 155
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 826,
+    "fields": {
+      "code": "H1.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 155
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 827,
+    "fields": {
+      "code": "H1.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 155
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 828,
+    "fields": {
+      "code": "H2.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 156
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 829,
+    "fields": {
+      "code": "H2.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 156
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 830,
+    "fields": {
+      "code": "H2.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 156
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 831,
+    "fields": {
+      "code": "H2.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 156
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 832,
+    "fields": {
+      "code": "H2.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 156
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 833,
+    "fields": {
+      "code": "H3.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 157
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 834,
+    "fields": {
+      "code": "H3.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 157
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 835,
+    "fields": {
+      "code": "H3.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 157
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 836,
+    "fields": {
+      "code": "H3.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 157
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 837,
+    "fields": {
+      "code": "H3.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 157
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 838,
+    "fields": {
+      "code": "H4.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 158
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 839,
+    "fields": {
+      "code": "H4.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 158
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 840,
+    "fields": {
+      "code": "H4.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 158
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 841,
+    "fields": {
+      "code": "H4.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 158
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 842,
+    "fields": {
+      "code": "H4.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 158
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 843,
+    "fields": {
+      "code": "H5.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 159
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 844,
+    "fields": {
+      "code": "H5.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 159
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 845,
+    "fields": {
+      "code": "H5.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 159
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 846,
+    "fields": {
+      "code": "H5.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 159
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 847,
+    "fields": {
+      "code": "H5.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 159
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 848,
+    "fields": {
+      "code": "H6.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 160
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 849,
+    "fields": {
+      "code": "H6.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 160
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 850,
+    "fields": {
+      "code": "H6.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 160
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 851,
+    "fields": {
+      "code": "H6.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 160
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 852,
+    "fields": {
+      "code": "H6.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 160
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 853,
+    "fields": {
+      "code": "H7.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 161
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 854,
+    "fields": {
+      "code": "H7.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 161
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 855,
+    "fields": {
+      "code": "H7.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 161
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 856,
+    "fields": {
+      "code": "H7.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 161
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 857,
+    "fields": {
+      "code": "H7.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 161
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 858,
+    "fields": {
+      "code": "H8.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 162
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 859,
+    "fields": {
+      "code": "H8.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 162
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 860,
+    "fields": {
+      "code": "H8.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 162
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 861,
+    "fields": {
+      "code": "H8.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 162
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 862,
+    "fields": {
+      "code": "H8.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 162
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 863,
+    "fields": {
+      "code": "H9.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 163
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 864,
+    "fields": {
+      "code": "H9.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 163
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 865,
+    "fields": {
+      "code": "H9.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 163
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 866,
+    "fields": {
+      "code": "H9.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 163
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 867,
+    "fields": {
+      "code": "H9.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 163
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 868,
+    "fields": {
+      "code": "H10.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 164
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 869,
+    "fields": {
+      "code": "H10.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 164
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 870,
+    "fields": {
+      "code": "H10.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 164
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 871,
+    "fields": {
+      "code": "H10.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 164
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 872,
+    "fields": {
+      "code": "H10.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 164
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 873,
+    "fields": {
+      "code": "H11.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 165
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 874,
+    "fields": {
+      "code": "H11.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 165
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 875,
+    "fields": {
+      "code": "H11.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 165
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 876,
+    "fields": {
+      "code": "H11.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 165
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 877,
+    "fields": {
+      "code": "H11.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 165
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 878,
+    "fields": {
+      "code": "H12.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 166
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 879,
+    "fields": {
+      "code": "H12.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 166
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 880,
+    "fields": {
+      "code": "H12.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 166
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 881,
+    "fields": {
+      "code": "H12.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 166
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 882,
+    "fields": {
+      "code": "H12.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 166
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 883,
+    "fields": {
+      "code": "H13.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 167
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 884,
+    "fields": {
+      "code": "H13.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 167
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 885,
+    "fields": {
+      "code": "H13.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 167
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 886,
+    "fields": {
+      "code": "H13.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 167
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 887,
+    "fields": {
+      "code": "H13.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 167
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 888,
+    "fields": {
+      "code": "H14.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 168
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 889,
+    "fields": {
+      "code": "H14.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 168
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 890,
+    "fields": {
+      "code": "H14.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 168
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 891,
+    "fields": {
+      "code": "H14.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 168
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 892,
+    "fields": {
+      "code": "H14.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 168
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 893,
+    "fields": {
+      "code": "ADT.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 171
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 894,
+    "fields": {
+      "code": "ADT.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 171
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 895,
+    "fields": {
+      "code": "ADT.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 171
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 896,
+    "fields": {
+      "code": "ADT.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 171
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 897,
+    "fields": {
+      "code": "ADT.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 171
+    }
+  }
+
 ]

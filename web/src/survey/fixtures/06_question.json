@@ -516,7 +516,7 @@
     "model": "survey.question",
     "pk": 58,
     "fields": {
-      "code": "H3.1",
+      "code": "H3.7",
       "text": "Valore en escala del 0 al 4 el grado a otros miedos, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.",
       "categories": [36]
     }
@@ -1191,15 +1191,6 @@
     "model": "survey.question",
     "pk": 133,
     "fields": {
-      "code": "Hd18",
-      "text": "Valore en que medida observa durante la entrevista.",
-      "categories": [69]
-    }
-  },
-  {
-    "model": "survey.question",
-    "pk": 134,
-    "fields": {
       "code": "H14.1",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la tensión (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
       "categories": [69]
@@ -1207,7 +1198,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 135,
+    "pk": 134,
     "fields": {
       "code": "H14.2",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a estar incómodo (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1216,7 +1207,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 136,
+    "pk": 135,
     "fields": {
       "code": "H14.3",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la agitación de las manos (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1225,7 +1216,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 137,
+    "pk": 136,
     "fields": {
       "code": "H14.4",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto frotar sus dedos (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1234,7 +1225,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 138,
+    "pk": 137,
     "fields": {
       "code": "H14.5",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a apretar los puños (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1243,7 +1234,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 139,
+    "pk": 138,
     "fields": {
       "code": "H14.6",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a posturas cambiantes (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1252,7 +1243,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 140,
+    "pk": 139,
     "fields": {
       "code": "H14.7",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al temblor de las manos (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1261,7 +1252,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 141,
+    "pk": 140,
     "fields": {
       "code": "H14.8",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al ceño arrugado (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1270,7 +1261,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 142,
+    "pk": 141,
     "fields": {
       "code": "H14.9",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a las facies tensa (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1279,7 +1270,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 143,
+    "pk": 142,
     "fields": {
       "code": "H14.10",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al tono muscular (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1288,7 +1279,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 144,
+    "pk": 143,
     "fields": {
       "code": "H14.11",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la respiración jadeante (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1297,7 +1288,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 145,
+    "pk": 144,
     "fields": {
       "code": "H14.12",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la palidez facial (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1306,7 +1297,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 146,
+    "pk": 145,
     "fields": {
       "code": "H14.13",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a tragar saliva (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1315,7 +1306,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 147,
+    "pk": 146,
     "fields": {
       "code": "H14.14",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a eructos (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1324,7 +1315,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 148,
+    "pk": 147,
     "fields": {
       "code": "H14.15",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a taquicardia de reposo (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1333,7 +1324,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 149,
+    "pk": 148,
     "fields": {
       "code": "H14.16",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la frecuencia respiratoria mayor de 20/min (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1342,7 +1333,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 150,
+    "pk": 149,
     "fields": {
       "code": "H14.17",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a los reflejos tendinosos vivos (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1351,7 +1342,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 151,
+    "pk": 150,
     "fields": {
       "code": "H14.18",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al temblor durante la entrevista (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1360,7 +1351,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 152,
+    "pk": 151,
     "fields": {
       "code": "H14.19",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la dilatación pupilar (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1369,7 +1360,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 153,
+    "pk": 152,
     "fields": {
       "code": "H14.20",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la exoftalmia (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1378,7 +1369,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 154,
+    "pk": 153,
     "fields": {
       "code": "H14.21",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la sudoración (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1387,7 +1378,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 155,
+    "pk": 154,
     "fields": {
       "code": "H14.22",
       "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a las mioclonias palpebrales (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
@@ -1396,7 +1387,7 @@
   },  
   {
     "model": "survey.question",
-    "pk": 156,
+    "pk": 155,
     "fields": {
       "code": "H1",
       "text": "Valore del 0 al 4 el grado en que sufre inquietud, irritabilidad, espera lo peor, aprensión(anticipación temerosa).",
@@ -1405,7 +1396,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 157,
+    "pk": 156,
     "fields": {
       "code": "H2",
       "text": "Valore del 0 al 4 el grado en que sufre sensaciones de tensión, fatigabilidad, imposibilidad de relajarse, llanto fácil, sobresalto al responder, temblores, sensación de inquietud, sensación de no poder quedarse en el lugar.",
@@ -1414,7 +1405,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 158,
+    "pk": 157,
     "fields": {
       "code": "H3",
       "text": "Valore del 0 al 4 el grado en que sufre miedo a la oscuridad, miedo a la gente desconocida, miedo a quedarse sólo, miedo a los animales grandes u otros, miedo al tránsito callejero, miedo a la multitud, otros miedos.",
@@ -1423,7 +1414,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 159,
+    "pk": 158,
     "fields": {
       "code": "H4",
       "text": "Valore del 0 al 4 el grado en que sufre dificultad para conciliar el sueño, sueño interrumpido, sueño no satisfactorio con cansancio al despertar, sueños penosos, pesadillas, terrores nocturnos.",
@@ -1432,7 +1423,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 160,
+    "pk": 159,
     "fields": {
       "code": "H5",
       "text": "Valore del 0 al 4 el grado en que sufre dificultad de concentración, mala memoria, problemas de atención.",
@@ -1441,7 +1432,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 161,
+    "pk": 160,
     "fields": {
       "code": "H6",
       "text": "Valore del 0 al 4 el grado en que no disfruta ya de sus pasatiempos, falta de interés, variaciones del humor durante el día, insomnio de madrugada.",
@@ -1450,7 +1441,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 162,
+    "pk": 161,
     "fields": {
       "code": "H7",
       "text": "Valore del 0 al 4 el grado en que sufre dolores musculares, espasmos musculares o calambres, rigidez muscular, tics, rechinar de dientes, voz vacilante, tono muscular aumentado.",
@@ -1459,7 +1450,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 163,
+    "pk": 162,
     "fields": {
       "code": "H8",
       "text": "Valore del 0 al 4 el grado en que sufre zumbidos de oídos, visión borrosa, oleadas de frío y calor, sensación de debilidad, sensaciones parestésicas(pinchazos, picazón u hormigueos).",
@@ -1468,7 +1459,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 164,
+    "pk": 163,
     "fields": {
       "code": "H9",
       "text": "Valore del 0 al 4 el grado en que sufre taquicardia, palpitaciones, dolores en el pecho, sensación de 'baja presión' o desmayo.",
@@ -1477,7 +1468,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 165,
+    "pk": 164,
     "fields": {
       "code": "H10",
       "text": "Valore del 0 al 4 el grado en que sufre peso en el pecho o sensación de opresión torácica, sensación de ahogo, suspiros, falta de aire.",
@@ -1486,7 +1477,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 166,
+    "pk": 165,
     "fields": {
       "code": "H11",
       "text": "Valore del 0 al 4 el grado en que sufre dificultad para tragar, meteorismo, dispepsia, dolor antes o después de comer, sensación de ardor, distensión abdominal, pirosis, náuseas, vómitos, sensación de estómago vacío, cólicos abdominales, borborigmos, diarrea, estreñimiento.",
@@ -1495,7 +1486,7 @@
   },
   {
     "model": "survey.question",
-    "pk":  167,
+    "pk":  166,
       "fields": {
       "code": "H12",
       "text": "Valore del 0 al 4 el grado en que sufre eyaculación precoz, ausencia de erección, impotencia, frigidez, metrorragia, amenorrea, micciones frecuentes.",
@@ -1504,7 +1495,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 168,
+    "pk": 167,
     "fields": {
       "code": "H13",
       "text": "Valore del 0 al 4 el grado en que sufre sequedad de boca, accesos de rubor, palidez, transpiración excesiva, vértigos, cefalea, tensional, horripilación(piel de gallina).",
@@ -1513,7 +1504,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 169,
+    "pk": 168,
     "fields": {
       "code": "H14",
       "text": "Valore del 0 al 4 el grado en que se encuentra tenso, incómodo, agitación de las manos, frota sus dedos, aprieta los puños, postura cambiante, temblor de las manos, ceño arrugado, facies tensa, aumento del tono muscular, respiración jadeante, palidez facial, traga saliva, tendinosos vivos, temblor durante la entrevista, dilatación pupilar, exoftalmia, sudoración, mioclonias palpebrales.",
@@ -1522,16 +1513,16 @@
   },
   {
     "model": "survey.question",
-    "pk": 170,
+    "pk": 169,
     "fields": {
       "code": "Hd8",
       "text": "Valore en qué medida observa durante la entrevista.",
-      "categories": [70]
+      "categories": [69,70]
     }
   },
   {
     "model": "survey.question",
-    "pk": 171,
+    "pk": 170,
     "fields": {
       "code": "SE",
       "text": "¿Ha observado desde su última visita, la aparición de nuevos síntomas o empeoramiento de alguno ya presente, a los que no se ha hecho referencia en el cuestionario?",
@@ -1540,7 +1531,7 @@
   },
   {
     "model": "survey.question",
-    "pk": 172,
+    "pk": 171,
     "fields": {
       "code": "ADT",
       "text": "¿En qué grado ha seguido el paciente las recomendaciones y/o tratamiento indicados?",
