@@ -45,6 +45,6 @@ class OptionAdmin(admin.ModelAdmin):
     list_display = ('code', 'text', 'weight', 'kind', 'question', 'father')
     search_fields = ('code', 'text', 'kind', 'weight', 'kind', 'question',
                         'father')
-    ordering = ('text', 'code', 'father')
+    ordering = ('code',)
 
 admin.site.register(Option, OptionAdmin)
