@@ -619,13 +619,21 @@
     "model": "survey.category",
     "pk": 78,
     "fields": {
+      "name": "Conducta en el trascurso del test",
+      "code": "CTT-E"      
+    }
+  },
+  {
+    "model": "survey.category",
+    "pk": 79,
+    "fields": {
       "name": "Adherencia al Tratamiento",
       "code": "AT"      
     }
   },
   {
     "model": "survey.category",
-    "pk": 79,
+    "pk": 80,
     "fields": {
       "name": "Síntomas o empeoramiento",
       "code": "SE"      
