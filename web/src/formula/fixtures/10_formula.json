@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
       "polynomial": "B1+H6.3",
-      "factor": 0.714285714,    
+      "factor": "0.714285714",    
       "variable": 1
     }
   },
@@ -13,7 +13,7 @@
     "pk": 2,
     "fields": {
       "polynomial": "B1",
-      "factor": 1.666666667,    
+      "factor": "1.666666667",    
       "variable": 1
     }
   },
@@ -22,7 +22,7 @@
     "pk": 3,
     "fields": {
       "polynomial": "B2+H1.2+H1.3",
-      "factor": 0.454545455,    
+      "factor": "0.454545455",    
       "variable": 2
     }
   },
@@ -31,7 +31,7 @@
     "pk": 4,
     "fields": {
       "polynomial": "B2",
-      "factor": 1.666666667,    
+      "factor": "1.666666667",    
       "variable": 2
     }
   },
@@ -40,7 +40,7 @@
     "pk": 5,
     "fields": {
       "polynomial": "B3+B5+B6+B7+B8+B14+H6.1+H6.2",
-      "factor": 0.192307692,    
+      "factor": "0.192307692",    
       "variable": 3
     }
   },
@@ -49,7 +49,7 @@
     "pk": 6,
     "fields": {
       "polynomial": "B3+B5+B6+B7+B8+B14",
-      "factor": 0.192307692,    
+      "factor": "0.192307692",    
       "variable": 3
     }
   },
@@ -58,7 +58,7 @@
     "pk": 7,
     "fields": {
       "polynomial": "B20",
-      "factor": 1.666666667,    
+      "factor": "1.666666667",    
       "variable": 4
     }
   },
@@ -67,7 +67,7 @@
     "pk": 8,
     "fields": {
       "polynomial": "B4+H6.2+H6.1",
-      "factor": 0.454545455,    
+      "factor": "0.454545455",    
       "variable": 5
     }
   },
@@ -76,7 +76,7 @@
     "pk": 9,
     "fields": {
       "polynomial": "B4",
-      "factor": 1.666666667,    
+      "factor": "1.666666667",    
       "variable": 5
     }
   },
@@ -85,7 +85,7 @@
     "pk": 10,
     "fields": {
       "polynomial": "B9",
-      "factor": 1.666666667,    
+      "factor": "1.666666667",    
       "variable": 6
     }
   },
@@ -94,7 +94,7 @@
     "pk": 11,
     "fields": {
       "polynomial": "B10+H2.4",
-      "factor": 0.714285714,    
+      "factor": "0.714285714",    
       "variable": 7
     }
   },
@@ -103,7 +103,7 @@
     "pk": 12,
     "fields": {
       "polynomial": "B10",
-      "factor": 1.666666667,    
+      "factor": "1.666666667",    
       "variable": 7
     }
   },
@@ -112,7 +112,7 @@
     "pk": 13,
     "fields": {
       "polynomial": "B11+H1.1",
-      "factor": 0.714285714,    
+      "factor": "0.714285714",    
       "variable": 8
     }
   },
@@ -121,7 +121,7 @@
     "pk": 14,
     "fields": {
       "polynomial": "B11",
-      "factor": 1.666666667,    
+      "factor": "1.666666667",    
       "variable": 8
     }
   },
@@ -130,7 +130,7 @@
     "pk": 15,
     "fields": {
       "polynomial": "B12",
-      "factor": 1.666666667,    
+      "factor": "1.666666667",    
       "variable": 9
     }
   },
@@ -139,7 +139,7 @@
     "pk": 16,
     "fields": {
       "polynomial": "B13",
-      "factor": 1.666666667,    
+      "factor": "1.666666667",    
       "variable": 10
     }
   },  
@@ -148,7 +148,7 @@
     "pk": 17,
     "fields": {
       "polynomial": "H5.1+H5.2+H5.3",
-      "factor": 0.138888889,    
+      "factor": "0.138888889",    
       "variable": 11
     }
   },
@@ -157,7 +157,7 @@
     "pk": 18,
     "fields": {
       "polynomial": "H5",
-      "factor": 0.416666667,    
+      "factor": "0.416666667",    
       "variable": 11
     }
   },
@@ -166,7 +166,7 @@
     "pk": 19,
     "fields": {
       "polynomial": "H3.1+H3.2+H3.3+H3.4+H3.5+H3.6+H3.7",
-      "factor": 0.178571429,    
+      "factor": "0.178571429",    
       "variable": 12
     }
   },
@@ -175,7 +175,7 @@
     "pk": 20,
     "fields": {
       "polynomial": "H3",
-      "factor": 1.25,    
+      "factor": "1.25",    
       "variable": 12
     }
   },
@@ -184,7 +184,7 @@
     "pk": 21,
     "fields": {
       "polynomial": "H2.1+H2.2+H2.3+H2.4+H2.5+H2.6+H2.7+H2.8",
-      "factor": 0.15625,    
+      "factor": "0.15625",    
       "variable": 13
     }
   },
@@ -193,7 +193,7 @@
     "pk": 22,
     "fields": {
       "polynomial": "H2",
-      "factor": 1.25,    
+      "factor": "1.25",    
       "variable": 13
     }
   },
@@ -202,7 +202,7 @@
     "pk": 23,
     "fields": {
       "polynomial": "B15",
-      "factor": 1.666666667,    
+      "factor": "1.666666667",    
       "variable": 14
     }
   },
@@ -211,7 +211,7 @@
     "pk": 24,
     "fields": {
       "polynomial": "B17+H2.2",
-      "factor": 0.714285714,    
+      "factor": "0.714285714",    
       "variable": 15
     }
   },
@@ -220,7 +220,7 @@
     "pk": 25,
     "fields": {
       "polynomial": "B17",
-      "factor": 1.666666667,    
+      "factor": "1.666666667",    
       "variable": 15
     }
   },
@@ -229,7 +229,7 @@
     "pk": 26,
     "fields": {
       "polynomial": "B16+H6.4",
-      "factor": 0.454545455,    
+      "factor": "0.454545455",    
       "variable": 16
     }
   },
@@ -238,7 +238,7 @@
     "pk": 27,
     "fields": {
       "polynomial": "H4.1+H4.2+H4.3+H4.4+H4.5+H4.6+H4.7",
-      "factor": 0.454545455,    
+      "factor": "0.454545455",    
       "variable": 16,
       "sibling": 26
     }
@@ -248,7 +248,7 @@
     "pk": 28,
     "fields": {
       "polynomial": "B16+H4",
-      "factor": 0.714285714,    
+      "factor": "0.714285714",    
       "variable": 16
     }
   },
@@ -257,7 +257,7 @@
     "pk": 29,
     "fields": {
       "polynomial": "H7.1+H7.2+H7.3+H7.4+H7.5+H7.6+H7.7",
-      "factor": 0.178571429,    
+      "factor": "0.178571429",    
       "variable": 17
     }
   },
@@ -266,7 +266,7 @@
     "pk": 30,
     "fields": {
       "polynomial": "H7",
-      "factor": 1.25,    
+      "factor": "1.25",    
       "variable": 17
     }
   },
@@ -275,7 +275,7 @@
     "pk": 31,
     "fields": {
       "polynomial": "B19",
-      "factor": 1.666666667,    
+      "factor": "1.666666667",    
       "variable": 18
     }
   },  
@@ -284,7 +284,7 @@
     "pk": 32,
     "fields": {
       "polynomial": "B18",
-      "factor": 1.666666667,    
+      "factor": "1.666666667",    
       "variable": 19
     }
   },
@@ -293,7 +293,7 @@
     "pk": 33,
     "fields": {
       "polynomial": "H11.1+H11.2+H11.3+H11.4+H11.5+H11.6+H11.7+H11.8+H11.9+H11.10+H11.11+H11.12+H11.13+H11.14",
-      "factor": 0.089285714,    
+      "factor": "0.089285714",    
       "variable": 20
     }
   },
@@ -302,7 +302,7 @@
     "pk": 34,
     "fields": {
       "polynomial": "H11",
-      "factor": 1.25,    
+      "factor": "1.25",    
       "variable": 20
     }
   },
@@ -311,7 +311,7 @@
     "pk": 35,
     "fields": {
       "polynomial": "H10.1+H10.2+H10.3+H10.4",
-      "factor": 0.3125,    
+      "factor": "0.3125",    
       "variable": 21
     }
   },
@@ -320,7 +320,7 @@
     "pk": 36,
     "fields": {
       "polynomial": "H10",
-      "factor": 1.25,    
+      "factor": "1.25",    
       "variable": 21
     }
   },
@@ -329,7 +329,7 @@
     "pk": 37,
     "fields": {
       "polynomial": "H9.1+H9.2+H9.3+H9.3+H9.4",
-      "factor": 0.3125,    
+      "factor": "0.3125",    
       "variable": 22
     }
   },
@@ -338,7 +338,7 @@
     "pk": 38,
     "fields": {
       "polynomial": "H9",
-      "factor": 1.25,    
+      "factor": "1.25",    
       "variable": 22
     }
   },
@@ -347,7 +347,7 @@
     "pk": 39,
     "fields": {
       "polynomial": "B21",
-      "factor": 0.714285714,    
+      "factor": "0.714285714",    
       "variable": 23
     }
   },
@@ -356,7 +356,7 @@
     "pk": 40,
     "fields": {
       "polynomial": "H12.1+H12.2+H12.3+H12.4+H12.5+H12.6+H12.7",
-      "factor": 0.102040816,    
+      "factor": "0.102040816",    
       "variable": 23,
       "sibling": 39
     }
@@ -366,7 +366,7 @@
     "pk": 41,
     "fields": {
       "polynomial": "B21+H12",
-      "factor": 0.714285714,    
+      "factor": "0.714285714",    
       "variable": 23
     }
   },
@@ -375,7 +375,7 @@
     "pk": 42,
     "fields": {
       "polynomial": "H8.1+H8.2+H8.3+H8.4+H8.5",
-      "factor": 0.25,    
+      "factor": "0.25",    
       "variable": 24
     }
   },
@@ -384,7 +384,7 @@
     "pk": 43,
     "fields": {
       "polynomial": "H8",
-      "factor": 1.25,    
+      "factor": "1.25",    
       "variable": 24
     }
   },
@@ -393,7 +393,7 @@
     "pk": 44,
     "fields": {
       "polynomial": "H13.1+H13.2+H13.3+H13.4+H13.5+H13.6+H13.7",
-      "factor": 0.178571429,    
+      "factor": "0.178571429",    
       "variable": 25
     }
   },
@@ -402,7 +402,7 @@
     "pk": 45,
     "fields": {
       "polynomial": "H13",
-      "factor": 1.25,    
+      "factor": "1.25",    
       "variable": 25
     }
   },
@@ -411,7 +411,7 @@
     "pk": 46,
     "fields": {
       "polynomial": "Hd8",
-      "factor": 1.25,    
+      "factor": "1.25",    
       "variable": 26
     }
   },
@@ -420,7 +420,7 @@
     "pk": 47,
     "fields": {
       "polynomial": "Hd17",
-      "factor": 1.25,    
+      "factor": "1.25",    
       "variable": 27
     }
   },
@@ -429,7 +429,7 @@
     "pk": 48,
     "fields": {
       "polynomial": "H14.1+H14.2+H14.3+H14.4+H14.5+H14.6+H14.7+H14.8+H14.9+H14.10+H14.11+H14.12+H14.13+H14.14+H14.15+H14.16+H14.17+H14.18+H14.19+H14.20+H14.21+H14.22",
-      "factor": 0.056818182,    
+      "factor": "0.056818182",    
       "variable": 28
     }
   },
@@ -438,7 +438,7 @@
     "pk": 49,
     "fields": {
       "polynomial": "H14",
-      "factor": 1.25,    
+      "factor": "1.25",    
       "variable": 28
     }
   }
