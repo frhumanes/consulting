@@ -6,7 +6,7 @@ from consulting import views as consulting_views
 urlpatterns = patterns('',
     url(r'^$', consulting_views.index, name='consulting_index'),
 
-    url(r'^newpatient/', consulting_views.newpatient,
+    url(r'^newpatient/$', consulting_views.newpatient,
         name='consulting_newpatient'),
 
     url(r'^newappointment/(?P<id_newpatient>\d+)$',
@@ -60,4 +60,11 @@ urlpatterns = patterns('',
     url(r'^patient_management/remove_treatment_pm/$',
         consulting_views.remove_treatment_pm,
         name='consulting_remove_treatment_pm'),
+
+    #ADMINISTRATION_DOCTOR
+    url(r'^administration/$', consulting_views.administration,
+        name='consulting_index_administration'),
+
+    url(r'^administration/newpatient/$', consulting_views.newpatient,
+        name='consulting_newpatient'),
 )

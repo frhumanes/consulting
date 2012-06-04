@@ -60,6 +60,11 @@ def newpatient(request):
     profile = request.user.get_profile()
 
     if profile.is_doctor() or profile.is_administrative():
+        if profile.is_doctor():
+            template = 'consulting/newpatient_doctor.html'
+        else:
+            template = 'consulting/newpatient_administrative.html'
+
         exist_user = False
         same_username = False
 
@@ -103,7 +108,7 @@ def newpatient(request):
         else:
             form = ProfileForm()
 
-        return render_to_response('consulting/newpatient.html',
+        return render_to_response(template,
                                     {'form': form, 'exist_user': exist_user,
                                     'same_username': same_username},
                                     context_instance=RequestContext(request))
@@ -232,6 +237,7 @@ def searcher_patients_doctor(request):
                 }
 
     return HttpResponse(simplejson.dumps(data))
+
 
 @login_required()
 def searcher_component(request):
@@ -722,3 +728,14 @@ def remove_treatment_pm(request):
             except Treatment.DoesNotExist:
                 return HttpResponseRedirect(reverse('consulting_index'))
     return HttpResponseRedirect(reverse('consulting_index'))
+
+
+@login_required()
+def administration(request):
+    profile = request.user.get_profile()
+
+    if profile.is_doctor():
+        return render_to_response('consulting/index_administration.html', {},
+                            context_instance=RequestContext(request))
+    else:
+        return HttpResponseRedirect(reverse('consulting_index'))

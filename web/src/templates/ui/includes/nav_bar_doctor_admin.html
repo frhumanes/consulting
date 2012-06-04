@@ -1,14 +1,19 @@
 {% load i18n%}
+{% load consulting %}
+
+{% url consulting_index_administration as index_administration %}
+{% url consulting_newpatient as newpatient %}
+
 <header id="overview" class="jumbotron subhead">
 <div class="subnav">
   <ul class="nav nav-pills">
-    <li>
-      <a href="#">
+    <li class="{% active_child request index_administration %}">
+      <a href="{% url consulting_index_administration %}">
         {% trans 'INICIO' %}
       </a>
     </li>
-    <li>
-      <a href="#">
+    <li class="{% active_child request newpatient %}">
+      <a href="{% url consulting_newpatient %}">
         {% trans 'ALTA PACIENTE' %}
       </a>
     </li> 
