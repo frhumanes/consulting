@@ -22,7 +22,7 @@ admin.site.register(Category, CategoryAdmin)
 
 class BlockAdmin(admin.ModelAdmin):
     fieldsets = [('Blocks', {'fields': ['name', 'code', 'kind',
-                'categories']})]
+                'categories', 'formulas']})]
     list_display = ('code', 'name', 'kind')
     search_fields = ('code', 'name', 'kind')
     ordering = ('code', 'kind')

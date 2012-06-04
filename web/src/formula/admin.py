@@ -21,10 +21,10 @@ admin.site.register(Variable, VariableAdmin)
 
 
 class FormulaAdmin(admin.ModelAdmin):
-    fieldsets = [('Formulas', {'fields': ['block', 'variable', 'polynomial',
-                'factor', 'children']})]
-    list_display = ('variable', 'block', 'polynomial', 'factor')
-    search_fields = ('variable', 'block', 'polynomial', 'factor')
-    ordering = ('variable', 'block')
+    fieldsets = [('Formulas', {'fields': ['variable', 'polynomial',
+                'factor', 'sibling']})]
+    list_display = ('variable', 'polynomial', 'factor')
+    search_fields = ('variable', 'polynomial', 'factor')
+    ordering = ('variable', )
 
 admin.site.register(Formula, FormulaAdmin)

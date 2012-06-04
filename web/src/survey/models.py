@@ -3,6 +3,7 @@
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from formula.models import Formula
 
 
 class Survey(models.Model):
@@ -30,7 +31,9 @@ class Block(models.Model):
         (2, _(u'Abreviado')),
     )
 
-    categories = models.ManyToManyField('Category', related_name='blocks')
+    categories = models.ManyToManyField('Category',
+                                        related_name='categoriesblocks')
+    formulas = models.ManyToManyField(Formula, related_name='formulasblocks')
 
     kind = models.IntegerField(_(u'Tipo'), choices=KIND)
     name = models.CharField(_(u'Nombre'), max_length=100)

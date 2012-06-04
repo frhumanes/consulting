@@ -3,7 +3,7 @@
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from survey.models import Block
+# from survey.models import Block
 
 
 class Dimension(models.Model):
@@ -26,12 +26,12 @@ class Variable(models.Model):
 
 
 class Formula(models.Model):
-    block = models.ForeignKey(Block, related_name='blockformulas')
+    # block = models.ForeignKey(Block, related_name='blockformulas')
     variable = models.ForeignKey('Variable', related_name='variableformulas')
-    children = models.ManyToManyField('self', blank=True, null=True,
-                related_name='childrenformulas')
+    sibling = models.ForeignKey('self', blank=True, null=True,
+                related_name='siblingformulas')
 
-    polynomial = models.CharField(_(u'Polinomio'), max_length=100)
+    polynomial = models.CharField(_(u'Polinomio'), max_length=250)
     factor = models.DecimalField(u'Factor', max_digits=10, decimal_places=8)
 
     def __unicode__(self):
