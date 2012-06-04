@@ -32,7 +32,7 @@ class Formula(models.Model):
                 related_name='siblingformulas')
 
     polynomial = models.CharField(_(u'Polinomio'), max_length=250)
-    factor = models.DecimalField(u'Factor', max_digits=10, decimal_places=8)
+    factor = models.DecimalField(u'Factor', max_digits=12, decimal_places=10)
 
     def __unicode__(self):
         return u'%s' % self.variable
