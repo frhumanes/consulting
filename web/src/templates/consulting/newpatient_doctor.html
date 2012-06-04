@@ -1,0 +1,33 @@
+{% extends "ui/app.html" %}
+
+{% load i18n%}
+
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
+{% endblock %}
+
+{% block css_files %}
+  {{ block.super }}
+  <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet">
+{% endblock %}
+
+{% block jquery_init %}
+  $('#dp').datepicker().on('changeDate',
+    function(ev){$('#dp').datepicker('hide');
+  });
+{% endblock %}
+
+{% block header%}
+    {% include "ui/includes/header_doctor.html" %}
+{% endblock  %}
+
+{% block body %}
+    <div class="container">
+        {% block nav-bar%}
+          {% include "ui/includes/nav_bar_doctor_admin.html" %}
+        {% endblock  %}
+
+        {% include "consulting/newpatient.html" %}
+    </div>
+{% endblock body %}
