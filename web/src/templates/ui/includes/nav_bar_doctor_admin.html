@@ -2,7 +2,7 @@
 {% load consulting %}
 
 {% url consulting_index_administration as index_administration %}
-{% url consulting_newpatient as newpatient %}
+{% url consulting_newpatient_administration as newpatient %}
 
 <header id="overview" class="jumbotron subhead">
 <div class="subnav">
@@ -13,7 +13,7 @@
       </a>
     </li>
     <li class="{% active_child request newpatient %}">
-      <a href="{% url consulting_newpatient %}">
+      <a href="{% url consulting_newpatient_administration %}">
         {% trans 'ALTA PACIENTE' %}
       </a>
     </li> 

@@ -66,5 +66,5 @@ urlpatterns = patterns('',
         name='consulting_index_administration'),
 
     url(r'^administration/newpatient/$', consulting_views.newpatient,
-        name='consulting_newpatient'),
+        name='consulting_newpatient_administration'),
 )
