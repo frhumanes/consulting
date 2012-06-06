@@ -24,11 +24,13 @@
                       {% trans 'CUESTIONARIO' %}
                     </a>
                 </li>
+                {% if user.get_profile.doctor %}
                 <li class="{% active_root request inbox %}">
                     <a href="{% url private_messages_inbox %}">
                         {% trans 'MENSAJERÍA' %}
                     </a>
-                </li>          
+                </li>
+                {% endif %}         
             </ul>
             <ul class="nav pull-right">
                 <li class="navbar-text">
