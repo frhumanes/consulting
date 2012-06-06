@@ -4,28 +4,27 @@ from django.conf.urls.defaults import url
 from consulting import views as consulting_views
 
 urlpatterns = patterns('',
+    # MAIN
     url(r'^$', consulting_views.index, name='consulting_index'),
-
-    url(r'^newpatient/$', consulting_views.newpatient,
-        name='consulting_newpatient'),
-
-    url(r'^newappointment/(?P<id_newpatient>\d+)$',
-        consulting_views.newappointment,
-        name='consulting_newappointment'),
-
-    url(r'^appointments_doctor/', consulting_views.appointments_doctor,
-        name='consulting_appointments_doctor'),
 
     url(r'^searcher/', consulting_views.searcher,
         name='consulting_searcher'),
 
-    url(r'^searcher_component/', consulting_views.searcher_component,
-        name='consulting_searcher_component'),
-
     url(r'^patient_appointments/', consulting_views.patient_appointments,
         name='consulting_patient_appointments'),
 
-    # PATIENT_MANAGEMENT
+    # NEW PATIENT AND NEW APPOINTMENT: DOCTOR AND ADMINISTRATIVE ROLES
+    url(r'^newpatient/$', consulting_views.newpatient,
+        name='consulting_newpatient'),
+
+    url(r'^newpatient/newappointment/(?P<newpatient_id>\d+)$',
+        consulting_views.newappointment,
+        name='consulting_newappointment'),
+
+    url(r'^appointments_doctor/$', consulting_views.appointments_doctor,
+        name='consulting_appointments_doctor'),
+
+    # PATIENT_MANAGEMENT: DOCTOR ROLE
     url(r'^patient_management/$', consulting_views.patient_management,
         name='consulting_index_pm'),
 
@@ -45,6 +44,9 @@ urlpatterns = patterns('',
         consulting_views.detail_treatment_pm,
         name='consulting_detail_treatment_pm'),
 
+    url(r'^searcher_component/', consulting_views.searcher_component,
+        name='consulting_searcher_component'),
+
     url(r'^patient_management/newtreatment_pm/$',
         consulting_views.newtreatment_pm,
         name='consulting_newtreatment_pm'),
@@ -61,7 +63,7 @@ urlpatterns = patterns('',
         consulting_views.remove_treatment_pm,
         name='consulting_remove_treatment_pm'),
 
-    #ADMINISTRATION_DOCTOR
+    # ADMINISTRATION: DOCTOR ROLE
     url(r'^administration/$', consulting_views.administration,
         name='consulting_index_administration'),
 
