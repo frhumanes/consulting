@@ -28,12 +28,30 @@ class Report(models.Model):
 
 
 class Appointment(models.Model):
+    STATUS = (
+        (settings.FIRST, _(u'Primera Cita')),
+        (settings.FIRST_DONE, _(u'Primera Cita/Realizada')),
+        (settings.FIRST_NOT_DONE, _(u'Primera Cita/No Realizada')),
+        (settings.FIRST_MODIFIED, _(u'Primera Cita/Modificada')),
+        (settings.FIRST_MODIFIED_DONE, _(u'Primera Cita/Modificada/Realizada')),
+        (settings.FIRST_MODIFIED_NOT_DONE, _(u'Primera Cita/Modificada/No Realizada')),
+        (settings.FIRST_MODIFIED_DELETED, _(u'Primera Cita/Modificada/Eliminada')),
+        (settings.FIRST_DELETED, _(u'Primera Cita/Eliminada')),
+        (settings.SUCCESSIVE, _(u'Sucesiva')),
+        (settings.SUCCESSIVE_DONE, _(u'Sucesiva/Realizada')),
+        (settings.SUCCESSIVE_NOT_DONE, _(u'Sucesiva/No Realizada')),
+        (settings.SUCCESSIVE_MODIFIED, _(u'Sucesiva/Modificada')),
+        (settings.SUCCESSIVE_MODIFIED_DONE, _(u'Sucesiva/Modificada/Realizada')),
+        (settings.SUCCESSIVE_MODIFIED_NOT_DONE, _(u'Sucesiva/Modificada/No Realizada')),
+        (settings.SUCCESSIVE_MODIFIED_DELETED, _(u'Sucesiva/Modificada/Eliminada')),
+        (settings.SUCCESSIVE_DELETED, _(u'Sucesiva/Eliminada')),
+    )
+
     patient = models.ForeignKey(User, related_name="patientappointments")
     doctor = models.ForeignKey(User, related_name="doctorappointments")
     questionnaire = models.ForeignKey('Questionnaire',
                     related_name='questionnaireappointments', blank=True,
                     null=True)
-    #REPASAR RELACION answers
     answers = models.ManyToManyField('Answer',
                                     related_name="answerappointments",
                                     blank=True, null=True)
@@ -41,6 +59,8 @@ class Appointment(models.Model):
                                     related_name="treatmentappointments",
                                     blank=True, null=True)
 
+    status = models.IntegerField(_(u'Estado'), choices=STATUS,
+                                    blank=True, null=True)
     date = models.DateField(_(u'Fecha de la Cita'))
     hour = models.TimeField(_(u'Hora de la Cita'))
 
