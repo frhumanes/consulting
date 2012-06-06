@@ -54,17 +54,11 @@ def generate_username(name, first_surname, nif):
     return username
 
 
-# REPASAR or profile.is_administrative()
 @login_required()
 def newpatient(request):
     profile = request.user.get_profile()
 
     if profile.is_doctor() or profile.is_administrative():
-        if profile.is_doctor():
-            template = 'consulting/newpatient_doctor.html'
-        else:
-            template = 'consulting/newpatient_administrative.html'
-
         exist_user = False
         same_username = False
 
@@ -98,17 +92,25 @@ def newpatient(request):
                             form, username, settings.PATIENT)
                         user.save()
 
-                        id_newpatient = user.id
+                        if profile.is_doctor():
+                            # Update doctor
+                            profile.patients.add(user)
+                            profile.save()
+                            # Update patient
+                            doctor_user = User.objects.get(profile=profile)
+                            profile_patient = user.get_profile()
+                            profile_patient.doctor = doctor_user
+                            profile_patient.save()
 
                         return render_to_response(
-                            'consulting/newpatient_info.html',
-                            {'username': username,
-                            'id_newpatient': id_newpatient},
+                            'consulting/newpatient_credentials.html',
+                            {'patient_user': user,
+                            'profile': user.get_profile()},
                             context_instance=RequestContext(request))
         else:
             form = ProfileForm()
 
-        return render_to_response(template,
+        return render_to_response('consulting/newpatient.html',
                                     {'form': form, 'exist_user': exist_user,
                                     'same_username': same_username},
                                     context_instance=RequestContext(request))
@@ -146,49 +148,52 @@ def create_or_update_profile(user, form, username, role):
     profile.save()
 
 
-def newappointment(request, id_newpatient):
-    patient_user = get_object_or_404(User, pk=int(id_newpatient))
-    patientfullname = patient_user.first_name + ' ' + patient_user.last_name
+@login_required()
+def newappointment(request, newpatient_id):
+    profile = request.user.get_profile()
 
-    if request.method == "POST":
-        form = AppointmentForm(request.POST)
-        if form.is_valid():
-            #UPDATE PROFILE DOCTOR
-            doctor_user = form.cleaned_data['doctor']
-            profile_doctor = doctor_user.get_profile()
-            profile_doctor.patients.add(patient_user)
-            profile_doctor.save()
+    if profile.is_doctor() or profile.is_administrative():
+        try:
+            patient_user = User.objects.get(id=newpatient_id)
+            profile_patient = patient_user.get_profile()
+        except User.DoesNotExist:
+            return HttpResponseRedirect(reverse('consulting_index'))
 
-            #UPDATE PROFILE PATIENT
-            #IF IT'S FIRST APPOINTMENT OF PATIENT
-            if Appointment.objects.filter(patient=id_newpatient).count() == 0:
-                profile_patient = patient_user.get_profile()
-                profile_patient.doctor = doctor_user
-                profile_patient.save()
+        if request.method == "POST":
+            form = AppointmentForm(request.POST)
+            if form.is_valid():
+                appointment = form.save(commit=False)
+                appointment.patient = patient_user
+                appointment.save()
 
-            form.save()
+                return HttpResponseRedirect(reverse('consulting_index'))
+        else:
+            form = AppointmentForm()
 
-            return render_to_response('consulting/index_administrative.html',
-                            {},
-                            context_instance=RequestContext(request))
+        return render_to_response(
+                    'consulting/newappointment.html',
+                    {'form': form,
+                    'profile': profile_patient,
+                    'newpatient_id': newpatient_id},
+                    context_instance=RequestContext(request))
     else:
-        form = AppointmentForm(initial={'patient': patient_user})
-
-    return render_to_response('consulting/newappointment.html',
-                                {'patientfullname': patientfullname,
-                                'form': form,
-                                'id_newpatient': id_newpatient},
-                                context_instance=RequestContext(request))
+        return HttpResponseRedirect(reverse('consulting_index'))
 
 
-# REPASAR
+@login_required()
 def appointments_doctor(request):
     if request.method == 'POST':
-        id_doctor = request.POST.get("id_doctor", "")
-        appointments_doctor = Appointment.objects.filter(doctor=id_doctor)
+        doctor_id = request.POST.get("doctor_id", "")
+        try:
+            # We check doctor user exit
+            doctor_user = User.objects.get(id=doctor_id)
+            appointments_doctor = Appointment.objects.filter(
+                                    doctor=doctor_user)
+        except User.DoesNotExit:
+            return HttpResponseRedirect(reverse('consulting_index'))
 
-    return render_to_response('consulting/appointments_doctor.html',
-                            {'appointments_doctor': appointments_doctor},
+    return render_to_response('consulting/list_appointments_doctor_ajax.html',
+                            {'appointments': appointments_doctor},
                             context_instance=RequestContext(request))
 
 
@@ -739,3 +744,9 @@ def administration(request):
                             context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect(reverse('consulting_index'))
+
+
+def prueba(request, newpatient_id):
+    return render_to_response('consulting/newpatient_info.html',
+                            {'newpatient_id': newpatient_id},
+                            context_instance=RequestContext(request))
