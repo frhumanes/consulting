@@ -23,28 +23,30 @@ class AppointmentForm(forms.ModelForm):
     format = _(u'%d/%m/%Y')
     input_formats = [format]
 
-    #PATIENT
-    profiles_patient = Profile.objects.filter(role=settings.PATIENT)
-    id_patient_users = [profile.user.id for profile in profiles_patient]
-    queryset = User.objects.filter(pk__in=id_patient_users)
-    patient = forms.ModelChoiceField(queryset=queryset,
-                                    widget=forms.HiddenInput)
-
-    #DOCTOR
-    profiles_doctor = Profile.objects.filter(role=settings.DOCTOR)
-    id_doctor_users = [profile.user.id for profile in profiles_doctor]
-    queryset = User.objects.filter(pk__in=id_doctor_users)
-    doctor = RecipientChoiceField(queryset=queryset,
-                                    validators=[validate_choice])
-
-    date = forms.DateField(widget=DateInput(
+    date = forms.DateField(label=_(u'Fecha'), widget=DateInput(
             attrs={'class': 'span2', 'size': '16'}))
-    hour = forms.TimeField(widget=forms.TextInput(
+    hour = forms.TimeField(label=_(u'Hora'), widget=forms.TextInput(
                             attrs={'class': 'input-mini'}))
+
+    def __init__(self, *args, **kwargs):
+        super(AppointmentForm, self).__init__(*args, **kwargs)
+
+        profiles_doctor = Profile.objects.filter(role=settings.DOCTOR)
+        ids_doctor = [profile.user.id for profile in profiles_doctor]
+        queryset = User.objects.filter(pk__in=ids_doctor)
+
+        self.fields['doctor'] = RecipientChoiceField(
+            label=_(u"Doctor"),
+            queryset=queryset,
+            validators=[validate_choice])
+
+    doctor = RecipientChoiceField(label=_(u'Médico'),
+                                    queryset=User.objects.none(),
+                                    validators=[validate_choice])
 
     class Meta:
         model = Appointment
-        exclude = ('questionnaire', 'answers', 'treatment')
+        exclude = ('patient', 'questionnaire', 'answers', 'treatment')
 
 
 class AdminRadioFieldRenderer(RadioFieldRenderer):
