@@ -13,5 +13,6 @@ urlpatterns = patterns('',
     (r'^accounts/', include('registration.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^messages/', include('private_messages.urls')),
+    (r'^events/', include('events_calendar.urls')),
 )
 urlpatterns += staticfiles_urlpatterns()

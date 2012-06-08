@@ -217,13 +217,16 @@
                 // Set ID
                 id = "day_" + dow;
 
+                month_ = date.getMonth() + 1;
+                year = date.getFullYear();
+
                 // Render HTML
                 if(dow == 0){
                     _html += '<td>&nbsp;</td>';
                 }else if(msg.length > 0){
-                    _html += '<td class="' +cls+ '" id="'+id+'">' + '<span class="weekday">' +dow+ '</span></td>';
+                    _html += '<td class="' +cls+ '" id="'+id+'" year="' + year + '" month="' + month_ + '" day="' + dow + '"><span class="weekday">' +dow+ '</span></td>';
                 }else{
-                    _html += '<td class="' +cls+ '" id="'+id+'">' +dow+ '</td>';
+                    _html += '<td class="' +cls+ '" id="'+id+'" year="' + year + '" month="' + month_ + '" day="' + dow + '">' +dow+ '</td>';
                 }
 
             }
@@ -252,18 +255,39 @@
                 switch(target[0].nodeName.toLowerCase()) {
                     case 'td':
                         if (target.is('.day')){
-                            var day = parseInt(target.text(), 10)||1;
+                            var day = parseInt(target.attr('day'), 10)||1;
+                            var month = parseInt(target.attr('month'), 10)||1;
+                            var year = parseInt(target.attr('year'), 10)||1;
+
                             this.element.trigger({
                                 type: 'changeDay',
                                 day: day,
+                                month: month,
+                                year: year,
                             });
                         }else if(target.is('.holiday')){
-                            var day = parseInt(target.text(), 10)||1;
+                            var day = parseInt(target.attr('day'), 10)||1;
+                            var month = parseInt(target.attr('month'), 10)||1;
+                            var year = parseInt(target.attr('year'), 10)||1;
+
                             this.element.trigger({
                                 type: 'onEvent',
                                 day: day,
+                                month: month,
+                                year: year,
                             });
-                        }
+                        }else if(target.is('.today')){
+                            var day = parseInt(target.attr('day'), 10)||1;
+                            var month = parseInt(target.attr('month'), 10)||1;
+                            var year = parseInt(target.attr('year'), 10)||1;
+
+                            this.element.trigger({
+                                type: 'onEvent',
+                                day: day,
+                                month: month,
+                                year: year,
+                            });
+            }
                         break;
                     case 'th':
                         if (target.is('.sel')){
@@ -275,7 +299,6 @@
                                     this.renderCalendar(prv, this.events);
                                     this.element.trigger({
                                         type: 'onPrev',
-                                        day: day,
                                     });
                                     break;
                                 case 'current':
@@ -285,7 +308,6 @@
                                     this.renderCalendar(now, this.events);
                                     this.element.trigger({
                                         type: 'onCurrent',
-                                        day: day,
                                     });
                                     break;
                                 case 'next':
@@ -295,7 +317,6 @@
                                     this.renderCalendar(nxt, this.events);
                                     this.element.trigger({
                                         type: 'onNext',
-                                        day: day,
                                     });
                                     break
                             }

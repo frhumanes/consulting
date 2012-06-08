@@ -38,10 +38,13 @@
         <div class="control-group">
           <label for="id_body" class="control-label">{{form.body.label}}</label>
           <div class="controls">
-            {{ form.body }}
+             {{ form.body }}
           </div>
         </div>
       {% endif %}
+
+
+
       <!-- END BODY -->
 
        <!-- RECIPIENT -->
@@ -72,3 +75,14 @@
 
   </fieldset>
 </form>
+
+<script type="text/javascript">
+  $('#id_body').wysihtml5({
+    "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+    "emphasis": true, //Italics, bold, etc. Default true
+    "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+    "html": false, //Button which allows you to edit the generated HTML. Default false
+    "link": false, //Button to insert a link. Default true
+    "image": false //Button to insert an image. Default true);
+  });
+</script>

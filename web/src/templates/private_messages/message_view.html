@@ -27,7 +27,7 @@
     <dd><span>{{ message.subject }}</span></dd>
 
     <dt>{% trans 'Body' %}</dt>
-    <dd><span>{{ message.body|linebreaks}}</span></dd>
+    <dd><span>{{ message.body|safe|escape|linebreaks }}</span></dd>
   </dl>
 
   <!-- END BODY -->
@@ -37,7 +37,8 @@
 </div>
 
 
-<script>
+<script type="text/javascript">
+
 $('#reply').on('click', function(event){
   var sp = start_spinner('loading');
 

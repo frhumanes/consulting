@@ -54,7 +54,7 @@ ACTIVE_INGREDIENT = 0
 MEDICINE = 1
 
 #PAGINATION
-OBJECTS_PER_PAGE = 10
+OBJECTS_PER_PAGE = 1
 
 #STATUS APPOINTMENT
 FIRST = 1
@@ -200,6 +200,7 @@ INSTALLED_APPS = (
     'registration',
     'private_messages',
     'connector',
+    'events_calendar',
 )
 
 AUTH_PROFILE_MODULE = 'userprofile.Profile'

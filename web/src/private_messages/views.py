@@ -82,7 +82,7 @@ def reply_message(request, message_id):
     """
     message_to_reply = get_object_or_404(Message, pk=int(message_id))
     message_to_reply.subject = 'Re: ' + message_to_reply.subject
-    message_to_reply.body = ' \n------ \n' + message_to_reply.body
+    message_to_reply.body = ' \n \n------ \n' + message_to_reply.body
     form = MessageForm(user=request.user,
         instance=message_to_reply,
         initial={'recipient': message_to_reply.author})

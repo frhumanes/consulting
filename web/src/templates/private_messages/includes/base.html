@@ -2,6 +2,17 @@
 
 {% load i18n%}
 
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/wysihtml5.js"></script>
+  <script src="{{ STATIC_URL }}js/bootstrap-wysihtml5.js"></script>
+{% endblock %}
+
+{% block css_files %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-wysihtml5.css"></link>
+{% endblock %}
+
 {% block header%}
     {%if request.user.get_profile.is_doctor %}
         {% include "ui/includes/header_doctor.html" %}
@@ -15,7 +26,7 @@
 
 <div class="container">
     {% block nav-bar%}
-        
+
     {% endblock  %}
     <div class="row">
         <div class="span2">
