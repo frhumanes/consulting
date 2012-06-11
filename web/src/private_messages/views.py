@@ -69,8 +69,9 @@ def view_message(request, id):
     View a message
     """
     message_to_view = get_object_or_404(Message, pk=int(id))
-    message_to_view.unread = False
-    message_to_view.save()
+    if message_to_view.recipient == request.user:
+        message_to_view.unread = False
+        message_to_view.save()
     return render_to_response("private_messages/message_view.html",
         {"message": message_to_view}, context_instance=RequestContext(request))
 
