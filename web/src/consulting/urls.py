@@ -69,4 +69,12 @@ urlpatterns = patterns('',
 
     url(r'^administration/newpatient/$', consulting_views.newpatient,
         name='consulting_newpatient_administration'),
+
+    url(r'^administration/newpatient/newappointment/(?P<newpatient_id>\d+)$',
+        consulting_views.newappointment,
+        name='consulting_newappointment_administration'),
+
+    # STATISTIC: DOCTOR ROLE
+    url(r'^statistic/stratification$', consulting_views.stratification,
+        name='consulting_stratification_statistic'),
 )
