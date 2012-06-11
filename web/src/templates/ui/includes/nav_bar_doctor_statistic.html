@@ -1,9 +1,13 @@
 {% load i18n%}
+{% load consulting %}
+
+{% url consulting_stratification_statistic as stratification %}
+
 <header id="overview" class="jumbotron subhead">
 <div class="subnav">
   <ul class="nav nav-pills">
-    <li>
-      <a href="#">
+    <li class="{% active_child request stratification %}">
+      <a href="{% url consulting_stratification_statistic %}">
         {% trans 'NIVELES DE ESTRATIFICACIÓN' %}
       </a>
     </li>
