@@ -115,7 +115,7 @@ def newpatient(request):
                                     'same_username': same_username},
                                     context_instance=RequestContext(request))
     else:
-        return HttpResponseRedirect(reverse('main_index'))
+        return HttpResponseRedirect(reverse('consulting_index'))
 
 
 def create_or_update_profile(user, form, username, role):
@@ -164,11 +164,38 @@ def newappointment(request, newpatient_id):
             if form.is_valid():
                 appointment = form.save(commit=False)
                 appointment.patient = patient_user
+                # appointment.status = settings.UNRESOLVED
                 appointment.save()
+
+                # # Update relationship between patient and doctor
+                # # Update patient
+                # if profile_patient.doctor is None:
+                #     doctor_user = User.objects.get(profile=profile)
+                #     profile_patient.doctor = doctor_user
+                #     profile_patient.save()
+                # # Update doctor
+                # if not profile.patients.all().filter(
+                #                                 id=patient_user.id).exists():
+                #     profile.patients.add(patient_user)
+                #     profile.save()
 
                 return HttpResponseRedirect(reverse('consulting_index'))
         else:
             form = AppointmentForm()
+            # Patient hasn't got any appointment
+            # if patient_user.patientappointments.count() == 0
+            # and profile.is_doctor():
+            #         form = AppointmentForm(initial={'doctor': profile.user},
+            #                         patient=patient_user,
+            #                         logged_user=request.user)
+            # else:
+            #     form = AppointmentForm(
+            #           initial={'doctor': patient_user.get_profile().doctor},
+            #             patient=patient_user,
+            #             logged_user=request.user)
+            # else:
+            #     form = AppointmentForm(patient=patient_user,
+            #                         logged_user=request.user)
 
         return render_to_response(
                     'consulting/newappointment.html',
