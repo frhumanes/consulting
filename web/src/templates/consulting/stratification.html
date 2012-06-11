@@ -39,22 +39,23 @@
       {% block nav-bar%}
           {% include "ui/includes/nav_bar_doctor_statistic.html" %}
       {% endblock  %}
-      <div class="">
-        <h2>Pirámides <small></small></h2>
-        <hr>
-        <div class="row">
-            <div class="span6" id="a"/>
-                <h2><small>Ansiedad</small></h2>
-                <div id="pyramid_anxiety"></div>
-                <hr>
-            </div>
-            <div class="span6" id="a"/>
-              <h2><small>Depresión</small></h2>
-                  <div id="pyramid_depression"></div>
-                <hr>
-            </div>
+      <section>
+        <div class="page-header">
+          <h1>{% trans 'Pirámides' %}</h1>
         </div>
-      </div>
+        <div class="row">
+          <div class="span6" id="a">
+              <h2><small>Ansiedad</small></h2>
+              <div id="pyramid_anxiety"></div>
+              <hr>
+          </div>
+          <div class="span6" id="a">
+            <h2><small>Depresión</small></h2>
+                <div id="pyramid_depression"></div>
+              <hr>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 {% endblock body %}
