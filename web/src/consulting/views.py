@@ -773,7 +773,12 @@ def administration(request):
         return HttpResponseRedirect(reverse('consulting_index'))
 
 
-def prueba(request, newpatient_id):
-    return render_to_response('consulting/newpatient_info.html',
-                            {'newpatient_id': newpatient_id},
+@login_required()
+def stratification(request):
+    profile = request.user.get_profile()
+
+    if profile.is_doctor():
+        return render_to_response('consulting/stratification.html', {},
                             context_instance=RequestContext(request))
+    else:
+        return HttpResponseRedirect(reverse('consulting_index'))
