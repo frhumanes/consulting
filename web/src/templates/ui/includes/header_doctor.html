@@ -4,6 +4,7 @@
 {% url consulting_index as index %}
 {% url consulting_index_administration as index_administration %}
 {% url consulting_index_pm as index_pm %}
+{% url consulting_stratification_statistic as index_statistic %}
 {% url private_messages_inbox as inbox %}
 
 <div class="navbar navbar-fixed-top">
@@ -31,8 +32,8 @@
                         {% trans 'GESTIÓN PACIENTE' %}
                     </a>
                 </li>
-                <li>
-                    <a href="#">{% trans 'ESTADÍSTICA' %}</a>
+                <li class="{% active_root request index_statistic %}">
+                    <a href="{% url consulting_stratification_statistic %}">{% trans 'ESTADÍSTICA' %}</a>
                 </li> 
                 <li class="{% active_root request inbox %}">
                     <a href="{% url private_messages_inbox %}">
