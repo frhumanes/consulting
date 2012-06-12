@@ -382,7 +382,7 @@ def personal_data_pm(request, patient_id):
     if profile.is_doctor():
         # IMPORTANT! patient_id is user_id of patient
         request.session['patient_id'] = patient_id
-        user = User.objects.get(id=patient_id)
+        user = Profile.objects.get(id=patient_id).user
         profile = user.get_profile()
         return render_to_response('consulting/personal_data_pm.html',
                         {'profile': profile,
