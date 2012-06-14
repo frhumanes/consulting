@@ -28,23 +28,16 @@ class Report(models.Model):
 
 
 class Appointment(models.Model):
+
     STATUS = (
-        (settings.FIRST, _(u'Primera Cita')),
-        (settings.FIRST_DONE, _(u'Primera Cita/Realizada')),
-        (settings.FIRST_NOT_DONE, _(u'Primera Cita/No Realizada')),
-        (settings.FIRST_MODIFIED, _(u'Primera Cita/Modificada')),
-        (settings.FIRST_MODIFIED_DONE, _(u'Primera Cita/Modificada/Realizada')),
-        (settings.FIRST_MODIFIED_NOT_DONE, _(u'Primera Cita/Modificada/No Realizada')),
-        (settings.FIRST_MODIFIED_DELETED, _(u'Primera Cita/Modificada/Eliminada')),
-        (settings.FIRST_DELETED, _(u'Primera Cita/Eliminada')),
-        (settings.SUCCESSIVE, _(u'Sucesiva')),
-        (settings.SUCCESSIVE_DONE, _(u'Sucesiva/Realizada')),
-        (settings.SUCCESSIVE_NOT_DONE, _(u'Sucesiva/No Realizada')),
-        (settings.SUCCESSIVE_MODIFIED, _(u'Sucesiva/Modificada')),
-        (settings.SUCCESSIVE_MODIFIED_DONE, _(u'Sucesiva/Modificada/Realizada')),
-        (settings.SUCCESSIVE_MODIFIED_NOT_DONE, _(u'Sucesiva/Modificada/No Realizada')),
-        (settings.SUCCESSIVE_MODIFIED_DELETED, _(u'Sucesiva/Modificada/Eliminada')),
-        (settings.SUCCESSIVE_DELETED, _(u'Sucesiva/Eliminada')),
+        (settings.UNRESOLVED, _(u'Sin resolver')),
+        (settings.DONE, _(u'Realizada')),
+        (settings.NOT_DONE, _(u'PNo Realizada')),
+        (settings.MODIFIED, _(u'Modificada')),
+        (settings.MODIFIED_DONE, _(u'Modificada/Realizada')),
+        (settings.MODIFIED_NOT_DONE, _(u'Modificada/No Realizada')),
+        (settings.MODIFIED_DELETED, _(u'Modificada/Eliminada')),
+        (settings.CANCELED, _(u'Cancelada')),
     )
 
     patient = models.ForeignKey(User, related_name="patientappointments")
