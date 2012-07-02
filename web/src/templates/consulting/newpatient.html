@@ -37,17 +37,15 @@
 
         <div class="row" >
           <div class="span8 offset2">
+            {% if not edit %}
             <form class="form-horizontal" id="form" action="." method="post" accept-charset="utf-8">{% csrf_token %}
+            {% endif %}
+            {% if edit %}
+            <form class="form-horizontal" id="form" action="{% url consulting_editpatient patient_id %}" method="post" accept-charset="utf-8">{% csrf_token %}
+            {% endif %}
+            <input type="hidden" name="next" value="{{ next }}"/>
               <fieldset class="control-group">
-                <legend>{% trans 'ALTA PACIENTE' %}</legend>
-              {% if exist_user %}
-                <div class="alert alert-error">
-                  <a class="close" data-dismiss="alert">×</a>
-                  <strong>
-                    {% trans 'El usuario ya existe' %}
-                  </strong>
-                </div>
-              {% endif %}
+                <legend>{% trans 'PACIENTEXXXX' %}</legend>                
               {% if same_username %}
                 <div class="alert alert-error">
                   <a class="close" data-dismiss="alert">×</a>
@@ -95,6 +93,9 @@
                 </label>
                 <div class="controls">
                   {{form.nif}}
+                  <span class="help-inline">
+                    {% trans 'Pacientes con NIF o mayores de edad' %}
+                  </span>
                   {% if form.nif.errors %}
                     {{ form.nif.errors }}
                   {% endif %}
@@ -122,7 +123,7 @@
                   {% endif %}
                 </div>
               </div>
-              <div class="control-group">
+               <div class="control-group">
                 <label class="control-label">
                   {{form.town.label}}
                 </label>
@@ -144,17 +145,19 @@
                   {% endif %}
                 </div>
               </div>
-              <div class="control-group">
-                <label class="control-label">
-                  {{form.status.label}}
-                </label>
-                <div class="controls">
-                  {{form.status}}
-                  {% if form.status.errors %}
-                    {{ form.status.errors }}
-                  {% endif %}
+              {% if user.get_profile.is_doctor %}
+                <div class="control-group">
+                  <label class="control-label">
+                    {{form.status.label}}
+                  </label>
+                  <div class="controls">
+                    {{form.status}}
+                    {% if form.status.errors %}
+                      {{ form.status.errors }}
+                    {% endif %}
+                  </div>
                 </div>
-              </div>
+              {% endif %}
               <div class="control-group">
                 <label class="control-label">
                   {{form.dob.label}}
@@ -166,7 +169,7 @@
                       <i class="icon-th"></i>
                     </span>
                     <span class="help-inline">
-                      {% trans 'Formato dd/mm/aaaa' %}
+                      {% trans 'Pacientes menores de edad sin NIF' %}
                     </span>
                   </div>
                   {% if form.dob.errors %}
@@ -207,6 +210,7 @@
                   {% endif %}
                 </div>
               </div>
+              {% if user.get_profile.is_doctor %}
               <div class="control-group">
                 <label class="control-label">
                   {{form.profession.label}}
@@ -218,6 +222,7 @@
                   {% endif %}
                 </div>
               </div>
+              {% endif %}
               <div class="controls span1">
                 <button type="submit" class="btn btn-primary btn-large">
                   {% trans 'Guardar' %}
