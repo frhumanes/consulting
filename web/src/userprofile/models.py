@@ -125,23 +125,32 @@ class Profile(models.Model):
     def get_lastAppointment(self):
         appointments = Appointment.objects.filter(
                         patient=self,
-                        date_appointment__lt=date.today()).order_by(
-                        '-date_appointment')
+                        date__lt=date.today()).order_by(
+                        '-date')
+        # appointments = Appointment.objects.filter(
+        #                 patient=self,
+        #                 date_appointment__lt=date.today()).order_by(
+        #                 '-date_appointment')
 
         if appointments.count() > 0:
-            lastAppointment = appointments[0].date_appointment
+            # lastAppointment = appointments[0].date_appointment
+            lastAppointment = appointments[0].date
         else:
             lastAppointment = ''
 
         return lastAppointment
 
     def get_nextAppointment(self):
+        # appointments = Appointment.objects.filter(
+        #     patient=self, date_appointment__gte=date.today()).order_by(
+        #     'date_appointment')
         appointments = Appointment.objects.filter(
-            patient=self, date_appointment__gte=date.today()).order_by(
-            'date_appointment')
+            patient=self, date__gte=date.today()).order_by(
+            'date')
 
         if appointments.count() > 0:
-            nextAppointment = appointments[0].date_appointment
+            # nextAppointment = appointments[0].date_appointment
+            nextAppointment = appointments[0].date
         else:
             nextAppointment = ''
 
