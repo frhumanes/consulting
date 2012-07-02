@@ -34,12 +34,18 @@
                     </h4>
                     <p>
                         {% if request.user.get_profile.is_administrative %}
-                        <a href="{% url consulting_newappointment patient_user.id %}" class="btn btn-primary">
+                        <!-- <a href="{% url consulting_newappointment patient_user.id %}" class="btn btn-primary">
+                            {% trans 'Sí' %}
+                        </a> -->
+                        <a href="#" class="btn btn-primary">
                             {% trans 'Sí' %}
                         </a>
                         {% endif %}
                         {% if request.user.get_profile.is_doctor %}
-                        <a href="{% url consulting_newappointment_administration patient_user.id %}" class="btn btn-primary">
+                        <!-- <a href="{% url consulting_newappointment_administration patient_user.id %}" class="btn btn-primary">
+                            {% trans 'Sí' %}
+                        </a> -->
+                        <a href="#" class="btn btn-primary">
                             {% trans 'Sí' %}
                         </a>
                         {% endif %}
