@@ -1,0 +1,55 @@
+{% extends "ui/app.html" %}
+
+{% load i18n%}
+
+{% block header%}
+    {% if user.get_profile.is_doctor %}
+        {% include "ui/includes/header_doctor.html" %}
+    {% endif %}
+    {% if user.get_profile.is_administrative %}
+        {% include "ui/includes/header_administrative.html" %}
+    {% endif %}
+{% endblock  %}
+
+{% block body %}
+<div class="container">
+    {% if user.get_profile.is_doctor %}
+        {% include "ui/includes/nav_bar_doctor_admin.html" %}
+    {% endif %}
+    <section>
+        <div class="page-header">
+          <h1>{% trans 'Datos de la cita' %}</h1>                
+        </div>
+        <div class="row" >
+            <div class="span12">
+                <table class="table">
+                    <thead>
+                        <tr>            
+                            <th>{% trans 'PACIENTE' %}</th>
+                            <th>{% trans 'MÉDICO' %}</th>
+                            <th>{% trans 'FECHA' %}</th>
+                            <th>{% trans 'HORA DE INICIO' %}</th>
+                            <th>{% trans 'HORA DE FIN' %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>                        
+                        <tr>            
+                            <td>{{appointment.patient.get_profile.name}}
+                                {{appointment.patient.get_profile.first_surname}}
+                                {{appointment.patient.get_profile.second_surname}}
+                            </td>
+                            <td>{{appointment.doctor.get_profile.name}}
+                                {{appointment.doctor.get_profile.first_surname}}
+                                {{appointment.doctor.get_profile.second_surname}}
+                            </td>
+                            <td>{{appointment.date_appointment}}</td>
+                            <td>{{appointment.hour_start}}</td>
+                            <td>{{appointment.hour_finish}}</td>
+                        </tr>              
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock body %}

@@ -1,0 +1,79 @@
+{% extends "ui/app.html" %}
+
+{% load i18n%}
+
+{% block header%}
+  {% include "ui/includes/header_administrative.html" %}
+{% endblock  %}
+
+
+{% block body %}
+  <div class="container">    
+    <section id="code">
+      <div class="page-header">
+        <h2>{% trans 'CITAS DEL PACIENTE:' %}
+          {{profile.name}}
+          {{profile.first_surname}}
+          {{profile.second_surname}}
+        </h2>
+      </div>
+
+      <div class="row">
+        <div class="span8">
+          {% if appointments_patient.object_list %}
+            <table class="table">
+              <thead>
+                <tr>            
+                  <th>{% trans 'FECHA' %}</th>
+                  <th>{% trans 'HORA INICIO' %}</th>
+                  <th>{% trans 'HORA FIN' %}</th>
+                  <th>{% trans 'MÉDICO' %}</th>
+                </tr>
+              </thead>
+              <tbody>      
+                {% for  appointment in patient_appointments.object_list %}
+                  <tr>            
+                    <td>{{appointment.date_appointment}}</td>
+                    <td>{{appointment.hour_start}}</td>
+                    <td>{{appointment.hour_finish}}</td>
+                    <td>
+                      {{appointment.doctor.first_name}} {{appointment.doctor.last_name}}
+                    </td>
+                  </tr>
+                {% endfor %}              
+              </tbody>
+            </table>
+            <div id="appointment-paginator">
+              <ul class="pagination">
+                {% if patient_appointments.has_previous %}
+                  <li>
+                    <a href="?page={{ patient_appointments.previous_page_number }}">←</a>
+                  </li>
+                {% else %}
+                  <li class="disabled"><a>←</a></li>
+                {% endif %}
+
+                {% if appointments_patient.has_next %}
+                  <li>
+                    <a href="?page={{ patient_appointments.next_page_number }}">→</a>
+                  </li>
+                {% else %}
+                  <li class="disabled"><a>→</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          {% else %}
+            <div class="alert alert-block alert-error fade in">
+              <h4 class="alert-heading">
+                {% trans 'El paciente no tiene citas' %}
+              </h4>
+            </div>        
+          {% endif %}
+        </div>
+        <div class="span4">
+          {% include "consulting/card.html" %}
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock body %}

@@ -1,0 +1,5 @@
+Bienvenido a Consulting 3.0
+
+Ya puede hacer uso de Consulting 3.0. Acceda a 'http://consultingpre.wtelecom.es', su nombre de usuario es {{username}} y su contraseña {{password}}.
+
+Saludos.
