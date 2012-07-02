@@ -24,47 +24,47 @@
           <tbody>           
             <tr>            
               <td>{% trans 'NIF' %}</td>
-              <td>{{profile.nif}}</td>
+              <td>{{patient_user.get_profile.nif}}</td>
             </tr>
             <tr>            
               <td>{% trans 'EDAD' %}</td>
-              <td>{{profile.get_age}}</td>
+              <td>{{patient_user.get_profile.get_age}}</td>
             </tr>
             <tr>            
               <td>{% trans 'ESTADO CIVIL' %}</td>
-              <td>{{profile.get_status}}</td>
+              <td>{{patient_user.get_profile.get_status}}</td>
             </tr>
             <tr>            
               <td>{% trans 'TELÉFONO 1' %}</td>
-              <td>{{profile.phone1}}</td>
+              <td>{{patient_user.get_profile.phone1}}</td>
             </tr>
             <tr>            
               <td>{% trans 'TELÉFONO 2' %}</td>
-              <td>{{profile.phone2}}</td>
+              <td>{{patient_user.get_profile.phone2}}</td>
             </tr>
             <tr>            
               <td>{% trans 'DOMICILIO' %}</td>
-              <td>{{profile.address}}</td>
+              <td>{{patient_user.get_profile.address}}</td>
             </tr>
             <tr>            
               <td>{% trans 'MUNICIPIO' %}</td>
-              <td>{{profile.town}}</td>
+              <td>{{patient_user.get_profile.town}}</td>
             </tr>
             <tr>            
               <td>{% trans 'CÓDIGO POSTAL' %}</td>
-              <td>{{profile.postcode}}</td>
+              <td>{{patient_user.get_profile.postcode}}</td>
             </tr>
             <tr>            
               <td>{% trans 'PROFESIÓN' %}</td>
-              <td>{{profile.profession|wordwrap:5}}</td>
+              <td>{{patient_user.get_profile.profession|wordwrap:5}}</td>
             </t5>
             <tr>            
               <td>{% trans 'ÚLTIMA CITA' %}</td>
-              <td>{{profile.get_lastAppointment}}</td>
+              <td>{{patient_user.get_profile.get_lastAppointment}}</td>
             </tr>
             <tr>            
               <td>{% trans 'PRÓXIMA CITA' %}</td>
-              <td>{{profile.get_nextAppointment}}</td>
+              <td>{{patient_user.get_profile.get_nextAppointment}}</td>
             </tr>
             <tr>            
               <td>{% trans 'NIVEL ESTRATIFICACIÓN' %}</td>
