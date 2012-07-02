@@ -6,11 +6,14 @@ from consulting import views as consulting_views
 urlpatterns = patterns('',
     # MAIN
     url(r'^$', consulting_views.index, name='consulting_index'),
-
+    # SEACHER: ROLE DOCTOR AND ADMINISTRATIVE
     url(r'^searcher/', consulting_views.searcher,
         name='consulting_searcher'),
 
-    url(r'^patient_appointments/', consulting_views.patient_appointments,
+    # APPOINTMENTS PATIENT: DOCTOR AND ADMINISTRATIVE ROLES
+    # Look at index_administrative.html line 35
+    url(r'^patient_appointments/(?P<patient_user_id>\d+)$',
+        consulting_views.patient_appointments,
         name='consulting_patient_appointments'),
 
     # NEW PATIENT AND NEW APPOINTMENT: DOCTOR AND ADMINISTRATIVE ROLES
@@ -24,17 +27,22 @@ urlpatterns = patterns('',
     url(r'^appointments_doctor/$', consulting_views.appointments_doctor,
         name='consulting_appointments_doctor'),
 
+
     # PATIENT_MANAGEMENT: DOCTOR ROLE
     url(r'^patient_management/$', consulting_views.patient_management,
         name='consulting_index_pm'),
 
-    url(r'^patient_management/personal_data_pm/(?P<patient_id>\d+)$',
+    url(r'^patient_management/personal_data_pm/(?P<patient_user_id>\d+)$',
         consulting_views.personal_data_pm,
         name='consulting_personal_data_pm'),
 
-    url(r'^searcher_patients_doctor/',
-        consulting_views.searcher_patients_doctor,
-        name='consulting_searcher_patients_doctor'),
+    url(r'^patient_management/editpatient_pm/(?P<patient_user_id>\d+)$',
+        consulting_views.editpatient_pm,
+        name='consulting_editpatient_pm'),
+
+    url(r'^patient_management/patient_identification_pm/(?P<patient_user_id>\d+)$',
+        consulting_views.patient_identification_pm,
+        name='consulting_patient_identification_pm'),
 
     url(r'^patient_management/list_treatments_pm/$',
         consulting_views.list_treatments_pm,
