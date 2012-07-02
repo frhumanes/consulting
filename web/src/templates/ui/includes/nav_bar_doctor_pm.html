@@ -13,14 +13,14 @@
   })
 </script>
 
-{% url consulting_personal_data_pm patient_id as personal_data %}
+{% url consulting_personal_data_pm patient_user_id as personal_data %}
 {% url consulting_list_treatments_pm as list_treatments %}
 {% url consulting_newtreatment_pm as newtreatment %}
 
 <div class="subnav">
   <ul class="nav nav-pills">
     <li class="{% active_child request personal_data %}">
-      <a href="{% url consulting_personal_data_pm patient_id %}">
+      <a href="{% url consulting_personal_data_pm patient_user_id %}">
         {% trans 'DATOS PERSONALES' %}
       </a>
     </li>    
@@ -58,7 +58,7 @@
     </li>
     <li>
       <a href="#">
-        {% trans 'CITAS' %}
+        {% trans 'HISTORIAL CITAS' %}
       </a>
     </li>
   </ul>
