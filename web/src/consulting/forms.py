@@ -28,8 +28,11 @@ class AppointmentForm(forms.ModelForm):
     hour = forms.TimeField(label=_(u'Hora'),
                                 widget=forms.TextInput(
                                 attrs={'class': 'input-mini'}))
-    # date_appointment = forms.DateField(label=_(u'Fecha'), widget=DateInput(
-    #         attrs={'class': 'span2', 'size': '16'}))
+    # date_appointment = forms.DateField(label=_(u'Fecha'),
+    #                                 input_formats=('%d/%m/%Y',),
+    #                                 widget=DateInput(
+    #                                 attrs={'class': 'span2', 'size': '16'},
+    #                                 format='%d/%m/%Y'))
     # hour_start = forms.TimeField(label=_(u'Hora de Inicio de la cita'),
     #                             widget=forms.TextInput(
     #                             attrs={'class': 'input-mini'}))
@@ -38,53 +41,25 @@ class AppointmentForm(forms.ModelForm):
     #                             attrs={'class': 'input-mini'}))
 
     def __init__(self, *args, **kwargs):
-        # if 'patient' in kwargs:
-        #     patient_user = kwargs.pop('patient')
+        if 'readonly_doctor' in kwargs and 'doctor_user' in kwargs:
+            readonly_doctor = kwargs.pop('readonly_doctor')
+            doctor_user = kwargs.pop('doctor_user')
+            super(AppointmentForm, self).__init__(*args, **kwargs)
 
-        # if 'logged_user' in kwargs:
-        #     logged_user = kwargs.pop('logged_user')
+            profiles_doctor = Profile.objects.filter(role=settings.DOCTOR)
+            ids_doctor = [profile.user.id for profile in profiles_doctor]
+            queryset = User.objects.filter(pk__in=ids_doctor)
 
-        super(AppointmentForm, self).__init__(*args, **kwargs)
-
-        profiles_doctor = Profile.objects.filter(role=settings.DOCTOR)
-        ids_doctor = [profile.user.id for profile in profiles_doctor]
-        queryset = User.objects.filter(pk__in=ids_doctor)
-        self.fields['doctor'] = RecipientChoiceField(
-                                                label=_(u"Doctor"),
+            self.fields['doctor'] = RecipientChoiceField(
+                                                label=_(u"Médico"),
                                                 queryset=queryset,
                                                 validators=[validate_choice])
+            if readonly_doctor and not doctor_user is None:
+                self.fields.pop('doctor')
 
-        # if not patient_user is None:
-        #     # Patient hasn't got any appointment
-        #     if patient_user.patientappointments.count() == 0:
-        #         # Role Administrative => all doctors
-        #         if logged_user.get_profile().is_administrative():
-        #             profiles_doctor = Profile.objects.filter(
-        #                                                 role=settings.DOCTOR)
-        #             ids_doctor = [profile.user.id
-        #                                     for profile in profiles_doctor]
-        #             queryset = User.objects.filter(pk__in=ids_doctor)
+        else:
+            super(AppointmentForm, self).__init__(*args, **kwargs)
 
-        #             self.fields['doctor'] = RecipientChoiceField(
-        #                                         label=_(u"Doctor"),
-        #                                         queryset=queryset,
-        #                                         validators=[validate_choice])
-        #         if logged_user.get_profile().is_doctor():
-        #             queryset = User.objects.filter(pk=logged_user.id)
-        #             self.fields['doctor'] = RecipientChoiceField(
-        #                 label=_(u"Doctor"),
-        #                 queryset=queryset,
-        #                 validators=[validate_choice],
-        #                 widget=forms.Select(attrs={'disabled': 'disabled'}))
-        #     # Patient has got one or more appointments
-        #     if patient_user.patientappointments.count() > 0:
-        #         queryset = User.objects.filter(
-        #                     pk=patient_user.get_profile().doctor.id)
-        #         self.fields['doctor'] = RecipientChoiceField(
-        #                 label=_(u"Doctor"),
-        #                 queryset=queryset,
-        #                 validators=[validate_choice],
-        #                 widget=forms.Select(attrs={'disabled': 'disabled'}))
     doctor = RecipientChoiceField(label=_(u'Médico'),
                                     queryset=User.objects.none(),
                                     validators=[validate_choice])
@@ -93,7 +68,7 @@ class AppointmentForm(forms.ModelForm):
         model = Appointment
         exclude = ('patient', 'questionnaire', 'answers', 'treatment')
         # exclude = ('patient', 'questionnaire', 'answers', 'treatment',
-        #             'date_modified', 'date_cancel')
+        #             'status', 'date_modified', 'date_cancel')
 
 
 class AdminRadioFieldRenderer(RadioFieldRenderer):
