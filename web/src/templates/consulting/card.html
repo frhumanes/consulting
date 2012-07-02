@@ -5,56 +5,68 @@
       <tr>            
         <th colspan="2" style="text-align:center;">
           <h3>
-            {{profile.name|upper}} {{profile.first_surname|upper}} {{profile.second_surname|upper}}
-          </h3>
+            {{patient_user.get_profile.name|upper}} {{patient_user.get_profile.first_surname|upper}} {{patient_user.get_profile.second_surname|upper}}
+          </h3>     
+        </th>
+        <th>
+          <a href="{% url consulting_editpatient_pm patient_user.id %}?next={{request.path}}" class="icon-edit"></a>
         </th>
       </tr>
     </thead>        
     <tbody>           
       <tr>            
         <td>{% trans 'NIF' %}</td>
-        <td>{{profile.nif}}</td>
+        <td>{{patient_user.get_profile.nif}}</td>
       </tr>
+      {% if user.get_profile.is_doctor %}
       <tr>            
         <td>{% trans 'EDAD' %}</td>
-        <td>{{profile.get_age}}</td>
-      </tr>
+        <td>{{patient_user.get_profile.get_age}}</td>
+        </tr>      
       <tr>            
         <td>{% trans 'ESTADO CIVIL' %}</td>
-        <td>{{profile.get_status}}</td>
+        <td>{{patient_user.get_profile.get_status}}</td>
       </tr>
+      {% endif %}
       <tr>            
         <td>{% trans 'TELÉFONO 1' %}</td>
-        <td>{{profile.phone1}}</td>
+        <td>{{patient_user.get_profile.phone1}}</td>
       </tr>
       <tr>            
         <td>{% trans 'TELÉFONO 2' %}</td>
-        <td>{{profile.phone2}}</td>
-      </tr>
+        <td>{{patient_user.get_profile.phone2}}</td>
+      </tr> 
+      <tr>            
+        <td>{% trans 'CORREO' %}</td>
+        <td>{{patient_user.get_profile.email}}</td>
+      </tr>     
       <tr>            
         <td>{% trans 'DOMICILIO' %}</td>
-        <td>{{profile.address}}</td>
+        <td>{{patient_user.get_profile.address}}</td>
       </tr>
       <tr>            
         <td>{% trans 'MUNICIPIO' %}</td>
-        <td>{{profile.town}}</td>
+        <td>{{patient_user.get_profile.town}}</td>
       </tr>
       <tr>            
         <td>{% trans 'CÓDIGO POSTAL' %}</td>
-        <td>{{profile.postcode}}</td>
+        <td>{% if patient_user.get_profile.postcode %}{{patient_user.get_profile.postcode}}{% endif %}</td>
       </tr>
+      {% if user.get_profile.is_doctor %}
       <tr>            
         <td>{% trans 'PROFESIÓN' %}</td>
-        <td>{{profile.profession|wordwrap:5}}</td>
-      </t5>
+        <td>{{patient_user.get_profile.profession|wordwrap:5}}</td>
+      </tr>
+      {% endif %}
       <tr>            
         <td>{% trans 'ÚLTIMA CITA' %}</td>
-        <td>{{profile.get_lastAppointment}}</td>
+        <td>{{patient_user.get_profile.get_lastAppointment}}</td>
       </tr>
       <tr>            
         <td>{% trans 'PRÓXIMA CITA' %}</td>
-        <td>{{profile.get_nextAppointment}}</td>
+        <td>{{patient_user.get_profile.get_nextAppointment}}</td>
       </tr>
+      {% if user.get_profile.is_doctor %}
       <tr>            
         <td>{% trans 'NIVEL ESTRATIFICACIÓN' %}</td>
         <td>
@@ -62,7 +74,8 @@
             PENDIENTE DE CALCULAR 
           </p>
         </td>
-      </tr>              
+      </tr>
+      {% endif %}              
     </tbody>
   </table>        
 </div>
