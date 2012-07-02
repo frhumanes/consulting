@@ -21,7 +21,12 @@ class Report(models.Model):
 
     kind = models.IntegerField(_(u'Tipo de Informe'), choices=KIND)
     name = models.CharField(max_length=255)
+    #observations debe ir en appointment
     observations = models.TextField(_(u'Observaciones'), blank=True)
+    #recommendations_treatment se debe dividir en recommendations de tipo
+    #TextField y en components de tipo ManyToManyField(Component).Ambos
+    #campos deben ir en appointment
+    #La fecha de las recomendaciones es la fecha de la cita
     recommendations_treatment = models.TextField(
                                 _(u'Recomendaciones/Tratamiento'), blank=True)
     date = models.DateTimeField()
@@ -30,14 +35,14 @@ class Report(models.Model):
 class Appointment(models.Model):
 
     STATUS = (
-        (settings.UNRESOLVED, _(u'Sin resolver')),
+        (settings.UNRESOLVED, _(u'Pendiente')),
         (settings.DONE, _(u'Realizada')),
-        (settings.NOT_DONE, _(u'PNo Realizada')),
+        (settings.NOT_DONE, _(u'No Realizada')),
         (settings.MODIFIED, _(u'Modificada')),
         (settings.MODIFIED_DONE, _(u'Modificada/Realizada')),
-        (settings.MODIFIED_NOT_DONE, _(u'Modificada/No Realizada')),
-        (settings.MODIFIED_DELETED, _(u'Modificada/Eliminada')),
-        (settings.CANCELED, _(u'Cancelada')),
+        (settings.MODIFIED_NOT_DONE, _(u'No Realizada')),
+        (settings.MODIFIED_DELETED, _(u'Modificada/Cancelada')),
+        (settings.CANCELED, _(u'Cancelada'))
     )
 
     patient = models.ForeignKey(User, related_name="patientappointments")
@@ -45,6 +50,7 @@ class Appointment(models.Model):
     questionnaire = models.ForeignKey('Questionnaire',
                     related_name='questionnaireappointments', blank=True,
                     null=True)
+    # answers debe estar en questionnaire
     answers = models.ManyToManyField('Answer',
                                     related_name="answerappointments",
                                     blank=True, null=True)
@@ -56,6 +62,21 @@ class Appointment(models.Model):
                                     blank=True, null=True)
     date = models.DateField(_(u'Fecha de la Cita'))
     hour = models.TimeField(_(u'Hora de la Cita'))
+    # status = models.IntegerField(_(u'Estado'), choices=STATUS, blank=True,
+    #                             null=True)
+    # date_appointment = models.DateField(_(u'Fecha de la Cita'), blank=True,
+    #                                     null=True)
+    # hour_start = models.TimeField(_(u'Hora de Inicio de la Cita'),
+    #                               blank=True,
+    #                                 null=True)
+    # hour_finish = models.TimeField(_(u'Hora de Fin de la Cita'), blank=True,
+    #                                 null=True)
+    # date_modified = models.DateTimeField(
+    #           _(u'Fecha y hora de modificación de la Cita'), blank=True,
+    #                 null=True)
+    # date_cancel = models.DateTimeField(
+    #                 _(u'Fecha y hora de cancelación de la Cita'), blank=True,
+    #                 null=True)
 
     def __unicode__(self):
         return u'%s - %s' % (self.patient, self.questionnaire)
