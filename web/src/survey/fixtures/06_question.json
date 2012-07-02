@@ -1526,7 +1526,7 @@
     "fields": {
       "code": "SE",
       "text": "¿Ha observado desde su última visita, la aparición de nuevos síntomas o empeoramiento de alguno ya presente, a los que no se ha hecho referencia en el cuestionario?",
-      "categories": [79]
+      "categories": [80]
     }
   },
   {
@@ -1535,7 +1535,7 @@
     "fields": {
       "code": "ADT",
       "text": "¿En qué grado ha seguido el paciente las recomendaciones y/o tratamiento indicados?",
-      "categories": [78]
+      "categories": [79]
     }
   }
 ]

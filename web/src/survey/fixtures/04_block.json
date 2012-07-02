@@ -62,5 +62,15 @@
       "categories": [68,70,77],
       "formulas": [46,47,49]
     }
+  },
+  {
+    "model": "survey.block",
+    "pk": 7,
+    "fields": {
+      "name": "Síntomas o Empeoramiento",
+      "code": "B5",
+      "kind": "0",
+      "categories": [80]
+    }
   }  
 ]
