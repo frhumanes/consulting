@@ -48,3 +48,17 @@ MODIFIED_DONE = 5
 MODIFIED_NOT_DONE = 6
 MODIFIED_DELETED = 7
 CANCELED = 8
+
+#EMAIL SETTINGS
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#only development
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = "mailer.backend.DbBackend"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'redmine@wtelecom.es'
+# EMAIL_HOST_PASSWORD = 'password'
+EMAIL_HOST_USER = 'consulting3iwt2@gmail.com'
+EMAIL_HOST_PASSWORD = 'prueba123'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_USE_TLS = True
