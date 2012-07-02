@@ -45,7 +45,14 @@ class Profile(models.Model):
                                     blank=True)
     second_surname = models.CharField(_(u'Segundo Apellido'), max_length=150,
                                         blank=True)
-    nif = models.CharField(_(u'NIF'), max_length=9, blank=True)
+    nif = models.CharField(_(u'NIF'), max_length=9, null=True, unique=True)
+
+    def unique_error_message(self, model_class, unique_check):
+        if unique_check == ("nif",):
+            return _(u'Ya existe un Paciente con este NIF')
+        else:
+            return super(Profile, self).unique_error_message(
+                                                model_class, unique_check)
     sex = models.IntegerField(_(u'Sexo'), choices=SEX, blank=True, null=True)
     address = models.CharField(_(u'Dirección'), max_length=150, blank=True)
     town = models.CharField(_(u'Municipio'), max_length=150, blank=True)
@@ -58,8 +65,7 @@ class Profile(models.Model):
     email = models.EmailField(_(u'Correo Electrónico'), max_length=150,
                                 blank=True)
     profession = models.CharField(_(u'Profesión'), max_length=150, blank=True)
-    role = models.IntegerField(_(u'Rol'), choices=ROLE, blank=True,
-                                null=True)
+    role = models.IntegerField(_(u'Rol'), choices=ROLE, blank=True, null=True)
 
     def is_doctor(self):
         return self.role == settings.DOCTOR
@@ -74,8 +80,19 @@ class Profile(models.Model):
         return u'%s %s %s' % (self.name, self.first_surname,
                                 self.second_surname)
 
+    def age(self, dob):
+        today = date.today()
+        years = today.year - dob.year
+        if today.month < dob.month or\
+            today.month == dob.month and today.day < dob.day:
+            years -= 1
+        return years
+
     def get_age(self):
-        return date.today().year - self.dob.year
+        if not self.dob is None:
+            return self.age(self.dob)
+        else:
+            return ''
 
     def get_status(self):
         if self.status == settings.MARRIED:
@@ -107,10 +124,12 @@ class Profile(models.Model):
 
     def get_lastAppointment(self):
         appointments = Appointment.objects.filter(
-                        patient=self, date__lt=date.today()).order_by('-date')
+                        patient=self,
+                        date_appointment__lt=date.today()).order_by(
+                        '-date_appointment')
 
         if appointments.count() > 0:
-            lastAppointment = appointments[0].date
+            lastAppointment = appointments[0].date_appointment
         else:
             lastAppointment = ''
 
@@ -118,10 +137,11 @@ class Profile(models.Model):
 
     def get_nextAppointment(self):
         appointments = Appointment.objects.filter(
-            patient=self, date__gte=date.today()).order_by('date')
+            patient=self, date_appointment__gte=date.today()).order_by(
+            'date_appointment')
 
         if appointments.count() > 0:
-            nextAppointment = appointments[0].date
+            nextAppointment = appointments[0].date_appointment
         else:
             nextAppointment = ''
 
