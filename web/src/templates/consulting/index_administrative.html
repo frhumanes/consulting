@@ -32,9 +32,8 @@
               })
             },
     select: function(event, ui){
-              $('#overwrite').load('{% url consulting_patient_appointments %}',
-                                      {'patient_id': ui.item.id,
-                                      'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()});
+              var url = '/patient_appointments/' + ui.item.id;
+            $(window.location).attr('href', url);
             },
     
   }); 
