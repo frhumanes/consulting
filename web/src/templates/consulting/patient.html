@@ -102,6 +102,7 @@
                   {% endif %}
                 </div>
               </div>
+              {% if user.get_profile.is_doctor %}
               <div class="control-group">
                 <label class="control-label">
                   {{form.sex.label}}
@@ -113,6 +114,7 @@
                   {% endif %}
                 </div>
               </div>
+              {% endif %}
               <div class="control-group">
                 <label class="control-label">
                   {{form.address.label}}
