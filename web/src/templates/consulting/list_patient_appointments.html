@@ -32,10 +32,12 @@
               </thead>
               <tbody>      
                 {% for  appointment in patient_appointments.object_list %}
-                  <tr>            
-                    <td>{{appointment.date_appointment}}</td>
+                  <tr>
+                    <td>{{appointment.date}}</td>
+                    <td>{{appointment.hour}}</td>            
+                    <!-- <td>{{appointment.date_appointment}}</td>
                     <td>{{appointment.hour_start}}</td>
-                    <td>{{appointment.hour_finish}}</td>
+                    <td>{{appointment.hour_finish}}</td> -->
                     <td>
                       {{appointment.doctor.first_name}} {{appointment.doctor.last_name}}
                     </td>
