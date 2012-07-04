@@ -32,7 +32,7 @@
                         {% for month in months %}
                             {% if month.entry %}<b>{% endif %}
                             <li>
-                                <a class={% if month.current %}"label label-info"{% else %}""{% endif %} href="{% url cal.views.month year month.n %}">{{ month.name }}</a>
+                                <a class={% if month.current %}"label label-info"{% else %}""{% endif %} href="{% url cal.views.day year month.n today %}">{{ month.name }}</a>
                                 {% if request.user.get_profile.is_doctor %}
                                     <a href="{% url cal.list_slot year month.n %}"><i class="icon-cog"></i></a>
                                 {% endif %}

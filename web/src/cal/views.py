@@ -60,7 +60,8 @@ def main(request, year=None):
                 current=current))
         lst.append((y, mlst))
 
-    data = dict(years=lst, user=request.user, year=year,
+    today = time.localtime()[2:3][0]
+    data = dict(years=lst, user=request.user, year=year, today=today,
             reminders=reminders(request))
 
     return render_to_response("cal/app/main.html", data,
