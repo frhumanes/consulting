@@ -61,6 +61,7 @@ def main(request, year=None):
         lst.append((y, mlst))
 
     today = time.localtime()[2:3][0]
+
     data = dict(years=lst, user=request.user, year=year, today=today,
             reminders=reminders(request))
 
