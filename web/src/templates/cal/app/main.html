@@ -1,0 +1,53 @@
+{% extends "ui/app.html" %}
+
+{% load i18n%}
+
+{% block header%}
+    {%if request.user.get_profile.is_doctor %}
+        {% include "ui/includes/header_doctor.html" %}
+    {% else %}
+        {% include "ui/includes/header_patient.html" %}
+    {% endif %}
+{% endblock  %}
+
+{% block body %}
+
+<div class="container">
+
+    <div class="row left">
+        <div class="span12">
+
+            <legend class="span10">{% trans 'Calendar' %}</legend>
+
+            <div class="span2">
+                <a href="{% url cal.views.main year|add:'-3' %}">&lt;&lt; Prev</a>
+            </div>
+
+            {% for year, months in years %}
+                <div class="span2 well center">
+
+                    <h2 class="label label-info">{{ year }}</h2>
+
+                    <ul class="unstyled">
+                        {% for month in months %}
+                            {% if month.entry %}<b>{% endif %}
+                            <li>
+                                <a class={% if month.current %}"label label-info"{% else %}""{% endif %} href="{% url cal.views.month year month.n %}">{{ month.name }}</a>
+                                {% if request.user.get_profile.is_doctor %}
+                                    <a href="{% url cal.list_slot year month.n %}"><i class="icon-cog"></i></a>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            {% endfor %}
+
+            <div class="span2">
+                <a href="{% url cal.views.main year|add:'3' %}">Next &gt;&gt;</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

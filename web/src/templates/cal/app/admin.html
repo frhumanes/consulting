@@ -1,0 +1,56 @@
+{% extends "ui/app.html" %}
+
+{% load i18n %}
+
+{% block header%}
+    {%if request.user.get_profile.is_doctor %}
+        {% include "ui/includes/header_doctor.html" %}
+    {% else %}
+        {% include "ui/includes/header_patient.html" %}
+    {% endif %}
+{% endblock  %}
+
+
+{% block body %}
+  <div class="container">
+      <div class="row">
+          <div class="span12">
+
+              <legend>{% trans "Appointments" %}</legend>
+
+              <div class="hero-unit center">
+                <p>{% trans 'In order to make an appointment, first you need to choose a doctor:' %}</p>
+
+                <div class="span9">
+                  <form class="form-horizontal" method="post" action="{% url cal.views.doctor_calendar year month %}">{% csrf_token %}
+                    <fieldset>
+                        <!-- DOCTOR -->
+                        {% if form.doctor.errors %}
+                          <div class="control-group error">
+                            <!-- <label for="id_doctor" class="control-label">{{form.doctor.label}}</label> -->
+                            <div class="controls">
+                              {{ form.doctor }} <button type="submit" class="btn">Go!</button>
+                              {% for error in form.doctor.errors %}
+                                 <span class="help-inline">{{ error|escape }}</span>
+                              {% endfor %}
+                            </div>
+                          </div>
+                        {% else %}
+                          <div class="control-group">
+                           <!-- <label for="id_weekday" class="control-label">{{form.doctor.label}}</label> -->
+                            <div class="controls">
+                              {{ form.doctor }} <button type="submit" class="btn">Go!</button>
+                            </div>
+                          </div>
+                        {% endif %}
+                        <!-- END DOCTOR -->
+                    </fieldset>
+                  </form>
+                </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+{% endblock body %}

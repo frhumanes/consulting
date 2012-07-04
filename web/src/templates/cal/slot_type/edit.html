@@ -1,0 +1,119 @@
+{% extends "cal/includes/base.html" %}
+
+{% load i18n messages %}
+
+{% block title %}{% trans 'Events list' %}{% endblock %}
+
+{% block left_panel %}
+  {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
+{% endblock %}
+
+{% block right_panel %}
+
+<a class="btn btn-primary" href="{% url cal.list_slot_type %}">
+  <i class="icon-arrow-left icon-white"></i>
+  {% trans 'Back' %}
+</a>
+
+  <legend>{% trans 'New Event Type' %}</legend>
+
+  <div class="offset1">
+
+<form class="form-horizontal" method="post" action="{% url cal.edit_entry_type event.id%}">{% csrf_token %}
+  <fieldset>
+
+      <!-- TITLE -->
+      {% if form.title.errors %}
+        <div class="control-group error">
+          <label for="id_title" class="control-label">{{form.title.label}}</label>
+          <div class="controls">
+            {{ form.title }}
+            {% for error in form.title.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_title" class="control-label">{{form.title.label}}</label>
+          <div class="controls">
+            {{ form.title }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END TITLE -->
+
+      <!-- DURATION -->
+      {% if form.duration.errors %}
+        <div class="control-group error">
+          <label for="id_duration" class="control-label">{{form.duration.label}}</label>
+          <div class="controls">
+            {{ form.duration }}
+            {% for error in form.duration.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_duration" class="control-label">{{form.duration.label}}</label>
+          <div class="controls">
+            {{ form.duration }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END DURATION -->
+
+      <p class="center">
+        <a id="remove-event" class="btn btn-large btn-danger" >
+          <i class="icon-minus icon-white"></i>
+          {% trans 'Delete' %}
+        </a>
+        <button class="btn btn-large btn-primary" type="submit">
+          <i class="icon-play icon-white"></i>
+          {% trans 'Save' %}</button>
+      </p>
+
+  </fieldset>
+</form>
+</div>
+
+<div id="modal-screen" class="modal hide">
+  <div class="modal-header">
+    <h3>{% trans 'Delete Event' %}</h3>
+  </div>
+  <div class="modal-body">
+    <p>"{% trans 'You are going to delete an event. Are you sure?' %}"</p>
+  </div>
+  <div class="modal-footer">
+    <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Yes' %}" data-loadingmsg="{% trans 'Removing ... ' %}">{% trans 'Yes' %}</a>
+    <a href="#" class="btn btn-primary" data-dismiss="modal">{% trans 'No' %}</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block jquery_init %}
+
+  $('#remove-event').live('click', function(event){
+    $('#modal-screen').modal({
+      'backdrop':'static',
+      'keyboard':false,
+    });
+  });
+
+  $('#confirm-delete').live('click', function(event){
+    event.preventDefault();
+    $(this).html($(this).attr('data-loadingmsg') + '<i class="icon-fire"></i>');
+
+    $(this).attr('disabled', true);
+    $(this).siblings().attr('disabled', true);
+    $(this).siblings().attr('data-dismiss', 'static');
+
+    console.log('{{event.id }}');
+  $.get('{% url cal.delete_slot_type event.id %}', function(data) {
+    window.location.href = '{% url cal.list_slot_type %}';
+  });
+
+});
+
+{% endblock %}

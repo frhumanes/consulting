@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from functools import wraps
 from django.template import RequestContext
 from django.shortcuts import render_to_response
@@ -31,3 +33,13 @@ def paginate(template_name=None, list_name='default', objects_per_page=10):
                 context_instance=RequestContext(request))
         return wraps(fn)(wrapped)
     return inner_p
+
+
+def only_doctor(func):
+    def _fn(request, *args, **kwargs):
+        if request.user.get_profile().is_doctor():
+            return func(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('cal.views.main'))
+
+    return _fn

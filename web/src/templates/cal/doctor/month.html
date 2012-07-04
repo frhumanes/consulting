@@ -1,0 +1,42 @@
+{% extends "cal/includes/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Calendar list' %}{% endblock %}
+
+{% block left_panel %}
+  {% include "cal/includes/events/calendar.html" %}
+{% endblock %}
+
+{% block right_panel %}
+    {% if events.object_list.count > 0 %}
+        <div id="message-paginator" class="pull-right">
+          <ul class="pagination ">
+            {% if events.has_previous %}
+              <li><a href="?page={{ events.previous_page_number }}">←</a></li>
+            {% else %}
+              <li class="disabled"><a>←</a></li>
+            {% endif %}
+
+            {% if events.has_next %}
+              <li><a href="?page={{ events.next_page_number }}">→</a></li>
+            {% else %}
+              <li class="disabled"><a>→</a></li>
+            {% endif %}
+          </ul>
+        </div>
+
+        <table id="message_list" class="table table-striped">
+          <thead></thead>
+          <tbody>
+            {% for event in events.object_list %}
+              {% include "cal/app/appointment.html" %}
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <div id="preview"></div>
+    {% else %}
+        <h6>{% trans "No hay citas para este día" %}</h6>
+    {% endif %}
+{% endblock %}

@@ -22,6 +22,7 @@
                     <a href="{% url consulting_index %}">
                         {% trans 'CONSULTA' %}
                     </a>
+                </li>
                 <li class="{% active_root request index_administration %}">
                     <a href="{% url consulting_index_administration %}">
                       {% trans 'ADMINISTRACIÓN' %}
@@ -34,25 +35,29 @@
                 </li>
                 <li class="{% active_root request index_statistic %}">
                     <a href="{% url consulting_stratification_statistic %}">{% trans 'ESTADÍSTICA' %}</a>
-                </li> 
+                </li>
                 <li class="{% active_root request inbox %}">
                     <a href="{% url private_messages_inbox %}">
                         {% trans 'MENSAJERÍA' %}
                     </a>
-                </li>         
+                </li>
             </ul>
             <ul class="nav pull-right">
                 <li class="navbar-text">
-                    {% trans 'Logado como '%} 
-                    {{ user.first_name }}
-                    {{ user.last_name}}
+                    {% trans 'Logado como '%}
+                </li>
+                <li class="navbar-text">
+                    <a href="{% url  conf.views.user_preferences%}">
+                        {{ user.first_name }}
+                        {{ user.last_name}}
+                    </a>
                 </li>
                 <li class="navbar-text">
                     <a href='{% url registration_logout %}'>
                         {% trans 'Salir' %}
                     </a>
                 <li>
-            </ul>                    
+            </ul>
         </div>
     </div>
   </div>

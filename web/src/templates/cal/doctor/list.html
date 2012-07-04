@@ -1,0 +1,71 @@
+{% extends "cal/includes/base.html" %}
+
+{% load i18n messages %}
+
+{% block title %}{% trans 'Events list' %}{% endblock %}
+
+{% block left_panel %}
+  {% include "cal/includes/events/calendar.html" %}
+{% endblock %}
+
+{% block right_panel %}
+
+  <legend>{{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}</legend>
+
+  <ul class="nav nav-pills">
+    <li><a class="btn btn-primary btn-large" href="{% url cal.add year month day %}">{% trans "New appointment" %}</a></li>
+  </ul>
+
+  {% if events.object_list.count > 0 %}
+    <div id="events-paginator" class="pull-right">
+      <ul class="pagination ">
+        {% if events.has_previous %}
+          <li><a href="?page={{ events.previous_page_number }}">←</a></li>
+        {% else %}
+          <li class="disabled"><a>←</a></li>
+        {% endif %}
+
+        {% if events.has_next %}
+          <li><a href="?page={{ events.next_page_number }}">→</a></li>
+        {% else %}
+          <li class="disabled"><a>→</a></li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <table id="events_list" class="table table-striped">
+      <thead>
+          <tr>
+            <th>{% trans "Start Time" %}</th>
+            <th>{% trans "End Time" %}</th>
+            <th>{% trans "Duration (min)" %}</th>
+            <th>{% trans "Patient" %}</th>
+            <th>{% trans "Appointment type" %}</th>
+            <th>{% trans "Note" %}</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for event in events.object_list %}
+          {% include "cal/app/appointment.html" %}
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div id="preview"></div>
+  {% else %}
+    <h6>{% trans "There are no appointments" %}</h6>
+  {% endif %}
+{% endblock %}
+
+{% block jquery_init %}
+var load_icon = "<img src='{{STATIC_URL}}img/loading.gif' alt='loading...'/>";
+
+$('table tbody tr').live('click', function(event){
+  var id = $(this).attr('data-msg');
+  if(id){
+    $('table').hide();
+    $('#message-paginator').hide();
+    window.location.href = '/calendar/app/edit/' +id+ '/{{ doctor.id }}';
+  }
+});
+{% endblock %}

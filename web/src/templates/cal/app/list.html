@@ -1,0 +1,79 @@
+{% extends "cal/includes/base.html" %}
+
+{% load i18n messages %}
+
+{% block title %}{% trans 'Appointments list' %}{% endblock %}
+
+{% block left_panel %}
+  {% include "cal/app/calendar.html" %}
+
+  {% if not request.user.get_profile.is_doctor %}
+    {% include "cal/app/doctor_preferences.html" %}
+  {% endif %}
+{% endblock %}
+
+{% block right_panel %}
+
+  <legend>{{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
+
+  <div class="well">
+    <p>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</p>
+  </div>
+
+  <ul class="nav nav-pills">
+    <li><a class="btn btn-primary btn-large" href="{% url cal.add year month day doctor.id%}">{% trans "New appointment" %}</a></li>
+  </ul>
+
+  {% if events.object_list.count > 0 %}
+    <div id="events-paginator" class="pull-right">
+      <ul class="pagination ">
+        {% if events.has_previous %}
+          <li><a href="?page={{ events.previous_page_number }}">←</a></li>
+        {% else %}
+          <li class="disabled"><a>←</a></li>
+        {% endif %}
+
+        {% if events.has_next %}
+          <li><a href="?page={{ events.next_page_number }}">→</a></li>
+        {% else %}
+          <li class="disabled"><a>→</a></li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <table id="events_list" class="table table-striped">
+      <thead>
+          <tr>
+            <th>{% trans "Start Time" %}</th>
+            <th>{% trans "End Time" %}</th>
+            <th>{% trans "Duration (min)" %}</th>
+            <th>{% trans "Patient" %}</th>
+            <th>{% trans "Appointment type" %}</th>
+            <th>{% trans "Note" %}</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for event in events.object_list %}
+          {% include "cal/app/appointment.html" %}
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div id="preview"></div>
+  {% else %}
+    <h6>{% trans "There is no appointments" %}</h6>
+  {% endif %}
+{% endblock %}
+
+{% block jquery_init %}
+var load_icon = "<img src='{{STATIC_URL}}img/loading.gif' alt='loading...'/>";
+
+$('table tbody tr').live('click', function(event){
+  var id = $(this).attr('data-msg');
+  if(id){
+    $('table').hide();
+    $('#message-paginator').hide();
+    window.location.href = '/calendar/app/edit/' +id+ '/' + {{ doctor.id }};
+  }
+});
+{% endblock %}

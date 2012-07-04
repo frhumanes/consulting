@@ -1,0 +1,63 @@
+{% extends "cal/includes/base.html" %}
+
+{% load i18n messages %}
+
+{% block title %}{% trans 'Type Events list' %}{% endblock %}
+
+{% block left_panel %}
+  {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
+{% endblock %}
+
+{% block right_panel %}
+
+  <legend>{% trans "Events type" %}</legend>
+
+  <ul class="nav nav-pills">
+    <li><a class="btn btn-primary btn-large" href="{% url cal.add_slot_type %}">{% trans "New slot type" %}</a></li>
+  </ul>
+
+  {% if slot_type.object_list.count > 0 %}
+    <div id="type_events-paginator" class="pull-right">
+      <ul class="pagination ">
+        {% if type_events.has_previous %}
+          <li><a href="?page={{ type_events.previous_page_number }}">←</a></li>
+        {% else %}
+          <li class="disabled"><a>←</a></li>
+        {% endif %}
+
+        {% if type_events.has_next %}
+          <li><a href="?page={{ type_events.next_page_number }}">→</a></li>
+        {% else %}
+          <li class="disabled"><a>→</a></li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <table id="events_list" class="table table-striped">
+      <thead></thead>
+      <tbody>
+        {% for slot in slot_type.object_list %}
+          {% include "cal/slot_type/slot_type.html" %}
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div id="preview"></div>
+  {% else %}
+    <h6>{% trans "There are no slots type" %}</h6>
+  {% endif %}
+{% endblock %}
+
+{% block jquery_init %}
+var load_icon = "<img src='{{STATIC_URL}}img/loading.gif' alt='loading...'/>";
+
+$('table tbody tr').live('click', function(event){
+  var id = $(this).attr('data-msg');
+  if(id){
+    $('table').hide();
+    $('#message-paginator').hide();
+    console.log(id);
+    window.location.href = '/calendar/slot/type/edit/' + id;
+  }
+});
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "conf/includes/base.html" %}
+
+{% load i18n messages %}
+
+{% block title %}{% trans 'Calendar list' %}{% endblock %}
+
+{% block left_panel %}
+  {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
+{% endblock %}
+
+{% block right_panel %}
+      <ul class="nav nav-pills">
+        <li><a class="btn btn-primary" href="{% url cal.views.main %}">{% trans "Calendar" %}</a></li>
+        <li><a class="btn btn-primary" href="{% url cal.list_slot_type %}">{% trans "Preference types" %}</a></li>
+      </ul>
+{% endblock %}
+
+{% comment %}
+
+{% extends "cal/includes/base.html" %}
+<!-- ... -->
+
+{% block content %}
+    <a href="{% url cal.views.main year|add:'-3' %}">&lt;&lt; Prev</a>
+    <a href="{% url cal.views.main year|add:'3' %}">Next &gt;&gt;</a>
+
+    {% for year, months in years %}
+        <div class="clear"></div>
+        <h4>{{ year }}</h4>
+        {% for month in months %}
+            <div class=
+            {% if month.current %}"current"{% endif %}
+            {% if not month.current %}"month"{% endif %} >
+                {% if month.entry %}<b>{% endif %}
+                <a href="{% url cal.views.month year month.n %}">{{ month.name }}</a>
+                {% if month.entry %}</b>{% endif %}
+            </div>
+
+            {% if month.n == 6 %}<br />{% endif %}
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+{% endcomment %}

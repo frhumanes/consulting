@@ -1,0 +1,40 @@
+{% load i18n %}
+
+{% regroup doctor_preferences by get_weekday_display as preferences_by_weekday %}
+<p></p>
+<legend></legend>
+
+<div class="well" style="height: 300px; overflow-y: scroll;">
+    <p><h5>{% trans 'Month Preferences' %}</h5></p>
+
+    <legend></legend>
+
+    {% for weekday in preferences_by_weekday %}
+        <h5>{{ weekday.grouper }}</h5>
+
+        <table id="doctor-calendar" class="table table-condensed">
+            <tbody>
+              {% for slot in weekday.list %}
+                <tr>
+                    <td>{{ slot.slot_type }}
+                        <p>{{ slot.start_time|time:"H:i" }} - {{ slot.end_time|time:"H:i" }}</p>
+                    </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+</div>
+
+
+{% comment %}
+    <tr data-msg="{{ slot.id }}" style="cursor:pointer" >
+        <td>{{ slot.date|date:"d M" }}</td>
+        <td>{{ slot.slot_type }}</td>
+        <td>{{ slot.note|striptags|safe|truncatewords:5 }}</td>
+        <td>{{ slot.start_time|time:"H:i" }}</td>
+        <td>{{ slot.end_time|time:"H:i" }}</td>
+        <td>{{ slot.duration }}</td>
+    </tr>
+{% endcomment %}
+

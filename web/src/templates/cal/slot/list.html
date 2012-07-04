@@ -1,0 +1,57 @@
+{% extends "cal/includes/base.html" %}
+
+{% load i18n messages %}
+
+{% block title %}{% trans 'Slots list' %}{% endblock %}
+
+{% block left_panel %}
+  {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
+{% endblock %}
+
+{% block right_panel %}
+
+  <legend>{% trans "Slots" %}</legend>
+
+  <ul class="nav nav-pills">
+    <li><a class="btn btn-primary" href="{% url cal.add_slot year month %}">{% trans "New preference" %}</a></li>
+  </ul>
+
+  {% regroup slots by get_weekday_display as slots_by_weekday %}
+
+  {% for weekday in slots_by_weekday %}
+    <table id="events_list" class="table">
+      <thead>
+        <tr>
+          <th><h3>{{ weekday.grouper }}</span></h3>
+        </tr>
+
+        <tr>
+          <th>{% trans "Slot Type" %}</th>
+          <th>{% trans "Notes" %}</th>
+          <th>{% trans "Start time" %}</th>
+          <th>{% trans "End time" %}</th>
+          <th>{% trans "Duration (min)" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% include "cal/slot/slot.html" %}
+      </tbody>
+    </table>
+  {% endfor %}
+
+    <div id="preview"></div>
+{% endblock %}
+
+{% block jquery_init %}
+var load_icon = "<img src='{{STATIC_URL}}img/loading.gif' alt='loading...'/>";
+
+$('table tbody tr').live('click', function(event){
+  var id = $(this).attr('data-msg');
+
+  if(id){
+    $('table').hide();
+    $('#message-paginator').hide();
+    window.location.href = '/calendar/slot/edit/' + id;
+  }
+});
+{% endblock %}

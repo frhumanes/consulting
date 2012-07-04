@@ -1,0 +1,47 @@
+{% extends "cal/includes/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Calendar list' %}{% endblock %}
+
+{% block left_panel %}
+  {% include "cal/app/calendar.html" %}
+
+  {% if not request.user.get_profile.is_doctor %}
+    {% include "cal/app/doctor_preferences.html" %}
+  {% endif %}
+{% endblock %}
+
+{% block right_panel %}
+Doctor: {{ doctor }}
+    {% if events.object_list.count > 0 %}
+        <div id="message-paginator" class="pull-right">
+          <ul class="pagination ">
+            {% if events.has_previous %}
+              <li><a href="?page={{ events.previous_page_number }}">←</a></li>
+            {% else %}
+              <li class="disabled"><a>←</a></li>
+            {% endif %}
+
+            {% if events.has_next %}
+              <li><a href="?page={{ events.next_page_number }}">→</a></li>
+            {% else %}
+              <li class="disabled"><a>→</a></li>
+            {% endif %}
+          </ul>
+        </div>
+
+        <table id="message_list" class="table table-striped">
+          <thead></thead>
+          <tbody>
+            {% for event in events.object_list %}
+              {% include "cal/app/appointment.html" %}
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <div id="preview"></div>
+    {% else %}
+        <h6>{% trans "There is no appointments" %}</h6>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,185 @@
+{% extends "cal/includes/base.html" %}
+
+{% load i18n messages %}
+
+{% block title %}{% trans 'Events list' %}{% endblock %}
+
+{% block left_panel %}
+  {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
+{% endblock %}
+
+{% block right_panel %}
+
+<a class="btn btn-primary" href="{% url cal.list_slot year month %}">
+  <i class="icon-arrow-left icon-white"></i>
+  {% trans 'Back' %}
+</a>
+
+
+  <legend>{% trans 'Edit Slot' %}</legend>
+
+  <div class="offset1">
+
+<form class="form-horizontal" method="post" action="{% url cal.edit_slot slot.id %}">{% csrf_token %}
+  <fieldset>
+
+      <!-- WEEKDAY -->
+      {% if form.weekday.errors %}
+        <div class="control-group error">
+          <label for="id_weekday" class="control-label">{{form.weekday.label}}</label>
+          <div class="controls">
+            {{ form.weekday }}
+            {% for error in form.weekday.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_weekday" class="control-label">{{form.weekday.label}}</label>
+          <div class="controls">
+            {{ form.weekday }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END WEEKDAY -->
+
+      <!-- SLOT_TYPE -->
+      {% if form.slot_type.errors %}
+        <div class="control-group error">
+          <label for="id_slot_type" class="control-label">{{form.slot_type.label}}</label>
+          <div class="controls">
+            {{ form.slot_type }}
+            {% for error in form.slot_type.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_event_type" class="control-label">{{form.slot_type.label}}</label>
+          <div class="controls">
+            {{ form.slot_type }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END SLOT_TYPE -->
+
+      {% comment %}
+      <!-- END_DATE -->
+      {% if form.date.errors %}
+        <div class="control-group error">
+          <label for="id_date" class="control-label">{{form.date.label}}</label>
+          <div class="controls">
+            {{ form.date }}
+            {% for error in form.date.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_end_time" class="control-label">{{form.date.label}}</label>
+          <div class="controls">
+            {{ form.date }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END END_DATE -->
+      {% endcomment %}
+
+      <!-- START_TIME -->
+      {% if form.start_time.errors %}
+        <div class="control-group error">
+          <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
+          <div class="controls">
+            {{ form.start_time }}
+            {% for error in form.start_time.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
+          <div class="controls">
+            {{ form.start_time }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END START_TIME -->
+
+      <!-- NOTE -->
+      {% if form.note.errors %}
+        <div class="control-group error">
+          <label for="id_note" class="control-label">{{form.note.label}}</label>
+          <div class="controls">
+            {{ form.note }}
+            {% for error in form.note.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_note" class="control-label">{{form.note.label}}</label>
+          <div class="controls">
+            {{ form.note }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END NOTE -->
+
+      <p class="center">
+        <a id="remove-event" class="btn btn-large btn-danger" >
+          <i class="icon-minus icon-white"></i>
+          {% trans 'Delete' %}
+        </a>
+        <button class="btn btn-large btn-primary" type="submit">
+          <i class="icon-play icon-white"></i>
+          {% trans 'Save' %}</button>
+      </p>
+
+  </fieldset>
+</form>
+</div>
+
+<div id="modal-screen" class="modal hide">
+  <div class="modal-header">
+    <h3>{% trans 'Delete Event' %}</h3>
+  </div>
+  <div class="modal-body">
+    <p>"{% trans 'You are going to delete an event. Are you sure?' %}"</p>
+  </div>
+  <div class="modal-footer">
+    <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Yes' %}" data-loadingmsg="{% trans 'Removing ... ' %}">{% trans 'Yes' %}</a>
+    <a href="#" class="btn btn-primary" data-dismiss="modal">{% trans 'No' %}</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block jquery_init %}
+$('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.start_time.value|time:"H:i" }}' });
+
+$('#remove-event').live('click', function(event){
+    $('#modal-screen').modal({
+      'backdrop':'static',
+      'keyboard':false,
+    });
+  });
+
+  $('#confirm-delete').live('click', function(event){
+    event.preventDefault();
+    $(this).html($(this).attr('data-loadingmsg') + '<i class="icon-fire"></i>');
+
+    $(this).attr('disabled', true);
+    $(this).siblings().attr('disabled', true);
+    $(this).siblings().attr('data-dismiss', 'static');
+
+  $.get('{% url cal.delete_slot slot.id %}', function(data) {
+      window.location.href = '{% url cal.list_slot year month %}';
+  });
+
+});
+
+{% endblock %}

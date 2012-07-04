@@ -1,0 +1,147 @@
+{% extends "cal/includes/base.html" %}
+
+{% load i18n messages %}
+
+{% block title %}{% trans 'Appointments list' %}{% endblock %}
+
+{% block left_panel %}
+  {% include "cal/app/calendar.html" %}
+
+  {% if not request.user.get_profile.is_doctor %}
+    {% include "cal/app/doctor_preferences.html" %}
+  {% endif %}
+
+{% endblock %}
+
+{% block right_panel %}
+
+<a class="btn btn-primary" href= "{%if request.user.get_profile.is_doctor%}{%url cal.views.day year month day%}{%else%}{%url cal.views.doctor_day year month day doctor.id%}{%endif%}">
+  <i class="icon-arrow-left icon-white"></i>
+  {% trans 'Back' %}
+</a>
+
+<p></p>
+
+<div class="well">
+  <p>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</p>
+</div>
+
+<div>
+
+<form class="form-horizontal well" method="post" action="{% url cal.add year month day doctor.id %}">{% csrf_token %}
+  <legend>{% trans 'New Appointment' %} {{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
+  <fieldset>
+      {% if not_available_error %}
+        <div class="alert alert-error">
+            <strong>{% trans '¡Error!' %}</strong>
+            {{ error_msg|escape }}
+        </div>
+      {% endif %}
+
+      <!-- EVENT_TYPE -->
+      {% if form.app_type.errors %}
+        <div class="control-group error">
+          <label for="id_event_type" class="control-label">{{form.app_type.label}}</label>
+          <div class="controls">
+            {{ form.app_type }}
+            {% for error in form.app_type.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_event_type" class="control-label">{{form.app_type.label}}</label>
+          <div class="controls">
+            {{ form.app_type }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END EVENT_TYPE -->
+
+      <!-- START_TIME -->
+      {% if form.start_time.errors %}
+        <div class="control-group error">
+          <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
+          <div class="controls">
+            {{ form.start_time }}
+            {% for error in form.start_time.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
+          <div class="controls">
+            {{ form.start_time }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END START_TIME -->
+
+      <!-- END_TIME -->
+      {% if form.end_time.errors %}
+        <div class="control-group error">
+          <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
+          <div class="controls">
+            {{ form.end_time }}
+            {% for error in form.end_time.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
+          <div class="controls">
+            {{ form.end_time }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END END_TIME -->
+
+      <!-- NOTE -->
+      {% if form.note.errors %}
+        <div class="control-group error">
+          <label for="id_note" class="control-label">{{form.note.label}}</label>
+          <div class="controls">
+            {{ form.note }}
+            {% for error in form.note.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_note" class="control-label">{{form.note.label}}</label>
+          <div class="controls">
+            {{ form.note }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END NOTE -->
+
+      <p class="center">
+        <button class="btn btn-large btn-primary" type="submit">
+          <i class="icon-play icon-white"></i>
+          {% trans 'Add' %}</button>
+      </p>
+
+  </fieldset>
+</form>
+
+{% include "cal/app/free_slots.html" %}
+
+</div>
+
+{% endblock %}
+
+{% block jquery_init %}
+
+  $('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': 'current' });
+  $('#id_end_time').timepicker({'showMeridian': false, 'defaultTime': 'current'});
+
+  $('#id_date').datepicker({'format':'dd/mm/yyyy'});
+
+{% endblock %}
