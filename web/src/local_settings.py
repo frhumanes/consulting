@@ -43,7 +43,6 @@ INSTALLED_APPS = (
     'registration',
     'private_messages',
     'connector',
-    'events_calendar',
     'log',
     'cal',
     'conf',

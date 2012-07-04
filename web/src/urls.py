@@ -2,6 +2,7 @@
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.defaults import *
 from django.contrib import admin
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -13,7 +14,6 @@ urlpatterns = patterns('',
     (r'^accounts/', include('registration.urls')),
     (r'^admin/', include(admin.site.urls)),
     (r'^messages/', include('private_messages.urls')),
-    (r'^events/', include('events_calendar.urls')),
     (r'^calendar/', include('cal.urls')),
     (r'^configuration/', include('conf.urls')),
 )
