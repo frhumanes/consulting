@@ -2,42 +2,54 @@ from django.contrib import admin
 from consulting.models import *
 
 
-class ReportAdmin(admin.ModelAdmin):
-    fieldsets = [('Reports', {'fields': ['name', 'patient', 'appointment',
-                'kind', 'observations', 'date']})]
-    list_display = ('name', 'patient', 'appointment', 'kind', 'observations',
-                    'date')
-    search_fields = ('name', 'patient', 'appointment', 'kind', 'observations',
-                    'date')
-    ordering = ('name', 'patient', 'date')
+class TaskAdmin(admin.ModelAdmin):
+    fieldsets = [('Tasks', {'fields': ['patient', 'survey', 
+                    'self_administered', 'value',
+                    'completed']})]
+    list_display = ('patient', 'survey',
+                    'self_administered', 'value',
+                    'completed')
+    search_fields = ('patient', 'survey',
+                    'self_administered', 'value',
+                    'completed')
+    ordering = ('patient', )
 
-admin.site.register(Report, ReportAdmin)
-
-
-class AppointmentAdmin(admin.ModelAdmin):
-    fieldsets = [('Appointments', {'fields': ['patient', 'doctor',
-                'questionnaire', 'answers', 'treatment', 'date', 'hour']})]
-    list_display = ('patient', 'doctor', 'questionnaire', 'treatment', 'date',
-                    'hour')
-    search_fields = ('patient', 'doctor', 'questionnaire', 'treatment', 'date',
-                    'hour')
-    ordering = ('patient', 'date')
+admin.site.register(Task, TaskAdmin)
 
 
-admin.site.register(Appointment, AppointmentAdmin)
+class RecommendationAdmin(admin.ModelAdmin):
+    fieldsets = [('Recommendations', {'fields': ['patient',
+                'content']})]
+    list_display = ('patient', 'content')
+    search_fields = ('patient', 'content')
+    ordering = ('patient', )
+
+admin.site.register(Recommendation, RecommendationAdmin)
 
 
-class QuestionnaireAdmin(admin.ModelAdmin):
-    fieldsets = [('Questionnaires', {'fields': ['survey', 'self_administered',
-                'rate', 'creation_date', 'start_date', 'end_date', 'from_date',
-                'to_date', 'completed']})]
-    list_display = ('survey', 'creation_date', 'start_date', 'end_date',
-                    'from_date', 'to_date', 'completed')
-    search_fields = ('survey', 'creation_date', 'start_date', 'end_date',
-                    'from_date', 'to_date', 'completed')
-    ordering = ('survey', 'creation_date')
+class MedicineAdmin(admin.ModelAdmin):
+    fieldsets = [('Medicines', {'fields': ['patient', 'component',
+                    'before_after_first_appointment', 'before_after_symptom',
+                    'months', 'posology']})]
+    list_display = ('patient', 'component',
+                    'before_after_first_appointment', 'before_after_symptom',
+                    'months', 'posology')
+    search_fields = ('patient', 'component',
+                    'before_after_first_appointment', 'before_after_symptom',
+                    'months', 'posology')
+    ordering = ('patient', )
 
-admin.site.register(Questionnaire, QuestionnaireAdmin)
+admin.site.register(Medicine, MedicineAdmin)
+
+
+class ResultAdmin(admin.ModelAdmin):
+    fieldsets = [('Medicines', {'fields': ['patient', 'survey', 'answers',
+                'task']})]
+    list_display = ('patient', 'survey', 'task')
+    search_fields = ('patient', 'survey', 'task')
+    ordering = ('patient',)
+
+admin.site.register(Result, ResultAdmin)
 
 
 class AnswerAdmin(admin.ModelAdmin):
@@ -49,23 +61,13 @@ class AnswerAdmin(admin.ModelAdmin):
 admin.site.register(Answer, AnswerAdmin)
 
 
-#-----------------------------------------------------------------------------#
-#--------------------------------- Treatment ---------------------------------#
-#-----------------------------------------------------------------------------#
-class TreatmentAdmin(admin.ModelAdmin):
-    fieldsets = [('Treatments', {'fields': ['patient', 'date']})]
-    list_display = ('patient', 'date')
-    search_fields = ('patient', 'date')
+class ReportAdmin(admin.ModelAdmin):
+    fieldsets = [('Reports', {'fields': ['patient', 'illness',
+                'survey', 'result']})]
+    list_display = ('patient', 'illness',
+                'survey', 'result')
+    search_fields = ('patient', 'illness',
+                'survey', 'result')
     ordering = ('patient',)
 
-admin.site.register(Treatment, TreatmentAdmin)
-
-
-class PrescriptionAdmin(admin.ModelAdmin):
-    fieldsets = [('Prescriptions', {'fields': ['treatment', 'component',
-                    'before_after', 'months', 'posology']})]
-    list_display = ('treatment', 'before_after', 'months', 'posology')
-    search_fields = ('treatment', 'before_after', 'months', 'posology')
-    ordering = ('component',)
-
-admin.site.register(Prescription, PrescriptionAdmin)
+admin.site.register(Report, ReportAdmin)
