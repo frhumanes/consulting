@@ -32,11 +32,16 @@ urlpatterns = patterns('',
     url(r'^patient_management/$', consulting_views.patient_management,
         name='consulting_index_pm'),
 
-    url(r'^patient_management/personal_data_pm/(?P<patient_user_id>\d+)$',
+    #See index_pm.html
+    url(r'^patient_management/set_patient_pm/(?P<patient_user_id>\d+)$',
+        consulting_views.set_patient_pm,
+        name='consulting_set_patient_pm'),
+
+    url(r'^patient_management/personal_data_pm/$',
         consulting_views.personal_data_pm,
         name='consulting_personal_data_pm'),
 
-    url(r'^patient_management/editpatient_pm/(?P<patient_user_id>\d+)$',
+    url(r'^editpatient_pm/(?P<patient_user_id>\d+)$',
         consulting_views.editpatient_pm,
         name='consulting_editpatient_pm'),
 
@@ -44,32 +49,29 @@ urlpatterns = patterns('',
         consulting_views.patient_identification_pm,
         name='consulting_patient_identification_pm'),
 
-    url(r'^patient_management/list_treatments_pm/$',
-        consulting_views.list_treatments_pm,
-        name='consulting_list_treatments_pm'),
-
-    url(r'^patient_management/detail_treatment_pm/$',
-        consulting_views.detail_treatment_pm,
-        name='consulting_detail_treatment_pm'),
-
+    # MEDICINES
     url(r'^searcher_component/', consulting_views.searcher_component,
         name='consulting_searcher_component'),
 
-    url(r'^patient_management/newtreatment_pm/$',
-        consulting_views.newtreatment_pm,
-        name='consulting_newtreatment_pm'),
+    url(r'^patient_management/medicines/new_medicine_pm/$',
+        consulting_views.new_medicine_pm,
+        name='consulting_new_medicine_pm'),
 
-    url(r'^patient_management/newtreatment_pm/add_prescriptions_treatment_pm/(?P<treatment_id>\d+)$',
-        consulting_views.add_prescriptions_treatment_pm,
-        name='consulting_add_prescriptions_treatment_pm'),
+    url(r'^patient_management/medicines/list_medicines_before_pm/$',
+        consulting_views.list_medicines_before_pm,
+        name='consulting_list_medicines_before_pm'),
 
-    url(r'^patient_management/remove_prescription_pm/$',
-        consulting_views.remove_prescription_pm,
-        name='consulting_remove_prescription_pm'),
+    url(r'^patient_management/medicines/list_medicines_after_pm/$',
+        consulting_views.list_medicines_after_pm,
+        name='consulting_list_medicines_after_pm'),
 
-    url(r'^patient_management/remove_treatment_pm/$',
-        consulting_views.remove_treatment_pm,
-        name='consulting_remove_treatment_pm'),
+    url(r'^patient_management/medicines/detail_medicine_pm/$',
+        consulting_views.detail_medicine_pm,
+        name='consulting_detail_medicine_pm'),
+
+    url(r'^patient_management/medicines/remove_medicine_pm/$',
+        consulting_views.remove_medicine_pm,
+        name='consulting_remove_medicine_pm'),
 
     # ADMINISTRATION: DOCTOR ROLE
     url(r'^administration/$', consulting_views.administration,
