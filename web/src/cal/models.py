@@ -85,16 +85,6 @@ class Slot(TraceableModel):
 
 
 class Appointment(TraceableModel):
-    STATUS = (
-        (settings.UNRESOLVED, _(u'Pendiente')),
-        (settings.DONE, _(u'Realizada')),
-        (settings.NOT_DONE, _(u'No Realizada')),
-        (settings.MODIFIED, _(u'Modificada')),
-        (settings.MODIFIED_DONE, _(u'Modificada/Realizada')),
-        (settings.MODIFIED_NOT_DONE, _(u'No Realizada')),
-        (settings.MODIFIED_DELETED, _(u'Modificada/Cancelada')),
-        (settings.CANCELED, _(u'Cancelada'))
-    )
 
     doctor = models.ForeignKey(User, related_name='appointment_doctor')
 
@@ -107,13 +97,12 @@ class Appointment(TraceableModel):
                                 blank=True, null=True)
 
     recommendation = models.ForeignKey(Recommendation,
-                                    related_name="recommendation_appointments")
+                                    related_name="recommendation_appointments",
+                                    blank=True, null=True)
 
     medicines = models.ManyToManyField(Medicine,
-                                    related_name="medicines_appointments")
-
-    status = models.IntegerField(_(u'Estado'), choices=STATUS, blank=True,
-                                null=True)
+                                    related_name="medicines_appointments",
+                                    blank=True, null=True)
 
     date = models.DateField(null=False, blank=False)
 
@@ -121,13 +110,6 @@ class Appointment(TraceableModel):
 
     end_time = models.TimeField(null=False, blank=False)
 
-    date_modified = models.DateTimeField(
-              _(u'Fecha y hora de modificación de la Cita'), blank=True,
-                    null=True)
-
-    date_cancel = models.DateTimeField(
-                        _(u'Fecha y hora de cancelación de la Cita'),
-                        blank=True, null=True)
     duration = models.IntegerField(null=False, blank=False)
     description = models.CharField(max_length=5000, blank=True, null=True)
 
