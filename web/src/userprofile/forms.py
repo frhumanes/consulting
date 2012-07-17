@@ -12,10 +12,9 @@ from models import Profile
 
 class ProfileForm(forms.ModelForm):
     ADULT = 18
-    ROLE = (
-        (settings.DOCTOR, _(u'Médico')),
-        (settings.ADMINISTRATIVE, _(u'Administrativo')),
-        (settings.PATIENT, _(u'Paciente')),
+    ACTIVE = (
+        (settings.ACTIVE, _(u'Activado')),
+        (settings.DEACTIVATE, _(u'Desactivado')),
     )
 
     name = forms.CharField(label=_(u'Nombre'), max_length=150)
@@ -32,10 +31,11 @@ class ProfileForm(forms.ModelForm):
     town = forms.CharField(label=_(u'Municipio'), max_length=150,
                             required=False)
     postcode = ESPostalCodeField(label=_(u'Código Postal'), required=False)
+
     dob = forms.DateField(label=_(u'Fecha de Nacimiento'),
-                    input_formats=('%d/%m/%Y',),
+                    input_formats=(settings.DATE_FORMAT,),
                     widget=DateInput(attrs={'class': 'span2', 'size': '16'},
-                                    format='%d/%m/%Y'),
+                                    format=settings.DATE_FORMAT),
                     required=False)
     status = forms.ChoiceField(label=_(u'Estado Civil'),
                                 choices=Profile.STATUS, required=False)
@@ -44,6 +44,7 @@ class ProfileForm(forms.ModelForm):
     email = forms.EmailField(label=_(u'Correo Electrónico'))
     profession = forms.CharField(label=_(u'Profesión'), max_length=150,
                                 required=False)
+    active = forms.ChoiceField(label=_(u'Estado Paciente'), choices=ACTIVE)
 
     def age(self, dob):
         today = date.today()
@@ -80,6 +81,14 @@ class ProfileForm(forms.ModelForm):
 
         return cleaned_data
 
+    def __init__(self, *args, **kwargs):
+        exclude_list = kwargs['exclude_list']
+        del kwargs['exclude_list']
+
+        super(ProfileForm, self).__init__(*args, **kwargs)
+
+        for field in exclude_list:
+            del self.fields[field]
+
     class Meta:
         model = Profile
-        exclude = ('user', 'role', 'doctor', 'search_field', 'patients')
