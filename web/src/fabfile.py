@@ -19,13 +19,13 @@ def development():
 
     env.deploy_folder = "/home/rambot/consulting"
     env.hosts = ['89.140.10.57']
-    env.user = 'rambot'
-    env.password = 'ramboFTW'
+    env.user = 'wtdeploy'
+    env.password = 'Rp53*PF[;Zp<E@Qg;ANIICA4[Pmq?pkh'
     env.local_conf_folder = "deploy/89.140.10.57"
 
     env.repo = "https://intranet.wtelecom.es/svn/consulting30/trunk/web/src"
-    env.repo_user = ''
-    env.repo_password = ''
+    env.repo_user = 'ahinojo'
+    env.repo_password = 'cmglpA2013'
 
     env.database_admin = 'root'
     env.database_admin_pass = 'cmglpa'
