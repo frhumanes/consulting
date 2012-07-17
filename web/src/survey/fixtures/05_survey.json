@@ -3,7 +3,7 @@
     "model": "survey.survey",
     "pk": 1,
     "fields": {
-      "name": "Encuesta primera visita a realizar por el doctor",
+      "name": "Valoración Inicial",
       "code": "S1",
       "blocks": [1,2,3,4]
     }
@@ -12,27 +12,27 @@
     "model": "survey.survey",
     "pk": 2,
     "fields": {
-      "name": "Encuesta visita sucesiva a realizar por el doctor",
+      "name": "Seguimiento",
       "code": "S2",
-      "blocks": [5,6]
+      "blocks": [3,4]
     }
   },
   {
     "model": "survey.survey",
     "pk": 3,
     "fields": {
-      "name": "Encuesta visita sucesiva a realizar por el paciente",
+      "name": "Comportamiento",
       "code": "S3",
-      "blocks": [3]
+      "blocks": [5,6]
     }
   },
   {
     "model": "survey.survey",
     "pk": 4,
     "fields": {
-      "name": "Encuesta visita sucesiva a realizar por el paciente",
+      "name": "Síntomas o Empeoramiento",
       "code": "S4",
-      "blocks": [4]
+      "blocks": [7]
     }
   }
 ]
