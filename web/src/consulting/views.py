@@ -16,12 +16,15 @@ from django.core.mail import send_mail
 from decorators import paginate
 from userprofile.models import Profile
 from userprofile.forms import ProfileForm
-from consulting.forms import AppointmentForm, PrescriptionForm
-from consulting.models import Appointment, Treatment, Prescription
+from consulting.forms import MedicineForm
+from cal.forms import AppointmentForm
+from consulting.models import Medicine
+from cal.models import Appointment
 from consulting.helper import strip_accents
 from medicament.models import Component, Group
 
 
+#################################### INDEX ####################################
 @login_required()
 def index(request):
 
@@ -39,6 +42,7 @@ def index(request):
                                 context_instance=RequestContext(request))
 
 
+################################### PATIENT ###################################
 def format_string(string):
     string_lower = string.lower()
     string_split = string_lower.split()
@@ -90,49 +94,6 @@ def generate_username(form):
     return username
 
 
-def create_or_update_profile(user, form, username, role):
-    name = format_string(form.cleaned_data['name'])
-    first_surname = format_string(form.cleaned_data['first_surname'])
-    second_surname = format_string(form.cleaned_data['second_surname'])
-    nif = form.cleaned_data['nif']
-
-    try:
-        profile = user.get_profile()
-    except Profile.DoesNotExist:
-        profile = Profile()
-        profile.user = user
-
-    profile.username = username
-    profile.name = name
-    profile.first_surname = first_surname
-    profile.second_surname = second_surname
-    profile.nif = nif
-    profile.email = form.cleaned_data['email']
-    profile.sex = form.cleaned_data['sex']
-    profile.address = form.cleaned_data['address']
-    profile.town = form.cleaned_data['town']
-
-    if form.cleaned_data['postcode']:
-        profile.postcode = form.cleaned_data['postcode']
-    else:
-        profile.postcode = None
-
-    profile.dob = form.cleaned_data['dob']
-    profile.status = form.cleaned_data['status']
-
-    if not form.cleaned_data['status']:
-        profile.status = -1
-    else:
-        profile.status = form.cleaned_data['status']
-
-    profile.phone1 = form.cleaned_data['phone1']
-    profile.phone2 = form.cleaned_data['phone2']
-    profile.profession = form.cleaned_data['profession']
-    profile.role = role
-
-    profile.save()
-
-
 def sendemail(user):
     subject = render_to_string(
                             'registration/identification_email_subject.txt',
@@ -157,13 +118,20 @@ def newpatient(request):
         same_username = False
 
         if request.method == "POST":
-            form = ProfileForm(request.POST)
+            if logged_user_profile.is_doctor():
+                    exclude_list = ['user', 'role', 'doctor', 'patients',
+                                    'username']
+            else:
+                exclude_list = ['user', 'role', 'doctor', 'patients',
+                                'username', 'sex', 'status', 'profession']
+            form = ProfileForm(request.POST, exclude_list=exclude_list)
             if form.is_valid():
                 username = generate_username(form)
                 try:
                     Profile.objects.get(username=username)
                     same_username = True
                 except Profile.DoesNotExist:
+                    ############################USER###########################
                     user = User.objects.create_user(username=username,
                         password=settings.DEFAULT_PASSWORD,
                         email=form.cleaned_data['email'])
@@ -174,22 +142,40 @@ def newpatient(request):
                                 format_string(
                                         form.cleaned_data['second_surname'])
                     user.email = form.cleaned_data['email']
-                    user.profile = create_or_update_profile(user,
-                                    form, username, settings.PATIENT)
                     user.save()
+                    ##########################PROFILE##########################
+                    try:
+                        profile = form.save(commit=False)
+                        #Automatic to format name, first_surname and
+                        #second_surname
+                        profile.name = format_string(form.cleaned_data['name'])
+                        profile.first_surname = format_string(
+                                        form.cleaned_data['first_surname'])
+                        profile.second_surname = format_string(
+                                        form.cleaned_data['second_surname'])
 
+                        profile.username = username
+                        profile.role = settings.PATIENT
+                        if not form.cleaned_data['postcode']:
+                            profile.postcode = None
+                        #Relationships between patient and doctor
+                        if logged_user_profile.is_doctor():
+                            profile.doctor = User.objects.get(
+                                            profile=logged_user_profile)
+                        profile.user = user
+                        profile.save()
+                    except Exception:
+                        user.delete()
+                        return HttpResponseRedirect(
+                                                reverse('consulting_index'))
+                    ###########################################################
+
+                    #Relationships between doctor and her/his patients
                     if logged_user_profile.is_doctor():
-                        # Update doctor
                         logged_user_profile.patients.add(user)
                         logged_user_profile.save()
-                        # Update patient
-                        doctor_user = User.objects.get(
-                                        profile=logged_user_profile)
-                        patient_profile = user.get_profile()
-                        patient_profile.doctor = doctor_user
-                        patient_profile.save()
 
-                    # SEND EMAIL
+                    #SEND EMAIL
                     sendemail(user)
 
                     return render_to_response(
@@ -199,7 +185,13 @@ def newpatient(request):
                                 'newpatient': True},
                                 context_instance=RequestContext(request))
         else:
-            form = ProfileForm()
+            if logged_user_profile.is_doctor():
+                exclude_list = ['user', 'role', 'doctor', 'patients',
+                                'username']
+            else:
+                exclude_list = ['user', 'role', 'doctor', 'patients',
+                            'username', 'sex', 'status', 'profession']
+            form = ProfileForm(exclude_list=exclude_list)
 
         return render_to_response('consulting/patient.html',
                                     {'form': form,
@@ -207,21 +199,6 @@ def newpatient(request):
                                     context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect(reverse('consulting_index'))
-
-
-def update_user(user, form, new_username):
-    user.username = new_username
-    user.set_password(settings.DEFAULT_PASSWORD)
-    user.first_name = format_string(form.cleaned_data['name'])
-    user.last_name = format_string(
-                        form.cleaned_data['first_surname'])\
-                        + ' ' +\
-                format_string(
-                        form.cleaned_data['second_surname'])
-    user.email = form.cleaned_data['email']
-    user.profile = create_or_update_profile(
-                                    user, form, new_username, settings.PATIENT)
-    user.save()
 
 
 @login_required()
@@ -251,6 +228,55 @@ def patient_identification_pm(request, patient_user_id):
 
 
 @login_required()
+def searcher(request):
+    logged_user_profile = request.user.get_profile()
+
+    if logged_user_profile.is_administrative() or\
+        logged_user_profile.is_doctor():
+        data = {'ok': False}
+        if request.method == 'POST':
+            start = request.POST.get("start", "")
+
+            if logged_user_profile.is_administrative():
+                profiles = Profile.objects.filter(
+                                Q(role__exact=settings.PATIENT,
+                                nif__istartswith=start)|
+                                Q(role__exact=settings.PATIENT,
+                                name__istartswith=start)|
+                                Q(role__exact=settings.PATIENT,
+                                first_surname__istartswith=start)|
+                                Q(role__exact=settings.PATIENT,
+                                second_surname__istartswith=start)).order_by(
+                                'name', 'first_surname', 'second_surname')
+            else:
+                doctor_user = logged_user_profile.user
+                profiles = Profile.objects.filter(
+                                Q(doctor=doctor_user,
+                                role__exact=settings.PATIENT,
+                                nif__istartswith=start)|
+                                Q(doctor=doctor_user,
+                                role__exact=settings.PATIENT,
+                                name__istartswith=start)|
+                                Q(doctor=doctor_user,
+                                role__exact=settings.PATIENT,
+                                first_surname__istartswith=start)|
+                                Q(doctor=doctor_user,
+                                role__exact=settings.PATIENT,
+                                second_surname__istartswith=start)).order_by(
+                                'name', 'first_surname', 'second_surname')
+            users = User.objects.filter(profile__id__in=profiles)
+
+            data = {'ok': True,
+                    'completed_names':
+                    [{'id': user.id,
+                    'label':
+                    (user.first_name + ' ' + user.last_name)}for user in users]
+                    }
+        return HttpResponse(simplejson.dumps(data))
+    return HttpResponseRedirect(reverse('consulting_index'))
+
+
+@login_required()
 def editpatient_pm(request, patient_user_id):
     logged_user_profile = request.user.get_profile()
 
@@ -267,25 +293,100 @@ def editpatient_pm(request, patient_user_id):
 
             if request.method == "POST":
                 redirect_to = request.POST.get('next', '')
-                form = ProfileForm(request.POST, instance=profile)
+                if logged_user_profile.is_doctor():
+                    exclude_list = ['user', 'role', 'doctor', 'patients',
+                                    'username', 'illnesses']
+                else:
+                    exclude_list = ['user', 'role', 'doctor', 'patients',
+                                    'username', 'illnesses', 'sex', 'status',
+                                    'profession']
+                form = ProfileForm(request.POST, instance=profile,
+                                exclude_list=exclude_list)
+
+                #Field to username
+                name = profile.name
+                first_surname = profile.first_surname
+                nif = profile.nif
+                dob = profile.dob
+
                 if form.is_valid():
-                    old_username = user.username
-                    new_username = generate_username(form)
-                    update_user(user, form, new_username)
-                    if not new_username == old_username:
+                    ######################## ACTIVE USER ######################
+                    if format_string(form.cleaned_data['active']) == '1':
+                        user.is_active = True
+                    else:
+                        user.is_active = False
+                    user.save()
+                    ###########################################################
+                    profile = form.save(commit=False)
+                    if not form.cleaned_data['postcode']:
+                        profile.postcode = None
+
+                    #Automatic to format name, first_surname and
+                    #second_surname
+                    profile.name = format_string(form.cleaned_data['name'])
+                    profile.first_surname = format_string(
+                                    form.cleaned_data['first_surname'])
+                    profile.second_surname = format_string(
+                                    form.cleaned_data['second_surname'])
+
+                    #######################CHECK USERNAME #####################
+                    #NUEVO USERNAME si se ha modificado el nombre o el
+                    #primer apellido o el nif, o si ahora el nif está vacío y
+                    #se ha modificado la fecha de nacimiento
+                    name_form = form.cleaned_data['name']
+                    first_surname_form = form.cleaned_data['first_surname']
+                    nif_form = form.cleaned_data['nif']
+                    dob_form = form.cleaned_data['dob']
+
+                    if (name != name_form or\
+                        first_surname != first_surname_form or\
+                        nif != nif_form) or\
+                        (nif_form == '' and dob != dob_form):
+                        #NUEVO username
+                        username = generate_username(form)
+                        profile.user.username = username
+                        profile.user.save()
+                        profile.username = username
+
+                        profile.save()
+
+                        #SEN EMAIL to warn new username
                         sendemail(user)
                         patient_user_id = user.id
+
                         return HttpResponseRedirect(
                             '%s?next=%s' % (
                             reverse('consulting_patient_identification_pm',
                                     args=[patient_user_id]),
                             redirect_to))
                     else:
+                        profile.save()
+
                         return HttpResponseRedirect(redirect_to)
+                else:
+                    return render_to_response('consulting/patient.html',
+                                    {'form': form,
+                                    'edit': True,
+                                    'patient_user_id': patient_user_id,
+                                    'next': redirect_to},
+                                    context_instance=RequestContext(request))
             else:
                 next = request.GET.get('next', '')
-                data = get_profile_data(profile)
-                form = ProfileForm(initial=data)
+                if logged_user_profile.is_doctor():
+                    exclude_list = ['user', 'role', 'doctor', 'patients',
+                                    'username', 'illnesses']
+                else:
+                    exclude_list = ['user', 'role', 'doctor', 'patients',
+                                    'username', 'illnesses', 'sex', 'status',
+                                    'profession']
+
+                if user.is_active:
+                    active = settings.ACTIVE
+                else:
+                    active = settings.DEACTIVATE
+
+                form = ProfileForm(instance=profile, exclude_list=exclude_list,
+                                    initial={'active': active})
 
             return render_to_response('consulting/patient.html',
                                     {'form': form,
@@ -299,26 +400,44 @@ def editpatient_pm(request, patient_user_id):
         return HttpResponseRedirect(reverse('consulting_index'))
 
 
-def get_profile_data(profile):
-    data = {'name': profile.name,
-            'first_surname': profile.first_surname,
-            'second_surname': profile.second_surname,
-            'nif': profile.nif,
-            'sex': profile.sex,
-            'address': profile.address,
-            'town': profile.town,
-            'postcode': profile.postcode,
-            'status': profile.status,
-            'dob': profile.dob,
-            'phone1': profile.phone1,
-            'phone2': profile.phone2,
-            'email': profile.email,
-            'profession': profile.profession
-            }
+@login_required()
+def set_patient_pm(request, patient_user_id):
+    logged_user_profile = request.user.get_profile()
 
-    return data
+    if logged_user_profile.is_doctor():
+        request.session['patient_user_id'] = patient_user_id
+        try:
+            patient_user = User.objects.get(id=patient_user_id)
+            return HttpResponseRedirect(reverse('consulting_personal_data_pm'))
+        except User.DoesNotExist:
+            return HttpResponseRedirect(reverse('consulting_index'))
 
 
+@login_required()
+def personal_data_pm(request):
+    logged_user_profile = request.user.get_profile()
+
+    if logged_user_profile.is_doctor():
+        patient_user_id = request.session['patient_user_id']
+        try:
+            patient_user = User.objects.get(id=patient_user_id)
+
+            # CHECK IF DOCTOR CONTAINS THIS PATIENT
+            if logged_user_profile.is_doctor():
+                if not patient_user in logged_user_profile.patients.all():
+                    return HttpResponseRedirect(reverse('consulting_index'))
+
+            return render_to_response('consulting/personal_data_pm.html',
+                        {'patient_user_id': patient_user.id,
+                        'patient_user': patient_user},
+                        context_instance=RequestContext(request))
+        except User.DoesNotExist:
+            return HttpResponseRedirect(reverse('consulting_index'))
+    else:
+        return HttpResponseRedirect(reverse('consulting_index'))
+
+
+################################# APPOINTMENT #################################
 @login_required()
 def newappointment(request, newpatient_id):
     logged_user_profile = request.user.get_profile()
@@ -431,55 +550,35 @@ def appointments_doctor(request):
                             context_instance=RequestContext(request))
 
 
+@paginate(template_name='consulting/list_patient_appointments.html',
+        list_name='patient_appointments',
+        objects_per_page=settings.OBJECTS_PER_PAGE)
+def patient_appointments(request, patient_user_id):
+    try:
+        patient_user = User.objects.get(id=patient_user_id)
+    except User.DoesNotExist:
+        return HttpResponseRedirect(reverse('consulting_index'))
+
+    patient_appointments = Appointment.objects.filter(
+                                                patient=patient_user)
+    template_data = {}
+    template_data.update({'patient_appointments': patient_appointments,
+                            'patient_user': patient_user})
+    return template_data
+
+
 @login_required()
-def searcher(request):
+def patient_management(request):
     logged_user_profile = request.user.get_profile()
 
-    if logged_user_profile.is_administrative() or\
-        logged_user_profile.is_doctor():
-        data = {'ok': False}
-        if request.method == 'POST':
-            start = request.POST.get("start", "")
-
-            if logged_user_profile.is_administrative():
-                profiles = Profile.objects.filter(
-                                Q(role__exact=settings.PATIENT,
-                                nif__istartswith=start)|
-                                Q(role__exact=settings.PATIENT,
-                                name__istartswith=start)|
-                                Q(role__exact=settings.PATIENT,
-                                first_surname__istartswith=start)|
-                                Q(role__exact=settings.PATIENT,
-                                second_surname__istartswith=start)).order_by(
-                                'name', 'first_surname', 'second_surname')
-            else:
-                doctor_user = logged_user_profile.user
-                profiles = Profile.objects.filter(
-                                Q(doctor=doctor_user,
-                                role__exact=settings.PATIENT,
-                                nif__istartswith=start)|
-                                Q(doctor=doctor_user,
-                                role__exact=settings.PATIENT,
-                                name__istartswith=start)|
-                                Q(doctor=doctor_user,
-                                role__exact=settings.PATIENT,
-                                first_surname__istartswith=start)|
-                                Q(doctor=doctor_user,
-                                role__exact=settings.PATIENT,
-                                second_surname__istartswith=start)).order_by(
-                                'name', 'first_surname', 'second_surname')
-            users = User.objects.filter(profile__id__in=profiles)
-
-            data = {'ok': True,
-                    'completed_names':
-                    [{'id': user.id,
-                    'label':
-                    (user.first_name + ' ' + user.last_name)}for user in users]
-                    }
-        return HttpResponse(simplejson.dumps(data))
-    return HttpResponseRedirect(reverse('consulting_index'))
+    if logged_user_profile.is_doctor():
+        return render_to_response('consulting/index_pm.html', {},
+                            context_instance=RequestContext(request))
+    else:
+        return HttpResponseRedirect(reverse('consulting_index'))
 
 
+################################## MEDICINE ###################################
 @login_required()
 def searcher_component(request):
     logged_user_profile = request.user.get_profile()
@@ -510,74 +609,66 @@ def searcher_component(request):
     return HttpResponseRedirect(reverse('consulting_index'))
 
 
-@paginate(template_name='consulting/list_patient_appointments.html',
-        list_name='patient_appointments',
-        objects_per_page=settings.OBJECTS_PER_PAGE)
-def patient_appointments(request, patient_user_id):
-    try:
-        patient_user = User.objects.get(id=patient_user_id)
-    except User.DoesNotExist:
-        return HttpResponseRedirect(reverse('consulting_index'))
-
-    patient_appointments = Appointment.objects.filter(
-                                                patient=patient_user)
-    template_data = {}
-    template_data.update({'patient_appointments': patient_appointments,
-                            'patient_user': patient_user})
-    return template_data
-
-
 @login_required()
-def patient_management(request):
-    logged_user_profile = request.user.get_profile()
-
-    if logged_user_profile.is_doctor():
-        return render_to_response('consulting/index_pm.html', {},
-                            context_instance=RequestContext(request))
-    else:
-        return HttpResponseRedirect(reverse('consulting_index'))
-
-
-@login_required()
-def personal_data_pm(request, patient_user_id):
-    logged_user_profile = request.user.get_profile()
-
-    if logged_user_profile.is_doctor():
-        request.session['patient_user_id'] = patient_user_id
-        try:
-            patient_user = User.objects.get(id=patient_user_id)
-
-            # CHECK IF DOCTOR CONTAINS THIS PATIENT
-            if logged_user_profile.is_doctor():
-                if not patient_user in logged_user_profile.patients.all():
-                    return HttpResponseRedirect(reverse('consulting_index'))
-
-            return render_to_response('consulting/personal_data_pm.html',
-                        {'patient_user_id': patient_user.id,
-                        'patient_user': patient_user},
-                        context_instance=RequestContext(request))
-        except User.DoesNotExist:
-            return HttpResponseRedirect(reverse('consulting_index'))
-    else:
-        return HttpResponseRedirect(reverse('consulting_index'))
-
-
-@login_required()
-@paginate(template_name='consulting/list_treatments_pm.html',
-    list_name='treatments', objects_per_page=settings.OBJECTS_PER_PAGE)
-def list_treatments_pm(request):
+def new_medicine_pm(request):
     logged_user_profile = request.user.get_profile()
 
     if logged_user_profile.is_doctor():
         patient_user_id = request.session['patient_user_id']
         patient_user = User.objects.get(id=patient_user_id)
 
-        treatments = Treatment.objects.filter(patient=patient_user).\
-                                                order_by('-date')
+        if request.method == "POST":
+            form = MedicineForm(request.POST)
+            if form.is_valid():
+                # COMPONENT CAN BE NEW OR ALREADY EXISTED
+                component_name = form.cleaned_data['searcher_component']
+                kind_component = form.cleaned_data['kind_component']
+                try:
+                    component = Component.objects.get(name=component_name,
+                                kind_component=kind_component)
+                except Component.DoesNotExist:
+                    component_group = Group.objects.get(id=-1)
+                    component = Component(name=component_name,
+                                        kind_component=kind_component)
+                    component.save()
+                    component.groups.add(component_group)
+                    component.save()
+                medicine = form.save(commit=False)
+                medicine.component = component
+                medicine.patient = patient_user
+                medicine.save()
+
+                return HttpResponseRedirect(
+                                        reverse('consulting_new_medicine_pm'))
+        else:
+            form = MedicineForm()
+
+        return render_to_response(
+                    'consulting/new_medicine_pm.html',
+                    {'form': form,
+                    'patient_user_id': patient_user_id,
+                    'patient_user': patient_user},
+                    context_instance=RequestContext(request))
+    return HttpResponseRedirect(reverse('consulting_index'))
+
+
+@login_required()
+@paginate(template_name='consulting/list_medicines_pm.html',
+    list_name='medicines', objects_per_page=settings.OBJECTS_PER_PAGE)
+def list_medicines_before_pm(request):
+    logged_user_profile = request.user.get_profile()
+
+    patient_user_id = request.session['patient_user_id']
+
+    if logged_user_profile.is_doctor():
+        patient_user = User.objects.get(id=patient_user_id)
+
+        medicines = Medicine.objects.filter(patient=patient_user,
+        before_after_first_appointment=settings.BEFORE).order_by('-date')
 
         template_data = {}
         template_data.update({'patient_user': patient_user,
-                                'treatments': treatments,
+                                'medicines': medicines,
                                 'patient_user_id': patient_user_id,
                                 'csrf_token': get_token(request)})
         return template_data
@@ -586,330 +677,82 @@ def list_treatments_pm(request):
 
 
 @login_required()
-def detail_treatment_pm(request):
+@paginate(template_name='consulting/list_medicines_pm.html',
+    list_name='medicines', objects_per_page=settings.OBJECTS_PER_PAGE)
+def list_medicines_after_pm(request):
+    logged_user_profile = request.user.get_profile()
+
+    patient_user_id = request.session['patient_user_id']
+
+    if logged_user_profile.is_doctor():
+        patient_user = User.objects.get(id=patient_user_id)
+
+        medicines = Medicine.objects.filter(patient=patient_user,
+        before_after_first_appointment=settings.AFTER).order_by('-date')
+
+        template_data = {}
+        template_data.update({'patient_user': patient_user,
+                                'medicines': medicines,
+                                'patient_user_id': patient_user_id,
+                                'csrf_token': get_token(request)})
+        return template_data
+    else:
+        return HttpResponseRedirect(reverse('consulting_index'))
+
+
+@login_required()
+def detail_medicine_pm(request):
     logged_user_profile = request.user.get_profile()
 
     if logged_user_profile.is_doctor():
         if request.method == 'POST':
-            treatment_id = request.POST.get("treatment_id", "")
+            medicine_id = request.POST.get("medicine_id", "")
             try:
-                treatment = Treatment.objects.get(id=treatment_id)
 
-                return render_to_response('consulting/detail_treatment.html',
-                    {'prescriptions': treatment.treatmentprescriptions.all()},
+                medicine = Medicine.objects.get(id=medicine_id)
+
+                return render_to_response('consulting/detail_medicine.html',
+                    {'medicine': medicine},
                         context_instance=RequestContext(request))
-            except Treatment.DoesNotExist:
+            except Medicine.DoesNotExist:
                     return HttpResponseRedirect(reverse('consulting_index'))
 
     return HttpResponseRedirect(reverse('consulting_index'))
 
 
 @login_required()
-def newtreatment_pm(request):
-    logged_user_profile = request.user.get_profile()
-
-    if logged_user_profile.is_doctor():
-        patient_user_id = request.session['patient_user_id']
-        patient_user = User.objects.get(id=patient_user_id)
-
-        treatment = Treatment(patient=patient_user,
-                                from_appointment=False,
-                                date=datetime.now())
-        treatment.save()
-
-        return HttpResponseRedirect(
-            reverse('consulting_add_prescriptions_treatment_pm',
-            args=[treatment.id]))
-
-    return HttpResponseRedirect(reverse('consulting_index'))
-
-
-@login_required()
-def add_prescriptions_treatment_pm(request, treatment_id):
-    logged_user_profile = request.user.get_profile()
-
-    if logged_user_profile.is_doctor():
-        patient_user_id = request.session['patient_user_id']
-        patient_user = User.objects.get(id=patient_user_id)
-
-        if request.method == "POST":
-            try:
-                treatment = Treatment.objects.get(id=treatment_id)
-                form = PrescriptionForm(request.POST)
-                if form.is_valid():
-                    # MEDICINE CAN BE NEW OR ALREADY EXISTED
-                    component_name = form.cleaned_data['searcher_component']
-                    kind_component = form.cleaned_data['kind_component']
-                    try:
-                        component = Component.objects.get(name=component_name,
-                                    kind_component=kind_component)
-                        prescription = form.save(commit=False)
-                        prescription.treatment = treatment
-                        prescription.component = component
-                        prescription.save()
-                    except Component.DoesNotExist:
-                        component_group = Group.objects.get(id=-1)
-                        component = Component(name=component_name,
-                                            kind_component=kind_component)
-                        component.save()
-                        component.groups.add(component_group)
-                        component.save()
-
-                        prescription = Prescription(treatment=treatment,
-                                component=component,
-                                before_after=form.cleaned_data['before_after'],
-                                months=form.cleaned_data['months'],
-                                posology=form.cleaned_data['posology'])
-                        prescription.save()
-                    #INICIALIZE FORM
-                    form = PrescriptionForm()
-                else:
-                    # ONLY GET TREATMENT OBJECT TO CAN GET ITS PRESCRIPTIONS
-                    try:
-                        treatment = Treatment.objects.get(id=treatment_id)
-                    except Treatment.DoesNotExist:
-                        return HttpResponseRedirect(
-                                                reverse('consulting_index'))
-            except Treatment.DoesNotExist:
-                return HttpResponseRedirect(reverse('consulting_index'))
-        else:
-            form = PrescriptionForm()
-
-            try:
-                treatment = Treatment.objects.get(id=treatment_id)
-            except Treatment.DoesNotExist:
-                return HttpResponseRedirect(reverse('consulting_index'))
-
-        return render_to_response(
-                    'consulting/newtreatment_pm.html',
-                    {'form': form,
-                    'patient_user_id': patient_user_id,
-                    'patient_user': patient_user,
-                    'treatment_id': treatment_id,
-                    'prescriptions': treatment.treatmentprescriptions.all()},
-                    context_instance=RequestContext(request))
-    return HttpResponseRedirect(reverse('consulting_index'))
-
-# @login_required()
-# def add_medications_treatment_pm(request, treatment_id):
-#     profile_logged_user = request.user.get_profile()
-
-#     if profile_logged_user.is_doctor():
-#         patient_id = request.session['patient_id']
-#         user_patient = User.objects.get(id=patient_id)
-#         profile_patient = user_patient.get_profile()
-
-#         if request.method == "POST":
-#             form = MedicationForm(request.POST)
-#             if form.is_valid():
-#                 # MEDICINE CAN BE NEW OR ALREADY EXISTED
-#                 medicine_name = form.cleaned_data['searcher_medicine']
-#                 try:
-#                     medicine = Medicine.objects.get(name=medicine_name)
-#                     if form.cleaned_data['medicine'].id == -1:
-#                         medication = Medication(medicine=medicine,
-#                             posology=form.cleaned_data['posology'],
-#                             months=form.cleaned_data['months'],
-#                             before_after=form.cleaned_data['before_after'])
-#                         medication.save()
-#                     else:
-#                         medication = form.save()
-#                 except Medicine.DoesNotExist:
-#                     medicine_group = Group.objects.get(id=-1)
-#                     medicine = Medicine(name=medicine_name,
-#                                         group=medicine_group)
-#                     medicine.save()
-
-#                     medication = Medication(medicine=medicine,
-#                             posology=form.cleaned_data['posology'],
-#                             months=form.cleaned_data['months'],
-#                             before_after=form.cleaned_data['before_after'])
-#                     medication.save()
-#                 # ADD MEDICATION TO TREATMENT
-#                 try:
-#                     treatment = Treatment.objects.get(id=treatment_id)
-#                     treatment.medications.add(medication)
-#                     treatment.save()
-#                 except Treatment.DoesNotExist:
-#                     return HttpResponseRedirect(reverse('consulting_index'))
-#                 #INICIALIZE FORM
-#                 form = MedicationForm()
-#             else:
-#                 # ONLY GET TREATMENT OBJECT TO CAN GET ITS MEDICATIONS
-#                 try:
-#                     treatment = Treatment.objects.get(id=treatment_id)
-#                 except Treatment.DoesNotExist:
-#                     return HttpResponseRedirect(reverse('consulting_index'))
-#         else:
-#             form = MedicationForm()
-
-#             try:
-#                 treatment = Treatment.objects.get(id=treatment_id)
-#             except Treatment.DoesNotExist:
-#                 return HttpResponseRedirect(reverse('consulting_index'))
-
-#         return render_to_response(
-#                                 'consulting/newtreatment_pm.html',
-#                                 {'form': form,
-#                                 'profile': profile_patient,
-#                                 'patient_id': patient_id,
-#                                 'treatment_id': treatment_id,
-#                                 'medications': treatment.medications.all()},
-#                                 context_instance=RequestContext(request))
-#     return HttpResponseRedirect(reverse('consulting_index'))
-
-
-# @login_required()
-# def newtreatment_pm(request):
-#     profile = request.user.get_profile()
-
-#     if profile.is_doctor():
-#         patient_id = request.session['patient_id']
-#         user = User.objects.get(id=patient_id)
-#         profile = user.get_profile()
-
-#         if request.method == "POST":
-#             form = MedicationForm(request.POST)
-#             if form.is_valid():
-#                 medicine_id = form.cleaned_data['medicine'].id
-#                 # Medicine can be new or not
-#                 if medicine_id == -1:
-#                     medicine_name = form.cleaned_data['searcher_medicine']
-#                     medicine_group = Group.objects.get(id=-1)
-#                     medicine = Medicine(name=medicine_name,
-#                                         group=medicine_group)
-#                     medicine.save()
-
-#                     medication = Medication(medicine=medicine,
-#                               posology=form.cleaned_data['posology'],
-#                               months=form.cleaned_data['months'],
-#                               before_after=form.cleaned_data['before_after'])
-#                     medication.save()
-#                 else:
-#                     medication = form.save()
-#                 #Saving treatment is distinct if table is empty or not
-#                 # treatment_id = form.cleaned_data['treatment']
-#                 treatment_id = request.POST['treatment_id']
-#                 if treatment_id:
-#                     try:
-#                         treatment = Treatment.objects.get(id=treatment_id)
-#                         treatment.medications.add(medication)
-#                         treatment.save()
-#                     except Treatment.DoesNotExist:
-#                         return render_to_response(
-#                                 'consulting/newtreatment_pm.html',
-#                                 {'form': form,
-#                                 'profile': profile,
-#                                 'patient_id': patient_id},
-#                                 context_instance=RequestContext(request))
-#                 else:
-#                     treatment = Treatment(patient=user,
-#                                             from_appointment=False,
-#                                             date=datetime.now())
-#                     treatment.save()
-#                     treatment.medications.add(medication)
-#                     treatment.save()
-#                     treatment_id = treatment.id
-
-#                 form = MedicationForm()
-#                 return render_to_response('consulting/newtreatment_pm.html',
-#                                 {'form': form,
-#                                 'profile': profile,
-#                                 'patient_id': patient_id,
-#                                 'treatment_id': treatment_id,
-#                                 'medications': treatment.medications.all()},
-#                                 context_instance=RequestContext(request))
-#             else:
-#                 #Saving treatment is distinct if table is empty or not
-#                 treatment_id = request.POST['treatment_id']
-#                 if treatment_id:
-#                     try:
-#                         treatment = Treatment.objects.get(id=treatment_id)
-#                         medications = treatment.medications.all()
-#                         return render_to_response(
-#                                     'consulting/newtreatment_pm.html',
-#                                     {'form': form,
-#                                     'profile': profile,
-#                                     'patient_id': patient_id,
-#                                     'treatment_id': treatment_id,
-#                                     'medications': medications},
-#                                     context_instance=RequestContext(request))
-#                     except Treatment.DoesNotExist:
-#                         return render_to_response(
-#                                     'consulting/newtreatment_pm.html',
-#                                     {'form': form,
-#                                     'profile': profile,
-#                                     'patient_id': patient_id},
-#                                     context_instance=RequestContext(request))
-#                 else:
-#                     return render_to_response(
-#                                     'consulting/newtreatment_pm.html',
-#                                     {'form': form,
-#                                     'profile': profile,
-#                                     'patient_id': patient_id},
-#                                     context_instance=RequestContext(request))
-#         else:
-#             form = MedicationForm()
-#         return render_to_response('consulting/newtreatment_pm.html',
-#                                 {'form': form,
-#                                 'profile': profile,
-#                                 'patient_id': patient_id},
-#                                 context_instance=RequestContext(request))
-#     return HttpResponseRedirect(reverse('consulting_index'))
-
-
-@login_required()
-def remove_prescription_pm(request):
-    logged_user_profile = request.user.get_profile()
-
-    if logged_user_profile.is_doctor():
-        if request.method == 'POST':
-            prescription_id = request.POST.get("prescription_id", "")
-            try:
-                prescription = Prescription.objects.get(id=prescription_id)
-                prescription.delete()
-
-                treatment_id = request.POST.get("treatment_id", "")
-                try:
-                    treatment = Treatment.objects.get(id=treatment_id)
-                    return render_to_response(
-                        'consulting/pharmacological_treatment_pm.html',
-                        {'prescriptions':
-                                treatment.treatmentprescriptions.all()},
-                                context_instance=RequestContext(request))
-                except Treatment.DoesNotExist:
-                    return HttpResponseRedirect(reverse('consulting_index'))
-            except Prescription.DoesNotExist:
-                return HttpResponseRedirect(reverse('consulting_index'))
-
-    return HttpResponseRedirect(reverse('consulting_index'))
-
-
-@login_required()
-@paginate(template_name='consulting/list_treatments_ajax_pm.html',
-    list_name='treatments', objects_per_page=settings.OBJECTS_PER_PAGE)
-def remove_treatment_pm(request):
+@paginate(template_name='consulting/list_medicines_ajax_pm.html',
+    list_name='medicines', objects_per_page=settings.OBJECTS_PER_PAGE)
+def remove_medicine_pm(request):
     logged_user_profile = request.user.get_profile()
     if logged_user_profile.is_doctor():
         if request.method == 'POST':
             patient_user_id = request.session['patient_user_id']
             patient_user = User.objects.get(id=patient_user_id)
-            treatment_id = request.POST.get("treatment_id", "")
+            medicine_id = request.POST.get("medicine_id", "")
             try:
-                treatment = Treatment.objects.get(id=treatment_id)
-                treatment.delete()
+                medicine = Medicine.objects.get(id=medicine_id)
+                when = medicine.before_after_first_appointment
+                medicine.delete()
 
-                treatments = Treatment.objects.filter(\
-                                patient=patient_user).order_by('-date')
+                if when == settings.BEFORE:
+                    medicines = Medicine.objects.filter(patient=patient_user,
+                            before_after_first_appointment=settings.BEFORE)\
+                            .order_by('-date')
+                else:
+                    medicines = Medicine.objects.filter(patient=patient_user,
+                            before_after_first_appointment=settings.AFTER)\
+                            .order_by('-date')
 
                 template_data = {}
-                template_data.update({'treatments': treatments})
+                template_data.update({'medicines': medicines})
                 return template_data
-            except Treatment.DoesNotExist:
+            except Medicine.DoesNotExist:
                 return HttpResponseRedirect(reverse('consulting_index'))
     return HttpResponseRedirect(reverse('consulting_index'))
 
 
+###############################################################################
 @login_required()
 def administration(request):
     logged_user_profile = request.user.get_profile()
@@ -921,6 +764,7 @@ def administration(request):
         return HttpResponseRedirect(reverse('consulting_index'))
 
 
+################################## STADISTICS #################################
 @login_required()
 def stratification(request):
     logged_user_profile = request.user.get_profile()
