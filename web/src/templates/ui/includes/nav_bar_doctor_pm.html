@@ -1,26 +1,13 @@
 {% load i18n%}
 {% load consulting %}
 
-<script type="text/javascript">
-  $(document).ready(function(){
-    if($("#list").attr('class')=='active' || $("#new").attr('class')=='active')
-    {      
-      $("#component").addClass('active')
-    }
-    else{
-      $("#component").removeClass('active')
-    }
-  })
-</script>
-
-{% url consulting_personal_data_pm patient_user_id as personal_data %}
-{% url consulting_list_treatments_pm as list_treatments %}
-{% url consulting_newtreatment_pm as newtreatment %}
+{% url consulting_personal_data_pm as personal_data %}
+{% url consulting_list_medicines_before_pm as list_medicines_before %}
 
 <div class="subnav">
   <ul class="nav nav-pills">
     <li class="{% active_child request personal_data %}">
-      <a href="{% url consulting_personal_data_pm patient_user_id %}">
+      <a href="{% url consulting_personal_data_pm %}">
         {% trans 'DATOS PERSONALES' %}
       </a>
     </li>    
@@ -39,22 +26,10 @@
         {% trans 'PARÁMETROS' %}
       </a>
     </li>
-    <li id="component" class="dropdown">
-      <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-        {% trans 'FÁRMACOS' %} <b class="caret"></b>
-      </a>
-      <ul class="dropdown-menu">
-        <li id="list" class="{% active_child request list_treatments %}">
-          <a href="{% url consulting_list_treatments_pm %}">
-            {% trans 'Listado de Tratamientos Farmacológicos' %}
-          </a>
-        </li>
-        <li id="new" class="{% active_child request newtreatment %}">
-          <a href="{% url consulting_newtreatment_pm %}">
-            {% trans 'Nuevo Tratamiento Farmacológico' %}
-          </a>
-        </li>
-      </ul>
+    <li class="{% active_child request list_medicines_before %}">
+      <a href="{% url consulting_list_medicines_before_pm %}">
+        {% trans 'FÁRMACOS' %}
+      </a>      
     </li>
     <li>
       <a href="#">
