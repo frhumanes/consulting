@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- encoding: utf-8 -*-
 
 from django.db import models
@@ -8,6 +7,7 @@ from django.conf import settings
 
 class Group(models.Model):
     name = models.CharField(_(u'Nombre del grupo'), max_length=40, blank=True)
+
     adverse_reaction = models.CharField(_(u'Reacciones Adversas'),
                         max_length=255)
 
@@ -21,10 +21,11 @@ class Component(models.Model):
         (settings.MEDICINE, _(u'Fármaco(nombre comercial)')),
     )
 
-    groups = models.ManyToManyField(Group, related_name='groupcomponents')
+    groups = models.ManyToManyField(Group, related_name='groups_components')
 
     kind_component = models.IntegerField(_(u'Tipo de componente'),
                                         choices=KIND)
+
     name = models.CharField(_(u'Nombre del componente'), max_length=255,
                             blank=True)
 
