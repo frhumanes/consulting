@@ -10,6 +10,5 @@ from decorators import only_doctor
 @login_required
 @only_doctor
 def user_preferences(request):
-
     return render_to_response("conf/preferences.html",
         context_instance=RequestContext(request))

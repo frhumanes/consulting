@@ -2,24 +2,36 @@
 
 {% load i18n messages %}
 
-{% block title %}{% trans 'Events list' %}{% endblock %}
+{% block title %}{% trans 'Vacations list' %}{% endblock %}
 
 {% block left_panel %}
-  {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
+  {% comment %}
+    {% include "cal/includes/calendar.html" %}
+
+    {% if not request.user.get_profile.is_doctor %}
+      {% include "cal/app/doctor_preferences.html" %}
+    {% endif %}
+  {% endcomment %}
+
 {% endblock %}
 
 {% block right_panel %}
 
-<a class="btn btn-primary" href="{% url cal.list_slot_type %}">
+<a class="btn btn-primary" href= "{% url cal.list_vacation %}">
   <i class="icon-arrow-left icon-white"></i>
   {% trans 'Back' %}
 </a>
 
-  <legend>{% trans 'New Slot Type' %}</legend>
+<p></p>
 
-  <div class="offset1">
+<div class="well">
+  <p>Dr. {{ request.user.get_profile.name }} {{ request.user.get_profile.first_surname }}</p>
+</div>
 
-<form class="form-horizontal" method="post" action="{% url cal.add_slot_type %}">{% csrf_token %}
+<div>
+
+<form class="form-horizontal well" method="post" action="{% url cal.add_vacation %}">{% csrf_token %}
+  <legend>{% trans 'New Vacation' %}</legend>
   <fieldset>
 
       {% if  form.non_field_errors  %}
@@ -31,47 +43,28 @@
         </div>
       {% endif %}
 
-      <!-- TITLE -->
-      {% if form.title.errors %}
+      <!-- DATE -->
+      {% if form.date.errors %}
         <div class="control-group error">
-          <label for="id_title" class="control-label">{{form.title.label}}</label>
+          <label for="id_date" class="control-label">{{form.date.label}}</label>
           <div class="controls">
-            {{ form.title }}
-            {% for error in form.title.errors %}
+            {{ form.date }}
+            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-calendar"></i>
+            {% for error in form.date.errors %}
                <span class="help-inline">{{ error|escape }}</span>
             {% endfor %}
           </div>
         </div>
       {% else %}
         <div class="control-group">
-          <label for="id_title" class="control-label">{{form.title.label}}</label>
+          <label for="id_date" class="control-label">{{form.date.label}}</label>
           <div class="controls">
-            {{ form.title }}
+            {{ form.date }}
+            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-calendar"></i>
           </div>
         </div>
       {% endif %}
-      <!-- END TITLE -->
-
-      <!-- DURATION -->
-      {% if form.duration.errors %}
-        <div class="control-group error">
-          <label for="id_duration" class="control-label">{{form.duration.label}}</label>
-          <div class="controls">
-            {{ form.duration }}
-            {% for error in form.duration.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
-          </div>
-        </div>
-      {% else %}
-        <div class="control-group">
-          <label for="id_duration" class="control-label">{{form.duration.label}}</label>
-          <div class="controls">
-            {{ form.duration }}
-          </div>
-        </div>
-      {% endif %}
-      <!-- END DURATION -->
+      <!-- END DATE -->
 
       <!-- DESCRIPTION -->
       {% if form.description.errors %}
@@ -102,7 +95,13 @@
 
   </fieldset>
 </form>
+
 </div>
+
 {% endblock %}
 
-{% block jquery_init %}{% endblock %}
+{% block jquery_init %}
+
+  $('#id_date').datepicker({'format':'dd/mm/yyyy'});
+
+{% endblock %}

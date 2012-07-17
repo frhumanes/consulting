@@ -2,20 +2,22 @@
 
 {% load i18n messages %}
 
-{% block title %}{% trans 'Appointments list' %}{% endblock %}
+{% block title %}{% trans 'Vacations list' %}{% endblock %}
 
 {% block left_panel %}
-  {% include "cal/includes/calendar.html" %}
+  {% comment %}
+    {% include "cal/includes/calendar.html" %}
 
-  {% if not request.user.get_profile.is_doctor %}
-    {% include "cal/app/doctor_preferences.html" %}
-  {% endif %}
+    {% if not request.user.get_profile.is_doctor %}
+      {% include "cal/app/doctor_preferences.html" %}
+    {% endif %}
+  {% endcomment %}
 
 {% endblock %}
 
 {% block right_panel %}
 
-<a class="btn btn-primary" href= "{%if request.user.get_profile.is_doctor%}{%url cal.views.day year month day%}{%else%}{%url cal.views.doctor_day year month day doctor.id%}{%endif%}">
+<a class="btn btn-primary" href= "{% url cal.list_event %}">
   <i class="icon-arrow-left icon-white"></i>
   {% trans 'Back' %}
 </a>
@@ -23,20 +25,14 @@
 <p></p>
 
 <div class="well">
-  <p>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</p>
+  <p>Dr. {{ request.user.get_profile.name }} {{ request.user.get_profile.first_surname }}</p>
 </div>
 
 <div>
 
-<form class="form-horizontal well" method="post" action="{% url cal.add year month day doctor.id %}">{% csrf_token %}
-  <legend>{% trans 'New Appointment' %} {{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
+<form class="form-horizontal well" method="post" action="{% url cal.add_event %}">{% csrf_token %}
+  <legend>{% trans 'New Event' %}</legend>
   <fieldset>
-      {% if not_available_error %}
-        <div class="alert alert-error">
-            <strong>{% trans '¡Error!' %}</strong>
-            {{ error_msg|escape }}
-        </div>
-      {% endif %}
 
       {% if  form.non_field_errors  %}
         <div class="alert alert-error">
@@ -47,26 +43,28 @@
         </div>
       {% endif %}
 
-      <!-- EVENT_TYPE -->
-      {% if form.app_type.errors %}
+      <!-- DATE -->
+      {% if form.date.errors %}
         <div class="control-group error">
-          <label for="id_event_type" class="control-label">{{form.app_type.label}}</label>
+          <label for="id_date" class="control-label">{{form.date.label}}</label>
           <div class="controls">
-            {{ form.app_type }}
-            {% for error in form.app_type.errors %}
+            {{ form.date }}
+            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-calendar"></i>
+            {% for error in form.date.errors %}
                <span class="help-inline">{{ error|escape }}</span>
             {% endfor %}
           </div>
         </div>
       {% else %}
         <div class="control-group">
-          <label for="id_event_type" class="control-label">{{form.app_type.label}}</label>
+          <label for="id_date" class="control-label">{{form.date.label}}</label>
           <div class="controls">
-            {{ form.app_type }}
+            {{ form.date }}
+            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-calendar"></i>
           </div>
         </div>
       {% endif %}
-      <!-- END EVENT_TYPE -->
+      <!-- END DATE -->
 
       <!-- START_TIME -->
       {% if form.start_time.errors %}
@@ -84,8 +82,8 @@
         <div class="control-group">
           <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
           <div class="controls">
-              {{ form.start_time }}
-              <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+            {{ form.start_time }}
+            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
           </div>
         </div>
       {% endif %}
@@ -143,8 +141,6 @@
 
   </fieldset>
 </form>
-
-{% include "cal/app/free_slots.html" %}
 
 </div>
 

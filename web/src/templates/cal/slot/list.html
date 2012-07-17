@@ -12,9 +12,15 @@
 
   <legend>{% trans "Slots" %}</legend>
 
-  <ul class="nav nav-pills">
-    <li><a class="btn btn-primary" href="{% url cal.add_slot year month %}">{% trans "New preference" %}</a></li>
-  </ul>
+  <div class="row">
+    <div class="span5">
+      <div class="btn-toolbar" style="margin-bottom: 9px">
+          <div class="btn-group">
+            <a class="btn btn-primary btn" href="{% url cal.add_slot year month %}"><i class="icon-pencil icon-white"></i> {% trans "New preference" %}</a>
+          </div>
+      </div>
+    </div>
+  </div>
 
   {% regroup slots by get_weekday_display as slots_by_weekday %}
 

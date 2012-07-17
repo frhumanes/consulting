@@ -13,7 +13,6 @@
 {% block body %}
 
 <div class="container">
-
     <div class="row left">
         <div class="span12">
 
@@ -30,7 +29,12 @@
                         {% for month in months %}
                             {% if month.entry %}<b>{% endif %}
                             <li>
-                                <a class={% if month.current %}"label label-info"{% else %}""{% endif %} href="{% url cal.views.day year month.n today %}">{{ month.name }}</a>
+                                <a class={% if month.current %}"label label-info"{% else %}""{% endif %}
+                                href={% if request.user.get_profile.is_doctor %}
+                                        "{% url cal.views.day year month.n today %}"
+                                     {% else %}
+                                        "{% url cal.views.doctor_calendar year month.n %}"
+                                     {% endif %}>{{ month.name }}</a>
                                 {% if request.user.get_profile.is_doctor %}
                                     <a href="{% url cal.list_slot year month.n %}"><i class="icon-cog"></i></a>
                                 {% endif %}

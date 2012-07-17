@@ -1,0 +1,2 @@
+.table-nohover tbody tr:hover td, .table tbody tr:hover th { background-color: transparent; }
+.table-hover-element tbody tr td:hover { background-color: #eeeeee; }

@@ -2,7 +2,7 @@
   <tr data-msg="{{ slot.id }}" style="cursor:pointer" >
     {% comment %}<td>{{ slot.date|date:"d M" }}</td>{% endcomment %}
     <td>{{ slot.slot_type }}</td>
-    <td>{{ slot.note|striptags|safe|truncatewords:5 }}</td>
+    <td>{{ slot.description|striptags|safe|truncatewords:5 }}</td>
     <td>{{ slot.start_time|time:"H:i" }}</td>
     <td>{{ slot.end_time|time:"H:i" }}</td>
     <td>{{ slot.duration }}</td>

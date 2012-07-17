@@ -1,0 +1,4 @@
+<tr data-msg="{{ vacation.id }}" style="cursor:pointer">
+  <td>{{ vacation.date|date:"d M Y" }}</td>
+  <td>{{ vacation.description|striptags|safe|truncatewords:5 }}</td>
+</tr>

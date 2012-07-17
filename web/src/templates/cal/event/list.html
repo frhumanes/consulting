@@ -5,17 +5,19 @@
 {% block title %}{% trans 'Events list' %}{% endblock %}
 
 {% block left_panel %}
-  {% include "cal/includes/calendar.html" %}
+  {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
 {% endblock %}
 
 {% block right_panel %}
-  <legend>{{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
 
+  <legend>{% trans "Events" %}</legend>
+
+ <!-- Button Toolbar -->
   <div class="row">
     <div class="span5">
       <div class="btn-toolbar" style="margin-bottom: 9px">
           <div class="btn-group">
-            <a class="btn btn-primary btn" href="{% url cal.add year month day %}"><i class="icon-pencil icon-white"></i> {% trans "New appointment" %}</a>
+            <a class="btn btn-primary btn" href="{% url cal.add_event %}"><i class="icon-calendar icon-white"></i> {% trans "Add event" %}</a>
           </div>
       </div>
     </div>
@@ -41,24 +43,20 @@
     <table id="events_list" class="table table-striped">
       <thead>
           <tr>
-            <th>{% trans "Start Time" %}</th>
-            <th>{% trans "End Time" %}</th>
-            <th>{% trans "Duration (min)" %}</th>
-            <th>{% trans "Patient" %}</th>
-            <th>{% trans "Appointment type" %}</th>
-            <th>{% trans "Note" %}</th>
+            <th>{% trans "Date" %}</th>
+            <th>{% trans "Description" %}</th>
           </tr>
       </thead>
       <tbody>
         {% for event in events.object_list %}
-          {% include "cal/app/appointment.html" %}
+          {% include "cal/event/event.html" %}
         {% endfor %}
       </tbody>
     </table>
 
     <div id="preview"></div>
   {% else %}
-    <h6>{% trans "There are no appointments" %}</h6>
+    <h6>{% trans "There are no events" %}</h6>
   {% endif %}
 {% endblock %}
 
@@ -70,7 +68,7 @@ $('table tbody tr').live('click', function(event){
   if(id){
     $('table').hide();
     $('#message-paginator').hide();
-    window.location.href = '/calendar/app/edit/' +id+ '/{{ doctor.id }}';
+    window.location.href = '/calendar/event/edit/' +id;
   }
 });
 {% endblock %}

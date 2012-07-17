@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 
+from datetime import datetime, date
 from django.db.models import Manager
 from cal import settings as app_settings
-from datetime import datetime, date
 
 
 class SlotManager(Manager):
@@ -12,39 +12,60 @@ class SlotManager(Manager):
 
 class AppointmentManager(Manager):
     def availability(self, doctor, app_date, app_to_check=None, edit=False):
+        #from django.db.models import Q
+        #Q(app_type__vacation=True) | Q(app_type__event=True),
+
         apps = self.get_query_set()\
-                    .filter(doctor=doctor,
+                    .filter(
+                        doctor=doctor,
                         date__year=app_date.year,
                         date__month=app_date.month,
-                        date__day=app_date.day).order_by('start_time')
+                        date__day=app_date.day)\
+                    .order_by('start_time')
 
         if edit and not app_to_check is None:
             apps = apps.exclude(id=app_to_check.id).order_by('start_time')
+
+        from cal.models import Event
+        events = Event.objects\
+            .filter(
+                doctor=doctor,
+                date__year=app_date.year,
+                date__month=app_date.month,
+                date__day=app_date.day)\
+            .order_by('start_time')
+
+        app_and_evt = list(apps) + list(events)
+
+        if app_and_evt:
+            app_and_evt = sorted(app_and_evt, key=lambda x: x.start_time)
 
         free_intervals = None
         matchings = None
         available = True
         matched = True
 
-        if apps.count() > 0:
+        if len(app_and_evt) > 0:
             free_intervals = []
 
-            if apps[0].start_time > app_settings.START_TIME:
-                z = datetime.combine(date.today(), apps[0].start_time) - \
-                        datetime.combine(date.today(), app_settings.START_TIME)
+            if app_and_evt[0].start_time > app_settings.START_TIME:
+                z = datetime.combine(date.today(),
+                    app_and_evt[0].start_time) - \
+                    datetime.combine(date.today(), app_settings.START_TIME)
                 #if z.seconds > 0:
                 first = {
-                        'id': apps[0].id,
+                        'id': app_and_evt[0].id,
                         'start_time': app_settings.START_TIME,
-                        'end_time': apps[0].start_time,
+                        'end_time': app_and_evt[0].start_time,
                         'duration': z.seconds / 60}
                 free_intervals.append(first)
                 # a = app_settings.START_TIME
-                a = apps[0].start_time
+                # a = apps[0].start_time
+                a = app_and_evt[0].end_time
             else:
-                a = apps[0].end_time
+                a = app_and_evt[0].end_time
 
-            appointments = apps[1:apps.count()]
+            appointments = app_and_evt[1:len(app_and_evt)]
 
             for app in appointments:
                 z = datetime.combine(date.today(), app.start_time) - \
@@ -58,7 +79,7 @@ class AppointmentManager(Manager):
                 a = app.end_time
                 free_intervals.append(interval)
 
-            latest = apps[apps.count() - 1]
+            latest = app_and_evt[len(app_and_evt) - 1]
 
             if latest.end_time < app_settings.END_TIME:
                 z = datetime.combine(date.today(), app_settings.END_TIME) - \

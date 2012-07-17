@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 from datetime import date, datetime, timedelta
+from datetime import time as ttime
 import time
 import json
 
@@ -17,23 +18,28 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 
-from decorators import paginate, only_doctor
+from decorators import paginate
+from decorators import only_doctor
 
 from cal.models import Slot
 from cal.models import SlotType
 from cal.models import Appointment
+from cal.models import Vacation
+from cal.models import Event
 
 from cal.forms import SlotForm
 from cal.forms import SlotTypeForm
 from cal.forms import DoctorSelectionForm
 from cal.forms import AppointmentForm
+from cal.forms import VacationForm
+from cal.forms import EventForm
 
 from cal.utils import create_calendar
 from cal.utils import add_minutes
 from cal.utils import get_weekday
 from cal.utils import mnames
 from cal.utils import get_doctor_preferences
-from cal.utils import reminders
+from cal.utils import check_vacations
 
 
 @login_required
@@ -62,8 +68,7 @@ def main(request, year=None):
 
     today = time.localtime()[2:3][0]
 
-    data = dict(years=lst, user=request.user, year=year, today=today,
-            reminders=reminders(request))
+    data = dict(years=lst, user=request.user, year=year, today=today)
 
     return render_to_response("cal/app/main.html", data,
         context_instance=RequestContext(request))
@@ -84,9 +89,8 @@ def month(request, year, month, change=None):
 
         year, month = (now + mod).timetuple()[:2]
 
-    lst = create_calendar(year, month)
-
     if request.user.get_profile().is_doctor():
+        lst = create_calendar(year, month, doctor=request.user)
         return render_to_response("cal/doctor/month.html",
             dict(year=year, month=month, user=request.user,
                 month_days=lst, mname=mnames[month - 1]),
@@ -100,10 +104,11 @@ def month(request, year, month, change=None):
 @paginate(template_name='cal/doctor/list.html', list_name='events',
     objects_per_page=settings.OBJECTS_PER_PAGE)
 def day(request, year, month, day):
-    events = Appointment.objects.filter(date__year=year, date__month=month,
-        date__day=day, doctor=request.user).order_by('start_time')
 
-    lst = create_calendar(int(year), int(month))
+    events = Appointment.objects.filter(date__year=year, date__month=month,
+            date__day=day, doctor=request.user).order_by('start_time')
+
+    lst = create_calendar(int(year), int(month), doctor=request.user)
 
     template_data = dict(year=year, month=month, day=day, user=request.user,
         month_days=lst, mname=mnames[int(month) - 1], events=events,
@@ -116,13 +121,26 @@ def day(request, year, month, day):
 def app_add(request, year, month, day, id_doctor=None):
     if request.user.get_profile().is_doctor():
         doctor = request.user
-        lst = create_calendar(int(year), int(month))
+        lst = create_calendar(int(year), int(month), doctor=doctor)
     else:
         if id_doctor:
             doctor = get_object_or_404(User, pk=int(id_doctor))
-            lst = create_calendar(int(year), int(month), user=doctor)
+            lst = create_calendar(int(year), int(month), doctor=doctor)
         else:
             return HttpResponseRedirect(reverse('cal.views.main'))
+
+    vacations = check_vacations(doctor, year, month, day)
+
+    if vacations:
+        return render_to_response("cal/app/edit.html",
+                {'vacations': vacations,
+                 'year': int(year), 'month': int(month), 'day': int(day),
+                 'month_days': lst,
+                 'doctor': doctor,
+                 'not_available_error': True,
+                 'error_msg': _('Appointment can not be set. '\
+                    'Please, choose another time interval')},
+                context_instance=RequestContext(request))
 
     mname = mnames[int(month) - 1]
 
@@ -135,32 +153,52 @@ def app_add(request, year, month, day, id_doctor=None):
             'doctor': doctor.id,
             'created_by': request.user.id,
             'date': date(int(year), int(month), int(day)),
-            'patient': 5 #WARNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            'patient': 5 # WARNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         })
 
         id_app_type = request.POST.get('app_type', None)
         start_time = request.POST.get('start_time', None)
+        end_time = request.POST.get('end_time', None)
 
-        if id_app_type and start_time:
+        if id_app_type:
             app_type = get_object_or_404(SlotType, pk=int(id_app_type))
-            end_time = request.POST.get('end_time', None)
+            duration = app_type.duration
+            request_params.update({'app_type': app_type.id})
 
-            if not end_time:
+            if end_time:
+                end_time = time.strptime(end_time, '%H:%M')
+                end_time = ttime(end_time[3], end_time[4], end_time[5])
+
+                if start_time:
+                    start_time = time.strptime(start_time, '%H:%M')
+                    start_time = ttime(start_time[3], start_time[4], start_time[5])
+                    duration = (datetime.combine(date.today(), end_time) - \
+                        datetime.combine(date.today(), start_time)).seconds
+                    del request_params['app_type']
+            else:
+                if start_time:
+                    start_time = time.strptime(start_time, '%H:%M')
+                    end_time = add_minutes(start_time, duration)
+                    start_time = ttime(start_time[3], start_time[4], start_time[5])
+
+            request_params.update({'start_time': start_time,
+                    'end_time': end_time, 'duration': duration})
+        else:
+            if start_time and end_time:
                 start_time = time.strptime(start_time, '%H:%M')
-                end_time = add_minutes(start_time, app_type.duration)
-                request_params.update({'end_time': end_time})
+                start_time = ttime(start_time[3], start_time[4], start_time[5])
 
-            request_params.update({'duration': app_type.duration,
-                'app_type': app_type.id})
+                end_time = time.strptime(end_time, '%H:%M')
+                end_time = ttime(end_time[3], end_time[4], end_time[5])
+
+                duration = (datetime.combine(date.today(), end_time) - \
+                    datetime.combine(date.today(), start_time)).seconds
+
+                request_params.update({'start_time': start_time,
+                    'end_time': end_time, 'duration': duration / 60})
 
         form = AppointmentForm(request_params, user=doctor)
-        """
-        free_intervals = Appointment.objects.get_free_intervals(doctor,
-        date(int(year), int(month), int(day)))
 
-        matched = Appointment.objects.match_interval(form.save(commit=False),
-                free_intervals)
-        """
         if form.is_valid():
             pre_save_instance = form.save(commit=False)
             available, free_intervals = Appointment.objects.availability(
@@ -223,10 +261,17 @@ def app_edit(request, pk, id_doctor=None):
 
     if not request.user.get_profile().is_doctor():
         doctor = get_object_or_404(User, pk=int(id_doctor))
-        lst = create_calendar(year, month, user=doctor)
+        lst = create_calendar(year, month, doctor=doctor)
     else:
         doctor = request.user
-        lst = create_calendar(year, month, user=doctor)
+        lst = create_calendar(year, month, doctor=doctor)
+
+    vacations = check_vacations(doctor, year, month, day)
+
+    if vacations:
+        return render_to_response("cal/app/edit.html",
+                {'vacations': vacations},
+                context_instance=RequestContext(request))
 
     doctor_preferences = get_doctor_preferences(year=year, month=month,
         day=day, doctor=id_doctor)
@@ -237,21 +282,56 @@ def app_edit(request, pk, id_doctor=None):
             'doctor': doctor.id,
             'created_by': request.user.id,
             'date': app.date,
-            'patient': 5 #WARNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            'patient': 5 # WARNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         })
 
-        form = AppointmentForm(request_params, instance=app, user=doctor)
-
+        start_time = request.POST.get('start_time', None)
         end_time = request.POST.get('end_time', None)
-        if not end_time:
-            start_time = request.POST.get('start_time', None)
-            start_time = time.strptime(start_time, '%H:%M')
-            end_time = add_minutes(start_time, app.app_type.duration)
-            request_params.update({'end_time': end_time})
+        app_type = request.POST.get('app_type', None)
+
+        if not app_type is None and not app_type == '':
+            app_type = get_object_or_404(SlotType, pk=int(app_type))
+
+            duration = app_type.duration
+            request_params.update({'app_type': app_type.id})
+
+            if end_time:
+                end_time = time.strptime(end_time, '%H:%M')
+                end_time = ttime(end_time[3], end_time[4], end_time[5])
+
+                if start_time:
+                    start_time = time.strptime(start_time, '%H:%M')
+                    start_time = ttime(start_time[3], start_time[4], start_time[5])
+                    duration = (datetime.combine(date.today(), end_time) - \
+                        datetime.combine(date.today(), start_time)).seconds / 60
+                    del request_params['app_type']
+            else:
+                if start_time:
+                    start_time = time.strptime(start_time, '%H:%M')
+                    end_time = add_minutes(start_time, duration)
+                    start_time = ttime(start_time[3], start_time[4], start_time[5])
+
+            request_params.update({'start_time': start_time,
+                    'end_time': end_time, 'duration': duration})
+        else:
+            if end_time:
+                end_time = time.strptime(end_time, '%H:%M')
+                end_time = ttime(end_time[3], end_time[4], end_time[5])
+
+                if start_time:
+                    start_time = time.strptime(start_time, '%H:%M')
+                    start_time = ttime(start_time[3], start_time[4], start_time[5])
+
+                    duration = datetime.combine(date.today(), end_time) - \
+                        datetime.combine(date.today(), start_time)
+                    request_params.update({'end_time': end_time,
+                        'start_time': start_time,
+                        'duration': duration.seconds / 60})
 
         selected_date = date(int(year), int(month), int(day))
-        request_params.update({'duration': app.app_type.duration,
-            'weekday': get_weekday(selected_date)})
+        request_params.update({'weekday': get_weekday(selected_date)})
+
+        form = AppointmentForm(request_params, instance=app, user=doctor)
 
         if form.is_valid():
             pre_edit_instance = form.save(commit=False)
@@ -317,15 +397,15 @@ def app_delete(request):
         event.delete()
 
         try:
-            return HttpResponse(json.dumps({'action': 'True'}),
+            return HttpResponse(json.dumps({'action': True}),
                 status=200,
                 mimetype='application/json')
         except:
-            return HttpResponse(json.dumps({'action': 'False'}),
+            return HttpResponse(json.dumps({'action': False}),
                 status=200,
                 mimetype='application/json')
     else:
-        return HttpResponse(json.dumps({'action': 'False'}),
+        return HttpResponse(json.dumps({'action': False}),
                 status=200,
                 mimetype='application/json')
 
@@ -388,22 +468,38 @@ def edit_slot_type(request, pk, template="cal/slot_type/edit.html"):
             return redirect(reverse("cal.list_slot_type"))
         else:
             return render_to_response(template,
-                {"form": form, 'event': slot},
+                {"form": form, 'slot_type': slot},
                 context_instance=RequestContext(request))
     else:
         form = SlotTypeForm(instance=slot)
 
     return render_to_response(template,
-        {"form": form, 'event': slot},
+        {"form": form, 'slot_type': slot},
         context_instance=RequestContext(request))
 
 
 @login_required
 @only_doctor
-def delete_slot_type(request, pk):
-    slot_type = get_object_or_404(SlotType, pk=int(pk))
-    slot_type.delete()
-    return redirect(reverse("cal.list_slot_type"))
+def delete_slot_type(request):
+    if request.method == 'DELETE':
+        data = json.loads(request.raw_post_data)
+        pk = data['pk']
+
+        slot_type = get_object_or_404(SlotType, pk=int(pk))
+
+        try:
+            slot_type.delete()
+            return HttpResponse(json.dumps({'action': True}),
+                status=200,
+                mimetype='application/json')
+        except:
+            return HttpResponse(json.dumps({'action': False}),
+                status=200,
+                mimetype='application/json')
+    else:
+        return HttpResponse(json.dumps({'action': False}),
+                status=200,
+                mimetype='application/json')
 
 
 @login_required
@@ -544,7 +640,6 @@ def doctor_month(request, year, month, id_doctor, change=None):
     if not doctor.get_profile().is_doctor():
         raise Http404
 
-    # apply next / previous change
     if change in ("next", "prev"):
         now, mdelta = date(year, month, 15), timedelta(days=31)
 
@@ -556,7 +651,7 @@ def doctor_month(request, year, month, id_doctor, change=None):
 
         year, month = (now + mod).timetuple()[:2]
 
-    lst = create_calendar(year, month, doctor)
+    lst = create_calendar(year, month, doctor=doctor)
     doctor_preferences = get_doctor_preferences(year=year, month=month,
         doctor=id_doctor)
 
@@ -575,18 +670,226 @@ def doctor_day(request, year, month, day, id_doctor=None):
     if not doctor.get_profile().is_doctor():
         raise Http404
 
-    #doctor preferences
+    vacations = check_vacations(doctor, year, month, day)
 
-    events = Appointment.objects.filter(doctor=doctor, date__year=year,
-        date__month=month, date__day=day).order_by('start_time')
+    if not vacations:
+        events = Appointment.objects.filter(doctor=doctor, date__year=year,
+            date__month=month, date__day=day).order_by('start_time')
+    else:
+        events = Appointment.objects.none()
 
-    lst = create_calendar(int(year), int(month), user=doctor)
+    lst = create_calendar(int(year), int(month), doctor=doctor)
     doctor_preferences = get_doctor_preferences(year=year, month=month,
         day=day, doctor=id_doctor)
 
     template_data = dict(year=year, month=month, day=day, user=request.user,
         doctor=doctor, month_days=lst, mname=mnames[int(month) - 1],
         events=events, doctor_preferences=doctor_preferences,
+        vacations=vacations,
         context_instance=RequestContext(request))
 
     return template_data
+
+
+@login_required
+@only_doctor
+@paginate(template_name='cal/vacation/list.html',
+    list_name='vacations', objects_per_page=settings.OBJECTS_PER_PAGE)
+def list_vacation(request):
+    vacations = Vacation.objects.filter(doctor=request.user).order_by('date')
+    template_data = dict(user=request.user, vacations=vacations,
+        context_instance=RequestContext(request))
+
+    return template_data
+
+
+@login_required
+@only_doctor
+def add_vacation(request, template="cal/vacation/add.html"):
+    if request.method == 'POST':
+        request_params = dict([k, v] for k, v in request.POST.items())
+        request_params.update({
+            'doctor': request.user.id,
+            'created_by': request.user.id,
+            'date': datetime.now()
+        })
+
+        date = request.POST.get('date', None)
+        if date:
+            date = datetime.now().strptime(date, settings.DATE_FORMAT)
+            request_params.update({'date': date})
+
+        form = VacationForm(request_params)
+
+        if form.is_valid():
+            form.save()
+            return redirect(reverse("cal.list_vacation"))
+        else:
+            return render_to_response(template,
+                {'form': form},
+                context_instance=RequestContext(request))
+    else:
+        form = VacationForm()
+
+    return render_to_response(template, {'form': form},
+                context_instance=RequestContext(request))
+
+
+@login_required
+@only_doctor
+def edit_vacation(request, pk, template="cal/vacation/edit.html"):
+    vacation = get_object_or_404(Vacation, pk=int(pk))
+
+    if request.method == 'POST':
+        request_params = dict([k, v] for k, v in request.POST.items())
+        request_params.update({
+            'doctor': request.user.id,
+            'created_by': request.user.id,
+        })
+
+        date = request.POST.get('date', None)
+        if date:
+            date = datetime.now().strptime(date, settings.DATE_FORMAT)
+            request_params.update({'date': date})
+
+        form = VacationForm(request_params, instance=vacation)
+
+        if form.is_valid():
+            form.save()
+            return redirect(reverse("cal.list_vacation"))
+        else:
+            return render_to_response(template,
+                {"form": form, 'vacation': vacation},
+                context_instance=RequestContext(request))
+    else:
+        form = VacationForm(instance=vacation)
+
+    return render_to_response(template,
+        {"form": form, 'vacation': vacation},
+        context_instance=RequestContext(request))
+
+
+@login_required
+@only_doctor
+def delete_vacation(request):
+    if request.method == 'DELETE':
+        data = json.loads(request.raw_post_data)
+        pk = data['pk']
+
+        vacation = get_object_or_404(Vacation, pk=int(pk))
+
+        try:
+            vacation.delete()
+            return HttpResponse(json.dumps({'action': True}),
+                status=200,
+                mimetype='application/json')
+        except:
+            return HttpResponse(json.dumps({'action': False}),
+                status=200,
+                mimetype='application/json')
+    else:
+        return HttpResponse(json.dumps({'action': False}),
+                status=200,
+                mimetype='application/json')
+
+
+@login_required
+@only_doctor
+@paginate(template_name='cal/event/list.html',
+    list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE)
+def list_event(request):
+    events = Event.objects.filter(doctor=request.user).order_by('date')
+    template_data = dict(user=request.user, events=events,
+        context_instance=RequestContext(request))
+
+    return template_data
+
+
+@login_required
+@only_doctor
+def add_event(request, template="cal/event/add.html"):
+    if request.method == 'POST':
+        request_params = dict([k, v] for k, v in request.POST.items())
+        request_params.update({
+            'doctor': request.user.id,
+            'created_by': request.user.id,
+            'date': datetime.now()
+        })
+
+        date = request.POST.get('date', None)
+        if date:
+            date = datetime.now().strptime(date, settings.DATE_FORMAT)
+            request_params.update({'date': date})
+
+        form = EventForm(request_params)
+
+        if form.is_valid():
+            form.save()
+            return redirect(reverse("cal.list_event"))
+        else:
+            return render_to_response(template,
+                {'form': form},
+                context_instance=RequestContext(request))
+    else:
+        form = EventForm()
+
+    return render_to_response(template, {'form': form},
+                context_instance=RequestContext(request))
+
+
+@login_required
+@only_doctor
+def edit_event(request, pk, template="cal/event/edit.html"):
+    event = get_object_or_404(Event, pk=int(pk))
+
+    if request.method == 'POST':
+        request_params = dict([k, v] for k, v in request.POST.items())
+        request_params.update({
+            'doctor': request.user.id,
+            'created_by': request.user.id,
+        })
+
+        date = request.POST.get('date', None)
+        if date:
+            date = datetime.now().strptime(date, settings.DATE_FORMAT)
+            request_params.update({'date': date})
+
+        form = EventForm(request_params, instance=event)
+
+        if form.is_valid():
+            form.save()
+            return redirect(reverse("cal.list_event"))
+        else:
+            return render_to_response(template,
+                {"form": form, 'event': event},
+                context_instance=RequestContext(request))
+    else:
+        form = EventForm(instance=event)
+
+    return render_to_response(template,
+        {"form": form, 'event': event},
+        context_instance=RequestContext(request))
+
+
+@login_required
+@only_doctor
+def delete_event(request):
+    if request.method == 'DELETE':
+        data = json.loads(request.raw_post_data)
+        pk = data['pk']
+
+        event = get_object_or_404(Event, pk=int(pk))
+
+        try:
+            event.delete()
+            return HttpResponse(json.dumps({'action': True}),
+                status=200,
+                mimetype='application/json')
+        except:
+            return HttpResponse(json.dumps({'action': False}),
+                status=200,
+                mimetype='application/json')
+    else:
+        return HttpResponse(json.dumps({'action': False}),
+                status=200,
+                mimetype='application/json')

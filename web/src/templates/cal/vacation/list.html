@@ -2,7 +2,7 @@
 
 {% load i18n messages %}
 
-{% block title %}{% trans 'Type Events list' %}{% endblock %}
+{% block title %}{% trans 'Events list' %}{% endblock %}
 
 {% block left_panel %}
   {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
@@ -10,47 +10,53 @@
 
 {% block right_panel %}
 
-  <legend>{% trans "Events type" %}</legend>
+  <legend>{% trans "Vacations" %}</legend>
 
+ <!-- Button Toolbar -->
   <div class="row">
     <div class="span5">
       <div class="btn-toolbar" style="margin-bottom: 9px">
           <div class="btn-group">
-            <a class="btn btn-primary btn" href="{% url cal.add_slot_type %}"><i class="icon-pencil icon-white"></i> {% trans "New slot type" %}</a>
+            <a class="btn btn-primary btn" href="{% url cal.add_vacation %}"><i class="icon-plane icon-white"></i> {% trans "Add vacation" %}</a>
           </div>
       </div>
     </div>
   </div>
 
-  {% if slot_type.object_list.count > 0 %}
-    <div id="type_events-paginator" class="pull-right">
+  {% if vacations.object_list.count > 0 %}
+    <div id="vacations-paginator" class="pull-right">
       <ul class="pagination ">
-        {% if type_events.has_previous %}
-          <li><a href="?page={{ type_events.previous_page_number }}">←</a></li>
+        {% if vacations.has_previous %}
+          <li><a href="?page={{ vacations.previous_page_number }}">←</a></li>
         {% else %}
           <li class="disabled"><a>←</a></li>
         {% endif %}
 
-        {% if type_events.has_next %}
-          <li><a href="?page={{ type_events.next_page_number }}">→</a></li>
+        {% if vacations.has_next %}
+          <li><a href="?page={{ vacations.next_page_number }}">→</a></li>
         {% else %}
           <li class="disabled"><a>→</a></li>
         {% endif %}
       </ul>
     </div>
 
-    <table id="events_list" class="table table-striped">
-      <thead></thead>
+    <table id="vacations_list" class="table table-striped">
+      <thead>
+          <tr>
+            <th>{% trans "Date" %}</th>
+            <th>{% trans "Description" %}</th>
+          </tr>
+      </thead>
       <tbody>
-        {% for slot in slot_type.object_list %}
-          {% include "cal/slot_type/slot_type.html" %}
+        {% for vacation in vacations.object_list %}
+          {% include "cal/vacation/vacation.html" %}
         {% endfor %}
       </tbody>
     </table>
 
     <div id="preview"></div>
   {% else %}
-    <h6>{% trans "There are no slots type" %}</h6>
+    <h6>{% trans "There are no vacations" %}</h6>
   {% endif %}
 {% endblock %}
 
@@ -62,7 +68,7 @@ $('table tbody tr').live('click', function(event){
   if(id){
     $('table').hide();
     $('#message-paginator').hide();
-    window.location.href = '/calendar/slot/type/edit/' + id;
+      window.location.href = '/calendar/vacation/edit/' +id;
   }
 });
 {% endblock %}

@@ -14,13 +14,11 @@
   {{ block.super }}
   <script src="{{ STATIC_URL }}js/bootstrap-timepicker.js"></script>
   <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
-  <!-- <script src="{{ STATIC_URL }}js/calendar.js"></script> -->
   <script src="{{ STATIC_URL }}js/json2.js"></script>
 {% endblock %}
 
 {% block css_files %}
   {{ block.super }}
-  <!-- <link href="{{ STATIC_URL }}css/calendar.css" rel="stylesheet"/> -->
   <link href="{{ STATIC_URL }}css/timepicker.css" rel="stylesheet"/>
   <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet"/>
 {% endblock %}
@@ -31,19 +29,11 @@
       {% block nav-bar%}{% endblock  %}
 
       <div class="row">
-          <div class="span2">
+          <div class="span3">
               {% block left_panel %}{% endblock %}
           </div>
 
-          <div class="span10">
-              {% if reminders %}
-                  <div class="reminders">
-                      <div class="gr">Alerts</div>
-                      {% for reminder in reminders %}
-                          <p> {{ reminder.short|safe }}</p>
-                      {% endfor %}
-                  </div>
-              {% endif %}
+          <div class="span9">
             {% block right_panel %}{% endblock %}
           </div>
       </div>

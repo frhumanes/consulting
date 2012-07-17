@@ -5,7 +5,7 @@
 {% block title %}{% trans 'Appointments list' %}{% endblock %}
 
 {% block left_panel %}
-  {% include "cal/app/calendar.html" %}
+  {% include "cal/includes/calendar.html" %}
 {% endblock %}
 
 {% block right_panel %}
@@ -17,142 +17,167 @@
 
 <p></p>
 
-<div class="well">
-  <p>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</p>
-</div>
-
-<div>
-<form class="form-horizontal well" method="post" action="{% url cal.edit event.id doctor.id %}">{% csrf_token %}
-  <legend>{% trans 'Edit Appointment' %} {{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
-  <fieldset>
-      {% if not_available_error %}
-        <div class="alert alert-error">
-            <strong>{% trans '¡Error!' %}</strong>
-            {{ error_msg|escape }}
-        </div>
-      {% endif %}
-
-      <!-- SLOT_TYPE -->
-      {% if form.slot_type.errors %}
-        <div class="control-group error">
-          <label for="id_app_type" class="control-label">{{form.app_type.label}}</label>
-          <div class="controls">
-            {{ form.app_type }}
-            {% for error in form.app_type.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
-          </div>
-        </div>
+{% if vacations %}
+  <div class="alert alert-error">
+    <p>
+      {% if request.user.get_profile.is_doctor %}
+        {% trans "You can not set an appointment if you have an event or vacation day" %}
       {% else %}
-        <div class="control-group">
-          <label for="id_app_type" class="control-label">{{form.app_type.label}}</label>
-          <div class="controls">
-            {{ form.app_type }}
-          </div>
-        </div>
+        {% trans "You can not set an appointment if the doctor has an event or vacation day" %}
       {% endif %}
-      <!-- END SLOT_TYPE -->
-
-      <!-- START_TIME -->
-      {% if form.start_time.errors %}
-        <div class="control-group error">
-          <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
-          <div class="controls">
-            {{ form.start_time }}
-            {% for error in form.start_time.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
-          </div>
-        </div>
-      {% else %}
-        <div class="control-group">
-          <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
-          <div class="controls">
-            {{ form.start_time }}
-          </div>
-        </div>
-      {% endif %}
-      <!-- END START_TIME -->
-
-      <!-- END_TIME -->
-      {% if form.end_time.errors %}
-        <div class="control-group error">
-          <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
-          <div class="controls">
-            {{ form.end_time }}
-            {% for error in form.end_time.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
-          </div>
-        </div>
-      {% else %}
-        <div class="control-group">
-          <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
-          <div class="controls">
-            {{ form.end_time }}
-          </div>
-        </div>
-      {% endif %}
-      <!-- END END_TIME -->
-
-      <!-- NOTE -->
-      {% if form.note.errors %}
-        <div class="control-group error">
-          <label for="id_note" class="control-label">{{form.note.label}}</label>
-          <div class="controls">
-            {{ form.note }}
-            {% for error in form.note.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
-          </div>
-        </div>
-      {% else %}
-        <div class="control-group">
-          <label for="id_note" class="control-label">{{form.note.label}}</label>
-          <div class="controls">
-            {{ form.note }}
-          </div>
-        </div>
-      {% endif %}
-      <!-- END NOTE -->
-
-      <p class="center">
-        <a id="remove-event" class="btn btn-large btn-danger" >
-          <i class="icon-minus icon-white"></i>
-          {% trans 'Delete' %}
-        </a>
-        <button class="btn btn-large btn-primary" type="submit">
-          <i class="icon-play icon-white"></i>
-          {% trans 'Save' %}</button>
-      </p>
-
-  </fieldset>
-</form>
-
-{% include "cal/app/free_slots.html" %}
-
-</div>
-
-<div id="modal-screen" class="modal hide">
-  <div class="modal-header">
-    <h3>{% trans 'Delete Event' %}</h3>
+    </p>
   </div>
-  <div class="modal-body">
-    <p>"{% trans 'You are going to delete an appointment. Are you sure?' %}"</p>
+{% else %}
+  <div class="well">
+    <p>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</p>
   </div>
-  <div class="modal-footer">
-    <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Yes' %}" data-loadingmsg="{% trans 'Removing ... ' %}">{% trans 'Yes' %}</a>
-    <a href="#" class="btn btn-primary" data-dismiss="modal">{% trans 'No' %}</a>
+
+  <div>
+  <form class="form-horizontal well" method="post" action="{% url cal.edit event.id doctor.id %}">{% csrf_token %}
+    <legend>{% trans 'Edit Appointment' %} {{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
+    <fieldset>
+        {% if not_available_error %}
+          <div class="alert alert-error">
+              <strong>{% trans '¡Error!' %}</strong>
+              {{ error_msg|escape }}
+          </div>
+        {% endif %}
+
+        {% if  form.non_field_errors  %}
+          <div class="alert alert-error">
+              {% for error in form.non_field_errors %}
+                  <strong>{% trans '¡Error!' %}</strong>
+                  {{ error|escape }}
+              {% endfor %}
+          </div>
+        {% endif %}
+
+        <!-- SLOT_TYPE -->
+        {% if form.slot_type.errors %}
+          <div class="control-group error">
+            <label for="id_app_type" class="control-label">{{form.app_type.label}}</label>
+            <div class="controls">
+              {{ form.app_type }}
+              {% for error in form.app_type.errors %}
+                 <span class="help-inline">{{ error|escape }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <div class="control-group">
+            <label for="id_app_type" class="control-label">{{form.app_type.label}}</label>
+            <div class="controls">
+              {{ form.app_type }}
+            </div>
+          </div>
+        {% endif %}
+        <!-- END SLOT_TYPE -->
+
+        <!-- START_TIME -->
+        {% if form.start_time.errors %}
+          <div class="control-group error">
+            <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
+            <div class="controls">
+              {{ form.start_time }}
+              <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+              {% for error in form.start_time.errors %}
+                 <span class="help-inline">{{ error|escape }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <div class="control-group">
+            <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
+            <div class="controls">
+              {{ form.start_time }}
+              <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+            </div>
+          </div>
+        {% endif %}
+        <!-- END START_TIME -->
+
+        <!-- END_TIME -->
+        {% if form.end_time.errors %}
+          <div class="control-group error">
+            <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
+            <div class="controls">
+              {{ form.end_time }}
+              <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+              {% for error in form.end_time.errors %}
+                 <span class="help-inline">{{ error|escape }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <div class="control-group">
+            <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
+            <div class="controls">
+              {{ form.end_time }}
+              <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+            </div>
+          </div>
+        {% endif %}
+        <!-- END END_TIME -->
+
+        <!-- NOTE -->
+        {% if form.description.errors %}
+          <div class="control-group error">
+            <label for="id_description" class="control-label">{{form.description.label}}</label>
+            <div class="controls">
+              {{ form.description }}
+              {% for error in form.description.errors %}
+                 <span class="help-inline">{{ error|escape }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <div class="control-group">
+            <label for="id_description" class="control-label">{{form.description.label}}</label>
+            <div class="controls">
+              {{ form.description }}
+            </div>
+          </div>
+        {% endif %}
+        <!-- END NOTE -->
+
+        <p class="center">
+          <a id="remove-event" class="btn btn-large btn-danger" >
+            <i class="icon-minus icon-white"></i>
+            {% trans 'Delete' %}
+          </a>
+          <button class="btn btn-large btn-primary" type="submit">
+            <i class="icon-play icon-white"></i>
+            {% trans 'Save' %}</button>
+        </p>
+
+    </fieldset>
+  </form>
+
+  {% include "cal/app/free_slots.html" %}
+
   </div>
-</div>
+
+  <div id="modal-screen" class="modal hide">
+    <div class="modal-header">
+      <h3>{% trans 'Delete Event' %}</h3>
+    </div>
+    <div class="modal-body">
+      <p>"{% trans 'You are going to delete an appointment. Are you sure?' %}"</p>
+    </div>
+    <div class="modal-footer">
+      <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Yes' %}" data-loadingmsg="{% trans 'Removing ... ' %}">{% trans 'Yes' %}</a>
+      <a href="#" class="btn btn-primary" data-dismiss="modal">{% trans 'No' %}</a>
+    </div>
+  </div>
+{% endif %}
+
 {% endblock %}
 
 {% block jquery_init %}
 
+  $('#id_date').datepicker({'format':'dd/mm/yyyy'});
   $('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.start_time.value|time:"H:i" }}' });
   $('#id_end_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.end_time.value|time:"H:i" }}' });
-
-  $('#id_date').datepicker({'format':'dd/mm/yyyy'});
 
   $('#remove-event').live('click', function(event){
     $('#modal-screen').modal({
@@ -160,7 +185,6 @@
       'keyboard':false,
     });
   });
-
 
   $('#confirm-delete').live('click', function(event){
     event.preventDefault();

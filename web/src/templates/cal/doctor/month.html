@@ -5,7 +5,7 @@
 {% block title %}{% trans 'Calendar list' %}{% endblock %}
 
 {% block left_panel %}
-  {% include "cal/includes/events/calendar.html" %}
+  {% include "cal/includes/calendar.html" %}
 {% endblock %}
 
 {% block right_panel %}
@@ -37,6 +37,6 @@
 
         <div id="preview"></div>
     {% else %}
-        <h6>{% trans "No hay citas para este día" %}</h6>
+        <h6>{% trans "There are no appointments" %}</h6>
     {% endif %}
 {% endblock %}

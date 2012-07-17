@@ -9,6 +9,8 @@ import calendar
 import time
 
 from cal.models import Appointment
+from cal.models import Vacation
+from cal.models import Event
 from cal.models import Slot
 
 
@@ -18,33 +20,68 @@ mnames = (
     _("December"),)
 
 
-def create_calendar(year, month, user=None):
-    # init variables
+def create_calendar(year, month, doctor=None):
     cal = calendar.Calendar()
     month_days = cal.itermonthdays(int(year), int(month))
     nyear, nmonth, nday = time.localtime()[:3]
     lst = [[]]
     week = 0
 
-    # make month lists containing list of days for each week
-    # each day tuple will contain list of slots and 'current' indicator
     for day in month_days:
-        apps = current = False   # are there slots for this day; current day?
+        apps = Appointment.objects.none()
+        current = False
+        vacations = False
+        events = False
         if day:
-            if user:
-                apps = Appointment.objects.filter(date__year=year,
-                    date__month=month, date__day=day, doctor=user)
+            if doctor:
+                apps = Appointment.objects.filter(
+                    date__year=year, date__month=month,
+                    date__day=day, doctor=doctor)
             else:
                 apps = Appointment.objects.filter(date__year=year,
-                    date__month=month, date__day=day)
+                            date__month=month, date__day=day)
+
             if day == nday and year == nyear and month == nmonth:
                 current = True
 
-        lst[week].append((day, apps, current))
+            vacations = check_vacations(doctor, year, month, day)
+            events = check_events(doctor, year, month, day)
+
+        lst[week].append((day, apps, current, vacations, events))
+
         if len(lst[week]) == 7:
             lst.append([])
             week += 1
     return lst
+
+
+def check_vacations(doctor, year, month, day):
+    vacations = Vacation.objects.filter(doctor=doctor, date__year=year,
+        date__month=month, date__day=day)
+    return vacations.count() > 0
+
+
+def check_events(doctor, year, month, day):
+    events = Event.objects.filter(doctor=doctor, date__year=year,
+        date__month=month, date__day=day)
+    return events.count() > 0
+
+
+def check_vacations_or_events(doctor, year, month, day):
+    vacations_or_events = False
+
+    vacations = Vacation.objects.filter(doctor=doctor, date__year=year,
+        date__month=month, date__day=day)
+
+    if vacations.count() == 0:
+        events = Event.objects.filter(doctor=doctor, date__year=year,
+            date__month=month, date__day=day)
+        if not events.count() == 0:
+            vacations_or_events = True
+    else:
+        vacations_or_events = True
+
+    return vacations_or_events
 
 
 def add_minutes(tm, minutes):
@@ -56,17 +93,6 @@ def add_minutes(tm, minutes):
 def get_weekday(date):
     wday = date.timetuple()[6]
     return wday
-
-
-def reminders(request):
-    """Return the list of reminders for today and tomorrow."""
-    year, month, day = time.localtime()[:3]
-    reminders = Appointment.objects.filter(date__year=year, date__month=month,
-        date__day=day, doctor=request.user, remind=True)
-    tomorrow = datetime.now() + timedelta(days=1)
-    year, month, day = tomorrow.timetuple()[:3]
-    return list(reminders) + list(Appointment.objects.filter(date__year=year,
-        date__month=month, date__day=day, doctor=request.user, remind=True))
 
 
 def get_doctor_preferences(year=None, month=None, day=None, doctor=None):
@@ -87,3 +113,13 @@ def get_doctor_preferences(year=None, month=None, day=None, doctor=None):
         return slots
     else:
         return Slot.objects.none()
+
+
+def reminders(request):
+    year, month, day = time.localtime()[:3]
+    reminders = Appointment.objects.filter(date__year=year, date__month=month,
+        date__day=day, doctor=request.user, remind=True)
+    tomorrow = datetime.now() + timedelta(days=1)
+    year, month, day = tomorrow.timetuple()[:3]
+    return list(reminders) + list(Appointment.objects.filter(date__year=year,
+        date__month=month, date__day=day, doctor=request.user, remind=True))

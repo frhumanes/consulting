@@ -154,6 +154,8 @@ INSTALLED_APPS = (
     'private_messages',
     'connector',
     'log',
+    'cal',
+    'conf',
 )
 
 AUTH_PROFILE_MODULE = 'userprofile.Profile'

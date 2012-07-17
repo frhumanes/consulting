@@ -22,6 +22,15 @@
 <form class="form-horizontal" method="post" action="{% url cal.add_slot year month %}">{% csrf_token %}
   <fieldset>
 
+      {% if  form.non_field_errors  %}
+        <div class="alert alert-error">
+            {% for error in form.non_field_errors %}
+                <strong>{% trans '¡Error!' %}</strong>
+                {{ error|escape }}
+            {% endfor %}
+        </div>
+      {% endif %}
+
       <!-- WEEKDAY -->
       {% if form.weekday.errors %}
         <div class="control-group error">
@@ -93,6 +102,7 @@
           <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
           <div class="controls">
             {{ form.start_time }}
+            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
             {% for error in form.start_time.errors %}
                <span class="help-inline">{{ error|escape }}</span>
             {% endfor %}
@@ -103,27 +113,28 @@
           <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
           <div class="controls">
             {{ form.start_time }}
+            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
           </div>
         </div>
       {% endif %}
       <!-- END START_TIME -->
 
       <!-- NOTE -->
-      {% if form.note.errors %}
+      {% if form.description.errors %}
         <div class="control-group error">
-          <label for="id_note" class="control-label">{{form.note.label}}</label>
+          <label for="id_description" class="control-label">{{form.description.label}}</label>
           <div class="controls">
-            {{ form.note }}
-            {% for error in form.note.errors %}
+            {{ form.description }}
+            {% for error in form.description.errors %}
                <span class="help-inline">{{ error|escape }}</span>
             {% endfor %}
           </div>
         </div>
       {% else %}
         <div class="control-group">
-          <label for="id_note" class="control-label">{{form.note.label}}</label>
+          <label for="id_description" class="control-label">{{form.description.label}}</label>
           <div class="controls">
-            {{ form.note }}
+            {{ form.description }}
           </div>
         </div>
       {% endif %}
@@ -142,7 +153,7 @@
 
 {% block jquery_init %}
 
-  $('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': 'current' });
+  $('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.start_time.value|time:"H:i" }}' });
   $('#id_date').datepicker({'format':'dd/mm/yyyy'});
 
 {% endblock %}

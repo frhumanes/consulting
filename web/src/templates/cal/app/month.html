@@ -5,7 +5,7 @@
 {% block title %}{% trans 'Calendar list' %}{% endblock %}
 
 {% block left_panel %}
-  {% include "cal/app/calendar.html" %}
+  {% include "cal/includes/calendar.html" %}
 
   {% if not request.user.get_profile.is_doctor %}
     {% include "cal/app/doctor_preferences.html" %}
@@ -13,7 +13,10 @@
 {% endblock %}
 
 {% block right_panel %}
-Doctor: {{ doctor }}
+    <div class="well">
+      <p>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</p>
+    </div>
+
     {% if events.object_list.count > 0 %}
         <div id="message-paginator" class="pull-right">
           <ul class="pagination ">
@@ -42,6 +45,6 @@ Doctor: {{ doctor }}
 
         <div id="preview"></div>
     {% else %}
-        <h6>{% trans "There is no appointments" %}</h6>
+        <h6>{% trans "There are no appointments" %}</h6>
     {% endif %}
 {% endblock %}

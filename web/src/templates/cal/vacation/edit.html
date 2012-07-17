@@ -10,16 +10,16 @@
 
 {% block right_panel %}
 
-<a class="btn btn-primary" href="{% url cal.list_slot_type %}">
+<a class="btn btn-primary" href="{% url cal.list_vacation %}">
   <i class="icon-arrow-left icon-white"></i>
   {% trans 'Back' %}
 </a>
 
-  <legend>{% trans 'New Event Type' %}</legend>
+<legend>{% trans 'Edit Vacation' %}</legend>
 
-  <div class="offset1">
+<div class="offset1">
 
-<form class="form-horizontal" method="post" action="{% url cal.edit_entry_type slot_type.id%}">{% csrf_token %}
+<form class="form-horizontal" method="post" action="{% url cal.edit_vacation vacation.id%}">{% csrf_token %}
   <fieldset>
 
       {% if  form.non_field_errors  %}
@@ -31,47 +31,28 @@
         </div>
       {% endif %}
 
-      <!-- TITLE -->
-      {% if form.title.errors %}
+      <!-- DATE -->
+      {% if form.date.errors %}
         <div class="control-group error">
-          <label for="id_title" class="control-label">{{form.title.label}}</label>
+          <label for="id_date" class="control-label">{{form.date.label}}</label>
           <div class="controls">
-            {{ form.title }}
-            {% for error in form.title.errors %}
+            {{ form.date }}
+            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-calendar"></i>
+            {% for error in form.date.errors %}
                <span class="help-inline">{{ error|escape }}</span>
             {% endfor %}
           </div>
         </div>
       {% else %}
         <div class="control-group">
-          <label for="id_title" class="control-label">{{form.title.label}}</label>
+          <label for="id_date" class="control-label">{{form.date.label}}</label>
           <div class="controls">
-            {{ form.title }}
+            {{ form.date }}
+            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-calendar"></i>
           </div>
         </div>
       {% endif %}
-      <!-- END TITLE -->
-
-      <!-- DURATION -->
-      {% if form.duration.errors %}
-        <div class="control-group error">
-          <label for="id_duration" class="control-label">{{form.duration.label}}</label>
-          <div class="controls">
-            {{ form.duration }}
-            {% for error in form.duration.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
-          </div>
-        </div>
-      {% else %}
-        <div class="control-group">
-          <label for="id_duration" class="control-label">{{form.duration.label}}</label>
-          <div class="controls">
-            {{ form.duration }}
-          </div>
-        </div>
-      {% endif %}
-      <!-- END DURATION -->
+      <!-- END DATE -->
 
       <!-- DESCRIPTION -->
       {% if form.description.errors %}
@@ -113,7 +94,7 @@
     <h3>{% trans 'Delete Event' %}</h3>
   </div>
   <div class="modal-body">
-    <p>{% trans 'You are going to delete a slot type. Are you sure?' %}</p>
+    <p>{% trans 'You are going to delete a vacation. Are you sure?' %}</p>
   </div>
   <div class="modal-footer">
     <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Yes' %}" data-loadingmsg="{% trans 'Removing ... ' %}">{% trans 'Yes' %}</a>
@@ -129,12 +110,14 @@
     <p>{% trans 'You can not delete a slot type with children' %}</p>
   </div>
   <div class="modal-footer">
-    <a href="#" onclick="window.location.href = '{% url cal.list_slot_type %}';" class="btn btn-primary" data-dismiss="modal">{% trans 'Ok' %}</a>
+    <a href="#" onclick="window.location.href = '{% url cal.list_vacation %}';" class="btn btn-primary" data-dismiss="modal">{% trans 'Ok' %}</a>
   </div>
 </div>
 {% endblock %}
 
 {% block jquery_init %}
+
+  $('#id_date').datepicker({'format':'dd/mm/yyyy'});
 
   $('#remove-event').live('click', function(event){
     $('#modal-screen').modal({
@@ -151,19 +134,18 @@
     $(this).siblings().attr('disabled', true);
     $(this).siblings().attr('data-dismiss', 'static');
 
-    var json = { pk: {{ slot_type.id }} };
+    var json = { pk: {{ vacation.id }} };
 
     $.ajax({
-      url: '{% url cal.delete_slot_type %}',
+      url: '{% url cal.delete_vacation %}',
       type: 'DELETE',
       dataType: 'json',
       contentType: "application/json",
       data: JSON.stringify(json),
       processData: false,
       success:function(data) {
-          console.log(data.action);
           if(data.action){
-            window.location.href = '{% url cal.list_slot_type %}';
+            window.location.href = '{% url cal.list_vacation %}';
           }else{
             $('#modal-screen').hide();
             $('#modal-screen-error').modal({

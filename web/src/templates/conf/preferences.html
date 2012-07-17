@@ -9,10 +9,27 @@
 {% endblock %}
 
 {% block right_panel %}
-      <ul class="nav nav-pills">
-        <li><a class="btn btn-primary" href="{% url cal.views.main %}">{% trans "Calendar" %}</a></li>
-        <li><a class="btn btn-primary" href="{% url cal.list_slot_type %}">{% trans "Preference types" %}</a></li>
-      </ul>
+
+ <!-- Button Toolbar -->
+  <div class="row">
+    <div class="span5">
+      <div class="btn-toolbar" style="margin-bottom: 9px">
+          <div class="btn-group">
+            <a class="btn btn-primary" href="{% url cal.views.main %}">{% trans "Calendar" %}</a>
+            <a class="btn btn-primary" href="{% url cal.list_slot_type %}">{% trans "Preference types" %}</a>
+          </div>
+          <div class="btn-group">
+            <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> {% trans "Absences" %}</a>
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url cal.list_vacation %}"><i class="icon-plane"></i> {% trans "Vacations" %}</a></li>
+                <li><a href="{% url cal.list_event %}"><i class="icon-calendar"></i> {% trans "Events" %}</a></li>
+              </ul>
+          </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}
 
 {% comment %}

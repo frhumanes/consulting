@@ -26,15 +26,3 @@
     {% endfor %}
 </div>
 
-
-{% comment %}
-    <tr data-msg="{{ slot.id }}" style="cursor:pointer" >
-        <td>{{ slot.date|date:"d M" }}</td>
-        <td>{{ slot.slot_type }}</td>
-        <td>{{ slot.note|striptags|safe|truncatewords:5 }}</td>
-        <td>{{ slot.start_time|time:"H:i" }}</td>
-        <td>{{ slot.end_time|time:"H:i" }}</td>
-        <td>{{ slot.duration }}</td>
-    </tr>
-{% endcomment %}
-

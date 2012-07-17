@@ -5,11 +5,11 @@
 {% block title %}{% trans 'Appointments list' %}{% endblock %}
 
 {% block left_panel %}
-  {% include "cal/app/calendar.html" %}
+  {% include "cal/includes/calendar.html" %}
 {% endblock %}
 
 {% block right_panel %}
-Doctor: {{ doctor }}
+
   <legend>{{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
 
   <ul class="nav nav-pills">
@@ -53,7 +53,7 @@ Doctor: {{ doctor }}
 
     <div id="preview"></div>
   {% else %}
-    <h6>{% trans "There is no appointments" %}</h6>
+    <h6>{% trans "There are no appointments" %}</h6>
   {% endif %}
 {% endblock %}
 
@@ -65,7 +65,6 @@ $('table tbody tr').live('click', function(event){
   if(id){
     $('table').hide();
     $('#message-paginator').hide();
-    console.log(id);
     window.location.href = '/calendar/app/edit/' + id;
   }
 });
