@@ -3,9 +3,13 @@
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 from django.db import models
+from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
 from managers import SlotManager, AppointmentManager
 from log.models import TraceableModel
+
+from consulting.models import Task, Recommendation, Medicine
 
 
 class Vacation(TraceableModel):
@@ -39,7 +43,7 @@ class Event(TraceableModel):
 class SlotType(TraceableModel):
     doctor = models.ForeignKey(User, related_name='entry_type_doctor')
     title = models.CharField(max_length=256)
-    duration = models.IntegerField()
+    duration = models.IntegerField(null=False, blank=False)
     description = models.CharField(max_length=5000, blank=True, null=True)
 
     def __unicode__(self):
@@ -81,14 +85,49 @@ class Slot(TraceableModel):
 
 
 class Appointment(TraceableModel):
+    STATUS = (
+        (settings.UNRESOLVED, _(u'Pendiente')),
+        (settings.DONE, _(u'Realizada')),
+        (settings.NOT_DONE, _(u'No Realizada')),
+        (settings.MODIFIED, _(u'Modificada')),
+        (settings.MODIFIED_DONE, _(u'Modificada/Realizada')),
+        (settings.MODIFIED_NOT_DONE, _(u'No Realizada')),
+        (settings.MODIFIED_DELETED, _(u'Modificada/Cancelada')),
+        (settings.CANCELED, _(u'Cancelada'))
+    )
+
     doctor = models.ForeignKey(User, related_name='appointment_doctor')
+
     patient = models.ForeignKey(User, related_name='appointment_patient')
+
     app_type = models.ForeignKey(SlotType,
         related_name='appointment_slot_type', null=True)
 
+    task = models.ForeignKey(Task, related_name='task_appointments',
+                                blank=True, null=True)
+
+    recommendation = models.ForeignKey(Recommendation,
+                                    related_name="recommendation_appointments")
+
+    medicines = models.ManyToManyField(Medicine,
+                                    related_name="medicines_appointments")
+
+    status = models.IntegerField(_(u'Estado'), choices=STATUS, blank=True,
+                                null=True)
+
     date = models.DateField(null=False, blank=False)
+
     start_time = models.TimeField(null=False, blank=False)
+
     end_time = models.TimeField(null=False, blank=False)
+
+    date_modified = models.DateTimeField(
+              _(u'Fecha y hora de modificación de la Cita'), blank=True,
+                    null=True)
+
+    date_cancel = models.DateTimeField(
+                        _(u'Fecha y hora de cancelación de la Cita'),
+                        blank=True, null=True)
     duration = models.IntegerField(null=False, blank=False)
     description = models.CharField(max_length=5000, blank=True, null=True)
 
