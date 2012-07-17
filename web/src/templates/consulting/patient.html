@@ -226,6 +226,17 @@
                 </div>
               </div>
               {% endif %}
+              <div class="control-group">
+                <label class="control-label">
+                  {{form.active.label}}
+                </label>
+                <div class="controls">
+                  {{form.active}}
+                  {% if form.active.errors %}
+                    {{ form.active.errors }}
+                  {% endif %}
+                </div>
+              </div>              
               <div class="controls span1">
                 <button type="submit" class="btn btn-primary btn-large">
                   {% trans 'Guardar' %}
