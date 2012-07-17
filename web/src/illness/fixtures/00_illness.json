@@ -1,0 +1,19 @@
+[
+  {
+    "model": "illness.illness",
+    "pk": 1,
+    "fields": {
+      "code": "0",
+      "name": "Otra"
+    }
+  },
+  {
+    "model": "illness.illness",
+    "pk": 2,
+    "fields": {
+      "code": "1",
+      "name": "Ansiedad/Depresión",
+      "surveys": [1,2,3,4]
+    }
+  }  
+]
