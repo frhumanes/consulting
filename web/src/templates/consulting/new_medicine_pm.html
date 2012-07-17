@@ -1,0 +1,169 @@
+{% extends "ui/app.html" %}
+
+{% load i18n%}
+
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/jquery-ui-1.8.18.custom.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.ui.core.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.ui.position.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
+{% endblock %}
+
+{% block css_files %}
+  {{ block.super }}
+  <link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+{% endblock %}
+
+{% block jquery_init %}
+  <!-- DISABLED searcher_component BY DEFAULT-->
+  if($("input[type='radio']:checked").val() == undefined){
+    $('#id_searcher_component').attr('disabled','disabled')
+  }
+
+  <!-- ENABLED searcher_component WHEN CLICK SOME OF INPUT TYPE RADIO -->
+  $('.radio_js').each(function(){
+    $(this).on("click", function(){ 
+      $('#id_searcher_component').removeAttr('disabled');     
+    });      
+  });     
+
+  <!-- LOOK FOR COMPONENT -->
+  $("#id_searcher_component").autocomplete({
+    source: function(request, response){
+              $.ajax({
+                  url: '{% url consulting_searcher_component %}',
+                  type:'POST',
+                  data: { 
+                      kind_component: $("input[type='radio']:checked").val(),
+                      start: function() { return $("#id_searcher_component").val(); },
+                      csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val()
+                  },
+                  dataType: "json",
+                  success: function(data){
+                      response(data['components'])
+                  }
+              })
+            },
+    select: function(event, ui){
+              $("#id_components").attr('value', ui.item.id);            
+            }    
+  });
+{% endblock %}
+
+{% block header%}
+  {% include "ui/includes/header_doctor.html" %}
+{% endblock  %}
+
+{% block body %}
+  <div class="container">
+    {% block nav-bar%}
+      {% include "ui/includes/nav_bar_doctor_pm.html" %}
+    {% endblock  %}
+    <div class="row">
+      <div class="span2">
+          {% include "ui/includes/medicine_actions.html" %}
+      </div>
+      <div class="span10">
+        <section>
+          <div class="page-header">
+            <h1>{% trans 'Receta Fármaco' %}</h1>
+          </div>
+          <div class="row">
+            <div class="span6">
+              <form class="form-horizontal" id="form" action="." method="post" accept-charset="utf-8">{% csrf_token %}
+                  {{form.component}}
+                  <div class="control-group">
+                    <label class="control-label">
+                      {{form.before_after_first_appointment.label}}
+                    </label>
+                    <div class="controls">
+                      {{form.before_after_first_appointment}}
+                      {% if form.before_after_first_appointment.errors %}
+                        {{ form.before_after_first_appointment.errors }}
+                      {% endif %}
+                    </div>
+                  </div>                                  
+                  <div class="control-group">
+                    <label class="control-label">
+                      {{form.kind_component.label}}
+                    </label>
+                    <div class="controls without_text_decorator">
+                      {{form.kind_component}}
+                      {% if form.kind_component.errors %}
+                        {{ form.kind_component.errors }}
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">
+                      {{form.searcher_component.label}}
+                    </label>
+                    <div class="controls">
+                      {{form.searcher_component}}
+                      {% if form.searcher_component.errors %}
+                        {{ form.searcher_component.errors }}
+                      {% endif %}
+                    </div>
+                  </div>
+                  <!-- <div class="control-group">
+                    <label class="control-label">
+                      {{form.before_after.label}}
+                    </label>
+                    <div class="controls">
+                      {{form.before_after}}
+                      {% if form.before_after.errors %}
+                        {{ form.before_after.errors }}
+                      {% endif %}
+                    </div>
+                  </div> -->
+                  <div class="control-group">
+                    <label class="control-label">
+                      {{form.before_after_symptom.label}}
+                    </label>
+                    <div class="controls">
+                      {{form.before_after_symptom}}
+                      {% if form.before_after_symptom.errors %}
+                        {{ form.before_after_symptom.errors }}
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">
+                      {{form.months.label}}
+                    </label>
+                    <div class="controls">
+                      {{form.months}}                    
+                      {% if form.months.errors %}
+                        {{ form.months.errors }}
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">
+                      {{form.posology.label}}
+                    </label>
+                    <div class="controls">
+                      {{form.posology}}
+                      {% if form.posology.errors %}
+                        {{ form.posology.errors }}
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="controls">
+                    <button type="submit" class="btn btn-primary btn-large">
+                      {% trans 'Guardar' %}
+                    </button>
+                  </div>
+              </form>          
+            </div>
+            <!-- PATIENT CARD -->
+            <div class="span4">
+                {% include "consulting/card.html" %}
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+{% endblock body %}
