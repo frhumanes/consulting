@@ -38,6 +38,17 @@
   <body>
 
     {% block header%}
+      {% if request.user.get_profile.is_doctor %}
+        {% include "ui/includes/header_doctor.html" %}
+      {% else %}
+        {% if request.user.get_profile.is_administrative %}
+          {% include "ui/includes/header_administrative.html" %}
+        {% else %}
+          {% if request.user.get_profile.is_patient %}
+            {% include "ui/includes/header_patient.html" %}
+          {% endif%}
+        {% endif%}
+      {% endif%}
     {% endblock  %}
 
     {% block body %}

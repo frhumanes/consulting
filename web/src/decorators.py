@@ -43,3 +43,24 @@ def only_doctor(func):
             return HttpResponseRedirect(reverse('cal.views.main'))
 
     return _fn
+
+
+def only_doctor_consulting(func):
+    def _fn(request, *args, **kwargs):
+        if request.user.get_profile().is_doctor():
+            return func(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('consulting_index'))
+
+    return _fn
+
+
+def only_doctor_administrative(func):
+    def _fn(request, *args, **kwargs):
+        if request.user.get_profile().is_administrative() or\
+            request.user.get_profile().is_doctor():
+            return func(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('cal.views.main'))
+
+    return _fn

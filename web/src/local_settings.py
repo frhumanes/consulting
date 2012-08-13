@@ -42,8 +42,8 @@ INSTALLED_APPS = (
     'consulting',
     'registration',
     'private_messages',
-    'connector',
     'log',
     'cal',
     'conf',
+    'illness',
 )

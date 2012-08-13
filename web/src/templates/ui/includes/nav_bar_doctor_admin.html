@@ -1,31 +1,20 @@
 {% load i18n%}
 {% load consulting %}
 
-{% url consulting_index_administration as index_administration %}
-{% url consulting_newpatient_administration as newpatient %}
+{% url consulting_newpatient as newpatient %}
+{% url cal.index as cal %}
 
-<header id="overview" class="jumbotron subhead">
 <div class="subnav">
   <ul class="nav nav-pills">
-    <li class="{% active_child request index_administration %}">
-      <a href="{% url consulting_index_administration %}">
-        {% trans 'INICIO' %}
-      </a>
-    </li>
-    <li class="{% active_child request newpatient %}">
-      <a href="{% url consulting_newpatient_administration %}">
-        {% trans 'ALTA PACIENTE' %}
-      </a>
-    </li>
-    <li>
-        <a href="#">{% trans 'BAJA PACIENTE' %}</a>
-    </li>
-    <li>
-        <a href="#">{% trans 'ACTIVAR PACIENTE' %}</a>
-    </li>
-    <li>
-        <a href="#">{% trans 'GESTIÓN AGENDA' %}</a>
-    </li>
-  </ul>
+      <li class="{% active_root request newpatient %}">
+          <a href="{% url consulting_newpatient %}">
+            {% trans 'ALTA PACIENTE' %}
+          </a>
+      </li>
+      <li class="{% active_root request cal %}">
+          <a href="{% url cal.index %}">
+            {% trans 'GESTIÓN AGENDA' %}
+          </a>
+      </li>                                                     
+  </ul>  
 </div>
-</header>

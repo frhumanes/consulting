@@ -178,7 +178,7 @@ class SlotForm(forms.ModelForm):
 class DoctorSelectionForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(DoctorSelectionForm, self).__init__(*args, **kwargs)
-        queryset = User.objects.filter(profile__role=settings.DOCTOR)
+        queryset = User.objects.filter(profiles__role=settings.DOCTOR)
         choices = [('', '--------')]
         choices.extend([(doc.id, unicode(doc)) for doc in queryset])
         self.fields['doctor'].choices = choices

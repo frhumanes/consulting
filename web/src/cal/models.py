@@ -7,8 +7,6 @@ from django.db import models
 from managers import SlotManager, AppointmentManager
 from log.models import TraceableModel
 
-from consulting.models import Task, Recommendation, Medicine
-
 
 class Vacation(TraceableModel):
     doctor = models.ForeignKey(User, related_name='vacation_doctor')
@@ -90,17 +88,6 @@ class Appointment(TraceableModel):
 
     app_type = models.ForeignKey(SlotType,
         related_name='appointment_slot_type', null=True)
-
-    task = models.ForeignKey(Task, related_name='task_appointments',
-                                blank=True, null=True)
-
-    recommendation = models.ForeignKey(Recommendation,
-                                    related_name="recommendation_appointments",
-                                    blank=True, null=True)
-
-    medicines = models.ManyToManyField(Medicine,
-                                    related_name="medicines_appointments",
-                                    blank=True, null=True)
 
     date = models.DateField(null=False, blank=False)
 

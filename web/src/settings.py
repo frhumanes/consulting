@@ -152,10 +152,10 @@ INSTALLED_APPS = (
     'consulting',
     'registration',
     'private_messages',
-    'connector',
     'log',
     'cal',
     'conf',
+    'illness',
 )
 
 AUTH_PROFILE_MODULE = 'userprofile.Profile'

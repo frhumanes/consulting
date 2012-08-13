@@ -3,36 +3,88 @@
     "model": "survey.survey",
     "pk": 1,
     "fields": {
-      "name": "Valoración Inicial",
-      "code": "S1",
-      "blocks": [1,2,3,4]
+      "name": "Estudio Previo",
+      "code": 1,
+      "kind": 0,
+      "blocks": [1,2],
+      "created_by": 1
     }
   },
   {
     "model": "survey.survey",
     "pk": 2,
     "fields": {
-      "name": "Seguimiento",
-      "code": "S2",
-      "blocks": [3,4]
+      "name": "Valoración Inicial",
+      "code": 2,
+      "kind": 0,
+      "blocks": [1,2,3,4],
+      "created_by": 1
     }
   },
   {
     "model": "survey.survey",
     "pk": 3,
     "fields": {
-      "name": "Comportamiento",
-      "code": "S3",
-      "blocks": [5,6]
+      "name": "Ansiedad/Depresión",
+      "code": 3,
+      "kind": 1,
+      "blocks": [3],
+      "created_by": 1
     }
   },
   {
     "model": "survey.survey",
     "pk": 4,
     "fields": {
+      "name": "Ansiedad/Depresión",
+      "code": 4,
+      "kind": 2,
+      "blocks": [4],
+      "created_by": 1
+    }
+  },
+  {
+    "model": "survey.survey",
+    "pk": 5,
+    "fields": {
+      "name": "Comportamiento durante la entrevista",
+      "code": 5,
+      "kind": 1,
+      "blocks": [5],
+      "created_by": 1
+    }
+  },
+  {
+    "model": "survey.survey",
+    "pk": 6,
+    "fields": {
+      "name": "Comportamiento durante la entrevista",
+      "code": 6,
+      "kind": 2,
+      "blocks": [6],
+      "created_by": 1
+    }
+  },
+  {
+    "model": "survey.survey",
+    "pk": 7,
+    "fields": {
       "name": "Síntomas o Empeoramiento",
-      "code": "S4",
-      "blocks": [7]
+      "code": 7,
+      "kind": 0,
+      "blocks": [7],
+      "created_by": 1
+    }
+  },
+  {
+    "model": "survey.survey",
+    "pk": 8,
+    "fields": {
+      "name": "Adherencia al Tratamiento",
+      "code": 8,
+      "kind": 0,
+      "blocks": [8],
+      "created_by": 1
     }
   }
 ]

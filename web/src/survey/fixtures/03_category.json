@@ -4,7 +4,9 @@
     "pk": 1,
     "fields": {
       "name": "Datos Administrativos",
-      "code": "DA"      
+      "code": 1,
+      "kind": 0,
+      "created_by": 1      
     }
   },
   {
@@ -12,7 +14,9 @@
     "pk": 2,
     "fields": {
       "name": "Antecedentes familiares",
-      "code": "AF"      
+      "code": 2,
+      "kind": 0,
+      "created_by": 1           
     }
   },
   {
@@ -20,7 +24,9 @@
     "pk": 3,
     "fields": {
       "name": "Antecedentes personales de enfermedad psíquica",
-      "code": "APEP"      
+      "code": 3,
+      "kind": 0,
+      "created_by": 1      
     }
   },
   {
@@ -28,7 +34,9 @@
     "pk": 4,
     "fields": {
       "name": "Antecedentes personales de enfermedad orgánica",
-      "code": "APEO"      
+      "code": 4,
+      "kind": 0,
+      "created_by": 1      
     }
   },
   {
@@ -36,7 +44,9 @@
     "pk": 5,
     "fields": {
       "name": "Medicación",
-      "code": "M"      
+      "code": 5,
+      "kind": 0,
+      "created_by": 1      
     }
   },
   {
@@ -44,7 +54,9 @@
     "pk": 6,
     "fields": {
       "name": "Luz",
-      "code": "L"      
+      "code": 6,
+      "kind": 0,
+      "created_by": 1      
     }
   },
   {
@@ -52,7 +64,9 @@
     "pk": 7,
     "fields": {
       "name": "Acontecimientos Vitales Estresantes",
-      "code": "AVE"      
+      "code": 7,
+      "kind": 0,
+      "created_by": 1     
     }
   },
   {
@@ -60,7 +74,9 @@
     "pk": 8,
     "fields": {
       "name": "Apoyo Social",
-      "code": "AS"      
+      "code": 8,
+      "kind": 0,
+      "created_by": 1      
     }
   },
   {
@@ -68,7 +84,9 @@
     "pk": 9,
     "fields": {
       "name": "Rasgos de la personalidad",
-      "code": "RP"      
+      "code": 9,
+      "kind": 0,
+      "created_by": 1     
     }
   },
   {
@@ -76,7 +94,9 @@
     "pk": 10,
     "fields": {
       "name": "Tristeza",
-      "code": "T-E"      
+      "code": 10,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -84,7 +104,9 @@
     "pk": 11,
     "fields": {
       "name": "Tristeza",
-      "code": "T-A"      
+      "code": 11,
+      "kind": 2,
+      "created_by": 1     
     }
   },
   {
@@ -92,7 +114,9 @@
     "pk": 12,
     "fields": {
       "name": "Pesimismo",
-      "code": "P-E"      
+      "code": 12,
+      "kind": 1,
+      "created_by": 1     
     }
   },
   {
@@ -100,7 +124,9 @@
     "pk": 13,
     "fields": {
       "name": "Pesimismo",
-      "code": "P-A"      
+      "code": 13,
+      "kind": 2,
+      "created_by": 1    
     }
   },
   {
@@ -108,7 +134,9 @@
     "pk": 14,
     "fields": {
       "name": "Sensación de fracaso",
-      "code": "SF-E"      
+      "code": 14,
+      "kind": 1,
+      "created_by": 1     
     }
   },
   {
@@ -116,7 +144,9 @@
     "pk": 15,
     "fields": {
       "name": "Sensación de fracaso",
-      "code": "SF-A"      
+      "code": 15,
+      "kind": 2,
+      "created_by": 1     
     }
   },
   {
@@ -124,7 +154,9 @@
     "pk": 16,
     "fields": {
       "name": "Insatisfacción",
-      "code": "I-E"      
+      "code": 16,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -132,7 +164,9 @@
     "pk": 17,
     "fields": {
       "name": "Insatisfacción",
-      "code": "I-A"      
+      "code": 17,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -140,7 +174,9 @@
     "pk": 18,
     "fields": {
       "name": "Culpa",
-      "code": "C-E"      
+      "code": 18,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -148,7 +184,9 @@
     "pk": 19,
     "fields": {
       "name": "Culpa",
-      "code": "C-A"      
+      "code": 19,
+      "kind": 2,
+      "created_by": 1     
     }
   },
   {
@@ -156,7 +194,9 @@
     "pk": 20,
     "fields": {
       "name": "Expectativas de castigo",
-      "code": "EC-E"      
+      "code": 20,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -164,7 +204,9 @@
     "pk": 21,
     "fields": {
       "name": "Expectativas de castigo",
-      "code": "EC-A"      
+      "code": 21,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -172,7 +214,9 @@
     "pk": 22,
     "fields": {
       "name": "Autodesprecio",
-      "code": "A-E"      
+      "code": 22,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -180,7 +224,9 @@
     "pk": 23,
     "fields": {
       "name": "Autodesprecio",
-      "code": "A-A"      
+      "code": 23,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -188,7 +234,9 @@
     "pk": 24,
     "fields": {
       "name": "Autoacusación",
-      "code": "AU-E"      
+      "code": 24,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -196,7 +244,9 @@
     "pk": 25,
     "fields": {
       "name": "Autoacusación",
-      "code": "AU-A"      
+      "code": 25,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -204,7 +254,9 @@
     "pk": 26,
     "fields": {
       "name": "Ideas suicidas",
-      "code": "IS-E"      
+      "code": 26,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -212,7 +264,9 @@
     "pk": 27,
     "fields": {
       "name": "Ideas suicidas",
-      "code": "IS-A"      
+      "code": 27,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -220,7 +274,9 @@
     "pk": 28,
     "fields": {
       "name": "Episodios de llanto",
-      "code": "EL-E"      
+      "code": 28,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -228,7 +284,9 @@
     "pk": 29,
     "fields": {
       "name": "Episodios de llanto",
-      "code": "EL-A"      
+      "code": 29,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -236,7 +294,9 @@
     "pk": 30,
     "fields": {
       "name": "Irritabilidad",
-      "code": "IR-E"      
+      "code": 30,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -244,7 +304,9 @@
     "pk": 31,
     "fields": {
       "name": "Irritabilidad",
-      "code": "IR-A"      
+      "code": 31,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -252,7 +314,9 @@
     "pk": 32,
     "fields": {
       "name": "Retirada social",
-      "code": "RS-E"      
+      "code": 32,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -260,7 +324,9 @@
     "pk": 33,
     "fields": {
       "name": "Retirada social",
-      "code": "RS-A"      
+      "code": 33,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -268,7 +334,9 @@
     "pk": 34,
     "fields": {
       "name": "Indecisión",
-      "code": "IN-E"      
+      "code": 34,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -276,7 +344,9 @@
     "pk": 35,
     "fields": {
       "name": "Indecisión",
-      "code": "IN-A"      
+      "code": 35,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -284,7 +354,9 @@
     "pk": 36,
     "fields": {
       "name": "Miedo",
-      "code": "M-E"      
+      "code": 36,
+      "kind": 1,
+      "created_by": 1      
     }
   }, 
   {
@@ -292,7 +364,9 @@
     "pk": 37,
     "fields": {
       "name": "Miedo",
-      "code": "M-A"      
+      "code": 37,
+      "kind": 2,
+      "created_by": 1      
     }
   }, 
   {
@@ -300,7 +374,9 @@
     "pk": 38,
     "fields": {
       "name": "Cambios en la imagen corporal",
-      "code": "CIC-E"      
+      "code": 38,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -308,7 +384,9 @@
     "pk": 39,
     "fields": {
       "name": "Cambios en la imagen corporal",
-      "code": "CIC-A"      
+      "code": 39,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -316,7 +394,9 @@
     "pk": 40,
     "fields": {
       "name": "Ralentización",
-      "code": "R-E"      
+      "code": 40,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -324,7 +404,9 @@
     "pk": 41,
     "fields": {
       "name": "Ralentización",
-      "code": "R-A"      
+      "code": 41,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -332,7 +414,9 @@
     "pk": 42,
     "fields": {
       "name": "Concentración",
-      "code": "CO-E"      
+      "code": 42,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -340,7 +424,9 @@
     "pk": 43,
     "fields": {
       "name": "Tensión",
-      "code": "TE-E"      
+      "code": 43,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -348,7 +434,9 @@
     "pk": 44,
     "fields": {
       "name": "Tensión",
-      "code": "TE-A"      
+      "code": 44,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -356,7 +444,9 @@
     "pk": 45,
     "fields": {
       "name": "Insomnio",
-      "code": "INS-E"      
+      "code": 45,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -364,7 +454,9 @@
     "pk": 46,
     "fields": {
       "name": "Insomnio",
-      "code": "INS-A"      
+      "code": 46,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -372,7 +464,9 @@
     "pk": 47,
     "fields": {
       "name": "Fatigabilidad",
-      "code": "F-E"      
+      "code": 47,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -380,7 +474,9 @@
     "pk": 48,
     "fields": {
       "name": "Fatigabilidad",
-      "code": "F-A"      
+      "code": 48,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -388,7 +484,9 @@
     "pk": 49,
     "fields": {
       "name": "Síntomas somáticos musculares",
-      "code": "SSM-E"      
+      "code": 49,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -396,7 +494,9 @@
     "pk": 50,
     "fields": {
       "name": "Síntomas somáticos musculares",
-      "code": "SSM-A"      
+      "code": 50,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -404,7 +504,9 @@
     "pk": 51,
     "fields": {
       "name": "Síntomas somáticos sensoriales",
-      "code": "SSS-E"      
+      "code": 51,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -412,7 +514,9 @@
     "pk": 52,
     "fields": {
       "name": "Síntomas gastrointestinales",
-      "code": "SG-E"      
+      "code": 52,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -420,7 +524,9 @@
     "pk": 53,
     "fields": {
       "name": "Síntomas gastrointestinales",
-      "code": "SG-A"      
+      "code": 53,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -428,7 +534,9 @@
     "pk": 54,
     "fields": {
       "name": "Pérdida de apetito",
-      "code": "PA-E"      
+      "code": 54,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -436,7 +544,9 @@
     "pk": 55,
     "fields": {
       "name": "Pérdida de apetito",
-      "code": "PA-A"      
+      "code": 55,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -444,7 +554,9 @@
     "pk": 56,
     "fields": {
       "name": "Pérdida de peso",
-      "code": "PP-E"      
+      "code": 56,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -452,7 +564,9 @@
     "pk": 57,
     "fields": {
       "name": "Pérdida de peso",
-      "code": "PP-A"      
+      "code": 57,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -460,7 +574,9 @@
     "pk": 58,
     "fields": {
       "name": "Preocupaciones somáticas",
-      "code": "PS-E"      
+      "code": 58,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -468,7 +584,9 @@
     "pk": 59,
     "fields": {
       "name": "Preocupaciones somáticas",
-      "code": "PS-A"      
+      "code": 59,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -476,7 +594,9 @@
     "pk": 60,
     "fields": {
       "name": "Bajo nivel de energía",
-      "code": "BNE-E"      
+      "code": 60,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -484,7 +604,9 @@
     "pk": 61,
     "fields": {
       "name": "Bajo nivel de energía",
-      "code": "BNE-A"      
+      "code": 61,
+      "kind": 2,
+      "created_by": 1      
     }
   },  
   {
@@ -492,7 +614,9 @@
     "pk": 62,
     "fields": {
       "name": "Síntomas respiratorios",
-      "code": "SR-E"      
+      "code": 62,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -500,7 +624,9 @@
     "pk": 63,
     "fields": {
       "name": "Síntomas respiratorios",
-      "code": "SR-A"      
+      "code": 63,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -508,7 +634,9 @@
     "pk": 64,
     "fields": {
       "name": "Síntomas cardiovasculares",
-      "code": "SC-E"      
+      "code": 64,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -516,7 +644,9 @@
     "pk": 65,
     "fields": {
       "name": "Síntomas cardiovasculares",
-      "code": "SC-A"      
+      "code": 65,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -524,7 +654,9 @@
     "pk": 66,
     "fields": {
       "name": "Síntomas vegetativos",
-      "code": "SV-E"      
+      "code": 66,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -532,7 +664,9 @@
     "pk": 67,
     "fields": {
       "name": "Introspección",
-      "code": "INT-E"      
+      "code": 67,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -540,7 +674,9 @@
     "pk": 68,
     "fields": {
       "name": "Introspección",
-      "code": "INT-A"      
+      "code": 68,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -548,7 +684,9 @@
     "pk": 69,
     "fields": {
       "name": "Inhibición psicomotora",
-      "code": "IP-E"      
+      "code": 69,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
@@ -556,7 +694,9 @@
     "pk": 70,
     "fields": {
       "name": "Inhibición psicomotora",
-      "code": "IP-A"      
+      "code": 70,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -564,7 +704,9 @@
     "pk": 71,
     "fields": {
       "name": "Humor ansioso",
-      "code": "HA-A"      
+      "code": 71,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -572,7 +714,9 @@
     "pk": 72,
     "fields": {
       "name": "Funciones intelectuales (cognitivas)",
-      "code": "FI-A"      
+      "code": 72,
+      "kind": 2,
+      "created_by": 1      
     }
   },  
   {
@@ -580,7 +724,9 @@
     "pk": 73,
     "fields": {
       "name": "Humor depresivo",
-      "code": "HD-A"      
+      "code": 73,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -588,7 +734,9 @@
     "pk": 74,
     "fields": {
       "name": "Síntomas somáticos generales",
-      "code": "SSG-A"      
+      "code": 74,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -596,7 +744,9 @@
     "pk": 75,
     "fields": {
       "name": "Síntomas genitourinarios",
-      "code": "SGE-A"      
+      "code": 75,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -604,7 +754,9 @@
     "pk": 76,
     "fields": {
       "name": "Síntomas del sistema nervioso autónomo",
-      "code": "SSNA-A"      
+      "code": 76,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -612,7 +764,9 @@
     "pk": 77,
     "fields": {
       "name": "Conducta en el trascurso del test",
-      "code": "CTT-A"      
+      "code": 77,
+      "kind": 2,
+      "created_by": 1      
     }
   },
   {
@@ -620,23 +774,29 @@
     "pk": 78,
     "fields": {
       "name": "Conducta en el trascurso del test",
-      "code": "CTT-E"      
+      "code": 78,
+      "kind": 1,
+      "created_by": 1      
     }
   },
   {
     "model": "survey.category",
     "pk": 79,
     "fields": {
-      "name": "Adherencia al Tratamiento",
-      "code": "AT"      
+      "name": "Síntomas o empeoramiento",
+      "code": 79,
+      "kind": 0,
+      "created_by": 1      
     }
   },
   {
     "model": "survey.category",
     "pk": 80,
     "fields": {
-      "name": "Síntomas o empeoramiento",
-      "code": "SE"      
+      "name": "Adherencia al Tratamiento",
+      "code": 80,
+      "kind": 0,
+      "created_by": 1     
     }
   }
   

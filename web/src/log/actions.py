@@ -17,7 +17,8 @@ def log_addition(object):
         content_type_id=ContentType.objects.get_for_model(object).pk,
         object_id=object.pk,
         object_repr=force_unicode(object),
-        action_flag=ADDITION
+        action_flag=ADDITION,
+        change_message=_('Additioned')
     )
 
 
@@ -51,5 +52,6 @@ def log_deletion(object):
         content_type_id=ContentType.objects.get_for_model(object).pk,
         object_id=object.pk,
         object_repr=force_unicode(object),
-        action_flag=DELETION
+        action_flag=DELETION,
+        change_message=_('Deleted')
     )

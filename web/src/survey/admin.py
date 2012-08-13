@@ -3,19 +3,19 @@ from survey.models import *
 
 
 class SurveyAdmin(admin.ModelAdmin):
-    fieldsets = [('Surveys', {'fields': ['name', 'code', 'blocks']})]
-    list_display = ('code', 'name')
-    search_fields = ('code', 'name')
-    ordering = ('code', 'name')
+    fieldsets = [('Surveys', {'fields': ['name', 'code', 'blocks', 'kind']})]
+    list_display = ('code', 'name', 'kind')
+    search_fields = ('code', 'name', 'kind')
+    ordering = ('code', 'name', 'kind')
 
 admin.site.register(Survey, SurveyAdmin)
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    fieldsets = [('Categorys', {'fields': ['name', 'code']})]
-    list_display = ('code', 'name')
-    search_fields = ('code', 'name')
-    ordering = ('code', 'name')
+    fieldsets = [('Categorys', {'fields': ['name', 'code', 'kind']})]
+    list_display = ('code', 'name', 'kind')
+    search_fields = ('code', 'name', 'kind')
+    ordering = ('code', 'name', 'kind')
 
 admin.site.register(Category, CategoryAdmin)
 
@@ -41,10 +41,9 @@ admin.site.register(Question, QuestionAdmin)
 
 class OptionAdmin(admin.ModelAdmin):
     fieldsets = [('Options', {'fields': ['text', 'code', 'kind', 'weight',
-                'question', 'father']})]
-    list_display = ('code', 'text', 'weight', 'kind', 'question', 'father')
-    search_fields = ('code', 'text', 'kind', 'weight', 'kind', 'question',
-                        'father')
+                'question']})]
+    list_display = ('code', 'text', 'weight', 'kind', 'question')
+    search_fields = ('code', 'text', 'kind', 'weight', 'kind', 'question')
     ordering = ('code',)
 
 admin.site.register(Option, OptionAdmin)

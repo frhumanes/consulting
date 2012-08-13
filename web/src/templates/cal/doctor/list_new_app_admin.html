@@ -2,20 +2,26 @@
 
 {% load i18n messages %}
 
-{% block title %}{% trans 'Events list' %}{% endblock %}
+{% block title %}{% trans 'Nueva cita' %}{% endblock %}
 
 {% block left_panel %}
-  {% include "cal/includes/calendar.html" %}
+  {% include "cal/includes/calendar_new_app_admin.html" %}
 {% endblock %}
 
 {% block right_panel %}
   <legend>{{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
 
+  <div class="well">
+    <p>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</p>
+  </div>
+  <div class="well">
+    <p>{% trans "Paciente:" %} {{ patient.get_profile.name }} {{ patient.get_profile.first_surname }}</p>
+  </div>
   <div class="row">
     <div class="span5">
       <div class="btn-toolbar" style="margin-bottom: 9px">
           <div class="btn-group">
-            <a class="btn btn-primary btn" href="{% url cal.lookfor_patient year month day %}"><i class="icon-pencil icon-white"></i> {% trans "New appointment" %}</a>
+            <a class="btn btn-primary btn" href="{% url cal.app_add_new_app_admin year month day doctor.id patient.id %}"><i class="icon-pencil icon-white"></i> {% trans "New appointment" %}</a>
           </div>
       </div>
     </div>
@@ -63,7 +69,6 @@
   {% endif %}
   {% include "cal/app/free_slots.html" %}
 {% endblock %}
-
 {% block jquery_init %}
 var load_icon = "<img src='{{STATIC_URL}}img/loading.gif' alt='loading...'/>";
 
@@ -72,8 +77,6 @@ $('table tbody tr').live('click', function(event){
   var id_patient = $(this).attr('id');
   if(id){
     $('table').hide();
-    $('#message-paginator').hide();
-    <!-- window.location.href = '/calendar/app/edit/' +id+ '/{{ doctor.id }}'; -->
     window.location.href = '/calendar/app/edit/' +id+ '/' + id_patient + '/{{ doctor.id }}';
   }
 });

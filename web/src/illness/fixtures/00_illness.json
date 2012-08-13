@@ -3,17 +3,20 @@
     "model": "illness.illness",
     "pk": 1,
     "fields": {
-      "code": "0",
-      "name": "Otra"
+      "code": 1,
+      "name": "Ninguna enfermedad",
+      "surveys": [1],
+      "created_by": 1
     }
   },
   {
     "model": "illness.illness",
     "pk": 2,
     "fields": {
-      "code": "1",
+      "code": 2,
       "name": "Ansiedad/Depresión",
-      "surveys": [1,2,3,4]
+      "surveys": [2,3,4,5,6,7,8],
+      "created_by": 1
     }
   }  
 ]

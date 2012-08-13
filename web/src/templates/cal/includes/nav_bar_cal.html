@@ -1,0 +1,54 @@
+{% load i18n%}
+{% load consulting %}
+
+
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li>
+        <a href="{% url cal.views.main %}">
+          {% if request.user.get_profile.is_doctor %}
+            {% trans 'CITAS/HUECOS MÉDICO | DAR CITA' %}
+          {% endif %}
+          {% if request.user.get_profile.is_administrative %}
+            {% trans 'CITAS/HUECOS MÉDICO' %}
+          {% endif %}
+        </a>
+    </li>
+    {% if request.user.get_profile.is_administrative %}
+    <li>
+        <a href="{% url cal.select_month_year %}">
+          {% trans 'DAR CITA' %}
+        </a>
+    </li>
+    {% endif %}
+    <li>
+        <a href="{% url cal.lookfor_patient_app_list %}">
+          {% trans 'CITAS PACIENTE' %}
+        </a>
+    </li>
+    {% if request.user.get_profile.is_doctor %}
+    <li>
+        <a href="{% url cal.list_slot_type %}">
+          {% trans 'TIPOS DE PREFERENCIA' %}
+        </a>
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        {% trans 'AUSENCIAS' %}<b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="{% url cal.list_vacation %}">{% trans "Vacaciones" %}</a>
+        </li>
+        <li>                                                     
+          <a href="{% url cal.list_event %}">{% trans "Eventos" %}</a>
+        </li>
+      </ul>
+    </li>
+    {% endif %}
+  </ul>
+</div>
+    
+
+         
+         

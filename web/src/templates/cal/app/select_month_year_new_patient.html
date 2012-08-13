@@ -14,7 +14,7 @@
             <legend class="span10">{% trans 'Calendar' %}</legend>
 
             <div class="span2">
-                <a href="{% url cal.views.main year|add:'-3' %}">&lt;&lt; Prev</a>
+                <a href="{% url cal.select_month_year year|add:'-3' %}">&lt;&lt; Prev</a>
             </div>
 
             {% for year, months in years %}
@@ -25,23 +25,15 @@
                             {% if month.entry %}<b>{% endif %}
                             <li>
                                 <a class={% if month.current %}"label label-info"{% else %}""{% endif %}
-                                href={% if request.user.get_profile.is_doctor %}
-                                        "{% url cal.views.day year month.n today %}"
-                                     {% else %}
-                                        "{% url cal.views.doctor_calendar year month.n %}"
-                                     {% endif %}>{{ month.name }}</a>
-                                {% if request.user.get_profile.is_doctor %}
-                                    <a href="{% url cal.list_slot year month.n %}"><i class="icon-cog"></i></a>
-                                {% endif %}
+                                href={% if request.user.get_profile.is_doctor %}"{% url cal.doctor_day_new_app_admin year month.n today request.user.id patient.id %}"{% else %}"{% url cal.check_patient year month.n today patient.id %}"{% endif %}>{{ month.name }}</a>        
                             </li>
                         {% endfor %}
-
                     </ul>
                 </div>
             {% endfor %}
 
             <div class="span2">
-                <a href="{% url cal.views.main year|add:'3' %}">Next &gt;&gt;</a>
+                <a href="{% url cal.select_month_year year|add:'3' %}">Next &gt;&gt;</a>
             </div>
         </div>
     </div>

@@ -4,11 +4,13 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+
+from log.models import TraceableModel
 from illness.models import Illness
 from cal.models import Appointment
 
 
-class Profile(models.Model):
+class Profile(TraceableModel):
 
     SEX = (
         (-1, _(u'Seleccione el sexo')),
@@ -31,9 +33,9 @@ class Profile(models.Model):
         (settings.PATIENT, _(u'Paciente')),
     )
     #username is the nick with you login in app
-    user = models.ForeignKey(User, unique=True)
+    user = models.ForeignKey(User, unique=True, related_name='profiles')
     doctor = models.ForeignKey(User, blank=True, null=True,
-                                related_name='doctor_profiles')
+                                related_name='doctor')
     patients = models.ManyToManyField(User, related_name='patients_profiles',
                                         blank=True, null=True)
 
@@ -96,8 +98,8 @@ class Profile(models.Model):
         return self.role == settings.PATIENT
 
     def __unicode__(self):
-        return u'%s %s %s' % (self.name, self.first_surname,
-                                self.second_surname)
+        return u'id: %s profile: %s %s %s' \
+            % (self.id, self.name, self.first_surname, self.second_surname)
 
     def age(self, dob):
         today = date.today()
@@ -110,6 +112,14 @@ class Profile(models.Model):
     def get_age(self):
         if not self.dob is None:
             return self.age(self.dob)
+        else:
+            return ''
+
+    def get_sex(self):
+        if self.sex == settings.WOMAN:
+            return _(u'Mujer')
+        elif self.sex == settings.MAN:
+            return _(u'Hombre')
         else:
             return ''
 

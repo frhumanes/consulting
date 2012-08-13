@@ -8,7 +8,7 @@ def active_root(request, pattern):
     split_path = request.path.split('/')
     split_pattern = pattern.split('/')
 
-    if split_path[1] == split_pattern[1]:
+    if split_path[1] == split_pattern[1] and  split_path[1] != '':
         return 'active'
 
     return ''

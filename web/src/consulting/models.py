@@ -4,15 +4,21 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.conf import settings
+
+from log.models import TraceableModel
 from survey.models import Option, Survey
 from medicament.models import Component
 from illness.models import Illness
+from cal.models import Appointment
 
 
-class Task(models.Model):
+class Task(TraceableModel):
     patient = models.ForeignKey(User, related_name='patient_tasks')
 
     survey = models.ForeignKey(Survey, related_name="survey_tasks")
+
+    appointment = models.ForeignKey(Appointment,
+                                    related_name="appointment_tasks")
 
     self_administered = models.NullBooleanField(_(u'¿Tarea autoadministrada?'))
 
@@ -41,19 +47,11 @@ class Task(models.Model):
                     default=False)
 
     def __unicode__(self):
-        return u'%s %s %s' % (self.patient, self.survey, self.creation_date)
+        return u'id: %s task: %s %s %s' \
+            % (self.id, self.patient, self.survey, self.creation_date)
 
 
-class Recommendation(models.Model):
-    patient = models.ForeignKey(User, related_name='patient_recommendations')
-
-    date = models.DateTimeField(_(u'Fecha'), auto_now_add=True)
-
-    content = models.CharField(_(u'Recomendación/nes'), max_length=255,
-                                blank=True)
-
-
-class Medicine(models.Model):
+class Medicine(TraceableModel):
     BEFORE_AFTER_CHOICES = (
         (settings.BEFORE, _(u'Anterior')),
         (settings.AFTER, _(u'Posterior')),
@@ -61,7 +59,13 @@ class Medicine(models.Model):
     patient = models.ForeignKey(User, related_name='patient_medicines')
 
     component = models.ForeignKey(Component,
-                              related_name='component_medicines')
+                                related_name='component_medicines',
+                                blank=True, null=True)
+    conclusion = models.ForeignKey('Conclusion',
+                                related_name='conclusion_medicines',
+                                blank=True, null=True)
+    result = models.ForeignKey('Result', related_name='result_medicines',
+                              blank=True, null=True)
 
     before_after_first_appointment = models.IntegerField(
                                         _(u'Anterior/Posterior\
@@ -79,7 +83,7 @@ class Medicine(models.Model):
     date = models.DateTimeField(_(u'Fecha'), auto_now_add=True)
 
     def __unicode__(self):
-        return u'%s' % (self.component)
+        return u'id: %s medicine: %s' % (self.id, self.component)
 
     def get_before_after_symptom(self):
         if self.before_after_symptom == settings.BEFORE:
@@ -98,32 +102,33 @@ class Medicine(models.Model):
         return before_after_first_appointment
 
 
-class Result(models.Model):
+class Result(TraceableModel):
     patient = models.ForeignKey(User, related_name='patient_results')
 
     survey = models.ForeignKey(Survey, related_name="survey_results")
 
-    answers = models.ManyToManyField('Answer',
-                                    related_name="answers_results")
+    options = models.ManyToManyField(Option, related_name="options_results")
+    # answers = models.ManyToManyField('Answer',
+    #                                 related_name="answers_results")
 
     task = models.ForeignKey(Task, related_name="task_results")
 
     date = models.DateTimeField(_(u'Fecha'), auto_now_add=True)
 
     def __unicode__(self):
-        return u'%s %s' % (self.patient, self.date)
+        return u'id: %s result: %s %s' % (self.id, self.patient, self.survey)
 
 
-class Answer(models.Model):
-    option = models.ForeignKey(Option, related_name="option_answers")
+# class Answer(TraceableModel):
+#     option = models.ForeignKey(Option, related_name="option_answers")
 
-    text = models.CharField(_(u'Texto'), max_length=255, blank=True)
+#     text = models.CharField(_(u'Texto'), max_length=255, blank=True)
 
-    def __unicode__(self):
-        return u'%s' % self.option
+#     def __unicode__(self):
+#         return u'id: %s answer: %s' % (self.id, self.option)
 
 
-class Report(models.Model):
+class Report(TraceableModel):
     patient = models.ForeignKey(User, related_name='patient_reports')
 
     illness = models.ForeignKey(Illness, related_name='illness_reports')
@@ -135,4 +140,25 @@ class Report(models.Model):
     date = models.DateTimeField(_(u'Fecha del Informe'), auto_now_add=True)
 
     def __unicode__(self):
-        return u'%s %s' % (self.patient, self.survey, self.date)
+        return u'id: %s report: %s %s' % (self.id, self.patient, self.illness)
+
+
+class Conclusion(TraceableModel):
+    patient = models.ForeignKey(User, related_name='patient_conclusions')
+
+    result = models.ForeignKey(Result, unique=True,
+                                related_name='result_conclusion',
+                                blank=True, null=True)
+
+    appointment = models.ForeignKey(Appointment,
+                                    related_name="appointment_conclusions")
+
+    observation = models.CharField(max_length=5000, blank=True, null=True)
+
+    recommendation = models.CharField(max_length=5000, blank=True, null=True)
+
+    date = models.DateTimeField(_(u'Fecha'), auto_now_add=True)
+
+    def __unicode__(self):
+        return u'id: %s conclusion: %s %s' \
+                                % (self.id, self.patient, self.appointment)

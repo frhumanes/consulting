@@ -6,8 +6,10 @@ from django.utils.safestring import mark_safe
 from django.forms.widgets import RadioFieldRenderer
 from django.forms.util import flatatt
 from django.utils.encoding import force_unicode
+
 from consulting.validators import validate_choice
-from consulting.models import Medicine
+
+from consulting.models import Medicine, Conclusion
 from medicament.models import Component
 
 
@@ -113,4 +115,31 @@ class MedicineForm(forms.ModelForm):
 
     class Meta:
         model = Medicine
-        exclude = ('patient', 'date')
+        exclude = ('patient', 'result', 'date', 'created_at', 'updated_at')
+
+
+class ConclusionForm(forms.ModelForm):
+    observation = forms.CharField(label=_(u'Observaciones'),
+                                    widget=forms.Textarea(attrs={'cols': 60,
+                                                'rows': 4, 'class': 'span5'}))
+    recommendation = forms.CharField(label=_(u'Recomendaciones'),
+                                    widget=forms.Textarea(attrs={'cols': 60,
+                                                'rows': 4, 'class': 'span5'}),
+                                    required=False)
+
+    class Meta:
+        model = Conclusion
+        exclude = ('created_at', 'updated_at', 'patient', 'result',
+                    'appointment', 'date')
+
+
+class ActionSelectionForm(forms.Form):
+    ACTION = (
+        ('', _(u'--------')),
+        (settings.CONCLUSION, _(u'Resumen')),
+        (settings.PREVIOUS_STUDY, _(u'Estudio Previo')),
+    )
+
+    action = forms.ChoiceField(label=_(u'Realizar'), choices=ACTION,
+        widget=forms.Select(
+                        attrs={'class': 'input-medium search-query span4'}))

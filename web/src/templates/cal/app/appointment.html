@@ -1,5 +1,6 @@
-<tr data-msg="{{ event.id }}" style="cursor:pointer">
-  <td>{{ event.start_time|time:"H:i" }}</td>
+<tr id={{event.patient.id}} data-msg="{{ event.id }}" style="cursor:pointer">
+  <td>{{ event.date }}</td>
+  <td>{{ event.start_time|time:"H:i" }}</td>  
   <td>{{ event.end_time|time:"H:i" }}</td>
   <td>{{ event.duration }}</td>
   <td>{{ event.patient.get_profile.name }} {{ event.patient.get_profile.first_surname }} {{ event.patient.get_profile.second_surname }}</td>

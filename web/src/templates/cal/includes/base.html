@@ -6,7 +6,7 @@
     {%if request.user.get_profile.is_doctor %}
         {% include "ui/includes/header_doctor.html" %}
     {% else %}
-        {% include "ui/includes/header_patient.html" %}
+        {% include "ui/includes/header_administrative.html" %}
     {% endif %}
 {% endblock  %}
 
@@ -26,7 +26,9 @@
 {% block body %}
 
   <div class="container">
-      {% block nav-bar%}{% endblock  %}
+      {% block nav-bar%}
+        {% include "cal/includes/nav_bar_cal.html" %}
+      {% endblock  %}
 
       <div class="row">
           <div class="span3">

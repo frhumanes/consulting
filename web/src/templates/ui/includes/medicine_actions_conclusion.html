@@ -1,0 +1,21 @@
+{% load i18n%}
+{% load consulting %}
+
+
+<ul class="nav nav-pills nav-stacked" style="padding-top: 30px;">
+    <li>
+        <a href="{% url consulting_list_medicines_before_conclusion id_conclusion %}">
+            {% trans "Fármacos Antes de la Primera Cita" %}
+        </a>
+    </li>
+    <li>
+        <a href="{% url consulting_list_medicines_after_conclusion id_conclusion %}">
+            {% trans "Fármacos Después de la Primera Cita" %}
+        </a>
+    </li>
+    <li>
+        <a href="{% url consulting_new_medicine_conclusion id_conclusion %}" >
+            {% trans "Recetar" %}
+        </a>
+    </li>
+</ul>

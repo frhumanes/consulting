@@ -31,9 +31,12 @@
   <div class="well">
     <p>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</p>
   </div>
+  <div class="well">
+    <p>{% trans "Paciente:" %} {{ patient.get_profile.name }} {{ patient.get_profile.first_surname }}</p>
+  </div>
 
   <div>
-  <form class="form-horizontal well" method="post" action="{% url cal.edit event.id doctor.id %}">{% csrf_token %}
+  <form class="form-horizontal well" method="post" action="{% url cal.edit event.id patient.id doctor.id %}">{% csrf_token %}
     <legend>{% trans 'Edit Appointment' %} {{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
     <fieldset>
         {% if not_available_error %}

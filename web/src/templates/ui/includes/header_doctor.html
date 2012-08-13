@@ -1,8 +1,8 @@
 {% load i18n%}
 {% load consulting %}
 
-{% url consulting_index as index %}
-{% url consulting_index_administration as index_administration %}
+{% url consulting_newpatient as newpatient %}
+{% url consulting_today as today %}
 {% url consulting_index_pm as index_pm %}
 {% url consulting_stratification_statistic as index_statistic %}
 {% url private_messages_inbox as inbox %}
@@ -15,17 +15,23 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="./index.html">Consulting 3.0</a>
+        <a class="brand" href="{% url consulting_index %}">Consulting 3.0</a>
         <div class="nav-collapse collapse">
             <ul class="nav">
-                <li class="{% active_root request index %}">
-                    <a href="{% url consulting_index %}">
-                        {% trans 'CONSULTA' %}
+                <li class="{% active_root request today %}">
+                    <a href="{% url consulting_today %}">
+                      {% trans 'CONSULTA' %}
                     </a>
                 </li>
-                <li class="{% active_root request index_administration %}">
-                    <a href="{% url consulting_index_administration %}">
-                      {% trans 'ADMINISTRACIÓN' %}
+                
+                <li class="{% active_root request newpatient %}">
+                    <a href="{% url consulting_newpatient %}">
+                      {% trans 'ALTA PACIENTE' %}
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url cal.index %}">
+                      {% trans 'GESTIÓN AGENDA' %}
                     </a>
                 </li>
                 <li class="{% active_root request index_pm %}">
@@ -44,13 +50,11 @@
             </ul>
             <ul class="nav pull-right">
                 <li class="navbar-text">
-                    {% trans 'Logado como '%}
+                    <i class="icon-user"></i>                
                 </li>
                 <li class="navbar-text">
-                    <a href="{% url  conf.views.user_preferences%}">
-                        {{ user.first_name }}
-                        {{ user.last_name}}
-                    </a>
+                    {{ user.first_name }}
+                    {{ user.last_name}}
                 </li>
                 <li class="navbar-text">
                     <a href='{% url registration_logout %}'>

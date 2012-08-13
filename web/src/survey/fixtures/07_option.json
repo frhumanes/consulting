@@ -89,23 +89,12 @@
   },
   {
     "model": "survey.option",
-    "pk": 9,
-    "fields": {
-      "code": "AF1",
-      "kind": 0,
-      "text": "Ansiedad",
-      "question": 11
-    }
-  }, 
-  {
-    "model": "survey.option",
     "pk": 10,
     "fields": {
       "code": "AF1.1",
       "kind": 0,
       "text": "Madre",
-      "question": 11,
-      "father": 9
+      "question": 11
     }
   },
   {
@@ -115,8 +104,7 @@
       "code": "AF1.2",
       "kind": 0,
       "text": "Padre",
-      "question": 11,
-      "father": 9
+      "question": 11
     }
   },
   {
@@ -126,8 +114,7 @@
       "code": "AF1.3",
       "kind": 0,
       "text": "Hermano/a",
-      "question": 11,
-      "father": 9
+      "question": 11
     }
   },
   {
@@ -137,8 +124,7 @@
       "code": "AF1.4",
       "kind": 0,
       "text": "Hijo/a",
-      "question": 11,
-      "father": 9
+      "question": 11
     }
   },
   {
@@ -148,20 +134,19 @@
       "code": "AF1.5",
       "kind": 0,
       "text": "Otros",
-      "question": 11,
-      "father": 9
+      "question": 11
     }
   },
   {
     "model": "survey.option",
     "pk": 15,
     "fields": {
-      "code": "AF2",
+      "code": "AF1.6",
       "kind": 0,
-      "text": "Síndromes fóbicos",
+      "text": "Ninguno",
       "question": 11
     }
-  }, 
+  },
   {
     "model": "survey.option",
     "pk": 16,
@@ -169,8 +154,7 @@
       "code": "AF2.1",
       "kind": 0,
       "text": "Madre",
-      "question": 11,
-      "father": 15
+      "question": 172
     }
   },
   {
@@ -180,8 +164,7 @@
       "code": "AF2.2",
       "kind": 0,
       "text": "Padre",
-      "question": 11,
-      "father": 15
+      "question": 172
     }
   },
   {
@@ -191,8 +174,7 @@
       "code": "AF2.3",
       "kind": 0,
       "text": "Hermano/a",
-      "question": 11,
-      "father": 15
+      "question": 172
     }
   },
   {
@@ -202,8 +184,7 @@
       "code": "AF2.4",
       "kind": 0,
       "text": "Hijo/a",
-      "question": 11,
-      "father": 15
+      "question": 172
     }
   },
   {
@@ -213,20 +194,19 @@
       "code": "AF2.5",
       "kind": 0,
       "text": "Otros",
-      "question": 11,
-      "father": 15
+      "question": 172
     }
   },
   {
     "model": "survey.option",
     "pk": 21,
     "fields": {
-      "code": "AF3",
+      "code": "AF2.6",
       "kind": 0,
-      "text": "Trastornos de pánico",
-      "question": 11
+      "text": "Ninguno",
+      "question": 172
     }
-  }, 
+  },
   {
     "model": "survey.option",
     "pk": 22,
@@ -234,8 +214,7 @@
       "code": "AF3.1",
       "kind": 0,
       "text": "Madre",
-      "question": 11,
-      "father": 21
+      "question": 173
     }
   },
   {
@@ -245,8 +224,7 @@
       "code": "AF3.2",
       "kind": 0,
       "text": "Padre",
-      "question": 11,
-      "father": 21
+      "question": 173
     }
   },
   {
@@ -256,8 +234,7 @@
       "code": "AF3.3",
       "kind": 0,
       "text": "Hermano/a",
-      "question": 11,
-      "father": 21
+      "question": 173
     }
   },
   {
@@ -267,8 +244,7 @@
       "code": "AF3.4",
       "kind": 0,
       "text": "Hijo/a",
-      "question": 11,
-      "father": 21
+      "question": 173
     }
   },
   {
@@ -278,20 +254,19 @@
       "code": "AF3.5",
       "kind": 0,
       "text": "Otros",
-      "question": 11,
-      "father": 21
+      "question": 173
     }
   },
   {
     "model": "survey.option",
     "pk": 27,
     "fields": {
-      "code": "AF4",
+      "code": "AF3.6",
       "kind": 0,
-      "text": "Distimia",
-      "question": 11
+      "text": "Ninguno",
+      "question": 173
     }
-  }, 
+  },
   {
     "model": "survey.option",
     "pk": 28,
@@ -299,8 +274,7 @@
       "code": "AF4.1",
       "kind": 0,
       "text": "Madre",
-      "question": 11,
-      "father": 27
+      "question": 174
     }
   },
   {
@@ -310,8 +284,7 @@
       "code": "AF4.2",
       "kind": 0,
       "text": "Padre",
-      "question": 11,
-      "father": 27
+      "question": 174
     }
   },
   {
@@ -321,8 +294,7 @@
       "code": "AF4.3",
       "kind": 0,
       "text": "Hermano/a",
-      "question": 11,
-      "father": 27
+      "question": 174
     }
   },
   {
@@ -332,8 +304,7 @@
       "code": "AF4.4",
       "kind": 0,
       "text": "Hijo/a",
-      "question": 11,
-      "father": 27
+      "question": 174
     }
   },
   {
@@ -343,20 +314,19 @@
       "code": "AF4.5",
       "kind": 0,
       "text": "Otros",
-      "question": 11,
-      "father": 27
+      "question": 174
     }
   },
   {
     "model": "survey.option",
     "pk": 33,
     "fields": {
-      "code": "AF5",
+      "code": "AF4.6",
       "kind": 0,
-      "text": "Trastorno depresivo",
-      "question": 11
+      "text": "Ninguno",
+      "question": 174
     }
-  }, 
+  },
   {
     "model": "survey.option",
     "pk": 34,
@@ -364,8 +334,7 @@
       "code": "AF5.1",
       "kind": 0,
       "text": "Madre",
-      "question": 11,
-      "father": 33
+      "question": 175
     }
   },
   {
@@ -375,8 +344,7 @@
       "code": "AF5.2",
       "kind": 0,
       "text": "Padre",
-      "question": 11,
-      "father": 33
+      "question": 175
     }
   },
   {
@@ -386,8 +354,7 @@
       "code": "AF5.3",
       "kind": 0,
       "text": "Hermano/a",
-      "question": 11,
-      "father": 33
+      "question": 175
     }
   },
   {
@@ -397,8 +364,7 @@
       "code": "AF5.4",
       "kind": 0,
       "text": "Hijo/a",
-      "question": 11,
-      "father": 33
+      "question": 175
     }
   },
   {
@@ -408,20 +374,19 @@
       "code": "AF5.5",
       "kind": 0,
       "text": "Otros",
-      "question": 11,
-      "father": 33
+      "question": 175
     }
   },
   {
     "model": "survey.option",
     "pk": 39,
     "fields": {
-      "code": "AF6",
+      "code": "AF5.6",
       "kind": 0,
-      "text": "Trastorno bipolar",
-      "question": 11
+      "text": "Ninguno",
+      "question": 175
     }
-  }, 
+  },
   {
     "model": "survey.option",
     "pk": 40,
@@ -429,8 +394,7 @@
       "code": "AF6.1",
       "kind": 0,
       "text": "Madre",
-      "question": 11,
-      "father": 39
+      "question": 176
     }
   },
   {
@@ -440,8 +404,7 @@
       "code": "AF6.2",
       "kind": 0,
       "text": "Padre",
-      "question": 11,
-      "father": 39
+      "question": 176
     }
   },
   {
@@ -451,8 +414,7 @@
       "code": "AF6.3",
       "kind": 0,
       "text": "Hermano/a",
-      "question": 11,
-      "father": 39
+      "question": 176
     }
   },
   {
@@ -462,8 +424,7 @@
       "code": "AF6.4",
       "kind": 0,
       "text": "Hijo/a",
-      "question": 11,
-      "father": 39
+      "question": 176
     }
   },
   {
@@ -473,18 +434,17 @@
       "code": "AF6.5",
       "kind": 0,
       "text": "Otros",
-      "question": 11,
-      "father": 39
+      "question": 176
     }
   },
   {
     "model": "survey.option",
     "pk": 45,
     "fields": {
-      "code": "AF7",
+      "code": "AF6.6",
       "kind": 0,
-      "text": "Manía",
-      "question": 11
+      "text": "Ninguno",
+      "question": 176
     }
   }, 
   {
@@ -494,8 +454,7 @@
       "code": "AF7.1",
       "kind": 0,
       "text": "Madre",
-      "question": 11,
-      "father": 45
+      "question": 177
     }
   },
   {
@@ -505,8 +464,7 @@
       "code": "AF7.2",
       "kind": 0,
       "text": "Padre",
-      "question": 11,
-      "father": 45
+      "question": 177
     }
   },
   {
@@ -516,8 +474,7 @@
       "code": "AF7.3",
       "kind": 0,
       "text": "Hermano/a",
-      "question": 11,
-      "father": 45
+      "question": 177
     }
   },
   {
@@ -527,8 +484,7 @@
       "code": "AF7.4",
       "kind": 0,
       "text": "Hijo/a",
-      "question": 11,
-      "father": 45
+      "question": 177
     }
   },
   {
@@ -538,20 +494,19 @@
       "code": "AF7.5",
       "kind": 0,
       "text": "Otros",
-      "question": 11,
-      "father": 45
+      "question": 177
     }
   },
   {
     "model": "survey.option",
     "pk": 51,
     "fields": {
-      "code": "AF8",
+      "code": "AF7.6",
       "kind": 0,
-      "text": "Toxicomanía",
-      "question": 11
+      "text": "Ninguno",
+      "question": 177
     }
-  }, 
+  },
   {
     "model": "survey.option",
     "pk": 52,
@@ -559,8 +514,7 @@
       "code": "AF8.1",
       "kind": 0,
       "text": "Madre",
-      "question": 11,
-      "father": 51
+      "question": 178
     }
   },
   {
@@ -570,8 +524,7 @@
       "code": "AF8.2",
       "kind": 0,
       "text": "Padre",
-      "question": 11,
-      "father": 51
+      "question": 178
     }
   },
   {
@@ -581,8 +534,7 @@
       "code": "AF8.3",
       "kind": 0,
       "text": "Hermano/a",
-      "question": 11,
-      "father": 51
+      "question": 178
     }
   },
   {
@@ -592,8 +544,7 @@
       "code": "AF8.4",
       "kind": 0,
       "text": "Hijo/a",
-      "question": 11,
-      "father": 51
+      "question": 178
     }
   },
   {
@@ -603,20 +554,19 @@
       "code": "AF8.5",
       "kind": 0,
       "text": "Otros",
-      "question": 11,
-      "father": 51
+      "question": 178
     }
   },
   {
     "model": "survey.option",
     "pk": 57,
     "fields": {
-      "code": "AF9",
+      "code": "AF8.6",
       "kind": 0,
-      "text": "Abuso Alcohol",
-      "question": 11
+      "text": "Ninguno",
+      "question": 178
     }
-  }, 
+  },
   {
     "model": "survey.option",
     "pk": 58,
@@ -624,8 +574,7 @@
       "code": "AF9.1",
       "kind": 0,
       "text": "Madre",
-      "question": 11,
-      "father": 57
+      "question": 179
     }
   },
   {
@@ -635,8 +584,7 @@
       "code": "AF9.2",
       "kind": 0,
       "text": "Padre",
-      "question": 11,
-      "father": 57
+      "question": 179
     }
   },
   {
@@ -646,8 +594,7 @@
       "code": "AF9.3",
       "kind": 0,
       "text": "Hermano/a",
-      "question": 11,
-      "father": 57
+      "question": 179
     }
   },
   {
@@ -657,8 +604,7 @@
       "code": "AF9.4",
       "kind": 0,
       "text": "Hijo/a",
-      "question": 11,
-      "father": 57
+      "question": 179
     }
   },
   {
@@ -668,20 +614,19 @@
       "code": "AF9.5",
       "kind": 0,
       "text": "Otros",
-      "question": 11,
-      "father": 57
+      "question": 179
     }
   },
   {
     "model": "survey.option",
     "pk": 63,
     "fields": {
-      "code": "AF10",
+      "code": "AF9.6",
       "kind": 0,
-      "text": "Trastorno obsesivo-compulsivo",
-      "question": 11
+      "text": "Ninguno",
+      "question": 179
     }
-  }, 
+  },
   {
     "model": "survey.option",
     "pk": 64,
@@ -689,8 +634,7 @@
       "code": "AF10.1",
       "kind": 0,
       "text": "Madre",
-      "question": 11,
-      "father": 63
+      "question": 180
     }
   },
   {
@@ -700,8 +644,7 @@
       "code": "AF10.2",
       "kind": 0,
       "text": "Padre",
-      "question": 11,
-      "father": 63
+      "question": 180
     }
   },
   {
@@ -711,8 +654,7 @@
       "code": "AF10.3",
       "kind": 0,
       "text": "Hermano/a",
-      "question": 11,
-      "father": 63
+      "question": 180
     }
   },
   {
@@ -722,8 +664,7 @@
       "code": "AF10.4",
       "kind": 0,
       "text": "Hijo/a",
-      "question": 11,
-      "father": 63
+      "question": 180
     }
   },
   {
@@ -733,20 +674,19 @@
       "code": "AF10.5",
       "kind": 0,
       "text": "Otros",
-      "question": 11,
-      "father": 63
+      "question": 180
     }
   },
   {
     "model": "survey.option",
     "pk": 69,
     "fields": {
-      "code": "AF11",
+      "code": "AF10.6",
       "kind": 0,
-      "text": "Esquizofrenia",
-      "question": 11
+      "text": "Ninguno",
+      "question": 180
     }
-  }, 
+  },
   {
     "model": "survey.option",
     "pk": 70,
@@ -754,8 +694,7 @@
       "code": "AF11.1",
       "kind": 0,
       "text": "Madre",
-      "question": 11,
-      "father": 69
+      "question": 181
     }
   },
   {
@@ -765,8 +704,7 @@
       "code": "AF11.2",
       "kind": 0,
       "text": "Padre",
-      "question": 11,
-      "father": 69
+      "question": 181
     }
   },
   {
@@ -776,8 +714,7 @@
       "code": "AF11.3",
       "kind": 0,
       "text": "Hermano/a",
-      "question": 11,
-      "father": 69
+      "question": 181
     }
   },
   {
@@ -787,8 +724,7 @@
       "code": "AF11.4",
       "kind": 0,
       "text": "Hijo/a",
-      "question": 11,
-      "father": 69
+      "question": 181
     }
   },
   {
@@ -798,20 +734,19 @@
       "code": "AF11.5",
       "kind": 0,
       "text": "Otros",
-      "question": 11,
-      "father": 69
+      "question": 181
     }
   },
   {
     "model": "survey.option",
     "pk": 75,
     "fields": {
-      "code": "AF12",
+      "code": "AF11.6",
       "kind": 0,
-      "text": "Trastorno de personalidad",
-      "question": 11
+      "text": "Ninguno",
+      "question": 181
     }
-  }, 
+  },
   {
     "model": "survey.option",
     "pk": 76,
@@ -819,8 +754,7 @@
       "code": "AF12.1",
       "kind": 0,
       "text": "Madre",
-      "question": 11,
-      "father": 75
+      "question": 182
     }
   },
   {
@@ -830,8 +764,7 @@
       "code": "AF12.2",
       "kind": 0,
       "text": "Padre",
-      "question": 11,
-      "father": 75
+      "question": 182
     }
   },
   {
@@ -841,8 +774,7 @@
       "code": "AF12.3",
       "kind": 0,
       "text": "Hermano/a",
-      "question": 11,
-      "father": 75
+      "question": 182
     }
   },
   {
@@ -852,8 +784,7 @@
       "code": "AF12.4",
       "kind": 0,
       "text": "Hijo/a",
-      "question": 11,
-      "father": 75
+      "question": 182
     }
   },
   {
@@ -863,20 +794,19 @@
       "code": "AF12.5",
       "kind": 0,
       "text": "Otros",
-      "question": 11,
-      "father": 75
+      "question": 182
     }
   },
   {
     "model": "survey.option",
     "pk": 81,
     "fields": {
-      "code": "AF13",
+      "code": "AF12.6",
       "kind": 0,
-      "text": "Otras",
-      "question": 11
+      "text": "Ninguno",
+      "question": 182
     }
-  }, 
+  },
   {
     "model": "survey.option",
     "pk": 82,
@@ -884,8 +814,7 @@
       "code": "AF13.1",
       "kind": 0,
       "text": "Madre",
-      "question": 11,
-      "father": 81
+      "question": 183
     }
   },
   {
@@ -895,8 +824,7 @@
       "code": "AF13.2",
       "kind": 0,
       "text": "Padre",
-      "question": 11,
-      "father": 81
+      "question": 183
     }
   },
   {
@@ -906,8 +834,7 @@
       "code": "AF13.3",
       "kind": 0,
       "text": "Hermano/a",
-      "question": 11,
-      "father": 81
+      "question": 183
     }
   },
   {
@@ -917,8 +844,7 @@
       "code": "AF13.4",
       "kind": 0,
       "text": "Hijo/a",
-      "question": 11,
-      "father": 81
+      "question": 183
     }
   },
   {
@@ -928,8 +854,17 @@
       "code": "AF13.5",
       "kind": 0,
       "text": "Otros",
-      "question": 11,
-      "father": 81
+      "question": 183
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 899,
+    "fields": {
+      "code": "AF13.6",
+      "kind": 0,
+      "text": "Ninguno",
+      "question": 183
     }
   },
   {
@@ -1197,7 +1132,7 @@
     "pk": 113,
     "fields": {
       "code": "AN12",
-      "kind": 0,
+      "kind": 1,
       "text": "Otra",
       "question": 14
     }
@@ -1277,7 +1212,7 @@
     "pk": 121,
     "fields": {
       "code": "AE8",
-      "kind": 0,
+      "kind": 1,
       "text": "Otra",
       "question": 15
     }
@@ -1337,7 +1272,7 @@
     "pk": 127,
     "fields": {
       "code": "AT6",
-      "kind": 0,
+      "kind": 1,
       "text": "Otra",
       "question": 16
     }
@@ -1419,6 +1354,16 @@
       "code": "AI8",
       "kind": 0,
       "text": "SIDA",
+      "question": 17
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 898,
+    "fields": {
+      "code": "AI9",
+      "kind": 1,
+      "text": "Otra",
       "question": 17
     }
   },

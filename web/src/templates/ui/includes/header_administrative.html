@@ -1,8 +1,9 @@
 {% load i18n%}
 {% load consulting %}
 
-{% url consulting_index as index %}
 {% url consulting_newpatient as newpatient %}
+{% url cal.index as cal %}
+
 
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
@@ -12,28 +13,19 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="./index.html">Consulting 3.0</a>
+        <a class="brand" href="{% url consulting_index %}">Consulting 3.0</a>
         <div class="nav-collapse collapse">
             <ul class="nav">
-                <li class="{% active_root request index %}">
-                    <a href="{% url consulting_index %}">
-                        {% trans 'INICIO' %}
-                    </a>
-                </li>
                 <li class="{% active_root request newpatient %}">
                     <a href="{% url consulting_newpatient %}">
                       {% trans 'ALTA PACIENTE' %}
                     </a>
                 </li>
-                <li>
-                    <a href="#">{% trans 'BAJA PACIENTE' %}</a>
-                </li>
-                <li>
-                    <a href="#">{% trans 'ACTIVAR PACIENTE' %}</a>
-                </li>
-                <li>
-                    <a href="#">{% trans 'GESTIÓN AGENDA' %}</a>
-                </li>         
+                <li class="{% active_root request cal %}">
+                    <a href="{% url cal.index %}">
+                      {% trans 'GESTIÓN AGENDA' %}
+                    </a>
+                </li>                                                     
             </ul>
             <ul class="nav pull-right">
                 <li class="navbar-text">

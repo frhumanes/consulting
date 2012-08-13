@@ -1,31 +1,4 @@
-[
-  {
-    "model": "survey.question",
-    "pk": 1,
-    "fields": {
-      "code": "DA1",
-      "text": "Nombre",
-      "categories": [1]
-    }
-  },
-  {
-    "model": "survey.question",
-    "pk": 2,
-    "fields": {
-      "code": "DA2",
-      "text": "Apellido 1",
-      "categories": [1]
-    }
-  },
-  {
-    "model": "survey.question",
-    "pk": 3,
-    "fields": {
-      "code": "DA3",
-      "text": "Apellido 2",
-      "categories": [1]
-    }
-  },
+[  
   {
     "model": "survey.question",
     "pk": 4,
@@ -34,43 +7,7 @@
       "text": "Sexo",
       "categories": [1]
     }
-  },
-  {
-    "model": "survey.question",
-    "pk": 5,
-    "fields": {
-      "code": "DA5",
-      "text": "Domicilio",
-      "categories": [1]
-    }
-  },
-  {
-    "model": "survey.question",
-    "pk": 6,
-    "fields": {
-      "code": "DA6",
-      "text": "Municipio",
-      "categories": [1]
-    }
-  },
-  {
-    "model": "survey.question",
-    "pk": 7,
-    "fields": {
-      "code": "DA7",
-      "text": "Código Postal",
-      "categories": [1]
-    }
-  },
-  {
-    "model": "survey.question",
-    "pk": 8,
-    "fields": {
-      "code": "DA8",
-      "text": "Año de nacimiento",
-      "categories": [1]
-    }
-  },
+  },  
   {
     "model": "survey.question",
     "pk": 9,
@@ -82,19 +19,118 @@
   },
   {
     "model": "survey.question",
-    "pk": 10,
+    "pk": 11,
     "fields": {
-      "code": "DA10",
-      "text": "Profesión",
-      "categories": [1]
+      "code": "AF1",
+      "text": "¿Ha padecido Ansiedad alguno de sus familiares?",
+      "categories": [2]
     }
   },
   {
     "model": "survey.question",
-    "pk": 11,
+    "pk": 172,
     "fields": {
-      "code": "AF",
-      "text": "¿Ha padecido alguno de sus familiares algún trastorno psiquiátrico?",
+      "code": "AF2",
+      "text": "¿Ha padecido Síndromes fóbicos alguno de sus familiares?",
+      "categories": [2]
+    }
+  },
+  {
+    "model": "survey.question",
+    "pk": 173,
+    "fields": {
+      "code": "AF3",
+      "text": "¿Ha padecido Trastornos de pánico alguno de sus familiares?",
+      "categories": [2]
+    }
+  },
+  {
+    "model": "survey.question",
+    "pk": 174,
+    "fields": {
+      "code": "AF4",
+      "text": "¿Ha padecido Distimia alguno de sus familiares?",
+      "categories": [2]
+    }
+  },
+  {
+    "model": "survey.question",
+    "pk": 175,
+    "fields": {
+      "code": "AF5",
+      "text": "¿Ha padecido Trastorno depresivo alguno de sus familiares?",
+      "categories": [2]
+    }
+  },
+  {
+    "model": "survey.question",
+    "pk": 176,
+    "fields": {
+      "code": "AF6",
+      "text": "¿Ha padecido Trastorno bipolar alguno de sus familiares?",
+      "categories": [2]
+    }
+  },
+  {
+    "model": "survey.question",
+    "pk": 177,
+    "fields": {
+      "code": "AF7",
+      "text": "¿Ha padecido Manía alguno de sus familiares?",
+      "categories": [2]
+    }
+  },
+  {
+    "model": "survey.question",
+    "pk": 178,
+    "fields": {
+      "code": "AF8",
+      "text": "¿Ha padecido Toxicomanía alguno de sus familiares?",
+      "categories": [2]
+    }
+  },
+  {
+    "model": "survey.question",
+    "pk": 179,
+    "fields": {
+      "code": "AF9",
+      "text": "¿Ha padecido Abuso de Alcohol alguno de sus familiares?",
+      "categories": [2]
+    }
+  },
+  {
+    "model": "survey.question",
+    "pk": 180,
+    "fields": {
+      "code": "AF10",
+      "text": "¿Ha padecido Trastorno obsesivo-compulsivo alguno de sus familiares?",
+      "categories": [2]
+    }
+  },
+  {
+    "model": "survey.question",
+    "pk": 181,
+    "fields": {
+      "code": "AF11",
+      "text": "¿Ha padecido Esquizofrenia alguno de sus familiares?",
+      "categories": [2]
+    }
+  },
+  {
+    "model": "survey.question",
+    "pk": 182,
+    "fields": {
+      "code": "AF12",
+      "text": "¿Ha padecido Trastorno de personalidad alguno de sus familiares?",
+      "categories": [2]
+    }
+  },
+  {
+    "model": "survey.question",
+    "pk": 183,
+    "fields": {
+      "code": "AF13",
+      "text": "¿Ha padecido Otro Trastorno psiquiátrico alguno de sus familiares?",
       "categories": [2]
     }
   },
@@ -159,15 +195,6 @@
       "code": "AO",
       "text": "¿Padece o presenta sintomatología compatible con alguna de las siguientes enfermedades de otra categoría?",
       "categories": [4]
-    }
-  },
-  {
-    "model": "survey.question",
-    "pk": 19,
-    "fields": {
-      "code": "M",
-      "text": "¿Toma algún medicamento?",
-      "categories": [5]
     }
   },
   {
@@ -1526,7 +1553,7 @@
     "fields": {
       "code": "SE",
       "text": "¿Ha observado desde su última visita, la aparición de nuevos síntomas o empeoramiento de alguno ya presente, a los que no se ha hecho referencia en el cuestionario?",
-      "categories": [80]
+      "categories": [79]
     }
   },
   {
@@ -1535,7 +1562,7 @@
     "fields": {
       "code": "ADT",
       "text": "¿En qué grado ha seguido el paciente las recomendaciones y/o tratamiento indicados?",
-      "categories": [79]
+      "categories": [80]
     }
   }
 ]

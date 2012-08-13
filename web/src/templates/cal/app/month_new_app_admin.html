@@ -6,7 +6,7 @@
 
 
 {% block left_panel %}
-  {% include "cal/includes/calendar.html" %}
+  {% include "cal/includes/calendar_new_app_admin.html" %}
 
   {% if not request.user.get_profile.is_doctor %}
     {% include "cal/app/doctor_preferences.html" %}
@@ -16,6 +16,9 @@
 {% block right_panel %}
     <div class="well">
       <p>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</p>
+    </div>
+    <div class="well">
+      <p>{% trans "Paciente:" %} {{ patient.get_profile.name }} {{ patient.get_profile.first_surname }}</p>
     </div>
 
     {% if events.object_list.count > 0 %}

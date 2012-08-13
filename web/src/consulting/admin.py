@@ -3,7 +3,7 @@ from consulting.models import *
 
 
 class TaskAdmin(admin.ModelAdmin):
-    fieldsets = [('Tasks', {'fields': ['patient', 'survey', 
+    fieldsets = [('Tasks', {'fields': ['patient', 'survey',
                     'self_administered', 'value',
                     'completed']})]
     list_display = ('patient', 'survey',
@@ -17,19 +17,10 @@ class TaskAdmin(admin.ModelAdmin):
 admin.site.register(Task, TaskAdmin)
 
 
-class RecommendationAdmin(admin.ModelAdmin):
-    fieldsets = [('Recommendations', {'fields': ['patient',
-                'content']})]
-    list_display = ('patient', 'content')
-    search_fields = ('patient', 'content')
-    ordering = ('patient', )
-
-admin.site.register(Recommendation, RecommendationAdmin)
-
-
 class MedicineAdmin(admin.ModelAdmin):
     fieldsets = [('Medicines', {'fields': ['patient', 'component',
-                    'before_after_first_appointment', 'before_after_symptom',
+                    'conclusion', 'result', 'before_after_first_appointment',
+                    'before_after_symptom',
                     'months', 'posology']})]
     list_display = ('patient', 'component',
                     'before_after_first_appointment', 'before_after_symptom',
@@ -43,7 +34,7 @@ admin.site.register(Medicine, MedicineAdmin)
 
 
 class ResultAdmin(admin.ModelAdmin):
-    fieldsets = [('Medicines', {'fields': ['patient', 'survey', 'answers',
+    fieldsets = [('Medicines', {'fields': ['patient', 'survey', 'options',
                 'task']})]
     list_display = ('patient', 'survey', 'task')
     search_fields = ('patient', 'survey', 'task')
@@ -52,13 +43,13 @@ class ResultAdmin(admin.ModelAdmin):
 admin.site.register(Result, ResultAdmin)
 
 
-class AnswerAdmin(admin.ModelAdmin):
-    fieldsets = [('Answers', {'fields': ['option', 'text']})]
-    list_display = ('option', 'text')
-    search_fields = ('option', 'text')
-    ordering = ('option',)
+# class AnswerAdmin(admin.ModelAdmin):
+#     fieldsets = [('Answers', {'fields': ['option', 'text']})]
+#     list_display = ('option', 'text')
+#     search_fields = ('option', 'text')
+#     ordering = ('option',)
 
-admin.site.register(Answer, AnswerAdmin)
+# admin.site.register(Answer, AnswerAdmin)
 
 
 class ReportAdmin(admin.ModelAdmin):
@@ -71,3 +62,15 @@ class ReportAdmin(admin.ModelAdmin):
     ordering = ('patient',)
 
 admin.site.register(Report, ReportAdmin)
+
+
+class ConclusionAdmin(admin.ModelAdmin):
+    fieldsets = [('Conclusions', {'fields': ['patient', 'result',
+                'appointment', 'observation', 'recommendation']})]
+    list_display = ('patient', 'result', 'appointment', 'observation',
+                    'recommendation', 'date')
+    search_fields = ('patient', 'result', 'appointment', 'observation',
+                    'recommendation', 'date')
+    ordering = ('patient',)
+
+admin.site.register(Conclusion, ConclusionAdmin)
