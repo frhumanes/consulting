@@ -1,0 +1,70 @@
+{% extends "ui/app.html" %}
+
+{% load i18n%}
+
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/jquery-ui-1.8.18.custom.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.ui.core.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.ui.position.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
+{% endblock %}
+
+{% block css_files %}
+  {{ block.super }}
+  <link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+{% endblock %}
+
+{% block jquery_init %}
+  <!-- DISABLED searcher_component BY DEFAULT-->
+  if($("input[type='radio']:checked").val() == undefined){
+    $('#id_searcher_component').attr('disabled','disabled')
+  }
+
+  <!-- ENABLED searcher_component WHEN CLICK SOME OF INPUT TYPE RADIO -->
+  $('.radio_js').each(function(){
+    $(this).on("click", function(){ 
+      $('#id_searcher_component').removeAttr('disabled');     
+    });      
+  });     
+
+  <!-- LOOK FOR COMPONENT -->
+  $("#id_searcher_component").autocomplete({
+    source: function(request, response){
+              $.ajax({
+                  url: '{% url consulting_searcher_component %}',
+                  type:'POST',
+                  data: { 
+                      kind_component: $("input[type='radio']:checked").val(),
+                      start: function() { return $("#id_searcher_component").val(); },
+                      csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val()
+                  },
+                  dataType: "json",
+                  success: function(data){
+                      response(data['components'])
+                  }
+              })
+            },
+    select: function(event, ui){
+              $("#id_components").attr('value', ui.item.id);            
+            }    
+  });
+
+  $('#carryon').on("click", function(){
+        window.location.href = '/consultation/conclusion/'+{{id_appointment}}+'/'+{{id_result}};  
+  }); 
+{% endblock %}
+
+
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="span2">
+          {% include "ui/includes/medicine_actions_survey.html" %}
+      </div>
+      <div class="span10">
+        {% include "consulting/consultation/medicine_survey.html" %}
+      </div>
+    </div>
+  </div>
+{% endblock body %}

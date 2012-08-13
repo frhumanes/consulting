@@ -1,0 +1,11 @@
+{% extends "cal/includes/base.html" %}
+{% load i18n%}
+
+
+{% block body %}
+    <div class="container">
+        {% block nav-bar%}
+            {% include "cal/includes/nav_bar_cal.html" %}       
+        {% endblock  %}
+    </div>
+{% endblock body %}

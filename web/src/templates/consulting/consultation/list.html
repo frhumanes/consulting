@@ -1,0 +1,72 @@
+{% extends "ui/app.html" %}
+
+{% load i18n %}
+
+{% block body %}
+<div id="container" class="container">
+  <div class="row">
+    <div class="span3">
+      {% include "consulting/consultation/calendar.html" %}
+    </div>
+
+
+    <div class="span9">
+      <legend>{% trans "CITAS " %}{{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}</legend>
+
+      {% if events.object_list.count > 0 %}
+      <div id="events-paginator" class="pull-right">
+        <ul class="pagination ">
+          {% if events.has_previous %}
+            <li><a href="?page={{ events.previous_page_number }}">←</a></li>
+          {% else %}
+            <li class="disabled"><a>←</a></li>
+          {% endif %}
+
+          {% if events.has_next %}
+            <li><a href="?page={{ events.next_page_number }}">→</a></li>
+          {% else %}
+            <li class="disabled"><a>→</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <table id="events_list" class="table table-striped">
+        <thead>
+            <tr>
+              <th>{% trans "Fecha" %}</th>
+              <th>{% trans "Hora de comienzo" %}</th>
+              <th>{% trans "Hora de fin" %}</th>
+              <th>{% trans "Duración (min)" %}</th>
+              <th>{% trans "Paciente" %}</th>
+              <th>{% trans "Tipo de cita" %}</th>
+              <th>{% trans "Nota" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for event in events.object_list %}
+            {% include "consulting/consultation/appointment.html" %}
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div id="preview"></div>
+      {% else %}
+        <h6>{% trans "No hay citas" %}</h6>
+      {% endif %}
+      {% include "consulting/consultation/free_slots.html" %}
+    </div>
+  </div>
+</div>
+{% endblock body %}
+
+{% block jquery_init %}
+var load_icon = "<img src='{{STATIC_URL}}img/loading.gif' alt='loading...'/>";
+
+$('table tbody tr').live('click', function(event){
+  var id_appointment = $(this).attr('data-msg');
+  if(id_appointment){
+    $("#container").hide();
+    window.location.href = '/consultation/select_illness/' + id_appointment;
+  }
+});
+{% endblock %}

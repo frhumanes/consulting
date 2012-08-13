@@ -1,0 +1,30 @@
+{% load i18n %}
+
+<div class="well" style="height: 175px; overflow: auto;">
+  <legend>{% trans "HUECOS LIBRES" %}</legend>
+
+  {% if free_intervals %}
+    <table id="free-slots" class="table">
+      <thead>
+          <tr>
+            <th>{% trans "Hora de Comienzo" %}</th>
+            <th>{% trans "Hora de Fin" %}</th>
+            <th>{% trans "Duración (min)" %}</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for free_interval in free_intervals %}
+          {% if free_interval.duration %}
+            <tr>
+              <td>{{ free_interval.start_time|time:"H:i" }}</td>
+              <td>{{ free_interval.end_time|time:"H:i" }}</td>
+              <td>{{ free_interval.duration }}</td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    {% trans "Todo hueco" %}
+  {% endif %}
+</div>

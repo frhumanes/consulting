@@ -1,0 +1,48 @@
+{% extends "ui/app.html" %}
+
+{% load i18n %}
+
+{% block header%}
+    {% include "ui/includes/header_doctor.html" %}
+{% endblock  %}
+
+
+{% block body %}
+  <div class="container">
+      <div class="row">
+          <div class="span12">
+
+              <legend>{% trans "Enfermedades" %}</legend>
+
+              <div class="hero-unit center">
+                <p>{% trans 'Seleccione la Enfermedad:' %}</p>
+
+                <div class="span9">
+                  <form class="form-horizontal" method="post" action=".">{% csrf_token %}
+                    <fieldset>
+                        {% if form.illness.errors %}
+                          <div class="control-group error">
+                            <div class="controls">
+                              {{ form.illness }} <button type="submit" class="btn">Ir</button>
+                              {% for error in form.illness.errors %}
+                                 <span class="help-inline">{{ error|escape }}</span>
+                              {% endfor %}
+                            </div>
+                          </div>
+                        {% else %}
+                          <div class="control-group">
+                            <div class="controls">
+                              {{ form.illness }} <button type="submit" class="btn">Ir</button>
+                            </div>
+                          </div>
+                        {% endif %}
+                    </fieldset>
+                  </form>
+                </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+{% endblock body %}
