@@ -17,6 +17,8 @@ class Survey(TraceableModel):
     )
     blocks = models.ManyToManyField('Block', related_name='blocks_surveys')
 
+    num_blocks = models.IntegerField(_(u'Número de bloques'))
+
     name = models.CharField(_(u'Nombre'), max_length=100)
 
     code = models.IntegerField(_(u'Código'), blank=True, null=True)
@@ -24,7 +26,14 @@ class Survey(TraceableModel):
     kind = models.IntegerField(_(u'Tipo'), choices=KIND)
 
     def __unicode__(self):
-        return u'id: %s survey: %s kind: %s' % (self.id, self.name, self.kind)
+        if self.kind == settings.GENERAL:
+            kind = 'General'
+        elif self.kind == settings.EXTENSO:
+            kind = 'Extenso'
+        else:
+            kind = 'Abreviado'
+
+        return u'%s - %s ' % (self.name, kind)
 
     def get_kind(self):
         if self.kind == settings.GENERAL:
