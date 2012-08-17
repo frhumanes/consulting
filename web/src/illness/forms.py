@@ -16,7 +16,7 @@ class IllnessSelectionForm(forms.Form):
                         .order_by('code')
             choices = [('', '--------')]
             choices.extend(
-                    [(illness.id, illness.name) for illness in illnesses])
+                    [(illness.code, illness.name) for illness in illnesses])
             self.fields['illness'].choices = choices
         else:
             super(IllnessSelectionForm, self).__init__(*args, **kwargs)
