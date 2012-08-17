@@ -9,8 +9,9 @@ from django.utils.encoding import force_unicode
 
 from consulting.validators import validate_choice
 
-from consulting.models import Medicine, Conclusion
+from consulting.models import Medicine, Conclusion, Task
 from medicament.models import Component
+from survey.models import Survey
 
 
 # class RecipientChoiceField(forms.ModelChoiceField):
@@ -143,3 +144,48 @@ class ActionSelectionForm(forms.Form):
     action = forms.ChoiceField(label=_(u'Realizar'), choices=ACTION,
         widget=forms.Select(
                         attrs={'class': 'input-medium search-query span4'}))
+
+
+class SelectTaskForm(forms.ModelForm):
+    survey = forms.ModelChoiceField(label=_(u"Encuesta"),
+                        queryset=Survey.objects.filter(
+                        code__in=[settings.ANXIETY_DEPRESSION_EXTENSIVE,
+                        settings.ANXIETY_DEPRESSION_SHORT]),
+                        widget=forms.Select(
+                        attrs={'class': 'input-medium search-query span4'}))
+    from_date = forms.DateField(
+            label=_(u'Fecha a partir de la cual puede realizar la encuesta'),
+            input_formats=(settings.DATE_FORMAT,),
+            widget=forms.DateInput(format=settings.DATE_FORMAT,
+                                    attrs={'class': 'span3', 'size': '16'}))
+    to_date = forms.DateField(
+            label=_(u'Fecha hasta la cual puede realizar la encuesta'),
+            input_formats=(settings.DATE_FORMAT,),
+            widget=forms.DateInput(format=settings.DATE_FORMAT,
+                                    attrs={'class': 'span3', 'size': '16'}))
+
+    class Meta:
+        model = Task
+        exclude = ('created_at', 'updated_at', 'patient', 'treated_blocks',
+                    'appointment', 'self_administered', 'start_date',
+                    'end_date', 'value', 'completed')
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        from_date = cleaned_data.get("from_date")
+        to_date = cleaned_data.get("to_date")
+
+        if from_date is None:
+            msg = _(u"Este campo es obligatorio")
+            self._errors["from_date"] = self.error_class([msg])
+
+        if to_date is None:
+            msg = _(u"Este campo es obligatorio")
+            self._errors["to_date"] = self.error_class([msg])
+
+        if from_date and to_date:
+            if to_date < from_date:
+                msg = _("La fecha hasta debe ser mayor que la fecha desde.")
+                self._errors['to_date'] = self.error_class([msg])
+
+        return cleaned_data
