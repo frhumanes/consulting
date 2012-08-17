@@ -2,24 +2,23 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import get_object_or_404
+from django.conf import settings
 
-from survey.models import Survey, Question
+from survey.models import Question
 
 
-class SelectSurveyForm(forms.Form):
-    def __init__(self, *args, **kwargs):
-        super(SelectSurveyForm, self).__init__(*args, **kwargs)
-        surveys = Survey.objects.filter(id__in=[1, 3, 4])
+class SelectBlockForm(forms.Form):
+    BLOCK = (
+        ('', '-----------'),
+        (settings.ANXIETY_DEPRESSION_EXTENSIVE,
+        _(u'Valoración de la depresión y la ansiedad: Extenso')),
+        (settings.ANXIETY_DEPRESSION_SHORT,
+        _(u'Valoración de la depresión y la ansiedad: Abreviado'))
+    )
 
-        choices = [('', '--------')]
-        choices.extend(
-        [(survey.id, survey.name + '-' + survey.get_kind())\
-         for survey in surveys])
-        self.fields['survey'].choices = choices
-
-    survey = forms.ChoiceField(label=_(u"Encuesta"),
-        widget=forms.Select(
-            attrs={'class': 'input-medium search-query span4'}))
+    block = forms.ChoiceField(label=_(u'Siguiente bloque:'), choices=BLOCK,
+                    widget=forms.Select(
+                        attrs={'class': 'input-medium search-query span4'}))
 
 
 class QuestionsForm(forms.Form):
@@ -34,8 +33,9 @@ class QuestionsForm(forms.Form):
                 initial_options = []
                 for v in values:
                     id_option = v[0]
-                    if selected_options.filter(id=id_option):
-                        initial_options.append(id_option)
+                    if selected_options:
+                        if selected_options.filter(id=id_option):
+                            initial_options.append(id_option)
                 self.fields[question.code] = forms.MultipleChoiceField(
                         label=question.text,
                         widget=forms.CheckboxSelectMultiple(), choices=values,
