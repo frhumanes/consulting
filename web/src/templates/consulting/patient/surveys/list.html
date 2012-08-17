@@ -1,0 +1,78 @@
+{% extends "ui/app.html" %}
+
+{% load i18n%}
+
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/spin.min.js"></script>
+{% endblock %}
+
+{% block header%}
+  {% include "ui/includes/header_patient.html" %}
+{% endblock  %}
+
+
+{% block body %}
+<div class="container">
+    <section>
+        <div class="page-header">
+            <h1>{% trans 'Cuestionarios sin completar' %}</h1>                
+        </div>
+        <div class="row">
+            {% if tasks.object_list.count > 0 %}
+            <div class="span12">
+                <div id="tasks-paginator" class="pull-right">
+                    <ul class="pagination ">
+                      {% if surveys.has_previous %}
+                        <li><a href="?page={{ tasks.previous_page_number }}">←</a></li>
+                      {% else %}
+                        <li class="disabled"><a>←</a></li>
+                      {% endif %}
+
+                      {% if tasks.has_next %}
+                        <li><a href="?page={{ tasks.next_page_number }}">→</a></li>
+                      {% else %}
+                        <li class="disabled"><a>→</a></li>
+                      {% endif %}
+                    </ul>
+                </div>
+                <table id="tasks_list" class="table table-striped">
+                    <thead>
+                        <tr>
+                          <th>{% trans "Médico" %}</th>
+                          <th>{% trans "Cuestionario" %}</th>
+                          <th>{% trans "Fecha desde" %}</th>
+                          <th>{% trans "Fecha hasta (min)" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      {% for task in tasks.object_list %}
+                        <tr data-msg="{{ task.id }}" style="cursor:pointer">
+                          <td>{{ task.patient.get_profile.doctor.get_profile.name }} {{ task.patient.get_profile.doctor.get_profile.first_surname }}</td>
+                          <td>{{ task.survey.name }}</td> 
+                          <td>{{ task.from_date }}</td>
+                          <td>{{ task.to_date }}</td>              
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+
+                <div id="preview"></div>
+                {% else %}
+                  <div class="span12">
+                    <h6>{% trans "No hay cuestionarios" %}</h6>
+                  </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock body %}
+{% block jquery_init %}
+
+$('table tbody tr').on('click', function(event){
+  var id = $(this).attr('data-msg');
+  window.location.href = '/surveys/block/' + id; 
+});
+
+{% endblock %}
