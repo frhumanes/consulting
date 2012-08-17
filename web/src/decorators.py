@@ -55,6 +55,16 @@ def only_doctor_consulting(func):
     return _fn
 
 
+def only_patient_consulting(func):
+    def _fn(request, *args, **kwargs):
+        if request.user.get_profile().is_patient():
+            return func(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('consulting_index'))
+
+    return _fn
+
+
 def only_doctor_administrative(func):
     def _fn(request, *args, **kwargs):
         if request.user.get_profile().is_administrative() or\
