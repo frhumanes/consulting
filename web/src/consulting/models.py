@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 from log.models import TraceableModel
-from survey.models import Option, Survey
+from survey.models import Survey, Block, Option
 from medicament.models import Component
 from illness.models import Illness
 from cal.models import Appointment
@@ -16,6 +16,8 @@ class Task(TraceableModel):
     patient = models.ForeignKey(User, related_name='patient_tasks')
 
     survey = models.ForeignKey(Survey, related_name="survey_tasks")
+
+    treated_blocks = models.ManyToManyField(Block, related_name='blocks_tasks')
 
     appointment = models.ForeignKey(Appointment,
                                     related_name="appointment_tasks")
@@ -31,11 +33,11 @@ class Task(TraceableModel):
     end_date = models.DateTimeField(_(u'Fecha de finalización de la encuesta'),
                                     blank=True, null=True)
 
-    from_date = models.DateTimeField(
+    from_date = models.DateField(
                     _(u'Fecha a partir de la cual puede realizar la encuesta'),
                     blank=True, null=True)
 
-    to_date = models.DateTimeField(
+    to_date = models.DateField(
                     _(u'Fecha hasta la que puede realizar la encuesta'),
                     blank=True, null=True)
 
