@@ -29,6 +29,6 @@
 
 {% block jquery_init %}
   $('#carryon').on("click", function(){
-      window.location.href = '/consultation/survey/risk/' + {{id_result}};  
+      window.location.href = '/consultation/survey/block/' + {{id_result}} + '/' + {{code_block}};  
   }); 
 {% endblock %}
