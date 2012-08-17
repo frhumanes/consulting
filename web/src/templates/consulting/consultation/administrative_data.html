@@ -10,6 +10,9 @@
     </div>
     <div class="row" >
       <div class="span8">
+        <div class="page-header">
+          <h2>{% trans 'Bloque: ' %}{{my_block.name}}</h2>
+        </div>
         <form class="form-horizontal" id="form" action="{% url consulting_administrative_data task.id %}" method="post" accept-charset="utf-8">{% csrf_token %}            
           {% if same_username %}
             <div class="alert alert-error">
@@ -212,21 +215,7 @@
       <div class="span4">
           {% include "consulting/patient/card.html" %}
       </div> 
-    </div>
-  <!-- <div class="row">
-    <div class="span8">
-      {% for block in blocks %}
-        <div class="page-header">
-          <h3>{{block.name}}</h3>
-        </div>        
-        {% for category in block.categories.all %}
-          <h4 class="offset1">{{category.name}}</h4>
-          {% for question in category.categories_questions.all %}
-            <h5 class="offset1">{{question.text}}</h5>          
-          {% endfor %}          
-        {% endfor %}
-      {% endfor %}
-    </div>-->
+    </div>  
   </section> 
 </div>
 {% endblock body %}
