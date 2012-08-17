@@ -14,7 +14,7 @@
                   <h2>{{name_block}}</h2>                
                 </div>
                 
-                <form class="form-horizontal" method="post" action="{% url consulting_risk result.id %}">{% csrf_token %}
+                <form class="form-horizontal" method="post" action="{% url consulting_survey result.id %}">{% csrf_token %}
                     {% for field in form %}
                         {% if field.errors %}
                             <div class="control-group error">
@@ -45,7 +45,7 @@
                         <button type="submit" class="btn btn-primary btn-large">
                           {% trans 'Guardar' %}
                         </button>
-                      </div>
+                    </div>
                 </form>
                 <div class="pull-right">
                     <button id="carryon" class="btn btn-info btn-large">
