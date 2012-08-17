@@ -4,13 +4,10 @@ from consulting.models import *
 
 class TaskAdmin(admin.ModelAdmin):
     fieldsets = [('Tasks', {'fields': ['patient', 'survey',
-                    'self_administered', 'value',
-                    'completed']})]
-    list_display = ('patient', 'survey',
-                    'self_administered', 'value',
+                    'self_administered', 'value', 'completed']})]
+    list_display = ('patient', 'survey', 'self_administered', 'value',
                     'completed')
-    search_fields = ('patient', 'survey',
-                    'self_administered', 'value',
+    search_fields = ('patient', 'survey', 'self_administered', 'value',
                     'completed')
     ordering = ('patient', )
 
