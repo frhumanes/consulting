@@ -2,6 +2,7 @@
 {% load consulting %}
 
 {% url consulting_index as index %}
+{% url consulting_list_surveys as surveys %}
 {% url private_messages_inbox as inbox %}
 
 <div class="navbar navbar-fixed-top">
@@ -19,8 +20,8 @@
                     <a href="{% url consulting_index %}">
                         {% trans 'INICIO' %}
                     </a>
-                <li>
-                    <a href="#">
+                <li class="{% active_root request surveys %}">
+                    <a href="{% url consulting_list_surveys %}">
                       {% trans 'CUESTIONARIO' %}
                     </a>
                 </li>
