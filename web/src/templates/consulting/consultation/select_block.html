@@ -1,0 +1,67 @@
+{% extends "ui/app.html" %}
+
+{% load i18n %}
+
+{% block body %}
+<div class="container">
+  <section>
+  <div class="page-header">
+    <h1>{% trans 'Seleccionar Bloque' %}</h1>
+  </div>
+  <div class="row">
+    <div class="span8">
+      <div class="hero-unit center">
+        <form class="form-horizontal" method="post" action="{% url consulting_select_block result.id %}">{% csrf_token %}
+          <fieldset>
+              {% if form.block.errors %}
+                <div class="control-group error">
+                  <label class="control-label">
+                    {{form.block.label}}
+                  </label>
+                  <div class="controls">
+                    {{ form.block }}
+                    <button type="submit" class="btn">
+                      Continuar
+                    </button>
+                    {% for error in form.block.errors %}
+                      <span class="help-inline">
+                        {{ error|escape }}
+                      </span>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% else %}
+                <div class="control-group">
+                  <label class="control-label">
+                    {{form.block.label}}
+                  </label>
+                  <div class="controls">
+                    {{ form.block }} 
+                    <button type="submit" class="btn">
+                      Continuar
+                    </button>
+                  </div>
+                </div>
+              {% endif %}
+          </fieldset>
+        </form>
+      </div>
+      <div class="pull-right">
+        <button id="carryon" class="btn btn-info btn-large">
+          {% trans 'Continuar' %}
+        </button>         
+      </div>
+    </div>
+    <!-- PATIENT CARD -->
+    <div class="span4">
+        {% include "consulting/patient/card.html" %}
+    </div>
+  </div>
+</div>
+{% endblock body %}
+
+{% block jquery_init %}
+  $('#carryon').on("click", function(){  
+      window.location.href = '/consultation/conclusion/' + {{result.task.appointment.id}} + '/' + {{result.id}};  
+  });
+{% endblock %}
