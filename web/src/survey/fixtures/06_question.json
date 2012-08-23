@@ -4,8 +4,7 @@
     "pk": 4,
     "fields": {
       "code": "DA4",
-      "text": "Sexo",
-      "categories": [1]
+      "text": "Sexo"
     }
   },  
   {
@@ -13,8 +12,7 @@
     "pk": 9,
     "fields": {
       "code": "DA9",
-      "text": "Estado Civil",
-      "categories": [1]
+      "text": "Estado Civil"
     }
   },
   {
@@ -22,8 +20,7 @@
     "pk": 11,
     "fields": {
       "code": "AF1",
-      "text": "¿Ha padecido Ansiedad alguno de sus familiares?",
-      "categories": [2]
+      "text": "¿Ha padecido Ansiedad alguno de sus familiares?"
     }
   },
   {
@@ -31,8 +28,7 @@
     "pk": 172,
     "fields": {
       "code": "AF2",
-      "text": "¿Ha padecido Síndromes fóbicos alguno de sus familiares?",
-      "categories": [2]
+      "text": "¿Ha padecido Síndromes fóbicos alguno de sus familiares?"
     }
   },
   {
@@ -40,8 +36,7 @@
     "pk": 173,
     "fields": {
       "code": "AF3",
-      "text": "¿Ha padecido Trastornos de pánico alguno de sus familiares?",
-      "categories": [2]
+      "text": "¿Ha padecido Trastornos de pánico alguno de sus familiares?"
     }
   },
   {
@@ -49,8 +44,7 @@
     "pk": 174,
     "fields": {
       "code": "AF4",
-      "text": "¿Ha padecido Distimia alguno de sus familiares?",
-      "categories": [2]
+      "text": "¿Ha padecido Distimia alguno de sus familiares?"
     }
   },
   {
@@ -58,8 +52,7 @@
     "pk": 175,
     "fields": {
       "code": "AF5",
-      "text": "¿Ha padecido Trastorno depresivo alguno de sus familiares?",
-      "categories": [2]
+      "text": "¿Ha padecido Trastorno depresivo alguno de sus familiares?"
     }
   },
   {
@@ -67,8 +60,7 @@
     "pk": 176,
     "fields": {
       "code": "AF6",
-      "text": "¿Ha padecido Trastorno bipolar alguno de sus familiares?",
-      "categories": [2]
+      "text": "¿Ha padecido Trastorno bipolar alguno de sus familiares?"
     }
   },
   {
@@ -76,8 +68,7 @@
     "pk": 177,
     "fields": {
       "code": "AF7",
-      "text": "¿Ha padecido Manía alguno de sus familiares?",
-      "categories": [2]
+      "text": "¿Ha padecido Manía alguno de sus familiares?"
     }
   },
   {
@@ -85,8 +76,7 @@
     "pk": 178,
     "fields": {
       "code": "AF8",
-      "text": "¿Ha padecido Toxicomanía alguno de sus familiares?",
-      "categories": [2]
+      "text": "¿Ha padecido Toxicomanía alguno de sus familiares?"
     }
   },
   {
@@ -94,8 +84,7 @@
     "pk": 179,
     "fields": {
       "code": "AF9",
-      "text": "¿Ha padecido Abuso de Alcohol alguno de sus familiares?",
-      "categories": [2]
+      "text": "¿Ha padecido Abuso de Alcohol alguno de sus familiares?"
     }
   },
   {
@@ -103,8 +92,7 @@
     "pk": 180,
     "fields": {
       "code": "AF10",
-      "text": "¿Ha padecido Trastorno obsesivo-compulsivo alguno de sus familiares?",
-      "categories": [2]
+      "text": "¿Ha padecido Trastorno obsesivo-compulsivo alguno de sus familiares?"
     }
   },
   {
@@ -112,8 +100,7 @@
     "pk": 181,
     "fields": {
       "code": "AF11",
-      "text": "¿Ha padecido Esquizofrenia alguno de sus familiares?",
-      "categories": [2]
+      "text": "¿Ha padecido Esquizofrenia alguno de sus familiares?"
     }
   },
   {
@@ -121,8 +108,7 @@
     "pk": 182,
     "fields": {
       "code": "AF12",
-      "text": "¿Ha padecido Trastorno de personalidad alguno de sus familiares?",
-      "categories": [2]
+      "text": "¿Ha padecido Trastorno de personalidad alguno de sus familiares?"
     }
   },
   {
@@ -130,8 +116,7 @@
     "pk": 183,
     "fields": {
       "code": "AF13",
-      "text": "¿Ha padecido Otro Trastorno psiquiátrico alguno de sus familiares?",
-      "categories": [2]
+      "text": "¿Ha padecido Otro Trastorno psiquiátrico alguno de sus familiares?"
     }
   },
   {
@@ -139,8 +124,7 @@
     "pk": 12,
     "fields": {
       "code": "AP",
-      "text": "¿Ha sido diagnosticado con anterioridad de alguna de las siguientes enfermedades psiquiátricas?",
-      "categories": [3]
+      "text": "¿Ha sido diagnosticado con anterioridad de alguna de las siguientes enfermedades psiquiátricas?"
     }
   },
   {
@@ -148,8 +132,7 @@
     "pk": 13,
     "fields": {
       "code": "DS",
-      "text": "¿Cuánto tiempo hace que presenta la sintomatología que le ha hecho acudir a la consulta?",
-      "categories": [3]
+      "text": "¿Cuánto tiempo hace que presenta la sintomatología que le ha hecho acudir a la consulta?"
     }
   },
   {
@@ -157,8 +140,7 @@
     "pk": 14,
     "fields": {
       "code": "AN",
-      "text": "¿Padece o presenta sintomatología compatible con alguna de las siguientes enfermedades neurológicas?",
-      "categories": [4]
+      "text": "¿Padece o presenta sintomatología compatible con alguna de las siguientes enfermedades neurológicas?"
     }
   },
   {
@@ -166,8 +148,7 @@
     "pk": 15,
     "fields": {
       "code": "AE",
-      "text": "¿Padece o presenta sintomatología compatible con alguna de las siguientes enfermedades endocrinólogas?",
-      "categories": [4]
+      "text": "¿Padece o presenta sintomatología compatible con alguna de las siguientes enfermedades endocrinólogas?"
     }
   },
   {
@@ -175,8 +156,7 @@
     "pk": 16,
     "fields": {
       "code": "AT",
-      "text": "¿Padece o presenta sintomatología compatible con alguna de las siguientes enfermedades tumorales?",
-      "categories": [4]
+      "text": "¿Padece o presenta sintomatología compatible con alguna de las siguientes enfermedades tumorales?"
     }
   },
   {
@@ -184,8 +164,7 @@
     "pk": 17,
     "fields": {
       "code": "AI",
-      "text": "¿Padece o presenta sintomatología compatible con alguna de las siguientes enfermedades infecciosas?",
-      "categories": [4]
+      "text": "¿Padece o presenta sintomatología compatible con alguna de las siguientes enfermedades infecciosas?"
     }
   },
   {
@@ -193,8 +172,7 @@
     "pk": 18,
     "fields": {
       "code": "AO",
-      "text": "¿Padece o presenta sintomatología compatible con alguna de las siguientes enfermedades de otra categoría?",
-      "categories": [4]
+      "text": "¿Padece o presenta sintomatología compatible con alguna de las siguientes enfermedades de otra categoría?"
     }
   },
   {
@@ -202,8 +180,7 @@
     "pk": 20,
     "fields": {
       "code": "L1",
-      "text": "¿Trabaja por la noche?",
-      "categories": [6]
+      "text": "¿Trabaja por la noche?"
     }
   },
   {
@@ -211,8 +188,7 @@
     "pk": 21,
     "fields": {
       "code": "L2",
-      "text": "¿Reside en una vivienda luminosa?",
-      "categories": [6]
+      "text": "¿Reside en una vivienda luminosa?"
     }
   },
   {
@@ -220,8 +196,7 @@
     "pk": 22,
     "fields": {
       "code": "L3",
-      "text": "¿Recibe a diario la luz natural?",
-      "categories": [6]
+      "text": "¿Recibe a diario la luz natural?"
     }
   },
   {
@@ -229,8 +204,7 @@
     "pk": 23,
     "fields": {
       "code": "AVE",
-      "text": "¿Ha sufrido alguno de los siguientes acontecimientos durante los últimos 12 meses?",
-      "categories": [7]
+      "text": "¿Ha sufrido alguno de los siguientes acontecimientos durante los últimos 12 meses?"
     }
   },
   {
@@ -238,8 +212,7 @@
     "pk": 24,
     "fields": {
       "code": "AS1",
-      "text": "Tengo familiares y amigos que hacen cosas para hacerme feliz.",
-      "categories": [8]
+      "text": "Tengo familiares y amigos que hacen cosas para hacerme feliz."
     }
   },
   {
@@ -247,8 +220,7 @@
     "pk": 25,
     "fields": {
       "code": "AS2",
-      "text": "Tengo familiares y amigos que hacen que me sienta más querido.",
-      "categories": [8]
+      "text": "Tengo familiares y amigos que hacen que me sienta más querido."
     }
   },
   {
@@ -256,8 +228,7 @@
     "pk": 26,
     "fields": {
       "code": "AS3",
-      "text": "Tengo familiares y amigos con los que puedo contar pase lo que pase.",
-      "categories": [8]
+      "text": "Tengo familiares y amigos con los que puedo contar pase lo que pase."
     }
   },
   {
@@ -265,8 +236,7 @@
     "pk": 27,
     "fields": {
       "code": "AS4",
-      "text": "Tengo familiares y amigos que cuidarían de mi si lo necesitara.",
-      "categories": [8]
+      "text": "Tengo familiares y amigos que cuidarían de mi si lo necesitara."
     }
   },
   {
@@ -274,8 +244,7 @@
     "pk": 28,
     "fields": {
       "code": "AS5",
-      "text": "Tengo familiares y amigos que me aceptan tal y como soy.",
-      "categories": [8]
+      "text": "Tengo familiares y amigos que me aceptan tal y como soy."
     }
   },
   {
@@ -283,8 +252,7 @@
     "pk": 29,
     "fields": {
       "code": "AS6",
-      "text": "Tengo familiares y amigos que me hacen sentir una parte importante de sus vidas.",
-      "categories": [8]
+      "text": "Tengo familiares y amigos que me hacen sentir una parte importante de sus vidas."
     }
   },
   {
@@ -292,8 +260,7 @@
     "pk": 30,
     "fields": {
       "code": "AS7",
-      "text": "Tengo familiares y amigos que me dan ánimos.",
-      "categories": [8]
+      "text": "Tengo familiares y amigos que me dan ánimos."
     }
   },
   {
@@ -301,8 +268,7 @@
     "pk": 31,
     "fields": {
       "code": "RP",
-      "text": "¿Considera que alguno de los siguientes rasgos caracterizan de forma especial su personalidad?",
-      "categories": [9]
+      "text": "¿Considera que alguno de los siguientes rasgos caracterizan de forma especial su personalidad?"
     }
   },
   {
@@ -310,8 +276,7 @@
     "pk": 32,
     "fields": {
       "code": "B1",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [10]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -319,8 +284,7 @@
     "pk": 33,
     "fields": {
       "code": "H6.3",
-      "text": "Valore en escala del 0 al 4 las variaciones del humor durante el día, siendo 0 la ausencia de variaciones y 4 una intensidad invalidante.",
-      "categories": [10]
+      "text": "Valore en escala del 0 al 4 las variaciones del humor durante el día, siendo 0 la ausencia de variaciones y 4 una intensidad invalidante."
     }
   },
   {
@@ -328,8 +292,7 @@
     "pk": 34,
     "fields": {
       "code": "B2",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [12,13]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -337,8 +300,7 @@
     "pk": 35,
     "fields": {
       "code": "H1.2",
-      "text": "Valore en escala del 0 al 4 el grado en el que 'espera lo peor', siendo 0 la ausencia de pensamientos al respecto y 4 una intensidad invalidante.",
-      "categories": [12]
+      "text": "Valore en escala del 0 al 4 el grado en el que 'espera lo peor', siendo 0 la ausencia de pensamientos al respecto y 4 una intensidad invalidante."
     }
   },
   {
@@ -346,8 +308,7 @@
     "pk": 36,
     "fields": {
       "code": "H1.3",
-      "text": "Valore en escala del 0 al 4 el grado de aprensión (anticipación temerosa), siendo 0 la ausencia de pensamientos al respecto y 4 una intensidad invalidante.",
-      "categories": [12]
+      "text": "Valore en escala del 0 al 4 el grado de aprensión (anticipación temerosa), siendo 0 la ausencia de pensamientos al respecto y 4 una intensidad invalidante."
     }
   },
   {
@@ -355,8 +316,7 @@
     "pk": 37,
     "fields": {
       "code": "B3",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [14,15]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -364,8 +324,7 @@
     "pk": 38,
     "fields": {
       "code": "B4",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [16,17]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -373,8 +332,7 @@
     "pk": 39,
     "fields": {
       "code": "H6.2",
-      "text": "Valore en escala del 0 al 4 el grado de incapacidad para disfrutar ya de sus pasatiempos, siendo 0 la ausencia de incapacidad(es decir, puede disfrutar como antes) y 4 una intensidad invalidante.",
-      "categories": [16]
+      "text": "Valore en escala del 0 al 4 el grado de incapacidad para disfrutar ya de sus pasatiempos, siendo 0 la ausencia de incapacidad(es decir, puede disfrutar como antes) y 4 una intensidad invalidante."
     }
   },
   {
@@ -382,8 +340,7 @@
     "pk": 40,
     "fields": {
       "code": "H6.1",
-      "text": "Valore en escala del 0 al 4 el grado de 'falta de interés' por las cosas, siendo 0 el mantenimiento normal del interés y 4 una intensidad invalidante.",
-      "categories": [16]
+      "text": "Valore en escala del 0 al 4 el grado de 'falta de interés' por las cosas, siendo 0 el mantenimiento normal del interés y 4 una intensidad invalidante."
     }
   },
   {
@@ -391,8 +348,7 @@
     "pk": 41,
     "fields": {
       "code": "B5",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [18,19]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -400,8 +356,7 @@
     "pk": 42,
     "fields": {
       "code": "B6",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [20,21]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -409,8 +364,7 @@
     "pk": 43,
     "fields": {
       "code": "B7",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [22,23]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -418,8 +372,7 @@
     "pk": 44,
     "fields": {
       "code": "B8",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [24,25]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -427,8 +380,7 @@
     "pk": 45,
     "fields": {
       "code": "B9",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [27]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -436,8 +388,7 @@
     "pk": 46,
     "fields": {
       "code": "B10",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [28,29]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -445,8 +396,7 @@
     "pk": 47,
     "fields": {
       "code": "H2.4",
-      "text": "Valore en escala del 0 al 4 el grado de 'llanto fácil', siendo 0 la ausencia de llanto fácil y 4 una intensidad invalidante.",
-      "categories": [28]
+      "text": "Valore en escala del 0 al 4 el grado de 'llanto fácil', siendo 0 la ausencia de llanto fácil y 4 una intensidad invalidante."
     }
   },
   {
@@ -454,8 +404,7 @@
     "pk": 48,
     "fields": {
       "code": "B11",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [30,31]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -463,8 +412,7 @@
     "pk": 49,
     "fields": {
       "code": "H1.1",
-      "text": "Valore en escala del 0 al 4 el grado de irritabilidad, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.",
-      "categories": [30]
+      "text": "Valore en escala del 0 al 4 el grado de irritabilidad, siendo 0 la ausencia de la misma y 4 una intensidad invalidante."
     }
   },
   {
@@ -472,8 +420,7 @@
     "pk": 50,
     "fields": {
       "code": "B12",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [32,33]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -481,8 +428,7 @@
     "pk": 51,
     "fields": {
       "code": "B13",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [34,35]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -490,8 +436,7 @@
     "pk": 52,
     "fields": {
       "code": "H3.1",
-      "text": "Valore en escala del 0 al 4 el grado de miedo a la oscuridad, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.",
-      "categories": [36]
+      "text": "Valore en escala del 0 al 4 el grado de miedo a la oscuridad, siendo 0 la ausencia de miedo y 4 una intensidad invalidante."
     }
   },
   {
@@ -499,8 +444,7 @@
     "pk": 53,
     "fields": {
       "code": "H3.2",
-      "text": "Valore en escala del 0 al 4 el grado de miedo a la gente desconocidad, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.",
-      "categories": [36]
+      "text": "Valore en escala del 0 al 4 el grado de miedo a la gente desconocidad, siendo 0 la ausencia de miedo y 4 una intensidad invalidante."
     }
   },
   {
@@ -508,8 +452,7 @@
     "pk": 54,
     "fields": {
       "code": "H3.3",
-      "text": "Valore en escala del 0 al 4 el grado de miedo a quedarse solo, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.",
-      "categories": [36]
+      "text": "Valore en escala del 0 al 4 el grado de miedo a quedarse solo, siendo 0 la ausencia de miedo y 4 una intensidad invalidante."
     }
   },
   {
@@ -517,8 +460,7 @@
     "pk": 55,
     "fields": {
       "code": "H3.4",
-      "text": "Valore en escala del 0 al 4 el grado de miedo a los animales grandes u otros, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.",
-      "categories": [36]
+      "text": "Valore en escala del 0 al 4 el grado de miedo a los animales grandes u otros, siendo 0 la ausencia de miedo y 4 una intensidad invalidante."
     }
   },
   {
@@ -526,8 +468,7 @@
     "pk": 56,
     "fields": {
       "code": "H3.5",
-      "text": "Valore en escala del 0 al 4 el grado de miedo al tránsito callejero, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.",
-      "categories": [36]
+      "text": "Valore en escala del 0 al 4 el grado de miedo al tránsito callejero, siendo 0 la ausencia de miedo y 4 una intensidad invalidante."
     }
   },
   {
@@ -535,8 +476,7 @@
     "pk": 57,
     "fields": {
       "code": "H3.6",
-      "text": "Valore en escala del 0 al 4 el grado de miedo a la multitud, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.",
-      "categories": [36]
+      "text": "Valore en escala del 0 al 4 el grado de miedo a la multitud, siendo 0 la ausencia de miedo y 4 una intensidad invalidante."
     }
   },
   {
@@ -544,8 +484,7 @@
     "pk": 58,
     "fields": {
       "code": "H3.7",
-      "text": "Valore en escala del 0 al 4 el grado a otros miedos, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.",
-      "categories": [36]
+      "text": "Valore en escala del 0 al 4 el grado a otros miedos, siendo 0 la ausencia de miedo y 4 una intensidad invalidante."
     }
   },
   {
@@ -553,8 +492,7 @@
     "pk": 59,
     "fields": {
       "code": "B14",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [38,39]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -562,8 +500,7 @@
     "pk": 60,
     "fields": {
       "code": "B15",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [40,41]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -571,8 +508,7 @@
     "pk": 61,
     "fields": {
       "code": "H5.1",
-      "text": "Valore en escala del 0 al 4 el grado de dificultad de conversación, siendo 0 la ausencia de dificultad y 4 una intensidad invalidante.",
-      "categories": [42]
+      "text": "Valore en escala del 0 al 4 el grado de dificultad de conversación, siendo 0 la ausencia de dificultad y 4 una intensidad invalidante."
     }
   },
   {
@@ -580,8 +516,7 @@
     "pk": 62,
     "fields": {
       "code": "H5.2",
-      "text": "Valore en escala del 0 al 4 el grado de 'mala memoria', siendo 0 la ausencia de alteraciones de la memoria y 4 una intensidad invalidante.",
-      "categories": [42]
+      "text": "Valore en escala del 0 al 4 el grado de 'mala memoria', siendo 0 la ausencia de alteraciones de la memoria y 4 una intensidad invalidante."
     }
   },
   {
@@ -589,8 +524,7 @@
     "pk": 63,
     "fields": {
       "code": "H5.3",
-      "text": "Valore en escala del 0 al 4 los problemas de atención que sufre, siendo 0 la ausencia de problemas y 4 una intensidad invalidante.",
-      "categories": [42]
+      "text": "Valore en escala del 0 al 4 los problemas de atención que sufre, siendo 0 la ausencia de problemas y 4 una intensidad invalidante."
     }
   },
   {
@@ -598,8 +532,7 @@
     "pk": 64,
     "fields": {
       "code": "H2.1",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre sensaciones de tensión, siendo 0 la ausencia de tensión y 4 una intensidad invalidante.",
-      "categories": [43]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre sensaciones de tensión, siendo 0 la ausencia de tensión y 4 una intensidad invalidante."
     }
   },
   {
@@ -607,8 +540,7 @@
     "pk": 65,
     "fields": {
       "code": "H2.3",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre 'imposibilidad de relajarse', siendo 0 la ausencia de dificultad para relajarse y 4 una intensidad invalidante.",
-      "categories": [43]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre 'imposibilidad de relajarse', siendo 0 la ausencia de dificultad para relajarse y 4 una intensidad invalidante."
     }
   },
   {
@@ -616,8 +548,7 @@
     "pk": 66,
     "fields": {
       "code": "H2.5",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre 'sobresaltos al responder', siendo 0 la ausencia de sobresaltos y 4 una intensidad invalidante.",
-      "categories": [43]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre 'sobresaltos al responder', siendo 0 la ausencia de sobresaltos y 4 una intensidad invalidante."
     }
   },
   {
@@ -625,8 +556,7 @@
     "pk": 67,
     "fields": {
       "code": "H2.6",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre temblores, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.",
-      "categories": [43]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre temblores, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante."
     }
   },
   {
@@ -634,8 +564,7 @@
     "pk": 68,
     "fields": {
       "code": "H2.7",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre 'sensaciones de inquietud', siendo 0 la ausencia de inquietud y 4 una intensidad invalidante.",
-      "categories": [43]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre 'sensaciones de inquietud', siendo 0 la ausencia de inquietud y 4 una intensidad invalidante."
     }
   },
   {
@@ -643,8 +572,7 @@
     "pk": 69,
     "fields": {
       "code": "H2.8",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre 'sensación de no poderse quedar en el lugar', siendo 0 la ausencia de inquietud y 4 una intensidad invalidante.",
-      "categories": [43]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre 'sensación de no poderse quedar en el lugar', siendo 0 la ausencia de inquietud y 4 una intensidad invalidante."
     }
   },
   {
@@ -652,8 +580,7 @@
     "pk": 70,
     "fields": {
       "code": "B16",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [45,46]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -661,8 +588,7 @@
     "pk": 71,
     "fields": {
       "code": "H4.1",
-      "text": "Valore en escala del 0 al 4 la dificultad para conciliar el sueño, siendo 0 la ausencia de dificultad y 4 una intensidad invalidante.",
-      "categories": [45]
+      "text": "Valore en escala del 0 al 4 la dificultad para conciliar el sueño, siendo 0 la ausencia de dificultad y 4 una intensidad invalidante."
     }
   },
   {
@@ -670,8 +596,7 @@
     "pk": 72,
     "fields": {
       "code": "H4.2",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre sueño interrumpido, siendo 0 la ausencia de sueño interrumpido y 4 una intensidad invalidante.",
-      "categories": [45]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre sueño interrumpido, siendo 0 la ausencia de sueño interrumpido y 4 una intensidad invalidante."
     }
   },
   {
@@ -679,8 +604,7 @@
     "pk": 73,
     "fields": {
       "code": "H4.3",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre sueño no satisfactorio con cansancio al despertar, siendo 0 la ausencia de sueños no satisfactorios con cansancio al despertar y 4 una intensidad invalidante.",
-      "categories": [45]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre sueño no satisfactorio con cansancio al despertar, siendo 0 la ausencia de sueños no satisfactorios con cansancio al despertar y 4 una intensidad invalidante."
     }
   },
   {
@@ -688,8 +612,7 @@
     "pk": 74,
     "fields": {
       "code": "H4.4",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre sueños penosos, siendo 0 la ausencia de sueños penosos y 4 una intensidad invalidante.",
-      "categories": [45]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre sueños penosos, siendo 0 la ausencia de sueños penosos y 4 una intensidad invalidante."
     }
   },
   {
@@ -697,8 +620,7 @@
     "pk": 75,
     "fields": {
       "code": "H4.5",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre pesadillas, siendo 0 la ausencia de pesadillas y 4 una intensidad invalidante.",
-      "categories": [45]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre pesadillas, siendo 0 la ausencia de pesadillas y 4 una intensidad invalidante."
     }
   },
   {
@@ -706,8 +628,7 @@
     "pk": 76,
     "fields": {
       "code": "H4.6",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre terrores nocturnos, siendo 0 la ausencia de terrores norcturnos y 4 una intensidad invalidante.",
-      "categories": [45]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre terrores nocturnos, siendo 0 la ausencia de terrores norcturnos y 4 una intensidad invalidante."
     }
   },
   {
@@ -715,8 +636,7 @@
     "pk": 77,
     "fields": {
       "code": "H6.4",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre insomnio de la madrugada, siendo 0 la ausencia de insomnio de la madrugada y 4 una intensidad invalidante.",
-      "categories": [45]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre insomnio de la madrugada, siendo 0 la ausencia de insomnio de la madrugada y 4 una intensidad invalidante."
     }
   },
   {
@@ -724,8 +644,7 @@
     "pk": 78,
     "fields": {
       "code": "B17",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [47,48]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -733,8 +652,7 @@
     "pk": 79,
     "fields": {
       "code": "H2.2",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre fatigabilidad, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.",
-      "categories": [47]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre fatigabilidad, siendo 0 la ausencia de la misma y 4 una intensidad invalidante."
     }
   },
   {
@@ -742,8 +660,7 @@
     "pk": 80,
     "fields": {
       "code": "H7.1",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre dolores musculares, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.",
-      "categories": [49]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre dolores musculares, siendo 0 la ausencia de la misma y 4 una intensidad invalidante."
     }
   },
   {
@@ -751,8 +668,7 @@
     "pk": 81,
     "fields": {
       "code": "H7.2",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre espasmos musculares o calambres, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.",
-      "categories": [49]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre espasmos musculares o calambres, siendo 0 la ausencia de la misma y 4 una intensidad invalidante."
     }
   },
   {
@@ -760,8 +676,7 @@
     "pk": 82,
     "fields": {
       "code": "H7.3",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre rigidez muscular, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.",
-      "categories": [49]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre rigidez muscular, siendo 0 la ausencia de la misma y 4 una intensidad invalidante."
     }
   },
   {
@@ -769,8 +684,7 @@
     "pk": 83,
     "fields": {
       "code": "H7.4",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre tics, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.",
-      "categories": [49]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre tics, siendo 0 la ausencia de la misma y 4 una intensidad invalidante."
     }
   },
   {
@@ -778,8 +692,7 @@
     "pk": 84,
     "fields": {
       "code": "H7.5",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre rechinar de dientes, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.",
-      "categories": [49]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre rechinar de dientes, siendo 0 la ausencia de la misma y 4 una intensidad invalidante."
     }
   },
   {
@@ -787,8 +700,7 @@
     "pk": 85,
     "fields": {
       "code": "H7.6",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre voz vacilante, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.",
-      "categories": [49]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre voz vacilante, siendo 0 la ausencia de la misma y 4 una intensidad invalidante."
     }
   },
   {
@@ -796,8 +708,7 @@
     "pk": 86,
     "fields": {
       "code": "H7.7",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre tono muscular aumentado, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.",
-      "categories": [49]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre tono muscular aumentado, siendo 0 la ausencia de la misma y 4 una intensidad invalidante."
     }
   },
   {
@@ -805,8 +716,7 @@
     "pk": 87,
     "fields": {
       "code": "H8.1",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre zumbido de oídos, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.",
-      "categories": [51]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre zumbido de oídos, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante."
     }
   },
   {
@@ -814,8 +724,7 @@
     "pk": 88,
     "fields": {
       "code": "H8.2",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre visión borrosa, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.",
-      "categories": [51]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre visión borrosa, siendo 0 la ausencia de la misma y 4 una intensidad invalidante."
     }
   },
   {
@@ -823,8 +732,7 @@
     "pk": 89,
     "fields": {
       "code": "H8.3",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre oleada de frío y calor, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.",
-      "categories": [51]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre oleada de frío y calor, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante."
     }
   },
   {
@@ -832,8 +740,7 @@
     "pk": 90,
     "fields": {
       "code": "H8.4",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre sensación de debilidad, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.",
-      "categories": [51]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre sensación de debilidad, siendo 0 la ausencia de la misma y 4 una intensidad invalidante."
     }
   },
   {
@@ -841,8 +748,7 @@
     "pk": 91,
     "fields": {
       "code": "H8.5",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre sensaciones parestésicas(pinchazos, picazón u hormigueos), siendo 0 la ausencia de las mismas y 4 una intensidad invalidante.",
-      "categories": [51]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre sensaciones parestésicas(pinchazos, picazón u hormigueos), siendo 0 la ausencia de las mismas y 4 una intensidad invalidante."
     }
   },
   {
@@ -850,8 +756,7 @@
     "pk": 92,
     "fields": {
       "code": "H11.1",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre dificultad para tragar, siendo 0 la ausencia de dificultad y 4 una intensidad invalidante.",
-      "categories": [52]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre dificultad para tragar, siendo 0 la ausencia de dificultad y 4 una intensidad invalidante."
     }
   },
   {
@@ -859,8 +764,7 @@
     "pk": 93,
     "fields": {
       "code": "H11.2",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre meteorismo, siendo 0 la ausencia de meteorismo y 4 una intensidad invalidante.",
-      "categories": [52]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre meteorismo, siendo 0 la ausencia de meteorismo y 4 una intensidad invalidante."
     }
   },
   {
@@ -868,8 +772,7 @@
     "pk": 94,
     "fields": {
       "code": "H11.3",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre dispepsia, siendo 0 la ausencia de dispepsia y 4 una intensidad invalidante.",
-      "categories": [52]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre dispepsia, siendo 0 la ausencia de dispepsia y 4 una intensidad invalidante."
     }
   },
   {
@@ -877,8 +780,7 @@
     "pk": 95,
     "fields": {
       "code": "H11.4",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre dolor antes o después de comer, siendo 0 la ausencia de dolor antes o después de comer y 4 una intensidad invalidante.",
-      "categories": [52]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre dolor antes o después de comer, siendo 0 la ausencia de dolor antes o después de comer y 4 una intensidad invalidante."
     }
   },
   {
@@ -886,8 +788,7 @@
     "pk": 96,
     "fields": {
       "code": "H11.5",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre sensación de ardor, siendo 0 la ausencia de sensación de ardor y 4 una intensidad invalidante.",
-      "categories": [52]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre sensación de ardor, siendo 0 la ausencia de sensación de ardor y 4 una intensidad invalidante."
     }
   },
   {
@@ -895,8 +796,7 @@
     "pk": 97,
     "fields": {
       "code": "H11.6",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre distensión abdominal, siendo 0 la ausencia de distensión abdominal y 4 una intensidad invalidante.",
-      "categories": [52]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre distensión abdominal, siendo 0 la ausencia de distensión abdominal y 4 una intensidad invalidante."
     }
   },
   {
@@ -904,8 +804,7 @@
     "pk": 98,
     "fields": {
       "code": "H11.7",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre pirosis, siendo 0 la ausencia de pirosis y 4 una intensidad invalidante.",
-      "categories": [52]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre pirosis, siendo 0 la ausencia de pirosis y 4 una intensidad invalidante."
     }
   },
   {
@@ -913,8 +812,7 @@
     "pk": 99,
     "fields": {
       "code": "H11.8",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre náuseas, siendo 0 la ausencia de náuseas y 4 una intensidad invalidante.",
-      "categories": [52]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre náuseas, siendo 0 la ausencia de náuseas y 4 una intensidad invalidante."
     }
   },
   {
@@ -922,8 +820,7 @@
     "pk": 100,
     "fields": {
       "code": "H11.9",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre vómitos, siendo 0 la ausencia de vómitos y 4 una intensidad invalidante.",
-      "categories": [52]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre vómitos, siendo 0 la ausencia de vómitos y 4 una intensidad invalidante."
     }
   },
   {
@@ -931,8 +828,7 @@
     "pk": 101,
     "fields": {
       "code": "H11.10",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre sensación de estómago vacío, siendo 0 la ausencia de sensación de estómago vacío y 4 una intensidad invalidante.",
-      "categories": [52]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre sensación de estómago vacío, siendo 0 la ausencia de sensación de estómago vacío y 4 una intensidad invalidante."
     }
   },
   {
@@ -940,8 +836,7 @@
     "pk": 102,
     "fields": {
       "code": "H11.11",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre cólicos abdominales, siendo 0 la ausencia de cólicos abdominales y 4 una intensidad invalidante.",
-      "categories": [52]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre cólicos abdominales, siendo 0 la ausencia de cólicos abdominales y 4 una intensidad invalidante."
     }
   },
   {
@@ -949,8 +844,7 @@
     "pk": 103,
     "fields": {
       "code": "H11.12",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre borborigmos, siendo 0 la ausencia de borborigmos y 4 una intensidad invalidante.",
-      "categories": [52]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre borborigmos, siendo 0 la ausencia de borborigmos y 4 una intensidad invalidante."
     }
   },
   {
@@ -958,8 +852,7 @@
     "pk": 104,
     "fields": {
       "code": "H11.13",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre diarrea, siendo 0 la ausencia de diarrea y 4 una intensidad invalidante.",
-      "categories": [52]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre diarrea, siendo 0 la ausencia de diarrea y 4 una intensidad invalidante."
     }
   },
   {
@@ -967,8 +860,7 @@
     "pk": 105,
     "fields": {
       "code": "H11.14",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre estreñimiento, siendo 0 la ausencia de estreñimiento y 4 una intensidad invalidante.",
-      "categories": [52]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre estreñimiento, siendo 0 la ausencia de estreñimiento y 4 una intensidad invalidante."
     }
   },
   {
@@ -976,8 +868,7 @@
     "pk": 106,
     "fields": {
       "code": "B18",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [54,55]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -985,8 +876,7 @@
     "pk": 107,
     "fields": {
       "code": "B19",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [11,56,57]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -994,8 +884,7 @@
     "pk": 108,
     "fields": {
       "code": "B20",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [58,59]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -1003,8 +892,7 @@
     "pk": 109,
     "fields": {
       "code": "B21",
-      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?",
-      "categories": [60,61]
+      "text": "¿Con cual de las siguientes afirmaciones se siente más identificado/a?"
     }
   },
   {
@@ -1012,8 +900,7 @@
     "pk": 110,
     "fields": {
       "code": "H12.5",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre eyaculación precoz(para hombres), siendo 0 la ausencia de eyaculación precoz y 4 una intensidad invalidante.",
-      "categories": [60]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre eyaculación precoz(para hombres), siendo 0 la ausencia de eyaculación precoz y 4 una intensidad invalidante."
     }
   },
   {
@@ -1021,8 +908,7 @@
     "pk": 111,
     "fields": {
       "code": "H12.6",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre ausencia de erección(para hombres), siendo 0 la ausencia del mismo y 4 una intensidad invalidante.",
-      "categories": [60]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre ausencia de erección(para hombres), siendo 0 la ausencia del mismo y 4 una intensidad invalidante."
     }
   },
   {
@@ -1030,8 +916,7 @@
     "pk": 112,
     "fields": {
       "code": "H12.7",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre impotencia(para hombres), siendo 0 la ausencia del mismo y 4 una intensidad invalidante.",
-      "categories": [60]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre impotencia(para hombres), siendo 0 la ausencia del mismo y 4 una intensidad invalidante."
     }
   },
   {
@@ -1039,8 +924,7 @@
     "pk": 113,
     "fields": {
       "code": "H12.3",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre frigidez(para mujeres), siendo 0 la ausencia de frigidez y 4 una intensidad invalidante.",
-      "categories": [60]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre frigidez(para mujeres), siendo 0 la ausencia de frigidez y 4 una intensidad invalidante."
     }
   },
   {
@@ -1048,8 +932,7 @@
     "pk": 114,
     "fields": {
       "code": "H12.2",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre metrorragia(para mujeres), siendo 0 la ausencia de metrorragia y 4 una intensidad invalidante.",
-      "categories": [60]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre metrorragia(para mujeres), siendo 0 la ausencia de metrorragia y 4 una intensidad invalidante."
     }
   },
   {
@@ -1057,8 +940,7 @@
     "pk": 115,
     "fields": {
       "code": "H12.1",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre amenorrea(para mujeres), siendo 0 la ausencia de amenorrea y 4 una intensidad invalidante.",
-      "categories": [60]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre amenorrea(para mujeres), siendo 0 la ausencia de amenorrea y 4 una intensidad invalidante."
     }
   },
   {
@@ -1066,8 +948,7 @@
     "pk": 116,
     "fields": {
       "code": "H12.4",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre micciones frecuentes, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.",
-      "categories": [60]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre micciones frecuentes, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante."
     }
   },
   {
@@ -1075,8 +956,7 @@
     "pk": 117,
     "fields": {
       "code": "H10.1",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre peso en el pecho o sensación de opresión torácica, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.",
-      "categories": [62]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre peso en el pecho o sensación de opresión torácica, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante."
     }
   },
   {
@@ -1084,8 +964,7 @@
     "pk": 118,
     "fields": {
       "code": "H10.2",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre sensación de ahogo, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.",
-      "categories": [62]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre sensación de ahogo, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante."
     }
   },
   {
@@ -1093,8 +972,7 @@
     "pk": 119,
     "fields": {
       "code": "H10.3",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre suspiros, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.",
-      "categories": [62]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre suspiros, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante."
     }
   },
   {
@@ -1102,8 +980,7 @@
     "pk": 120,
     "fields": {
       "code": "H10.4",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre falta de aire, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.",
-      "categories": [62]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre falta de aire, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante."
     }
   },
   {
@@ -1111,8 +988,7 @@
     "pk": 121,
     "fields": {
       "code": "H9.1",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre taquicardia, siendo 0 la ausencia de taquicardia y 4 una intensidad invalidante.",
-      "categories": [64]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre taquicardia, siendo 0 la ausencia de taquicardia y 4 una intensidad invalidante."
     }
   },
   {
@@ -1120,8 +996,7 @@
     "pk": 122,
     "fields": {
       "code": "H9.2",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre palpitaciones, siendo 0 la ausencia de palpitaciones y 4 una intensidad invalidante.",
-      "categories": [64]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre palpitaciones, siendo 0 la ausencia de palpitaciones y 4 una intensidad invalidante."
     }
   },
   {
@@ -1129,8 +1004,7 @@
     "pk": 123,
     "fields": {
       "code": "H9.3",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre dolores en el pecho, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.",
-      "categories": [64]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre dolores en el pecho, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante."
     }
   },
   {
@@ -1138,8 +1012,7 @@
     "pk": 124,
     "fields": {
       "code": "H9.4",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre sensación de 'baja presión' o desmayo, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.",
-      "categories": [64]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre sensación de 'baja presión' o desmayo, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante."
     }
   },
   {
@@ -1147,8 +1020,7 @@
     "pk": 125,
     "fields": {
       "code": "H13.1",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre sequedad de boca, siendo 0 la ausencia de sequedad de boca y 4 una intensidad invalidante.",
-      "categories": [66]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre sequedad de boca, siendo 0 la ausencia de sequedad de boca y 4 una intensidad invalidante."
     }
   },
   {
@@ -1156,8 +1028,7 @@
     "pk": 126,
     "fields": {
       "code": "H13.2",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre accesos de rubor, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.",
-      "categories": [66]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre accesos de rubor, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante."
     }
   },
   {
@@ -1165,8 +1036,7 @@
     "pk": 127,
     "fields": {
       "code": "H13.3",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre palidez, siendo 0 la ausencia de palidez y 4 una intensidad invalidante.",
-      "categories": [66]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre palidez, siendo 0 la ausencia de palidez y 4 una intensidad invalidante."
     }
   },
   {
@@ -1174,8 +1044,7 @@
     "pk": 128,
     "fields": {
       "code": "H13.4",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre transpiración excesiva, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.",
-      "categories": [66]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre transpiración excesiva, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante."
     }
   },
   {
@@ -1183,8 +1052,7 @@
     "pk": 129,
     "fields": {
       "code": "H13.5",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre vértigos, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.",
-      "categories": [66]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre vértigos, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante."
     }
   },
   {
@@ -1192,8 +1060,7 @@
     "pk": 130,
     "fields": {
       "code": "H13.6",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre cefalea tensional, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.",
-      "categories": [66]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre cefalea tensional, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante."
     }
   },
   {
@@ -1201,8 +1068,7 @@
     "pk": 131,
     "fields": {
       "code": "H13.7",
-      "text": "Valore en escala del 0 al 4 en qué medida sufre horripilación(piel de gallina), siendo 0 la ausencia de horripilación y 4 una intensidad invalidante.",
-      "categories": [66]
+      "text": "Valore en escala del 0 al 4 en qué medida sufre horripilación(piel de gallina), siendo 0 la ausencia de horripilación y 4 una intensidad invalidante."
     }
   },
   {
@@ -1210,8 +1076,7 @@
     "pk": 132,
     "fields": {
       "code": "Hd17",
-      "text": "Valore en que medida observa en el paciente durante la entrevista.",
-      "categories": [67,68]
+      "text": "Valore en que medida observa en el paciente durante la entrevista."
     }
   },
   {
@@ -1219,8 +1084,7 @@
     "pk": 133,
     "fields": {
       "code": "H14.1",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la tensión (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la tensión (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1228,8 +1092,7 @@
     "pk": 134,
     "fields": {
       "code": "H14.2",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a estar incómodo (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a estar incómodo (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1237,8 +1100,7 @@
     "pk": 135,
     "fields": {
       "code": "H14.3",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la agitación de las manos (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la agitación de las manos (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1246,8 +1108,7 @@
     "pk": 136,
     "fields": {
       "code": "H14.4",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto frotar sus dedos (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto frotar sus dedos (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1255,8 +1116,7 @@
     "pk": 137,
     "fields": {
       "code": "H14.5",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a apretar los puños (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a apretar los puños (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1264,8 +1124,7 @@
     "pk": 138,
     "fields": {
       "code": "H14.6",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a posturas cambiantes (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a posturas cambiantes (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1273,8 +1132,7 @@
     "pk": 139,
     "fields": {
       "code": "H14.7",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al temblor de las manos (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al temblor de las manos (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1282,8 +1140,7 @@
     "pk": 140,
     "fields": {
       "code": "H14.8",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al ceño arrugado (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al ceño arrugado (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1291,8 +1148,7 @@
     "pk": 141,
     "fields": {
       "code": "H14.9",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a las facies tensa (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a las facies tensa (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1300,8 +1156,7 @@
     "pk": 142,
     "fields": {
       "code": "H14.10",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al tono muscular (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al tono muscular (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1309,8 +1164,7 @@
     "pk": 143,
     "fields": {
       "code": "H14.11",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la respiración jadeante (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la respiración jadeante (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1318,8 +1172,7 @@
     "pk": 144,
     "fields": {
       "code": "H14.12",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la palidez facial (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la palidez facial (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1327,8 +1180,7 @@
     "pk": 145,
     "fields": {
       "code": "H14.13",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a tragar saliva (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a tragar saliva (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1336,8 +1188,7 @@
     "pk": 146,
     "fields": {
       "code": "H14.14",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a eructos (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a eructos (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1345,8 +1196,7 @@
     "pk": 147,
     "fields": {
       "code": "H14.15",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a taquicardia de reposo (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a taquicardia de reposo (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1354,8 +1204,7 @@
     "pk": 148,
     "fields": {
       "code": "H14.16",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la frecuencia respiratoria mayor de 20/min (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la frecuencia respiratoria mayor de 20/min (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1363,8 +1212,7 @@
     "pk": 149,
     "fields": {
       "code": "H14.17",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a los reflejos tendinosos vivos (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a los reflejos tendinosos vivos (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1372,8 +1220,7 @@
     "pk": 150,
     "fields": {
       "code": "H14.18",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al temblor durante la entrevista (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al temblor durante la entrevista (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1381,8 +1228,7 @@
     "pk": 151,
     "fields": {
       "code": "H14.19",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la dilatación pupilar (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la dilatación pupilar (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1390,8 +1236,7 @@
     "pk": 152,
     "fields": {
       "code": "H14.20",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la exoftalmia (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la exoftalmia (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1399,8 +1244,7 @@
     "pk": 153,
     "fields": {
       "code": "H14.21",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la sudoración (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la sudoración (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },
   {
@@ -1408,8 +1252,7 @@
     "pk": 154,
     "fields": {
       "code": "H14.22",
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a las mioclonias palpebrales (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante)).",
-      "categories": [69]
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a las mioclonias palpebrales (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad máxima(invalidante))."
     }
   },  
   {
@@ -1417,8 +1260,7 @@
     "pk": 155,
     "fields": {
       "code": "H1",
-      "text": "Valore del 0 al 4 el grado en que sufre inquietud, irritabilidad, espera lo peor, aprensión(anticipación temerosa).",
-      "categories": [71]
+      "text": "Valore del 0 al 4 el grado en que sufre inquietud, irritabilidad, espera lo peor, aprensión(anticipación temerosa)."
     }
   },
   {
@@ -1426,8 +1268,7 @@
     "pk": 156,
     "fields": {
       "code": "H2",
-      "text": "Valore del 0 al 4 el grado en que sufre sensaciones de tensión, fatigabilidad, imposibilidad de relajarse, llanto fácil, sobresalto al responder, temblores, sensación de inquietud, sensación de no poder quedarse en el lugar.",
-      "categories": [44]
+      "text": "Valore del 0 al 4 el grado en que sufre sensaciones de tensión, fatigabilidad, imposibilidad de relajarse, llanto fácil, sobresalto al responder, temblores, sensación de inquietud, sensación de no poder quedarse en el lugar."
     }
   },
   {
@@ -1435,8 +1276,7 @@
     "pk": 157,
     "fields": {
       "code": "H3",
-      "text": "Valore del 0 al 4 el grado en que sufre miedo a la oscuridad, miedo a la gente desconocida, miedo a quedarse sólo, miedo a los animales grandes u otros, miedo al tránsito callejero, miedo a la multitud, otros miedos.",
-      "categories": [37]
+      "text": "Valore del 0 al 4 el grado en que sufre miedo a la oscuridad, miedo a la gente desconocida, miedo a quedarse sólo, miedo a los animales grandes u otros, miedo al tránsito callejero, miedo a la multitud, otros miedos."
     }
   },
   {
@@ -1444,8 +1284,7 @@
     "pk": 158,
     "fields": {
       "code": "H4",
-      "text": "Valore del 0 al 4 el grado en que sufre dificultad para conciliar el sueño, sueño interrumpido, sueño no satisfactorio con cansancio al despertar, sueños penosos, pesadillas, terrores nocturnos.",
-      "categories": [46]
+      "text": "Valore del 0 al 4 el grado en que sufre dificultad para conciliar el sueño, sueño interrumpido, sueño no satisfactorio con cansancio al despertar, sueños penosos, pesadillas, terrores nocturnos."
     }
   },
   {
@@ -1453,8 +1292,7 @@
     "pk": 159,
     "fields": {
       "code": "H5",
-      "text": "Valore del 0 al 4 el grado en que sufre dificultad de concentración, mala memoria, problemas de atención.",
-      "categories": [72]
+      "text": "Valore del 0 al 4 el grado en que sufre dificultad de concentración, mala memoria, problemas de atención."
     }
   },
   {
@@ -1462,8 +1300,7 @@
     "pk": 160,
     "fields": {
       "code": "H6",
-      "text": "Valore del 0 al 4 el grado en que no disfruta ya de sus pasatiempos, falta de interés, variaciones del humor durante el día, insomnio de madrugada.",
-      "categories": [73]
+      "text": "Valore del 0 al 4 el grado en que no disfruta ya de sus pasatiempos, falta de interés, variaciones del humor durante el día, insomnio de madrugada."
     }
   },
   {
@@ -1471,8 +1308,7 @@
     "pk": 161,
     "fields": {
       "code": "H7",
-      "text": "Valore del 0 al 4 el grado en que sufre dolores musculares, espasmos musculares o calambres, rigidez muscular, tics, rechinar de dientes, voz vacilante, tono muscular aumentado.",
-      "categories": [50]
+      "text": "Valore del 0 al 4 el grado en que sufre dolores musculares, espasmos musculares o calambres, rigidez muscular, tics, rechinar de dientes, voz vacilante, tono muscular aumentado."
     }
   },
   {
@@ -1480,8 +1316,7 @@
     "pk": 162,
     "fields": {
       "code": "H8",
-      "text": "Valore del 0 al 4 el grado en que sufre zumbidos de oídos, visión borrosa, oleadas de frío y calor, sensación de debilidad, sensaciones parestésicas(pinchazos, picazón u hormigueos).",
-      "categories": [74]
+      "text": "Valore del 0 al 4 el grado en que sufre zumbidos de oídos, visión borrosa, oleadas de frío y calor, sensación de debilidad, sensaciones parestésicas(pinchazos, picazón u hormigueos)."
     }
   },
   {
@@ -1489,8 +1324,7 @@
     "pk": 163,
     "fields": {
       "code": "H9",
-      "text": "Valore del 0 al 4 el grado en que sufre taquicardia, palpitaciones, dolores en el pecho, sensación de 'baja presión' o desmayo.",
-      "categories": [65]
+      "text": "Valore del 0 al 4 el grado en que sufre taquicardia, palpitaciones, dolores en el pecho, sensación de 'baja presión' o desmayo."
     }
   },
   {
@@ -1498,8 +1332,7 @@
     "pk": 164,
     "fields": {
       "code": "H10",
-      "text": "Valore del 0 al 4 el grado en que sufre peso en el pecho o sensación de opresión torácica, sensación de ahogo, suspiros, falta de aire.",
-      "categories": [63]
+      "text": "Valore del 0 al 4 el grado en que sufre peso en el pecho o sensación de opresión torácica, sensación de ahogo, suspiros, falta de aire."
     }
   },
   {
@@ -1507,8 +1340,7 @@
     "pk": 165,
     "fields": {
       "code": "H11",
-      "text": "Valore del 0 al 4 el grado en que sufre dificultad para tragar, meteorismo, dispepsia, dolor antes o después de comer, sensación de ardor, distensión abdominal, pirosis, náuseas, vómitos, sensación de estómago vacío, cólicos abdominales, borborigmos, diarrea, estreñimiento.",
-      "categories": [53]
+      "text": "Valore del 0 al 4 el grado en que sufre dificultad para tragar, meteorismo, dispepsia, dolor antes o después de comer, sensación de ardor, distensión abdominal, pirosis, náuseas, vómitos, sensación de estómago vacío, cólicos abdominales, borborigmos, diarrea, estreñimiento."
     }
   },
   {
@@ -1516,8 +1348,7 @@
     "pk":  166,
       "fields": {
       "code": "H12",
-      "text": "Valore del 0 al 4 el grado en que sufre eyaculación precoz, ausencia de erección, impotencia, frigidez, metrorragia, amenorrea, micciones frecuentes.",
-      "categories": [75]
+      "text": "Valore del 0 al 4 el grado en que sufre eyaculación precoz, ausencia de erección, impotencia, frigidez, metrorragia, amenorrea, micciones frecuentes."
     }
   },
   {
@@ -1525,8 +1356,7 @@
     "pk": 167,
     "fields": {
       "code": "H13",
-      "text": "Valore del 0 al 4 el grado en que sufre sequedad de boca, accesos de rubor, palidez, transpiración excesiva, vértigos, cefalea, tensional, horripilación(piel de gallina).",
-      "categories": [76]
+      "text": "Valore del 0 al 4 el grado en que sufre sequedad de boca, accesos de rubor, palidez, transpiración excesiva, vértigos, cefalea, tensional, horripilación(piel de gallina)."
     }
   },
   {
@@ -1534,8 +1364,7 @@
     "pk": 168,
     "fields": {
       "code": "H14",
-      "text": "Valore del 0 al 4 el grado en que se encuentra tenso, incómodo, agitación de las manos, frota sus dedos, aprieta los puños, postura cambiante, temblor de las manos, ceño arrugado, facies tensa, aumento del tono muscular, respiración jadeante, palidez facial, traga saliva, tendinosos vivos, temblor durante la entrevista, dilatación pupilar, exoftalmia, sudoración, mioclonias palpebrales.",
-      "categories": [77]
+      "text": "Valore del 0 al 4 el grado en que se encuentra tenso, incómodo, agitación de las manos, frota sus dedos, aprieta los puños, postura cambiante, temblor de las manos, ceño arrugado, facies tensa, aumento del tono muscular, respiración jadeante, palidez facial, traga saliva, tendinosos vivos, temblor durante la entrevista, dilatación pupilar, exoftalmia, sudoración, mioclonias palpebrales."
     }
   },
   {
@@ -1543,8 +1372,7 @@
     "pk": 169,
     "fields": {
       "code": "Hd8",
-      "text": "Valore en qué medida observa durante la entrevista.",
-      "categories": [69,70]
+      "text": "Valore en qué medida observa durante la entrevista."
     }
   },
   {
@@ -1552,8 +1380,7 @@
     "pk": 170,
     "fields": {
       "code": "SE",
-      "text": "¿Ha observado desde su última visita, la aparición de nuevos síntomas o empeoramiento de alguno ya presente, a los que no se ha hecho referencia en el cuestionario?",
-      "categories": [79]
+      "text": "¿Ha observado desde su última visita, la aparición de nuevos síntomas o empeoramiento de alguno ya presente, a los que no se ha hecho referencia en el cuestionario?"
     }
   },
   {
@@ -1561,8 +1388,7 @@
     "pk": 171,
     "fields": {
       "code": "ADT",
-      "text": "¿En qué grado ha seguido el paciente las recomendaciones y/o tratamiento indicados?",
-      "categories": [80]
+      "text": "¿En qué grado ha seguido el paciente las recomendaciones y/o tratamiento indicados?"
     }
   }
 ]

@@ -22,7 +22,6 @@
     <div class="span8">
       <div class="hero-unit center">
         <form class="form-horizontal" method="post" action="{% url consulting_select_survey id_appointment %}">{% csrf_token %}
-          <fieldset>
             {% if form.survey.errors %}
               <div class="control-group error">
                 <label class="control-label">
@@ -100,7 +99,6 @@
                 {% trans 'Guardar' %}
               </button>
             </div>
-          </fieldset>
         </form>
       </div>
       <div class="pull-right">
@@ -108,6 +106,10 @@
           {% trans 'Variables' %}
         </button>         
       </div>
+    </div>
+    <!-- PATIENT CARD -->
+    <div class="span4">
+        {% include "consulting/patient/card.html" %}
     </div>
   </div>
 </div>

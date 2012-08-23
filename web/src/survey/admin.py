@@ -12,7 +12,8 @@ admin.site.register(Survey, SurveyAdmin)
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    fieldsets = [('Categorys', {'fields': ['name', 'code', 'kind']})]
+    fieldsets = [('Categorys', {'fields': ['name', 'code', 'kind',
+                                            'questions']})]
     list_display = ('code', 'name', 'kind')
     search_fields = ('code', 'name', 'kind')
     ordering = ('code', 'name', 'kind')
@@ -31,7 +32,7 @@ admin.site.register(Block, BlockAdmin)
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    fieldsets = [('Questions', {'fields': ['text', 'code', 'categories']})]
+    fieldsets = [('Questions', {'fields': ['text', 'code']})]
     list_display = ('code', 'text')
     search_fields = ('code', 'text')
     ordering = ('code',)

@@ -50,6 +50,8 @@ class Category(TraceableModel):
         (settings.EXTENSO, _(u'Extenso')),
         (settings.ABREVIADO, _(u'Abreviado')),
     )
+    questions = models.ManyToManyField('Question',
+                                        related_name='questions_categories')
     name = models.CharField(_(u'Nombre'), max_length=100)
 
     code = models.IntegerField(_(u'Código'), blank=True, null=True)
@@ -82,11 +84,6 @@ class Block(TraceableModel):
 
 
 class Question(models.Model):
-    #Es ManyToMany, ejemplo Pregunta B5 esta en la categoria Culpa-Abreviada y
-    #en Culpa-Extensa
-    categories = models.ManyToManyField('Category',
-                                        related_name='categories_questions')
-
     text = models.CharField(_(u'Text'), max_length=500)
 
     code = models.CharField(_(u'Código'), max_length=10)

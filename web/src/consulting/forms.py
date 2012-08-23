@@ -6,12 +6,13 @@ from django.utils.safestring import mark_safe
 from django.forms.widgets import RadioFieldRenderer
 from django.forms.util import flatatt
 from django.utils.encoding import force_unicode
+from django.shortcuts import get_object_or_404
 
 from consulting.validators import validate_choice
 
 from consulting.models import Medicine, Conclusion, Task
 from medicament.models import Component
-from survey.models import Survey
+from survey.models import Survey, Question
 
 
 # class RecipientChoiceField(forms.ModelChoiceField):
@@ -189,3 +190,81 @@ class SelectTaskForm(forms.ModelForm):
                 self._errors['to_date'] = self.error_class([msg])
 
         return cleaned_data
+
+
+class SelectOtherTaskForm(forms.Form):
+    survey = forms.ModelChoiceField(label=_(u"Encuesta"),
+                        queryset=Survey.objects.filter(
+                        code__in=[settings.ANXIETY_DEPRESSION_EXTENSIVE,
+                        settings.ANXIETY_DEPRESSION_SHORT]),
+                        widget=forms.Select(
+                        attrs={'class': 'input-medium search-query span4'}))
+
+
+class SelectVariablesForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        if 'variables' in kwargs:
+            variables = kwargs.pop('variables')
+            super(SelectVariablesForm, self).__init__(*args, **kwargs)
+
+            self.fields['variables'] = forms.MultipleChoiceField(
+                    label=_(u'Variables'),
+                    widget=forms.CheckboxSelectMultiple(),
+                    choices=variables,
+                    required=True)
+        else:
+            super(SelectVariablesForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        from_date = cleaned_data.get("from_date")
+        to_date = cleaned_data.get("to_date")
+
+        if from_date is None:
+            msg = _(u"Este campo es obligatorio")
+            self._errors["from_date"] = self.error_class([msg])
+
+        if to_date is None:
+            msg = _(u"Este campo es obligatorio")
+            self._errors["to_date"] = self.error_class([msg])
+
+        if from_date and to_date:
+            if to_date < from_date:
+                msg = _("La fecha hasta debe ser mayor que la fecha desde.")
+                self._errors['to_date'] = self.error_class([msg])
+
+        return cleaned_data
+
+    from_date = forms.DateField(
+            label=_(u'Fecha a partir de la cual puede realizar la encuesta'),
+            input_formats=(settings.DATE_FORMAT,),
+            widget=forms.DateInput(format=settings.DATE_FORMAT,
+                                    attrs={'class': 'span2', 'size': '16'}))
+    to_date = forms.DateField(
+            label=_(u'Fecha hasta la cual puede realizar la encuesta'),
+            input_formats=(settings.DATE_FORMAT,),
+            widget=forms.DateInput(format=settings.DATE_FORMAT,
+                                    attrs={'class': 'span2', 'size': '16'}))
+
+
+class SelectOtherVariablesForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        if 'variables' in kwargs:
+            variables = kwargs.pop('variables')
+            super(SelectOtherVariablesForm, self).__init__(*args, **kwargs)
+
+            self.fields['variables'] = forms.MultipleChoiceField(
+                    label=_(u'Variables'),
+                    widget=forms.CheckboxSelectMultiple(),
+                    choices=variables,
+                    required=True)
+        else:
+            super(SelectOtherVariablesForm, self).__init__(*args, **kwargs)
+
+
+class SymptomsWorseningForm(forms.Form):
+    symptoms_worsening = forms.CharField(
+                        label=get_object_or_404(Question,
+                                code=settings.CODE_SYMTOMS_WORSENING).text,
+                        widget=forms.Textarea(
+                            attrs={'cols': 60, 'rows': 4, 'class': 'span5'}))

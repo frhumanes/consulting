@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 from log.models import TraceableModel
-from survey.models import Survey, Block, Option
+from survey.models import Survey, Block, Question, Option
 from medicament.models import Component
 from illness.models import Illness
 from cal.models import Appointment
@@ -16,6 +16,10 @@ class Task(TraceableModel):
     patient = models.ForeignKey(User, related_name='patient_tasks')
 
     survey = models.ForeignKey(Survey, related_name="survey_tasks")
+
+    questions = models.ManyToManyField(Question,
+                                        related_name="questions_tasks",
+                                        blank=True, null=True)
 
     treated_blocks = models.ManyToManyField(Block, related_name='blocks_tasks')
 
@@ -110,24 +114,16 @@ class Result(TraceableModel):
     survey = models.ForeignKey(Survey, related_name="survey_results")
 
     options = models.ManyToManyField(Option, related_name="options_results")
-    # answers = models.ManyToManyField('Answer',
-    #                                 related_name="answers_results")
 
     task = models.ForeignKey(Task, related_name="task_results")
 
     date = models.DateTimeField(_(u'Fecha'), auto_now_add=True)
 
+    symptoms_worsening = models.CharField(max_length=5000, blank=True,
+                                            null=True)
+
     def __unicode__(self):
         return u'id: %s result: %s %s' % (self.id, self.patient, self.survey)
-
-
-# class Answer(TraceableModel):
-#     option = models.ForeignKey(Option, related_name="option_answers")
-
-#     text = models.CharField(_(u'Texto'), max_length=255, blank=True)
-
-#     def __unicode__(self):
-#         return u'id: %s answer: %s' % (self.id, self.option)
 
 
 class Report(TraceableModel):

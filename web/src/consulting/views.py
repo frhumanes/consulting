@@ -27,13 +27,18 @@ from medicament.models import Component, Group
 from consulting.models import Medicine, Task, Conclusion, Result
 from cal.models import Appointment, Slot, SlotType
 from illness.models import Illness
-from survey.models import Survey, Block, Option
+from survey.models import Survey, Block, Question, Option
+from formula.models import Variable
 
 from userprofile.forms import ProfileForm, ProfileSurveyForm
 from consulting.forms import MedicineForm
 from consulting.forms import  ConclusionForm
 from consulting.forms import  ActionSelectionForm
 from consulting.forms import SelectTaskForm
+from consulting.forms import SelectOtherTaskForm
+from consulting.forms import SelectVariablesForm
+from consulting.forms import SelectOtherVariablesForm
+from consulting.forms import SymptomsWorseningForm
 from illness.forms import IllnessSelectionForm, IllnessAddPatientForm
 from survey.forms import SelectBlockForm, QuestionsForm
 from cal.forms import AppointmentForm
@@ -409,24 +414,38 @@ def select_illness(request, id_appointment):
 def task_completed(id_task):
     task = get_object_or_404(Task, pk=int(id_task))
     result = task.task_results.latest('date')
-    if task.treated_blocks.count() == task.survey.num_blocks:
-        blocks = result.task.treated_blocks.all().order_by('code')
-        options_result = result.options.all()
 
-        for block in blocks:
-            categories = block.categories.all().order_by('code')
-            for category in categories:
-                questions = category.categories_questions.all().order_by('id')
-                for question in questions:
-                    options = question.question_options.all().order_by('id')
-                    enc_option = False
-                    for option in options:
-                        if option  in options_result:
-                            enc_option = True
-                            break
-                    if not enc_option:
-                        return False
-        return True
+    if task.treated_blocks.count() == task.survey.num_blocks:
+        options_result = result.options.all()
+        questions = task.questions.all()
+        if questions:
+            for question in questions:
+                options = question.question_options.all().order_by('id')
+                enc_option = False
+                for option in options:
+                    if option in options_result:
+                        enc_option = True
+                        break
+                if not enc_option:
+                    return False
+            return True
+        else:
+            blocks = result.task.treated_blocks.all().order_by('code')
+
+            for block in blocks:
+                categories = block.categories.all().order_by('code')
+                for category in categories:
+                    questions = category.questions.all().order_by('id')
+                    for question in questions:
+                        options = question.question_options.all().order_by('id')
+                        enc_option = False
+                        for option in options:
+                            if option  in options_result:
+                                enc_option = True
+                                break
+                        if not enc_option:
+                            return False
+            return True
     else:
         return False
 
@@ -550,7 +569,7 @@ def new_medicine_conclusion(request, id_conclusion):
         form = MedicineForm()
 
     return render_to_response(
-                'consulting/consultation/new_medicine.html',
+                'consulting/consultation/new_medicine_conclusion.html',
                 {'form': form,
                 'id_conclusion': id_conclusion,
                 'patient_user': patient},
@@ -560,7 +579,7 @@ def new_medicine_conclusion(request, id_conclusion):
 @login_required()
 @only_doctor_consulting
 @paginate(
-    template_name='consulting/consultation/list_medicines.html',
+    template_name='consulting/consultation/list_medicines_conclusion.html',
     list_name='medicines', objects_per_page=settings.OBJECTS_PER_PAGE)
 def list_medicines_before_conclusion(request, id_conclusion):
     conclusion = get_object_or_404(Conclusion, pk=int(id_conclusion))
@@ -578,7 +597,7 @@ def list_medicines_before_conclusion(request, id_conclusion):
 @login_required()
 @only_doctor_consulting
 @paginate(
-    template_name='consulting/consultation/list_medicines.html',
+    template_name='consulting/consultation/list_medicines_conclusion.html',
     list_name='medicines', objects_per_page=settings.OBJECTS_PER_PAGE)
 def list_medicines_after_conclusion(request, id_conclusion):
     conclusion = get_object_or_404(Conclusion, pk=int(id_conclusion))
@@ -616,7 +635,7 @@ def detail_medicine_conclusion(request):
 
 @login_required()
 @only_doctor_consulting
-@paginate(template_name='consulting/consultation/list_medicines_ajax.html',
+@paginate(template_name='consulting/consultation/list_medicines_ajax_conclusion.html',
     list_name='medicines', objects_per_page=settings.OBJECTS_PER_PAGE)
 def remove_medicine_conclusion(request):
     if request.method == 'POST':
@@ -626,7 +645,6 @@ def remove_medicine_conclusion(request):
             medicine = Medicine.objects.get(id=medicine_id)
             when = medicine.before_after_first_appointment
             medicine.delete()
-
             conclusion = get_object_or_404(Conclusion, pk=int(id_conclusion))
 
             if when == settings.BEFORE:
@@ -637,7 +655,6 @@ def remove_medicine_conclusion(request):
                 medicines = conclusion.conclusion_medicines.filter(
                         before_after_first_appointment=settings.AFTER).\
                         order_by('-date')
-
             template_data = {}
             template_data.update({'medicines': medicines,
                                     'id_conclusion': id_conclusion})
@@ -671,7 +688,7 @@ def add_illness_patient(request, id_conclusion):
     return render_to_response(
                         'consulting/consultation/add_illness_patient.html',
                         {'form': form,
-                        'id_conclusion': id_conclusion,
+                        'conclusion': conclusion,
                         'patient_user': patient},
                         context_instance=RequestContext(request))
 
@@ -691,14 +708,230 @@ def select_survey(request, id_appointment):
             task.appointment = appointment
             task.self_administered = True
             task.save()
-
-            return HttpResponseRedirect(reverse('consulting_index'))
     else:
         form = SelectTaskForm()
     return render_to_response(
                         'consulting/consultation/select_survey.html',
                         {'form': form,
-                        'id_appointment': id_appointment},
+                        'id_appointment': id_appointment,
+                        'patient_user': appointment.patient},
+                        context_instance=RequestContext(request))
+
+
+@login_required()
+@only_doctor_consulting
+def check_iasurvey(request, id_appointment):
+    appointment = get_object_or_404(Appointment, pk=int(id_appointment))
+
+    ia_survey = Survey.objects.get(code=settings.INITIAL_ASSESSMENT)
+    tasks_with_ia_survey = Task.objects.filter(patient=appointment.patient,
+                                                survey=ia_survey)
+    if tasks_with_ia_survey:
+        #HAY VALORACIÓN INICIAL
+        last_task_with_ia_survey = tasks_with_ia_survey.latest(
+                                                'creation_date')
+        if task_completed(last_task_with_ia_survey.id):
+            return HttpResponseRedirect(
+                                    reverse('consulting_select_other_survey',
+                                    args=[id_appointment]))
+        else:
+            return HttpResponseRedirect(
+                                    reverse('consulting_select_year_month',
+                                    args=[appointment.patient.id]))
+    else:
+        return HttpResponseRedirect(reverse('consulting_index'))
+
+
+@login_required()
+@only_doctor_consulting
+def select_other_survey(request, id_appointment):
+    appointment = get_object_or_404(Appointment, pk=int(id_appointment))
+
+    if request.method == 'POST':
+        request_params = dict([k, v] for k, v in request.POST.items())
+
+        request_params.update({'created_by': request.user.id})
+
+        form = SelectOtherTaskForm(request_params)
+        if form.is_valid():
+            survey = form.cleaned_data['survey']
+            task = Task(created_by=request.user, patient=appointment.patient,
+                        appointment=appointment, survey=survey,
+                        self_administered=False)
+            task.save()
+
+            return HttpResponseRedirect(reverse('consulting_other_block',
+                                    args=[task.id]))
+    else:
+        form = SelectTaskForm()
+    return render_to_response(
+                        'consulting/consultation/select_other_survey.html',
+                        {'form': form,
+                        'id_appointment': id_appointment,
+                        'patient_user': appointment.patient},
+                        context_instance=RequestContext(request))
+
+
+def get_variables(id_result, num):
+    result = get_object_or_404(Result, pk=int(id_result))
+    options = result.options.all()
+    list_variables = []
+    variable_tuple = None
+    if result.survey.kind == settings.INITIAL_ASSESSMENT or\
+        result.survey.kind == settings.ANXIETY_DEPRESSION_EXTENSIVE:
+        kind = settings.EXTENSO
+    else:
+        kind = settings.ABREVIADO
+
+    variables = Variable.objects.all()
+    for variable in variables:
+        formulas = variable.variable_formulas.filter(kind=kind)
+
+        mark = 0
+        for formula in formulas:
+            codes = formula.polynomial.split('+')
+
+            weight = 0
+            for code in codes:
+                if options.filter(question__code=code):
+                    weight = weight + options.get(question__code=code).weight
+            mark = mark + (float(weight) * float(formula.factor))
+
+        variable_tuple = variable.code, mark
+        list_variables.append(variable_tuple)
+
+    list_variables.sort(key=lambda x: x[1])
+    list_variables.reverse()
+    list_variables = list_variables[:num]
+
+    variables = []
+    for k, v in list_variables:
+        variable = get_object_or_404(Variable, code=k)
+        t = variable.id, variable.name
+        variables.append(t)
+
+    return variables
+
+
+@login_required()
+@only_doctor_consulting
+def select_variables(request, id_appointment):
+    appointment = get_object_or_404(Appointment, pk=int(id_appointment))
+
+    results = Result.objects.filter(patient=appointment.patient,
+                            survey__code__in=[settings.INITIAL_ASSESSMENT,
+                            settings.ANXIETY_DEPRESSION_EXTENSIVE,
+                            settings.ANXIETY_DEPRESSION_SHORT])
+    if results:
+        last_result = results.latest('date')
+    else:
+        return HttpResponseRedirect(reverse('consulting_index'))
+
+    variables = get_variables(last_result.id, settings.DEFAULT_NUM_VARIABLES)
+
+    if request.method == 'POST':
+        form = SelectVariablesForm(request.POST, variables=variables)
+        if form.is_valid():
+            try:
+                if last_result.survey.kind == settings.INITIAL_ASSESSMENT or\
+                    last_result.survey.kind == settings.ANXIETY_DEPRESSION_EXTENSIVE:
+                    kind = settings.EXTENSO
+                    survey = get_object_or_404(Survey,
+                                    code=settings.ANXIETY_DEPRESSION_EXTENSIVE)
+                else:
+                    kind = settings.ABREVIADO
+                    survey = get_object_or_404(Survey,
+                                    code=settings.ANXIETY_DEPRESSION_SHORT)
+                task = Task(created_by=request.user, patient=appointment.patient,
+                        survey=survey, appointment=appointment,
+                        self_administered=True)
+                task.save()
+
+                from_date = form.cleaned_data['from_date']
+                to_date = form.cleaned_data['to_date']
+
+                task.from_date = from_date
+                task.to_date = to_date
+                task.save()
+
+                id_variables = form.cleaned_data['variables']
+                variables = Variable.objects.filter(id__in=id_variables)
+                for variable in variables:
+                    formulas = variable.variable_formulas.filter(kind=kind)
+                    for formula in formulas:
+                        codes = formula.polynomial.split('+')
+                        for code in codes:
+                            question = get_object_or_404(Question, code=code)
+                            task.questions.add(question)
+                return HttpResponseRedirect(reverse('consulting_index'))
+            except Exception:
+                task.delete()
+                return HttpResponseRedirect(reverse('consulting_index'))
+    else:
+        form = SelectVariablesForm(variables=variables)
+    return render_to_response(
+                        'consulting/consultation/select_variables.html',
+                        {'form': form,
+                        'id_appointment': id_appointment,
+                        'patient_user': appointment.patient},
+                        context_instance=RequestContext(request))
+
+
+@login_required()
+@only_doctor_consulting
+def select_other_variables(request, id_appointment):
+    appointment = get_object_or_404(Appointment, pk=int(id_appointment))
+
+    results = Result.objects.filter(patient=appointment.patient,
+                            survey__code__in=[settings.INITIAL_ASSESSMENT,
+                            settings.ANXIETY_DEPRESSION_EXTENSIVE,
+                            settings.ANXIETY_DEPRESSION_SHORT])
+    if results:
+        last_result = results.latest('date')
+    else:
+        return HttpResponseRedirect(reverse('consulting_index'))
+
+    variables = get_variables(last_result.id, settings.DEFAULT_NUM_VARIABLES)
+
+    if request.method == 'POST':
+        form = SelectOtherVariablesForm(request.POST, variables=variables)
+        if form.is_valid():
+            try:
+                if last_result.survey.kind == settings.INITIAL_ASSESSMENT or\
+                    last_result.survey.kind == settings.ANXIETY_DEPRESSION_EXTENSIVE:
+                    kind = settings.EXTENSO
+                    survey = get_object_or_404(Survey,
+                                    code=settings.ANXIETY_DEPRESSION_EXTENSIVE)
+                else:
+                    kind = settings.ABREVIADO
+                    survey = get_object_or_404(Survey,
+                                    code=settings.ANXIETY_DEPRESSION_SHORT)
+                task = Task(created_by=request.user, patient=appointment.patient,
+                        survey=survey, appointment=appointment,
+                        self_administered=False)
+                task.save()
+
+                id_variables = form.cleaned_data['variables']
+                variables = Variable.objects.filter(id__in=id_variables)
+                for variable in variables:
+                    formulas = variable.variable_formulas.filter(kind=kind)
+                    for formula in formulas:
+                        codes = formula.polynomial.split('+')
+                        for code in codes:
+                            question = get_object_or_404(Question, code=code)
+                            task.questions.add(question)
+                return HttpResponseRedirect(reverse('consulting_other_block',
+                                    args=[task.id]))
+            except Exception:
+                task.delete()
+                return HttpResponseRedirect(reverse('consulting_index'))
+    else:
+        form = SelectOtherVariablesForm(variables=variables)
+    return render_to_response(
+                        'consulting/consultation/select_other_variables.html',
+                        {'form': form,
+                        'id_appointment': id_appointment,
+                        'patient_user': appointment.patient},
                         context_instance=RequestContext(request))
 
 
@@ -707,7 +940,7 @@ def new_result_sex_status(id_logged_user, id_task):
     task = get_object_or_404(Task, pk=int(id_task))
     profile = task.patient.get_profile()
 
-    #NEW RESULT)
+    #NEW RESULT
     result = Result(patient=task.patient,
                     survey=task.survey,
                     task=task,
@@ -716,24 +949,24 @@ def new_result_sex_status(id_logged_user, id_task):
 
     #SEX
     if profile.sex == settings.WOMAN:
-        sex_option = get_object_or_404(Option, code='DA4.1')
+        sex_option = get_object_or_404(Option, code=settings.CODE_WOMAN)
     else:
-        sex_option = get_object_or_404(Option, code='DA4.0')
+        sex_option = get_object_or_404(Option, code=settings.CODE_MAN)
 
     #STATUS
     status = profile.status
     if status == settings.MARRIED:
-        status_option = get_object_or_404(Option, code='DA9.1')
+        status_option = get_object_or_404(Option, code=settings.CODE_MARRIED)
     elif status == settings.STABLE_PARTNER:
-        status_option = get_object_or_404(Option, code='DA9.2')
+        status_option = get_object_or_404(Option, code=settings.CODE_STABLE_PARTNER)
     elif status == settings.DIVORCED:
-        status_option = get_object_or_404(Option, code='DA9.3')
+        status_option = get_object_or_404(Option, code=settings.CODE_DIVORCED)
     elif status == settings.WIDOW_ER:
-        status_option = get_object_or_404(Option, code='DA9.4')
+        status_option = get_object_or_404(Option, code=settings.CODE_WIDOW_ER)
     elif status == settings.SINGLE:
-        status_option = get_object_or_404(Option, code='DA9.5')
+        status_option = get_object_or_404(Option, code=settings.CODE_SINGLE)
     elif status == settings.OTHER:
-        status_option = get_object_or_404(Option, code='DA9.6')
+        status_option = get_object_or_404(Option, code=settings.CODE_OTHER)
 
     #UPDATE RESULT
     result.options.add(sex_option)
@@ -823,7 +1056,7 @@ def administrative_data(request, id_task):
 
                 if last_result:
                     options = last_result.options.all()
-                    add_options = options.exclude(code__istartswith='DA')
+                    add_options = options.exclude(code__istartswith=settings.START_CODE_AD)
                     result.options.add(*add_options)
 
                 if my_block not in treated_blocks:
@@ -853,7 +1086,7 @@ def administrative_data(request, id_task):
 
                 if last_result:
                     options = last_result.options.all()
-                    add_options = options.exclude(code__istartswith='DA')
+                    add_options = options.exclude(code__istartswith=settings.START_CODE_AD)
                     result.options.add(*add_options)
 
                 if my_block not in treated_blocks:
@@ -905,11 +1138,7 @@ def block(request, id_result, code_block):
 
     if task.task_results.all():
         all_results = task.task_results.all()
-        print 'Todos los resultados de la tarea'
-        print all_results
         all_results_minus_last = all_results.exclude(id=id_result)
-        print 'Todos los resultados de la tarea menos el último'
-        print all_results_minus_last
         if all_results_minus_last:
             penultimate = all_results.exclude(id=id_result).latest('date')
             selected_options = penultimate.options.all()
@@ -918,12 +1147,10 @@ def block(request, id_result, code_block):
             selected_options = []
     else:
         selected_options = []
-    print 'Opciones ya seleccionadas'
-    print selected_options
 
     dic = {}
     for category in categories:
-        questions = category.categories_questions.all().order_by('id')
+        questions = category.questions.all().order_by('id')
         for question in questions:
             options = question.question_options.all().order_by('id')
             dic[question.id] = [
@@ -970,8 +1197,8 @@ def block(request, id_result, code_block):
 
 
 @login_required()
-@only_patient_consulting
-def block_patient(request, id_task):
+@only_doctor_consulting
+def other_block(request, id_task):
     task = get_object_or_404(Task, pk=int(id_task))
 
     if task.task_results.all():
@@ -981,18 +1208,25 @@ def block_patient(request, id_task):
             selected_options = last_result.options.all()
     else:
         selected_options = []
-    block = task.survey.blocks.all()[0]
-    categories = block.categories.all().order_by('id')
-
-    treated_blocks = task.treated_blocks.all()
 
     dic = {}
-    for category in categories:
-        questions = category.categories_questions.all().order_by('id')
+    treated_blocks = task.treated_blocks.all()
+    block = task.survey.blocks.all()[0]
+    questions = task.questions.all()
+    if questions:
         for question in questions:
             options = question.question_options.all().order_by('id')
             dic[question.id] = [
                             (option.id, option.text)for option in options]
+    else:
+        categories = block.categories.all().order_by('id')
+
+        for category in categories:
+            questions = category.questions.all().order_by('id')
+            for question in questions:
+                options = question.question_options.all().order_by('id')
+                dic[question.id] = [
+                                (option.id, option.text)for option in options]
 
     if request.method == 'POST':
         form = QuestionsForm(request.POST, dic=dic,
@@ -1015,6 +1249,77 @@ def block_patient(request, id_task):
             if task_completed(task.id):
                 task.completed = True
                 task.save()
+
+            destination = '/consultation/conclusion/' +\
+                            str(task.appointment.id) + '/' + str(result.id)
+    else:
+        form = QuestionsForm(dic=dic, selected_options=selected_options)
+
+        destination = '/consultation/conclusion/' + str(task.appointment.id)
+
+    return render_to_response('consulting/consultation/other_block.html',
+                            {'form': form,
+                            'task': task,
+                            'patient_user': task.patient,
+                            'destination': destination},
+                            context_instance=RequestContext(request))
+
+
+@login_required()
+@only_patient_consulting
+def self_administered_block(request, id_task):
+    task = get_object_or_404(Task, pk=int(id_task))
+
+    if task.task_results.all():
+        last_result = task.task_results.latest('date')
+
+        if last_result:
+            selected_options = last_result.options.all()
+    else:
+        selected_options = []
+
+    dic = {}
+    treated_blocks = task.treated_blocks.all()
+    block = task.survey.blocks.all()[0]
+    questions = task.questions.all()
+    if questions:
+        for question in questions:
+            options = question.question_options.all().order_by('id')
+            dic[question.id] = [
+                            (option.id, option.text)for option in options]
+    else:
+        categories = block.categories.all().order_by('id')
+
+        for category in categories:
+            questions = category.questions.all().order_by('id')
+            for question in questions:
+                options = question.question_options.all().order_by('id')
+                dic[question.id] = [
+                                (option.id, option.text)for option in options]
+
+    if request.method == 'POST':
+        form = QuestionsForm(request.POST, dic=dic,
+                                        selected_options=selected_options)
+
+        if form.is_valid():
+            result = Result(patient=task.patient, survey=task.survey, task=task,
+                    created_by=request.user)
+            result.save()
+            items = form.cleaned_data.items()
+            for name_field, values_list in items:
+                if values_list:
+                    for value in values_list:
+                        option = get_object_or_404(Option, pk=int(value))
+                        result.options.add(option)
+
+            if block not in treated_blocks:
+                task.treated_blocks.add(block)
+
+            if task_completed(task.id):
+                task.completed = True
+                task.save()
+            return HttpResponseRedirect(
+                    reverse('consulting_symptoms_worsening', args=[result.id]))
     else:
         form = QuestionsForm(dic=dic, selected_options=selected_options)
 
@@ -1022,6 +1327,25 @@ def block_patient(request, id_task):
                             {'form': form,
                             'task': task},
                             context_instance=RequestContext(request))
+
+
+@login_required()
+@only_patient_consulting
+def symptoms_worsening(request, id_result):
+    result = get_object_or_404(Result, pk=int(id_result))
+    if request.method == 'POST':
+        form = SymptomsWorseningForm(request.POST)
+        if form.is_valid():
+            symptoms_worsening = form.cleaned_data['symptoms_worsening']
+            result.symptoms_worsening = symptoms_worsening
+            result.save()
+            return HttpResponseRedirect(reverse('consulting_list_surveys'))
+    else:
+        form = SymptomsWorseningForm()
+    return render_to_response('consulting/consultation/symptoms_worsening.html',
+                                {'form': form,
+                                'id_result': result.id},
+                                context_instance=RequestContext(request))
 
 
 @login_required
@@ -1624,7 +1948,8 @@ def patient_management(request):
 def list_surveys(request):
     tasks = Task.objects.filter(patient=request.user,
                                     self_administered=True, completed=False,
-                                    to_date__gte=datetime.now())\
+                                    to_date__gte=datetime.now(),
+                                    from_date__lte=datetime.now())\
                                     .order_by('-creation_date')
 
     template_data = {}
@@ -1672,7 +1997,6 @@ def new_medicine_pm(request):
         patient_user = User.objects.get(id=patient_user_id)
 
         if request.method == "POST":
-            print request.POST
             request_params = dict([k, v] for k, v in request.POST.items())
             request_params.update({'created_by': request.user.id})
             form = MedicineForm(request_params)

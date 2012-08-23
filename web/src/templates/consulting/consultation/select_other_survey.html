@@ -1,4 +1,4 @@
-{% extends "cal/includes/base.html" %}
+{% extends "ui/app.html" %}
 
 {% load i18n %}
 
@@ -6,21 +6,20 @@
 <div class="container">
   <section>
   <div class="page-header">
-    <h1>{% trans 'Asignar Enfermedad/es' %}</h1>
+    <h1>{% trans 'Siguiente Encuesta' %}</h1>
   </div>
   <div class="row">
     <div class="span8">
-      <div class="hero-unit center">      
-        <form class="form-horizontal" method="post" action="{% url consulting_add_illness_patient conclusion.id %}">{% csrf_token %}      
-          <fieldset>
-            {% if form.illnesses.errors %}
+      <div class="hero-unit center">
+        <form class="form-horizontal" method="post" action="{% url consulting_select_other_survey id_appointment %}">{% csrf_token %}
+            {% if form.survey.errors %}
               <div class="control-group error">
                 <label class="control-label">
-                  {{form.illnesses.label}}
+                  {{form.survey.label}}
                 </label>
                 <div class="controls">
-                  {{ form.illnesses }}
-                  {% for error in form.illnesses.errors %}
+                  {{ form.survey }}
+                  {% for error in form.survey.errors %}
                     <span class="help-inline">
                       {{ error|escape }}
                     </span>
@@ -30,21 +29,25 @@
             {% else %}
               <div class="control-group">
                 <label class="control-label">
-                  {{form.illnesses.label}}
+                  {{form.survey.label}}
                 </label>
                 <div class="controls">
-                  {{ form.illnesses }}                     
+                  {{ form.survey }}
                 </div>
-              </div>                
+              </div>
             {% endif %}
-            <div class="controls">
+            <div class="controls span1">
               <button type="submit" class="btn btn-primary btn-large">
                 {% trans 'Guardar' %}
               </button>
             </div>
-          </fieldset>
         </form>
-      </div>
+        <div class="pull-right">
+          <button id="variables" class="btn btn-info btn-large">
+            {% trans 'Variables' %}
+          </button>         
+        </div>
+      </div>      
       <div class="pull-right">
         <button id="carryon" class="btn btn-info btn-large">
           {% trans 'Continuar' %}
@@ -59,11 +62,12 @@
 </div>
 {% endblock body %}
 
-{% block jquery_init %}
-  $('ul').addClass("without_decorator");
 
-  $('#carryon').on("click", function(){
-    var self_administered = 0;
-    window.location.href = '/consultation/check_iasurvey/' + {{conclusion.appointment.id}}; 
+{% block jquery_init %}
+  $('#variables').on("click", function(){  
+      window.location.href = '/consultation/select_other_variables/' + {{id_appointment}};  
+  });
+  $('#carryon').on("click", function(){  
+      window.location.href = '/consultation/new_app/select_year_month/' + {{patient_user.id}};  
   });
 {% endblock %}
