@@ -17,6 +17,11 @@ ul#id_kind_component{
 .without_decorator{
   list-style:none;
 }
+.exit{
+  color:black;
+  margin-left:10px;
+  margin-bottom:10px;
+}
 /* Space out sub-sections more
 -------------------------------------------------- */
 section {

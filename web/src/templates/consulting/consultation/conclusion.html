@@ -6,15 +6,11 @@
 <div class="container">
 <section>
   <div class="page-header">
-    <h1>{% trans 'Conclusion' %}</h1>
+    <h1>{% trans 'Conclusión' %}</h1>
   </div>
   <div class="row">
-    <div class="span8">
-      {% if id_result %}
-        <form class="form-horizontal" id="form" action="{% url consulting_conclusion id_appointment id_result %}" method="post" accept-charset="utf-8">{% csrf_token %}
-      {% else %}
-        <form class="form-horizontal" id="form" action="{% url consulting_conclusion id_appointment %}" method="post" accept-charset="utf-8">{% csrf_token %}
-      {% endif %}
+    <div class="span8">      
+      <form class="form-horizontal" id="form" action={% if id_result %}"{% url consulting_conclusion id_appointment id_result %}"{% else %}"{% url consulting_conclusion id_appointment %}"{% endif %} method="post" accept-charset="utf-8">{% csrf_token %}
           {{form.component}}
           <div class="control-group">
             <label class="control-label">

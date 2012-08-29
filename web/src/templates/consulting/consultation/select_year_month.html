@@ -7,31 +7,26 @@
 <div class="container">
     <div class="row left">
         <div class="span12">
-
             <legend class="span10">{% trans 'Calendario' %}</legend>
-
             <div class="span2">
-                <a href="{% url consulting_select_year_month patient.id year|add:'-3' %}">&lt;&lt; Prev</a>
+                <a href={% if id_result %}"{% url consulting_select_year_month patient.id  year|add:'-3' id_result %}"{% else %}"{% url consulting_select_year_month patient.id  year|add:'-3' %}"{% endif %}>&lt;&lt; Prev</a>                
             </div>
-
             {% for year, months in years %}
                 <div class="span2 well center">
                     <h2 class="label label-info">{{ year }}</h2>
                     <ul class="unstyled">
-                        {% for month in months %}
-                            {% if month.entry %}<b>{% endif %}
-                            <li>
-                                <a class={% if month.current %}"label label-info"{% else %}""{% endif %}
-                                href="{% url consulting_day_new_app year month.n today patient.id %}">{{ month.name }}</a>
-                            </li>
-                        {% endfor %}
-
+                    {% for month in months %}
+                        {% if month.entry %}<b>{% endif %}
+                        <li>                                
+                            <a class={% if month.current %}"label label-info"{% else %}""{% endif %}
+                            href={% if id_result %}"{% url consulting_day_new_app year month.n today patient.id id_result %}"{% else %}"{% url consulting_day_new_app year month.n today patient.id %}"{% endif %}>{{ month.name }}</a>
+                        </li>
+                    {% endfor %}
                     </ul>
                 </div>
             {% endfor %}
-
-            <div class="span2">
-                <a href="{% url consulting_select_year_month patient.id year|add:'3' %}">Next &gt;&gt;</a>
+            <div class="span2">                
+                <a href={% if id_result %}"{% url consulting_select_year_month patient.id year|add:'3' id_result %}"{% else %}"{% url consulting_select_year_month patient.id year|add:'3' %}"{% endif %}>Next &gt;&gt;</a>
             </div>
         </div>
     </div>

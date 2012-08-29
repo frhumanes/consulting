@@ -1,8 +1,6 @@
 {% load i18n%}
 <section>
-  <div class="page-header">
-    <h1>{% trans 'Receta Fármaco' %}</h1>
-  </div>
+  <h3>{% trans '¿Toma algún medicamento?' %}</h3>  
   <div class="row">
     <div class="span6">
       <form class="form-horizontal" id="form" action="{% url consulting_new_medicine_survey id_result %}" method="post" accept-charset="utf-8">{% csrf_token %}
@@ -73,10 +71,6 @@
           {% trans 'Continuar' %}
         </button>         
       </div>
-    </div>
-    <!-- PATIENT CARD -->
-    <div class="span4">
-        {% include "consulting/patient/card.html" %}
     </div>
   </div>
 </section>

@@ -16,8 +16,8 @@
       <div class="row">
         <div class="span5">
           <div class="btn-toolbar" style="margin-bottom: 9px">
-              <div class="btn-group">
-                <a class="btn btn-primary btn" href="{% url consulting_app_add year month day patient.id %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva cita" %}</a>
+              <div class="btn-group">                
+                <a class="btn btn-primary btn" href={% if id_result %}"{% url consulting_app_add year month day patient.id id_result %}"{% else %}"{% url consulting_app_add year month day patient.id %}"{% endif %}><i class="icon-pencil icon-white"></i> {% trans "Nueva cita" %}</a>
               </div>
           </div>
         </div>

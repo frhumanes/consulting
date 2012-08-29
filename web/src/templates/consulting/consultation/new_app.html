@@ -24,7 +24,7 @@
       {% include "consulting/consultation/calendar_new_app.html" %}
     </div>
     <div class="span9">
-      <a class="btn btn-primary" href="{% url consulting_day_new_app year month day patient.id %}">
+      <a class="btn btn-primary" href={%if id_result %}"{% url consulting_day_new_app year month day patient.id id_result %}"{% else %}"{% url consulting_day_new_app year month day patient.id %}"{% endif %}>
         <i class="icon-arrow-left icon-white"></i>
         {% trans 'Volver' %}
       </a>
@@ -36,7 +36,7 @@
         <p>Paciente {{ patient.get_profile.name }} {{ patient.get_profile.first_surname }}</p>
       </div>
       <div>
-        <form class="form-horizontal well" method="post" action="{% url consulting_app_add year month day patient.id %}">{% csrf_token %}
+        <form class="form-horizontal well" method="post" action={% if id_result %}"{% url consulting_app_add year month day patient.id id_result %}"{% else %}"{% url consulting_app_add year month day patient.id %}"{% endif %}>{% csrf_token %}
           <legend>{% trans 'New Appointment' %} {{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
           <fieldset>
             {% if not_available_error %}

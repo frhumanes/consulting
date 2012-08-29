@@ -10,9 +10,9 @@ from django.shortcuts import get_object_or_404
 
 from consulting.validators import validate_choice
 
-from consulting.models import Medicine, Conclusion, Task
+from consulting.models import Medicine, Conclusion
 from medicament.models import Component
-from survey.models import Survey, Question
+from survey.models import Question
 
 
 # class RecipientChoiceField(forms.ModelChoiceField):
@@ -147,34 +147,39 @@ class ActionSelectionForm(forms.Form):
                         attrs={'class': 'input-medium search-query span4'}))
 
 
-class SelectTaskForm(forms.ModelForm):
-    survey = forms.ModelChoiceField(label=_(u"Encuesta"),
-                        queryset=Survey.objects.filter(
-                        code__in=[settings.ANXIETY_DEPRESSION_EXTENSIVE,
-                        settings.ANXIETY_DEPRESSION_SHORT]),
-                        widget=forms.Select(
-                        attrs={'class': 'input-medium search-query span4'}))
-    from_date = forms.DateField(
-            label=_(u'Fecha a partir de la cual puede realizar la encuesta'),
-            input_formats=(settings.DATE_FORMAT,),
-            widget=forms.DateInput(format=settings.DATE_FORMAT,
-                                    attrs={'class': 'span3', 'size': '16'}))
-    to_date = forms.DateField(
-            label=_(u'Fecha hasta la cual puede realizar la encuesta'),
-            input_formats=(settings.DATE_FORMAT,),
-            widget=forms.DateInput(format=settings.DATE_FORMAT,
-                                    attrs={'class': 'span3', 'size': '16'}))
+class SelectTaskForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        if 'variables' in kwargs:
+            variables = kwargs.pop('variables')
+            super(SelectTaskForm, self).__init__(*args, **kwargs)
 
-    class Meta:
-        model = Task
-        exclude = ('created_at', 'updated_at', 'patient', 'treated_blocks',
-                    'appointment', 'self_administered', 'start_date',
-                    'end_date', 'value', 'completed')
+            self.fields['variables'] = forms.MultipleChoiceField(
+                    label=_(u'Variables'),
+                    widget=forms.CheckboxSelectMultiple(),
+                    choices=variables,
+                    required=False)
+
+            NEXT_SURVEY = (
+                ('', _(u'--------')),
+                (settings.ANXIETY_DEPRESSION_EXTENSIVE,
+                    _(u'Valoración de la depresión y la ansiedad - Extenso')),
+                (settings.ANXIETY_DEPRESSION_SHORT,
+                _(u'Valoración de la depresión y la ansiedad - Abreviado')),
+                (settings.VARIABLES, _(u'Variables más puntuadas')),
+            )
+            if not variables:
+                print '----No hay variables----'
+                NEXT_SURVEY = NEXT_SURVEY[:3]
+            self.fields['survey'].choices = NEXT_SURVEY
+        else:
+            super(SelectTaskForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         cleaned_data = self.cleaned_data
         from_date = cleaned_data.get("from_date")
         to_date = cleaned_data.get("to_date")
+        survey = cleaned_data.get("survey")
+        variables = cleaned_data.get("variables")
 
         if from_date is None:
             msg = _(u"Este campo es obligatorio")
@@ -186,80 +191,71 @@ class SelectTaskForm(forms.ModelForm):
 
         if from_date and to_date:
             if to_date < from_date:
-                msg = _("La fecha hasta debe ser mayor que la fecha desde.")
+                msg = _(u"Fecha fin mayor que fecha inicio.")
                 self._errors['to_date'] = self.error_class([msg])
 
+        if survey == str(settings.VARIABLES) and not variables:
+            msg = _(u"Este campo es obligatorio")
+            self._errors['variables'] = self.error_class([msg])
+
         return cleaned_data
+
+    from_date = forms.DateField(
+            label=_(u'Fecha inicio'),
+            input_formats=(settings.DATE_FORMAT,),
+            widget=forms.DateInput(format=settings.DATE_FORMAT,
+                                    attrs={'class': 'span2', 'size': '16'}))
+    to_date = forms.DateField(
+            label=_(u'Fecha fin'),
+            input_formats=(settings.DATE_FORMAT,),
+            widget=forms.DateInput(format=settings.DATE_FORMAT,
+                                    attrs={'class': 'span2', 'size': '16'}))
+    survey = forms.ChoiceField(label=_(u'Encuesta'),
+            widget=forms.Select(
+                        attrs={'class': 'input-medium search-query span4'}))
 
 
 class SelectOtherTaskForm(forms.Form):
-    survey = forms.ModelChoiceField(label=_(u"Encuesta"),
-                        queryset=Survey.objects.filter(
-                        code__in=[settings.ANXIETY_DEPRESSION_EXTENSIVE,
-                        settings.ANXIETY_DEPRESSION_SHORT]),
-                        widget=forms.Select(
-                        attrs={'class': 'input-medium search-query span4'}))
-
-
-class SelectVariablesForm(forms.Form):
     def __init__(self, *args, **kwargs):
         if 'variables' in kwargs:
             variables = kwargs.pop('variables')
-            super(SelectVariablesForm, self).__init__(*args, **kwargs)
+            super(SelectOtherTaskForm, self).__init__(*args, **kwargs)
 
             self.fields['variables'] = forms.MultipleChoiceField(
                     label=_(u'Variables'),
                     widget=forms.CheckboxSelectMultiple(),
                     choices=variables,
-                    required=True)
+                    required=False)
+
+            NEXT_SURVEY = (
+                ('', _(u'--------')),
+                (settings.ANXIETY_DEPRESSION_EXTENSIVE,
+                    _(u'Valoración de la depresión y la ansiedad - Extenso')),
+                (settings.ANXIETY_DEPRESSION_SHORT,
+                _(u'Valoración de la depresión y la ansiedad - Abreviado')),
+                (settings.VARIABLES, _(u'Variables más puntuadas')),
+            )
+            if not variables:
+                NEXT_SURVEY = NEXT_SURVEY[:3]
+            self.fields['survey'].choices = NEXT_SURVEY
         else:
-            super(SelectVariablesForm, self).__init__(*args, **kwargs)
+            super(SelectOtherTaskForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         cleaned_data = self.cleaned_data
-        from_date = cleaned_data.get("from_date")
-        to_date = cleaned_data.get("to_date")
+        survey = cleaned_data.get("survey")
+        variables = cleaned_data.get("variables")
 
-        if from_date is None:
+        if survey == str(settings.VARIABLES) and not variables:
             msg = _(u"Este campo es obligatorio")
-            self._errors["from_date"] = self.error_class([msg])
-
-        if to_date is None:
-            msg = _(u"Este campo es obligatorio")
-            self._errors["to_date"] = self.error_class([msg])
-
-        if from_date and to_date:
-            if to_date < from_date:
-                msg = _("La fecha hasta debe ser mayor que la fecha desde.")
-                self._errors['to_date'] = self.error_class([msg])
+            self._errors['variables'] = self.error_class([msg])
 
         return cleaned_data
 
-    from_date = forms.DateField(
-            label=_(u'Fecha a partir de la cual puede realizar la encuesta'),
-            input_formats=(settings.DATE_FORMAT,),
-            widget=forms.DateInput(format=settings.DATE_FORMAT,
-                                    attrs={'class': 'span2', 'size': '16'}))
-    to_date = forms.DateField(
-            label=_(u'Fecha hasta la cual puede realizar la encuesta'),
-            input_formats=(settings.DATE_FORMAT,),
-            widget=forms.DateInput(format=settings.DATE_FORMAT,
-                                    attrs={'class': 'span2', 'size': '16'}))
+    survey = forms.ChoiceField(label=_(u'Encuesta'),
+            widget=forms.Select(
+                        attrs={'class': 'input-medium search-query span4'}))
 
-
-class SelectOtherVariablesForm(forms.Form):
-    def __init__(self, *args, **kwargs):
-        if 'variables' in kwargs:
-            variables = kwargs.pop('variables')
-            super(SelectOtherVariablesForm, self).__init__(*args, **kwargs)
-
-            self.fields['variables'] = forms.MultipleChoiceField(
-                    label=_(u'Variables'),
-                    widget=forms.CheckboxSelectMultiple(),
-                    choices=variables,
-                    required=True)
-        else:
-            super(SelectOtherVariablesForm, self).__init__(*args, **kwargs)
 
 
 class SymptomsWorseningForm(forms.Form):

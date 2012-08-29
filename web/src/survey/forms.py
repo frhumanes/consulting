@@ -11,14 +11,16 @@ class SelectBlockForm(forms.Form):
     BLOCK = (
         ('', '-----------'),
         (settings.ANXIETY_DEPRESSION_EXTENSIVE,
-        _(u'Valoración de la depresión y la ansiedad: Extenso')),
+        _(u'Extenso')),
         (settings.ANXIETY_DEPRESSION_SHORT,
-        _(u'Valoración de la depresión y la ansiedad: Abreviado'))
+        _(u'Abreviado'))
     )
 
-    block = forms.ChoiceField(label=_(u'Siguiente bloque:'), choices=BLOCK,
+    block = forms.ChoiceField(
+                    label=_(u'Valoración de la depresión y la ansiedad:'),
+                    choices=BLOCK,
                     widget=forms.Select(
-                        attrs={'class': 'input-medium search-query span4'}))
+                        attrs={'class': 'input-medium search-query span2'}))
 
 
 class QuestionsForm(forms.Form):

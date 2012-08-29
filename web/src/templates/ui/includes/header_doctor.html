@@ -57,9 +57,11 @@
                     {{ user.last_name}}
                 </li>
                 <li class="navbar-text">
-                    <a href='{% url registration_logout %}'>
+                    <div>
+                    <a  class="exit btn"href='{% url registration_logout %}'>
                         {% trans 'Salir' %}
                     </a>
+                    </div>
                 <li>
             </ul>
         </div>

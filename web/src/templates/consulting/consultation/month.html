@@ -3,39 +3,45 @@
 {% load i18n %}
 
 
-{% block left_panel %}
-  {% include "cal/includes/calendar.html" %}
-{% endblock %}
+{% block body %}
 
-{% block right_panel %}
-    {% if events.object_list.count > 0 %}
-        <div id="message-paginator" class="pull-right">
-          <ul class="pagination ">
-            {% if events.has_previous %}
-              <li><a href="?page={{ events.previous_page_number }}">←</a></li>
-            {% else %}
-              <li class="disabled"><a>←</a></li>
-            {% endif %}
+  <div class="container">
+    <div class="row">
+      <div class="span3">
+        {% include "consulting/consultation/calendar.html" %}
+      </div>
+      <div class="span9">
+        {% if events.object_list.count > 0 %}
+            <div id="message-paginator" class="pull-right">
+              <ul class="pagination ">
+                {% if events.has_previous %}
+                  <li><a href="?page={{ events.previous_page_number }}">←</a></li>
+                {% else %}
+                  <li class="disabled"><a>←</a></li>
+                {% endif %}
 
-            {% if events.has_next %}
-              <li><a href="?page={{ events.next_page_number }}">→</a></li>
-            {% else %}
-              <li class="disabled"><a>→</a></li>
-            {% endif %}
-          </ul>
-        </div>
+                {% if events.has_next %}
+                  <li><a href="?page={{ events.next_page_number }}">→</a></li>
+                {% else %}
+                  <li class="disabled"><a>→</a></li>
+                {% endif %}
+              </ul>
+            </div>
 
-        <table id="message_list" class="table table-striped">
-          <thead></thead>
-          <tbody>
-            {% for event in events.object_list %}
-              {% include "cal/app/appointment.html" %}
-            {% endfor %}
-          </tbody>
-        </table>
+            <table id="message_list" class="table table-striped">
+              <thead></thead>
+              <tbody>
+                {% for event in events.object_list %}
+                  {% include "cal/app/appointment.html" %}
+                {% endfor %}
+              </tbody>
+            </table>
 
-        <div id="preview"></div>
-    {% else %}
-        <h6>{% trans "There are no appointments" %}</h6>
-    {% endif %}
-{% endblock %}
+            <div id="preview"></div>
+        {% else %}
+            <h6>{% trans "There are no appointments" %}</h6>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock body %}

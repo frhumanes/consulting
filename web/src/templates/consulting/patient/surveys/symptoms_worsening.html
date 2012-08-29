@@ -1,0 +1,48 @@
+{% extends "ui/app.html" %}
+
+{% load i18n%}
+
+{% block body %}
+<div class="container">
+<section>
+  <div class="page-header">
+    <h1>{% trans 'Síntomas o Empeoramientos' %}</h1>
+  </div>
+  <div class="row">
+    <div class="span12">
+      <form class="form-horizontal" id="form" action="{% url consulting_symptoms_worsening id_result %}" method="post" accept-charset="utf-8">{% csrf_token %}
+        {% if form.symptoms_worsening.errors %}
+          <div class="control-group error">
+            <label>
+              {{form.symptoms_worsening.label}}
+            </label>
+            <div>
+              {{ form.symptoms_worsening }}
+              {% for error in form.symptoms_worsening.errors %}
+                <span class="help-inline">
+                  {{ error|escape }}
+                </span>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <div class="control-group">
+            <label>
+              {{form.symptoms_worsening.label}}
+            </label>
+            <div>
+              {{ form.symptoms_worsening }}               
+            </div>
+          </div>
+        {% endif %}
+        <div class="controls">
+          <button type="submit" class="btn btn-primary btn-large">
+            {% trans 'Guardar' %}
+          </button>
+        </div>
+      </form>          
+    </div>    
+  </div>
+</section>
+ </div>
+ {% endblock body %}

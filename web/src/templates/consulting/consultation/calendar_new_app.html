@@ -22,7 +22,7 @@
                 <td class= "center" onMouseOver="this.bgColor='#eeeeee';" onMouseOut="this.bgColor='transparent';">
 
                     {% if day != 0 %}
-                        <a href="{% url consulting_day_new_app year month day patient.id %}">
+                        <a href={% if id_result %}"{% url consulting_day_new_app year month day patient.id id_result %}"{% else %}"{% url consulting_day_new_app year month day patient.id %}"{% endif %}>
                             <span class="
                                 {% if current %}
                                     label label-info
@@ -39,7 +39,7 @@
                             </span>
                         </a>
                     {% else %}
-                        <a href="{% url consulting_day_new_app year month day patient.id %}">
+                        <a href={% if id_result %}"{% url consulting_day_new_app year month day patient.id id_result %}"{% else %}"{% url consulting_day_new_app year month day patient.id %}"{% endif %}>
                             <span class="
                                 {% if current %}
                                     label label-info
@@ -66,13 +66,13 @@
     <tfoot>
         <tr>
             <th colspan='3'>
-                <a href= "{% url consulting_month_new_app year month "prev" patient.id %}">
+                <a href= {% if id_result %}"{% url consulting_month_new_app year month "prev" patient.id id_result %}"{% else %}"{% url consulting_month_new_app year month "prev" patient.id %}"{% endif %}>
                     &lt;&lt; Anterior
                 </a>
             </th>
             <th></th>
             <th colspan='3'>
-                <a href= "{% url consulting_month_new_app year month "next" patient.id %}" class="pull-right">
+                <a href= {% if id_result %}"{% url consulting_month_new_app year month "next" patient.id id_result %}"{% else %}"{% url consulting_month_new_app year month "next" patient.id %}"{% endif %} class="pull-right">
                     Posterior &gt;&gt;
                 </a>
             </th>

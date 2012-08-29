@@ -1,16 +1,18 @@
 {% load i18n%}
 {% load consulting %}
 
+{% url consulting_new_medicine_survey id_result as new_medicine %}
+{% url consulting_list_medicines_before_survey id_result as list_medicines_before %}
 
 <ul class="nav nav-pills nav-stacked" style="padding-top: 30px;">
-    <li>
-        <a href="{% url consulting_list_medicines_before_survey id_result %}">
-            {% trans "Fármacos Antes de la Primera Cita" %}
-        </a>
-    </li>
-    <li>
+    <li class="{% active_greatgranchild request new_medicine %}">
         <a href="{% url consulting_new_medicine_survey id_result %}" >
-            {% trans "Recetar" %}
+            {% trans "Recetar fármacos previos" %}
         </a>
     </li>
+    <li class="{% active_greatgranchild request list_medicines_before %}">
+        <a href="{% url consulting_list_medicines_before_survey id_result %}">
+            {% trans "Listado de fármacos previos" %}
+        </a>
+    </li>    
 </ul>
