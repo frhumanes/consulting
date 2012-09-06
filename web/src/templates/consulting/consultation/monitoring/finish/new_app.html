@@ -1,0 +1,165 @@
+{% extends "ui/app.html" %}
+
+{% load i18n messages %}
+
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/bootstrap-timepicker.js"></script>
+  <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
+  <script src="{{ STATIC_URL }}js/json2.js"></script>
+{% endblock %}
+
+{% block css_files %}
+  {{ block.super }}
+  <link href="{{ STATIC_URL }}css/timepicker.css" rel="stylesheet"/>
+  <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}{% trans 'Lista de Citas' %}{% endblock %}
+
+{% block body %}
+<div class="container">
+  {% block nav-bar%}
+    {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
+  {% endblock  %}
+  <div class="row">
+    <div class="span3">
+      {% include "consulting/consultation/monitoring/finish/calendar.html" %}
+    </div>
+    <div class="span9">
+      <a class="btn btn-primary" href="{% url consulting_day_monitoring year month day patient.id appointment.id %}">
+        <i class="icon-arrow-left icon-white"></i>
+        {% trans 'Volver' %}
+      </a>
+      <p></p>
+      <div class="well">
+        <p>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</p>
+      </div>
+      <div class="well">
+        <p>Paciente {{ patient.get_profile.name }} {{ patient.get_profile.first_surname }}</p>
+      </div>
+      <div>
+        <form class="form-horizontal well" method="post" action="{% url consulting_app_add_monitoring year month day patient.id appointment.id %}">{% csrf_token %}
+          <legend>{% trans 'New Appointment' %} {{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
+          <fieldset>
+            {% if not_available_error %}
+              <div class="alert alert-error">
+                  <strong>{% trans '¡Error!' %}</strong>
+                  {{ error_msg|escape }}
+              </div>
+            {% endif %}
+
+            {% if  form.non_field_errors  %}
+              <div class="alert alert-error">
+                  {% for error in form.non_field_errors %}
+                      <strong>{% trans '¡Error!' %}</strong>
+                      {{ error|escape }}
+                  {% endfor %}
+              </div>
+            {% endif %}
+
+            <!-- EVENT_TYPE -->
+            {% if form.app_type.errors %}
+              <div class="control-group error">
+                <label for="id_event_type" class="control-label">{{form.app_type.label}}</label>
+                <div class="controls">
+                  {{ form.app_type }}
+                  {% for error in form.app_type.errors %}
+                     <span class="help-inline">{{ error|escape }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+            {% else %}
+              <div class="control-group">
+                <label for="id_event_type" class="control-label">{{form.app_type.label}}</label>
+                <div class="controls">
+                  {{ form.app_type }}
+                </div>
+              </div>
+            {% endif %}
+            <!-- END EVENT_TYPE -->
+
+            <!-- START_TIME -->
+            {% if form.start_time.errors %}
+              <div class="control-group error">
+                <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
+                <div class="controls">
+                  {{ form.start_time }}
+                  <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+                  {% for error in form.start_time.errors %}
+                     <span class="help-inline">{{ error|escape }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+            {% else %}
+              <div class="control-group">
+                <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
+                <div class="controls">
+                    {{ form.start_time }}
+                    <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+                </div>
+              </div>
+            {% endif %}
+            <!-- END START_TIME -->
+
+            <!-- END_TIME -->
+            {% if form.end_time.errors %}
+              <div class="control-group error">
+                <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
+                <div class="controls">
+                  {{ form.end_time }}
+                  <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+                  {% for error in form.end_time.errors %}
+                     <span class="help-inline">{{ error|escape }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+            {% else %}
+              <div class="control-group">
+                <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
+                <div class="controls">
+                  {{ form.end_time }}
+                  <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+                </div>
+              </div>
+            {% endif %}
+            <!-- END END_TIME -->
+
+            <!-- DESCRIPTION -->
+            {% if form.description.errors %}
+              <div class="control-group error">
+                <label for="id_description" class="control-label">{{form.description.label}}</label>
+                <div class="controls">
+                  {{ form.description }}
+                  {% for error in form.description.errors %}
+                     <span class="help-inline">{{ error|escape }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+            {% else %}
+              <div class="control-group">
+                <label for="id_description" class="control-label">{{form.description.label}}</label>
+                <div class="controls">
+                  {{ form.description }}
+                </div>
+              </div>
+            {% endif %}
+            <!-- END DESCRIPTION -->
+            <p class="center">
+              <button class="btn btn-large btn-primary" type="submit">
+                <i class="icon-play icon-white"></i>
+                {% trans 'Guardar' %}</button>
+            </p>
+          </fieldset>
+        </form>
+        {% include "cal/app/free_slots.html" %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}
+{% block jquery_init %}
+  $('#id_date').datepicker({'format':'dd/mm/yyyy'});
+  $('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.start_time.value|time:"H:i" }}' });
+  $('#id_end_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.end_time.value|time:"H:i" }}'});
+{% endblock %}

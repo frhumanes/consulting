@@ -1,0 +1,100 @@
+{% extends "ui/app.html" %}
+
+{% load i18n%}
+
+{% block body %}
+  <div class="container">    
+    {% block nav-bar%}
+        {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
+    {% endblock  %}
+    <div class="row">
+      <div class="span12">
+        <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
+        <section>
+          <div class="page-header">
+              <h1>{% trans 'Encuesta autoadministrada' %}</h1>
+          </div>
+          <div class="row">       
+            <div class="span8">            
+              {% if task %}
+                <p class="alert alert-info">
+                  {% trans 'Fecha de cumplimentación: ' %}{{task.end_date}}
+                </p>
+                <table class="table table-bordered table-condensed">  
+                  <thead>
+                    <tr>
+                      <th style="text-align:center;">
+                        {% trans 'Variable' %}
+                      </th>           
+                      <th style="text-align:center;">
+                        {% trans 'Puntuación' %}
+                      </th>                                   
+                    </tr>
+                  </thead>        
+                  <tbody>                  
+                    {% for variable in variables %}
+                    <tr>
+                      {% for var in variable %}
+                      <td style="text-align:center;">{{var}}</td>
+                      {% endfor %}
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% if symptoms_worsening %}
+                <table id="sw" class="table table-bordered table-condensed">  
+                  <thead>
+                    <tr>
+                      <th style="text-align:center;">
+                        {% trans 'Síntomas o empeoramiento' %}
+                      </th>           
+                      <th style="text-align:center;">
+                        {% trans 'Fecha' %}
+                      </th>                                   
+                    </tr>
+                  </thead>        
+                  <tbody>                  
+                    {% for sw in symptoms_worsening %}
+                    <tr>                      
+                      <td style="text-align:center;">{{sw|first}}</td>
+                      <td style="text-align:center;">{{sw|last}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% if more_variables %}
+                <p id="more_variables" class="alert alert-error">
+                  {% trans '¿Desea valorar alguna variable no evaluada en la encuesta autoadministrada?' %}
+                </p>
+                {% endif %}
+                {% endif %}
+              {% else %}
+                <p>{{warning}}</p>
+              {% endif %}
+            </div>
+            <!-- PATIENT CARD -->
+            <div class="span4">
+                {% include "consulting/patient/card.html" %}
+            </div>            
+          </div>                          
+        </section>
+      </div>
+    </div>                    
+  </div>
+{% endblock body %}
+
+{% block jquery_init %}
+  <!-- ASSESS TASK -->
+  $('.assess_task').each(function(){
+    $(this).on("click", function(){ 
+                            var id = $(this).attr("id");
+                            $('#id_task').val(id);     
+                        });      
+  });
+
+  <!-- ¿ASSESS? -->
+  $("#more_variables").click(function(){
+    
+    window.location.href = '/consultation/monitoring/complete_self_administered_survey/select_not_assessed_variables/' +{{appointment.id}} + '/'+ {{id_result}};
+  });
+{% endblock %}

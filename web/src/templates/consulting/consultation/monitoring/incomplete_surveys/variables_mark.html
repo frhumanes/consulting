@@ -1,0 +1,60 @@
+{% extends "ui/app.html" %}
+
+{% load i18n%}
+
+{% block body %}
+  <div class="container">    
+    {% block nav-bar%}
+        {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
+    {% endblock  %}
+    <div class="row">
+      <div class="span12">        
+        <section>
+          <div class="page-header">
+              <h1>{% trans 'Puntuaciones obtenidas' %}</h1>
+          </div>
+          <div class="row">       
+            <div class="span8">
+              <table class="table table-bordered table-condensed">  
+                <thead>
+                  <tr>
+                    <th style="text-align:center;">
+                      {% trans 'Variable' %}
+                    </th>           
+                    <th style="text-align:center;">
+                      {% trans 'Puntuación' %}
+                    </th>                                   
+                  </tr>
+                </thead>        
+                <tbody>                  
+                  {% for variable in variables %}
+                  <tr>
+                    {% for var in variable %}
+                    <td style="text-align:center;">{{var}}</td>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <div class="pull-right">
+                <button id="goback" class="btn btn-info btn-large">
+                  {% trans 'Volver' %}
+                </button>         
+              </div>
+            </div>
+            <!-- PATIENT CARD -->
+            <div class="span4">
+                {% include "consulting/patient/card.html" %}
+            </div>            
+          </div>                              
+        </section>
+      </div>
+    </div>                    
+  </div>
+{% endblock body %}
+
+{% block jquery_init %}
+  $('#goback').on("click", function(){
+      window.location.href = '/consultation/monitoring/incomplete_surveys/list/' +{{appointment.id}};  
+  });
+{% endblock %}

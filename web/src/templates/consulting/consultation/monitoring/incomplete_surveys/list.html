@@ -1,0 +1,125 @@
+{% extends "ui/app.html" %}
+
+{% load i18n%}
+
+{% block body %}
+  <div class="container">
+    {% block nav-bar%}
+        {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
+    {% endblock  %}
+    <div class="row">
+      <div class="span12">
+        <section>
+          <div class="page-header">
+              <h1>{% trans 'Listado de encuestas sin completar' %}</h1>
+          </div>
+          <div class="row">       
+            <div class="span8">            
+              {% if tasks.object_list %}
+              <div id="medicine-paginator" class="pull-right">
+                <ul class="pagination">
+                  {% if tasks.has_previous %}
+                    <li><a href="?page={{ tasks.previous_page_number }}">←</a></li>
+                  {% else %}
+                    <li class="disabled"><a>←</a></li>
+                  {% endif %}
+
+                  {% if tasks.has_next %}
+                    <li><a href="?page={{ tasks.next_page_number }}">→</a></li>
+                  {% else %}
+                    <li class="disabled"><a>→</a></li>
+                  {% endif %}
+                </ul>
+              </div>                         
+              <table id="list_tasks" class="table table-bordered table-condensed">  
+                <thead>
+                  <tr>            
+                    <th style="text-align:center;">
+                      {% trans 'Fecha cita' %}
+                    </th>
+                    <th style="text-align:center;">
+                      {% trans 'Encuesta' %}
+                    </th>
+                    <th style="text-align:center;">
+                      {% trans 'Tipo' %}
+                    </th>
+                    <th style="text-align:center;">
+                      {% trans 'Autoadministrado' %}
+                    </th>
+                    <th style="text-align:center;">
+                      {% trans 'Fecha inicio' %}
+                    </th>
+                    <th style="text-align:center;">
+                      {% trans 'Fecha fin' %}
+                    </th>
+                    <th></th>                
+                    <th></th>
+                  </tr>
+                </thead>        
+                <tbody>                  
+                  {% for task in tasks.object_list %}
+                    <tr id="{{task.id}}" class="medicine">
+                      <td style="text-align:center;">{{task.appointment.date}}</td>
+                      <td style="text-align:center;">{{task.survey.name}}</td>
+                      <td style="text-align:center;">{{task.survey.get_kind}}</td>
+                      <td style="text-align:center;">{{task.get_self_administered}}</td>
+                      <td style="text-align:center;">{{task.survey.from_date}}</td>
+                      <td style="text-align:center;">{{task.survey.to_date}}</td>                      
+                      <td>                      
+                        <a id="edit" class="icon-edit edit_task" data-toggle="modal" href="#"></a>
+                      </td>
+                      <td>                      
+                        <a id="assess" class="icon-off assess_task" data-toggle="modal" href="#check_assess_task"></a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <div id="overwrite"></div>                                       
+              {% else %}
+                  <h6>{% trans "No hay encuestas sin completar" %}</h6>                  
+              {% endif %}
+            </div>            
+            <!-- PATIENT CARD -->
+            <div class="span4">
+                {% include "consulting/patient/card.html" %}
+            </div>
+          </div>
+          <div id="check_assess_task" class="modal hide fade" style="display: block;">
+            <input id="id_task" type="hidden">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">
+                  ×
+                </button>
+                <h3>Valoración</h3>
+            </div>
+            <div class="modal-body">
+                <p>
+                  {% trans '¿Está seguro que no desea seguir realizando más valoraciones de esta encuesta?' %}
+                </p>
+            </div>
+            <div class="modal-footer">
+              <a id="yes" data-dismiss="modal" href="#" class="btn">Sí</a>
+              <a data-dismiss="modal" href="#" class="btn btn-primary">No</a>
+            </div>    
+          </div>                    
+        </section>
+      </div>
+    </div>                    
+  </div>
+{% endblock body %}
+
+{% block jquery_init %} 
+
+  $('#edit').live('click', function(event){
+    var id_task = $('table tbody tr').attr('id');
+    
+      window.location.href = '/consultation/monitoring/incomplete_surveys/survey/' + id_task + '/{{appointment.id}}';
+    
+  });
+
+  $("#yes").click(function(){
+    var id_task = $('table tbody tr').attr('id');
+    window.location.href = '/consultation/monitoring/incomplete_surveys/not_assess_task/' + id_task + '/{{appointment.id}}';
+  });
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "ui/app.html" %}
+
+{% load i18n%}
+
+{% block body %}
+
+<div class="container">
+    {% block nav-bar%}
+        {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
+    {% endblock  %}
+    <div class="row left">
+        <div class="span12">
+            <legend class="span10">{% trans 'Calendario' %}</legend>
+            <div class="span2">
+                <a href="{% url consulting_select_year_month_monitoring year|add:'-3' patient.id  appointment.id %}">&lt;&lt; Prev</a>                
+            </div>
+            {% for year, months in years %}
+                <div class="span2 well center">
+                    <h2 class="label label-info">{{ year }}</h2>
+                    <ul class="unstyled">
+                    {% for month in months %}
+                        {% if month.entry %}<b>{% endif %}
+                        <li>                                
+                            <a class={% if month.current %}"label label-info"{% else %}""{% endif %}
+                            href="{% url consulting_day_monitoring year month.n today patient.id appointment.id %}">{{ month.name }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+            <div class="span2">                
+                <a href="{% url consulting_select_year_month_monitoring year|add:'3' patient.id appointment.id %}">Next &gt;&gt;</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

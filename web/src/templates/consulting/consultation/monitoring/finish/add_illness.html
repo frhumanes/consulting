@@ -1,0 +1,71 @@
+{% extends "cal/includes/base.html" %}
+
+{% load i18n %}
+
+{% block body %}
+<div class="container">
+  {% block nav-bar%}
+    {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
+  {% endblock  %}
+  <section>
+  <div class="page-header">
+    <h1>{% trans 'Asignar enfermedad/es' %}</h1>
+  </div>
+  <div class="row">
+    <div class="span8">
+      <div class="hero-unit center">      
+        <form class="form-horizontal" method="post" action="{% url consulting_add_illness_monitoring conclusion.id %}">{% csrf_token %}      
+          <fieldset>
+            {% if form.illnesses.errors %}
+              <div class="control-group error">
+                <label class="control-label">
+                  {{form.illnesses.label}}
+                </label>
+                <div class="controls">
+                  {{ form.illnesses }}
+                  {% for error in form.illnesses.errors %}
+                    <span class="help-inline">
+                      {{ error|escape }}
+                    </span>
+                  {% endfor %}
+                </div>
+              </div>
+            {% else %}
+              <div class="control-group">
+                <label class="control-label">
+                  {{form.illnesses.label}}
+                </label>
+                <div class="controls">
+                  {{ form.illnesses }}                     
+                </div>
+              </div>                
+            {% endif %}
+            <div class="controls">
+              <button type="submit" class="btn btn-primary btn-large">
+                {% trans 'Guardar' %}
+              </button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="pull-right">
+        <button id="carryon" class="btn btn-info btn-large">
+          {% trans 'Continuar' %}
+        </button>         
+      </div>
+    </div>
+    <!-- PATIENT CARD -->
+    <div class="span4">
+        {% include "consulting/patient/card.html" %}
+    </div>
+  </div>
+</div>
+{% endblock body %}
+
+{% block jquery_init %}
+  $('ul').addClass("without_decorator");
+
+  $('#carryon').on("click", function(){
+    window.location.href = '/consultation/monitoring/finish/select_year_month/' + '{{year}}' + '/' + '{{patient_user.id}}' + '/' + '{{appointment.id}}';
+  });
+{% endblock %}
