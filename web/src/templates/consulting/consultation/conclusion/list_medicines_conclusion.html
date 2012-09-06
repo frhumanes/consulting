@@ -1,0 +1,134 @@
+{% extends "ui/app.html" %}
+
+{% load i18n%}
+
+{% block jquery_init %}
+  $('.medicine').each(function(){
+      $(this).on("click", function(){ 
+          var medicine_id = $(this).attr("id");
+
+          $(this).css("background", "#D9EDF7").siblings().removeAttr("style")
+
+          $('#overwrite').load(
+                '{% url consulting_detail_medicine_conclusion%}',
+                {'medicine_id': medicine_id,
+                'id_conclusion': {{id_conclusion}},
+                'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()});
+          });
+  });
+
+  <!-- REMOVE MEDICINE -->
+  $('.remove_medicine').each(function(){
+    $(this).on("click", function(){ 
+                            var id = $(this).attr("id");
+                            $('#medicine_id').val(id);     
+                        });      
+  });
+
+  $("#yes").click(function(){
+                    medicine_id = $('#medicine_id').val()
+                    $('#overwrite_list').load(
+                                  '{% url consulting_remove_medicine_conclusion %}',
+                                  {'medicine_id': medicine_id,
+                                  'id_conclusion': {{id_conclusion}},
+                                  'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()});
+  });
+
+  $('#carryon').on("click", function(){
+      window.location.href = '/consultation/add_illness/' +{{id_conclusion}};  
+  });
+{% endblock %}
+
+
+{% block body %}
+  <div class="container">
+    <div class="row">      
+      <div class="span2">
+          {% include "ui/includes/medicine_actions_conclusion.html" %}
+      </div>
+      <div class="span10">
+        <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
+        <section>
+          <div class="page-header">
+              <h1>{% trans 'Listado de Fármacos' %}</h1>                
+          </div>
+          <div class="row">       
+            <div id="overwrite_list" class="span6">            
+              {% if medicines.object_list %}
+              <div id="medicine-paginator" class="pull-right">
+                <ul class="pagination">
+                  {% if medicines.has_previous %}
+                    <li><a href="?page={{ medicines.previous_page_number }}">←</a></li>
+                  {% else %}
+                    <li class="disabled"><a>←</a></li>
+                  {% endif %}
+
+                  {% if medicines.has_next %}
+                    <li><a href="?page={{ medicines.next_page_number }}">→</a></li>
+                  {% else %}
+                    <li class="disabled"><a>→</a></li>
+                  {% endif %}
+                </ul>
+              </div>                         
+              <table id="list_medicine" class="table table-bordered table-condensed">  
+                <thead>
+                  <tr>            
+                    <th style="text-align:center;">
+                      {% trans 'FECHA' %}
+                    </th>
+                    <th style="text-align:center;">
+                      {% trans 'Fármaco' %}
+                    </th>
+                    <th></th>                
+                  </tr>
+                </thead>        
+                <tbody>                  
+                  {% for medicine in medicines.object_list %}
+                    <tr id="{{medicine.id}}" class="medicine">
+                      <td style="text-align:center;">{{medicine.date}}</td>
+                      <td style="text-align:center;">{{medicine.component}}</td>                      
+                      <td>                      
+                        <a id="{{medicine.id}}" class="icon-trash remove_medicine" data-toggle="modal" href="#check_remove_medicine"></a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <div id="overwrite"></div>                                       
+              {% else %}
+                  <h6>{% trans "No hay fármacos" %}</h6>                  
+              {% endif %}
+              <div class="pull-right">
+                <button id="carryon" class="btn btn-info btn-large">
+                  {% trans 'Continuar' %}
+                </button>         
+              </div>
+            </div>            
+            <!-- PATIENT CARD -->
+            <div class="span4">
+                {% include "consulting/patient/card.html" %}
+            </div>
+          </div>
+          <div id="check_remove_medicine" class="modal hide fade" style="display: block;">
+            <input id="medicine_id" type="hidden">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">
+                  ×
+                </button>
+                <h3>Borrar Fármaco</h3>
+            </div>
+            <div class="modal-body">
+                <p>
+                  {% trans '¿Está seguro que quiere borrar éste fármaco?' %}
+                </p>
+            </div>
+            <div class="modal-footer">
+              <a id="yes" data-dismiss="modal" href="#" class="btn">Sí</a>
+              <a data-dismiss="modal" href="#" class="btn btn-primary">No</a>
+            </div>    
+          </div>                    
+        </section>
+      </div>
+    </div>                    
+  </div>
+{% endblock body %}
