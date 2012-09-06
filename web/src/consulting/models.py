@@ -45,7 +45,7 @@ class Task(TraceableModel):
                     _(u'Fecha hasta la que puede realizar la encuesta'),
                     blank=True, null=True)
 
-    value = models.BooleanField(_(u'¿Seguir valorando la encuesta?'),
+    assess = models.BooleanField(_(u'¿Seguir valorando la encuesta?'),
                                 default=True)
 
     completed = models.BooleanField(
@@ -55,6 +55,24 @@ class Task(TraceableModel):
     def __unicode__(self):
         return u'id: %s task: %s %s %s' \
             % (self.id, self.patient, self.survey, self.creation_date)
+
+    def get_self_administered(self):
+        if self.self_administered:
+            return _(u'Sí')
+        else:
+            return _(u'No')
+
+    def if_from_date(self):
+        if self.from_date != None:
+            return self.from_date
+        else:
+            return ''
+
+    def if_to_date(self):
+        if self.to_date != None:
+            return self.to_date
+        else:
+            return ''
 
 
 class Medicine(TraceableModel):
@@ -117,6 +135,10 @@ class Result(TraceableModel):
 
     task = models.ForeignKey(Task, related_name="task_results")
 
+    appointment = models.ForeignKey(Appointment,
+                                    related_name="appointment_results",
+                                    blank=True, null=True)
+
     date = models.DateTimeField(_(u'Fecha'), auto_now_add=True)
 
     symptoms_worsening = models.CharField(max_length=5000, blank=True,
@@ -124,21 +146,6 @@ class Result(TraceableModel):
 
     def __unicode__(self):
         return u'id: %s result: %s %s' % (self.id, self.patient, self.survey)
-
-
-class Report(TraceableModel):
-    patient = models.ForeignKey(User, related_name='patient_reports')
-
-    illness = models.ForeignKey(Illness, related_name='illness_reports')
-
-    survey = models.ForeignKey(Survey, related_name="survey_reports")
-
-    result = models.ForeignKey(Result, related_name='result_reports')
-
-    date = models.DateTimeField(_(u'Fecha del Informe'), auto_now_add=True)
-
-    def __unicode__(self):
-        return u'id: %s report: %s %s' % (self.id, self.patient, self.illness)
 
 
 class Conclusion(TraceableModel):
@@ -160,3 +167,18 @@ class Conclusion(TraceableModel):
     def __unicode__(self):
         return u'id: %s conclusion: %s %s' \
                                 % (self.id, self.patient, self.appointment)
+
+
+class Report(TraceableModel):
+    patient = models.ForeignKey(User, related_name='patient_reports')
+
+    illness = models.ForeignKey(Illness, related_name='illness_reports')
+
+    survey = models.ForeignKey(Survey, related_name="survey_reports")
+
+    result = models.ForeignKey(Result, related_name='result_reports')
+
+    date = models.DateTimeField(_(u'Fecha del Informe'), auto_now_add=True)
+
+    def __unicode__(self):
+        return u'id: %s report: %s %s' % (self.id, self.patient, self.illness)

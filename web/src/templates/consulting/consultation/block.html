@@ -14,7 +14,7 @@
                   <h2>{% trans 'Bloque' %} {{my_block.code}}: {{my_block.name}}</h2>
                 </div>
                 <div class="pull-right">
-                    <button id="carryon" class="btn btn-info btn-large">
+                    <button id="carryon_top" class="btn btn-info btn-large">
                       {% trans 'Continuar' %}
                     </button>         
                 </div> 
@@ -52,7 +52,7 @@
                     </div>
                 </form>
                 <div class="pull-right">
-                    <button id="carryon" class="btn btn-info btn-large">
+                    <button id="carryon_bottom" class="btn btn-info btn-large">
                       {% trans 'Continuar' %}
                     </button>         
                 </div>               
@@ -68,7 +68,10 @@
 {% block jquery_init %}
     $('ul').addClass("without_decorator");
 
-    $('#carryon').on("click", function(){
+    $('#carryon_top').on("click", function(){
+        window.location.href = '{{destination}}'; 
+    });
+    $('#carryon_bottom').on("click", function(){
         window.location.href = '{{destination}}'; 
     });
 {% endblock %}

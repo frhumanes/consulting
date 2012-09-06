@@ -23,6 +23,20 @@ class SelectBlockForm(forms.Form):
                         attrs={'class': 'input-medium search-query span2'}))
 
 
+class SelectBehaviorSurveyForm(forms.Form):
+    SURVEY = (
+        ('', '-----------'),
+        (settings.BEHAVIOR_EXTENSIVE, _(u'Extenso')),
+        (settings.BEHAVIOR_SHORT, _(u'Abreviado'))
+    )
+
+    survey = forms.ChoiceField(
+                    label=_(u'Formato:'),
+                    choices=SURVEY,
+                    widget=forms.Select(
+                        attrs={'class': 'input-medium search-query span2'}))
+
+
 class QuestionsForm(forms.Form):
     def __init__(self, *args, **kwargs):
         if 'dic' in kwargs and 'selected_options' in kwargs:

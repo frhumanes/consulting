@@ -17,10 +17,10 @@ def active_root(request, pattern):
 @register.simple_tag
 def active_child(request, pattern):
     split_path = request.path.split('/')
-    print '------split_path-------'
+    print '---split_path---'
     print split_path
     split_pattern = pattern.split('/')
-    print '------split_pattern-------'
+    print '---split_pattern---'
     print split_pattern
 
     if split_path[1] == split_pattern[1] and split_path[2] == split_pattern[2]:
@@ -33,6 +33,11 @@ def active_child(request, pattern):
 def active_granchild(request, pattern):
     split_path = request.path.split('/')
     split_pattern = pattern.split('/')
+
+    print '---split_path---'
+    print split_path
+    print '---split_pattern---'
+    print split_pattern
 
     if split_path[1] == split_pattern[1] and\
         split_path[2] == split_pattern[2] and\

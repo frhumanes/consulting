@@ -88,12 +88,12 @@ urlpatterns = patterns('',
     ##SURVEY
     url(r'^consultation/survey/block/(\d+)/(\d+)/$', consulting_views.block,
         name='consulting_block'),
-        url(r'^consultation/survey/other_block/(\d+)/$',
+    url(r'^consultation/survey/other_block/(\d+)/(\d+)/$',
         consulting_views.other_block, name='consulting_other_block'),
     url(r'^consultation/survey/select_block/(\d+)/$',
         consulting_views.select_block,
         name='consulting_select_block'),
-    url(r'^consultation/survey/administrative_data/(\d+)$',
+    url(r'^consultation/survey/administrative_data/(\d+)/(\d+)/$',
         consulting_views.administrative_data,
         name='consulting_administrative_data'),
     url(r"^consultation/survey/medicine/new_medicine/(\d+)/$",
@@ -110,8 +110,107 @@ urlpatterns = patterns('',
         name='consulting_remove_medicine_survey'),
 
     ##MONITORING
+    url(r'^consultation/monitoring/(\d+)/$', consulting_views.monitoring,
+        name='consulting_monitoring'),
 
+    url(r'^consultation/monitoring/incomplete_surveys/list/(\d+)/$',
+        consulting_views.list_incomplete_surveys,
+        name='consulting_list_incomplete_surveys'),
 
+    url(r'^consultation/monitoring/incomplete_surveys/not_assess_task/(\d+)/(\d+)/$',
+        consulting_views.not_assess_task,
+        name='consulting_not_assess_task'),
+
+    url(r'^consultation/monitoring/incomplete_surveys/survey/(\d+)/(\d+)/$',
+        consulting_views.incomplete_block,
+        name='consulting_incomplete_block'),
+
+    url(r'^consultation/monitoring/incomplete_surveys/variables_mark/(\d+)/(\d+)/$',
+        consulting_views.variables_mark,
+        name='consulting_variables_mark'),
+
+    url(r'^consultation/monitoring/complete_self_administered_survey/(\d+)/$',
+        consulting_views.complete_self_administered_survey,
+        name='consulting_complete_self_administered_survey'),
+
+    url(r'^consultation/monitoring/complete_self_administered_survey/select_not_assessed_variables/(\d+)/(\d+)/$',
+        consulting_views.select_not_assessed_variables,
+        name='consulting_select_not_assessed_variables'),
+
+    url(r'^consultation/monitoring/complete_self_administered_survey/survey/(\d+)/(\d+)/$',
+        consulting_views.complete_self_administered_block,
+        name='consulting_complete_self_administered_block'),
+
+    url(r'^consultation/monitoring/successive_survey/select/(\d+)/$',
+        consulting_views.select_successive_survey,
+        name='consulting_select_successive_survey'),
+
+    url(r'^consultation/monitoring/successive_survey/survey/(\d+)/(\d+)/$',
+        consulting_views.successive_block,
+        name='consulting_successive_survey'),
+
+    url(r'^consultation/monitoring/treatment_survey/prev/(\d+)/$',
+        consulting_views.prev_treatment_block,
+        name='consulting_prev_treatment_survey'),
+
+    url(r'^consultation/monitoring/treatment_survey/survey/(\d+)/(\d+)$',
+        consulting_views.treatment_block,
+        name='consulting_treatment_survey'),
+
+    url(r'^consultation/monitoring/behavior_survey/select/(\d+)/$',
+        consulting_views.select_behavior_survey,
+        name='consulting_select_behavior_survey'),
+
+    url(r'^consultation/monitoring/behavior_survey/survey/(\d+)/(\d+)/$',
+        consulting_views.behavior_block,
+        name='consulting_behavior_survey'),
+
+    url(r'^consultation/monitoring/finish/conclusion/(\d+)/$',
+        consulting_views.conclusion_monitoring,
+        name='consulting_conclusion_monitoring'),
+
+    url(r'^consultation/monitoring/finish/new_medicine/(\d+)/$',
+        consulting_views.new_medicine_monitoring,
+        name='consulting_new_medicine_monitoring'),
+
+    url(r'^consultation/monitoring/finish/list_medicines_before/(\d+)/$',
+        consulting_views.list_medicines_before_monitoring,
+        name='consulting_list_medicines_before_monitoring'),
+
+    url(r'^consultation/monitoring/finish/list_medicines_after/(\d+)/$',
+        consulting_views.list_medicines_after_monitoring,
+        name='consulting_list_medicines_after_monitoring'),
+
+    url(r'^consultation/monitoring/finish/detail_medicine/$',
+        consulting_views.detail_medicine_monitoring,
+        name='consulting_detail_medicine_monitoring'),
+
+    url(r'^consultation/monitoring/finish/remove_medicine/$',
+        consulting_views.remove_medicine_monitoring,
+        name='consulting_remove_medicine_monitoring'),
+
+    url(r'^consultation/monitoring/finish/add_illness/(\d+)/$',
+        consulting_views.add_illness_monitoring,
+        name='consulting_add_illness_monitoring'),
+
+    url(r'^consultation/monitoring/finish/select_year_month/(\d+)/(\d+)/(\d+)/$',
+        consulting_views.select_year_month_monitoring,
+        name='consulting_select_year_month_monitoring'),
+
+    url(r"^consultation/monitoring/finish/day/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/$",
+        consulting_views.day_monitoring,
+        name='consulting_day_monitoring'),
+
+    url(r'^consultation/monitoring/finish/app_add/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/$',
+        consulting_views.app_add_monitoring,
+        name='consulting_app_add_monitoring'),
+
+    url(r"^consultation/monitoring/finish/month/(\d+)/(\d+)/(prev|next)/(\d+)/(\d+)/$",
+        consulting_views.month_monitoring, name='consulting_month_monitoring'),
+
+    url(r'^consultation/monitoring/finish/select_self_administered_survey/(\d+)/$',
+        consulting_views.select_self_administered_survey_monitoring,
+        name='consulting_select_self_administered_survey_monitoring'),
 
     ################################ SURVEYS ##################################
     url(r'^surveys/$', consulting_views.list_surveys,

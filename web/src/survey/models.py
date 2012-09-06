@@ -99,8 +99,6 @@ class Option(models.Model):
     )
 
     question = models.ForeignKey('Question', related_name="question_options")
-    #REPASAR RELACION: creo que es OneToMany
-    #Un hijo solo puede pertenecer a un padre. Ejemplo F9.1 su padre es solo F9
     # father = models.ForeignKey('self', blank=True, null=True,
     #             related_name='father_options')
 

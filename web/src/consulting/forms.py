@@ -168,7 +168,6 @@ class SelectTaskForm(forms.Form):
                 (settings.VARIABLES, _(u'Variables más puntuadas')),
             )
             if not variables:
-                print '----No hay variables----'
                 NEXT_SURVEY = NEXT_SURVEY[:3]
             self.fields['survey'].choices = NEXT_SURVEY
         else:
@@ -256,6 +255,22 @@ class SelectOtherTaskForm(forms.Form):
             widget=forms.Select(
                         attrs={'class': 'input-medium search-query span4'}))
 
+
+class SelectNotAssessedVariablesForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        if 'variables' in kwargs:
+            variables = kwargs.pop('variables')
+            super(SelectNotAssessedVariablesForm, self)\
+                                                    .__init__(*args, **kwargs)
+
+            self.fields['variables'] = forms.MultipleChoiceField(
+                    label=_(u'Variables'),
+                    widget=forms.CheckboxSelectMultiple(),
+                    choices=variables,
+                    required=True)
+        else:
+            super(SelectNotAssessedVariablesForm, self)\
+                                                    .__init__(*args, **kwargs)
 
 
 class SymptomsWorseningForm(forms.Form):

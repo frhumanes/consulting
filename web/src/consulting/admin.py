@@ -4,10 +4,10 @@ from consulting.models import *
 
 class TaskAdmin(admin.ModelAdmin):
     fieldsets = [('Tasks', {'fields': ['patient', 'survey',
-                    'self_administered', 'value', 'completed']})]
-    list_display = ('patient', 'survey', 'self_administered', 'value',
+                    'self_administered', 'assess', 'completed']})]
+    list_display = ('patient', 'survey', 'self_administered', 'assess',
                     'completed')
-    search_fields = ('patient', 'survey', 'self_administered', 'value',
+    search_fields = ('patient', 'survey', 'self_administered', 'assess',
                     'completed')
     ordering = ('patient', )
 
@@ -38,15 +38,6 @@ class ResultAdmin(admin.ModelAdmin):
     ordering = ('patient',)
 
 admin.site.register(Result, ResultAdmin)
-
-
-# class AnswerAdmin(admin.ModelAdmin):
-#     fieldsets = [('Answers', {'fields': ['option', 'text']})]
-#     list_display = ('option', 'text')
-#     search_fields = ('option', 'text')
-#     ordering = ('option',)
-
-# admin.site.register(Answer, AnswerAdmin)
 
 
 class ReportAdmin(admin.ModelAdmin):
