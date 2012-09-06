@@ -9727,6 +9727,226 @@
       "weight": 4,
       "question": 171
     }
+  },
+  {
+    "model": "survey.option",
+    "pk": 900,
+    "fields": {
+      "code": "H6.3.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 33
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 901,
+    "fields": {
+      "code": "H6.3.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 33
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 902,
+    "fields": {
+      "code": "H6.3.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 33
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 903,
+    "fields": {
+      "code": "H6.3.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 33
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 904,
+    "fields": {
+      "code": "H6.3.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 33
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 905,
+    "fields": {
+      "code": "H1.3.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 36
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 906,
+    "fields": {
+      "code": "H1.3.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 36
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 907,
+    "fields": {
+      "code": "H1.3.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 36
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 908,
+    "fields": {
+      "code": "H1.3.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 36
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 909,
+    "fields": {
+      "code": "H1.3.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 36
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 910,
+    "fields": {
+      "code": "H2.4.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 47
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 911,
+    "fields": {
+      "code": "H2.4.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 47
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 912,
+    "fields": {
+      "code": "H2.4.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 47
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 913,
+    "fields": {
+      "code": "H2.4.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 47
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 914,
+    "fields": {
+      "code": "H2.4.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 47
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 915,
+    "fields": {
+      "code": "H1.1.0",
+      "kind": 0,
+      "text": "0",
+      "weight": 0,
+      "question": 49
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 916,
+    "fields": {
+      "code": "H1.1.1",
+      "kind": 0,
+      "text": "1",
+      "weight": 1,
+      "question": 49
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 917,
+    "fields": {
+      "code": "H1.1.2",
+      "kind": 0,
+      "text": "2",
+      "weight": 2,
+      "question": 49
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 918,
+    "fields": {
+      "code": "H1.1.3",
+      "kind": 0,
+      "text": "3",
+      "weight": 3,
+      "question": 49
+    }
+  },
+  {
+    "model": "survey.option",
+    "pk": 919,
+    "fields": {
+      "code": "H1.1.4",
+      "kind": 0,
+      "text": "4",
+      "weight": 4,
+      "question": 49
+    }
   }
 
 ]
