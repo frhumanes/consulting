@@ -1,0 +1,82 @@
+{% load i18n%}
+{% load consulting %}
+
+{% url consulting_list_incomplete_surveys appointment.id as surveys %}
+{% url consulting_complete_self_administered_survey appointment.id as self_administered %}
+{% url consulting_select_successive_survey appointment.id as successive %}
+{% url consulting_prev_treatment_survey appointment.id as treatment %}
+{% url consulting_select_behavior_survey appointment.id as behavior %}
+{% url consulting_conclusion_monitoring appointment.id as finish %}
+
+
+<div class="subnav" style="padding-bottom:14px;">
+  <ul class="nav nav-pills">
+      <li class="{% active_granchild request surveys %}">
+          <a href="{% url consulting_list_incomplete_surveys appointment.id %}">
+            {% trans 'ENCUESTAS<br>SIN COMPLETAR' %}
+          </a>
+      </li>
+      <li class="{% active_granchild request self_administered %}">
+          <a href="{% url consulting_complete_self_administered_survey appointment.id %}">
+            {% trans 'ENCUESTA<br>AUTOADMINISTRADA' %}
+          </a>
+      </li> 
+      <li class="{% active_granchild request successive %}">
+          <a href="{% url consulting_select_successive_survey appointment.id %}">
+            {% trans 'ENCUESTA<br>SUCESIVA' %}
+          </a>
+      </li>
+      <li class="{% active_granchild request treatment %}">
+          <a data-toggle="modal" href="#check_treatment_survey">
+            {% trans 'ENCUESTA<br>ADHERENCIA AL TRATAMIENTO' %}
+          </a>
+      </li>
+      <li class="{% active_granchild request behavior %}">
+          <a data-toggle="modal" href="#check_behavior_survey">
+            {% trans 'ENCUESTA<br>COMPORTAMIENTO DURANTE LA ENTREVISTA' %}
+          </a>
+      </li>
+      <li class="{% active_granchild request finish %}">
+          <a data-toggle="modal" href="{% url consulting_conclusion_monitoring appointment.id %}">
+            {% trans 'FINALIZAR<br>CONSULTA' %}
+          </a>
+      </li>                                                  
+  </ul>  
+</div>
+<div class="pull-right">
+  <h3>{{appointment.date}}</h3>
+</div>
+<div id="check_treatment_survey" class="modal hide fade" style="display: block;">
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal">
+      ×
+    </button>
+    <h3>Encuesta adherencia al tratamiento</h3>
+  </div>
+  <div class="modal-body">
+    <p>
+      {% trans '¿Desea cumplimentar las cuestiones relativas a la adherencia al tratamiento?' %}
+    </p>
+  </div>
+  <div class="modal-footer">
+    <a data-dismiss="modal" href="#" onclick="window.location.href = '{% url consulting_prev_treatment_survey appointment.id %}';"class="btn">Sí</a>
+    <a data-dismiss="modal" href="#" class="btn btn-primary">No</a>
+  </div>    
+</div>
+<div id="check_behavior_survey" class="modal hide fade" style="display: block;">
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal">
+      ×
+    </button>
+    <h3>Encuesta comportamiento durante la entrevista</h3>
+  </div>
+  <div class="modal-body">
+    <p>
+      {% trans '¿Desea cumplimentar las cuestiones relativas al comportamiento del paciente durante la entrevista?' %}
+    </p>
+  </div>
+  <div class="modal-footer">
+    <a data-dismiss="modal" href="#" onclick="window.location.href = '{% url consulting_select_behavior_survey appointment.id %}';"class="btn">Sí</a>
+    <a data-dismiss="modal" href="#" class="btn btn-primary">No</a>
+  </div>    
+</div>
