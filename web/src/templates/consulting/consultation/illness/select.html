@@ -1,0 +1,56 @@
+{% extends "ui/app.html" %}
+
+{% load i18n %}
+
+{% block body %}
+<div class="container">
+  <section>
+  <div class="page-header">
+    <h1>{% trans 'Enfermedad a pasar consulta' %}</h1>
+  </div>
+  <div class="row">
+    <div class="span8">
+      <div class="hero-unit center">
+        <form class="form-horizontal" method="post" action="{% url consulting_select_illness id_appointment %}">{% csrf_token %}
+          <fieldset>
+              {% if form.illness.errors %}
+                <div class="control-group error">
+                  <label class="control-label">
+                    {{form.illness.label}}
+                  </label>
+                  <div class="controls">
+                    {{ form.illness }}
+                    <button type="submit" class="btn">
+                      Continuar
+                    </button>
+                    {% for error in form.illness.errors %}
+                      <span class="help-inline">
+                        {{ error|escape }}
+                      </span>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% else %}
+                <div class="control-group">
+                  <label class="control-label">
+                    {{form.illness.label}}
+                  </label>
+                  <div class="controls">
+                    {{ form.illness }} 
+                    <button type="submit" class="btn">
+                      Ir
+                    </button>
+                  </div>
+                </div>
+              {% endif %}
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <!-- PATIENT CARD -->
+    <div class="span4">
+        {% include "consulting/patient/card.html" %}
+    </div>
+  </div>
+</div>
+{% endblock body %}
