@@ -330,7 +330,7 @@ def app_add(request, year, month, day, id_patient, id_result=None):
                             reverse('consulting_select_self_administered_survey',
                                         args=[appointment.id, id_result]))
                     else:
-                        return HttpResponseRedirect(reverse('consulting_index'))
+                        return HttpResponseRedirect(reverse('consulting_today'))
                 else:
                     tasks = Task.objects.filter(
                                     survey__code=settings.INITIAL_ASSESSMENT,
@@ -1181,24 +1181,24 @@ def block(request, id_result, code_block):
                 result.task.completed = True
                 task.end_date = datetime.now()
                 result.task.save()
+
+            if code_block == str(settings.PRECEDENT_RISK_FACTOR):
+                return HttpResponseRedirect(
+                            reverse('consulting_new_medicine_survey',
+                                    args=[result.id]))
+            elif code_block == str(settings.ANXIETY_DEPRESSION_EXTENSIVE) or\
+                code_block == str(settings.ANXIETY_DEPRESSION_SHORT):
+                return HttpResponseRedirect(reverse('consulting_conclusion',
+                                args=[result.task.appointment.id, result.id]))
+            else:
+                return HttpResponseRedirect(reverse('consulting_index'))
     else:
         form = QuestionsForm(dic=dic, selected_options=selected_options)
-
-    if code_block == str(settings.PRECEDENT_RISK_FACTOR):
-        destination = '/consultation/survey/medicine/new_medicine/' +\
-                        str(result.id)
-    elif code_block == str(settings.ANXIETY_DEPRESSION_EXTENSIVE) or\
-        code_block == str(settings.ANXIETY_DEPRESSION_SHORT):
-        destination = '/consultation/conclusion/' +\
-            str(result.task.appointment.id) + '/' + str(result.id)
-    else:
-        return HttpResponseRedirect(reverse('consulting_index'))
 
     return render_to_response('consulting/consultation/block.html',
                             {'form': form,
                             'result': result,
                             'my_block': block,
-                            'destination': destination,
                             'patient_user': result.patient},
                             context_instance=RequestContext(request))
 
@@ -1267,20 +1267,17 @@ def other_block(request, id_task, id_appointment):
                 task.end_date = datetime.now()
                 task.save()
 
-            destination = '/consultation/conclusion/' +\
-                            str(task.appointment.id) + '/' + str(result.id)
+            return HttpResponseRedirect(reverse('consulting_conclusion',
+                                        args=[task.appointment.id, result.id]))
     else:
         form = QuestionsForm(dic=dic, selected_options=selected_options)
-
-        destination = '/consultation/conclusion/' + str(task.appointment.id)
 
     return render_to_response('consulting/consultation/other_block.html',
                             {'form': form,
                             'task': task,
                             'id_appointment': id_appointment,
                             'my_block': block,
-                            'patient_user': task.patient,
-                            'destination': destination},
+                            'patient_user': task.patient},
                             context_instance=RequestContext(request))
 
 
