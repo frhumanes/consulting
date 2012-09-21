@@ -4,20 +4,21 @@
 
 {% block title %}{% trans 'Events list' %}{% endblock %}
 
-{% block left_panel %}
+{% block right %}
   {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
 {% endblock %}
 
-{% block right_panel %}
+{% block container %}
+<h1>{% trans 'Edit Slot' %}</h1>
 
 <a class="btn btn-primary" href="{% url cal.list_slot year month %}">
   <i class="icon-arrow-left icon-white"></i>
   {% trans 'Back' %}
 </a>
 
-<legend>{% trans 'Edit Slot' %}</legend>
 
-<div class="offset1">
+
+<div class="well center">
 
 <form class="form-horizontal" method="post" action="{% url cal.edit_slot slot.id %}">{% csrf_token %}
   <fieldset>
@@ -156,13 +157,13 @@
 
 <div id="modal-screen" class="modal hide">
   <div class="modal-header">
-    <h3>{% trans 'Delete Event' %}</h3>
+    <h3>{% trans 'Eliminar evento' %}</h3>
   </div>
   <div class="modal-body">
-    <p>"{% trans 'You are going to delete an event. Are you sure?' %}"</p>
+    <p>"{% trans '¿Desea eliminar el evento seleccionado?' %}"</p>
   </div>
   <div class="modal-footer">
-    <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Yes' %}" data-loadingmsg="{% trans 'Removing ... ' %}">{% trans 'Yes' %}</a>
+    <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Yes' %}" data-loadingmsg="{% trans 'Removing ... ' %}">{% trans 'Sí' %}</a>
     <a href="#" class="btn btn-primary" data-dismiss="modal">{% trans 'No' %}</a>
   </div>
 </div>

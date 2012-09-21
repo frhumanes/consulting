@@ -225,6 +225,12 @@ class SelectOtherTaskForm(forms.Form):
                     widget=forms.CheckboxSelectMultiple(),
                     choices=variables,
                     required=False)
+            self.fields['kind'] = forms.ChoiceField(
+                    label=_(u'Tipo'),
+                    widget=forms.Select(),
+                    choices=((settings.ABREVIADO, u'Abreviado'),
+                             (settings.EXTENSO, u'Extendido')),
+                    required=True)
 
             NEXT_SURVEY = (
                 ('', _(u'--------')),

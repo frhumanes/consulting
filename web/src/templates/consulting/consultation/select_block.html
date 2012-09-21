@@ -2,14 +2,15 @@
 
 {% load i18n %}
 
-{% block body %}
-<div class="container">
-  <section>
+{% block right %}
+  {% include "consulting/patient/card.html" %}
+{% endblock %}
+
+{% block container %}
   <div class="page-header">
     <h1>{% trans 'Seleccionar bloque' %}</h1>
   </div>
-  <div class="row">
-    <div class="span8">
+  <section>
       <div class="hero-unit center">
         <form class="form-horizontal" method="post" action="{% url consulting_select_block result.id %}">{% csrf_token %}
           {% if form.block.errors %}
@@ -36,27 +37,16 @@
               </label>
               <div class="controls">
                 {{ form.block }} 
-                <button type="submit" class="btn">
-                  Ir
-                </button>
               </div>
             </div>
           {% endif %}
+          <button type="submit" class="btn btn-primary btn-large">
+            Continuar
+          </button>
         </form>
       </div>
-      <div class="pull-right">
-        <button id="carryon" class="btn btn-info btn-large">
-          {% trans 'Continuar' %}
-        </button>         
-      </div>
-    </div>
-    <!-- PATIENT CARD -->
-    <div class="span4">
-        {% include "consulting/patient/card.html" %}
-    </div>
-  </div>
-</div>
-{% endblock body %}
+    </section>
+{% endblock container %}
 
 {% block jquery_init %}
   $('#carryon').on("click", function(){  

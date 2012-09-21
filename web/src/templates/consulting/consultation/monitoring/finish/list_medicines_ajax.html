@@ -24,7 +24,7 @@
     });
 </script>
 {% if medicines.object_list %}
-<div id="medicine-paginator" class="pull-right">
+<div id="medicine-paginator" class="pagination pagination-centered">
   <ul class="pagination">
     {% if medicines.has_previous %}
       <li><a href="?page={{ medicines.previous_page_number }}">←</a></li>
@@ -51,7 +51,7 @@
       <th></th>                
     </tr>
   </thead>        
-  <tbody>                  
+  <tcontainer>                  
     {% for medicine in medicines.object_list %}
       <tr id="{{medicine.id}}" class="medicine">
         <td style="text-align:center;">{{medicine.date}}</td>
@@ -61,7 +61,7 @@
         </td>
       </tr>
     {% endfor %}
-  </tbody>
+  </tcontainer>
 </table>             
 <div id="overwrite"></div>                                         
 {% else %}

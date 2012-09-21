@@ -1,19 +1,12 @@
-{% extends "cal/includes/base.html" %}
-
+{% extends "consulting/consultation/monitoring/index.html" %}
 {% load i18n %}
 
-{% block body %}
-<div class="container">
-  {% block nav-bar%}
-    {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
-  {% endblock  %}
+{% block container %}
   <section>
   <div class="page-header">
     <h1>{% trans 'Asignar enfermedad/es' %}</h1>
   </div>
-  <div class="row">
-    <div class="span8">
-      <div class="hero-unit center">      
+     <div class="hero-unit center">      
         <form class="form-horizontal" method="post" action="{% url consulting_add_illness_monitoring conclusion.id %}">{% csrf_token %}      
           <fieldset>
             {% if form.illnesses.errors %}
@@ -53,14 +46,7 @@
           {% trans 'Continuar' %}
         </button>         
       </div>
-    </div>
-    <!-- PATIENT CARD -->
-    <div class="span4">
-        {% include "consulting/patient/card.html" %}
-    </div>
-  </div>
-</div>
-{% endblock body %}
+{% endblock container %}
 
 {% block jquery_init %}
   $('ul').addClass("without_decorator");

@@ -1,18 +1,12 @@
-{% extends "ui/app.html" %}
+{% extends "consulting/consultation/monitoring/index.html" %}
 
 {% load i18n %}
 
-{% block body %}
-<div class="container">
-  {% block nav-bar%}
-      {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
-  {% endblock  %}
+{% block container %}
   <section>
   <div class="page-header">
     <h1>{% trans 'Encuesta sucesiva' %}</h1>
   </div>
-  <div class="row">
-    <div class="span8">
       <div class="hero-unit">
         <form class="form-horizontal" method="post" action="{% url consulting_select_successive_survey appointment.id %}">{% csrf_token %}
           {% if form.survey.errors %}
@@ -22,9 +16,6 @@
               </label>
               <div class="controls">
                 {{ form.survey }}
-                <button type="submit" class="btn">
-                  Ir
-                </button>
                 {% for error in form.survey.errors %}
                   <span class="help-inline">
                     {{ error|escape }}
@@ -39,15 +30,12 @@
               </label>
               <div class="controls">
                 {{ form.survey }}
-                <button type="submit" class="btn">
-                  Ir
-                </button>
               </div>
             </div>
           {% endif %}
           {% if form.variables.errors %}
             <div id="error_variables" class="control-group error">
-              <div class="offset1">
+              <div class="">
                 {{ form.variables }}
                 {% for error in form.variables.errors %}
                   <span class="help-inline">
@@ -58,21 +46,28 @@
             </div>
           {% else %}
             <div id="variables" class="control-group" style="display: none;">
-              <div class="offset1">
+              <label class="control-label">
+                {{form.kind.label}}
+              </label>
+              <div class="controls">
+                {{ form.kind }}
+              </div>
+              <label class="control-label">
+                Variables
+              </label>
+              <div class="controls">
                 {{ form.variables }}
               </div>
             </div>
           {% endif %}
+          <div class="center">
+            <button type="submit" class="btn btn-primary btn-large">
+              Continuar
+            </button>
+          </div>
         </form>
-      </div>
     </div>
-    <!-- PATIENT CARD -->
-    <div class="span4">
-        {% include "consulting/patient/card.html" %}
-    </div>
-  </div>
-</div>
-{% endblock body %}
+{% endblock container %}
 
 
 {% block jquery_init %}

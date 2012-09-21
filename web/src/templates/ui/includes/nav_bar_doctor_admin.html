@@ -4,8 +4,7 @@
 {% url consulting_newpatient as newpatient %}
 {% url cal.index as cal %}
 
-<div class="subnav">
-  <ul class="nav nav-pills">
+  <ul class="nav nav-pills nav-stacked">
       <li class="{% active_root request newpatient %}">
           <a href="{% url consulting_newpatient %}">
             {% trans 'ALTA PACIENTE' %}
@@ -17,4 +16,3 @@
           </a>
       </li>                                                     
   </ul>  
-</div>

@@ -1,0 +1,79 @@
+{% extends "consulting/patient/personal_data_pm.html" %}
+
+{% load i18n%}
+
+{% block left %}
+  {% include "ui/includes/nav_bar_doctor_pm.html" %}
+{% endblock  %}
+
+{% block right %}
+  {% include "consulting/patient/card.html" %}
+{% endblock  %}
+
+{% block container %}
+  <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
+  <section>
+    <div class="page-header">
+        <h1>{% trans 'Listado de Informes' %}</h1>                
+    </div>
+    <div class="row">       
+      <div id="overwrite_list" class="">            
+        {% if reports.object_list %}                     
+        <table id="list_report" class="table table-bordered table-condensed">  
+          <thead>
+            <tr>            
+              <th style="text-align:center;">
+                {% trans 'FECHA' %}
+              </th>
+              <th style="text-align:center;">
+                {% trans 'INFORME' %}
+              </th>
+              <th style="text-align:center;">
+                {% trans 'ANSIEDAD' %}
+              </th>
+              <th style="text-align:center;">
+                {% trans 'DEPRESION' %}
+              </th>
+              <th style="text-align:center;">
+                {% trans 'PDF' %}
+              </th>               
+            </tr>
+          </thead>        
+          <tbody>                  
+            {% for report in reports.object_list %}
+              <tr id="{{report.id}}" class="report">
+                <td style="text-align:center;">{{report.end_date|date:"d/M/Y"|lower}}</td>
+                <td style="text-align:center;"><a class="btn btn-link" href="{% url consulting_view_report report.id%}" target="_blank">{{report.survey.name}}</a></td>
+                <td style="text-align:center;"><span class="label label-{{report.get_anxiety_status|last}}">{{report.get_anxiety_status|first}}</span></td>
+                <td style="text-align:center;"><span class="label label-{{report.get_depression_status|last}}">{{report.get_depression_status|first}}</span></td>              
+                <td style="text-align:center;"><a class="btn btn-link" href="{% url consulting_view_report report.id%}?as=pdf" ><i class="icon-download-alt"></i></a>   
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div id="report-paginator" class="pagination pagination-centered">
+          <ul class="pagination">
+            {% if reports.has_previous %}
+              <li><a href="?page={{ reports.previous_page_number }}">←</a></li>
+            {% else %}
+              <li class="disabled"><a>←</a></li>
+            {% endif %}
+
+            {% if reports.has_next %}
+              <li><a href="?page={{ reports.next_page_number }}">→</a></li>
+            {% else %}
+              <li class="disabled"><a>→</a></li>
+            {% endif %}
+          </ul>
+        </div>    
+        <div id="overwrite"></div>                           
+        {% else %}
+            <h6>{% trans "No hay Informes" %}</h6>
+        {% endif %}
+      </div>
+     
+    </div>
+             
+  </section>
+{% endblock container %}

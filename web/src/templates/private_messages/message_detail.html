@@ -21,6 +21,6 @@
 
   <!-- <td>{{ message.subject }}</td> -->
 
-  <td>{{ message.body|striptags|safe|truncatewords:22 }}</td>
-  <td>{{ message.sent_at|date:"d M" }}</td>
+  <td>{{ message.subject|striptags|safe}} - <span class="muted">{{ message.body|striptags|safe|truncatewords:17 }}</span></td>
+  <td>{{ message.sent_at|date:"d/M/y" }}</td>
 </tr>

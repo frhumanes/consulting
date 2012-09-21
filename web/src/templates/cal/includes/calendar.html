@@ -1,7 +1,6 @@
 {% load i18n %}
 
-<h4>{{ mname }} {{ year }}</h4>
-
+<h4 class="center">{{ mname }} {{ year }}</h4>
 <table class="table table-condensed table-nohover table-hover-element">
     <thead>
       <tr>
@@ -71,27 +70,28 @@
             </tr>
         {% endfor %}
     </tbody>
-    <tfoot>
-        <tr>
-            <th colspan='3'>
-                <a href= "{% if request.user.get_profile.is_doctor %}
-                            {% url cal.views.month year month "prev" %}
-                          {% else %}
-                            {% url cal.views.doctor_month year month doctor.id "prev" %}
-                          {% endif %}">
-                    &lt;&lt; Prev
-                </a>
-            </th>
-            <th></th>
-            <th colspan='3'>
-                <a href= "{% if request.user.get_profile.is_doctor %}
-                            {% url cal.views.month year month "next" %}
-                          {% else %}
-                            {% url cal.views.doctor_month year month doctor.id "next" %}
-                          {% endif %}" class="pull-right">
-                    Next &gt;&gt;
-                </a>
-            </th>
-        </tr>
-    </tfoot>
 </table>
+<ul class="pager">
+    <li class="previous">
+        <a href= "{% if request.user.get_profile.is_doctor %}
+                    {% url cal.views.month year month "prev" %}
+                  {% else %}
+                    {% url cal.views.doctor_month year month doctor.id "prev" %}
+                  {% endif %}">
+            &larr; Anterior
+        </a>
+    </li>
+    <li class="next">
+        <a href= "{% if request.user.get_profile.is_doctor %}
+                    {% url cal.views.month year month "next" %}
+                  {% else %}
+                    {% url cal.views.doctor_month year month doctor.id "next" %}
+                  {% endif %}" class="pull-right">
+            Posterior &rarr;
+        </a>
+    </li>
+</ul>
+
+<div id="info_day">
+      {% include "cal/includes/extra_info.html" %}
+</div>

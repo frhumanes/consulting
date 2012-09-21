@@ -23,7 +23,7 @@ admin.site.register(Variable, VariableAdmin)
 class FormulaAdmin(admin.ModelAdmin):
     fieldsets = [('Formulas', {'fields': ['variable', 'polynomial',
                 'factor', 'sibling']})]
-    list_display = ('variable', 'polynomial', 'factor')
+    list_display = ('variable', 'kind', 'polynomial', 'factor')
     search_fields = ('variable', 'polynomial', 'factor')
     ordering = ('variable', )
 

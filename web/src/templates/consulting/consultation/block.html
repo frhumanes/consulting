@@ -2,58 +2,45 @@
 
 {% load i18n%}
 
-{% block body %}
-<div class="container">
+{% block right %}
+  {% include "consulting/patient/card.html" %}
+{% endblock %}
+
+{% block container %}
     <section>
         <div class="page-header">
           <h1>{% trans 'Encuesta: ' %}{{result.survey.name}}</h1>              
         </div>
-        <div class="row" >
-            <div class="span8">
-                <div class="page-header">
-                  <h2>{% trans 'Bloque' %} {{my_block.code}}: {{my_block.name}}</h2>
-                </div> 
-                <form class="form-horizontal" method="post" action="{% url consulting_block result.id  my_block.code%}">{% csrf_token %}
-                    {% for field in form %}
-                        {% if field.errors %}
-                            <div class="control-group error">
-                                <label>
-                                    {{field.label}}
-                                </label>
-                                <div>
-                                    {{ field }}
-                                    {% for error in field.errors %}
-                                        <span class="help-inline">
-                                            {{ error|escape }}
-                                        </span>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        {% else %}
-                            <div class="control-group">
-                                <label>
-                                    {{field.label}}
-                                </label>
-                                <div>
-                                    {{ field }}
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
+        <div class="page-header">
+          <h2>{% trans 'Bloque' %} {{my_block.code}}: {{my_block.name}}</h2>
+        </div> 
+        <form class="form-horizontal" method="post" action="{% url consulting_block result.id  my_block.code%}">{% csrf_token %}
+            {% for field in form %}
+                <div class="control-group">
+                    <label class="">
+                        {{field.label}}
+                    </label>
                     <div class="controls">
-                        <button type="submit" class="btn btn-primary btn-large">
-                          {% trans 'Guardar y continuar' %}
-                        </button>
+                        {{ field }}
+                        {% if field.errors|length %}
+                            {% for error in field.errors %}
+                                <span class="help-inline">
+                                    {{ error|escape }}
+                                </span>
+                            {% endfor %}
+                        {% endif %}
                     </div>
-                </form>               
+                </div>
+                
+            {% endfor %}
+            <div class="controls">
+                <button type="submit" class="btn btn-primary btn-large">
+                  {% trans 'Guardar y continuar' %}
+                </button>
             </div>
-            <div class="span4">
-                {% include "consulting/patient/card.html" %}
-            </div>  
-        </div>
+        </form>               
     </section>
-</div>
-{% endblock body %}
+{% endblock container %}
 
 {% block jquery_init %}
     $('ul').addClass("without_decorator");

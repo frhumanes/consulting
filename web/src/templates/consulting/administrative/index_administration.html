@@ -2,15 +2,6 @@
 
 {% load i18n%}
 
-{% block header%}
-  {% include "ui/includes/header_doctor.html" %}
+{% block left%}
+    {% include "ui/includes/nav_bar_doctor_admin.html" %}       
 {% endblock  %}
-
-
-{% block body %}
-    <div class="container">
-        {% block nav-bar%}
-            {% include "ui/includes/nav_bar_doctor_admin.html" %}       
-        {% endblock  %}
-    </div>
-{% endblock body %}

@@ -1,15 +1,15 @@
 {% load i18n %}
 
-<div class="well" style="height: 175px; overflow: auto;">
-  <legend>{% trans "Free Slots" %}</legend>
-
-  {% if free_intervals %}
+{% if free_intervals %}
+<legend>{% trans "Huecos disponibles" %}</legend>
+<div class="well" style="max-height: 200px; overflow: auto;">
+  {% if free_intervals|length %}
     <table id="free-slots" class="table">
       <thead>
           <tr>
-            <th>{% trans "Start Time" %}</th>
-            <th>{% trans "End Time" %}</th>
-            <th>{% trans "Duration (min)" %}</th>
+            <th>{% trans "Desde" %}</th>
+            <th>{% trans "Hasta" %}</th>
+            <th>{% trans "Libre" %}</th>
           </tr>
       </thead>
       <tbody>
@@ -18,13 +18,14 @@
             <tr>
               <td>{{ free_interval.start_time|time:"H:i" }}</td>
               <td>{{ free_interval.end_time|time:"H:i" }}</td>
-              <td>{{ free_interval.duration }}</td>
+              <td>{{ free_interval.duration }} min</td>
             </tr>
           {% endif %}
         {% endfor %}
       </tbody>
     </table>
   {% else %}
-    {% trans "All slots are free" %}
+    {% trans "Todos los huecos libres" %}
   {% endif %}
 </div>
+{% endif %}

@@ -4,21 +4,39 @@
 
 {% block title %}{% trans 'Appointments list' %}{% endblock %}
 
-{% block left_panel %}
+{% block right %}
   {% include "cal/includes/calendar.html" %}
 {% endblock %}
 
-{% block right_panel %}
-
-  <legend>{{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
-
-  <ul class="nav nav-pills">
-    <li><a href="{% url cal.add year month day doctor.id %}">{% trans "New appointment" %}</a></li>
-  </ul>
+{% block container %}
+  <legend>
+     <div>
+      {{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}
+       <a class="btn btn-info pull-right" href="{% url cal.add year month day doctor.id %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva cita" %}</a>
+     </div>
+  </legend>
 
   {% if events.object_list.count > 0 %}
-    <div id="events-paginator" class="pull-right">
-      <ul class="pagination ">
+
+
+    <table id="events_list" class="table table-striped">
+      <thead>
+          <tr>
+            <th>{% trans "Inicio" %}</th>
+            <th>{% trans "Final" %}</th>
+            <th>{% trans "Paciente" %}</th>
+            <th>{% trans "Tipo de cita" %}</th>
+            <th>{% trans "Notas" %}</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for event in events.object_list %}
+          {% include "cal/app/appointment.html" %}
+        {% endfor %}
+      </tbody>
+    </table>
+    <div id="events-paginator" class="pagination pagination-centered">
+      <ul>
         {% if events.has_previous %}
           <li><a href="?page={{ events.previous_page_number }}">←</a></li>
         {% else %}
@@ -32,28 +50,9 @@
         {% endif %}
       </ul>
     </div>
-
-    <table id="events_list" class="table table-striped">
-      <thead>
-          <tr>
-            <th>{% trans "Start Time" %}</th>
-            <th>{% trans "End Time" %}</th>
-            <th>{% trans "Duration (min)" %}</th>
-            <th>{% trans "Patient" %}</th>
-            <th>{% trans "Appointment type" %}</th>
-            <th>{% trans "Note" %}</th>
-          </tr>
-      </thead>
-      <tbody>
-        {% for event in events.object_list %}
-          {% include "cal/app/appointment.html" %}
-        {% endfor %}
-      </tbody>
-    </table>
-
     <div id="preview"></div>
   {% else %}
-    <h6>{% trans "There are no appointments" %}</h6>
+    <h6>{% trans "No hay citas concertadas para este día" %}</h6>
   {% endif %}
 {% endblock %}
 

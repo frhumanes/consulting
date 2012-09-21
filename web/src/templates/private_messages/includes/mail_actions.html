@@ -1,7 +1,9 @@
 {% load i18n messages %}
 
+{% match_url "private_messages_outbox" as match_outbox %}
+{% match_url "private_messages_inbox" as match_inbox %}
+
 <ul class="nav nav-pills nav-stacked">
-    <li><a href="{% url private_messages_new %}">{% trans "Redactar" %}</a></li>
-    <li><a href="{% url private_messages_inbox %}" >{% trans "Recibidos" %} ({{ request.user|unread_messages }}) </a></li>
-    <li><a href="{% url private_messages_outbox %}">{% trans "Enviados" %}</a></li>
+    <li class="{{ match_inbox|yesno:'active,' }}"><a href="{% url private_messages_inbox %}" >{% trans "RECIBIDOS" %} ({{ request.user|unread_messages }}) </a></li>
+    <li class="{{ match_outbox|yesno:'active,' }}"><a href="{% url private_messages_outbox %}">{% trans "ENVIADOS" %}</a></li>
 </ul>

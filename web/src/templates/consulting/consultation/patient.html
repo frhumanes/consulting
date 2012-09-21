@@ -18,14 +18,11 @@
   });
 {% endblock %}
 
-{% block body %}
-    <div class="container">
+{% block container %}
       <section>
         <div class="page-header">
           <h2>{% trans 'PACIENTE' %}</h2>
         </div>        
-        <div class="row" >
-          <div class="span offset3">
             <form class="form-horizontal" id="form" action="{% url consulting_editpatient_consultation id_patient %}" method="post" accept-charset="utf-8">{% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}"/>             
               {% if same_username %}
@@ -223,10 +220,6 @@
                   {% trans 'Guardar' %}
                 </button>
               </div>
-            </fieldset>
             </form>
-          </div>  
-        </div>
       </section>
-    </div>
-{% endblock body %}
+{% endblock container %}

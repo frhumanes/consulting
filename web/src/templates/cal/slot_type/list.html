@@ -4,13 +4,13 @@
 
 {% block title %}{% trans 'Type Events list' %}{% endblock %}
 
-{% block left_panel %}
+{% block right %}
   {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
 {% endblock %}
 
-{% block right_panel %}
+{% block container %}
 
-  <legend>{% trans "Events type" %}</legend>
+  <h1>{% trans "Tipos de evento" %}</h1>
 
   <div class="row">
     <div class="span5">
@@ -23,8 +23,8 @@
   </div>
 
   {% if slot_type.object_list.count > 0 %}
-    <div id="type_events-paginator" class="pull-right">
-      <ul class="pagination ">
+    <div id="type_events-paginator" class="pagination pagination-centered">
+      <ul>
         {% if type_events.has_previous %}
           <li><a href="?page={{ type_events.previous_page_number }}">←</a></li>
         {% else %}

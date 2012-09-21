@@ -23,22 +23,7 @@
   <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet"/>
 {% endblock %}
 
-{% block body %}
+{% block left %}
+  {% include "cal/includes/nav_bar_cal.html" %}
+{% endblock %}
 
-  <div class="container">
-      {% block nav-bar%}
-        {% include "cal/includes/nav_bar_cal.html" %}
-      {% endblock  %}
-
-      <div class="row">
-          <div class="span3">
-              {% block left_panel %}{% endblock %}
-          </div>
-
-          <div class="span9">
-            {% block right_panel %}{% endblock %}
-          </div>
-      </div>
-  </div>
-
-{% endblock body %}

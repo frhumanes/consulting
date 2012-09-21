@@ -1,28 +1,25 @@
 {% load i18n %}
 
 {% regroup doctor_preferences by get_weekday_display as preferences_by_weekday %}
-<p></p>
-<legend></legend>
 
-<div class="well" style="height: 300px; overflow-y: scroll;">
-    <p><h5>{% trans 'Month Preferences' %}</h5></p>
 
-    <legend></legend>
+{% if doctor_preferences %}
+<br />
 
+<legend><h4>Prefencias del médico</h4></legend>
+
+<div class="well" style="max-height: 275px; overflow-y: auto;">
+    <dl>
     {% for weekday in preferences_by_weekday %}
-        <h5>{{ weekday.grouper }}</h5>
-
-        <table id="doctor-calendar" class="table table-condensed">
-            <tbody>
+        <dt>{{ weekday.grouper }}</dt>
               {% for slot in weekday.list %}
-                <tr>
-                    <td>{{ slot.slot_type }}
-                        <p>{{ slot.start_time|time:"H:i" }} - {{ slot.end_time|time:"H:i" }}</p>
-                    </td>
-                </tr>
+                <dd>{{ slot.slot_type }}
+                        {{ slot.start_time|time:"H:i" }} - {{ slot.end_time|time:"H:i" }}
+                    </dd>
               {% endfor %}
-            </tbody>
-        </table>
     {% endfor %}
+    </dl>
 </div>
+{% endif %}
+
 

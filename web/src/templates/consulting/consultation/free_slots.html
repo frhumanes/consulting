@@ -7,24 +7,24 @@
     <table id="free-slots" class="table">
       <thead>
           <tr>
-            <th>{% trans "Hora de Comienzo" %}</th>
-            <th>{% trans "Hora de Fin" %}</th>
-            <th>{% trans "Duración (min)" %}</th>
+            <th>{% trans "Desde" %}</th>
+            <th>{% trans "Hasta" %}</th>
+            <th>{% trans "Duración" %}</th>
           </tr>
       </thead>
       <tbody>
         {% for free_interval in free_intervals %}
           {% if free_interval.duration %}
-            <tr>
+            <tr style="text-align: right">
               <td>{{ free_interval.start_time|time:"H:i" }}</td>
               <td>{{ free_interval.end_time|time:"H:i" }}</td>
-              <td>{{ free_interval.duration }}</td>
+              <td>{{ free_interval.duration }} min</td>
             </tr>
           {% endif %}
         {% endfor %}
       </tbody>
     </table>
   {% else %}
-    {% trans "Todo hueco" %}
+    <p class="text-success">{% trans "Total disponibilidad" %}</p>
   {% endif %}
 </div>

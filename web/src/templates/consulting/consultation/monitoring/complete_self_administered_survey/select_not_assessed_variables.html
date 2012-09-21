@@ -1,14 +1,8 @@
-{% extends "ui/app.html" %}
+{% extends "consulting/consultation/monitoring/index.html" %}
 
 {% load i18n%}
 
-{% block body %}
-<div class="container">    
-  {% block nav-bar%}
-      {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
-  {% endblock  %}
-  <div class="row">
-    <div class="span12">
+{% block container %}
       <section>
         <div class="page-header">
             <h1>{% trans 'Variables no evaluadas' %}</h1>
@@ -44,16 +38,9 @@
               </form>
             </div>      
           </div>
-          <!-- PATIENT CARD -->
-          <div class="span4">
-            {% include "consulting/patient/card.html" %}
-          </div>            
         </div>                          
       </section>
-    </div>
-  </div>                    
-</div>
-{% endblock body %}
+{% endblock container %}
 
 {% block jquery_init %}
   $('ul').addClass("without_decorator");

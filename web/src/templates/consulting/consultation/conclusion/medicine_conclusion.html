@@ -3,8 +3,8 @@
   <div class="page-header">
     <h1>{% trans 'Receta Fármaco' %}</h1>
   </div>
-  <div class="row">
-    <div class="span6">
+  <div class="">
+    <div class="hero-unit">
       <form class="form-horizontal" id="form" action="{% url consulting_new_medicine_conclusion id_conclusion %}" method="post" accept-charset="utf-8">{% csrf_token %}
           {{form.component}}
           <div class="control-group">
@@ -74,20 +74,17 @@
             </div>
           </div>
           <div class="controls">
-            <button type="submit" class="btn btn-primary btn-large">
+            <button type="submit" class="btn btn-info btn-large">
               {% trans 'Guardar' %}
             </button>
           </div>
       </form>
-      <div class="pull-right">
-        <button id="carryon" class="btn btn-info btn-large">
+      
+    </div>
+    <div class="pull-right">
+        <button id="carryon" class="btn btn-primary btn-large">
           {% trans 'Continuar' %}
         </button>         
       </div>
-    </div>
-    <!-- PATIENT CARD -->
-    <div class="span4">
-        {% include "consulting/patient/card.html" %}
-    </div>
   </div>
 </section>

@@ -255,9 +255,29 @@ urlpatterns = patterns('',
     url(r'^searcher_component/', consulting_views.searcher_component,
         name='consulting_searcher_component'),
 
+    url(r'^patient_management/medicines/$',
+        consulting_views.list_medicines,
+        name='consulting_list_medicines'),
+
     url(r'^patient_management/medicines/new_medicine_pm/$',
         consulting_views.new_medicine_pm,
         name='consulting_new_medicine_pm'),
+
+    url(r'^patient_management/reports/$',
+        consulting_views.list_reports,
+        name='consulting_list_reports'),
+
+    url(r'^patient_management/report/(\d+)$',
+        consulting_views.view_report,
+        name='consulting_view_report'),
+
+    url(r'^patient_management/parameters/$',
+        consulting_views.user_evolution,
+        name='consulting_user_evolution'),
+
+    url(r'^patient_management/appointments/$',
+        consulting_views.list_appointments,
+        name='consulting_list_appointments'),
 
     url(r'^patient_management/medicines/list_medicines_before_pm/$',
         consulting_views.list_medicines_before_pm,
@@ -285,4 +305,9 @@ urlpatterns = patterns('',
     # STATISTIC: DOCTOR ROLE
     url(r'^statistic/stratification$', consulting_views.stratification,
         name='consulting_stratification_statistic'),
+
+    #NEW URL'S
+    url(r'^consultation/task/(\d+)/report$',
+        consulting_views.view_report,
+        name='consulting_task_report'),
 )

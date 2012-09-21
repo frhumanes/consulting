@@ -6,6 +6,7 @@
 {% url consulting_index_pm as index_pm %}
 {% url consulting_stratification_statistic as index_statistic %}
 {% url private_messages_inbox as inbox %}
+{% url cal.index as calendar %}
 
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
@@ -29,9 +30,9 @@
                       {% trans 'ALTA PACIENTE' %}
                     </a>
                 </li>
-                <li>
+                <li class="{% active_root request calendar %}">
                     <a href="{% url cal.index %}">
-                      {% trans 'GESTIÓN AGENDA' %}
+                      {% trans 'AGENDA' %}
                     </a>
                 </li>
                 <li class="{% active_root request index_pm %}">
@@ -49,20 +50,17 @@
                 </li>
             </ul>
             <ul class="nav pull-right">
-                <li class="navbar-text">
-                    <i class="icon-user"></i>                
-                </li>
-                <li class="navbar-text">
-                    {{ user.first_name }}
-                    {{ user.last_name}}
-                </li>
-                <li class="navbar-text">
-                    <div>
-                    <a  class="exit btn"href='{% url registration_logout %}'>
-                        {% trans 'Salir' %}
+                <div class="btn-group ">
+                    <a class="btn btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user"></i> {{user.username}}
+                    <span class="caret"></span>
                     </a>
-                    </div>
-                <li>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="icon-user"></i><strong>{{ user.first_name }} {{ user.last_name }}</strong></a></li>
+                        <li class="divider"></li>
+                        <li><a href="{% url registration_logout %}"><i class="icon-off"></i>{% trans 'Desconectar' %}</a></li>
+                    </ul>
+                </div>
             </ul>
         </div>
     </div>

@@ -8,6 +8,7 @@ from django.conf import settings
 from log.models import TraceableModel
 from illness.models import Illness
 from cal.models import Appointment
+from consulting.models import Task
 
 
 class Profile(TraceableModel):
@@ -152,7 +153,7 @@ class Profile(TraceableModel):
         return status
 
     def get_lastAppointment(self):
-        appointments = Appointment.objects.filter(patient=self,
+        appointments = Appointment.objects.filter(patient=self.user,
                         date__lt=date.today()).order_by(
                         '-date')
 
@@ -164,7 +165,7 @@ class Profile(TraceableModel):
         return lastAppointment
 
     def get_nextAppointment(self):
-        appointments = Appointment.objects.filter(patient=self,
+        appointments = Appointment.objects.filter(patient=self.user,
                             date__gte=date.today()).order_by(
                             'date')
 
@@ -174,3 +175,18 @@ class Profile(TraceableModel):
             nextAppointment = ''
 
         return nextAppointment
+
+    def get_anxiety_status(self):
+        try:
+            latest_task = Task.objects.filter(patient=self.user, survey=settings.INITIAL_ASSESSMENT, completed=True).latest('end_date')
+            return latest_task.get_anxiety_status()
+        except:
+            pass
+
+    def get_depression_status(self):
+        try:
+            latest_task = Task.objects.filter(patient=self.user, survey=settings.INITIAL_ASSESSMENT, completed=True).latest('end_date')
+            return latest_task.get_depression_status()
+        except:
+            pass
+

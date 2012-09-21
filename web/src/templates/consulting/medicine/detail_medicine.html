@@ -1,19 +1,16 @@
 {% load i18n%}
-<div class="row">
-  <div class="span6 offset1">
+    <h4>Detalles</h4>
     <dl class="dl-horizontal">
         <dt>{% trans 'Fármaco' %}</dt>
         <dd><span>{{medicine.component}}</span></dd>
 
-        <dt>{% trans 'A/P Síntomas' %}</dt>
-        <dd><span>{{medicine.get_before_after_symptom}}</span></dd>
+        <dt>{% trans 'Inicio' %}</dt>
+        <dd><span>{{medicine.get_before_after_symptom}} a los sintomas</span></dd>
         <!-- <dd><span>{{medicine.get_before_after}}</span></dd> -->
 
-        <dt>{% trans 'Meses' %}</dt>
-        <dd><span>{{medicine.months}}</span></dd>
+        <dt>{% trans 'Durante' %}</dt>
+        <dd><span>{{medicine.months}} meses</span></dd>
 
-        <dt>{% trans 'Posología (mg/día)' %}</dt>
-        <dd><span>{{medicine.posology}}</span></dd>
+        <dt>{% trans 'Posología' %}</dt>
+        <dd><span>{{medicine.posology}} (mg/día)</span></dd>
     </dl>
-  </div>
-</div>

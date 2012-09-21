@@ -1,22 +1,16 @@
-{% extends "ui/app.html" %}
+{% extends "consulting/consultation/monitoring/index.html" %}
 
 {% load i18n %}
 
-{% block body %}
-
-  <div class="container">
-    {% block nav-bar%}
-      {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
-    {% endblock  %}
-    <div class="row">
+{% block container %}
       <section>
       <div class="span3">
         {% include "consulting/consultation/monitoring/finish/calendar.html" %}
       </div>
       <div class="span9">
         {% if events.object_list.count > 0 %}
-        <div id="message-paginator" class="pull-right">
-          <ul class="pagination ">
+        <div id="message-paginator" class="pagination pagination-centered">
+          <ul>
             {% if events.has_previous %}
               <li><a href="?page={{ events.previous_page_number }}">←</a></li>
             {% else %}
@@ -33,19 +27,17 @@
 
         <table id="message_list" class="table table-striped">
           <thead></thead>
-          <tbody>
+          <tcontainer>
             {% for event in events.object_list %}
               {% include "cal/app/appointment.html" %}
             {% endfor %}
-          </tbody>
+          </tcontainer>
         </table>
 
         <div id="preview"></div>
         {% else %}
-        <h6>{% trans "There are no appointments" %}</h6>
+        <h6>{% trans "No hay citas concertadas para este día" %}</h6>
         {% endif %}
       </div>
       </section>
-    </div>
-  </div>
-{% endblock body %}
+{% endblock container %}

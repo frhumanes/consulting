@@ -2,41 +2,38 @@
 
 {% load i18n%}
 
-{% block body %}
-
-<div class="container">
-    {% block nav-bar%}
+    {% block left%}
         {% include "cal/includes/nav_bar_cal.html" %}
     {% endblock  %}
-    <div class="row left">
-        <div class="span12">
 
-            <legend class="span10">{% trans 'Calendar' %}</legend>
 
-            <div class="span2">
-                <a href="{% url cal.select_month_year year|add:'-3' %}">&lt;&lt; Prev</a>
-            </div>
+{% block container %}
+<legend class=""><h2>{% trans 'Calendar' %}</h2></legend>
 
-            {% for year, months in years %}
-                <div class="span2 well center">
-                    <h2 class="label label-info">{{ year }}</h2>
-                    <ul class="unstyled">
-                        {% for month in months %}
-                            {% if month.entry %}<b>{% endif %}
-                            <li>
-                                <a class={% if month.current %}"label label-info"{% else %}""{% endif %}
-                                href="{% url cal.lookfor_patient year month.n today %}">{{ month.name }}</a>        
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endfor %}
-
-            <div class="span2">
-                <a href="{% url cal.select_month_year year|add:'3' %}">Next &gt;&gt;</a>
-            </div>
-        </div>
-    </div>
+<div class="">
+    <ul class="pager">
+        <li class="previous">
+            <a href="{% url cal.select_month_year year|add:'-3' %}">&larr; Prev</a>
+        </li>
+        <li class="next">
+            <a href="{% url cal.select_month_year year|add:'3' %}">Next &rarr;</a>
+        </li>
+    </ul>
 </div>
-
-{% endblock body %}
+<div class="row-fluid">
+    {% for year, months in years %}
+        <div class="span3 well center">
+            <h2 class="label label-info">{{ year }}</h2>
+            <ul class="unstyled">
+                {% for month in months %}
+                    {% if month.entry %}<b>{% endif %}
+                    <li>
+                        <a class={% if month.current %}"label label-info"{% else %}""{% endif %}
+                        href="{% url cal.lookfor_patient year month.n today %}">{{ month.name }}</a>        
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>
+{% endblock container %}

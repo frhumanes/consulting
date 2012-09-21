@@ -17,7 +17,7 @@ class Vacation(TraceableModel):
         unique_together = ('doctor', 'date')
 
     def __unicode__(self):
-        return u'id: %s %s slot at %s' \
+        return u'vac: %s %s [%s]' \
             % (self.id, self.doctor, self.date)
 
 
@@ -32,7 +32,7 @@ class Event(TraceableModel):
         unique_together = ('doctor', 'date', 'start_time', 'end_time')
 
     def __unicode__(self):
-        return u'id: %s %s slot at %s' \
+        return u'event: %s %s [%s]' \
             % (self.id, self.doctor, self.date)
 
 
@@ -73,7 +73,7 @@ class Slot(TraceableModel):
     objects = SlotManager()
 
     def __unicode__(self):
-        return u'id: %s %s slot at %s' \
+        return u'slot: %s %s [%s]' \
             % (self.id, self.slot_type, self.start_time)
 
     class Meta:
@@ -104,5 +104,5 @@ class Appointment(TraceableModel):
         get_latest_by = "start_time"
 
     def __unicode__(self):
-        return u'id: %s %s slot at %s' \
-            % (self.id, self.app_type, self.start_time)
+        return u'app: %s %s [%s]' \
+            % (self.id, self.app_type, self.date)

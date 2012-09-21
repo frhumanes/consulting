@@ -15,6 +15,7 @@ class Survey(TraceableModel):
         (settings.EXTENSO, _(u'Extenso')),
         (settings.ABREVIADO, _(u'Abreviado')),
     )
+    
     blocks = models.ManyToManyField('Block', related_name='blocks_surveys')
 
     num_blocks = models.IntegerField(_(u'Número de bloques'))
@@ -26,14 +27,7 @@ class Survey(TraceableModel):
     kind = models.IntegerField(_(u'Tipo'), choices=KIND)
 
     def __unicode__(self):
-        if self.kind == settings.GENERAL:
-            kind = 'General'
-        elif self.kind == settings.EXTENSO:
-            kind = 'Extenso'
-        else:
-            kind = 'Abreviado'
-
-        return u'%s - %s ' % (self.name, kind)
+        return u'%s - %s ' % (self.name, self.get_kind())
 
     def get_kind(self):
         if self.kind == settings.GENERAL:
@@ -50,6 +44,7 @@ class Category(TraceableModel):
         (settings.EXTENSO, _(u'Extenso')),
         (settings.ABREVIADO, _(u'Abreviado')),
     )
+    
     questions = models.ManyToManyField('Question',
                                         related_name='questions_categories')
     name = models.CharField(_(u'Nombre'), max_length=100)
@@ -82,27 +77,50 @@ class Block(TraceableModel):
     def __unicode__(self):
         return u'id: %s block: %s kind: %s' % (self.id, self.name, self.kind)
 
+    def get_kind(self):
+        if self.kind == settings.GENERAL:
+            return 'General'
+        elif self.kind == settings.EXTENSO:
+            return 'Extenso'
+        else:
+            return 'Abreviado'
+
 
 class Question(models.Model):
+    KIND = (
+        (settings.UNISEX, _(u'Ambos sexos')),
+        (settings.MAN, _(u'Hombre')),
+        (settings.WOMAN, _(u'Mujer')),
+    )
+
     text = models.CharField(_(u'Text'), max_length=500)
 
     code = models.CharField(_(u'Código'), max_length=10)
 
+    single = models.BooleanField(_(u'¿Respuesta única?'), default=False)
+
+    kind = models.IntegerField(_(u'Sexo'), choices=KIND, default=settings.UNISEX)
+    
+    required = models.BooleanField(_(u'¿Responder obligatoriamente?'), default=False)
+
     def __unicode__(self):
         return u'%s - %s' % (self.code, self.text)
 
+    def get_kind(self):
+        if self.kind == settings.MAN:
+            return 'Hombre'
+        elif self.kind == settings.WOMAN:
+            return 'Mujer'
+        else:
+            return 'Ambos'
+
+    def get_af_illness(self):
+        return self.text[self.text.find('padecido')+9:self.text.find(' alguno')]
 
 class Option(models.Model):
-    KIND = (
-        (0, _(u'Obligatorio')),
-        (1, _(u'Libre')),
-    )
+
 
     question = models.ForeignKey('Question', related_name="question_options")
-    # father = models.ForeignKey('self', blank=True, null=True,
-    #             related_name='father_options')
-
-    kind = models.IntegerField(_(u'Tipo'), choices=KIND)
 
     code = models.CharField(_(u'Código'), max_length=10)
 
@@ -113,3 +131,5 @@ class Option(models.Model):
 
     def __unicode__(self):
         return u'%s - %s' % (self.code, self.text)
+
+

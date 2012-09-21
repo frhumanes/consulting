@@ -2,57 +2,41 @@
 
 {% load i18n%}
 
-{% block header%}
-    {% if user.get_profile.is_doctor %}
-        {% include "ui/includes/header_doctor.html" %}
-    {% endif %}
-    {% if user.get_profile.is_administrative %}
-        {% include "ui/includes/header_administrative.html" %}
-    {% endif %}
-{% endblock  %}
 
-{% block body %}
-<div class="container">
-    {% block nav-bar%}
-        {% if user.get_profile.is_doctor %}
-          {% include "ui/includes/nav_bar_doctor_pm.html" %}
-        {% endif %}
-    {% endblock  %}
+{% block container %}
     <section>
         <div class="page-header">
           <h1>{% trans 'Identificación Paciente' %}</h1>                
         </div>
-        <div class="row" >
-            <div class="span8">
-                <div class="alert alert-info">
-                    {% trans 'Se le ha enviado un correo electrónico al paciente con el nombre de usuario y contraseña, la cual podrá modificar cuando lo desee.' %}
-                </div>
-                {% if newpatient %}
-                <div class="center">
-                    <h4>
-                        {% trans '¿Desea crear una cita al paciente que acaba de dar de alta?' %}
-                    </h4>
-                    <p>
-                        <a href="{% url cal.select_month_year_new_patient patient_user.id %}" class="btn btn-primary">
-                            {% trans 'Sí' %}
-                        </a>
-                        <a href="{% url consulting_index %}" class="btn">
-                            {% trans 'No' %}
-                        </a>
-                    </p>                    
-                </div> 
-                {% endif %}
-                {% if not newpatient %}
-                    <input type="hidden" name="next" value="{{ next }}"/>
-                    <a href="{{ next }}" class="btn">
-                        {% trans 'Volver' %}
-                    </a>
-                {% endif %} 
+        <div class="" >
+            <div class="alert alert-info">
+                {% trans 'Se le ha enviado un correo electrónico al paciente con el nombre de usuario y contraseña, la cual podrá modificar cuando lo desee.' %}
             </div>
-            <div class="span4">
-                {% include "consulting/patient/card.html" %}
-            </div>  
+            {% if newpatient %}
+            <div class="hero-unit center">
+                <h4>
+                    {% trans '¿Desea crear una cita al paciente que acaba de dar de alta?' %}
+                </h4>
+                <p>
+                    <a href="{% url cal.select_month_year_new_patient patient_user.id %}" class="btn btn-primary">
+                        {% trans 'Sí' %}
+                    </a>
+                    <a href="{% url consulting_index %}" class="btn">
+                        {% trans 'No' %}
+                    </a>
+                </p>                    
+            </div> 
+            {% endif %}
+            {% if not newpatient %}
+                <input type="hidden" name="next" value="{{ next }}"/>
+                <a href="{{ next }}" class="btn">
+                    {% trans 'Volver' %}
+                </a>
+            {% endif %} 
         </div>
     </section>
-</div>
-{% endblock body %}
+{% endblock container %}
+
+{% block right %}
+  {% include "consulting/patient/card.html" %}
+{% endblock %}

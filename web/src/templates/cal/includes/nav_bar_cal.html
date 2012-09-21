@@ -1,53 +1,66 @@
 {% load i18n%}
 {% load consulting %}
 
+{% url cal.views.main as view_appointment %}
+{% url cal.select_month_year as set_appointment  %}
+{% url cal.lookfor_patient_app_list as users_appointment %}
+{% url cal.list_slot_type as slot_type %}
 
-<div class="subnav">
-  <ul class="nav nav-pills">
-    <li>
-        <a href="{% url cal.views.main %}">
-          {% if request.user.get_profile.is_doctor %}
-            {% trans 'CITAS/HUECOS MÉDICO | DAR CITA' %}
-          {% endif %}
-          {% if request.user.get_profile.is_administrative %}
-            {% trans 'CITAS/HUECOS MÉDICO' %}
-          {% endif %}
-        </a>
-    </li>
-    {% if request.user.get_profile.is_administrative %}
-    <li>
-        <a href="{% url cal.select_month_year %}">
-          {% trans 'DAR CITA' %}
-        </a>
-    </li>
-    {% endif %}
-    <li>
-        <a href="{% url cal.lookfor_patient_app_list %}">
-          {% trans 'CITAS PACIENTE' %}
-        </a>
-    </li>
-    {% if request.user.get_profile.is_doctor %}
-    <li>
-        <a href="{% url cal.list_slot_type %}">
-          {% trans 'TIPOS DE PREFERENCIA' %}
-        </a>
-    </li>
-    <li class="dropdown">
+
+
+<ul class="nav nav-pills nav-stacked">
+  <li class="{% active_child request view_appointment %}">
+      <a href="{% url cal.views.main %}">
+        {% if request.user.get_profile.is_doctor %}
+          {% trans 'CITAS/HUECOS MÉDICO | DAR CITA' %}
+        {% endif %}
+        {% if request.user.get_profile.is_administrative %}
+          {% trans 'CITAS/HUECOS MÉDICO' %}
+        {% endif %}
+      </a>
+  </li>
+  {% if request.user.get_profile.is_administrative %}
+  <li class="{% active_child request set_appointment %}">
+      <a href="{% url cal.select_month_year %}">
+        {% trans 'DAR CITA' %}
+      </a>
+  </li>
+  {% endif %}
+  <li class="{% active_child request users_appointment %}">
+      <a href="{% url cal.lookfor_patient_app_list %}">
+        {% trans 'CITAS PACIENTE' %}
+      </a>
+  </li>
+  {% if request.user.get_profile.is_doctor %}
+  <li  class="dropdown {% active_child request slot_type %}">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        {% trans 'AUSENCIAS' %}<b class="caret"></b>
+        {% trans 'PREFERENCIAS' %}<b class="caret"></b>
       </a>
       <ul class="dropdown-menu">
         <li>
-          <a href="{% url cal.list_vacation %}">{% trans "Vacaciones" %}</a>
+          <a href="{% url cal.list_slot_type %}">{% trans 'TIPOS' %}</a>
         </li>
-        <li>                                                     
-          <a href="{% url cal.list_event %}">{% trans "Eventos" %}</a>
+        <li>
+          <a href="{% url cal.views.main %}">{% trans 'CITAS' %}</a>
         </li>
       </ul>
-    </li>
-    {% endif %}
-  </ul>
-</div>
+  </li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      {% trans 'AUSENCIAS' %}<b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="{% url cal.list_vacation %}">{% trans "VACACIONES" %}</a>
+      </li>
+      <li>                                                     
+        <a href="{% url cal.list_event %}">{% trans "EVENTOS" %}</a>
+      </li>
+    </ul>
+  </li>
+  {% endif %}
+</ul>
+
     
 
          

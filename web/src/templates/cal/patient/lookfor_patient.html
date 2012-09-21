@@ -39,20 +39,15 @@
 {% endblock %}
 
 
-{% block body %}
-  <div class="container">
-    {% block nav-bar%}
-        {% include "cal/includes/nav_bar_cal.html" %}
-    {% endblock  %}
-    <div class="row" style="margin-top:150px;">      
-      <div class="span5" style="text-align:right;">
-        <h3>{% trans 'BUSCAR PACIENTE' %}</h3>
-      </div>
-      <div class="span7">
-        <form class="form-horizontal">{% csrf_token %}
-          <input type="text" id="searcher" class="input-medium span4">
-        </form>
-      </div>     
-    </div>  
+{% block container %}
+<div class="row" style="margin-top:150px;">      
+  <div class="span3" style="text-align:right;">
+    <h3>{% trans 'BUSCAR PACIENTE' %}</h3>
   </div>
-{% endblock body %}
+  <div class="span4">
+    <form class="form-horizontal">{% csrf_token %}
+      <input type="text" id="searcher" class="input-medium span4">
+    </form>
+  </div>     
+</div>  
+{% endblock %}

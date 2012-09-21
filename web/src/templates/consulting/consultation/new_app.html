@@ -17,13 +17,12 @@
 
 {% block title %}{% trans 'Lista de Citas' %}{% endblock %}
 
-{% block body %}
-<div class="container">
-  <div class="row">
-    <div class="span3">
-      {% include "consulting/consultation/calendar_new_app.html" %}
-    </div>
-    <div class="span9">
+{% block right %}
+  {% include "consulting/consultation/calendar_new_app.html" %}
+{% endblock %}
+
+{% block container %}
+    <div class="">
       <a class="btn btn-primary" href={%if id_result %}"{% url consulting_day_new_app year month day patient.id id_result %}"{% else %}"{% url consulting_day_new_app year month day patient.id %}"{% endif %}>
         <i class="icon-arrow-left icon-white"></i>
         {% trans 'Volver' %}
@@ -149,12 +148,9 @@
             </p>
           </fieldset>
         </form>
-        {% include "cal/app/free_slots.html" %}
       </div>
     </div>
-  </div>
-</div>
-{% endblock body %}
+{% endblock container %}
 {% block jquery_init %}
   $('#id_date').datepicker({'format':'dd/mm/yyyy'});
   $('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.start_time.value|time:"H:i" }}' });

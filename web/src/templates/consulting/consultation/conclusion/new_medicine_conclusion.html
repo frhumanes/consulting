@@ -55,16 +55,14 @@
   }); 
 {% endblock %}
 
+{% block left %}
+ {% include "ui/includes/medicine_actions_conclusion.html" %}
+{% endblock %}
 
-{% block body %}
-  <div class="container">
-    <div class="row">
-      <div class="span2">
-          {% include "ui/includes/medicine_actions_conclusion.html" %}
-      </div>
-      <div class="span10">
-        {% include "consulting/consultation/conclusion/medicine_conclusion.html" %}
-      </div>
-    </div>
-  </div>
-{% endblock body %}
+{% block right %}
+  {% include "consulting/patient/card.html" %}
+{% endblock %}
+
+{% block container %}  
+ {% include "consulting/consultation/conclusion/medicine_conclusion.html" %}
+{% endblock %}

@@ -3,8 +3,7 @@
   <div class="page-header">
     <h1>{% trans 'Receta Fármaco' %}</h1>
   </div>
-  <div class="row">
-    <div class="span6">
+    <div class="hero-unit center">
       <form class="form-horizontal" id="form" action="{% url consulting_new_medicine_monitoring id_conclusion %}" method="post" accept-charset="utf-8">{% csrf_token %}
           {{form.component}}
           <div class="control-group">
@@ -84,10 +83,5 @@
           {% trans 'Continuar' %}
         </button>         
       </div>
-    </div>
-    <!-- PATIENT CARD -->
-    <div class="span4">
-        {% include "consulting/patient/card.html" %}
-    </div>
   </div>
 </section>

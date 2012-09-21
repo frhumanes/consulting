@@ -4,21 +4,21 @@
 
 {% block title %}{% trans 'Events list' %}{% endblock %}
 
-{% block left_panel %}
+{% block right %}
   {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
 {% endblock %}
 
-{% block right_panel %}
+{% block container %}
+<h1>{% trans 'New Slot' %}</h1>
 
 <a class="btn btn-primary" href="{% url cal.list_slot year month %}">
   <i class="icon-arrow-left icon-white"></i>
   {% trans 'Back' %}
 </a>
 
-<legend>{% trans 'New Slot' %}</legend>
 
-<div class="offset1">
 
+<div class="well center">
 <form class="form-horizontal" method="post" action="{% url cal.add_slot year month %}">{% csrf_token %}
   <fieldset>
 

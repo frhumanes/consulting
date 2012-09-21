@@ -5,15 +5,18 @@
 {% block title %}{% trans 'Calendar list' %}{% endblock %}
 
 
-{% block left_panel %}
+{% block right %}
   {% include "cal/includes/calendar_new_app_admin.html" %}
-
-  {% if not request.user.get_profile.is_doctor %}
-    {% include "cal/app/doctor_preferences.html" %}
-  {% endif %}
 {% endblock %}
 
-{% block right_panel %}
+{% if not request.user.get_profile.is_doctor %}
+  {% block left %}
+    {{block.super}}
+      {% include "cal/app/doctor_preferences.html" %}
+    {% endblock %}
+{% endif %}
+
+{% block container %}
     <div class="well">
       <p>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</p>
     </div>
@@ -22,8 +25,8 @@
     </div>
 
     {% if events.object_list.count > 0 %}
-        <div id="message-paginator" class="pull-right">
-          <ul class="pagination ">
+        <div id="message-paginator" class="pagination pagination-centered">
+          <ul>
             {% if events.has_previous %}
               <li><a href="?page={{ events.previous_page_number }}">←</a></li>
             {% else %}
@@ -49,6 +52,6 @@
 
         <div id="preview"></div>
     {% else %}
-        <h6>{% trans "There are no appointments" %}</h6>
+        <h6>{% trans "No hay citas concertadas para este día" %}</h6>
     {% endif %}
 {% endblock %}

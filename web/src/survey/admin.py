@@ -32,8 +32,8 @@ admin.site.register(Block, BlockAdmin)
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    fieldsets = [('Questions', {'fields': ['text', 'code']})]
-    list_display = ('code', 'text')
+    fieldsets = [('Questions', {'fields': ['text', 'code', 'required', 'single','kind']})]
+    list_display = ('code', 'text', 'required', 'single')
     search_fields = ('code', 'text')
     ordering = ('code',)
 
@@ -41,10 +41,10 @@ admin.site.register(Question, QuestionAdmin)
 
 
 class OptionAdmin(admin.ModelAdmin):
-    fieldsets = [('Options', {'fields': ['text', 'code', 'kind', 'weight',
+    fieldsets = [('Options', {'fields': ['text', 'code', 'weight',
                 'question']})]
-    list_display = ('code', 'text', 'weight', 'kind', 'question')
-    search_fields = ('code', 'text', 'kind', 'weight', 'kind', 'question')
+    list_display = ('code', 'text', 'weight', 'question')
+    search_fields = ('code', 'text', 'weight')
     ordering = ('code',)
 
 admin.site.register(Option, OptionAdmin)

@@ -34,19 +34,18 @@
                 {% endif %}
             </ul>
             <ul class="nav pull-right">
-                <li class="navbar-text">
-                    {% trans 'Logado como '%}
-                    {{ user.first_name }}
-                    {{ user.last_name}}
-                </li>
-                <li class="navbar-text">
-                    <div>
-                    <a  class="exit btn"href='{% url registration_logout %}'>
-                        {% trans 'Salir' %}
+                <div class="btn-group ">
+                    <a class="btn btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user"></i> {{user.username}}
+                    <span class="caret"></span>
                     </a>
-                    </div>
-                <li>
-            </ul>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="icon-user"></i><strong>{{ user.first_name }} {{ user.last_name }}</strong></a></li>
+                        <li class="divider"></li>
+                        <li><a href="{% url registration_logout %}"><i class="icon-off"></i>{% trans 'Desconectar' %}</a></li>
+                    </ul>
+                </div>
+            </ul>   
         </div>
     </div>
   </div>

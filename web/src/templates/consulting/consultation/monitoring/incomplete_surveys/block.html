@@ -1,12 +1,8 @@
-{% extends "ui/app.html" %}
+{% extends "consulting/consultation/monitoring/index.html" %}
 
 {% load i18n%}
 
-{% block body %}
-<div class="container">
-    {% block nav-bar%}
-        {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
-    {% endblock  %}
+{% block container%}
     <section>
         <div class="page-header">
           <h1>{% trans 'Encuesta: ' %}{{task.survey.name}}</h1>              
@@ -50,13 +46,9 @@
                     </div>
                 </form>               
             </div>
-            <div class="span4">
-                {% include "consulting/patient/card.html" %}
-            </div>  
         </div>
     </section>
-</div>
-{% endblock body %}
+{% endblock container %}
 
 {% block jquery_init %}
     $('ul').addClass("without_decorator");

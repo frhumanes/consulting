@@ -4,11 +4,11 @@
 
 {% block title %}{% trans 'Appointments list' %}{% endblock %}
 
-{% block left_panel %}
+{% block right %}
   {% include "cal/includes/calendar.html" %}
 {% endblock %}
 
-{% block right_panel %}
+{% block container %}
 
 <a class="btn btn-primary" href="{%if request.user.get_profile.is_doctor%}{%url cal.views.day year month day%}{%else%}{%url cal.views.doctor_day year month day doctor.id%}{%endif%}">
   <i class="icon-arrow-left icon-white"></i>
@@ -156,7 +156,6 @@
     </fieldset>
   </form>
 
-  {% include "cal/app/free_slots.html" %}
 
   </div>
 

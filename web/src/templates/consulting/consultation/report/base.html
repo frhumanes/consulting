@@ -1,0 +1,180 @@
+{% extends as_pdf|yesno:"ui/pdf.html,ui/app.html" %}
+
+{% load i18n %}
+
+{% block container %}
+<h2>INFORME RESUMEN TRAS LA PRIMERA ENTREVISTA</h2>
+<p>{{patient.name}} {{patient.first_surname}} {{patient.second_surname}} de {{patient.get_age}} años de edad presenta desde __ {{time_interval.text}} los síntomas que le han hecho acudir a consulta.
+	{% if ap_list %}
+		Ha sido diagnosticado/a de 
+		{% for ap in ap_list %}
+			{% if forloop.last and not forloop.first %}
+					 y {{ap.text}}
+				{% else %}
+					{% if forloop.revcounter0 > 1 %}
+						{{ap.text}}, 
+					{% else %}
+						{{ap.text}}
+					{% endif %}
+				{% endif %}
+		{%  endfor %}
+	{% else %}
+		No ha sido diagnosticado/a 
+	{% endif %}
+	con anterioridad y en su familia
+	{% if af_dict|length %}
+		también existen antecedentes de enfermedades psiquiátricas, en concreto
+		{% for person, af_list in af_dict.items %}
+			{% if forloop.last and not forloop.first %}
+				 y su {{person|lower}} está diagnosticado de
+				 {% for illness in af_list %}
+					{% if forloop.last and not forloop.first %}
+						 y {{illness}}.
+					{% else %}
+						{% if forloop.revcounter0 > 1 %}
+							{{illness}}, 
+						{% else %}
+							{{illness}}
+						{% endif %}
+					{% endif %}
+				{%  endfor %}
+			{% else %}
+				{% if forloop.revcounter0 > 0 %}
+					su {{person|lower}} está diagnosticado de 
+					{% for illness in af_list %}
+						{% if forloop.last and not forloop.first %}
+							 y {{illness}},
+						{% else %}
+							{% if forloop.revcounter0 > 1 %}
+								{{illness}}, 
+							{% else %}
+								{{illness}}
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				{% else %}
+					su {{person|lower}} está diagnosticado de 
+					{% for illness in af_list %}
+						{% if forloop.last and not forloop.first %}
+							 y {{illness}}.
+						{% else %}
+							{% if forloop.revcounter0 > 1 %}
+								{{illness}}, 
+							{% else %}
+								{{illness}}
+							{% endif %}
+						{% endif %}
+					{%  endfor %}
+				{% endif %}
+			{% endif %}
+			
+			
+		{%  endfor %}
+	{% else %}
+		no existen antecedentes de enfermedades psiquiátricas.
+	{% endif %}
+</p>
+<p>{{patient.name}} 
+	{% if organicity_list %}
+		padece
+		{% for org in organicity_list %}
+			{% if forloop.last and not forloop.first %}
+				 y {{org.text}}
+			{% else %}
+				{% if forloop.revcounter0 > 1 %}
+					{{org.text}}, 
+				{% else %}
+					{{org.text}}
+				{% endif %}
+			{% endif %}
+		{%  endfor %}
+	{% else %}
+		no padece de enfermedad orgánica diagnosticada y
+	{% endif %}
+	{% if organicity_list and medicaments_list%}
+	y
+	{% endif %}
+	{% if medicaments_list %}
+	se medica con
+		{% for med in medicaments_list %}
+			{% if forloop.last and not forloop.first %}
+				 y {{med.component.name}} {{med.posology}} mg/24 horas desde hace {{med.months}} meses.
+			{% else %}
+				{% if forloop.revcounter0 > 1 %}
+					{{med.component.name}} {{med.posology}} mg/24 horas desde hace {{med.months}} meses, 
+				{% else %}
+					{{med.component.name}} {{med.posology}} mg/24 horas desde hace {{med.months}} meses
+				{% endif %}
+			{% endif %}
+		
+		{%  endfor %}
+	{% else %}
+		no toma ninguna medicación.
+	{% endif %}
+</p>
+{% if organicity_list or medicaments_list %}
+	<p>Según estos antecedentes, convendría que el/la paciente revisara
+		{% if organicity_list %}
+				su
+			{% for org in organicity_list %}
+				{% if forloop.last and not forloop.first %}
+					 y {{org.text}}
+				{% else %}
+					{% if forloop.revcounter0 > 1 %}
+						{{org.text}}, 
+					{% else %}
+						{{org.text}}
+					{% endif %}
+				{% endif %}
+			{%  endfor %}
+		{% endif %}
+		{% if medicaments_list %}
+			{% if organicity_list and medicaments_list %}
+				y/o 
+			{% endif %}
+			su medicación de
+			{% for med in medicaments_list %}
+				{% if forloop.last and not forloop.first %}
+					 y {{med.component.name}}
+				{% else %}
+					{% if forloop.revcounter0 > 1 %}
+						{{med.component.name}}, 
+					{% else %}
+						{{med.component.name}}
+					{% endif %}
+				{% endif %}
+			
+			{%  endfor %}
+		{% endif %}
+	para valorar la posible influencia de 
+		{% if organicity_list|length > 1 %}
+			dichas enfemerdades
+		{% else %}
+			{% if organicity_list|length = 1 %}
+				dicha enfermedad
+			{% endif %}
+		{% endif %}
+		{% if organicity_list and medicaments_list %}
+				y de
+		{% endif %}
+		{% if medicaments_list %}
+				dicha medicación
+			{% endif %}
+		como posible factor _____ en su sintomatología.
+	</p>
+{% endif %}
+
+{% if task.survey.id = 2 %}
+	{% include 'consulting/consultation/report/anxiety_depression.html' %}
+{% endif %}
+
+<dl>
+	<dt>OBSERVACIONES</dt>
+	<dd>{{conclusion.observation}}</dd>
+	<dt>RECOMENDACIONES</dt>
+	<dd>{{conclusion.recommendation}}</dd>
+</dl>
+
+
+
+{% endblock container %}

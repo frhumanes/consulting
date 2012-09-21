@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 from django.db import models
+from django.db.models import Max
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -52,6 +53,9 @@ class Task(TraceableModel):
                     _(u'¿Ha contestado todas las preguntas de la encuesta?'),
                     default=False)
 
+    observations = models.CharField(max_length=5000, blank=True,
+                                            null=True)
+
     def __unicode__(self):
         return u'id: %s task: %s %s %s' \
             % (self.id, self.patient, self.survey, self.creation_date)
@@ -73,6 +77,107 @@ class Task(TraceableModel):
             return self.to_date
         else:
             return ''
+
+    def get_answers(self):
+        answers = []
+        for r in self.task_results.values('block').annotate(Max('date'),Max('id')).order_by():
+            answers += Result.objects.get(id=r['id__max']).options.all()
+        return answers
+
+    def is_completed(self):
+        if self.treated_blocks.count() == self.survey.num_blocks:
+            return self.completed
+        else:
+            return False
+
+    def get_time_interval(self):
+        return self.task_results.filter(block=settings.PRECEDENT_RISK_FACTOR).latest('id').options.filter(code__startswith='DS')
+
+    def get_af_dict(self):
+        dic = {}
+        for opt in self.task_results.filter(block=settings.PRECEDENT_RISK_FACTOR).latest('id').options.filter(question__code__startswith='AF').exclude(text='Ninguno'):
+            if opt.text in dic:
+                dic[opt.text].append(opt.question.get_af_illness())
+            else:
+                dic[opt.text] = [opt.question.get_af_illness()]
+        return dic
+
+    def get_ap_list(self):
+        return self.task_results.filter(block=settings.PRECEDENT_RISK_FACTOR).latest('id').options.filter(question__code__startswith='AP')
+
+    def get_organicity_list(self):
+        return self.task_results.filter(block=settings.PRECEDENT_RISK_FACTOR).latest('id').options.filter(question__code__in=['AN','AE','AT','AI','AO'])
+
+    def get_rp_list(self):
+        return self.task_results.filter(block=settings.PRECEDENT_RISK_FACTOR).latest('id').options.filter(code__startswith='RP')
+
+    def get_comorbidity_list(self):
+        return self.task_results.filter(block=settings.PRECEDENT_RISK_FACTOR).latest('id').options.filter(code__in=['AP7','AP8','AP9','AP10','AP11','AP12'])
+
+    def calculate_mark_by_code(self, code):
+        answers = self.get_answers()
+        mark = 0
+        for a in answers:
+            if a.code.startswith(code):
+                mark += a.weight
+        return mark
+
+    def calculate_beck_mark(self):
+        answers = self.get_answers()
+        mark = 0
+        for a in answers:
+            if a.code.startswith('B'):
+                mark += a.weight #* 5 / q.question_options.aggregate(Max('weight'))['weight__max']
+        return mark
+
+    def calculate_hamilton_mark(self):
+        answers = self.get_answers()
+        mark = 0
+        submarks = {}
+        kind = self.treated_blocks.all().aggregate(Max('kind'))['kind__max']
+        for a in answers:
+            if not a.code.startswith('H') or a.code.startswith('Hd'):
+                continue
+            item = a.code.split('.')[0]
+            if kind == settings.EXTENSO:
+                if item in submarks:
+                    submarks[item] += a.weight
+                else:
+                    submarks[item] = a.weight
+            else:
+                submarks[item] = a.weight
+                mark += a.weight
+        if kind == settings.EXTENSO:
+            for code, value in submarks.items():
+                submarks[code] = float(value)/Question.objects.filter(code__startswith=code+'.').count()
+                mark += submarks[code]
+        return mark, submarks
+
+    def get_ave_status(self):
+        l = settings.AVE.keys()
+        l.sort()
+        ave_mark = self.calculate_mark_by_code('AVE')
+        for value in l:
+            if ave_mark < value:
+                return settings.AVE[value]
+
+    def get_depression_status(self):
+        l = settings.BECK.keys()
+        l.sort()
+        beck_mark = self.calculate_beck_mark()
+        for value in l:
+            if beck_mark < value:
+                return settings.BECK[value]
+
+    def get_anxiety_status(self):
+        l = settings.HAMILTON.keys()
+        l.sort()
+        hamilton_mark, hamilton_submarks = self.calculate_hamilton_mark()
+        for value in l:
+            if hamilton_mark < value:
+                return settings.HAMILTON[value]
+
+
 
 
 class Medicine(TraceableModel):
@@ -106,6 +211,8 @@ class Medicine(TraceableModel):
                                     blank=True)
     date = models.DateTimeField(_(u'Fecha'), auto_now_add=True)
 
+
+
     def __unicode__(self):
         return u'id: %s medicine: %s' % (self.id, self.component)
 
@@ -135,6 +242,8 @@ class Result(TraceableModel):
 
     task = models.ForeignKey(Task, related_name="task_results")
 
+    block = models.ForeignKey(Block, related_name="block_results")
+
     appointment = models.ForeignKey(Appointment,
                                     related_name="appointment_results",
                                     blank=True, null=True)
@@ -145,7 +254,7 @@ class Result(TraceableModel):
                                             null=True)
 
     def __unicode__(self):
-        return u'id: %s result: %s %s' % (self.id, self.patient, self.survey)
+        return u'id: %s result: %s %s %s' % (self.id, self.patient, self.survey, self.block)
 
 
 class Conclusion(TraceableModel):
@@ -161,6 +270,8 @@ class Conclusion(TraceableModel):
     observation = models.CharField(max_length=5000, blank=True, null=True)
 
     recommendation = models.CharField(max_length=5000, blank=True, null=True)
+
+    task = models.ForeignKey(Task, related_name="task_conclusions", blank=True, null=True)
 
     date = models.DateTimeField(_(u'Fecha'), auto_now_add=True)
 

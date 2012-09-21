@@ -1,0 +1,57 @@
+{% load i18n %}
+
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+    {% if free_intervals %}
+    <li class="active"><a href="#tab1" data-toggle="tab">{% trans "Huecos libres" %}</a></li>
+    {% endif %}
+    {% if doctor_preferences %}
+    <li><a href="#tab2" data-toggle="tab">{% trans 'Prefencias del médico' %}</a></li>
+    {% endif %}
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+    {% if free_intervals %}
+      {% if free_intervals|length %}
+        <table id="free-slots" class="table">
+          <thead>
+              <tr>
+                <th>{% trans "Desde" %}</th>
+                <th>{% trans "Hasta" %}</th>
+                <th>{% trans "Libre" %}</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for free_interval in free_intervals %}
+              {% if free_interval.duration %}
+                <tr>
+                  <td>{{ free_interval.start_time|time:"H:i" }}</td>
+                  <td>{{ free_interval.end_time|time:"H:i" }}</td>
+                  <td>{{ free_interval.duration }} min</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        {% trans "Todos los huecos libres" %}
+      {% endif %}
+    {% endif %}
+    </div>
+    <div class="tab-pane" id="tab2">
+    {% regroup doctor_preferences by get_weekday_display as preferences_by_weekday %}
+    {% if doctor_preferences %}
+       <dl>
+        {% for weekday in preferences_by_weekday %}
+            <dt>{{ weekday.grouper }}</dt>
+                  {% for slot in weekday.list %}
+                    <dd>{{ slot.slot_type }}
+                            {{ slot.start_time|time:"H:i" }} - {{ slot.end_time|time:"H:i" }}
+                        </dd>
+                  {% endfor %}
+        {% endfor %}
+       </dl>
+    {% endif %}
+    </div>
+  </div>
+</div>

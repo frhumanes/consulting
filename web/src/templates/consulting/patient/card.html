@@ -1,15 +1,13 @@
 {% load i18n%}
-<div class="alert alert-info card">        
-  <table class="table-condensed">  
+<div class="alert alert-info">
+  <table class="table table-condensed">  
     <thead>
       <tr>            
         <th colspan="2" style="text-align:center;">
-          <h3>
+          <h4>
             {{patient_user.get_profile.name|upper}} {{patient_user.get_profile.first_surname|upper}} {{patient_user.get_profile.second_surname|upper}}
-          </h3>     
-        </th>
-        <th>
-          <a href="{% url consulting_editpatient_pm patient_user.id %}?next={{request.path}}" class="icon-edit"></a>
+          <a href="{% url consulting_editpatient_pm patient_user.id %}?next={{request.path}}" data-dismiss="alert" class="icon-edit pull-right"></a> 
+          </h4>
         </th>
       </tr>
     </thead>        
@@ -21,7 +19,7 @@
       {% if user.get_profile.is_doctor %}
       <tr>            
         <td>{% trans 'EDAD' %}</td>
-        <td>{{patient_user.get_profile.get_age}}</td>
+        <td>{{patient_user.get_profile.get_age}} {% trans 'años' %}</td>
       </tr>
       <tr>            
         <td>{% trans 'SEXO' %}</td>
@@ -42,7 +40,7 @@
       </tr> 
       <tr>            
         <td>{% trans 'CORREO' %}</td>
-        <td>{{patient_user.get_profile.email}}</td>
+        <td><small>{{patient_user.get_profile.email}}</small></td>
       </tr>     
       <tr>            
         <td>{% trans 'DOMICILIO' %}</td>
@@ -64,19 +62,23 @@
       {% endif %}
       <tr>            
         <td>{% trans 'ÚLTIMA CITA' %}</td>
-        <td>{{patient_user.get_profile.get_lastAppointment}}</td>
+        <td>{{patient_user.get_profile.get_lastAppointment|date:'d/M/Y'}}</td>
       </tr>
       <tr>            
         <td>{% trans 'PRÓXIMA CITA' %}</td>
-        <td>{{patient_user.get_profile.get_nextAppointment}}</td>
+        <td>{{patient_user.get_profile.get_nextAppointment|date:'d/M/Y'}}</td>
       </tr>
       {% if user.get_profile.is_doctor %}
       <tr>            
-        <td>{% trans 'NIVEL ESTRATIFICACIÓN' %}</td>
-        <td>
-          <p>
-            PENDIENTE DE CALCULAR 
-          </p>
+        <td colspan="2">{% trans 'NIVEL ESTRATIFICACIÓN' %}<br />
+          {% if patient_user.get_profile.get_anxiety_status %}
+              <span class="label label-{{patient_user.get_profile.get_anxiety_status|last}}">{{patient_user.get_profile.get_anxiety_status|first}}</span>
+          {% endif %}
+          {% if patient_user.get_profile.get_depression_status %}
+              <span class="label label-{{patient_user.get_profile.get_depression_status|last}}">{{patient_user.get_profile.get_depression_status|first}}</span>
+          {% else %}
+              <span class="label">PENDIENTE DE CALCULAR</span>
+          {% endif %}
         </td>
       </tr>
       {% endif %}              

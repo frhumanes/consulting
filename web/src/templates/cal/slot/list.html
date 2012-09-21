@@ -4,24 +4,19 @@
 
 {% block title %}{% trans 'Slots list' %}{% endblock %}
 
-{% block left_panel %}
+{% block right %}
   {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
 {% endblock %}
 
-{% block right_panel %}
+{% block container %}
 
-  <legend>{% trans "Slots" %}</legend>
-
-  <div class="row">
-    <div class="span5">
-      <div class="btn-toolbar" style="margin-bottom: 9px">
-          <div class="btn-group">
-            <a class="btn btn-primary btn" href="{% url cal.add_slot year month %}"><i class="icon-pencil icon-white"></i> {% trans "New preference" %}</a>
+  <legend>{% trans "Preferencia de Citas para " %}          
+    <div class="btn-group pull-right">
+            <a class="btn btn-info" href="{% url cal.add_slot year month %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva preferencia" %}</a>
           </div>
-      </div>
-    </div>
-  </div>
+    </legend>
 
+  
   {% regroup slots by get_weekday_display as slots_by_weekday %}
 
   {% for weekday in slots_by_weekday %}
@@ -32,11 +27,11 @@
         </tr>
 
         <tr>
-          <th>{% trans "Slot Type" %}</th>
-          <th>{% trans "Notes" %}</th>
-          <th>{% trans "Start time" %}</th>
-          <th>{% trans "End time" %}</th>
-          <th>{% trans "Duration (min)" %}</th>
+          <th>{% trans "Tipo de cita" %}</th>
+          <th>{% trans "Notas" %}</th>
+          <th>{% trans "Hora inicial" %}</th>
+          <th>{% trans "Hora final" %}</th>
+          <th>{% trans "Duración (min)" %}</th>
         </tr>
       </thead>
       <tbody>

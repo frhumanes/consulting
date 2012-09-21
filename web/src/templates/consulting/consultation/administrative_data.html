@@ -2,17 +2,18 @@
 
 {% load i18n %}
 
-{% block body %}
-<div class="container">
+{% block right %}
+  {% include "consulting/patient/card.html" %}
+{% endblock %}
+
+{% block container %}
   <section>
     <div class="page-header">
       <h1>{% trans 'Encuesta: ' %} {{task.survey.name}}</h1>
     </div>
-    <div class="row" >
-      <div class="span8">
-        <div class="page-header">
-          <h2>{% trans 'Bloque' %} {{my_block.code}}: {{my_block.name}}</h2>
-        </div>
+      <div class="page-header">
+        <h2>{% trans 'Bloque' %} {{my_block.code}}: {{my_block.name}}</h2>
+      </div>
         <form class="form-horizontal" id="form" action="{% url consulting_administrative_data task.id id_appointment %}" method="post" accept-charset="utf-8">{% csrf_token %}            
           {% if same_username %}
             <div class="alert alert-error">
@@ -37,7 +38,7 @@
               </div>
             </div>
           {% else %}
-            <div class="control-group error">
+            <div class="control-group info">
               <label class="control-label">
                 {{form.name.label}}
               </label>
@@ -61,7 +62,7 @@
             </div>
           </div>
           {% else %}
-          <div class="control-group error">
+          <div class="control-group info">
             <label class="control-label">
               {{form.first_surname.label}}
             </label>
@@ -85,7 +86,7 @@
             </div>
           </div>
           {% else %}
-          <div class="control-group error">
+          <div class="control-group info">
             <label class="control-label">
               {{form.second_surname.label}}
             </label>
@@ -109,7 +110,7 @@
             </div>
           </div>
           {% else %}
-          <div class="control-group">
+          <div class="control-group info">
             <label class="control-label">
               {{form.nif.label}}
             </label>
@@ -134,7 +135,7 @@
               </div>
             </div>
             {% else %}
-            <div class="control-group error">
+            <div class="control-group info">
               <label class="control-label">
                 {{form.sex.label}}
               </label>
@@ -232,7 +233,7 @@
               </div>
             </div>
             {% else %}
-            <div class="control-group error">
+            <div class="control-group info">
               <label class="control-label">
                 {{form.status.label}}
               </label>
@@ -265,7 +266,7 @@
             </div>
           </div>
           {% else %}
-          <div class="control-group error">
+          <div class="control-group info">
             <label class="control-label">
               {{form.dob.label}}
             </label>
@@ -297,7 +298,7 @@
             </div>
           </div>
           {% else %}
-          <div class="control-group error">
+          <div class="control-group info">
             <label class="control-label">
               {{form.phone1.label}}
             </label>
@@ -345,7 +346,7 @@
             </div>
           </div>
           {% else %}
-          <div class="control-group error">
+          <div class="control-group info">
             <label class="control-label">
               {{form.email.label}}
             </label>
@@ -410,12 +411,5 @@
             </button>
           </div>        
         </form>        
-      </div>
-      <!-- PATIENT CARD -->
-      <div class="span4">
-          {% include "consulting/patient/card.html" %}
-      </div> 
-    </div>  
   </section> 
-</div>
-{% endblock body %}
+{% endblock container %}

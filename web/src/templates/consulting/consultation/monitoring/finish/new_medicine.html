@@ -1,4 +1,4 @@
-{% extends "ui/app.html" %}
+{% extends "consulting/consultation/monitoring/index.html" %}
 
 {% load i18n%}
 
@@ -56,18 +56,6 @@
 {% endblock %}
 
 
-{% block body %}
-  <div class="container">
-    {% block nav-bar%}
-        {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
-    {% endblock  %}
-    <div class="row">
-      <div class="span2">
-          {% include "ui/includes/monitoring/finish/medicine_actions.html" %}
-      </div>
-      <div class="span10">
-        {% include "consulting/consultation/monitoring/finish/medicine.html" %}
-      </div>
-    </div>
-  </div>
-{% endblock body %}
+{% block container %}
+  {% include "consulting/consultation/monitoring/finish/medicine.html" %}
+{% endblock container %}

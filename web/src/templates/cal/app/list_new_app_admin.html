@@ -4,45 +4,48 @@
 
 {% block title %}{% trans 'Appointments list' %}{% endblock %}
 
-{% block left_panel %}
+{% block right %}
   {% include "cal/includes/calendar_new_app_admin.html" %}
-
-  {% if not request.user.get_profile.is_doctor %}
-    {% include "cal/app/doctor_preferences.html" %}
-  {% endif %}
 {% endblock %}
 
-{% block right_panel %}
 
-  <legend>{{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
+{% block container %}
+  <legend>
+    <div>
+      {{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}
+      {% if not vacations %}
+       <a class="btn btn-info pull-right" href="{% url cal.app_add_new_app_admin year month day doctor.id patient.id %}"><i class="icon-pencil icon-white"></i> {% trans "Asignar cita" %}</a>
+       {% endif %}
+   </div>
+  </legend>
 
-  {% if vacations %}
-    <div class="well">
-      <p>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }} {% trans " is not available this day" %}</p>
-    </div>
-    <div class="well">
-      <p>{% trans "Paciente:" %} {{ patient.get_profile.name }} {{ patient.get_profile.first_surname }}</p>
-    </div>
-  {% else %}
-    <div class="well">
-      <p>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</p>
-    </div>
-    <div class="well">
-      <p>{% trans "Paciente:" %} {{ patient.get_profile.name }} {{ patient.get_profile.first_surname }}</p>
-    </div>
-    <div class="row">
-      <div class="span5">
-        <div class="btn-toolbar" style="margin-bottom: 9px">
-            <div class="btn-group">
-              <a class="btn btn-primary btn" href="{% url cal.app_add_new_app_admin year month day doctor.id patient.id %}"><i class="icon-pencil icon-white"></i> {% trans "New appointment" %}</a>
-            </div>
-        </div>
-      </div>
-    </div>
 
-    {% if events.object_list.count > 0 %}
-      <div id="events-paginator" class="pull-right">
-        <ul class="pagination ">
+  <div class="well">
+    <h4>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</h4>
+  </div>
+  <div class="well">
+    <h4>{% trans "Paciente:" %} {{ patient.get_profile.name }} {{ patient.get_profile.first_surname }} {{ patient.get_profile.second_surname }}</h4>
+  </div>
+    {% if events.object_list.count %}
+      <table id="events_list" class="table table-striped">
+        <thead>
+            <tr>
+              <th>{% trans "Fecha" %}</th>
+              <th>{% trans "Inicio" %}</th>
+              <th>{% trans "Final" %}</th>
+              <th>{% trans "Paciente" %}</th>
+              <th>{% trans "Tipo de cita" %}</th>
+              <th>{% trans "Notas" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for event in events.object_list %}
+            {% include "cal/app/appointment.html" %}
+          {% endfor %}
+        </tbody>
+      </table>
+      <div id="events-paginator" class="pagination pagination-centered">
+        <ul>
           {% if events.has_previous %}
             <li><a href="?page={{ events.previous_page_number }}">←</a></li>
           {% else %}
@@ -57,32 +60,14 @@
         </ul>
       </div>
 
-      <table id="events_list" class="table table-striped">
-        <thead>
-            <tr>
-              <th>{% trans "Date" %}</th>
-              <th>{% trans "Start Time" %}</th>
-              <th>{% trans "End Time" %}</th>
-              <th>{% trans "Duration (min)" %}</th>
-              <th>{% trans "Patient" %}</th>
-              <th>{% trans "Appointment type" %}</th>
-              <th>{% trans "Note" %}</th>
-            </tr>
-        </thead>
-        <tbody>
-          {% for event in events.object_list %}
-            {% include "cal/app/appointment.html" %}
-          {% endfor %}
-        </tbody>
-      </table>
-
       <div id="preview"></div>
     {% else %}
-      <h6>{% trans "There are no appointments" %}</h6>
+        {% if vacations %}
+            <div class="alert alert-error"> El doctor no está disponible para este día</div>
+        {% else %}
+          <h6>{% trans "No hay citas concertadas para este día" %}</h6>
+        {% endif %}
     {% endif %}
-    {% include "cal/app/free_slots.html" %}
-
-  {% endif %}
 
 {% endblock %}
 {% block jquery_init %}

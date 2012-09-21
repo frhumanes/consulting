@@ -2,14 +2,15 @@
 
 {% load i18n %}
 
-{% block body %}
-<div class="container">
+{% block right %}
+  {% include "consulting/patient/card.html" %}
+{% end block %}
+
+{% block container %}
   <section>
   <div class="page-header">
     <h1>{% trans 'Acción a realizar' %}</h1>
   </div>
-  <div class="row">
-    <div class="span8">
       <div class="hero-unit center">
         <form class="form-horizontal" method="post" action="{% url consulting_select_action id_appointment %}">{% csrf_token %}
           <fieldset>
@@ -20,9 +21,6 @@
                   </label>
                   <div class="controls">
                     {{ form.action }}
-                    <button type="submit" class="btn">
-                      Continuar
-                    </button>
                     {% for error in form.action.errors %}
                       <span class="help-inline">
                         {{ error|escape }}
@@ -37,20 +35,17 @@
                   </label>
                   <div class="controls">
                     {{ form.action }} 
-                    <button type="submit" class="btn">
-                      Ir
-                    </button>
                   </div>
                 </div>
               {% endif %}
           </fieldset>
+              <button type="submit" class="btn btn-block">
+      Continuar
+    </button>
         </form>
       </div>
     </div>
-    <!-- PATIENT CARD -->
-    <div class="span4">
-        {% include "consulting/patient/card.html" %}
-    </div>
+
   </div>
 </div>
 {% endblock body %}

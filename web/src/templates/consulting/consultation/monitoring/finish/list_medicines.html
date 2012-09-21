@@ -1,4 +1,4 @@
-{% extends "ui/app.html" %}
+{% extends "consulting/consultation/monitoring/index.html" %}
 
 {% load i18n%}
 
@@ -40,11 +40,7 @@
 {% endblock %}
 
 
-{% block body %}
-  <div class="container">
-    {% block nav-bar%}
-      {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
-    {% endblock  %}
+{% block container %}
     <div class="row">      
       <div class="span2">
           {% include "ui/includes/monitoring/finish/medicine_actions.html" %}
@@ -58,7 +54,7 @@
           <div class="row">       
             <div id="overwrite_list" class="span6">            
               {% if medicines.object_list %}
-              <div id="medicine-paginator" class="pull-right">
+              <div id="medicine-paginator" class="pagination pagination-centered">
                 <ul class="pagination">
                   {% if medicines.has_previous %}
                     <li><a href="?page={{ medicines.previous_page_number }}">←</a></li>
@@ -85,7 +81,7 @@
                     <th></th>                
                   </tr>
                 </thead>        
-                <tbody>                  
+                <tcontainer>                  
                   {% for medicine in medicines.object_list %}
                     <tr id="{{medicine.id}}" class="medicine">
                       <td style="text-align:center;">{{medicine.date}}</td>
@@ -95,7 +91,7 @@
                       </td>
                     </tr>
                   {% endfor %}
-                </tbody>
+                </tcontainer>
               </table>
               <div id="overwrite"></div>                                       
               {% else %}
@@ -107,10 +103,6 @@
                 </button>         
               </div>
             </div>            
-            <!-- PATIENT CARD -->
-            <div class="span4">
-                {% include "consulting/patient/card.html" %}
-            </div>
           </div>
           <div id="check_remove_medicine" class="modal hide fade" style="display: block;">
             <input id="medicine_id" type="hidden">
@@ -120,7 +112,7 @@
                 </button>
                 <h3>Borrar Fármaco</h3>
             </div>
-            <div class="modal-body">
+            <div class="modal-container">
                 <p>
                   {% trans '¿Está seguro que quiere borrar éste fármaco?' %}
                 </p>
@@ -133,5 +125,4 @@
         </section>
       </div>
     </div>                    
-  </div>
-{% endblock body %}
+{% endblock container %}

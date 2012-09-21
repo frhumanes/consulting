@@ -2,62 +2,50 @@
 
 {% load i18n%}
 
-{% block body %}
-  <div class="container">
-    {% block nav-bar%}
-        {% include "cal/includes/nav_bar_cal.html" %}       
-    {% endblock  %}    
-    <section id="code">
-      <div class="page-header">
-        <h2>{% trans 'CITAS' %}</h2>
-      </div>
+{% block container %}  
+<div class="page-header">
+  <h1>{% trans 'Citas' %}</h1>
+</div>
 
-      <div class="row">
-        <div class="span8">
-          {% if events.object_list.count > 0 %}
-            <div id="events-paginator" class="pull-right">
-              <ul class="pagination ">
-                {% if events.has_previous %}
-                  <li><a href="?page={{ events.previous_page_number }}">←</a></li>
-                {% else %}
-                  <li class="disabled"><a>←</a></li>
-                {% endif %}
+  {% if events.object_list.count > 0 %}
+   
+    <table id="events_list" class="table table-striped">
+      <thead>
+          <tr>
+            <th>{% trans "Fecha" %}</th>
+            <th>{% trans "Inicio" %}</th>
+            <th>{% trans "Final" %}</th>
+            <th>{% trans "Paciente" %}</th>
+            <th>{% trans "Tipo de cita" %}</th>
+            <th>{% trans "Notas" %}</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for event in events.object_list %}
+          {% include "cal/app/appointment.html" %}
+        {% endfor %}
+      </tbody>
+    </table>
+     <div id="events-paginator" class="pagination pagination-centered">
+      <ul>
+        {% if events.has_previous %}
+          <li><a href="?page={{ events.previous_page_number }}">←</a></li>
+        {% else %}
+          <li class="disabled"><a>←</a></li>
+        {% endif %}
 
-                {% if events.has_next %}
-                  <li><a href="?page={{ events.next_page_number }}">→</a></li>
-                {% else %}
-                  <li class="disabled"><a>→</a></li>
-                {% endif %}
-              </ul>
-            </div>      
-            <table id="events_list" class="table table-striped">
-              <thead>
-                  <tr>
-                    <th>{% trans "Fecha" %}</th>
-                    <th>{% trans "Start Time" %}</th>
-                    <th>{% trans "End Time" %}</th>
-                    <th>{% trans "Duration (min)" %}</th>
-                    <th>{% trans "Patient" %}</th>
-                    <th>{% trans "Appointment type" %}</th>
-                    <th>{% trans "Note" %}</th>
-                  </tr>
-              </thead>
-              <tbody>
-                {% for event in events.object_list %}
-                  {% include "cal/app/appointment.html" %}
-                {% endfor %}
-              </tbody>
-            </table>
-
-            <div id="preview"></div>
-          {% else %}
-            <h6>{% trans "There are no appointments" %}</h6>
-          {% endif %}
-        </div>        
-      </div>      
-    </section>
-  </div>
-{% endblock body %}
+        {% if events.has_next %}
+          <li><a href="?page={{ events.next_page_number }}">→</a></li>
+        {% else %}
+          <li class="disabled"><a>→</a></li>
+        {% endif %}
+      </ul>
+    </div>      
+    <div id="preview"></div>
+  {% else %}
+    <h6>{% trans "No se ha encontrado ninguna cita" %}</h6>
+  {% endif %}
+{% endblock container %}
 
 {% block jquery_init %}
 var load_icon = "<img src='{{STATIC_URL}}img/loading.gif' alt='loading...'/>";

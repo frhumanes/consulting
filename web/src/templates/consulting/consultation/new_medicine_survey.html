@@ -55,34 +55,24 @@
   }); 
 {% endblock %}
 
+{% block left %}
+ {% include "ui/includes/medicine_actions_survey.html" %}
+{% endblock %}
 
-{% block body %}
-  <div class="container">
+{% block right %}
+  {% include "consulting/patient/card.html" %}
+{% endblock %}
+
+{% block container %}
     <section>
       <div class="page-header">
         <h1>{% trans 'Encuesta: ' %}{{name_survey}}</h1>              
       </div>      
-      <div class="row">
-        <div class="span8">
           <div class="page-header">
             <h2>{% trans 'Bloque' %} {{code_block}}: {{name_block}}</h2>
           </div>
-          <div class="row">
-            <div class="span2">
-              {% include "ui/includes/medicine_actions_survey.html" %}
-            </div>
-            <div class="span6">
               {% include "consulting/consultation/medicine_survey.html" %}
-            </div>
-          </div>
-        </div>
-        <!-- PATIENT CARD -->
-        <div class="span4">
-            {% include "consulting/patient/card.html" %}
-        </div>
-      </div>
     </section>
-  </div>
-{% endblock body %}
+{% endblock %}
 
 

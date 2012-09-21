@@ -39,103 +39,94 @@
   });
 {% endblock %}
 
+{% block left %}
+ {% include "ui/includes/medicine_actions_survey.html" %}
+{% endblock %}
 
-{% block body %}
-  <div class="container">
+{% block right %}
+  {% include "consulting/patient/card.html" %}
+{% endblock %}
+
+{% block container %}
     <section>
       <div class="page-header">
         <h1>{% trans 'Encuesta: ' %}{{name_survey}}</h1>              
       </div>
-      <div class="row">      
-        <div class="span8">
-          <div class="page-header">
-              <h2>{% trans 'Bloque' %} {{code_block}}: {{name_block}}</h2>
-          </div>
-          <div class="row">
-            <div class="span2">
-              {% include "ui/includes/medicine_actions_survey.html" %}
-            </div>
-            <div class="span6">
-              <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">              
-                <div class="row">       
-                  <div id="overwrite_list" class="span6">            
-                    {% if medicines.object_list %}
-                    <div id="medicine-paginator" class="pull-right">
-                      <ul class="pagination">
-                        {% if medicines.has_previous %}
-                          <li><a href="?page={{ medicines.previous_page_number }}">←</a></li>
-                        {% else %}
-                          <li class="disabled"><a>←</a></li>
-                        {% endif %}
-
-                        {% if medicines.has_next %}
-                          <li><a href="?page={{ medicines.next_page_number }}">→</a></li>
-                        {% else %}
-                          <li class="disabled"><a>→</a></li>
-                        {% endif %}
-                      </ul>
-                    </div>                         
-                    <table id="list_medicine" class="table table-bordered table-condensed">  
-                      <thead>
-                        <tr>            
-                          <th style="text-align:center;">
-                            {% trans 'FECHA' %}
-                          </th>
-                          <th style="text-align:center;">
-                            {% trans 'Fármaco' %}
-                          </th>
-                          <th></th>                
-                        </tr>
-                      </thead>        
-                      <tbody>                  
-                        {% for medicine in medicines.object_list %}
-                          <tr id="{{medicine.id}}" class="medicine">
-                            <td style="text-align:center;">{{medicine.date}}</td>
-                            <td style="text-align:center;">{{medicine.component}}</td>                      
-                            <td>                      
-                              <a id="{{medicine.id}}" class="icon-trash remove_medicine" data-toggle="modal" href="#check_remove_medicine"></a>
-                            </td>
-                          </tr>
-                        {% endfor %}
-                      </tbody>
-                    </table>
-                    <div id="overwrite"></div>                                       
-                    {% else %}
-                        <h6>{% trans "No hay fármacos" %}</h6>                  
-                    {% endif %}
-                    <div class="pull-right">
-                      <button id="carryon" class="btn btn-info btn-large">
-                        {% trans 'Continuar' %}
-                      </button>         
-                    </div>
-                  </div>
-                </div>
-                <div id="check_remove_medicine" class="modal hide fade" style="display: block;">
-                  <input id="medicine_id" type="hidden">
-                  <div class="modal-header">
-                      <button class="close" data-dismiss="modal">
-                        ×
-                      </button>
-                      <h3>Borrar Fármaco</h3>
-                  </div>
-                  <div class="modal-body">
-                      <p>
-                        {% trans '¿Está seguro que quiere borrar éste fármaco?' %}
-                      </p>
-                  </div>
-                  <div class="modal-footer">
-                    <a id="yes" data-dismiss="modal" href="#" class="btn">Sí</a>
-                    <a data-dismiss="modal" href="#" class="btn btn-primary">No</a>
-                  </div>    
-                </div>
-            </div>
-          </div>
-        </div>
-        <!-- PATIENT CARD -->
-        <div class="span4">
-            {% include "consulting/patient/card.html" %}
-        </div>               
+      <div class="page-header">
+          <h2>{% trans 'Bloque' %} {{code_block}}: {{name_block}}</h2>
       </div>
+          <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">              
+            <div class="">       
+              <div id="overwrite_list" class="">            
+                {% if medicines.object_list %}
+                <div id="medicine-paginator" class="pagination pagination-centered">
+                  <ul class="pagination">
+                    {% if medicines.has_previous %}
+                      <li><a href="?page={{ medicines.previous_page_number }}">←</a></li>
+                    {% else %}
+                      <li class="disabled"><a>←</a></li>
+                    {% endif %}
+
+                    {% if medicines.has_next %}
+                      <li><a href="?page={{ medicines.next_page_number }}">→</a></li>
+                    {% else %}
+                      <li class="disabled"><a>→</a></li>
+                    {% endif %}
+                  </ul>
+                </div>                         
+                <table id="list_medicine" class="table table-bordered table-condensed">  
+                  <thead>
+                    <tr>            
+                      <th style="text-align:center;">
+                        {% trans 'FECHA' %}
+                      </th>
+                      <th style="text-align:center;">
+                        {% trans 'Fármaco' %}
+                      </th>
+                      <th></th>                
+                    </tr>
+                  </thead>        
+                  <tbody>                  
+                    {% for medicine in medicines.object_list %}
+                      <tr id="{{medicine.id}}" class="medicine">
+                        <td style="text-align:center;">{{medicine.date}}</td>
+                        <td style="text-align:center;">{{medicine.component}}</td>                      
+                        <td>                      
+                          <a id="{{medicine.id}}" class="icon-trash remove_medicine" data-toggle="modal" href="#check_remove_medicine"></a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <div id="overwrite"></div>                                       
+                {% else %}
+                    <h6>{% trans "No hay fármacos" %}</h6>                  
+                {% endif %}
+
+              </div>
+            </div>
+            <div id="check_remove_medicine" class="modal hide fade" style="display: block;">
+              <input id="medicine_id" type="hidden">
+              <div class="modal-header">
+                  <button class="close" data-dismiss="modal">
+                    ×
+                  </button>
+                  <h3>Borrar Fármaco</h3>
+              </div>
+              <div class="modal-body">
+                  <p>
+                    {% trans '¿Está seguro que quiere borrar éste fármaco?' %}
+                  </p>
+              </div>
+              <div class="modal-footer">
+                <a id="yes" data-dismiss="modal" href="#" class="btn">Sí</a>
+                <a data-dismiss="modal" href="#" class="btn btn-primary">No</a>
+              </div>    
+            </div>
+          <div class="pull-right">
+            <button id="carryon" class="btn btn-primary btn-large">
+              {% trans 'Continuar encuesta' %}
+            </button>         
+          </div>
     </section>                    
-  </div>
-{% endblock body %}
+{% endblock %}

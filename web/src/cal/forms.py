@@ -19,10 +19,10 @@ import cal.settings as cal_settings
 class VacationForm(forms.ModelForm):
     date = forms.DateField(input_formats=(settings.DATE_FORMAT,),
         widget=forms.DateInput(format=settings.DATE_FORMAT,
-            attrs={'class': 'span5'}))
+            attrs={'class': 'span3'}))
 
     description = forms.CharField(widget=forms.Textarea(attrs={'cols': 60,
-        'rows': 4, 'class': 'span5'}), required=False)
+        'rows': 4, 'class': 'span3'}), required=False)
 
     class Meta:
         model = Vacation
@@ -32,16 +32,16 @@ class VacationForm(forms.ModelForm):
 class EventForm(forms.ModelForm):
     date = forms.DateField(input_formats=(settings.DATE_FORMAT,),
         widget=forms.DateInput(format=settings.DATE_FORMAT,
-            attrs={'class': 'span5'}))
+            attrs={'class': 'span3'}))
 
     start_time = forms.TimeField(widget=forms.TimeInput(
-        attrs={'class': 'span5'}))
+        attrs={'class': 'span3'}))
 
     end_time = forms.TimeField(widget=forms.TimeInput(
-        attrs={'class': 'span5'}))
+        attrs={'class': 'span3'}))
 
     description = forms.CharField(widget=forms.Textarea(attrs={'cols': 60,
-        'rows': 4, 'class': 'span5'}), required=False)
+        'rows': 4, 'class': 'span3'}), required=False)
 
     class Meta:
         model = Event
@@ -86,13 +86,13 @@ class EventForm(forms.ModelForm):
 
 class SlotTypeForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'cols': 60,
-        'rows': 4, 'class': 'span5'}))
+        'rows': 4, 'class': 'span3'}))
 
     duration = forms.IntegerField(widget=forms.TextInput(attrs={'cols': 60,
-        'rows': 4, 'class': 'span5'}))
+        'rows': 4, 'class': 'span3'}))
 
     description = forms.CharField(widget=forms.Textarea(attrs={'cols': 60,
-        'rows': 4, 'class': 'span5'}), required=False)
+        'rows': 4, 'class': 'span3'}), required=False)
 
     vacation = forms.BooleanField(widget=forms.CheckboxInput(
         attrs={'class': 'span1'}), required=False)
@@ -133,29 +133,29 @@ class SlotForm(forms.ModelForm):
                 self.fields['slot_type'] = SlotTypeChoiceField(
                     label=_(u"Slot type"),
                     queryset=queryset,
-                    widget=forms.Select(attrs={'class': 'span5'}))
+                    widget=forms.Select(attrs={'class': 'span3'}))
         else:
             super(SlotForm, self).__init__(*args, **kwargs)
 
     slot_type = SlotTypeChoiceField(label=_(u"Slot type"),
         queryset=SlotType.objects.none(),
-        widget=forms.Select(attrs={'class': 'span5'}))
+        widget=forms.Select(attrs={'class': 'span3'}))
 
     weekday = forms.CharField(widget=forms.Select(
-        attrs={'class': 'span5'}, choices=Slot.WEEKDAYS))
+        attrs={'class': 'span3'}, choices=Slot.WEEKDAYS))
 
     date = forms.DateField(input_formats=(settings.DATE_FORMAT,),
         widget=forms.DateInput(format=settings.DATE_FORMAT,
-            attrs={'class': 'span5'}))
+            attrs={'class': 'span3'}))
 
     start_time = forms.TimeField(widget=forms.TimeInput(
-        attrs={'class': 'span5'}))
+        attrs={'class': 'span3'}))
 
     end_time = forms.TimeField(widget=forms.TimeInput(
-        attrs={'class': 'span5'}))
+        attrs={'class': 'span3'}))
 
     description = forms.CharField(widget=forms.Textarea(attrs={'cols': 60,
-        'rows': 4, 'class': 'span5'}), required=False)
+        'rows': 4, 'class': 'span3'}), required=False)
 
     class Meta:
         model = Slot
@@ -185,7 +185,7 @@ class DoctorSelectionForm(forms.Form):
 
     doctor = forms.ChoiceField(label=_(u"Doctor"),
         widget=forms.Select(
-            attrs={'class': 'input-medium search-query span5'}))
+            attrs={'class': 'input-medium search-query span3'}))
 
 
 class AppointmentForm(forms.ModelForm):
@@ -203,28 +203,28 @@ class AppointmentForm(forms.ModelForm):
                 self.fields['app_type'] = SlotTypeChoiceField(
                     label=_(u"Appointment type"),
                     queryset=queryset,
-                    widget=forms.Select(attrs={'class': 'span5'}),
+                    widget=forms.Select(attrs={'class': 'span3'}),
                     required=False)
         else:
             super(AppointmentForm, self).__init__(*args, **kwargs)
 
     app_type = SlotTypeChoiceField(label=_(u"Appointment type"),
         queryset=SlotType.objects.none(),
-        widget=forms.Select(attrs={'class': 'span5'}),
+        widget=forms.Select(attrs={'class': 'span3'}),
         required=False)
 
     date = forms.DateField(input_formats=(settings.DATE_FORMAT,),
         widget=forms.DateInput(format=settings.DATE_FORMAT,
-            attrs={'class': 'span5'}))
+            attrs={'class': 'span3'}))
 
     start_time = forms.TimeField(widget=forms.TimeInput(
-        attrs={'class': 'span5'}))
+        attrs={'class': 'span3'}))
 
     end_time = forms.TimeField(widget=forms.TimeInput(
-        attrs={'class': 'span5'}))
+        attrs={'class': 'span3'}))
 
     description = forms.CharField(widget=forms.Textarea(attrs={'cols': 60,
-        'rows': 4, 'class': 'span5'}), required=False)
+        'rows': 4, 'class': 'span3'}), required=False)
 
     class Meta:
         model = Appointment

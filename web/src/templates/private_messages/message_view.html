@@ -6,33 +6,22 @@
 <div id="loading"></div>
 
 <div id="message">
-  <dl class="dl-horizontal">
-    {% if match_inbox %}
-      <dt>{% trans 'From' %}</dt>
-      <dd><span>{{ message.author }}</span></dd>
-
-      <dt>{% trans 'To' %}</dt>
-      <dd><span>{{ message.recipient }}</span></dd>
-    {% endif %}
-
-    {% if match_outbox %}
-      <dt>{% trans 'To' %}</dt>
-      <dd><span>{{ message.recipient }}</span></dd>
-    {% endif %}
-
-    <dt>{% trans 'Date' %}</dt>
-      <dd><span>{{ message.sent_at|date:"d M H:i" }}</span></dd>
-
-    <dt>{% trans 'Subject' %}</dt>
-    <dd><span>{{ message.subject }}</span></dd>
-
-    <dt>{% trans 'Body' %}</dt>
-    <dd><span>{{ message.body|safe|escape|linebreaks }}</span></dd>
-  </dl>
-
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <h4>{{ message.subject }}</h4>
+  <div>
+      {% trans 'De' %} <strong>{{ message.author }}</strong>
+      <div class="pull-right">
+        <span>{{ message.sent_at|date:"d M y H:i" }}</span>
+      </div>
+  </div>
+  <div>
+      {% trans 'Para' %} <em class="muted">{{ message.recipient }}</em>
+  </div>
+  <br />
+    <div><span>{{ message.body|safe|escape|linebreaks }}</span></div>
   <!-- END BODY -->
   {% if match_inbox %}
-    <button id="reply" class="btn btn-medium btn-primary span2 offset1" type="submit">{% trans 'Responder' %}</button>
+    <button id="reply" class="btn btn-block btn-primary " type="submit">{% trans 'Responder' %}</button>
   {% endif %}
 </div>
 

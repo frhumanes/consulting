@@ -1,6 +1,6 @@
 {% extends "ui/app.html" %}
 
-{% load i18n%}
+{% load i18n %}
 
 {% block js_files %}
   {{ block.super }}
@@ -13,30 +13,6 @@
   <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-wysihtml5.css"></link>
 {% endblock %}
 
-{% block header%}
-    {%if request.user.get_profile.is_doctor %}
-        {% include "ui/includes/header_doctor.html" %}
-    {% else %}
-        {% include "ui/includes/header_patient.html" %}
-    {% endif %}
-{% endblock  %}
-
-
-{% block body %}
-
-<div class="container">
-    {% block nav-bar%}
-
-    {% endblock  %}
-    <div class="row">
-        <div class="span2">
-            {% block left_panel %}{% endblock %}
-        </div>
-
-        <div class="span10">
-          {% block right_panel %}{% endblock %}
-        </div>
-    </div>
-</div>
-
-{% endblock body %}
+{% block left %}
+  {% include "private_messages/includes/mail_actions.html" %}
+{% endblock %}

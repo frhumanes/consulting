@@ -3,19 +3,16 @@
 
 {% url consulting_stratification_statistic as stratification %}
 
-<header id="overview" class="jumbotron subhead">
-<div class="subnav">
-  <ul class="nav nav-pills">
-    <li class="{% active_child request stratification %}">
-      <a href="{% url consulting_stratification_statistic %}">
-        {% trans 'NIVELES DE ESTRATIFICACIÓN' %}
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        {% trans 'EXPLOTACIÓN DE DATOS' %}
-      </a>
-    </li> 
-  </ul>
-</div>
-</header>
+<ul class="nav nav-pills nav-stacked">
+  <li class="{% active_child request stratification %}">
+    <a href="{% url consulting_stratification_statistic %}">
+      {% trans 'NIVELES DE ESTRATIFICACIÓN' %}
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      {% trans 'EXPLOTACIÓN DE DATOS' %}
+    </a>
+  </li> 
+</ul>
+

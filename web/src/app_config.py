@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #DATE AND TIME FORMAT
 TIME_FORMAT = "H:i"
 DATE_FORMAT = "%d/%m/%Y"
@@ -34,6 +35,7 @@ OTHER = 6
 
 
 #SEX
+UNISEX =0
 WOMAN = 1
 MAN = 2
 
@@ -109,3 +111,27 @@ EMAIL_HOST_USER = 'consulting3iwt2@gmail.com'
 EMAIL_HOST_PASSWORD = 'prueba123'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 EMAIL_USE_TLS = True
+
+#RANGES
+AVE = {140:'', 200:u'importante', 300:u'bastante alto',9999:u'muy alto'}
+BECK = {10:[u'No depresión', 'success'], 
+		13:[u'Leve perturbación del estado de ánimo', 'info'],
+		19:[u'Depresión leve', 'default'],
+		30:[u'Depresión moderada', 'warning'],
+		40:[u'Depresión grave', 'important'],
+		999:[u'Depresión muy grave', 'inverse']}
+HAMILTON = {18:[u'No ansiedad', 'success'],
+			28:[u'Ansiedad leve', 'default'],
+			38:[u'Ansiedad moderada', 'warning'],
+			48:[u'Ansiedad grave', 'important'],
+			999:[u'Ansiedad muy grave', 'inverse']}
+
+#WKHTMLTOPDF
+WKHTMLTOPDF_CMD = '/usr/local/bin/wkhtmltopdf'
+WKHTMLTOPDF_CMD_OPTIONS = {'encoding': 'utf8', 
+							'quiet': True,
+							'margin-bottom':20,
+							'margin-right':20,
+							'margin-left':20,
+							'margin-top':30,
+							'header-spacing':10,}

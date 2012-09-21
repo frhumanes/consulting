@@ -4,11 +4,11 @@
 
 {% block title %}{% trans 'Events list' %}{% endblock %}
 
-{% block left_panel %}
+{% block right %}
   {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
 {% endblock %}
 
-{% block right_panel %}
+{% block container %}
 
   <legend>{% trans "Vacations" %}</legend>
 
@@ -24,8 +24,8 @@
   </div>
 
   {% if vacations.object_list.count > 0 %}
-    <div id="vacations-paginator" class="pull-right">
-      <ul class="pagination ">
+    <div id="vacations-paginator" class="pagination pagination-centered">
+      <ul>
         {% if vacations.has_previous %}
           <li><a href="?page={{ vacations.previous_page_number }}">←</a></li>
         {% else %}

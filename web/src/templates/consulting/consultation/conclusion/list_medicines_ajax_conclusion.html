@@ -24,7 +24,7 @@
     });
 </script>
 {% if medicines.object_list %}
-<div id="medicine-paginator" class="pull-right">
+<div id="medicine-paginator" class="pagination pagination-centered">
   <ul class="pagination">
     {% if medicines.has_previous %}
       <li><a href="?page={{ medicines.previous_page_number }}">←</a></li>

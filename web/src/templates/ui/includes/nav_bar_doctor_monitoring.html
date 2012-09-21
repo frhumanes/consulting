@@ -8,9 +8,7 @@
 {% url consulting_select_behavior_survey appointment.id as behavior %}
 {% url consulting_conclusion_monitoring appointment.id as finish %}
 
-
-<div class="subnav" style="padding-bottom:14px;">
-  <ul class="nav nav-pills">
+  <ul class="nav nav-pills nav-stacked bs-docs-sidenav">
       <li class="{% active_granchild request surveys %}">
           <a href="{% url consulting_list_incomplete_surveys appointment.id %}">
             {% trans 'ENCUESTAS<br>SIN COMPLETAR' %}
@@ -42,10 +40,7 @@
           </a>
       </li>                                                  
   </ul>  
-</div>
-<div class="pull-right">
-  <h3>{{appointment.date}}</h3>
-</div>
+
 <div id="check_treatment_survey" class="modal hide fade" style="display: block;">
   <div class="modal-header">
     <button class="close" data-dismiss="modal">

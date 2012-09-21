@@ -27,14 +27,13 @@
   {% endif %} 
 {% endblock  %}
 
-{% block body %}
-    <div class="container">
+{% block container %}
       <section>
         <div class="page-header">
           <h2>{% trans 'PACIENTE' %}</h2>
         </div>        
         <div class="row" >
-          <div class="span offset3 {% if edit %}alert alert-info card{% endif %}">
+          <div class="{% if edit %}alert alert-info card{% endif %}">
             {% if not edit %}
             <form class="form-horizontal" id="form" action="." method="post" accept-charset="utf-8">{% csrf_token %}
             {% endif %}
@@ -57,7 +56,7 @@
                 <div class="controls">
                   {{form.name}}
                   {% if form.name.errors %}
-                    {{ form.name.errors }}
+                    <span class="help-inline">{{ form.name.errors }}</span>
                   {% endif %}
                 </div>
               </div>
@@ -242,5 +241,4 @@
           </div>  
         </div>
       </section>
-    </div>
-{% endblock body %}
+{% endblock %}

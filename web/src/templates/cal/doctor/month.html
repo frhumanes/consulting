@@ -4,14 +4,14 @@
 
 {% block title %}{% trans 'Calendar list' %}{% endblock %}
 
-{% block left_panel %}
+{% block right %}
   {% include "cal/includes/calendar.html" %}
 {% endblock %}
 
-{% block right_panel %}
+{% block container %}
     {% if events.object_list.count > 0 %}
-        <div id="message-paginator" class="pull-right">
-          <ul class="pagination ">
+        <div id="message-paginator" class="pagination pagination-centered">
+          <ul>
             {% if events.has_previous %}
               <li><a href="?page={{ events.previous_page_number }}">←</a></li>
             {% else %}
@@ -37,6 +37,6 @@
 
         <div id="preview"></div>
     {% else %}
-        <h6>{% trans "There are no appointments" %}</h6>
+        <h6>{% trans "No hay citas concertadas para este día" %}</h6>
     {% endif %}
 {% endblock %}

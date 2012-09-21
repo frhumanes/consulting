@@ -46,15 +46,29 @@ class QuestionsForm(forms.Form):
 
             for k, values in dic.items():
                 question = get_object_or_404(Question, pk=int(k))
-                initial_options = []
-                for v in values:
-                    id_option = v[0]
-                    if selected_options:
-                        if selected_options.filter(id=id_option):
-                            initial_options.append(id_option)
-                self.fields[question.code] = forms.MultipleChoiceField(
-                        label=question.text,
-                        widget=forms.CheckboxSelectMultiple(), choices=values,
-                        required=False, initial=initial_options)
+                
+                if question.single:
+                    initial_option = ''
+                    for v in values:
+                        id_option = v[0]
+                        if selected_options:
+                            if selected_options.filter(id=id_option):
+                                initial_option = id_option
+                    values.insert(0,('',''))
+                    self.fields[question.code] = forms.ChoiceField(
+                            label=question.text,
+                            widget=forms.Select(), choices=values,
+                            required=False, initial=initial_option)
+                else:
+                    initial_options = []
+                    for v in values:
+                        id_option = v[0]
+                        if selected_options:
+                            if selected_options.filter(id=id_option):
+                                initial_options.append(id_option)
+                    self.fields[question.code] = forms.MultipleChoiceField(
+                            label=question.text,
+                            widget=forms.CheckboxSelectMultiple(), choices=values,
+                            required=False, initial=initial_options)
         else:
             super(QuestionsForm, self).__init__(*args, **kwargs)

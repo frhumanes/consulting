@@ -220,24 +220,35 @@ def day_consultation(request, year, month, day):
 
 
 @login_required
-@paginate(template_name='cal/doctor/list_new_app_admin.html',
+@paginate(template_name='cal/app/list_new_app_admin.html',
     list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE)
 def day_new_app_admin(request, year, month, day, id_doctor, id_patient):
     doctor = get_object_or_404(User, pk=int(id_doctor))
     patient = get_object_or_404(User, pk=int(id_patient))
+    if not doctor.get_profile().is_doctor():
+        raise Http404
 
-    events = Appointment.objects.filter(date__year=year, date__month=month,
-            date__day=day, doctor=doctor).order_by('start_time')
+    vacations = check_vacations(doctor, year, month, day)
+    if not vacations:
+        events = Appointment.objects.filter(doctor=doctor, date__year=year,
+            date__month=month, date__day=day).order_by('start_time')
+    else:
+        events = []
+
 
     lst = create_calendar(int(year), int(month), doctor=doctor)
+    doctor_preferences = get_doctor_preferences(year=year, month=month,
+        day=day, doctor=id_doctor)
 
     available, free_intervals = Appointment.objects.availability(
                 doctor,
                 date(int(year), int(month), int(day)))
 
     template_data = dict(year=year, month=month, day=day, user=request.user,
-        month_days=lst, mname=mnames[int(month) - 1], events=events,
-        free_intervals=free_intervals, doctor=doctor, patient=patient,
+        doctor=doctor, patient=patient, month_days=lst,
+        mname=mnames[int(month) - 1],
+        events=events, doctor_preferences=doctor_preferences,
+        vacations=vacations, free_intervals=free_intervals,
         context_instance=RequestContext(request))
 
     return template_data
@@ -300,9 +311,9 @@ def app_add(request, year, month, day, id_patient, id_doctor=None):
                 if start_time:
                     start_time = time.strptime(start_time, '%H:%M')
                     start_time = ttime(start_time[3], start_time[4], start_time[5])
-                    duration = (datetime.combine(date.today(), end_time) - \
-                        datetime.combine(date.today(), start_time)).seconds
-                    del request_params['app_type']
+                    duration = ((datetime.combine(date.today(), end_time) - \
+                        datetime.combine(date.today(), start_time)).seconds) / 60
+                    #del request_params['app_type']
             else:
                 if start_time:
                     start_time = time.strptime(start_time, '%H:%M')
@@ -429,9 +440,9 @@ def app_add_new_app_admin(request, year, month, day, id_doctor, id_patient):
                 if start_time:
                     start_time = time.strptime(start_time, '%H:%M')
                     start_time = ttime(start_time[3], start_time[4], start_time[5])
-                    duration = (datetime.combine(date.today(), end_time) - \
-                        datetime.combine(date.today(), start_time)).seconds
-                    del request_params['app_type']
+                    duration = ((datetime.combine(date.today(), end_time) - \
+                        datetime.combine(date.today(), start_time)).seconds) / 06
+                    #del request_params['app_type']
             else:
                 if start_time:
                     start_time = time.strptime(start_time, '%H:%M')
@@ -566,7 +577,7 @@ def app_edit(request, pk, id_patient, id_doctor=None):
                     start_time = ttime(start_time[3], start_time[4], start_time[5])
                     duration = (datetime.combine(date.today(), end_time) - \
                         datetime.combine(date.today(), start_time)).seconds / 60
-                    del request_params['app_type']
+                    #del request_params['app_type']
             else:
                 if start_time:
                     start_time = time.strptime(start_time, '%H:%M')
@@ -985,7 +996,7 @@ def doctor_day_new_app_admin(request, year, month, day, id_doctor, id_patient):
         events = Appointment.objects.filter(doctor=doctor, date__year=year,
             date__month=month, date__day=day).order_by('start_time')
     else:
-        events = Appointment.objects.none()
+        events = []
 
     lst = create_calendar(int(year), int(month), doctor=doctor)
     doctor_preferences = get_doctor_preferences(year=year, month=month,

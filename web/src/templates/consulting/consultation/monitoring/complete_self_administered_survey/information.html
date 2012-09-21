@@ -1,14 +1,8 @@
-{% extends "ui/app.html" %}
+{% extends "consulting/consultation/monitoring/index.html" %}
 
 {% load i18n%}
 
-{% block body %}
-  <div class="container">    
-    {% block nav-bar%}
-        {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
-    {% endblock  %}
-    <div class="row">
-      <div class="span12">
+{% block container %}
         <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
         <section>
           <div class="page-header">
@@ -31,7 +25,7 @@
                       </th>                                   
                     </tr>
                   </thead>        
-                  <tbody>                  
+                  <tcontainer>                  
                     {% for variable in variables %}
                     <tr>
                       {% for var in variable %}
@@ -39,7 +33,7 @@
                       {% endfor %}
                     </tr>
                     {% endfor %}
-                  </tbody>
+                  </tcontainer>
                 </table>
                 {% if symptoms_worsening %}
                 <table id="sw" class="table table-bordered table-condensed">  
@@ -53,14 +47,14 @@
                       </th>                                   
                     </tr>
                   </thead>        
-                  <tbody>                  
+                  <tcontainer>                  
                     {% for sw in symptoms_worsening %}
                     <tr>                      
                       <td style="text-align:center;">{{sw|first}}</td>
                       <td style="text-align:center;">{{sw|last}}</td>
                     </tr>
                     {% endfor %}
-                  </tbody>
+                  </tcontainer>
                 </table>
                 {% if more_variables %}
                 <p id="more_variables" class="alert alert-error">
@@ -71,17 +65,10 @@
               {% else %}
                 <p>{{warning}}</p>
               {% endif %}
-            </div>
-            <!-- PATIENT CARD -->
-            <div class="span4">
-                {% include "consulting/patient/card.html" %}
-            </div>            
+            </div>       
           </div>                          
         </section>
-      </div>
-    </div>                    
-  </div>
-{% endblock body %}
+{% endblock container %}
 
 {% block jquery_init %}
   <!-- ASSESS TASK -->

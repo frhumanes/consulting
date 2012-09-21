@@ -1,4 +1,4 @@
-{% extends "ui/app.html" %}
+{% extends "consulting/consultation/monitoring/index.html" %}
 
 {% load i18n messages %}
 
@@ -17,17 +17,12 @@
 
 {% block title %}{% trans 'Lista de Citas' %}{% endblock %}
 
-{% block body %}
-<div class="container">
-  {% block nav-bar%}
-    {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
-  {% endblock  %}
-  <div class="row">
-    <div class="span3">
-      {% include "consulting/consultation/monitoring/finish/calendar.html" %}
-    </div>
-    <div class="span9">
-      <a class="btn btn-primary" href="{% url consulting_day_monitoring year month day patient.id appointment.id %}">
+{% block right %}
+  {% include "consulting/consultation/monitoring/finish/calendar.html" %}
+{% endblock %}
+
+{% block container %}
+      <a class="btn btn-primary" href="{% url consulting_day_monitoring year month day patient_user.id appointment.id %}">
         <i class="icon-arrow-left icon-white"></i>
         {% trans 'Volver' %}
       </a>
@@ -36,10 +31,10 @@
         <p>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</p>
       </div>
       <div class="well">
-        <p>Paciente {{ patient.get_profile.name }} {{ patient.get_profile.first_surname }}</p>
+        <p>Paciente {{ patient_user.get_profile.name }} {{ patient_user.get_profile.first_surname }}</p>
       </div>
       <div>
-        <form class="form-horizontal well" method="post" action="{% url consulting_app_add_monitoring year month day patient.id appointment.id %}">{% csrf_token %}
+        <form class="form-horizontal well" method="post" action="{% url consulting_app_add_monitoring year month day patient_user.id appointment.id %}">{% csrf_token %}
           <legend>{% trans 'New Appointment' %} {{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
           <fieldset>
             {% if not_available_error %}
@@ -49,7 +44,7 @@
               </div>
             {% endif %}
 
-            {% if  form.non_field_errors  %}
+            {% if form.non_field_errors  %}
               <div class="alert alert-error">
                   {% for error in form.non_field_errors %}
                       <strong>{% trans '¡Error!' %}</strong>
@@ -152,12 +147,10 @@
             </p>
           </fieldset>
         </form>
-        {% include "cal/app/free_slots.html" %}
+
       </div>
-    </div>
-  </div>
-</div>
-{% endblock body %}
+{% endblock container %}
+
 {% block jquery_init %}
   $('#id_date').datepicker({'format':'dd/mm/yyyy'});
   $('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.start_time.value|time:"H:i" }}' });

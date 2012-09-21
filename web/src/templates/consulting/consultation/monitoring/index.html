@@ -2,10 +2,14 @@
 
 {% load i18n%}
 
-{% block body %}
-    <div class="container">    
-        {% block nav-bar%}
-            {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
-        {% endblock  %}
-    </div>    
-{% endblock body %}
+{% block left%}
+  {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
+{% endblock  %}
+
+{% block container%}
+  &nbsp;    
+{% endblock  %}
+
+{% block right %}
+  {% include "consulting/patient/card.html" %}
+{% endblock %}

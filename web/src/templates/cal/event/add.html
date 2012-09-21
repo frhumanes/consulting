@@ -4,7 +4,7 @@
 
 {% block title %}{% trans 'Vacations list' %}{% endblock %}
 
-{% block left_panel %}
+{% block right %}
   {% comment %}
     {% include "cal/includes/calendar.html" %}
 
@@ -15,7 +15,7 @@
 
 {% endblock %}
 
-{% block right_panel %}
+{% block container %}
 
 <a class="btn btn-primary" href= "{% url cal.list_event %}">
   <i class="icon-arrow-left icon-white"></i>

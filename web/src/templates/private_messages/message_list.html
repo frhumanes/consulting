@@ -9,16 +9,25 @@
   <script src="{{ STATIC_URL }}js/spin.min.js"></script>
 {% endblock %}
 
-{% block left_panel %}
+{% block left %}
   {% include "private_messages/includes/mail_actions.html" %}
 {% endblock %}
 
-{% block right_panel %}
-
+{% block container %}
+<div class="pull-right"><a class="btn btn-primary" href="{% url private_messages_new %}"><i class="icon-pencil"></i> {% trans "REDACTAR" %}</a></div>
 <legend>{% get_header request %}</legend>
   {% if messages.object_list.count > 0 %}
-    <div id="message-paginator" class="pull-right">
-      <ul class="pagination ">
+
+    <table id="message_list" class="table table-striped">
+      <thead></thead>
+      <tbody>
+        {% for message in messages.object_list %}
+          {% include "private_messages/message_detail.html" %}
+        {% endfor %}
+      </tbody>
+    </table>
+    <div id="message-paginator" class="pagination pagination-centered">
+      <ul>
         {% if messages.has_previous %}
           <li><a href="?page={{ messages.previous_page_number }}">←</a></li>
         {% else %}
@@ -32,20 +41,14 @@
         {% endif %}
       </ul>
     </div>
-
-    <table id="message_list" class="table table-striped">
-      <thead></thead>
-      <tbody>
-        {% for message in messages.object_list %}
-          {% include "private_messages/message_detail.html" %}
-        {% endfor %}
-      </tbody>
-    </table>
-
-    <div id="preview"></div>
+    
   {% else %}
     <h6>{% trans "No hay mensajes" %}</h6>
   {% endif %}
+{% endblock %}
+
+{% block right %}
+<div id="preview" class="alert alert-info"></div>
 {% endblock %}
 
 {% block jquery_init %}
@@ -60,8 +63,6 @@ $('table tbody tr').on('click', function(event){
 });
 
 function start_spinner(el){
-  $('table').hide();
-  $('#message-paginator').hide();
   return create_spinner_on(el);
 }
 

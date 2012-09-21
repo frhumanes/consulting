@@ -4,3 +4,4 @@ south
 MySQL-python
 gunicorn==0.13.4
 django-extensions
+django-wkhtmltopdf

@@ -2,17 +2,20 @@
 {% load consulting %}
 
 {% url consulting_personal_data_pm as personal_data %}
-{% url consulting_list_medicines_before_pm as list_medicines_before %}
+{% url consulting_list_medicines as list_medicines %}
+{% url consulting_list_appointments as list_appointments %}
+{% url consulting_list_reports as list_reports %}
+{% url consulting_user_evolution as user_evolution %}
 
-<div class="subnav">
-  <ul class="nav nav-pills">
+
+  <ul class="nav nav-pills nav-stacked">
     <li class="{% active_child request personal_data %}">
       <a href="{% url consulting_personal_data_pm %}">
         {% trans 'DATOS PERSONALES' %}
       </a>
     </li>    
-    <li>
-      <a href="#">
+    <li class="{% active_child request list_reports %}">
+      <a href="{% url consulting_list_reports %}">
         {% trans 'INFORMES' %}
       </a>
     </li>
@@ -21,20 +24,24 @@
         {% trans 'RECOMENDACIONES' %}
       </a>
     </li>
-    <li>
-      <a href="#">
+    <li class="{% active_child request user_evolution %}">
+      <a href="{% url consulting_user_evolution %}">
         {% trans 'PARÁMETROS' %}
       </a>
     </li>
-    <li class="{% active_child request list_medicines_before %}">
-      <a href="{% url consulting_list_medicines_before_pm %}">
+    <li class="{% active_child request list_medicines %}">
+      <a href="{% url consulting_list_medicines %}">
         {% trans 'FÁRMACOS' %}
       </a>      
     </li>
-    <li>
-      <a href="#">
+    <li class="{% active_child request list_appointments %}">
+      <a href="{% url consulting_list_appointments %}">
         {% trans 'HISTORIAL CITAS' %}
       </a>
     </li>
+    <li>
+      <a href="#">
+        {% trans 'MENSAJERÍA' %}
+      </a>
+    </li>
   </ul>
-</div>

@@ -21,8 +21,8 @@
         <div class="row">
             {% if tasks.object_list.count > 0 %}
             <div class="span12">
-                <div id="tasks-paginator" class="pull-right">
-                    <ul class="pagination ">
+                <div id="tasks-paginator" class="pagination pagination-centered">
+                    <ul>
                       {% if tasks.has_previous %}
                         <li><a href="?page={{ tasks.previous_page_number }}">←</a></li>
                       {% else %}
