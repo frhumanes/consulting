@@ -23,7 +23,7 @@ class IllnessSelectionForm(forms.Form):
 
     illness = forms.ChoiceField(label=_(u"Enfermedad"),
                         widget=forms.Select(
-                        attrs={'class': 'input-medium search-query span4'}))
+                        attrs={'class': 'input-medium search-query span12'}))
 
 
 class IllnessAddPatientForm(forms.ModelForm):

@@ -1,10 +1,10 @@
 {% load i18n%}
-<section>
   <div class="page-header">
     <h1>{% trans 'Receta Fármaco' %}</h1>
   </div>
+<section>
   <div class="">
-    <div class="hero-unit">
+    <div class="well">
       <form class="form-horizontal" id="form" action="{% url consulting_new_medicine_conclusion id_conclusion %}" method="post" accept-charset="utf-8">{% csrf_token %}
           {{form.component}}
           <div class="control-group">

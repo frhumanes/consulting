@@ -20,7 +20,7 @@ class SelectBlockForm(forms.Form):
                     label=_(u'Valoración de la depresión y la ansiedad:'),
                     choices=BLOCK,
                     widget=forms.Select(
-                        attrs={'class': 'input-medium search-query span2'}))
+                        attrs={'class': 'input-medium search-query span12'}))
 
 
 class SelectBehaviorSurveyForm(forms.Form):
@@ -34,7 +34,7 @@ class SelectBehaviorSurveyForm(forms.Form):
                     label=_(u'Formato:'),
                     choices=SURVEY,
                     widget=forms.Select(
-                        attrs={'class': 'input-medium search-query span2'}))
+                        attrs={'class': 'input-medium search-query span12'}))
 
 
 class QuestionsForm(forms.Form):
@@ -43,10 +43,11 @@ class QuestionsForm(forms.Form):
             dic = kwargs.pop('dic')
             selected_options = kwargs.pop('selected_options')
             super(QuestionsForm, self).__init__(*args, **kwargs)
-
-            for k, values in dic.items():
+            pkeys = dic.keys()
+            pkeys.sort()
+            for k in pkeys:
                 question = get_object_or_404(Question, pk=int(k))
-                
+                values = dic[k]
                 if question.single:
                     initial_option = ''
                     for v in values:
@@ -55,10 +56,18 @@ class QuestionsForm(forms.Form):
                             if selected_options.filter(id=id_option):
                                 initial_option = id_option
                     values.insert(0,('',''))
-                    self.fields[question.code] = forms.ChoiceField(
+                    if question.code.startswith('DS'):
+                        self.fields[question.code] = forms.ChoiceField(
+                            label=question.text,
+                            widget=forms.Select(attrs={'class': 'span6'}), choices=values,
+                            required=False, initial=initial_option)
+                        self.fields[question.code+'_value'] = forms.CharField(label="DS", widget=forms.TextInput(attrs={'class': 'span2'}))
+                    else:
+                        self.fields[question.code] = forms.ChoiceField(
                             label=question.text,
                             widget=forms.Select(), choices=values,
                             required=False, initial=initial_option)
+
                 else:
                     initial_options = []
                     for v in values:

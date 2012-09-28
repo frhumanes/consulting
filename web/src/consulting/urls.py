@@ -263,9 +263,17 @@ urlpatterns = patterns('',
         consulting_views.new_medicine_pm,
         name='consulting_new_medicine_pm'),
 
+    url(r'^patient_management/recommendations/$',
+        consulting_views.list_recommendations,
+        name='consulting_list_recommendations'),
+
     url(r'^patient_management/reports/$',
         consulting_views.list_reports,
         name='consulting_list_reports'),
+
+    url(r'^patient_management/messages/$',
+        consulting_views.list_messages,
+        name='consulting_list_messages'),
 
     url(r'^patient_management/report/(\d+)$',
         consulting_views.view_report,
@@ -305,6 +313,9 @@ urlpatterns = patterns('',
     # STATISTIC: DOCTOR ROLE
     url(r'^statistic/stratification$', consulting_views.stratification,
         name='consulting_stratification_statistic'),
+
+    url(r'^statistic/explotation$', consulting_views.explotation,
+        name='consulting_explotation_statistic'),
 
     #NEW URL'S
     url(r'^consultation/task/(\d+)/report$',

@@ -5,7 +5,7 @@
 {% block container %}
 
 
-    <legend class=""><h2>{% trans 'Calendar' %}</h2></legend>
+    <legend class=""><h2>{% trans 'Calendario' %}</h2></legend>
 
 <div class="">
     <ul class="pager">
@@ -19,7 +19,7 @@
 </div>
 <div class="row-fluid">
     {% for year, months in years %}
-        <div class="span3 well center">
+        <div class="span4 well center">
             <h2 class="label label-info">{{ year }}</h2>
             <ul class="unstyled">
                 {% for month in months %}

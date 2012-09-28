@@ -7,20 +7,21 @@
 {% endblock %}
 
 {% block container %}
+<div class="page-header">
+  <h1>{% trans 'Encuesta: ' %}{{result.survey.name}}</h1>              
+  <h2>{% trans 'Bloque' %} {{my_block.code}}: {{my_block.name}}</h2>
+</div> 
     <section>
-        <div class="page-header">
-          <h1>{% trans 'Encuesta: ' %}{{result.survey.name}}</h1>              
-        </div>
-        <div class="page-header">
-          <h2>{% trans 'Bloque' %} {{my_block.code}}: {{my_block.name}}</h2>
-        </div> 
         <form class="form-horizontal" method="post" action="{% url consulting_block result.id  my_block.code%}">{% csrf_token %}
             {% for field in form %}
+                {% if field.label = 'DS' %}
+                    <script>$('#id_{{field.label}}').parent().prepend('{{field}}');</script>
+                {% else %}
                 <div class="control-group">
-                    <label class="">
+                    <label class="control-label span7">
                         {{field.label}}
                     </label>
-                    <div class="controls">
+                    <div class="controls span5">
                         {{ field }}
                         {% if field.errors|length %}
                             {% for error in field.errors %}
@@ -31,7 +32,7 @@
                         {% endif %}
                     </div>
                 </div>
-                
+                {% endif %}
             {% endfor %}
             <div class="controls">
                 <button type="submit" class="btn btn-primary btn-large">

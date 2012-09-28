@@ -4,33 +4,22 @@
 
 {% block title %}{% trans 'Vacations list' %}{% endblock %}
 
-{% block right %}
-  {% comment %}
-    {% include "cal/includes/calendar.html" %}
-
-    {% if not request.user.get_profile.is_doctor %}
-      {% include "cal/app/doctor_preferences.html" %}
-    {% endif %}
-  {% endcomment %}
-
-{% endblock %}
 
 {% block container %}
-
-<a class="btn btn-primary" href= "{% url cal.list_vacation %}">
-  <i class="icon-arrow-left icon-white"></i>
-  {% trans 'Back' %}
-</a>
-
-<p></p>
+  <div class="page-header">
+    <h1>{% trans 'Nuevo día de vacaciones' %}
+            <div class="btn-group pull-right">
+                  <a class="btn btn-info" href="{% url cal.list_vacation %}">
+                     <i class="icon-arrow-left icon-white"></i>
+                    {% trans 'Volver' %}
+                  </a>
+            </div>
+        </h1>
+  </div>
 
 <div class="well">
-  <p>Dr. {{ request.user.get_profile.name }} {{ request.user.get_profile.first_surname }}</p>
-</div>
 
-<div>
-
-<form class="form-horizontal well" method="post" action="{% url cal.add_vacation %}">{% csrf_token %}
+<form class="form-horizontal" method="post" action="{% url cal.add_vacation %}">{% csrf_token %}
   <legend>{% trans 'New Vacation' %}</legend>
   <fieldset>
 

@@ -314,7 +314,7 @@
     "pk": 32,
     "fields": {
       "polynomial": "H4.1+H4.2+H4.3+H4.4+H4.5+H4.6",
-      "factor": "0.113636364",    
+      "factor": "0.075757576",    
       "variable": 16,
       "sibling": 26,
       "kind": 1
@@ -434,7 +434,7 @@
     "model": "formula.formula",
     "pk": 44,
     "fields": {
-      "polynomial": "H9.1+H9.2+H9.3+H9.3+H9.4",
+      "polynomial": "H9.1+H9.2+H9.3+H9.4",
       "factor": "0.3125",    
       "variable": 22,
       "kind": 1

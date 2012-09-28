@@ -5,6 +5,8 @@
 {% url consulting_list_medicines as list_medicines %}
 {% url consulting_list_appointments as list_appointments %}
 {% url consulting_list_reports as list_reports %}
+{% url consulting_list_messages as list_messages %}
+{% url consulting_list_recommendations as list_recommendations %}
 {% url consulting_user_evolution as user_evolution %}
 
 
@@ -20,7 +22,8 @@
       </a>
     </li>
     <li>
-      <a href="#">
+    <li class="{% active_child request list_recommendations %}">
+      <a href="{% url consulting_list_recommendations %}">
         {% trans 'RECOMENDACIONES' %}
       </a>
     </li>
@@ -40,7 +43,8 @@
       </a>
     </li>
     <li>
-      <a href="#">
+    <li class="{% active_child request list_messages %}">
+      <a href="{% url consulting_list_messages %}">
         {% trans 'MENSAJERÍA' %}
       </a>
     </li>

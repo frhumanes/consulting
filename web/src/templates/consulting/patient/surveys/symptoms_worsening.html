@@ -2,47 +2,69 @@
 
 {% load i18n%}
 
-{% block body %}
-<div class="container">
+{% block container %}
+<div class="page-header">
+  <h1>{% trans 'Síntomas o Empeoramientos' %}</h1>
+</div>
 <section>
-  <div class="page-header">
-    <h1>{% trans 'Síntomas o Empeoramientos' %}</h1>
-  </div>
-  <div class="row">
-    <div class="span12">
-      <form class="form-horizontal" id="form" action="{% url consulting_symptoms_worsening id_result %}" method="post" accept-charset="utf-8">{% csrf_token %}
-        {% if form.symptoms_worsening.errors %}
-          <div class="control-group error">
-            <label>
-              {{form.symptoms_worsening.label}}
-            </label>
-            <div>
-              {{ form.symptoms_worsening }}
-              {% for error in form.symptoms_worsening.errors %}
-                <span class="help-inline">
-                  {{ error|escape }}
-                </span>
-              {% endfor %}
-            </div>
-          </div>
-        {% else %}
-          <div class="control-group">
-            <label>
-              {{form.symptoms_worsening.label}}
-            </label>
-            <div>
-              {{ form.symptoms_worsening }}               
-            </div>
-          </div>
-        {% endif %}
-        <div class="controls">
-          <button type="submit" class="btn btn-primary btn-large">
-            {% trans 'Guardar' %}
-          </button>
+  <form class="form-horizontal" id="form" action="{% url consulting_symptoms_worsening id_result %}" method="post" accept-charset="utf-8">{% csrf_token %}
+    {% if form.symptoms_worsening.errors %}
+      <div class="control-group">
+        <label>
+          {{form.symptoms_worsening.label}}
+        </label>
+        <div>
+          {{ form.question }}
         </div>
-      </form>          
-    </div>    
-  </div>
+      </div>
+        <div id="symptoms" class="control-group error">
+        <label>
+          {% trans 'Indique cuales' %}
+        </label>
+        {% for error in form.symptoms_worsening.errors %}
+            <span class="help-inline">
+              {{ error|escape }}
+            </span>
+          {% endfor %}
+        <div>
+          {{ form.symptoms_worsening }}               
+        </div>
+      </div>
+
+    {% else %}
+      <div class="control-group">
+        <label>
+          {{form.symptoms_worsening.label}}
+        </label>
+        <div>
+          {{ form.question }}               
+        </div>
+      </div>
+      <div id="symptoms" class="control-group hide">
+        <label>
+          {% trans 'Indique cuales' %}
+        </label>
+        <div>
+          {{ form.symptoms_worsening }}               
+        </div>
+      </div>
+    {% endif %}
+    <div class="controls">
+      <button type="submit" class="btn btn-primary btn-large">
+        {% trans 'Guardar' %}
+      </button>
+    </div>
+  </form>          
 </section>
- </div>
- {% endblock body %}
+ {% endblock %}
+
+{% block jquery_init %}
+  $('#question').on("change", function(){  
+    if($(this).val()=='1'){
+      $('#symptoms').show()
+    }
+    else{
+      $('#symptoms').hide()
+  }
+  });
+{% endblock %}

@@ -5,22 +5,16 @@
 
 <tr data-msg="{{ message.id }}" style="cursor:pointer" >
 
-{% if match_outbox %}
+{% if match_outbox or message.author = patient_user %}
   <td><i class="icon-share"></i></td>
-  <td>{{ message.recipient }}</td>
+  <td  style="font-weight: {{ message.unread|yesno:'bold,normal' }}">{{ message.recipient.get_profile.get_full_name }}</td>
 {% endif %}
 
-{% if match_inbox %}
-    {% if message.unread %}
-        <td><i class="icon-envelope"></i></td>
-    {% else %}
-        <td><i class="icon-eye-open"></i></td>
-    {% endif %}
-   <td>{{ message.author }}</td>
+{% if match_inbox or message.recipient = patient_user %}
+    <td><i class="{{ message.unread|yesno:'icon-envelope,icon-eye-open' }}"></i></td>
+   <td style="font-weight: {{ message.unread|yesno:'bold,normal' }}">{{ message.author.get_profile.get_full_name }}</td>
 {% endif %}
 
-  <!-- <td>{{ message.subject }}</td> -->
-
-  <td>{{ message.subject|striptags|safe}} - <span class="muted">{{ message.body|striptags|safe|truncatewords:17 }}</span></td>
+  <td><span style="font-weight: {{ message.unread|yesno:'bold,normal' }}">{{ message.subject|striptags|safe}}</span> - <span class="muted">{{ message.body|striptags|safe|truncatewords:7 }}</span></td>
   <td>{{ message.sent_at|date:"d/M/y" }}</td>
 </tr>

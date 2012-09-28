@@ -8,10 +8,11 @@
 {% endblock %}
 
 {% block container %}
-<section>
-  <div class="page-header">
+ <div class="page-header">
     <h1>{% trans 'Conclusión' %}</h1>
   </div>
+<section>
+ 
       <form class="form-horizontal" id="form" action={% if id_result %}"{% url consulting_conclusion id_appointment id_result %}"{% else %}"{% url consulting_conclusion id_appointment %}"{% endif %} method="post" accept-charset="utf-8">{% csrf_token %}
           {{form.component}}
           <div class="control-group">

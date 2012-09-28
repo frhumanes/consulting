@@ -2,30 +2,24 @@
 
 {% load i18n%}
 
-{% block body %}
-<div class="container">
-    <section>
-        <div class="page-header">
-          <h1>{% trans 'Identificación Paciente' %}</h1>                
-        </div>
-        <div class="row" >
-            <div class="span8">
-                <div class="alert alert-info">
-                    {% trans 'Se le ha enviado un correo electrónico al paciente con el nombre de usuario y contraseña, la cual podrá modificar cuando lo desee.' %}
-                </div>
-                <div class="pull-right">
-                  <button id="carryon" class="btn btn-info btn-large">
-                    {% trans 'Continuar' %}
-                  </button>         
-                </div>                
-            </div>
-            <div class="span4">
-                {% include "consulting/patient/card.html" %}
-            </div>  
-        </div>
-    </section>
+{% block container %}
+<div class="page-header">
+  <h1>{% trans 'Identificación Paciente' %}</h1>                
 </div>
-{% endblock body %}
+<section>
+   <div class="alert alert-info">
+        {% trans 'Se le ha enviado un correo electrónico al paciente con el nombre de usuario y contraseña, la cual podrá modificar cuando lo desee.' %}
+    </div>
+    <div class="pull-right">
+      <button id="carryon" class="btn btn-info btn-large">
+        {% trans 'Continuar' %}
+      </button>         
+    </div>                
+</section>
+{% endblock %}
+{% block right %}
+  {% include "consulting/patient/card.html" %}
+{% endblock %} 
 
 {% block jquery_init %}
   $('#carryon').on("click", function(){

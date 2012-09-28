@@ -33,26 +33,32 @@
   });
 {% endblock %}
 
+{% block right %}
+  {% include "consulting/patient/card.html" %}
+{% endblock %}
 
 
 {% block container %}
+<div class="page-header row-fluid">
+    <h1 class="span5">{% trans 'Tratamiento' %}</h1>
+    <ul class="nav nav-pills pull-right">
+        <li class="{% if when = 2 %}active{% endif %}">
+          <a href="{% url consulting_list_medicines %}">Después de la primera cita</a>
+        </li>
+       <li class="{% if when = 1 %}active{% endif %}">
+          <a href="{% url consulting_list_medicines %}?when=before">Antes de la primera cita</a>
+       </li>
+     </ul>                
+</div>
 <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
 <section>
-  <div class="page-header row-fluid">
-      <h1 class="span5">{% trans 'Tratamiento' %}</h1>
-      <ul class="nav nav-pills pull-right">
-          <li class="{% if when = 2 %}active{% endif %}">
-            <a href="{% url consulting_list_medicines %}">Después de la primera cita</a>
-          </li>
-         <li class="{% if when = 1 %}active{% endif %}">
-            <a href="{% url consulting_list_medicines %}?when=before">Antes de la primera cita</a>
-         </li>
-       </ul>                
-  </div>
-    <div>      
-    <div id="overwrite_list" class=""> 
-      <div class="span3 center">           
-      {% if medicines.object_list %}               
+
+  <div>      
+  
+    <div id="overwrite_list" class="row-fluid">  
+    {% if medicines.object_list %}
+
+    <div class="span6">                 
       <table id="list_medicine" class="table table-bordered table-condensed">  
         <thead>
           <tr>            
@@ -78,8 +84,8 @@
         </tbody>
       </table>
       </div>
-      <div class="span3 alert alert-info" id="overwrite"></div>
-      <div id="medicine-paginator" class="span7 pagination pagination-centered">
+      <div class="span6 alert alert-info" id="overwrite"></div>
+      <div id="medicine-paginator" class="span12 pagination pagination-centered">
         <ul class="pagination">
           {% if medicines.has_previous %}
             <li><a href="?page={{ medicines.previous_page_number }}">←</a></li>
@@ -96,7 +102,7 @@
       </div>          
                                  
       {% else %}
-          <h6>{% trans "No hay fármacos" %}</h6>
+          <div class="alert alert-info">{% trans "No hay fármacos" %}</div>
       {% endif %}
     </div>
   </div>
@@ -120,7 +126,3 @@
 </section>
 
 {% endblock container %}
-
-{% block right %}
-  {% include "consulting/patient/card.html" %}
-{% endblock %}

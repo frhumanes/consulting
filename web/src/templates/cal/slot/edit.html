@@ -9,14 +9,16 @@
 {% endblock %}
 
 {% block container %}
-<h1>{% trans 'Edit Slot' %}</h1>
-
-<a class="btn btn-primary" href="{% url cal.list_slot year month %}">
-  <i class="icon-arrow-left icon-white"></i>
-  {% trans 'Back' %}
-</a>
-
-
+  <div class="page-header">
+    <h1>{% trans "Editar preferencia" %}
+            <div class="btn-group pull-right">
+              <a class="btn btn-info" href="{% url cal.list_slot year month %}">
+                <i class="icon-arrow-left icon-white"></i>
+                {% trans 'Volver' %}
+              </a>
+            </div>
+        </h1>
+  </div>
 
 <div class="well center">
 
@@ -174,7 +176,7 @@ $('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.s
 
 $('#remove-event').live('click', function(event){
     $('#modal-screen').modal({
-      'backdrop':'static',
+      'Volverdrop':'static',
       'keyboard':false,
     });
   });

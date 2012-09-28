@@ -7,21 +7,23 @@
 
 <div id="message">
   <button type="button" class="close" data-dismiss="alert">×</button>
-  <h4>{{ message.subject }}</h4>
+  <h4>{{ message.subject }}<small class="pull-right">{{ message.sent_at|date:"d M y H:i" }}</small></h4>
   <div>
-      {% trans 'De' %} <strong>{{ message.author }}</strong>
-      <div class="pull-right">
-        <span>{{ message.sent_at|date:"d M y H:i" }}</span>
-      </div>
+      {% trans 'De' %} <strong>{{ message.author.get_profile.get_full_name }}</strong>
   </div>
   <div>
-      {% trans 'Para' %} <em class="muted">{{ message.recipient }}</em>
+      {% trans 'Para' %} <em class="muted">{{ message.recipient.get_profile.get_full_name }}</em>
   </div>
+   
   <br />
     <div><span>{{ message.body|safe|escape|linebreaks }}</span></div>
   <!-- END BODY -->
   {% if match_inbox %}
-    <button id="reply" class="btn btn-block btn-primary " type="submit">{% trans 'Responder' %}</button>
+    <div>
+      <span>
+        <button id="reply" class="btn btn-block btn-info btn-large" type="submit"><i class="icon-share-alt"></i> {% trans 'Responder' %}</button>
+      </span>
+    </div>
   {% endif %}
 </div>
 
@@ -31,7 +33,7 @@
 $('#reply').on('click', function(event){
   var sp = start_spinner('loading');
 
-  $('#message').load('{% url private_messages_reply  message.id %}', function() {
+  $('#mail_area').load('{% url private_messages_reply  message.id %}', function() {
      sp.stop();
      $('#message').show();
      $("textarea:visible:first").focus();

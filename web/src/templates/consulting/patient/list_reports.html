@@ -2,21 +2,24 @@
 
 {% load i18n%}
 
-{% block left %}
-  {% include "ui/includes/nav_bar_doctor_pm.html" %}
-{% endblock  %}
-
 {% block right %}
   {% include "consulting/patient/card.html" %}
-{% endblock  %}
+{% endblock %}
+
+{% block jquery_init %}
+    $('#modal').on('hidden', function () {
+      $(this).removeData();
+    })
+{% endblock %}
 
 {% block container %}
-  <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
+<div class="page-header">
+    <h1>{% trans 'Listado de Informes' %}</h1>                
+</div>
   <section>
-    <div class="page-header">
-        <h1>{% trans 'Listado de Informes' %}</h1>                
-    </div>
-    <div class="row">       
+  <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
+
+    <div class="">       
       <div id="overwrite_list" class="">            
         {% if reports.object_list %}                     
         <table id="list_report" class="table table-bordered table-condensed">  
@@ -43,7 +46,7 @@
             {% for report in reports.object_list %}
               <tr id="{{report.id}}" class="report">
                 <td style="text-align:center;">{{report.end_date|date:"d/M/Y"|lower}}</td>
-                <td style="text-align:center;"><a class="btn btn-link" href="{% url consulting_view_report report.id%}" target="_blank">{{report.survey.name}}</a></td>
+                <td style="text-align:center;"><a class="btn btn-link" data-target="#modal" href="{% url consulting_view_report report.id %}" role="button" data-toggle="modal">{{report.survey.name}}</a></td>
                 <td style="text-align:center;"><span class="label label-{{report.get_anxiety_status|last}}">{{report.get_anxiety_status|first}}</span></td>
                 <td style="text-align:center;"><span class="label label-{{report.get_depression_status|last}}">{{report.get_depression_status|first}}</span></td>              
                 <td style="text-align:center;"><a class="btn btn-link" href="{% url consulting_view_report report.id%}?as=pdf" ><i class="icon-download-alt"></i></a>   
@@ -69,11 +72,23 @@
         </div>    
         <div id="overwrite"></div>                           
         {% else %}
-            <h6>{% trans "No hay Informes" %}</h6>
+            <div class="alert alert-info">{% trans "No hay Informes" %}</div>
         {% endif %}
       </div>
      
     </div>
              
   </section>
+
+<div class="modal hide fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Previsualización de informe</h3>
+  </div>
+  <div class="modal-body"></div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+  </div>
+</div>
 {% endblock container %}
+

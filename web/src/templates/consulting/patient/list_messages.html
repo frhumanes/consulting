@@ -1,36 +1,41 @@
-{% extends "private_messages/includes/base.html" %}
+{% extends "consulting/patient/personal_data_pm.html" %}
 
-{% load i18n messages %}
+{% load i18n%}
 
-{% block title %}{% trans 'Message list' %}{% endblock %}
+
 
 {% block js_files %}
   {{ block.super }}
   <script src="{{ STATIC_URL }}js/spin.min.js"></script>
 {% endblock %}
 
-{% block left %}
-  {% include "private_messages/includes/mail_actions.html" %}
-{% endblock %}
 
 {% block container %}
   <div class="page-header">
-    <h1>{% get_header request %}
+    <h1>{% trans 'Mensajes' %}
             <div class="btn-group pull-right">
-               <a class="btn btn-info" href="{% url private_messages_new %}"><i class="icon-pencil icon-white"></i> {% trans "Redactar" %}</a>
+               <a class="btn btn-info" href="{% url private_messages_new_for patient_user.id %}"><i class="icon-pencil icon-white"></i> {% trans "Redactar" %}</a>
             </div>
         </h1>
   </div>
 <div id="mail_area">
   {% if messages.object_list.count > 0 %}
-    <table id="message_list" class="table table-striped">
-      <thead></thead>
-      <tbody>
-        {% for message in messages.object_list %}
-          {% include "private_messages/message_detail.html" %}
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="accordion" id="accordion2">
+      {% for message in messages.object_list %}
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{message.id}}">
+          <h4>{{ message.subject }}<small class="pull-right">{{ message.sent_at|date:"d M y H:i" }}</small></h4>
+          </a>
+        </div>
+        <div id="collapse{{message.id}}" class="accordion-body collapse">
+          <div class="accordion-inner">
+          {% include "private_messages/message_conversation.html" with message=message user=patient_user %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
     <div id="message-paginator" class="pagination pagination-centered">
       <ul>
         {% if messages.has_previous %}
@@ -55,11 +60,11 @@
 
 
 {% block right %}
-<div id="preview" class="alert alert-info"></div>
+  {% include "consulting/patient/card.html" %}
 {% endblock %}
 
 {% block jquery_init %}
-
+{% comment  %}
 $('table tbody tr').on('click', function(event){
   var id = $(this).attr('data-msg');
   var sp = start_spinner('preview');
@@ -68,7 +73,7 @@ $('table tbody tr').on('click', function(event){
      sp.stop();
   });
 });
-
+{% endcomment %}
 function start_spinner(el){
   return create_spinner_on(el);
 }

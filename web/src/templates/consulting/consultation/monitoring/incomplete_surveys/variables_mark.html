@@ -3,63 +3,63 @@
 {% load i18n%}
 
 {% block container %}
-        <section>
-          <div class="page-header">
-              <h1>{% trans 'Puntuaciones obtenidas' %}</h1>
-          </div>
-              <div class="alert alert-info">
-                ATENCIÓN, las siguientes puntuaciones han sido obtenidas del cuestionario <strong>{{kind}}</strong>
-              </div>
-              <table class="table table-bordered table-condensed">  
-                <thead>
-                  <tr>
-                    <th style="text-align:center;">
-                      {% trans 'Dimensión' %}
-                    </th>           
-                    <th style="text-align:center;">
-                      {% trans 'Puntuación' %}
-                    </th>                                   
-                  </tr>
-                </thead>        
-                <tbody>                  
-                  {% for dimension, mark in dimensions.items %}
-                  <tr>
-                    <td style="text-align:center;">{{dimension}}</td>
-                    <td style="text-align:center;">{{mark|floatformat}}</td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-              <table class="table table-bordered table-condensed">  
-                <thead>
-                  <tr>
-                    <th style="text-align:center;">
-                      {% trans 'Variable' %}
-                    </th>           
-                    <th style="text-align:center;">
-                      {% trans 'Puntuación' %}
-                    </th>                                   
-                  </tr>
-                </thead>        
-                <tbody>                  
-                  {% for variable, mark in variables.items %}
-                  <tr>
-                    <td style="text-align:center;">{{variable.code}} {{variable.name}}</td>
-                    <td style="text-align:center;">{{mark|floatformat}}</td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-              <div class="pull-right">
-                <button id="goback" class="btn btn-info btn-large">
-                  {% trans 'Volver' %}
-                </button>         
-              </div>                             
-        </section>
+  <div class="page-header">
+      <h1>{% trans 'Puntuaciones obtenidas' %}</h1>
+  </div>
+  <section>
+      <div class="alert alert-info">
+        ATENCIÓN, las siguientes puntuaciones han sido obtenidas del cuestionario <strong>{{kind}}</strong>
+      </div>
+        <table class="table table-bordered table-condensed">  
+          <thead>
+            <tr>
+              <th style="text-align:center;">
+                {% trans 'Dimensión' %}
+              </th>           
+              <th style="text-align:center;">
+                {% trans 'Puntuación' %}
+              </th>                                   
+            </tr>
+          </thead>        
+          <tbody>                  
+            {% for dimension, mark in dimensions.items %}
+            <tr>
+              <td style="text-align:center;">{{dimension}}</td>
+              <td style="text-align:center;">{{mark|floatformat}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <table class="table table-bordered table-condensed">  
+          <thead>
+            <tr>
+              <th style="text-align:center;">
+                {% trans 'Variable' %}
+              </th>           
+              <th style="text-align:center;">
+                {% trans 'Puntuación' %}
+              </th>                                   
+            </tr>
+          </thead>        
+          <tbody>                  
+            {% for variable, mark in variables.items %}
+            <tr>
+              <td style="text-align:center;">{{variable.name}}</td>
+              <td style="text-align:center;">{{mark|floatformat}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="pull-right">
+          <button id="goback" class="btn btn-info btn-large">
+            {% trans 'Volver' %}
+          </button>         
+        </div>                             
+  </section>
 {% endblock container %}
 
 {% block jquery_init %}
-  $('#goback').on("click", function(){
+  $('#goVolver').on("click", function(){
       window.location.href = '/consultation/monitoring/incomplete_surveys/list/' +{{appointment.id}};  
   });
 {% endblock %}

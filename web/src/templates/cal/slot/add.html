@@ -9,14 +9,16 @@
 {% endblock %}
 
 {% block container %}
-<h1>{% trans 'New Slot' %}</h1>
-
-<a class="btn btn-primary" href="{% url cal.list_slot year month %}">
-  <i class="icon-arrow-left icon-white"></i>
-  {% trans 'Back' %}
-</a>
-
-
+  <div class="page-header">
+    <h1>{% trans 'Nueva preferencia' %}
+            <div class="btn-group pull-right">
+                <a class="btn btn-info" href="{% url cal.list_slot year month %}">
+                  <i class="icon-arrow-left icon-white"></i>
+                  {% trans 'Volver' %}
+                </a>
+            </div>
+        </h1>
+  </div>
 
 <div class="well center">
 <form class="form-horizontal" method="post" action="{% url cal.add_slot year month %}">{% csrf_token %}

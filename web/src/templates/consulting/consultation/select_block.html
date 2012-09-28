@@ -11,7 +11,7 @@
     <h1>{% trans 'Seleccionar bloque' %}</h1>
   </div>
   <section>
-      <div class="hero-unit center">
+      <div class="well center">
         <form class="form-horizontal" method="post" action="{% url consulting_select_block result.id %}">{% csrf_token %}
           {% if form.block.errors %}
             <div class="control-group error">

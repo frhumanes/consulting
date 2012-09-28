@@ -1,10 +1,10 @@
-{% extends as_pdf|yesno:"ui/pdf.html,ui/app.html" %}
+{% extends as_pdf|yesno:"ui/pdf.html,ui/dummy.html" %}
 
 {% load i18n %}
 
 {% block container %}
 <h2>INFORME RESUMEN TRAS LA PRIMERA ENTREVISTA</h2>
-<p>{{patient.name}} {{patient.first_surname}} {{patient.second_surname}} de {{patient.get_age}} años de edad presenta desde __ {{time_interval.text}} los síntomas que le han hecho acudir a consulta.
+<p>{{patient.name}} {{patient.first_surname}} {{patient.second_surname}} de {{patient.get_age}} años de edad presenta desde hace {{time_interval|lower}} los síntomas que le han hecho acudir a consulta.
 	{% if ap_list %}
 		Ha sido diagnosticado/a de 
 		{% for ap in ap_list %}

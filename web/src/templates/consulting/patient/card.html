@@ -62,11 +62,11 @@
       {% endif %}
       <tr>            
         <td>{% trans 'ÚLTIMA CITA' %}</td>
-        <td>{{patient_user.get_profile.get_lastAppointment|date:'d/M/Y'}}</td>
+        <td>{{patient_user.get_profile.get_lastAppointment.date|date:'d/M/Y'}}</td>
       </tr>
       <tr>            
         <td>{% trans 'PRÓXIMA CITA' %}</td>
-        <td>{{patient_user.get_profile.get_nextAppointment|date:'d/M/Y'}}</td>
+        <td>{{patient_user.get_profile.get_nextAppointment.date|date:'d/M/Y'}}</td>
       </tr>
       {% if user.get_profile.is_doctor %}
       <tr>            

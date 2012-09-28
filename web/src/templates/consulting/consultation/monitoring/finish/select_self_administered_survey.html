@@ -13,13 +13,12 @@
 {% endblock %}
 
 {% block container %}
-  <section>
     <div class="page-header">
       <h1>{% trans 'Encuesta autoadministrada' %}</h1>
     </div>
-    <div class="row">
-      <div class="span8">
-        <div class="hero-unit">
+  <section>
+
+        <div class="well center">
           <form class="form-horizontal" method="post" action="{% url consulting_select_self_administered_survey_monitoring appointment.id %}">{% csrf_token %}
             {% if form.from_date.errors %}
               <div class="control-group error">
@@ -84,9 +83,6 @@
                 </label>
                 <div class="controls">
                   {{ form.survey }}
-                  <button type="submit" class="btn">
-                    Ir
-                  </button>
                   {% for error in form.survey.errors %}
                     <span class="help-inline">
                       {{ error|escape }}
@@ -101,14 +97,17 @@
                 </label>
                 <div class="controls">
                   {{ form.survey }}
-                  <button type="submit" class="btn">
-                    Enviar
-                  </button>
                 </div>
               </div>
             {% endif %}
             {% if form.variables.errors %}
               <div id="error_variables" class="control-group error">
+                 <label class="control-label">
+                {{form.kind.label}}
+                </label>
+                <div class="controls">
+                  {{ form.kind }}
+                </div>
                 <div class="offset1">
                   {{ form.variables }}
                   {% for error in form.variables.errors %}
@@ -120,15 +119,25 @@
               </div>
             {% else %}
               <div id="variables" class="control-group" style="display: none;">
+                 <label class="control-label">
+                  {{form.kind.label}}
+                </label>
+                <div class="controls">
+                  {{ form.kind }}
+                </div>
                 <div class="offset1">
                   {{ form.variables }}
                 </div>
               </div>
             {% endif %}
+              <button type="submit" class="btn btn-primary btn-large">
+                Guardar
+              </button>
           </form>
         </div>
-      </div>
-    </div>
+        <a href="{% url consulting_today %}" class="btn btn-info btn-large pull-right">
+            Continuar
+        </a>
   </section>
 
 {% endblock container %}

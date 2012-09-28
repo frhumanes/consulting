@@ -40,7 +40,7 @@ class ProfileForm(forms.ModelForm):
 
     dob = forms.DateField(label=_(u'Fecha de Nacimiento'),
                     input_formats=(settings.DATE_FORMAT,),
-                    widget=DateInput(attrs={'class': 'span2', 'size': '16'},
+                    widget=DateInput(attrs={'class': 'span12', 'size': '16'},
                                     format=settings.DATE_FORMAT),
                     required=False)
     status = forms.ChoiceField(label=_(u'Estado Civil'),
@@ -125,7 +125,7 @@ class ProfileSurveyForm(forms.ModelForm):
 
     dob = forms.DateField(label=_(u'Fecha de Nacimiento'),
                     input_formats=(settings.DATE_FORMAT,),
-                    widget=DateInput(attrs={'class': 'span2', 'size': '16'},
+                    widget=DateInput(attrs={'class': 'span12', 'size': '16'},
                                     format=settings.DATE_FORMAT),
                     required=False)
     status = forms.ChoiceField(label=_(u'Estado Civil'),

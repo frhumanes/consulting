@@ -7,21 +7,35 @@
   <script src="{{ STATIC_URL }}js/spin.min.js"></script>
 {% endblock %}
 
-{% block header%}
-  {% include "ui/includes/header_patient.html" %}
-{% endblock  %}
-
-
-{% block body %}
-<div class="container">
+{% block container %}
+  <div class="page-header">
+      <h1>{% trans 'Encuestas sin completar' %}</h1>                
+  </div>
     <section>
-        <div class="page-header">
-            <h1>{% trans 'Encuestas sin completar' %}</h1>                
-        </div>
-        <div class="row">
+        <div class="">
             {% if tasks.object_list.count > 0 %}
-            <div class="span12">
-                <div id="tasks-paginator" class="pagination pagination-centered">
+            <div class="">
+                <table id="tasks_list" class="table table-striped">
+                    <thead>
+                        <tr>
+                          <th>{% trans "Médico" %}</th>
+                          <th>{% trans "Disponible desde" %}</th>
+                          <th>{% trans "Hasta" %}</th>
+                          <th>{% trans "Última modificación" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      {% for task in tasks.object_list %}
+                        <tr data-msg="{{ task.id }}" style="cursor:pointer">
+                          <td>{{ task.patient.get_profile.doctor.get_profile.name }} {{ task.patient.get_profile.doctor.get_profile.first_surname }} {{ task.patient.get_profile.doctor.get_profile.second_surname }}</td>
+                          <td>{{ task.from_date|date:'d/M/Y' }}</td>
+                          <td>{{ task.to_date|date:'d/M/Y' }}</td>
+                           <td>{{ task.updated_at|date:'d/M/Y H:i' }}</td>              
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+                  <div id="tasks-paginator" class="pagination pagination-centered">
                     <ul>
                       {% if tasks.has_previous %}
                         <li><a href="?page={{ tasks.previous_page_number }}">←</a></li>
@@ -36,38 +50,18 @@
                       {% endif %}
                     </ul>
                 </div>
-                <table id="tasks_list" class="table table-striped">
-                    <thead>
-                        <tr>
-                          <th>{% trans "Médico" %}</th>
-                          <th>{% trans "Cuestionario" %}</th>
-                          <th>{% trans "Fecha desde" %}</th>
-                          <th>{% trans "Fecha hasta (min)" %}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      {% for task in tasks.object_list %}
-                        <tr data-msg="{{ task.id }}" style="cursor:pointer">
-                          <td>{{ task.patient.get_profile.doctor.get_profile.name }} {{ task.patient.get_profile.doctor.get_profile.first_surname }}</td>
-                          <td>{{ task.survey.name }}</td> 
-                          <td>{{ task.from_date }}</td>
-                          <td>{{ task.to_date }}</td>              
-                        </tr>
-                      {% endfor %}
-                    </tbody>
-                </table>
 
                 <div id="preview"></div>
                 {% else %}
-                  <div class="span12">
-                    <h6>{% trans "No hay cuestionarios" %}</h6>
+                  <div class="">
+                    <div class="alert alert-info">{% trans "No hay cuestionarios pendientes en este momento" %}</div>
                   </div>
                 {% endif %}
             </div>
         </div>
     </section>
-</div>
-{% endblock body %}
+
+{% endblock container %}
 {% block jquery_init %}
 
 $('table tbody tr').on('click', function(event){

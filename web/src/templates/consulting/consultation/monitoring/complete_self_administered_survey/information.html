@@ -3,71 +3,67 @@
 {% load i18n%}
 
 {% block container %}
-        <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
-        <section>
-          <div class="page-header">
-              <h1>{% trans 'Encuesta autoadministrada' %}</h1>
-          </div>
-          <div class="row">       
-            <div class="span8">            
-              {% if task %}
-                <p class="alert alert-info">
-                  {% trans 'Fecha de cumplimentación: ' %}{{task.end_date}}
-                </p>
-                <table class="table table-bordered table-condensed">  
-                  <thead>
-                    <tr>
-                      <th style="text-align:center;">
-                        {% trans 'Variable' %}
-                      </th>           
-                      <th style="text-align:center;">
-                        {% trans 'Puntuación' %}
-                      </th>                                   
-                    </tr>
-                  </thead>        
-                  <tcontainer>                  
-                    {% for variable in variables %}
-                    <tr>
-                      {% for var in variable %}
-                      <td style="text-align:center;">{{var}}</td>
-                      {% endfor %}
-                    </tr>
-                    {% endfor %}
-                  </tcontainer>
-                </table>
-                {% if symptoms_worsening %}
-                <table id="sw" class="table table-bordered table-condensed">  
-                  <thead>
-                    <tr>
-                      <th style="text-align:center;">
-                        {% trans 'Síntomas o empeoramiento' %}
-                      </th>           
-                      <th style="text-align:center;">
-                        {% trans 'Fecha' %}
-                      </th>                                   
-                    </tr>
-                  </thead>        
-                  <tcontainer>                  
-                    {% for sw in symptoms_worsening %}
-                    <tr>                      
-                      <td style="text-align:center;">{{sw|first}}</td>
-                      <td style="text-align:center;">{{sw|last}}</td>
-                    </tr>
-                    {% endfor %}
-                  </tcontainer>
-                </table>
-                {% if more_variables %}
-                <p id="more_variables" class="alert alert-error">
-                  {% trans '¿Desea valorar alguna variable no evaluada en la encuesta autoadministrada?' %}
-                </p>
-                {% endif %}
-                {% endif %}
-              {% else %}
-                <p>{{warning}}</p>
-              {% endif %}
-            </div>       
-          </div>                          
-        </section>
+<div class="page-header">
+    <h1>{% trans 'Encuesta autoadministrada' %}</h1>
+</div>
+<input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
+<section>
+      {% if task %}
+        <p class="alert alert-info">
+          {% trans 'Fecha de cumplimentación: ' %}{{task.end_date}}
+        </p>
+        <table class="table table-bordered table-condensed">  
+          <thead>
+            <tr>
+              <th style="text-align:center;">
+                {% trans 'Variable' %}
+              </th>           
+              <th style="text-align:center;">
+                {% trans 'Puntuación' %}
+              </th>                                   
+            </tr>
+          </thead>        
+          <tcontainer>                  
+            {% for variable, mark in variables.items %}
+            <tr>
+              <td style="text-align:center;">{{variable}}</td>
+              <td style="text-align:center;">{{mark|floatformat}}</td>
+            </tr>
+            {% endfor %}
+          </tcontainer>
+        </table>
+        {% if symptoms_worsening %}
+        <table id="sw" class="table table-bordered table-condensed">  
+          <thead>
+            <tr>
+              <th style="text-align:center;">
+                {% trans 'Síntomas o empeoramiento' %}
+              </th>           
+              <th style="text-align:center;">
+                {% trans 'Fecha' %}
+              </th>                                   
+            </tr>
+          </thead>        
+          <tcontainer>                  
+            {% for sw in symptoms_worsening %}
+            <tr>                      
+              <td style="text-align:center;">{{sw|first}}</td>
+              <td style="text-align:center;">{{sw|last}}</td>
+            </tr>
+            {% endfor %}
+          </tcontainer>
+        </table>
+        {% if more_variables %}
+        <p id="more_variables" class="alert alert-error">
+          {% trans '¿Desea valorar alguna variable no evaluada en la encuesta autoadministrada?' %}
+        </p>
+        {% endif %}
+        {% endif %}
+      {% else %}
+        <p>{{warning}}</p>
+      {% endif %}
+     
+</section>
 {% endblock container %}
 
 {% block jquery_init %}

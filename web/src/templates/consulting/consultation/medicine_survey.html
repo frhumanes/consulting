@@ -1,8 +1,9 @@
 {% load i18n%}
 <section>
   <div class="">
-      <h3>{% trans '¿Toma algún medicamento?' %}</h3> 
-    <div class="hero-unit">
+    <h3>{% trans '¿Toma algún medicamento?' %}</h3> 
+  <div class="well center">
+    <div>
       <form class="form-horizontal" id="form" action="{% url consulting_new_medicine_survey id_result %}" method="post" accept-charset="utf-8">{% csrf_token %}
           {{form.component}}                                          
           <div class="control-group">
@@ -68,9 +69,10 @@
       </form>
       
     </div>
-    <div class="pull-right">
-        <button id="carryon" class="btn btn-primary btn-large">
-          {% trans 'Continuar encuesta' %}
-        </button>         
-      </div>
+  </div>
+  <div class="pull-right">
+    <button id="carryon" class="btn btn-primary btn-large">
+      {% trans 'Continuar encuesta' %}
+    </button>         
+  </div>
 </section>

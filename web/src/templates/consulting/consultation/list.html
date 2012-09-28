@@ -7,7 +7,9 @@
 {% endblock right %}
 
 {% block container %}
+<div class="page-header">
   <h1>{% trans "Citas del " %}{{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}</h1>
+</div>
 
   {% if events.object_list.count > 0 %}
     {% if events.object_list.count > 10 %}
@@ -31,8 +33,8 @@
   <table id="events_list" class="table table-striped">
     <thead>
         <tr>
-          <th>{% trans "Hora de comienzo" %}</th>
-          <th>{% trans "Hora de fin" %}</th>
+          <th></th>
+          <th>{% trans "Hora" %}</th>
           <th>{% trans "Paciente" %}</th>
           <th>{% trans "Tipo de cita" %}</th>
           <th>{% trans "Nota" %}</th>
@@ -47,7 +49,7 @@
 
   <div id="preview"></div>
   {% else %}
-    <h6>{% trans "No hay citas" %}</h6>
+    <div class="alert alert-info">{% trans "No hay citas" %}</div>
   {% endif %}
 {% endblock container %}
 

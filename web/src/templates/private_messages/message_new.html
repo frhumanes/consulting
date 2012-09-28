@@ -5,12 +5,16 @@
 
 {% block title %}{% trans 'Message New' %}{% endblock %}
 
-
-
 {% block container %}
-
 {% if replying %}
+  <div class="page-header">
+    <h1>{% trans 'Nueva respuesta' %}</h1>
+  </div>
   {% include "private_messages/message_detail.html" with message=parent_message replying=replying %}
+{% else %}
+  <div class="page-header">
+    <h1>{% trans 'Nuevo correo' %}</h1>
+  </div>
 {% endif %}
 
 {% if  form.non_field_errors  %}
@@ -21,10 +25,9 @@
         {% endfor %}
     </div>
 {% endif %}
-
+<section>
 <form class="form-horizontal" method="post" action="">{% csrf_token %}
   <fieldset>
-    <legend>{% trans 'Redactar correo' %}</legend>
       <!-- RECIPIENT -->
       {% if form.recipient.errors %}
         <div class="control-group error">
@@ -91,11 +94,12 @@
 
 
       <div class="form-actions center">
-        <button class="btn btn-large btn-primary" type="submit">{% trans 'Enviar' %}</button>
+        <button class="btn btn-large btn-primary btn-block" type="submit">{% trans 'Enviar' %}</button>
       </div>
 
   </fieldset>
 </form>
+</section>
 
 <script type="text/javascript">
   $('#id_body').wysihtml5({

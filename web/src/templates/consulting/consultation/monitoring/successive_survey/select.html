@@ -3,10 +3,11 @@
 {% load i18n %}
 
 {% block container %}
-  <section>
   <div class="page-header">
     <h1>{% trans 'Encuesta sucesiva' %}</h1>
   </div>
+  <section>
+
       <div class="hero-unit">
         <form class="form-horizontal" method="post" action="{% url consulting_select_successive_survey appointment.id %}">{% csrf_token %}
           {% if form.survey.errors %}

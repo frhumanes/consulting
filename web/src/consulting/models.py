@@ -91,7 +91,8 @@ class Task(TraceableModel):
             return False
 
     def get_time_interval(self):
-        return self.task_results.filter(block=settings.PRECEDENT_RISK_FACTOR).latest('id').options.filter(code__startswith='DS')
+        answer = Answer.objects.filter(result__block=settings.PRECEDENT_RISK_FACTOR, option__code__startswith='DS', result__task=self).latest('result__id')
+        return "%s %s" % (answer.value, answer.option.text)
 
     def get_af_dict(self):
         dic = {}
@@ -177,6 +178,17 @@ class Task(TraceableModel):
             if hamilton_mark < value:
                 return settings.HAMILTON[value]
 
+    def get_kind(self):
+        kind = self.treated_blocks.all().aggregate(Max('kind'))['kind__max']
+
+        if kind == settings.GENERAL:
+            kind =  'General'
+        elif kind == settings.EXTENSO:
+            kind = 'Extenso'
+        else:
+            kind = 'Abreviado'
+        return kind
+
 
 
 
@@ -238,7 +250,7 @@ class Result(TraceableModel):
 
     survey = models.ForeignKey(Survey, related_name="survey_results")
 
-    options = models.ManyToManyField(Option, related_name="options_results")
+    options = models.ManyToManyField(Option, related_name="options_results", through='Answer')
 
     task = models.ForeignKey(Task, related_name="task_results")
 
@@ -251,7 +263,7 @@ class Result(TraceableModel):
     date = models.DateTimeField(_(u'Fecha'), auto_now_add=True)
 
     symptoms_worsening = models.CharField(max_length=5000, blank=True,
-                                            null=True)
+                                            null=True, default='')
 
     def __unicode__(self):
         return u'id: %s result: %s %s %s' % (self.id, self.patient, self.survey, self.block)
@@ -293,3 +305,11 @@ class Report(TraceableModel):
 
     def __unicode__(self):
         return u'id: %s report: %s %s' % (self.id, self.patient, self.illness)
+
+class Answer(models.Model):
+    result = models.ForeignKey(Result, related_name='result_answers')
+    option = models.ForeignKey(Option, related_name='option_answers')
+    value = models.CharField(max_length=50, blank=True, null=True)
+
+    def __unicode__(self):
+        return u'id: %s answer: %s %s' % (self.id, self.value, self.option.text)

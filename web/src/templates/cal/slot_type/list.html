@@ -10,19 +10,26 @@
 
 {% block container %}
 
-  <h1>{% trans "Tipos de evento" %}</h1>
-
-  <div class="row">
-    <div class="span5">
-      <div class="btn-toolbar" style="margin-bottom: 9px">
-          <div class="btn-group">
-            <a class="btn btn-primary btn" href="{% url cal.add_slot_type %}"><i class="icon-pencil icon-white"></i> {% trans "New slot type" %}</a>
-          </div>
-      </div>
-    </div>
+  <div class="page-header">
+    <h1>{% trans 'Tipos de cita' %}
+            <div class="btn-group pull-right">
+                  <a class="btn btn-info" href="{% url cal.add_slot_type %}"><i class="icon-pencil icon-white"></i> {% trans "Nuevo tipo" %}</a>
+            </div>
+        </h1>
   </div>
 
+
   {% if slot_type.object_list.count > 0 %}
+    
+
+    <table id="events_list" class="table table-striped">
+      <thead></thead>
+      <tbody>
+        {% for slot in slot_type.object_list %}
+          {% include "cal/slot_type/slot_type.html" %}
+        {% endfor %}
+      </tbody>
+    </table>
     <div id="type_events-paginator" class="pagination pagination-centered">
       <ul>
         {% if type_events.has_previous %}
@@ -39,18 +46,9 @@
       </ul>
     </div>
 
-    <table id="events_list" class="table table-striped">
-      <thead></thead>
-      <tbody>
-        {% for slot in slot_type.object_list %}
-          {% include "cal/slot_type/slot_type.html" %}
-        {% endfor %}
-      </tbody>
-    </table>
-
     <div id="preview"></div>
   {% else %}
-    <h6>{% trans "There are no slots type" %}</h6>
+    <div class="alert alert-info">{% trans "There are no slots type" %}</div>
   {% endif %}
 {% endblock %}
 

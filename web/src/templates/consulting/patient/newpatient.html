@@ -30,7 +30,7 @@
       {% endif %}
       <input type="hidden" name="next" value="{{ next }}"/>
         <fieldset class="control-group">
-          <legend>{% trans 'PACIENTEXXXX' %}</legend>                
+          <legend>{% trans 'Datos del paciente' %}</legend>                
         {% if same_username %}
           <div class="alert alert-error">
             <a class="close" data-dismiss="alert">×</a>
@@ -208,7 +208,7 @@
           </div>
         </div>
         {% endif %}
-        <div class="controls span1">
+        <div class="center">
           <button type="submit" class="btn btn-primary btn-large">
             {% trans 'Guardar' %}
           </button>

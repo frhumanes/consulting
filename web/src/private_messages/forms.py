@@ -9,15 +9,20 @@ from private_messages.models import Message
 
 class RecipientChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
-        return "%s %s (%s)" % (obj.first_name, obj.last_name, obj.username)
+        if obj.get_profile().is_doctor():
+            return obj.get_profile().get_full_name()
+        else:
+            return "%s (%s)" % (obj.get_profile().get_full_name(), obj.username)
 
 
 class MessageForm(forms.ModelForm):
     subject = forms.CharField(label=_("Asunto"),
-        widget=forms.TextInput(attrs={'class': 'span6'}))
+        widget=forms.TextInput(attrs={'class': 'span12'}))
+    parent = forms.ModelChoiceField(label=_(""),queryset=Message.objects.all(),
+        widget=forms.HiddenInput(attrs={'class': 'span12'}))
     body = forms.CharField(label=_("Mensaje"),
         widget=forms.Textarea(
-            attrs={'cols': 60, 'rows': 10, 'class': 'span6'}))
+            attrs={'cols': 80, 'rows': 10, 'class': 'span12'}))
 
     def __init__(self, *args, **kwargs):
         if 'user' in kwargs:
@@ -31,19 +36,17 @@ class MessageForm(forms.ModelForm):
                 if profile.is_doctor():
                     queryset = profile.patients
                 else:
-                    queryset = User.objects.filter(\
-                        profile=profile.doctor.get_profile)
-
+                    queryset = User.objects.filter(profiles=profile.doctor.get_profile())
                 self.fields['recipient'] = RecipientChoiceField(
-                    label=_(u"Destinatario"),
-                    queryset=queryset,
-                    widget=forms.Select(attrs={'class': 'span6'}))
+                        label=_(u"Destinatario"),
+                        queryset=queryset,
+                        widget=forms.Select(attrs={'class': 'span12'}))
         else:
             super(MessageForm, self).__init__(*args, **kwargs)
 
     recipient = forms.ModelChoiceField(label=_("Destinatario"),
         queryset=User.objects.none(),
-        widget=forms.Select(attrs={'class': 'span6'}))
+        widget=forms.Select(attrs={'class': 'span5'}))
 
     class Meta:
         model = Message
@@ -53,7 +56,7 @@ class MessageForm(forms.ModelForm):
 class ReplyMessageForm(forms.ModelForm):
     body = forms.CharField(
         widget=forms.Textarea(
-            attrs={'cols': 60, 'rows': 10, 'class': 'span6'}))
+            attrs={'cols': 60, 'rows': 10, 'class': 'span12'}))
 
     class Meta:
         model = Message

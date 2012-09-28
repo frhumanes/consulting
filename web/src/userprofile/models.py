@@ -8,18 +8,18 @@ from django.conf import settings
 from log.models import TraceableModel
 from illness.models import Illness
 from cal.models import Appointment
-from consulting.models import Task
+from consulting.models import Task, Conclusion
 
 
 class Profile(TraceableModel):
 
     SEX = (
-        (-1, _(u'Seleccione el sexo')),
+        (-1, ''),
         (1, _(u'Mujer')),
         (2, _(u'Hombre')),
     )
     STATUS = (
-        (-1, _(u'Seleccione el estado civil')),
+        (-1, ''),
         (settings.MARRIED, _(u'Casado')),
         (settings.STABLE_PARTNER, _(u'Pareja Estable')),
         (settings.DIVORCED, _(u'Divorciado')),
@@ -88,6 +88,9 @@ class Profile(TraceableModel):
     profession = models.CharField(_(u'Profesión'), max_length=150, blank=True)
 
     role = models.IntegerField(_(u'Rol'), choices=ROLE, blank=True, null=True)
+
+    def get_full_name(self):
+        return "%s %s %s" % (self.name, self.first_surname, self.second_surname)
 
     def is_doctor(self):
         return self.role == settings.DOCTOR
@@ -158,7 +161,7 @@ class Profile(TraceableModel):
                         '-date')
 
         if appointments.count() > 0:
-            lastAppointment = appointments[0].date
+            lastAppointment = appointments[0]
         else:
             lastAppointment = ''
 
@@ -170,11 +173,18 @@ class Profile(TraceableModel):
                             'date')
 
         if appointments.count() > 0:
-            nextAppointment = appointments[0].date
+            nextAppointment = appointments[0]
         else:
             nextAppointment = ''
 
         return nextAppointment
+
+    def get_conclusions(self):
+        return Conclusion.objects.filter(patient=self.user).latest('date')
+
+    def get_pending_tasks(self):
+        return Task.objects.filter(patient=self.user,self_administered=True,completed=False, from_date__lte=date.today(), to_date__gt=date.today())
+
 
     def get_anxiety_status(self):
         try:

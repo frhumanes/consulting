@@ -2,414 +2,438 @@
 
 {% load i18n %}
 
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
+{% endblock %}
+
+{% block css_files %}
+  {{ block.super }}
+  <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet">
+{% endblock %}
+
+{% block jquery_init %}
+  $('#dp').datepicker().on('changeDate',
+    function(ev){$('#dp').datepicker('hide');
+  });
+{% endblock %}
+
+{% block header%}
+  {% if user.get_profile.is_doctor %}
+        {% include "ui/includes/header_doctor.html" %}
+  {% endif %}
+  {% if user.get_profile.is_administrative %}
+        {% include "ui/includes/header_administrative.html" %}
+  {% endif %} 
+{% endblock  %}
+
 {% block right %}
   {% include "consulting/patient/card.html" %}
 {% endblock %}
 
 {% block container %}
-  <section>
-    <div class="page-header">
-      <h1>{% trans 'Encuesta: ' %} {{task.survey.name}}</h1>
-    </div>
-      <div class="page-header">
-        <h2>{% trans 'Bloque' %} {{my_block.code}}: {{my_block.name}}</h2>
+<div class="page-header">
+  <h1>{% trans 'Encuesta: ' %} {{task.survey.name}}</h1>
+  <h2>{% trans 'Bloque' %} {{my_block.code}}: {{my_block.name}}</h2>
+</div>
+<section>
+  <form class="form-horizontal" id="form" action="{% url consulting_administrative_data task.id id_appointment %}" method="post" accept-charset="utf-8">{% csrf_token %}            
+    {% if same_username %}
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">×</a>
+        <strong>
+          {% trans 'Ya existe un usuario con el mismo nombre de usuario. Contacte con el administrador. ' %}
+        </strong>
       </div>
-        <form class="form-horizontal" id="form" action="{% url consulting_administrative_data task.id id_appointment %}" method="post" accept-charset="utf-8">{% csrf_token %}            
-          {% if same_username %}
-            <div class="alert alert-error">
-              <a class="close" data-dismiss="alert">×</a>
-              <strong>
-                {% trans 'Ya existe un usuario con el mismo nombre de usuario. Contacte con el administrador. ' %}
-              </strong>
-            </div>
-          {% endif %}
-          {% if form.name.errors %}
-          <div class="control-group error">
-              <label class="control-label">
-                {{form.name.label}}
-              </label>
-              <div class="controls">
-                {{ form.name }}
-                {% for error in form.name.errors %}
-                  <span class="help-inline">
-                    {{ error|escape }}
-                  </span>
-                {% endfor %}
-              </div>
-            </div>
-          {% else %}
-            <div class="control-group info">
-              <label class="control-label">
-                {{form.name.label}}
-              </label>
-              <div class="controls">
-                {{ form.name }}
-              </div>
-            </div>
-          {% endif %}
-          {% if form.first_surname.errors %}
-          <div class="control-group error">
-            <label class="control-label">
-              {{form.first_surname.label}}
-            </label>
-            <div class="controls">
-              {{ form.first_surname }}
-              {% for error in form.first_surname.errors %}
-                <span class="help-inline">
-                  {{ error|escape }}
-                </span>
-              {% endfor %}
-            </div>
-          </div>
-          {% else %}
-          <div class="control-group info">
-            <label class="control-label">
-              {{form.first_surname.label}}
-            </label>
-            <div class="controls">
-              {{ form.first_surname }}
-            </div>
-          </div>
-          {% endif %}
-          {% if form.second_surname.errors %}
-          <div class="control-group error">
-            <label class="control-label">
-              {{form.second_surname.label}}
-            </label>
-            <div class="controls">
-              {{ form.second_surname }}
-              {% for error in form.second_surname.errors %}
-                <span class="help-inline">
-                  {{ error|escape }}
-                </span>
-              {% endfor %}
-            </div>
-          </div>
-          {% else %}
-          <div class="control-group info">
-            <label class="control-label">
-              {{form.second_surname.label}}
-            </label>
-            <div class="controls">
-              {{ form.second_surname }}
-            </div>
-          </div>
-          {% endif %}
-          {% if form.nif.errors %}
-          <div class="control-group error">
-            <label class="control-label">
-              {{form.nif.label}}
-            </label>
-            <div class="controls">
-              {{ form.nif }}
-              {% for error in form.nif.errors %}
-                <span class="help-inline">
-                  {{ error|escape }}
-                </span>
-              {% endfor %}
-            </div>
-          </div>
-          {% else %}
-          <div class="control-group info">
-            <label class="control-label">
-              {{form.nif.label}}
-            </label>
-            <div class="controls">
-              {{ form.nif }}
-            </div>
-          </div>
-          {% endif %}          
-          {% if user.get_profile.is_doctor %}
-            {% if form.sex.errors %}
-            <div class="control-group error">
-              <label class="control-label">
-                {{form.sex.label}}
-              </label>
-              <div class="controls">
-                {{ form.sex }}
-                {% for error in form.sex.errors %}
-                  <span class="help-inline">
-                    {{ error|escape }}
-                  </span>
-                {% endfor %}
-              </div>
-            </div>
-            {% else %}
-            <div class="control-group info">
-              <label class="control-label">
-                {{form.sex.label}}
-              </label>
-              <div class="controls">
-                {{ form.sex }}
-              </div>
-            </div>
-            {% endif %}
-          {% endif %}
-            {% if form.address.errors %}
-            <div class="control-group error">
-              <label class="control-label">
-                {{form.address.label}}
-              </label>
-              <div class="controls">
-                {{ form.address }}
-                {% for error in form.address.errors %}
-                  <span class="help-inline">
-                    {{ error|escape }}
-                  </span>
-                {% endfor %}
-              </div>
-            </div>
-            {% else %}
-            <div class="control-group">
-              <label class="control-label">
-                {{form.address.label}}
-              </label>
-              <div class="controls">
-                {{ form.address }}
-              </div>
-            </div>
-            {% endif %}
-            {% if form.town.errors %}
-            <div class="control-group error">
-              <label class="control-label">
-                {{form.town.label}}
-              </label>
-              <div class="controls">
-                {{ form.town }}
-                {% for error in form.town.errors %}
-                  <span class="help-inline">
-                    {{ error|escape }}
-                  </span>
-                {% endfor %}
-              </div>
-            </div>
-            {% else %}
-            <div class="control-group">
-              <label class="control-label">
-                {{form.town.label}}
-              </label>
-              <div class="controls">
-                {{ form.town }}
-              </div>
-            </div>
-            {% endif %}
-            {% if form.postcode.errors %}
-            <div class="control-group error">
-              <label class="control-label">
-                {{form.postcode.label}}
-              </label>
-              <div class="controls">
-                {{ form.postcode }}
-                {% for error in form.postcode.errors %}
-                  <span class="help-inline">
-                    {{ error|escape }}
-                  </span>
-                {% endfor %}
-              </div>
-            </div>
-            {% else %}
-            <div class="control-group">
-              <label class="control-label">
-                {{form.postcode.label}}
-              </label>
-              <div class="controls">
-                {{ form.postcode }}
-              </div>
-            </div>
-            {% endif %}
-          {% if user.get_profile.is_doctor %}
-            {% if form.status.errors %}
-            <div class="control-group error">
-              <label class="control-label">
-                {{form.status.label}}
-              </label>
-              <div class="controls">
-                {{ form.status }}
-                {% for error in form.status.errors %}
-                  <span class="help-inline">
-                    {{ error|escape }}
-                  </span>
-                {% endfor %}
-              </div>
-            </div>
-            {% else %}
-            <div class="control-group info">
-              <label class="control-label">
-                {{form.status.label}}
-              </label>
-              <div class="controls">
-                {{ form.status }}
-              </div>
-            </div>
-            {% endif %}            
-          {% endif %}
-          {% if form.dob.errors %}
-          <div class="control-group error">
-            <label class="control-label">
-              {{form.dob.label}}
-            </label>
-            <div class="controls">
-              <div id="dp" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
-                {{form.dob}}
-                <span class="add-on">
-                  <i class="icon-th"></i>
-                </span>
-                <span class="help-inline">
-                  {% trans 'Pacientes menores de edad sin NIF' %}
-                </span>
-                {% for error in form.dob.errors %}
-                  <span class="help-inline">
-                    {{ error|escape }}
-                  </span>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-          {% else %}
-          <div class="control-group info">
-            <label class="control-label">
-              {{form.dob.label}}
-            </label>
-            <div class="controls">
-              <div id="dp" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
-                {{form.dob}}
-                <span class="add-on">
-                  <i class="icon-th"></i>
-                </span>
-                <span class="help-inline">
-                  {% trans 'Pacientes menores de edad sin NIF' %}
-                </span>
-              </div>
-            </div>
-          </div>
-          {% endif %}
-          {% if form.phone1.errors %}
-          <div class="control-group error">
-            <label class="control-label">
-              {{form.phone1.label}}
-            </label>
-            <div class="controls">
-              {{ form.phone1 }}
-              {% for error in form.phone1.errors %}
-                <span class="help-inline">
-                  {{ error|escape }}
-                </span>
-              {% endfor %}
-            </div>
-          </div>
-          {% else %}
-          <div class="control-group info">
-            <label class="control-label">
-              {{form.phone1.label}}
-            </label>
-            <div class="controls">
-              {{ form.phone1 }}
-            </div>
-          </div>
-          {% endif %}
-          {% if form.phone2.errors %}
-          <div class="control-group error">
-            <label class="control-label">
-              {{form.phone2.label}}
-            </label>
-            <div class="controls">
-              {{ form.phone2 }}
-              {% for error in form.phone2.errors %}
-                <span class="help-inline">
-                  {{ error|escape }}
-                </span>
-              {% endfor %}
-            </div>
-          </div>
-          {% else %}
-          <div class="control-group">
-            <label class="control-label">
-              {{form.phone2.label}}
-            </label>
-            <div class="controls">
-              {{ form.phone2 }}
-            </div>
-          </div>
-          {% endif %}
-          {% if form.email.errors %}
-          <div class="control-group error">
-            <label class="control-label">
-              {{form.email.label}}
-            </label>
-            <div class="controls">
-              {{ form.email }}
-              {% for error in form.email.errors %}
-                <span class="help-inline">
-                  {{ error|escape }}
-                </span>
-              {% endfor %}
-            </div>
-          </div>
-          {% else %}
-          <div class="control-group info">
-            <label class="control-label">
-              {{form.email.label}}
-            </label>
-            <div class="controls">
-              {{ form.email }}
-            </div>
-          </div>
-          {% endif %}          
-          {% if user.get_profile.is_doctor %}
-            {% if form.profession.errors %}
-            <div class="control-group error">
-              <label class="control-label">
-                {{form.profession.label}}
-              </label>
-              <div class="controls">
-                {{ form.profession }}
-                {% for error in form.profession.errors %}
-                  <span class="help-inline">
-                    {{ error|escape }}
-                  </span>
-                {% endfor %}
-              </div>
-            </div>
-            {% else %}
-            <div class="control-group">
-              <label class="control-label">
-                {{form.profession.label}}
-              </label>
-              <div class="controls">
-                {{ form.profession }}
-              </div>
-            </div>
-            {% endif %}
-          {% endif %}
-          {% if form.active.errors %}
-          <div class="control-group error">
-            <label class="control-label">
-              {{form.active.label}}
-            </label>
-            <div class="controls">
-              {{ form.active }}
-              {% for error in form.active.errors %}
-                <span class="help-inline">
-                  {{ error|escape }}
-                </span>
-              {% endfor %}
-            </div>
-          </div>
-          {% else %}
-          <div class="control-group">
-            <label class="control-label">
-              {{form.active.label}}
-            </label>
-            <div class="controls">
-              {{ form.active }}
-            </div>
-          </div>
-          {% endif %}             
-          <div class="controls">
-            <button type="submit" class="btn btn-primary btn-large">
-              {% trans 'Guardar y continuar' %}
-            </button>
-          </div>        
-        </form>        
-  </section> 
+    {% endif %}
+    {% if form.name.errors %}
+    <div class="control-group error">
+        <label class="control-label">
+          {{form.name.label}}
+        </label>
+        <div class="controls">
+          {{ form.name }}
+          {% for error in form.name.errors %}
+            <span class="help-inline">
+              {{ error|escape }}
+            </span>
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <div class="control-group info">
+        <label class="control-label">
+          {{form.name.label}}
+        </label>
+        <div class="controls">
+          {{ form.name }}
+        </div>
+      </div>
+    {% endif %}
+    {% if form.first_surname.errors %}
+    <div class="control-group error">
+      <label class="control-label">
+        {{form.first_surname.label}}
+      </label>
+      <div class="controls">
+        {{ form.first_surname }}
+        {% for error in form.first_surname.errors %}
+          <span class="help-inline">
+            {{ error|escape }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="control-group info">
+      <label class="control-label">
+        {{form.first_surname.label}}
+      </label>
+      <div class="controls">
+        {{ form.first_surname }}
+      </div>
+    </div>
+    {% endif %}
+    {% if form.second_surname.errors %}
+    <div class="control-group error">
+      <label class="control-label">
+        {{form.second_surname.label}}
+      </label>
+      <div class="controls">
+        {{ form.second_surname }}
+        {% for error in form.second_surname.errors %}
+          <span class="help-inline">
+            {{ error|escape }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="control-group info">
+      <label class="control-label">
+        {{form.second_surname.label}}
+      </label>
+      <div class="controls">
+        {{ form.second_surname }}
+      </div>
+    </div>
+    {% endif %}
+    {% if form.nif.errors %}
+    <div class="control-group error">
+      <label class="control-label">
+        {{form.nif.label}}
+      </label>
+      <div class="controls">
+        {{ form.nif }}
+        {% for error in form.nif.errors %}
+          <span class="help-inline">
+            {{ error|escape }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="control-group info">
+      <label class="control-label">
+        {{form.nif.label}}
+      </label>
+      <div class="controls">
+        {{ form.nif }}
+      </div>
+    </div>
+    {% endif %}
+    {% if form.dob.errors %}
+    <div class="control-group error">
+      <label class="control-label">
+        {{form.dob.label}}
+      </label>
+      <div class="controls">
+        <div id="dp" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
+          {{form.dob}}
+          <span class="add-on">
+            <i class="icon-th"></i>
+          </span>
+          <span class="help-inline">
+            {% trans 'Pacientes menores de edad sin NIF' %}
+          </span>
+          {% for error in form.dob.errors %}
+            <span class="help-inline">
+              {{ error|escape }}
+            </span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="control-group info">
+      <label class="control-label">
+        {{form.dob.label}}
+      </label>
+      <div class="controls">
+        <div id="dp" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
+          {{form.dob}}
+          <span class="add-on">
+            <i class="icon-th"></i>
+          </span>
+          <span class="help-inline">
+            {% trans 'Pacientes menores de edad sin NIF' %}
+          </span>
+        </div>
+      </div>
+    </div>
+    {% endif %}        
+    {% if user.get_profile.is_doctor %}
+      {% if form.sex.errors %}
+      <div class="control-group error">
+        <label class="control-label">
+          {{form.sex.label}}
+        </label>
+        <div class="controls">
+          {{ form.sex }}
+          {% for error in form.sex.errors %}
+            <span class="help-inline">
+              {{ error|escape }}
+            </span>
+          {% endfor %}
+        </div>
+      </div>
+      {% else %}
+      <div class="control-group info">
+        <label class="control-label">
+          {{form.sex.label}}
+        </label>
+        <div class="controls">
+          {{ form.sex }}
+        </div>
+      </div>
+      {% endif %}
+    {% endif %}
+     {% if user.get_profile.is_doctor %}
+      {% if form.status.errors %}
+      <div class="control-group error">
+        <label class="control-label">
+          {{form.status.label}}
+        </label>
+        <div class="controls">
+          {{ form.status }}
+          {% for error in form.status.errors %}
+            <span class="help-inline">
+              {{ error|escape }}
+            </span>
+          {% endfor %}
+        </div>
+      </div>
+      {% else %}
+      <div class="control-group info">
+        <label class="control-label">
+          {{form.status.label}}
+        </label>
+        <div class="controls">
+          {{ form.status }}
+        </div>
+      </div>
+      {% endif %}            
+    {% endif %}
+      {% if form.address.errors %}
+      <div class="control-group error">
+        <label class="control-label">
+          {{form.address.label}}
+        </label>
+        <div class="controls">
+          {{ form.address }}
+          {% for error in form.address.errors %}
+            <span class="help-inline">
+              {{ error|escape }}
+            </span>
+          {% endfor %}
+        </div>
+      </div>
+      {% else %}
+      <div class="control-group">
+        <label class="control-label">
+          {{form.address.label}}
+        </label>
+        <div class="controls">
+          {{ form.address }}
+        </div>
+      </div>
+      {% endif %}
+      {% if form.town.errors %}
+      <div class="control-group error">
+        <label class="control-label">
+          {{form.town.label}}
+        </label>
+        <div class="controls">
+          {{ form.town }}
+          {% for error in form.town.errors %}
+            <span class="help-inline">
+              {{ error|escape }}
+            </span>
+          {% endfor %}
+        </div>
+      </div>
+      {% else %}
+      <div class="control-group">
+        <label class="control-label">
+          {{form.town.label}}
+        </label>
+        <div class="controls">
+          {{ form.town }}
+        </div>
+      </div>
+      {% endif %}
+      {% if form.postcode.errors %}
+      <div class="control-group error">
+        <label class="control-label">
+          {{form.postcode.label}}
+        </label>
+        <div class="controls">
+          {{ form.postcode }}
+          {% for error in form.postcode.errors %}
+            <span class="help-inline">
+              {{ error|escape }}
+            </span>
+          {% endfor %}
+        </div>
+      </div>
+      {% else %}
+      <div class="control-group">
+        <label class="control-label">
+          {{form.postcode.label}}
+        </label>
+        <div class="controls">
+          {{ form.postcode }}
+        </div>
+      </div>
+      {% endif %}
+   
+    {% if form.phone1.errors %}
+    <div class="control-group error">
+      <label class="control-label">
+        {{form.phone1.label}}
+      </label>
+      <div class="controls">
+        {{ form.phone1 }}
+        {% for error in form.phone1.errors %}
+          <span class="help-inline">
+            {{ error|escape }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="control-group info">
+      <label class="control-label">
+        {{form.phone1.label}}
+      </label>
+      <div class="controls">
+        {{ form.phone1 }}
+      </div>
+    </div>
+    {% endif %}
+    {% if form.phone2.errors %}
+    <div class="control-group error">
+      <label class="control-label">
+        {{form.phone2.label}}
+      </label>
+      <div class="controls">
+        {{ form.phone2 }}
+        {% for error in form.phone2.errors %}
+          <span class="help-inline">
+            {{ error|escape }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="control-group">
+      <label class="control-label">
+        {{form.phone2.label}}
+      </label>
+      <div class="controls">
+        {{ form.phone2 }}
+      </div>
+    </div>
+    {% endif %}
+    {% if form.email.errors %}
+    <div class="control-group error">
+      <label class="control-label">
+        {{form.email.label}}
+      </label>
+      <div class="controls">
+        {{ form.email }}
+        {% for error in form.email.errors %}
+          <span class="help-inline">
+            {{ error|escape }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="control-group info">
+      <label class="control-label">
+        {{form.email.label}}
+      </label>
+      <div class="controls">
+        {{ form.email }}
+      </div>
+    </div>
+    {% endif %}          
+    {% if user.get_profile.is_doctor %}
+      {% if form.profession.errors %}
+      <div class="control-group error">
+        <label class="control-label">
+          {{form.profession.label}}
+        </label>
+        <div class="controls">
+          {{ form.profession }}
+          {% for error in form.profession.errors %}
+            <span class="help-inline">
+              {{ error|escape }}
+            </span>
+          {% endfor %}
+        </div>
+      </div>
+      {% else %}
+      <div class="control-group">
+        <label class="control-label">
+          {{form.profession.label}}
+        </label>
+        <div class="controls">
+          {{ form.profession }}
+        </div>
+      </div>
+      {% endif %}
+    {% endif %}
+    {% if form.active.errors %}
+    <div class="control-group error">
+      <label class="control-label">
+        {{form.active.label}}
+      </label>
+      <div class="controls">
+        {{ form.active }}
+        {% for error in form.active.errors %}
+          <span class="help-inline">
+            {{ error|escape }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <div class="control-group">
+      <label class="control-label">
+        {{form.active.label}}
+      </label>
+      <div class="controls">
+        {{ form.active }}
+      </div>
+    </div>
+    {% endif %}             
+    <div class="controls">
+      <button type="submit" class="btn btn-primary btn-large">
+        {% trans 'Guardar y continuar' %}
+      </button>
+    </div>        
+  </form>        
+</section> 
 {% endblock container %}

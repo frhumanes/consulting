@@ -10,14 +10,18 @@
 
 {% block container %}
 
-<a class="btn btn-primary" href="{% url cal.list_vacation %}">
-  <i class="icon-arrow-left icon-white"></i>
-  {% trans 'Back' %}
-</a>
+  <div class="page-header">
+    <h1>{% trans 'Editar día de vacaciones' %}
+            <div class="btn-group pull-right">
+                  <a class="btn btn-info" href="{% url cal.list_vacation %}">
+                     <i class="icon-arrow-left icon-white"></i>
+                    {% trans 'Volver' %}
+                  </a>
+            </div>
+        </h1>
+  </div>
 
-<legend>{% trans 'Edit Vacation' %}</legend>
-
-<div class="offset1">
+<div class="well">
 
 <form class="form-horizontal" method="post" action="{% url cal.edit_vacation vacation.id%}">{% csrf_token %}
   <fieldset>
@@ -121,7 +125,7 @@
 
   $('#remove-event').live('click', function(event){
     $('#modal-screen').modal({
-      'backdrop':'static',
+      'Volverdrop':'static',
       'keyboard':false,
     });
   });
@@ -149,7 +153,7 @@
           }else{
             $('#modal-screen').hide();
             $('#modal-screen-error').modal({
-              'backdrop':'static',
+              'Volverdrop':'static',
               'keyboard':false,
             });
           }

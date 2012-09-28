@@ -11,6 +11,8 @@ urlpatterns = patterns('',
 
     url(r'^new/$', message_views.create_message, name="private_messages_new"),
 
+    url(r'^new/(?P<recipient_id>\d+)/$', message_views.create_message, name="private_messages_new_for"),
+
     url(r'^view/(?P<id>\d+)/$', message_views.view_message,
         name="private_messages_view"),
 

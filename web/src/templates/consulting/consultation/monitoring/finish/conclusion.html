@@ -3,13 +3,11 @@
 {% load i18n%}
 
 {% block container %}
-  <section>
     <div class="page-header">
       <h1>{% trans 'Conclusión' %}</h1>
     </div>
-    <div class="row">
-      <div class="span8">      
-        <form class="form-horizontal" id="form" action="{% url consulting_conclusion_monitoring appointment.id %}" method="post" accept-charset="utf-8">{% csrf_token %}
+  <section>
+     <form class="form-horizontal" id="form" action="{% url consulting_conclusion_monitoring appointment.id %}" method="post" accept-charset="utf-8">{% csrf_token %}
             {{form.component}}
             <div class="control-group">
               <label class="control-label">
@@ -39,7 +37,5 @@
               </button>
             </div>
         </form>          
-      </div>
-    </div>
   </section>
  {% endblock container %}

@@ -2,6 +2,27 @@
 
 <form class="form-horizontal" method="post" action="{% url private_messages_new %}">{% csrf_token %}
   <fieldset>
+        <!-- RECIPIENT -->
+      {% if form.recipient.errors %}
+        <div class="control-group error">
+          <label for="id_recipient" class="control-label">{{form.recipient.label}}</label>
+          <div class="controls">
+            {{ form.recipient }}
+            {% for error in form.recipient.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group hide">
+          <label for="id_recipient" class="control-label">{{form.recipient.label}}</label>
+          <div class="controls">
+            {{ form.recipient }}
+            {{ form.parent }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END RECIPIENT -->
       <!-- SUBJECT -->
       {% if form.subject.errors %}
         <div class="control-group error">
@@ -47,30 +68,11 @@
 
       <!-- END BODY -->
 
-       <!-- RECIPIENT -->
-      {% if form.recipient.errors %}
-        <div class="control-group error">
-          <label for="id_recipient" class="control-label">{{form.recipient.label}}</label>
-          <div class="controls">
-            {{ form.recipient }}
-            {% for error in form.recipient.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
-          </div>
-        </div>
-      {% else %}
-        <div class="control-group">
-          <label for="id_recipient" class="control-label">{{form.recipient.label}}</label>
-          <div class="controls">
-            {{ form.recipient }}
-          </div>
-        </div>
-      {% endif %}
-      <!-- END RECIPIENT -->
+     
 
 
       <div class="form-actions">
-        <button class="btn btn-large btn-primary span3 offset1" type="submit">{% trans 'Enviar' %}</button>
+        <button class="btn btn-large btn-primary btn-block" type="submit">{% trans 'Enviar' %}</button>
       </div>
 
   </fieldset>

@@ -1,10 +1,16 @@
 {% load i18n%}
 
-{% block subheader %}
-    <h2>{% trans 'Datos Personales' %}</h2>
-{% endblock %}
+<div class="page-header">
+	<h1>Datos personales
+        <div class="btn-group pull-right">
+            <a class="btn btn-info"  href="{% url consulting_editpatient_pm patient_user.id %}?next={{request.path}}">
+            <i class="icon-pencil icon-white"></i> Editar
+            </a>
+        </div>
+    </h1>
+</div>
 <section>
-  <div class="row">
+  <div class="">
     {% include 'consulting/patient/card.html' %}
   </div>
 </section>

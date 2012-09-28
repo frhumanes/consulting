@@ -9,6 +9,7 @@ from datetime import datetime
 
 from models import Message
 from forms import MessageForm
+from django.contrib.auth.models import User
 
 from decorators import paginate
 
@@ -42,7 +43,7 @@ def inbox(request):
 
 
 @login_required
-def create_message(request):
+def create_message(request, recipient_id=None):
     """
     Create a new message
     """
@@ -57,7 +58,11 @@ def create_message(request):
             return redirect(reverse("private_messages_inbox"))
 
     else:
-        form = MessageForm(user=request.user)
+        if recipient_id:
+            user = User.objects.get(pk=recipient_id)
+            form = MessageForm(user=request.user, initial={'recipient': user})
+        else:
+            form = MessageForm(user=request.user)
 
     return render_to_response("private_messages/message_new.html",
                 {"form": form}, context_instance=RequestContext(request))
@@ -83,10 +88,10 @@ def reply_message(request, message_id):
     """
     message_to_reply = get_object_or_404(Message, pk=int(message_id))
     message_to_reply.subject = 'Re: ' + message_to_reply.subject
-    message_to_reply.body = ' \n \n------ \n' + message_to_reply.body
+    message_to_reply.body = ''
     form = MessageForm(user=request.user,
         instance=message_to_reply,
-        initial={'recipient': message_to_reply.author})
+        initial={'recipient': message_to_reply.author,'parent': message_to_reply})
 
     return render_to_response("private_messages/message_reply.html",
                 {"form": form}, context_instance=RequestContext(request))

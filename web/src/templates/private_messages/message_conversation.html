@@ -1,0 +1,18 @@
+{% load i18n messages%}
+<div class="row-fluid">
+  <div id="message{{message.id}}" class="alert {% if message.author = user %}alert-info pull-left{% else %}alert-success pull-right{% endif %} span8">
+    <legeng>
+        <strong>{{ message.author.get_profile.get_full_name }}</strong>
+    </legend>
+    <div><span>{{ message.body|safe|escape|linebreaks }}</span></div>
+    <em class="pull-right">{{ message.sent_at|date:"d M y H:i" }}</em>
+  </div>
+</div>
+
+{% if message.get_responses %}
+  {% for response in message.get_responses %}
+    {% with template_name="private_messages/message_conversation.html" %}
+       {% include template_name with message=response user=user %}
+    {% endwith %}
+  {% endfor %}
+{% endif %}

@@ -7,10 +7,11 @@
 {% end block %}
 
 {% block container %}
-  <section>
   <div class="page-header">
     <h1>{% trans 'Acción a realizar' %}</h1>
   </div>
+  <section>
+
       <div class="hero-unit center">
         <form class="form-horizontal" method="post" action="{% url consulting_select_action id_appointment %}">{% csrf_token %}
           <fieldset>

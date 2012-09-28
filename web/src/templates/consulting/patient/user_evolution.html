@@ -9,8 +9,6 @@
 {% endblock %}
 
 {% block right %}
-
-    <br />
     {% include 'consulting/patient/card.html' %}
 {% endblock %}
 {% block container %}
@@ -31,7 +29,12 @@
 	<div id="placeholder" style="width:100%;height:300px;">
 		<div class="alert alert-info center">Use el botón <strong>Variables</strong> para visualizar su evolución.</div>
 	</div>
+    <div id="tools" class="clearfix">
+        <button class="btn pull-left" id="setAll">Seleccionar todas</button>
+        <button class="btn pull-right" id="cleanAll">Limpiar todas</button>
+    </div>
 	</div>
+    
 	<div id="legend"></div>
 	
 <script type="text/javascript">
@@ -40,7 +43,7 @@ $(function () {
     	{% for label, marks in latest_marks.items %}
         "{{label}}": {
             label: "{{label|upper}}",
-            data: [{% for date, mark in marks %}[(new Date({{date|date:'Y, m, d'}})).getTime(),parseFloat("{{mark|floatformat}}".replace(",", "."))],{% endfor %}]
+            data: [{% for date, mark in marks %}[(Date.UTC({{date|date:'Y, m, d'}})),parseFloat("{{mark|floatformat}}".replace(",", "."))],{% endfor %}]
         },        
        {% endfor %}
     };
@@ -56,12 +59,28 @@ $(function () {
     // insert checkboxes 
     var choiceContainer = $("#choices");
     var legendContainer = $("#legend");
+    var originalContent = $("#placeholder").html();
     $.each(datasets, function(key, val) {
-        choiceContainer.append('<li><label class="checkbox span3"><input type="checkbox" name="' + key + '" value="'+  key +'">' + val.label + '</label><li>');
+        choiceContainer.append('<li><label class="checkbox"><input type="checkbox" name="' + key + '" value="'+  key +'">' + val.label + '</label><li>');
     });
     choiceContainer.find("input").click(plotAccordingToChoices);
-
+    $("#cleanAll").click(cleanAll);
+    $("#setAll").click(setAll);
     
+    function cleanAll() {
+        choiceContainer.find("input").each(function () {
+            $(this).removeAttr("checked");
+        });
+        $("#placeholder").html(originalContent);
+    }
+
+    function setAll() {
+        choiceContainer.find("input").each(function () {
+            $(this).attr("checked", true);
+        });
+        plotAccordingToChoices();
+    }
+
     function plotAccordingToChoices() {
         var data = [];
 
@@ -76,13 +95,14 @@ $(function () {
             	lines: { show: true },
             	points: { show: true },
                 yaxis: { min: 0, max: 5, ticks: 10, position: "right"},
-                xaxis: { mode: "time",  minTickSize: [1, "day"], min: (new Date({{ticks|first|date:'Y, m, d-1'}})).getTime(),
-                max: (new Date({{ticks|last|date:'Y, m, d+1'}})).getTime()},
+                xaxis: { mode: "time",  minTickSize: [1, "day"], min: (Date.UTC({{ticks|first|date:'Y, m, d-1, 23'}})),
+                max: (Date.UTC({{ticks|last|date:'Y, m, d, 01'}}))},
                 legend: { container: legendContainer, noColumns: 3 }
             });
     }
 
     plotAccordingToChoices();
+
 });
 </script>
 

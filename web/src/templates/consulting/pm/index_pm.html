@@ -40,21 +40,15 @@
 
 {% endblock %}
 
-{% block header%}
-  {% include "ui/includes/header_doctor.html" %}
-{% endblock  %}
-
-{% block body %}
-  <div id="overwrite" class="container">
-    <div class="row" style="margin-top:150px;">      
-      <div class="span5" style="text-align:right;">
-        <h3>{% trans 'BUSCAR PACIENTE' %}</h3>
-      </div>
-      <div class="span7">
-        <form class="form-horizontal">{% csrf_token %}
-          <input type="text" id="searcher" class="input-medium span4">
-        </form>
-      </div>     
-    </div>  
+{% block container %}
+<div class="row-fluid" style="margin-top:150px;">      
+  <div class="span6" style="text-align:right;">
+    <h3>{% trans 'BUSCAR PACIENTE' %}</h3>
   </div>
-{% endblock body %}
+  <div class="span6">
+    <form class="">{% csrf_token %}
+      <input type="text" id="searcher" class="input-medium search-query span12" style="margin: 13px 0">
+    </form>
+  </div>     
+</div>  
+{% endblock %}

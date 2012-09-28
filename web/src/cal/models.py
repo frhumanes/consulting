@@ -106,3 +106,6 @@ class Appointment(TraceableModel):
     def __unicode__(self):
         return u'app: %s %s [%s]' \
             % (self.id, self.app_type, self.date)
+
+    def is_first_appointment(self):
+        return self == Appointment.objects.filter(patient=self.patient).order_by('date')[0]

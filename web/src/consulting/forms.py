@@ -123,10 +123,10 @@ class MedicineForm(forms.ModelForm):
 class ConclusionForm(forms.ModelForm):
     observation = forms.CharField(label=_(u'Observaciones'),
                                     widget=forms.Textarea(attrs={'cols': 60,
-                                                'rows': 4, 'class': 'span5'}))
+                                                'rows': 4, 'class': 'span12'}))
     recommendation = forms.CharField(label=_(u'Recomendaciones'),
                                     widget=forms.Textarea(attrs={'cols': 60,
-                                                'rows': 4, 'class': 'span5'}),
+                                                'rows': 4, 'class': 'span12'}),
                                     required=False)
 
     class Meta:
@@ -144,7 +144,7 @@ class ActionSelectionForm(forms.Form):
 
     action = forms.ChoiceField(label=_(u'Realizar'), choices=ACTION,
         widget=forms.Select(
-                        attrs={'class': 'input-medium search-query span4'}))
+                        attrs={'class': 'input-medium search-query span12'}))
 
 
 class SelectTaskForm(forms.Form):
@@ -170,6 +170,12 @@ class SelectTaskForm(forms.Form):
             if not variables:
                 NEXT_SURVEY = NEXT_SURVEY[:3]
             self.fields['survey'].choices = NEXT_SURVEY
+            self.fields['kind'] = forms.ChoiceField(
+                    label=_(u'Tipo'),
+                    widget=forms.Select(attrs={'class':'span6'}),
+                    choices=((settings.ABREVIADO, u'Abreviado'),
+                             (settings.EXTENSO, u'Extendido')),
+                    required=True)
         else:
             super(SelectTaskForm, self).__init__(*args, **kwargs)
 
@@ -211,7 +217,7 @@ class SelectTaskForm(forms.Form):
                                     attrs={'class': 'span2', 'size': '16'}))
     survey = forms.ChoiceField(label=_(u'Encuesta'),
             widget=forms.Select(
-                        attrs={'class': 'input-medium search-query span4'}))
+                        attrs={'class': 'input-medium search-query span12'}))
 
 
 class SelectOtherTaskForm(forms.Form):
@@ -259,7 +265,7 @@ class SelectOtherTaskForm(forms.Form):
 
     survey = forms.ChoiceField(label=_(u'Encuesta'),
             widget=forms.Select(
-                        attrs={'class': 'input-medium search-query span4'}))
+                        attrs={'class': 'input-medium search-query span12'}))
 
 
 class SelectNotAssessedVariablesForm(forms.Form):
@@ -280,8 +286,19 @@ class SelectNotAssessedVariablesForm(forms.Form):
 
 
 class SymptomsWorseningForm(forms.Form):
-    symptoms_worsening = forms.CharField(
-                        label=get_object_or_404(Question,
-                                code=settings.CODE_SYMTOMS_WORSENING).text,
-                        widget=forms.Textarea(
-                            attrs={'cols': 60, 'rows': 4, 'class': 'span5'}))
+
+    symptoms_worsening = forms.CharField(label=get_object_or_404(Question,
+                                code=settings.CODE_SYMPTOMS_WORSENING).text,
+                                widget=forms.Textarea(
+                                attrs={'cols': 60, 'rows': 4, 'class': 'span12'}))
+
+    def __init__(self, *args, **kwargs):
+        OPTION = (
+                (0, _(u'No')),
+                (1, _(u'Sí')),
+            )
+
+        super(SymptomsWorseningForm, self).__init__(*args, **kwargs)
+        self.fields['question'] = forms.ChoiceField(choices=OPTION,
+                                                    widget=forms.Select(
+                                                    attrs={'class': 'input-medium search-query span3', 'id':'question'}))

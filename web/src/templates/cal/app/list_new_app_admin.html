@@ -65,7 +65,7 @@
         {% if vacations %}
             <div class="alert alert-error"> El doctor no está disponible para este día</div>
         {% else %}
-          <h6>{% trans "No hay citas concertadas para este día" %}</h6>
+          <div class="alert alert-info">{% trans "No hay citas concertadas para este día" %}</div>
         {% endif %}
     {% endif %}
 

@@ -3,43 +3,39 @@
 {% load i18n%}
 
 {% block container %}
-      <section>
-        <div class="page-header">
-            <h1>{% trans 'Variables no evaluadas' %}</h1>
-        </div>
-        <div class="row">       
-          <div class="span8">            
-            <div class="hero-unit">
-              <form class="form-horizontal" method="post" action="{% url consulting_select_not_assessed_variables appointment.id id_result %}">{% csrf_token %}                  
-                {% if form.variables.errors %}
-                  <div id="error_variables" class="control-group error">
-                    <div class="offset1">
-                      <button type="submit" class="btn pull-right">
-                        Ir
-                      </button>
-                      {{ form.variables }}                      
-                      {% for error in form.variables.errors %}
-                        <span class="help-inline">
-                          {{ error|escape }}
-                        </span>
-                      {% endfor %}
-                    </div>
-                  </div>
-                {% else %}
-                  <div class="control-group">
-                    <button type="submit" class="btn pull-right">
-                      Ir
-                    </button>
-                    <div class="offset1">                      
-                      {{ form.variables }}                      
-                    </div>
-                  </div>
-                {% endif %}
-              </form>
-            </div>      
+<div class="page-header">
+    <h1>{% trans 'Variables no evaluadas' %}</h1>
+</div>
+<section>
+  <div class="hero-unit">
+    <form class="form-horizontal" method="post" action="{% url consulting_select_not_assessed_variables appointment.id id_result %}">{% csrf_token %}                  
+      {% if form.variables.errors %}
+        <div id="error_variables" class="control-group error">
+          <div class="offset1">
+            <button type="submit" class="btn pull-right">
+              Ir
+            </button>
+            {{ form.variables }}                      
+            {% for error in form.variables.errors %}
+              <span class="help-inline">
+                {{ error|escape }}
+              </span>
+            {% endfor %}
           </div>
-        </div>                          
-      </section>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <button type="submit" class="btn pull-right">
+            Ir
+          </button>
+          <div class="offset1">                      
+            {{ form.variables }}                      
+          </div>
+        </div>
+      {% endif %}
+    </form>
+  </div>                  
+</section>
 {% endblock container %}
 
 {% block jquery_init %}

@@ -1,0 +1,75 @@
+{% extends "consulting/patient/personal_data_pm.html" %}
+
+{% load i18n%}
+
+{% block right %}
+  {% include "consulting/patient/card.html" %}
+{% endblock %}
+
+
+{% block container %}
+  <div class="page-header">
+    <h1>{% trans 'Listado de Recomendaciones' %}</h1>
+  </div>
+  <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
+  <section>
+    <div class="">       
+      <div id="overwrite_list" class="">            
+        {% if recommendations.object_list %}                     
+        <table id="list_recommendation" class="table table-bordered table-condensed">  
+          <thead>
+            <tr>            
+              <th style="text-align:center;">
+                {% trans 'FECHA' %}
+              </th>
+              <th style="text-align:center;">
+                {% trans 'RECOMENDACIÓN' %}
+              </th>
+              <th style="text-align:center;">
+                {% trans 'ANSIEDAD' %}
+              </th>
+              <th style="text-align:center;">
+                {% trans 'DEPRESION' %}
+              </th>
+            </tr>
+          </thead>        
+          <tbody>                  
+            {% for recommendation in recommendations.object_list %}
+              <tr id="{{recommendation.id}}" class="recommendation">
+                <td style="text-align:center;">{{recommendation.date|date:"d/M/Y"|lower}}</td>
+                <td style="text-align:justify;"><a href="#" class="muted" rel="popover" title="Dr. {{recommendation.created_by.get_profile.get_full_name}}" data-content="{{recommendation.recommendation|striptags|safe}}">{{recommendation.recommendation|striptags|safe|truncatewords:10}}</a></td>
+                <td style="text-align:center;"><span class="label label-{{recommendation.task.get_anxiety_status|last}}">{{recommendation.task.get_anxiety_status|first}}</span></td>
+                <td style="text-align:center;"><span class="label label-{{recommendation.task.get_depression_status|last}}">{{recommendation.task.get_depression_status|first}}</span></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div id="recommendation-paginator" class="pagination pagination-centered">
+          <ul class="pagination">
+            {% if recommendations.has_previous %}
+              <li><a href="?page={{ recommendations.previous_page_number }}">←</a></li>
+            {% else %}
+              <li class="disabled"><a>←</a></li>
+            {% endif %}
+
+            {% if recommendations.has_next %}
+              <li><a href="?page={{ recommendations.next_page_number }}">→</a></li>
+            {% else %}
+              <li class="disabled"><a>→</a></li>
+            {% endif %}
+          </ul>
+        </div>    
+        <div id="overwrite"></div>                           
+        {% else %}
+            <div class="alert alert-info">{% trans "No hay Recomendaciones" %}</div>
+        {% endif %}
+      </div>
+     
+    </div>
+             
+  </section>
+{% endblock container %}
+
+{% block jquery_init %}
+    $('a[rel="popover"]').popover();
+{% endblock %}

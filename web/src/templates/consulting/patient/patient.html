@@ -28,12 +28,12 @@
 {% endblock  %}
 
 {% block container %}
+      <div class="page-header">
+          <h2>{% trans 'Datos del paciente' %}</h2>
+      </div>   
       <section>
-        <div class="page-header">
-          <h2>{% trans 'PACIENTE' %}</h2>
-        </div>        
-        <div class="row" >
-          <div class="{% if edit %}alert alert-info card{% endif %}">
+        <div class="" >
+          <div class="{% if edit %}well{% endif %}">
             {% if not edit %}
             <form class="form-horizontal" id="form" action="." method="post" accept-charset="utf-8">{% csrf_token %}
             {% endif %}
@@ -49,44 +49,44 @@
                   </strong>
                 </div>
               {% endif %}
-              <div class="control-group">
+              <div class="control-group info">
                 <label class="control-label">
                   {{ form.name.label }}
                 </label>
-                <div class="controls">
+                <div class="controls info">
                   {{form.name}}
                   {% if form.name.errors %}
                     <span class="help-inline">{{ form.name.errors }}</span>
                   {% endif %}
                 </div>
               </div>
-               <div class="control-group">
+               <div class="control-group info">
                 <label class="control-label">
                   {{form.first_surname.label}}
                 </label>
-                <div class="controls">
+                <div class="controls info">
                   {{form.first_surname}}
                   {% if form.first_surname.errors %}
                     {{ form.first_surname.errors }}
                   {% endif %}
                 </div>
               </div>
-             <div class="control-group">
+             <div class="control-group info">
                 <label class="control-label">
                   {{form.second_surname.label}}
                 </label>
-                <div class="controls">
+                <div class="controls info">
                   {{form.second_surname}}
                   {% if form.second_surname.errors %}
                     {{ form.second_surname.errors }}
                   {% endif %}
                 </div>
               </div>
-              <div class="control-group">
+              <div class="control-group info">
                 <label class="control-label">
                   {{form.nif.label}}
                 </label>
-                <div class="controls">
+                <div class="controls info">
                   {{form.nif}}
                   <span class="help-inline">
                     {% trans 'Pacientes con NIF o mayores de edad' %}
@@ -96,12 +96,44 @@
                   {% endif %}
                 </div>
               </div>
+               <div class="control-group info">
+                <label class="control-label">
+                  {{form.dob.label}}
+                </label>
+                <div class="controls info">
+                  <div id="dp" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
+                    {{form.dob}}
+                    <span class="add-on">
+                      <i class="icon-th"></i>
+                    </span>
+                    <span class="help-inline">
+                      {% trans 'Pacientes menores de edad sin NIF' %}
+                    </span>
+                  </div>
+                  {% if form.dob.errors %}
+                    {{ form.dob.errors }}
+                  {% endif %}
+                </div>
+              </div>
               {% if user.get_profile.is_doctor %}
-              <div class="control-group">
+                <div class="control-group info">
+                  <label class="control-label">
+                    {{form.status.label}}
+                  </label>
+                  <div class="controls info">
+                    {{form.status}}
+                    {% if form.status.errors %}
+                      {{ form.status.errors }}
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+              {% if user.get_profile.is_doctor %}
+              <div class="control-group info">
                 <label class="control-label">
                   {{form.sex.label}}
                 </label>
-                <div class="controls">
+                <div class="controls info">
                   {{form.sex}}
                   {% if form.sex.errors %}
                     {{ form.sex.errors }}
@@ -142,43 +174,11 @@
                   {% endif %}
                 </div>
               </div>
-              {% if user.get_profile.is_doctor %}
-                <div class="control-group">
-                  <label class="control-label">
-                    {{form.status.label}}
-                  </label>
-                  <div class="controls">
-                    {{form.status}}
-                    {% if form.status.errors %}
-                      {{ form.status.errors }}
-                    {% endif %}
-                  </div>
-                </div>
-              {% endif %}
-              <div class="control-group">
-                <label class="control-label">
-                  {{form.dob.label}}
-                </label>
-                <div class="controls">
-                  <div id="dp" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
-                    {{form.dob}}
-                    <span class="add-on">
-                      <i class="icon-th"></i>
-                    </span>
-                    <span class="help-inline">
-                      {% trans 'Pacientes menores de edad sin NIF' %}
-                    </span>
-                  </div>
-                  {% if form.dob.errors %}
-                    {{ form.dob.errors }}
-                  {% endif %}
-                </div>
-              </div>
               <div class="control-group">
                 <label class="control-label">
                   {{form.phone1.label}}
                 </label>
-                <div class="controls">
+                <div class="controls info">
                   {{form.phone1}}
                   {% if form.phone1.errors %}
                     {{ form.phone1.errors }}
@@ -196,7 +196,7 @@
                   {% endif %}
                 </div>
               </div>
-              <div class="control-group">
+              <div class="control-group info">
                 <label class="control-label">
                   {{form.email.label}}
                 </label>
@@ -231,7 +231,7 @@
                   {% endif %}
                 </div>
               </div>              
-              <div class="controls span1">
+              <div class="center">
                 <button type="submit" class="btn btn-primary btn-large">
                   {% trans 'Guardar' %}
                 </button>

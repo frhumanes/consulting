@@ -2,11 +2,33 @@
 
 {% load i18n%}
 
-{% block header%}
-  {% include "ui/includes/header_patient.html" %}
-{% endblock  %}
+{% block right %}
+	{% if patient_user.get_nextAppointment %}
+	<div class="alert alert-success" style="text-align: justify">
+		<h5>Su próxima cita tendrá lugar el <strong>{{patient_user.get_nextAppointment.date|date:"l d F Y"}}<strong> a las <strong>{{patient_user.get_nextAppointment.start_time|time:"H:i"}}<strong></h5>
+	</div>
+	{% endif %}
+	{% if patient_user.get_pending_tasks %}
+	<div class="alert alert-info" style="text-align: justify">
+		<span>Tiene <strong>{{patient_user.get_pending_tasks.count}}</strong> cuestionario{{ patient_user.get_pending_tasks.count|pluralize:",s" }}
+ pendiente{{ patient_user.get_pending_tasks.count|pluralize:",s" }}.</span>
+		<a href="{% url consulting_list_surveys %}" class="btn btn-large btn-block btn-info" type="button">Realizar ahora</a>
+	</div>
+	{% endif %}
+{% endblock %}
 
+{% block container %}
+	
+	<div class="hero-unit">
+		<h2>{% trans 'Resumen de la última consulta' %}</h2>
+		<dl>
+			<dt>Observaciones</dt>
+			<dd>{{patient_user.get_conclusions.observation}}&nbsp;</dd>
+			<dt>Recomendaciones</dt>
+			<dd>{{patient_user.get_conclusions.recommendation}}&nbsp;</dd>
+			<dt>Tratamiento</dt>
+			<dd>&nbsp;</dd>
+		</dl>
+	</div>
 
-{% block body %}
-INICIO
-{% endblock body %}
+{% endblock %}

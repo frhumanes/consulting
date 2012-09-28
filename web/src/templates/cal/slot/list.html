@@ -9,13 +9,13 @@
 {% endblock %}
 
 {% block container %}
-
-  <legend>{% trans "Preferencia de Citas para " %}          
-    <div class="btn-group pull-right">
-            <a class="btn btn-info" href="{% url cal.add_slot year month %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva preferencia" %}</a>
-          </div>
-    </legend>
-
+  <div class="page-header">
+    <h1>{% trans "Preferencia de Citas" %}
+            <div class="btn-group pull-right">
+                <a class="btn btn-info" href="{% url cal.add_slot year month %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva preferencia" %}</a>
+            </div>
+        </h1>
+  </div>
   
   {% regroup slots by get_weekday_display as slots_by_weekday %}
 

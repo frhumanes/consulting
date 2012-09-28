@@ -24,3 +24,6 @@ class Message(models.Model):
 
     def __unicode__(self):
         return u'%s message at %s' % (self.author, self.sent_at)
+
+    def get_responses(self):
+        return Message.objects.filter(parent=self)

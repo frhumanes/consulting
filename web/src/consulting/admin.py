@@ -31,7 +31,7 @@ admin.site.register(Medicine, MedicineAdmin)
 
 
 class ResultAdmin(admin.ModelAdmin):
-    fieldsets = [('Medicines', {'fields': ['patient', 'survey', 'options',
+    fieldsets = [('Medicines', {'fields': ['patient', 'survey',
                 'task']})]
     list_display = ('patient', 'survey', 'task')
     search_fields = ('patient', 'survey', 'task')

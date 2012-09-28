@@ -29,12 +29,12 @@
             </ul>
             <ul class="nav pull-right">
                 <div class="btn-group ">
-                    <a class="btn btn dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="icon-user"></i> {{user.username}}
+                    <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user icon-white"></i> {{user.username}}
                     <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="icon-user"></i><strong>{{ user.first_name }} {{ user.last_name }}</strong></a></li>
+                        <li><a href="#"><i class="icon-user"></i><strong>{{ user.get_profile.get_full_name }}</strong></a></li>
                         <li class="divider"></li>
                         <li><a href="{% url registration_logout %}"><i class="icon-off"></i>{% trans 'Desconectar' %}</a></li>
                     </ul>
