@@ -18,7 +18,7 @@
     </div>
   <section>
 
-        <div class="well center">
+        <div class="well">
           <form class="form-horizontal" method="post" action="{% url consulting_select_self_administered_survey_monitoring appointment.id %}">{% csrf_token %}
             {% if form.from_date.errors %}
               <div class="control-group error">
@@ -130,9 +130,11 @@
                 </div>
               </div>
             {% endif %}
+            <div class="center">
               <button type="submit" class="btn btn-primary btn-large">
                 Guardar
               </button>
+            </div>
           </form>
         </div>
         <a href="{% url consulting_today %}" class="btn btn-info btn-large pull-right">

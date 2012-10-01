@@ -209,12 +209,12 @@ class SelectTaskForm(forms.Form):
             label=_(u'Fecha inicio'),
             input_formats=(settings.DATE_FORMAT,),
             widget=forms.DateInput(format=settings.DATE_FORMAT,
-                                    attrs={'class': 'span2', 'size': '16'}))
+                                    attrs={'class': 'span8', 'size': '16'}))
     to_date = forms.DateField(
             label=_(u'Fecha fin'),
             input_formats=(settings.DATE_FORMAT,),
             widget=forms.DateInput(format=settings.DATE_FORMAT,
-                                    attrs={'class': 'span2', 'size': '16'}))
+                                    attrs={'class': 'span8', 'size': '16'}))
     survey = forms.ChoiceField(label=_(u'Encuesta'),
             widget=forms.Select(
                         attrs={'class': 'input-medium search-query span12'}))

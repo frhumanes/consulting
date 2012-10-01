@@ -7,27 +7,22 @@
 {% endblock %}
 
 {% block container %}
-  <section>
-      <legend>{% trans "CITAS " %}{{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}</legend>
-
-      <div class="row">
-        <div class="span5">
-          <div class="btn-toolbar" style="margin-bottom: 9px">
-              <div class="btn-group">                
-                <a class="btn btn-primary btn" href="{% url consulting_app_add_monitoring year month day patient_user.id appointment.id %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva cita" %}</a>
-              </div>
-          </div>
+<div class="page-header">
+  <h1>{% trans "CITAS " %}{{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}
+        <div class="btn-group pull-right">
+            <a class="btn btn-primary btn" href="{% url consulting_app_add_monitoring year month day patient_user.id appointment.id %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva cita" %}</a>
+            </a>
         </div>
-      </div>
-
+    </h1>
+</div>
+  <section>
       {% if events.object_list.count > 0 %}
 
 
       <table id="events_list" class="table table-striped">
         <thead>
             <tr>
-              <th>{% trans "Hora de comienzo" %}</th>
-              <th>{% trans "Hora de fin" %}</th>
+              <th>{% trans "Hora" %}</th>
               <th>{% trans "Paciente" %}</th>
               <th>{% trans "Tipo de cita" %}</th>
               <th>{% trans "Nota" %}</th>
