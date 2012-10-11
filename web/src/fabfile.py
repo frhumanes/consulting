@@ -10,13 +10,11 @@ from wtdeploy import push
 def development():
     env.app_name = 'consulting'
     env.fixtures_name = {
-        'medicament': ['00_illness', '01_group', '02_component'],
-        'survey': ['03_category', '04_block', '05_survey', '06_question',
-                    '07_option'],
-        'formula': ['08_dimension', '09_variable', '10_formula']
+        'initial_data': [ '01_group', '02_component', '06_question',  '07_option', '03_category', '08_dimension', '09_variable', '10_formula', '04_block', '05_survey', '00_illness']
     }
     env.ip = '89.140.10.57'
     env.nginx_serves_static = True
+
 
     env.deploy_folder = "/home/rambot/consulting"
     env.hosts = ['89.140.10.57']
@@ -25,8 +23,8 @@ def development():
     env.local_conf_folder = "deploy/89.140.10.57"
 
     env.repo = "https://intranet.wtelecom.es/svn/consulting30/trunk/web/src"
-    env.repo_user = ''
-    env.repo_password = ''
+    env.repo_user = 'fruiz'
+    env.repo_password = 'Wtelecom123'
 
     env.database_admin = 'root'
     env.database_admin_pass = 'cmglpa'

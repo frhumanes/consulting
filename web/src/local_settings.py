@@ -7,7 +7,11 @@ DATABASES = {
         'PASSWORD': 'consulting',                  # Not used with sqlite3.
         'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
-    }
+    },
+    'nonrel' : {
+      'ENGINE' : 'django_mongodb_engine',
+      'NAME' : 'consulting'
+   }
 }
 """
 
@@ -21,7 +25,9 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
 """
+
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -33,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'south',
+    #'south', #MONGODB ISSUE
     'django_extensions',
     'userprofile',
     'survey',
@@ -46,4 +52,6 @@ INSTALLED_APPS = (
     'cal',
     'conf',
     'illness',
+    'stadistic',
 )
+

@@ -1753,10 +1753,10 @@
     "model": "survey.question", 
     "fields": {
       "text": "Valore en qu\u00e9 medida observa durante la entrevista.", 
-      "single": false, 
+      "single": true, 
       "code": "Hd8", 
       "kind": 0, 
-      "required": false
+      "required": true
     }
   }, 
   {
@@ -1775,10 +1775,10 @@
     "model": "survey.question", 
     "fields": {
       "text": "\u00bfEn qu\u00e9 grado ha seguido el paciente las recomendaciones y/o tratamiento indicados?", 
-      "single": false, 
+      "single": true, 
       "code": "ADT", 
       "kind": 0, 
-      "required": false
+      "required": true
     }
   }, 
   {

@@ -60,7 +60,7 @@ $('table tbody tr').live('click', function(event){
   var id_appointment = $(this).attr('data-msg');
   if(id_appointment){
     $("#container").hide();
-    window.location.href = '/consultation/select_illness/' + id_appointment;
+    window.location.href = '/consultation/' + id_appointment;
   }
 });
 {% endblock %}

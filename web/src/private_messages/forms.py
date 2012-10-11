@@ -19,7 +19,7 @@ class MessageForm(forms.ModelForm):
     subject = forms.CharField(label=_("Asunto"),
         widget=forms.TextInput(attrs={'class': 'span12'}))
     parent = forms.ModelChoiceField(label=_(""),queryset=Message.objects.all(),
-        widget=forms.HiddenInput(attrs={'class': 'span12'}))
+        widget=forms.HiddenInput(attrs={'class': 'span12'}),required=False)
     body = forms.CharField(label=_("Mensaje"),
         widget=forms.Textarea(
             attrs={'cols': 80, 'rows': 10, 'class': 'span12'}))

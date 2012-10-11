@@ -2,15 +2,6 @@
 
 {% load i18n %}
 
-{% block js_files %}
-  {{ block.super }}
-  <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
-{% endblock %}
-
-{% block css_files %}
-  {{ block.super }}
-  <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet">
-{% endblock %}
 
 {% block container %}
     <div class="page-header">
@@ -19,60 +10,22 @@
   <section>
 
         <div class="well">
-          <form class="form-horizontal" method="post" action="{% url consulting_select_self_administered_survey_monitoring appointment.id %}">{% csrf_token %}
-            {% if form.from_date.errors %}
+          <form class="form-horizontal" method="post" action="{{request.path}}">{% csrf_token %}
+            {% if form.previous_days.errors %}
               <div class="control-group error">
-                <label for="id_from_date" class="control-label">{{form.from_date.label}}</label>
+                <label for="id_previous_days" class="control-label">{{form.previous_days.label}}</label>
                 <div class="controls">
-                  <div id="from_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
-                    {{ form.from_date }} 
-                    <span class="add-on">
-                      <i class="icon-th"></i>
-                    </span>                   
-                    {% for error in form.from_date.errors %}
+                    {{ form.previous_days }} {% trans 'días antes de la próxima cita' %}           
+                    {% for error in form.previous_days.errors %}
                        <span class="help-inline">{{ error|escape }}</span>
                     {% endfor %}
-                  </div>
                 </div>              
               </div>
             {% else %}
               <div class="control-group">
-                <label for="from_date" class="control-label">{{form.from_date.label}}</label>
+                <label for="previous_days" class="control-label">{{form.previous_days.label}}</label>
                 <div class="controls">
-                  <div id="from_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
-                    {{ form.from_date }}
-                    <span class="add-on">
-                      <i class="icon-th"></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            {% endif %}
-            {% if form.to_date.errors %}
-              <div class="control-group error">
-                <label for="to_date" class="control-label">{{form.to_date.label}}</label>
-                <div class="controls">
-                  <div id="to_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
-                    {{ form.to_date }}
-                    <span class="add-on">
-                      <i class="icon-th"></i>
-                    </span>
-                    {% for error in form.to_date.errors %}
-                       <span class="help-inline">{{ error|escape }}</span>
-                    {% endfor %}
-                  </div>
-                </div>
-              </div>
-            {% else %}
-              <div class="control-group">
-                <label for="id_to_date" class="control-label">{{form.to_date.label}}</label>
-                <div class="controls">
-                  <div id="to_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
-                    {{ form.to_date }}
-                    <span class="add-on">
-                      <i class="icon-th"></i>
-                    </span>
-                  </div>
+                    {{ form.previous_days }} {% trans 'días antes de la próxima cita' %}
                 </div>
               </div>
             {% endif %}
@@ -100,36 +53,35 @@
                 </div>
               </div>
             {% endif %}
-            {% if form.variables.errors %}
-              <div id="error_variables" class="control-group error">
-                 <label class="control-label">
+            <div class="control-group">
+              <label class="control-label">
                 {{form.kind.label}}
-                </label>
-                <div class="controls">
-                  {{ form.kind }}
-                </div>
-                <div class="offset1">
-                  {{ form.variables }}
-                  {% for error in form.variables.errors %}
-                    <span class="help-inline">
-                      {{ error|escape }}
-                    </span>
-                  {% endfor %}
-                </div>
+              </label>
+              <div class="controls">
+                {{ form.kind }}
               </div>
-            {% else %}
-              <div id="variables" class="control-group" style="display: none;">
-                 <label class="control-label">
-                  {{form.kind.label}}
-                </label>
-                <div class="controls">
-                  {{ form.kind }}
-                </div>
-                <div class="offset1">
-                  {{ form.variables }}
-                </div>
+            </div>
+          {% if form.variables.errors %}
+            <div id="error_variables" class="control-group error">
+              <div class="">
+                {{ form.variables }}
+                {% for error in form.variables.errors %}
+                  <span class="help-inline">
+                    {{ error|escape }}
+                  </span>
+                {% endfor %}
               </div>
-            {% endif %}
+            </div>
+          {% else %}
+            <div id="variables" class="control-group" style="display: none;">
+              <label class="control-label">
+                Variables
+              </label>
+              <div class="controls">
+                {{ form.variables }}
+              </div>
+            </div>
+          {% endif %}
             <div class="center">
               <button type="submit" class="btn btn-primary btn-large">
                 Guardar
@@ -137,9 +89,6 @@
             </div>
           </form>
         </div>
-        <a href="{% url consulting_today %}" class="btn btn-info btn-large pull-right">
-            Continuar
-        </a>
   </section>
 
 {% endblock container %}
@@ -147,13 +96,6 @@
 
 {% block jquery_init %}
   $('ul').addClass("without_decorator");
-
-  $('#from_date').datepicker().on('changeDate',
-    function(ev){$('#from_date').datepicker('hide');
-  });
-  $('#to_date').datepicker().on('changeDate',
-    function(ev){$('#to_date').datepicker('hide');
-  });
 
   $("#id_survey").change(function() {
         if($(this).val() == {{code_variables}}){

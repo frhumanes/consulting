@@ -5,3 +5,6 @@ MySQL-python
 gunicorn==0.13.4
 django-extensions
 django-wkhtmltopdf
+hg+https://bitbucket.org/wkornewald/django-nonrel
+hg+https://bitbucket.org/wkornewald/djangotoolbox
+git+https://github.com/django-nonrel/mongodb-engine

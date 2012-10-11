@@ -5,9 +5,7 @@
     "fields": {
       "name": "Estudio Previo",
       "code": 1,
-      "kind": 0,
       "blocks": [1,2],
-      "num_blocks": 2,
       "created_by": 1
     }
   },
@@ -17,9 +15,8 @@
     "fields": {
       "name": "Valoración Inicial",
       "code": 2,
-      "kind": 0,
       "blocks": [1,2,3,4],
-      "num_blocks": 3,
+      "multitype": 1,
       "created_by": 1
     }
   },
@@ -29,9 +26,8 @@
     "fields": {
       "name": "Ansiedad/Depresión",
       "code": 3,
-      "kind": 1,
-      "blocks": [3],
-      "num_blocks": 1,
+      "blocks": [3,4],
+      "multitype": 1,
       "created_by": 1
     }
   },
@@ -39,60 +35,11 @@
     "model": "survey.survey",
     "pk": 4,
     "fields": {
-      "name": "Ansiedad/Depresión",
-      "code": 4,
-      "kind": 2,
-      "blocks": [4],
-      "num_blocks": 1,
-      "created_by": 1
-    }
-  },
-  {
-    "model": "survey.survey",
-    "pk": 5,
-    "fields": {
-      "name": "Comportamiento durante la entrevista",
-      "code": 5,
-      "kind": 1,
-      "blocks": [5],
-      "num_blocks": 1,
-      "created_by": 1
-    }
-  },
-  {
-    "model": "survey.survey",
-    "pk": 6,
-    "fields": {
-      "name": "Comportamiento durante la entrevista",
-      "code": 6,
-      "kind": 2,
-      "blocks": [6],
-      "num_blocks": 1,
-      "created_by": 1
-    }
-  },
-  {
-    "model": "survey.survey",
-    "pk": 7,
-    "fields": {
-      "name": "Síntomas o Empeoramiento",
-      "code": 7,
-      "kind": 0,
-      "blocks": [7],
-      "num_blocks": 1,
-      "created_by": 1
-    }
-  },
-  {
-    "model": "survey.survey",
-    "pk": 8,
-    "fields": {
-      "name": "Adherencia al Tratamiento",
+      "name": "Adherencia al Trattamiento",
       "code": 8,
-      "kind": 0,
       "blocks": [8],
-      "num_blocks": 1,
+      "multitype": 0,
       "created_by": 1
     }
-  }
+  },
 ]

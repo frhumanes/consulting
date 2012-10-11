@@ -1,0 +1,20 @@
+{% load i18n %}
+
+<section>
+  <legend>{% trans 'Conclusiones' %}</legend>
+  {% if conclusions.count = 0%}
+    <div class="alert alert-warning">{% trans 'Pendiente.' %} <a href="{% url consulting_set_conclusion appointment.id illness.code %}"><strong class="warning">{% trans 'Rellenar ahora' %}</strong></a></div>
+  {% endif %}
+  {% for c in conclusions %}
+  <dl>
+    {% if c.observation %}
+      <dt>{% trans 'Observaciones' %}</dt>
+      <dd>{{c.observation}}</dd>
+    {% endif %}
+    {% if c.recommendation %}
+      <dt>{% trans 'Recomendaciones' %}</dt>
+      <dd>{{c.recommendation}}</dd>
+    {% endif %}
+  </dl>
+  {% endfor %}
+</section>

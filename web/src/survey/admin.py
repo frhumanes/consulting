@@ -3,10 +3,10 @@ from survey.models import *
 
 
 class SurveyAdmin(admin.ModelAdmin):
-    fieldsets = [('Surveys', {'fields': ['name', 'code', 'blocks', 'kind']})]
-    list_display = ('code', 'name', 'kind')
-    search_fields = ('code', 'name', 'kind')
-    ordering = ('code', 'name', 'kind')
+    fieldsets = [('Surveys', {'fields': ['name', 'code', 'blocks', 'multitype']})]
+    list_display = ('code', 'name', 'multitype')
+    search_fields = ('code', 'name')
+    ordering = ('code', 'name', 'multitype')
 
 admin.site.register(Survey, SurveyAdmin)
 

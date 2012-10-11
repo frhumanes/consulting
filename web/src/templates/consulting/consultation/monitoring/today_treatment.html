@@ -1,0 +1,13 @@
+{% load i18n %}
+
+<section>
+  <legend>{% trans 'Tratamiento' %}</legend>
+    {% if treatment.count = 0%}
+    <div class="alert alert-info">{% trans 'No hay tratamiento farmacológico asociado a esta cita' %}</div>
+  {% endif %}
+  {% for m in treatment %}
+  <div>
+    {{m.component}} [{{m.posology}} mg/día]
+  </div>
+  {% endfor %}
+</section>

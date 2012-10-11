@@ -1,0 +1,35 @@
+{% load i18n %}
+
+<table class="table-striped table">
+  {% for medicine in medicines.object_list %}
+    {% if medicine.is_previous %}
+    <tr id="{{medicine.id}}" class="medicine">
+      <td><em>{{medicine.months}} mes{{ medicine.months|pluralize:"es" }}</em></td>
+      <td><strong>{{medicine.component}}</strong></td>
+      <td>{{medicine.get_before_after_symptom}} a los síntomas</td>
+      <td>{{medicine.posology}} mg/día</td>
+      <td><a href="#" id="{{medicine.id}}"  data-toggle="modal" data-target="#check_remove_medicine" class="remove_medicine"><i class="icon-remove-circle"></i></a></td>
+    </tr>
+    {% endif %}
+  {% endfor %}
+</table>
+<a class="btn btn-block btn-info" data-toggle="modal" data-target="#modal_medicament" href="{% if appointment %}{% url consulting_add_medicine action='register' id_appointment=appointment.id %}{% else %}{% url consulting_add_medicine action='register' %}{% endif %}">{% trans 'Registrar nuevo fármaco' %}</a>
+
+ <div id="check_remove_medicine" class="modal hide fade" style="display: block;">
+  <input id="medicine_id" type="hidden">
+  <div class="modal-header">
+      <button class="close" data-dismiss="modal">
+        ×
+      </button>
+      <h3>Borrar Fármaco</h3>
+  </div>
+  <div class="modal-body">
+      <p>
+        {% trans '¿Está seguro que quiere borrar este fármaco?' %}
+      </p>
+  </div>
+  <div class="modal-footer">
+    <a id="yes_remove" data-dismiss="modal" href="#" class="btn">Sí</a>
+    <a data-dismiss="modal" href="#" class="btn btn-primary">No</a>
+  </div>
+</div>

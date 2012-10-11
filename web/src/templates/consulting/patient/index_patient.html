@@ -22,12 +22,20 @@
 	<div class="hero-unit">
 		<h2>{% trans 'Resumen de la última consulta' %}</h2>
 		<dl>
-			<dt>Observaciones</dt>
-			<dd>{{patient_user.get_conclusions.observation}}&nbsp;</dd>
 			<dt>Recomendaciones</dt>
 			<dd>{{patient_user.get_conclusions.recommendation}}&nbsp;</dd>
 			<dt>Tratamiento</dt>
-			<dd>&nbsp;</dd>
+			<dd>
+				<table class="table table-striped table-condensed">
+				{% for m in patient_user.get_treatment %}
+					<tr>
+						<td>{{m.component}}</td>
+						<td style="text-align:right">{{m.posology}}</td>
+						<td>{% trans 'mg/día' %}</td>
+					</tr>
+				{% endfor %}
+				</table>
+			</dd>
 		</dl>
 	</div>
 

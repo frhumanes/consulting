@@ -157,12 +157,15 @@ INSTALLED_APPS = (
     'cal',
     'conf',
     'illness',
+    'stadistic',
 )
 
 AUTH_PROFILE_MODULE = 'userprofile.Profile'
-
+SESSION_COOKIE_AGE = 7200 # 2 HOURS
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 try:
    from local_settings import *
    from app_config import *
+   DATABASE_ROUTERS = ['stadistic.StadisticRouter']
 except ImportError:
    pass

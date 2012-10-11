@@ -2,6 +2,19 @@
 
 {% load i18n%}
 
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/jquery-ui-1.8.18.custom.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.ui.core.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.ui.position.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
+{% endblock %}
+
+{% block css_files %}
+  {{ block.super }}
+  <link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+{% endblock %}
+
 {% block jquery_init %}
   $('.medicine').each(function(){
       $(this).on("click", function(){ 
@@ -10,7 +23,7 @@
           $(this).css("background", "#D9EDF7").siblings().removeAttr("style")
 
           $('#overwrite').load(
-                '{% url consulting_detail_medicine_pm %}',
+                '',
                 {'medicine_id': medicine_id,
                 'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()});
           });
@@ -24,12 +37,54 @@
                         });      
   });
 
-  $("#yes").click(function(){
+  $("#yes_remove").click(function(){
                     medicine_id = $('#medicine_id').val()
-                    $('#overwrite_list').load(
-                                  '{% url consulting_remove_medicine_pm %}',
+                    var jqxhr = $.post(
+                                  '{% url consulting_add_medicine action='remove' %}',
                                   {'medicine_id': medicine_id,
-                                  'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()});
+                                  'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()}, 
+                                  function() {
+                                    $('#'+medicine_id).remove();
+                                  });
+  });
+
+  <!-- STOP MEDICINE -->
+  $('.stop_medicine').each(function(){
+    $(this).on("click", function(){ 
+                            var id = $(this).attr("id");
+                            $('#medicine_id').val(id);     
+                        });      
+  });
+
+  $("#yes_stop").click(function(){
+                    medicine_id = $('#medicine_id').val()
+                    var jqxhr = $.post(
+                                  '{% url consulting_add_medicine action='stop' %}',
+                                  {'medicine_id': medicine_id,
+                                  'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()}, 
+                                  function() {
+                                    $('#'+medicine_id).remove();
+                                  });
+  });
+
+
+  $('#save').live('click', function(){
+    var $form = $('#modal_medicament').find('form');
+    $form.ajaxSubmit({  target: null,
+                        clearForm: true,
+                        success: function(response) {
+                            if ($(response).find("form").length) {
+                               $('#modalForm').html(response);
+                            } else {
+                              if ($(response).find("#check_stop_medicine").length) {
+                               $('#active').html(response);
+                              } else {
+                               $('#previous').html(response);
+                              }
+                               $('#modal_medicament').modal('hide');
+                            }
+                        }
+                    });
   });
 {% endblock %}
 
@@ -40,52 +95,32 @@
 
 {% block container %}
 <div class="page-header row-fluid">
-    <h1 class="span5">{% trans 'Tratamiento' %}</h1>
-    <ul class="nav nav-pills pull-right">
-        <li class="{% if when = 2 %}active{% endif %}">
-          <a href="{% url consulting_list_medicines %}">Después de la primera cita</a>
-        </li>
-       <li class="{% if when = 1 %}active{% endif %}">
-          <a href="{% url consulting_list_medicines %}?when=before">Antes de la primera cita</a>
-       </li>
-     </ul>                
+    <h1>{% trans 'Tratamiento farmacológico' %}</h1>       
 </div>
 <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
 <section>
 
   <div>      
-  
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#active" data-toggle="tab">{% trans 'Actual' %}</a></li>
+      <li><a href="#log" data-toggle="tab">{% trans 'Histórico' %}</a></li>
+      <li><a href="#previous" data-toggle="tab">{% trans 'Previos' %}</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="active">
+        {% include 'consulting/medicine/list_current_treatment.html' %}
+      </div>
+      <div class="tab-pane" id="log">
+        {% include 'consulting/medicine/list_old_treatment.html' %}
+      </div>
+      <div class="tab-pane" id="previous">
+       {% include 'consulting/medicine/list_previous_treatment.html' %}
+      </div>
+    </div>
     <div id="overwrite_list" class="row-fluid">  
     {% if medicines.object_list %}
 
-    <div class="span6">                 
-      <table id="list_medicine" class="table table-bordered table-condensed">  
-        <thead>
-          <tr>            
-            <th style="text-align:center;">
-              {% trans 'FECHA' %}
-            </th>
-            <th style="text-align:center;">
-              {% trans 'Fármaco' %}
-            </th>
-            <th></th>                
-          </tr>
-        </thead>        
-        <tbody>                  
-          {% for medicine in medicines.object_list %}
-            <tr id="{{medicine.id}}" class="medicine">
-              <td style="text-align:center;">{{medicine.date|date:'d/M/Y'}}</td>
-              <td style="text-align:center;">{{medicine.component}}</td>                      
-              <td class="center">                      
-                <a id="{{medicine.id}}" class="icon-trash remove_medicine" data-toggle="modal" href="#check_remove_medicine"></a>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      </div>
-      <div class="span6 alert alert-info" id="overwrite"></div>
-      <div id="medicine-paginator" class="span12 pagination pagination-centered">
+       <div id="medicine-paginator" class="span12 pagination pagination-centered">
         <ul class="pagination">
           {% if medicines.has_previous %}
             <li><a href="?page={{ medicines.previous_page_number }}">←</a></li>
@@ -100,29 +135,40 @@
           {% endif %}
         </ul>
       </div>          
-                                 
-      {% else %}
-          <div class="alert alert-info">{% trans "No hay fármacos" %}</div>
       {% endif %}
     </div>
   </div>
-  <div id="check_remove_medicine" class="modal hide fade" style="display: block;">
+ 
+  <div id="check_stop_medicine" class="modal hide fade" style="display: block;">
     <input id="medicine_id" type="hidden">
     <div class="modal-header">
         <button class="close" data-dismiss="modal">
           ×
         </button>
-        <h3>Borrar Fármaco</h3>
+        <h3>Modificar Prescripción</h3>
     </div>
     <div class="modal-body">
         <p>
-          {% trans '¿Está seguro que quiere borrar éste fármaco?' %}
+          {% trans '¿Está seguro que quiere cancelar el tratamiento de este fármaco?' %}
         </p>
     </div>
     <div class="modal-footer">
       <a id="yes" data-dismiss="modal" href="#" class="btn">Sí</a>
       <a data-dismiss="modal" href="#" class="btn btn-primary">No</a>
-    </div>                      
+    </div>
+  </div>
+  <div class="modal hide fade" id="modal_medicament" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="modalLabel">Nuevo fármaco</h3>
+    </div>
+    <div class="modal-body" id="modalForm">
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans 'Cerrar' %}</button>
+      <button class="btn btn-primary" id="save">{% trans 'Guardar' %}</button>
+    </div>
+  </div>                      
 </section>
 
 {% endblock container %}

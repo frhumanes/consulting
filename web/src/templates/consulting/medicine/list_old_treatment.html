@@ -1,0 +1,14 @@
+{% load i18n %}
+
+<table class="table-striped table">
+{% for medicine in medicines.object_list %}
+  {% if not medicine.is_active and not medicine.is_previous %}
+  <tr id="{{medicine.id}}" class="medicine">
+    <td><em>{{medicine.created_at|date:'d/M/Y'}}</em></td>
+    <td><em>{{medicine.date|date:'d/M/Y'}}</em></td>
+    <td><strong>{{medicine.component}}</strong></td>
+    <td>{{medicine.posology}} mg/día</td>
+  </tr>
+  {% endif %}
+{% endfor %}
+</table>

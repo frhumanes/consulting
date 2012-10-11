@@ -29,12 +29,15 @@
                 <li class="{% active_root request inbox %}">
                     <a href="{% url private_messages_inbox %}">
                         {% trans 'MENSAJERÍA' %}
+                        {% if user.get_profile.get_unread_messages.count %}
+                            <span class="badge badge-important"><small>{{user.get_profile.get_unread_messages.count}}</small></span>
+                        {% endif %}
                     </a>
                 </li>
                 {% endif %}
             </ul>
             <ul class="nav pull-right">
-                <div class="btn-group ">
+                <div class="btn-group pull-right">
                     <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="icon-user icon-white"></i> {{user.username}}
                     <span class="caret"></span>

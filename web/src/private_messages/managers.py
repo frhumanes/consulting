@@ -16,3 +16,9 @@ class MessageManager(Manager):
             Get all approved messages sent to a certain user
         """
         return self.get_query_set().filter(recipient=user).order_by('-sent_at')
+
+    def get_pending_for_user(self, user):
+        """
+            Get all unread messages sent to a certain user
+        """
+        return self.get_query_set().filter(recipient=user,unread=True).order_by('-sent_at')

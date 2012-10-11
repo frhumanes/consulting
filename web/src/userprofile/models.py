@@ -8,7 +8,9 @@ from django.conf import settings
 from log.models import TraceableModel
 from illness.models import Illness
 from cal.models import Appointment
-from consulting.models import Task, Conclusion
+from consulting.models import Task, Conclusion, Medicine
+from private_messages.models import Message
+from datetime import date, timedelta, datetime
 
 
 class Profile(TraceableModel):
@@ -182,21 +184,35 @@ class Profile(TraceableModel):
     def get_conclusions(self):
         return Conclusion.objects.filter(patient=self.user).latest('date')
 
+    def get_treatment(self):
+        return Medicine.objects.filter(patient=self.user,date__isnull=True).order_by('component')
+
     def get_pending_tasks(self):
-        return Task.objects.filter(patient=self.user,self_administered=True,completed=False, from_date__lte=date.today(), to_date__gt=date.today())
+        next_app = self.get_nextAppointment()
+        tasks = []
+        if next_app and next_app.date >= date.today():
+            ddays = (next_app.date-date.today()).days
+            tasks = Task.objects.filter(patient=self.user,
+                                        self_administered=True, 
+                                        completed=False,
+                                        assess=True,
+                                        previous_days__gte=ddays).order_by('-creation_date')
+        return tasks
 
 
     def get_anxiety_status(self):
         try:
-            latest_task = Task.objects.filter(patient=self.user, survey=settings.INITIAL_ASSESSMENT, completed=True).latest('end_date')
+            latest_task = Task.objects.filter(patient=self.user, survey__id__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True).latest('end_date')
             return latest_task.get_anxiety_status()
         except:
             pass
 
     def get_depression_status(self):
         try:
-            latest_task = Task.objects.filter(patient=self.user, survey=settings.INITIAL_ASSESSMENT, completed=True).latest('end_date')
+            latest_task = Task.objects.filter(patient=self.user, survey__id__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True).latest('end_date')
             return latest_task.get_depression_status()
         except:
             pass
 
+    def get_unread_messages(self):
+        return Message.objects.get_pending_for_user(self.user)

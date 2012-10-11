@@ -2,47 +2,41 @@
 
 {% load i18n%}
 
+
+
 {% block left%}
   {% include "ui/includes/nav_bar_doctor_monitoring.html" %}       
 {% endblock  %}
 
 {% block container%}
   <div class="page-header">
-      <h1>{% trans 'Últimas puntuaciones' %}</h1>
+      <h1>{{appointment.app_type.title}}<small class="pull-right">[{{appointment.duration}} min]</small></h1>
   </div>
-  <section>
-    <table class="table table-bordered table-condensed">  
-      <thead>
-      	<tr>
-          <th style="text-align:center;">&nbsp;</th>
-          <th colspan="2" style="text-align:center;">Fecha / Tipo cuestionario</th>
-        </tr>
-        <tr>
-          <td style="text-align:center;">&nbsp;</td>
-          <td style="text-align:center;">{{tasks.0.end_date|date:"d M Y"}}<br /><span class="label label-info">{{tasks.0.get_kind}}</span></td>
-          <td style="text-align:center;">{{tasks.1.end_date|date:"d M Y"}}<br /><span class="label label-info">{{tasks.1.get_kind}}</span></td>
-        </tr>
-        <tr>
-          <th style="text-align:center;">
-            {% trans 'Variable' %}
-          </th>           
-          <th colspan="2" style="text-align:center;">
-            {% trans 'Puntuación' %}
-          </th>                                   
-        </tr>
-      </thead>        
-      <tbody>                
-        {% for variable, mark_list in previous_marks.items %}
-        <tr>
-          <td style="text-align:center;">{{variable.name}}</td>
-          <td style="text-align:center;">{{mark_list.0|floatformat}}</td>
-          <td style="text-align:center;">{{mark_list.1|floatformat}}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+  {% if appointment.description %}
+  <div class="well">
+    {{appointment.description}}
+  </div>
+  {% endif %}
+  {% if tasks %}
+    {% if previous_marks %}
+      {% include 'consulting/consultation/monitoring/latest_marks.html' %}
+    {% else %}
+      {% include 'consulting/consultation/monitoring/today_tasks.html' %}
+    {% endif %}
+  {% else %}
+
+  {% endif %}
+  {% if not previous_marks %}
+    {% include 'consulting/consultation/monitoring/today_conclusions.html' %}
+    {% include 'consulting/consultation/monitoring/today_treatment.html' %}
+  {% endif %}
+
+
 {% endblock  %}
 
 {% block right %}
   {% include "consulting/patient/card.html" %}
 {% endblock %}
+
+
+

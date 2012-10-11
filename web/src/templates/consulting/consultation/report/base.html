@@ -3,11 +3,12 @@
 {% load i18n %}
 
 {% block container %}
-<h2>INFORME RESUMEN TRAS LA PRIMERA ENTREVISTA</h2>
-<p>{{patient.name}} {{patient.first_surname}} {{patient.second_surname}} de {{patient.get_age}} años de edad presenta desde hace {{time_interval|lower}} los síntomas que le han hecho acudir a consulta.
-	{% if ap_list %}
+<h2>INFORME RESUMEN DE {{task.survey.name|upper}}</h2>
+{% if task.survey.id < 3 %}
+<p>{{patient.name}} {{patient.first_surname}} {{patient.second_surname}} de {{patient.get_age}} años de edad presenta desde hace {{task.get_time_interval|lower}} los síntomas que le han hecho acudir a consulta.
+	{% if task.get_ap_dict %}
 		Ha sido diagnosticado/a de 
-		{% for ap in ap_list %}
+		{% for ap in task.get_ap_dict %}
 			{% if forloop.last and not forloop.first %}
 					 y {{ap.text}}
 				{% else %}
@@ -22,9 +23,9 @@
 		No ha sido diagnosticado/a 
 	{% endif %}
 	con anterioridad y en su familia
-	{% if af_dict|length %}
+	{% if task.get_af_dict|length %}
 		también existen antecedentes de enfermedades psiquiátricas, en concreto
-		{% for person, af_list in af_dict.items %}
+		{% for person, af_list in task.get_af_dict.items %}
 			{% if forloop.last and not forloop.first %}
 				 y su {{person|lower}} está diagnosticado de
 				 {% for illness in af_list %}
@@ -75,9 +76,9 @@
 	{% endif %}
 </p>
 <p>{{patient.name}} 
-	{% if organicity_list %}
+	{% if task.get_organicity_list %}
 		padece
-		{% for org in organicity_list %}
+		{% for org in task.get_organicity_list %}
 			{% if forloop.last and not forloop.first %}
 				 y {{org.text}}
 			{% else %}
@@ -91,7 +92,7 @@
 	{% else %}
 		no padece de enfermedad orgánica diagnosticada y
 	{% endif %}
-	{% if organicity_list and medicaments_list%}
+	{% if task.get_organicity_list %}
 	y
 	{% endif %}
 	{% if medicaments_list %}
@@ -162,11 +163,12 @@
 			{% endif %}
 		como posible factor etiológico y/o de empeoramiento en su sintomatología.
 	</p>
+	{% endif %}
 {% endif %}
 
-{% if task.survey.id = 2 %}
-	{% include 'consulting/consultation/report/anxiety_depression.html' %}
-{% endif %}
+
+{% include 'consulting/consultation/report/anxiety_depression.html' %}
+
 
 <dl>
 	<dt>OBSERVACIONES</dt>

@@ -1,64 +1,67 @@
 {% load i18n %}
 
-{% if rp_list or ave_mark > 140 or as_mark < 17 or light_mark > 2 and beck_mark > 10 or light_mark > 2 and h6_mark > 2 %}
-<p>Otros factores significativos a tener en cuenta en la etiología y/o el mantenimiento de los síntomas del paciente son:
-	<ul>
-	{% if light_mark > 2 and beck_mark > 10 or h6_mark > 2 %}
-		<li>La falta de exposición a luz natural</li>
-	{% endif %}
-	{% if as_mark < 17 %}
-		<li>La falta de apoyo social, con puntuación en el cuestionario de Blaxter de {{as_mark}} puntos sobre 21</li>
-	{% endif %}
-	{% if ave_mark > 140 %}
-		<li>El nivel de estrés gererado por los acontecimientos sufridos por el/la paciente durante el último año. Ha puntuado {{ave_mark}} en la escala de Acontecimientos Vitales Estresantes, considerádose {{ave_status}} el grado de estrés generados por los mismos</li>
-	{% endif %}
-	{% if rp_list %}
-		<li>Algunos rasgos de la personalidad:
-			{% for rp in rp_list %}
-				{% if forloop.last and not forloop.first %}
-					 y {{rp.text}}
-				{% else %}
-					{% if forloop.revcounter0 > 1 %}
-						{{rp.text}}, 
+{% if task.survey.id = 2 %}
+	{% if task.get_rp_dict or ave_mark > 140 or as_mark < 17 or light_mark > 2 and beck_mark > 10 or light_mark > 2 and h6_mark > 2 %}
+	<p>Otros factores significativos a tener en cuenta en la etiología y/o el mantenimiento de los síntomas del paciente son:
+		<ul>
+		{% if light_mark > 2 and beck_mark > 10 or h6_mark > 2 %}
+			<li>La falta de exposición a luz natural</li>
+		{% endif %}
+		{% if as_mark < 17 %}
+			<li>La falta de apoyo social, con puntuación en el cuestionario de Blaxter de {{as_mark}} puntos sobre 21</li>
+		{% endif %}
+		{% if ave_mark > 140 %}
+			<li>El nivel de estrés gererado por los acontecimientos sufridos por el/la paciente durante el último año. Ha puntuado {{ave_mark}} en la escala de Acontecimientos Vitales Estresantes, considerádose {{ave_status}} el grado de estrés generados por los mismos</li>
+		{% endif %}
+		{% if task.get_rp_dict %}
+			<li>Algunos rasgos de la personalidad:
+				{% for rp in task.get_rp_dict %}
+					{% if forloop.last and not forloop.first %}
+						 y {{rp.text}}
 					{% else %}
-						{{rp.text}}
+						{% if forloop.revcounter0 > 1 %}
+							{{rp.text}}, 
+						{% else %}
+							{{rp.text}}
+						{% endif %}
 					{% endif %}
-				{% endif %}
-			{% endfor %}
-		</li>
+				{% endfor %}
+			</li>
+		{% endif %}
+		</ul>
+	</p>
 	{% endif %}
-	</ul>
-</p>
+
+	{% if comorbidity_list or patient.get_age > 55 or recurrent %}
+	<p>Como factores de mal pronóstico, se han obsevado los siguientes:
+		<ul>
+			{% if comorbidity_list %}
+			<li> Comorbilidad con 
+			{% for c in comorbidity_list %}
+					{% if forloop.last and not forloop.first%}
+						 y {{c}}
+					{% else %}
+						{% if forloop.revcounte0 > 1 %}
+							{{c}}, 
+						{% else %}
+							{{c}}
+						{% endif %}
+					{% endif %}
+				{% endfor %}
+			</li>
+			{% endif %}
+			{% if patient.get_age > 55 %}
+				<li>Edad mayor de 55 años</li>
+			{% endif %}
+			{% if recurrent %}
+				<li>Recurrencia</li>
+			{% endif %}
+		</ul>
+	</p>
+	{% endif %}
 {% endif %}
 
-{% if comorbidity_list or patient.get_age > 55 or recurrent %}
-<p>Como factores de mal pronóstico, se han obsevado los siguientes:
-	<ul>
-		{% if comorbidity_list %}
-		<li> Comorbilidad con 
-		{% for c in comorbidity_list %}
-				{% if forloop.last and not forloop.first%}
-					 y {{c}}
-				{% else %}
-					{% if forloop.revcounte0 > 1 %}
-						{{c}}, 
-					{% else %}
-						{{c}}
-					{% endif %}
-				{% endif %}
-			{% endfor %}
-		</li>
-		{% endif %}
-		{% if patient.get_age > 55 %}
-			<li>Edad mayor de 55 años</li>
-		{% endif %}
-		{% if recurrent %}
-			<li>Recurrencia</li>
-		{% endif %}
-	</ul>
-</p>
-{% endif %}
-
+{% if task.get_kind == 'Extenso' %}
 <h3>PUNTUACIONES GLOBALES</h3>
 	<dl>
 		<dt>CUESTIONARIO DE DEPRESIÓN DE BECK 
@@ -75,10 +78,14 @@
 		    <div class="pull-right">{{cognitive_mark|floatformat}} / 10</div>
 		</dt>
 	</dl>
+{% endif %}
 
+{% if marks %}
 <p>La puntuación del paciente en las diferentes variables integradas en las puntuaciones globales referidas son:</p>
 	<ul class="unstyled">
 		{% for var, value in marks.items %}
-		<li style="border-bottom: dotted 1px black; margin: 3px 0">{{var.name}}<div class="pull-right">{{value|floatformat}}</div></li>
+		<li style="border-bottom: dotted 1px black; margin: 3px 0">{{var.name}}<div class="pull-right">{% if value and value >= 0 %}{{value|floatformat}}{% else %}&mdash;{% endif %}</div></li>
 		{% endfor %}
 	</ul>
+
+{% endif %}

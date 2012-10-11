@@ -1,4 +1,7 @@
 {% load i18n%}
+
+
+
 {% load consulting %}
 
 {% url consulting_newpatient as newpatient %}
@@ -46,11 +49,15 @@
                 <li class="{% active_root request inbox %}">
                     <a href="{% url private_messages_inbox %}">
                         {% trans 'MENSAJERÍA' %}
+                        {% if user.get_profile.get_unread_messages.count %}
+                            <span class="badge badge-important"><small>{{user.get_profile.get_unread_messages.count}}</small></span>
+                        {% endif %}
                     </a>
                 </li>
             </ul>
-            <ul class="nav pull-right">
-                <div class="btn-group ">
+            <div class="nav pull-right">
+                <div class="btn-group pull-right">
+                    <a class="btn btn-warning" href="#" id="edit_notes"><i class="icon-th-list icon-white"></i> NOTAS<div style="width:0;height:0; visibility:hidden" id="notes" data-pk="1" data-params="{'csrfmiddlewaretoken':'{{ csrf_token }}'}" data-toggle="#edit_notes" data-type="textarea" data-url="{% url consulting_save_notes %}" data-original-title="Notas" data-placement="bottom">{{request.session.notes}}</div></a>
                     <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="icon-user icon-white"></i> {{user.username}}
                     <span class="caret"></span>
@@ -61,8 +68,9 @@
                         <li><a href="{% url registration_logout %}"><i class="icon-off"></i>{% trans 'Desconectar' %}</a></li>
                     </ul>
                 </div>
-            </ul>
+            </div>
         </div>
     </div>
   </div>
 </div>
+

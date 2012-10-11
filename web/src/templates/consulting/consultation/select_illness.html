@@ -8,12 +8,12 @@
 
 {% block container %}
   <div class="page-header">
-    <h1>{% trans 'Enfermedad a pasar consulta' %}</h1>
+    <h1>{% trans 'Selección de diagnóstico' %}</h1>
   </div>
   <section>
 
 <div class="hero-unit center">
-  <form class="form-horizontal" method="post" action="{% url consulting_select_illness id_appointment %}">{% csrf_token %}
+  <form class="form-horizontal" method="post" action="{% url consulting_start id_appointment %}">{% csrf_token %}
     <fieldset>
         {% if form.illness.errors %}
           <div class="control-group error">

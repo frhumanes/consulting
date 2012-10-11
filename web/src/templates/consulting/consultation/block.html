@@ -2,17 +2,30 @@
 
 {% load i18n%}
 
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/jquery-ui-1.8.18.custom.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.ui.core.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.ui.position.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
+{% endblock %}
+
+{% block css_files %}
+  {{ block.super }}
+  <link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+{% endblock %}
+
 {% block right %}
   {% include "consulting/patient/card.html" %}
 {% endblock %}
 
 {% block container %}
 <div class="page-header">
-  <h1>{% trans 'Encuesta: ' %}{{result.survey.name}}</h1>              
-  <h2>{% trans 'Bloque' %} {{my_block.code}}: {{my_block.name}}</h2>
+  <h1>{% trans 'Encuesta: ' %}{{task.survey.name}}</h1>              
+  <h3>{% trans 'Bloque' %} {{my_block.code}}: {{my_block.name}} <small>[{{my_block.get_kind}}]</small></h2>
 </div> 
     <section>
-        <form class="form-horizontal" method="post" action="{% url consulting_block result.id  my_block.code%}">{% csrf_token %}
+        <form class="form-horizontal" method="post" action="{{request.path}}">{% csrf_token %}
             {% for field in form %}
                 {% if field.label = 'DS' %}
                     <script>$('#id_{{field.label}}').parent().prepend('{{field}}');</script>
@@ -35,21 +48,69 @@
                 {% endif %}
             {% endfor %}
             <div class="controls">
-                <button type="submit" class="btn btn-primary btn-large">
+                <button type="submit" class="btn btn-primary btn-large" data-loading-text="Guardando...">
                   {% trans 'Guardar y continuar' %}
                 </button>
             </div>
-        </form>               
+        </form>   
+        {% if my_block.code = 2 %}
+            <div class="well">
+                <h4>{% trans 'Medicación previa' %}</h4>
+                <p>{% trans '¿Toma algún medicamento?' %}</p>
+                <div id="medicament_container">
+                    {% include 'consulting/medicine/list_previous_treatment.html' %}
+                </div>
+                 <div class="modal hide fade" id="modal_medicament" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h3 id="modalLabel">Nuevo fármaco</h3>
+                </div>
+                <div class="modal-body" id="modalForm">
+                </div>
+                <div class="modal-footer">
+                  <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans 'Cerrar' %}</button>
+                  <button class="btn btn-primary" id="save">{% trans 'Guardar' %}</button>
+                </div>
+              </div>        
+            </div>
+            {% endif %}            
     </section>
 {% endblock container %}
 
 {% block jquery_init %}
-    $('ul').addClass("without_decorator");
+  $('ul').addClass("without_decorator");
 
-    $('#carryon_top').on("click", function(){
-        window.location.href = '{{destination}}'; 
-    });
-    $('#carryon_bottom').on("click", function(){
-        window.location.href = '{{destination}}'; 
-    });
+  <!-- REMOVE MEDICINE -->
+  $('.remove_medicine').each(function(){
+    $(this).on("click", function(){ 
+                            var id = $(this).attr("id");
+                            $('#medicine_id').val(id);     
+                        });      
+  });
+
+  $("#yes_remove").click(function(){
+                    medicine_id = $('#medicine_id').val()
+                    var jqxhr = $.post(
+                                  '{% url consulting_add_medicine action='remove' %}',
+                                  {'medicine_id': medicine_id,
+                                  'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()}, 
+                                  function() {
+                                    $('#'+medicine_id).hide();
+                                  });
+  });
+
+  $('#save').live('click', function(){
+    var $form = $('#modal_medicament').find('form');
+    $form.ajaxSubmit({  target: null,
+                        clearForm: true,
+                        success: function(response) {
+                            if ($(response).find("form").length) {
+                               $('#modalForm').html(response);
+                            } else {
+                               $('#medicament_container').html(response);
+                               $('#modal_medicament').modal('hide');
+                            }
+                        }
+                    });
+  });
 {% endblock %}

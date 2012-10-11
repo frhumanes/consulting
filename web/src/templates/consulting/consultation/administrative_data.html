@@ -37,7 +37,7 @@
   <h2>{% trans 'Bloque' %} {{my_block.code}}: {{my_block.name}}</h2>
 </div>
 <section>
-  <form class="form-horizontal" id="form" action="{% url consulting_administrative_data task.id id_appointment %}" method="post" accept-charset="utf-8">{% csrf_token %}            
+  <form class="form-horizontal" id="form" action="{{request.path}}" method="post" accept-charset="utf-8">{% csrf_token %}            
     {% if same_username %}
       <div class="alert alert-error">
         <a class="close" data-dismiss="alert">×</a>

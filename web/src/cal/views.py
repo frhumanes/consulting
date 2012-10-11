@@ -441,7 +441,7 @@ def app_add_new_app_admin(request, year, month, day, id_doctor, id_patient):
                     start_time = time.strptime(start_time, '%H:%M')
                     start_time = ttime(start_time[3], start_time[4], start_time[5])
                     duration = ((datetime.combine(date.today(), end_time) - \
-                        datetime.combine(date.today(), start_time)).seconds) / 06
+                        datetime.combine(date.today(), start_time)).seconds) / 60
                     #del request_params['app_type']
             else:
                 if start_time:

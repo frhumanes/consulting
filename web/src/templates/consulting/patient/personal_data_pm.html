@@ -3,7 +3,11 @@
 {% load i18n%}
 
 {% block left %}
-  {% include "ui/includes/nav_bar_doctor_pm.html" %}
+	{% if appointment %}
+   	  {% include 'ui/includes/nav_bar_doctor_monitoring.html' %}
+  	{% else %}
+	  {% include "ui/includes/nav_bar_doctor_pm.html" %}
+	{% endif %}
 {% endblock  %}
 
 {% block container %}

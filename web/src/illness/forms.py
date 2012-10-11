@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
@@ -12,8 +13,9 @@ class IllnessSelectionForm(forms.Form):
             id_appointment = kwargs.pop('id_appointment')
             super(IllnessSelectionForm, self).__init__(*args, **kwargs)
             appointment = Appointment.objects.get(id=id_appointment)
-            illnesses = appointment.patient.get_profile().illnesses.all()\
-                        .order_by('code')
+            #illnesses = appointment.patient.get_profile().illnesses.all()\
+            #            .order_by('code')
+            illnesses = Illness.objects.all()
             choices = [('', '--------')]
             choices.extend(
                     [(illness.code, illness.name) for illness in illnesses])
@@ -21,7 +23,7 @@ class IllnessSelectionForm(forms.Form):
         else:
             super(IllnessSelectionForm, self).__init__(*args, **kwargs)
 
-    illness = forms.ChoiceField(label=_(u"Enfermedad"),
+    illness = forms.ChoiceField(label=_(u"Diagnóstico"),
                         widget=forms.Select(
                         attrs={'class': 'input-medium search-query span12'}))
 

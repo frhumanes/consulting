@@ -1,0 +1,34 @@
+{% load i18n %}
+
+<table class="table-striped table">
+{% for medicine in medicines.object_list %}
+  {% if medicine.is_active and not medicine.is_previous %}
+  <tr id="{{medicine.id}}" class="medicine">
+    <td><em>{{medicine.created_at|date:'d/M/Y'}}</em></td>
+    <td><strong>{{medicine.component}}</strong></td>
+    <td>{{medicine.posology}} mg/día</td>
+     <td><a href="#" id="{{medicine.id}}"  data-toggle="modal" data-target="#check_stop_medicine" class="stop_medicine"><i class="icon-stop"></i></a></td>
+  </tr>
+  {% endif %}
+{% endfor %}
+</table>
+<a class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal_medicament" href="{% if appointment %}{% url consulting_add_medicine action='prescribe' id_appointment=appointment.id %}{% else %}{% url consulting_add_medicine action='prescribe' %}{% endif %}">{% trans 'Prescribir nuevo fármaco' %}</a>
+
+<div id="check_stop_medicine" class="modal hide fade" style="display: block;">
+<input id="medicine_id" type="hidden">
+<div class="modal-header">
+    <button class="close" data-dismiss="modal">
+      ×
+    </button>
+    <h3>Modificar Prescripción</h3>
+</div>
+<div class="modal-body">
+    <p>
+      {% trans '¿Está seguro que quiere cancelar el tratamiento de este fármaco?' %}
+    </p>
+</div>
+<div class="modal-footer">
+  <a id="yes_stop" data-dismiss="modal" href="#" class="btn">Sí</a>
+  <a data-dismiss="modal" href="#" class="btn btn-primary">No</a>
+</div>
+</div>

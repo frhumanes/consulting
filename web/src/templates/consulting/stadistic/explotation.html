@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load l10n %}
+{% load stadistic %}
 
 {% block css_files %}
   {{block.super}}
@@ -39,7 +40,7 @@ text.malebar, text.femalebar {
 var data = [
   {% for labelname, values in data.items %}
     {% localize off %}
-      {"sharedLabel": "{{labelname}}", "barData1": {{values.1|unlocalize}}, "barData2": {{values.2|unlocalize}} },
+      {"sharedLabel": "{{labelname}}", "barData1": {% if values.1 %}{{values.1|unlocalize}}{% else %}0{% endif %}, "barData2": {% if values.2 %}{{values.2|unlocalize}}{% else %}0{% endif %}},
     {% endlocalize %}
   {% endfor %}
 ];
@@ -172,7 +173,36 @@ function refresh(data) {
 </div>
  <section>
     <div id="vis"></div>
-  </section>
+ </section>
+ <section>
+    <div id="data" style="overflow-x:scroll;">
+      <table class="table table-condensed table-striped">
+        <thead>
+          <th colspan="4"></th>
+          {% for d in dimensions %}
+            <td><small>Dimensión {{d.name}}</small></td>
+          {% endfor %}
+          {% for v in variables %}
+            <td><small>{{v.name}}</small></td>
+          {% endfor %}
+        </thead>
+        {% for r in reports %}
+          <tr>
+            <td>{{r.patient.id}}</td>
+            <td>{{r.patient.get_age}}</td>
+            <td>{{r.patient.get_sex}}</td>
+            <td>{{r.patient.profession}}</td>
+            {% for d in dimensions %}
+              <td>{% dictvalue r.dimensions d.name %}</th>
+            {% endfor %}
+            {% for v in variables %}
+              <td>{% dictvalue r.variables v.name %}</th>
+            {% endfor %}
+          <tr>
+        {% endfor %}
+      </table>
+    </div>
+    <section>
 {% endblock container %}
 
 

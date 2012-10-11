@@ -56,7 +56,6 @@ def create_message(request, recipient_id=None):
             message.sent_at = datetime.now()
             message.save()
             return redirect(reverse("private_messages_inbox"))
-
     else:
         if recipient_id:
             user = User.objects.get(pk=recipient_id)

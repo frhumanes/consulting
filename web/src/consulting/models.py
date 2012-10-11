@@ -11,12 +11,21 @@ from survey.models import Survey, Block, Question, Option
 from medicament.models import Component
 from illness.models import Illness
 from cal.models import Appointment
+from formula.models import Formula, Dimension, Variable
 
 
 class Task(TraceableModel):
+    KIND = (
+        (settings.GENERAL, _(u'General')),
+        (settings.EXTENSO, _(u'Extenso')),
+        (settings.ABREVIADO, _(u'Abreviado')),
+    )
+
     patient = models.ForeignKey(User, related_name='patient_tasks')
 
     survey = models.ForeignKey(Survey, related_name="survey_tasks")
+
+    kind = models.IntegerField(_(u'Tipo'), choices=KIND, default=settings.GENERAL)
 
     questions = models.ManyToManyField(Question,
                                         related_name="questions_tasks",
@@ -38,13 +47,10 @@ class Task(TraceableModel):
     end_date = models.DateTimeField(_(u'Fecha de finalización de la encuesta'),
                                     blank=True, null=True)
 
-    from_date = models.DateField(
-                    _(u'Fecha a partir de la cual puede realizar la encuesta'),
-                    blank=True, null=True)
+    previous_days = models.IntegerField(
+                    _(u'Disponibilidad para el paciente (días antes de la próxima cita'),
+                    default=settings.DAYS_BEFORE_SURVEY)
 
-    to_date = models.DateField(
-                    _(u'Fecha hasta la que puede realizar la encuesta'),
-                    blank=True, null=True)
 
     assess = models.BooleanField(_(u'¿Seguir valorando la encuesta?'),
                                 default=True)
@@ -65,18 +71,6 @@ class Task(TraceableModel):
             return _(u'Sí')
         else:
             return _(u'No')
-
-    def if_from_date(self):
-        if self.from_date != None:
-            return self.from_date
-        else:
-            return ''
-
-    def if_to_date(self):
-        if self.to_date != None:
-            return self.to_date
-        else:
-            return ''
 
     def get_answers(self):
         answers = []
@@ -114,6 +108,14 @@ class Task(TraceableModel):
 
     def get_comorbidity_list(self):
         return self.task_results.filter(block=settings.PRECEDENT_RISK_FACTOR).latest('id').options.filter(code__in=['AP7','AP8','AP9','AP10','AP11','AP12'])
+
+    def get_ave_list(self):
+        answers = self.get_answers()
+        l = []
+        for a in answers:
+            if a.code.startswith('AVE'):
+                l.append(a.id)
+        return l
 
     def calculate_mark_by_code(self, code):
         answers = self.get_answers()
@@ -179,49 +181,102 @@ class Task(TraceableModel):
                 return settings.HAMILTON[value]
 
     def get_kind(self):
+        if self.kind == settings.GENERAL:
+            return 'General'
+        elif self.kind == settings.EXTENSO:
+            return 'Extenso'
+        else:
+            return 'Abreviado'
+
+    def get_list_variables(self, num=None):
+        marks = self.get_variables_mark()
+        lv = []
+        if num != None:
+            values = marks.values()
+            values.sort()
+            if num <= len(values):
+                n_mark = values[-num]
+            else:
+                n_mark = 0
+        else:
+            n_mark = 0
+        for var, mark in marks.items():
+            if mark >= n_mark:
+                lv.append((var.id, var.name))
+        return lv
+
+    def get_variables_mark(self):
+        answers = self.get_answers()
+        marks = {}
+        variable_tuple = None
+        
         kind = self.treated_blocks.all().aggregate(Max('kind'))['kind__max']
 
-        if kind == settings.GENERAL:
-            kind =  'General'
-        elif kind == settings.EXTENSO:
-            kind = 'Extenso'
-        else:
-            kind = 'Abreviado'
-        return kind
+        for f in Formula.objects.filter(kind=kind):
+            total = None
+            for item in f.polynomial.split('+'):
+                for a in answers:
+                    if a.question.code == item:
+                        if not total:
+                            total = 0
+                        total += a.weight
+                        break
+                #try:
+                #    total += result.options.get(question__code=item).weight
+                #except:
+                #    pass
+            if total != None:
+                if f.variable in marks:
+                    marks[f.variable]+=(float(total) * float(f.factor))
+                else:
+                    marks[f.variable]=(float(total) * float(f.factor))
+            else:
+                marks[f.variable] = -1
+        sorted(marks.items(), key=lambda x: -x[1])
+
+        return marks
+
+    def get_dimensions_mark(self, variables_mark=None):
+        marks = {}
+        if variables_mark is None:
+            variables_mark = self.get_variables_mark()
+        for d in Dimension.objects.all():
+            total = 0
+            for item in d.polynomial.split('+'):
+                variable = Variable.objects.get(code=item)
+                try:
+                    if isinstance(variables_mark[variable], float) and variables_mark[variable] > 0:
+                        total += variables_mark[variable]
+                except:
+                    pass
+            if d.name in marks:
+                marks[d.name] += (float(total) * float(d.factor))
+            else:
+                marks[d.name] = (float(total) * float(d.factor))
+        return marks
 
 
 
 
 class Medicine(TraceableModel):
-    BEFORE_AFTER_CHOICES = (
-        (settings.BEFORE, _(u'Anterior')),
-        (settings.AFTER, _(u'Posterior')),
-    )
     patient = models.ForeignKey(User, related_name='patient_medicines')
 
     component = models.ForeignKey(Component,
                                 related_name='component_medicines',
                                 blank=True, null=True)
-    conclusion = models.ForeignKey('Conclusion',
-                                related_name='conclusion_medicines',
-                                blank=True, null=True)
-    result = models.ForeignKey('Result', related_name='result_medicines',
-                              blank=True, null=True)
-
-    before_after_first_appointment = models.IntegerField(
-                                        _(u'Anterior/Posterior\
-                                        Primera Cita'),
-                                        choices=BEFORE_AFTER_CHOICES,
-                                        blank=True, null=True)
-    before_after_symptom = models.IntegerField(_(u'Anterior/Posterior\
-                                    síntomas psiquiátricos'),
-                                    choices=BEFORE_AFTER_CHOICES,
+    appointment = models.ForeignKey(Appointment, 
+                                    related_name='appointment_medicines',
                                     blank=True, null=True)
+
+    is_previous = models.BooleanField(_(u'Tratamiento previo'),
+                                        default=False)
+    after_symptoms = models.BooleanField(_(u'Posterior a\
+                                    los síntomas'), default=True)
     months = models.IntegerField(_(u'Número de meses de toma del fármaco'),
                                     blank=True, null=True)
     posology = models.CharField(_(u'Posología (mg/día)'), max_length=255,
                                     blank=True)
-    date = models.DateTimeField(_(u'Fecha'), auto_now_add=True)
+    date = models.DateTimeField(_(u'Fecha'), null=True)
 
 
 
@@ -229,7 +284,7 @@ class Medicine(TraceableModel):
         return u'id: %s medicine: %s' % (self.id, self.component)
 
     def get_before_after_symptom(self):
-        if self.before_after_symptom == settings.BEFORE:
+        if not self.after_symptoms:
             before_after_symptom = _(u'Anterior')
         else:
             before_after_symptom = _(u'Posterior')
@@ -237,12 +292,15 @@ class Medicine(TraceableModel):
         return before_after_symptom
 
     def get_before_after_first_appointment(self):
-        if self.before_after_first_appointment == settings.BEFORE:
+        if self.is_previous:
             before_after_first_appointment = _(u'Anterior')
         else:
             before_after_first_appointment = _(u'Posterior')
 
         return before_after_first_appointment
+
+    def is_active(self):
+        return self.date is None 
 
 
 class Result(TraceableModel):
@@ -262,8 +320,6 @@ class Result(TraceableModel):
 
     date = models.DateTimeField(_(u'Fecha'), auto_now_add=True)
 
-    symptoms_worsening = models.CharField(max_length=5000, blank=True,
-                                            null=True, default='')
 
     def __unicode__(self):
         return u'id: %s result: %s %s %s' % (self.id, self.patient, self.survey, self.block)
@@ -271,10 +327,6 @@ class Result(TraceableModel):
 
 class Conclusion(TraceableModel):
     patient = models.ForeignKey(User, related_name='patient_conclusions')
-
-    result = models.ForeignKey(Result, unique=True,
-                                related_name='result_conclusion',
-                                blank=True, null=True)
 
     appointment = models.ForeignKey(Appointment,
                                     related_name="appointment_conclusions")
@@ -291,20 +343,6 @@ class Conclusion(TraceableModel):
         return u'id: %s conclusion: %s %s' \
                                 % (self.id, self.patient, self.appointment)
 
-
-class Report(TraceableModel):
-    patient = models.ForeignKey(User, related_name='patient_reports')
-
-    illness = models.ForeignKey(Illness, related_name='illness_reports')
-
-    survey = models.ForeignKey(Survey, related_name="survey_reports")
-
-    result = models.ForeignKey(Result, related_name='result_reports')
-
-    date = models.DateTimeField(_(u'Fecha del Informe'), auto_now_add=True)
-
-    def __unicode__(self):
-        return u'id: %s report: %s %s' % (self.id, self.patient, self.illness)
 
 class Answer(models.Model):
     result = models.ForeignKey(Result, related_name='result_answers')

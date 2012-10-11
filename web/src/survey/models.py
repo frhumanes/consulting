@@ -10,32 +10,21 @@ from django.conf import settings
 
 
 class Survey(TraceableModel):
-    KIND = (
-        (settings.GENERAL, _(u'General')),
-        (settings.EXTENSO, _(u'Extenso')),
-        (settings.ABREVIADO, _(u'Abreviado')),
-    )
     
     blocks = models.ManyToManyField('Block', related_name='blocks_surveys')
 
-    num_blocks = models.IntegerField(_(u'Número de bloques'))
+    multitype = models.BooleanField(_(u'Encuesta configurable'), default=False)
 
     name = models.CharField(_(u'Nombre'), max_length=100)
 
     code = models.IntegerField(_(u'Código'), blank=True, null=True)
 
-    kind = models.IntegerField(_(u'Tipo'), choices=KIND)
 
     def __unicode__(self):
-        return u'%s - %s ' % (self.name, self.get_kind())
+        return u'%s' % (self.name)
 
-    def get_kind(self):
-        if self.kind == settings.GENERAL:
-            return 'General'
-        elif self.kind == settings.EXTENSO:
-            return 'Extenso'
-        else:
-            return 'Abreviado'
+    def num_blocks(self):
+        return self.blocks.values('code').distinct().count()
 
 
 class Category(TraceableModel):
@@ -72,7 +61,7 @@ class Block(TraceableModel):
 
     name = models.CharField(_(u'Nombre'), max_length=100)
 
-    code = models.IntegerField(_(u'Código'), blank=True, null=True)
+    code = models.IntegerField(_(u'Código'))
 
     def __unicode__(self):
         return u'id: %s block: %s kind: %s' % (self.id, self.name, self.kind)

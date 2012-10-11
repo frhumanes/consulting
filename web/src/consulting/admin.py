@@ -16,14 +16,14 @@ admin.site.register(Task, TaskAdmin)
 
 class MedicineAdmin(admin.ModelAdmin):
     fieldsets = [('Medicines', {'fields': ['patient', 'component',
-                    'conclusion', 'result', 'before_after_first_appointment',
-                    'before_after_symptom',
+                    'is_previous',
+                    'after_symptoms',
                     'months', 'posology']})]
     list_display = ('patient', 'component',
-                    'before_after_first_appointment', 'before_after_symptom',
+                    'is_previous', 'after_symptoms',
                     'months', 'posology')
     search_fields = ('patient', 'component',
-                    'before_after_first_appointment', 'before_after_symptom',
+                    'is_previous', 'after_symptoms',
                     'months', 'posology')
     ordering = ('patient', )
 
@@ -40,24 +40,14 @@ class ResultAdmin(admin.ModelAdmin):
 admin.site.register(Result, ResultAdmin)
 
 
-class ReportAdmin(admin.ModelAdmin):
-    fieldsets = [('Reports', {'fields': ['patient', 'illness',
-                'survey', 'result']})]
-    list_display = ('patient', 'illness',
-                'survey', 'result')
-    search_fields = ('patient', 'illness',
-                'survey', 'result')
-    ordering = ('patient',)
-
-admin.site.register(Report, ReportAdmin)
 
 
 class ConclusionAdmin(admin.ModelAdmin):
-    fieldsets = [('Conclusions', {'fields': ['patient', 'result',
+    fieldsets = [('Conclusions', {'fields': ['patient',
                 'appointment', 'observation', 'recommendation']})]
-    list_display = ('patient', 'result', 'appointment', 'observation',
+    list_display = ('patient', 'appointment', 'observation',
                     'recommendation', 'date')
-    search_fields = ('patient', 'result', 'appointment', 'observation',
+    search_fields = ('patient', 'appointment', 'observation',
                     'recommendation', 'date')
     ordering = ('patient',)
 

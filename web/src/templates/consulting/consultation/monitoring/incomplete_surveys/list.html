@@ -8,53 +8,37 @@
 </div>
   <section>
     {% if tasks.object_list %}
-    <table id="list_tasks" class="table table-bordered table-condensed">  
-      <thead>
-        <tr>            
-          <th style="text-align:center;">
-            {% trans 'Fecha cita' %}
-          </th>
-          <th style="text-align:center;">
-            {% trans 'Encuesta' %}
-          </th>
-          <th style="text-align:center;">
-            {% trans 'Tipo' %}
-          </th>
-          <th style="text-align:center;">
-            {% trans 'Autoadministrado' %}
-          </th>
-          <th style="text-align:center;">
-            {% trans 'Fecha inicio' %}
-          </th>
-          <th style="text-align:center;">
-            {% trans 'Última modificación' %}
-          </th>
-          <th></th>                
-          <th></th>
-        </tr>
-      </thead>        
-      <tbody>                  
-        {% for task in tasks.object_list %}
-          <tr id="{{task.id}}" class="medicine">
-            <td style="text-align:center;">{{task.appointment.date|date:'d/M/y'}}</td>
-            <td style="text-align:center;">{{task.survey.name}}</td>
-            <td style="text-align:center;">{{task.survey.get_kind}}</td>
-            <td style="text-align:center;">{{task.get_self_administered}}</td>
-            <td style="text-align:center;">{% if task.self_administered %}{{task.from_date|date:'d/M/y'}}{% else %}{{task.start_date|date:'d/M/y'}}{% endif %}</td>
-            <td style="text-align:center;">{{task.updated_at|date:'d/M/y H:i'}}</td>
-      
-            <td>                      
-              <a id="edit" class="icon-edit edit_task" data-toggle="modal" href="#"></a>
-            </td>
-            <td>                      
-              <a id="assess" class="icon-off assess_task" data-toggle="modal" href="#check_assess_task"></a>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="accordion" id="accordion_tasks">
+      {% for task in tasks.object_list %}
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_tasks" href="#collapse{{task.id}}">
+          <h4>{{task.survey.name|upper}} <small>[{{task.get_kind}}]</small>
+          <div class="muted pull-right">{{task.updated_at|date:'d/M/y H:i'}}</div></h4>
+          </a>
+        </div>
+        <div id="collapse{{task.id}}" class="accordion-body collapse">
+          <div class="accordion-inner">
+            {% if task.observations %}
+              <h4>{% trans 'Síntomas y/o empeoramiento' %}</h4>
+              <p><span>{{task.observations}}</span></p>
+            {% endif %}
+            <br />
+            <div class="btn-group center">
+              <a id="assess{{task.id}}" class=" btn btn-large btn-warning" data-toggle="modal" data-target="#modal" href="{% url consulting_not_assess_task task.id  %}"> <i class="icon-off icon-white"></i> {% trans 'DESCARTAR' %}</a>
+              {% if task.questions.count > 0 %}
+                <a id="edit{{task.id}}" class="btn btn-large btn-info"  data-toggle="modal" data-target="#modal_var" href="{% url consulting_config_variables task.id %}"><i class="icon-th-list icon-white" ></i> {% trans 'VARIABLES' %}</a>
+              {% endif %}
+              <a id="complete{{task.id}}" class="btn btn-large btn-primary" href="{% url consulting_show_task_block appointment.id illness.code task.id 0 %}"><i class="icon-edit icon-white"></i> {% trans 'COMPLETAR' %}</a>
+            </div> 
+            <br />
+          </div>
+        </div>
+      </div>
+    {% endfor%}
+    </div>
 
-  
+    
     <div id="medicine-paginator" class="pagination pagination-centered">
       <ul class="pagination">
         {% if tasks.has_previous %}
@@ -74,38 +58,46 @@
     {% else %}
         <div class="alert alert-info">{% trans "No hay encuestas sin completar" %}</div>                  
     {% endif %}
-    <div id="check_assess_task" class="modal hide fade" style="display: block;">
+    <div id="modal" class="modal hide fade" style="display: block;">
       <input id="id_task" type="hidden">
       <div class="modal-header">
           <button class="close" data-dismiss="modal">
             ×
           </button>
-          <h3>Valoración</h3>
+          <h3>Aviso del sistema</h3>
       </div>
       <div class="modal-body">
-          <p>
-            {% trans '¿Está seguro que no desea seguir realizando más valoraciones de esta encuesta?' %}
-          </p>
       </div>
       <div class="modal-footer">
-        <a id="yes" data-dismiss="modal" href="#" class="btn">Sí</a>
-        <a data-dismiss="modal" href="#" class="btn btn-primary">No</a>
+        <a data-dismiss="modal" href="#" class="btn btn-primary">Cerrar</a>
       </div>    
-    </div>                    
+    </div>  
+        <div id="modal_var" class="modal hide fade" style="display: block;">
+      <input id="id_task" type="hidden">
+      <div class="modal-header">
+          <button class="close" data-dismiss="modal">
+            ×
+          </button>
+          <h3>Configurador de variables</h3>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+         <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">{% trans 'Cerrar' %}</a>
+         <a id="save" href="#" class="btn btn-primary">{% trans 'Guardar cambios' %}</a>
+      </div>    
+    </div>                     
   </section>
 {% endblock container %}
 
 {% block jquery_init %} 
-
-  $('#edit').live('click', function(event){
-    var id_task = $('table tbody tr').attr('id');
-    
-      window.location.href = '/consultation/monitoring/incomplete_surveys/survey/' + id_task + '/{{appointment.id}}';
-    
-  });
-
-  $("#yes").click(function(){
-    var id_task = $('table tbody tr').attr('id');
-    window.location.href = '/consultation/monitoring/incomplete_surveys/not_assess_task/' + id_task + '/{{appointment.id}}';
-  });
+    $('#modal').on('hidden', function () {
+      location.reload(true);
+    });
+    $('ul').addClass("without_decorator");
+    $('#save').on('click', function () {
+      var $form = $('#modal_var').find('form');
+      $form.ajaxSubmit({target:'.modal_body'});
+      $('#modal_var').modal('hide');
+    });
 {% endblock %}

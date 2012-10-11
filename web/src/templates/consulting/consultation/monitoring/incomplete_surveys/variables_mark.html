@@ -8,7 +8,7 @@
   </div>
   <section>
       <div class="alert alert-info">
-        ATENCIÓN, las siguientes puntuaciones han sido obtenidas del cuestionario <strong>{{kind}}</strong>
+        ATENCIÓN, las siguientes puntuaciones han sido obtenidas del cuestionario <strong>{{task.get_kind}}</strong>
       </div>
         <table class="table table-bordered table-condensed">  
           <thead>
@@ -51,15 +51,10 @@
           </tbody>
         </table>
         <div class="pull-right">
-          <button id="goback" class="btn btn-info btn-large">
+          <a id="goback" href="{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}" class="btn btn-info btn-large">
             {% trans 'Volver' %}
-          </button>         
+          </a>         
         </div>                             
   </section>
 {% endblock container %}
 
-{% block jquery_init %}
-  $('#goVolver').on("click", function(){
-      window.location.href = '/consultation/monitoring/incomplete_surveys/list/' +{{appointment.id}};  
-  });
-{% endblock %}

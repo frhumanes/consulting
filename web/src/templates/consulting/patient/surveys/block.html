@@ -9,30 +9,21 @@
     <section>
         <form class="form-horizontal" method="post" action="{% url consulting_self_administered_block task.id %}">{% csrf_token %}
             {% for field in form %}
-                {% if field.errors %}
-                    <div class="control-group error">
-                        <label>
-                            {{field.label}}
-                        </label>
-                        <div>
-                            {{ field }}
+                <div class="control-group">
+                    <label class="control-label span7">
+                        {{field.label}}
+                    </label>
+                    <div class="controls span5">
+                        {{ field }}
+                        {% if field.errors|length %}
                             {% for error in field.errors %}
                                 <span class="help-inline">
                                     {{ error|escape }}
                                 </span>
                             {% endfor %}
-                        </div>
+                        {% endif %}
                     </div>
-                {% else %}
-                    <div class="control-group">
-                        <label>
-                            {{field.label}}
-                        </label>
-                        <div>
-                            {{ field }}
-                        </div>
-                    </div>
-                {% endif %}
+                </div>
             {% endfor %}
             <div class="controls">
                 <button type="submit" class="btn btn-primary btn-large">

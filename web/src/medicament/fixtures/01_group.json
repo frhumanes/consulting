@@ -196,7 +196,7 @@
     "pk": 24,
     "fields": {
       "name": "M24. Levodopa",
-      "adverse_reaction": " Somnolencia y episodios de sueño repentinos, discinesia, náusea, anorexia; alucinaciones, confusión, pesadillas, cansancio, insomnio, depresión, euforia, demencia, episodios psicóticos, estimulación; episodios on-off, mareos; palpitaciones"
+      "adverse_reaction": "Somnolencia y episodios de sueño repentinos, discinesia, náusea, anorexia; alucinaciones, confusión, pesadillas, cansancio, insomnio, depresión, euforia, demencia, episodios psicóticos, estimulación; episodios on-off, mareos; palpitaciones"
     }
   },
   {
@@ -244,7 +244,7 @@
     "pk": 30,
     "fields": {
       "name": "M30. Rifampicina",
-      "adverse_reaction": " Somnolencia, fatiga, mareos, alteraciones del comportaminento y entumecimiento generalizado"
+      "adverse_reaction": "Somnolencia, fatiga, mareos, alteraciones del comportaminento y entumecimiento generalizado"
     }
   },
   {

@@ -6,17 +6,7 @@
     <div class="well center">
       <form class="form-horizontal" id="form" action="{% url consulting_new_medicine_monitoring id_conclusion %}" method="post" accept-charset="utf-8">{% csrf_token %}
           {{form.component}}
-          <div class="control-group">
-            <label class="control-label">
-              {{form.before_after_first_appointment.label}}
-            </label>
-            <div class="controls">
-              {{form.before_after_first_appointment}}
-              {% if form.before_after_first_appointment.errors %}
-                {{ form.before_after_first_appointment.errors }}
-              {% endif %}
-            </div>
-          </div>                                  
+              
           <div class="control-group">
             <label class="control-label">
               {{form.kind_component.label}}
@@ -39,28 +29,7 @@
               {% endif %}
             </div>
           </div>
-          <div class="control-group">
-            <label class="control-label">
-              {{form.before_after_symptom.label}}
-            </label>
-            <div class="controls">
-              {{form.before_after_symptom}}
-              {% if form.before_after_symptom.errors %}
-                {{ form.before_after_symptom.errors }}
-              {% endif %}
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label">
-              {{form.months.label}}
-            </label>
-            <div class="controls">
-              {{form.months}}                    
-              {% if form.months.errors %}
-                {{ form.months.errors }}
-              {% endif %}
-            </div>
-          </div>
+         
           <div class="control-group">
             <label class="control-label">
               {{form.posology.label}}

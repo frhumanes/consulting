@@ -19,8 +19,7 @@
                     <thead>
                         <tr>
                           <th>{% trans "Médico" %}</th>
-                          <th>{% trans "Disponible desde" %}</th>
-                          <th>{% trans "Hasta" %}</th>
+                          <th>{% trans "Fecha límite" %}</th>
                           <th>{% trans "Última modificación" %}</th>
                         </tr>
                     </thead>
@@ -28,8 +27,7 @@
                       {% for task in tasks.object_list %}
                         <tr data-msg="{{ task.id }}" style="cursor:pointer">
                           <td>{{ task.patient.get_profile.doctor.get_profile.name }} {{ task.patient.get_profile.doctor.get_profile.first_surname }} {{ task.patient.get_profile.doctor.get_profile.second_surname }}</td>
-                          <td>{{ task.from_date|date:'d/M/Y' }}</td>
-                          <td>{{ task.to_date|date:'d/M/Y' }}</td>
+                          <td>{{ task.patient.get_profile.get_nextAppointment.date|date:'d/M/Y' }}</td>
                            <td>{{ task.updated_at|date:'d/M/Y H:i' }}</td>              
                         </tr>
                       {% endfor %}

@@ -7,7 +7,7 @@
   <h1>{% trans 'Síntomas o Empeoramientos' %}</h1>
 </div>
 <section>
-  <form class="form-horizontal" id="form" action="{% url consulting_symptoms_worsening id_result %}" method="post" accept-charset="utf-8">{% csrf_token %}
+  <form class="form-horizontal" id="form" action="{{request.path}}" method="post" accept-charset="utf-8">{% csrf_token %}
     {% if form.symptoms_worsening.errors %}
       <div class="control-group">
         <label>
