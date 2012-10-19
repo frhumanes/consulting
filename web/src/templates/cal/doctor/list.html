@@ -2,20 +2,32 @@
 
 {% load i18n messages %}
 
-{% block title %}{% trans 'Events list' %}{% endblock %}
+{% block title %}{% trans 'Nueva cita' %}{% endblock %}
 
 {% block right %}
-  {% include "cal/includes/calendar.html" %}
+  {% include "cal/includes/calendar.html" with doctor=doctor %}
 {% endblock %}
 
 {% block container %}
   <legend>
     <div>
       {{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}
-       <a class="btn btn-info pull-right" href="{% url cal.lookfor_patient year month day %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva cita" %}</a>
+      {% if not vacations %}
+       <a class="btn btn-info pull-right" href="{% if patient_user %}{% url cal.add year month day patient_user.id %}{% else %}{% url search_patient_for_action_at action='new_app' year=year month=month day=day %}{% endif %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva cita" %}</a>
+      {% endif %}
    </div>
   </legend>
 
+  {% if request.user.get_profile.is_administrative %}
+  <div class="well">
+    <h4>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</h4>
+  </div>
+  {% endif %}
+  {% if patient_user %}
+  <div class="well">
+    <h4>{% trans "Paciente:" %} {{ patient_user.get_profile.get_full_name }}</h4>
+  </div>
+  {% endif %}
 
   {% if events.object_list.count > 0 %}
     
@@ -38,6 +50,7 @@
       </tbody>
     </table>
 
+    {% if events.paginator.num_pages > 1 %}
     <div id="events-paginator" class="pagination pagination-centered">
       <ul>
         {% if events.has_previous %}
@@ -45,7 +58,9 @@
         {% else %}
           <li class="disabled"><a>←</a></li>
         {% endif %}
-
+        {% for p in events.paginator.page_range %}
+         <li {% if p = events.number %}class="disabled"{% endif %}><a href="?page={{p}}">{{p}}</a></li>
+        {% endfor %}
         {% if events.has_next %}
           <li><a href="?page={{ events.next_page_number }}">→</a></li>
         {% else %}
@@ -53,25 +68,16 @@
         {% endif %}
       </ul>
     </div>
+    {% endif %}
 
     <div id="preview"></div>
   {% else %}
+    {% if vacations %}
+    <div class="alert alert-error">{% trans "El doctor no está disponible para este día" %}</div>
+    {% else %}
     <div class="alert alert-info">{% trans "No hay citas concertadas para este día" %}</div>
-         </legend>
+    {% endif %}
+
   {% endif %}
 {% endblock %}
 
-{% block jquery_init %}
-var load_icon = "<img src='{{STATIC_URL}}img/loading.gif' alt='loading...'/>";
-
-$('table tbody tr').live('click', function(event){
-  var id = $(this).attr('data-msg');
-  var id_patient = $(this).attr('id');
-  if(id){
-    $('table').hide();
-    $('#message-paginator').hide();
-    <!-- window.location.href = '/calendar/app/edit/' +id+ '/{{ doctor.id }}'; -->
-    window.location.href = '/calendar/app/edit/' +id+ '/' + id_patient + '/{{ doctor.id }}';
-  }
-});
-{% endblock %}

@@ -1,17 +1,18 @@
 {% load i18n%}
 {% load consulting %}
 
-{% url consulting_stratification_statistic as stratification %}
-{% url consulting_explotation_statistic as explotation %}
+
+{% url stratification_statistic as stratification %}
+{% url explotation_statistic as explotation %}
 
 <ul class="nav nav-pills nav-stacked">
   <li class="{% active_child request stratification %}">
-    <a href="{% url consulting_stratification_statistic %}">
+    <a href="{% url stratification_statistic %}">
       {% trans 'NIVELES DE ESTRATIFICACIÓN' %}
     </a>
   </li>
  <li class="{% active_child request explotation %}">
-    <a href="{% url consulting_explotation_statistic %}">
+    <a href="{% url explotation_statistic %}">
       {% trans 'EXPLOTACIÓN DE DATOS' %}
     </a>
   </li> 

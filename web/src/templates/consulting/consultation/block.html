@@ -47,40 +47,39 @@
                 </div>
                 {% endif %}
             {% endfor %}
+            {% if my_block.code = 2 %}
+            <div class="well">
+                <h4>{% trans 'Medicación previa' %}</h4>
+                <p>{% trans '¿Toma algún medicamento?' %}</p>
+                <div id="medicament_container">
+                </div>    
+            </div>
+            {% endif %} 
             <div class="controls">
                 <button type="submit" class="btn btn-primary btn-large" data-loading-text="Guardando...">
                   {% trans 'Guardar y continuar' %}
                 </button>
             </div>
-        </form>   
-        {% if my_block.code = 2 %}
-            <div class="well">
-                <h4>{% trans 'Medicación previa' %}</h4>
-                <p>{% trans '¿Toma algún medicamento?' %}</p>
-                <div id="medicament_container">
-                    {% include 'consulting/medicine/list_previous_treatment.html' %}
-                </div>
-                 <div class="modal hide fade" id="modal_medicament" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h3 id="modalLabel">Nuevo fármaco</h3>
-                </div>
-                <div class="modal-body" id="modalForm">
-                </div>
-                <div class="modal-footer">
-                  <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans 'Cerrar' %}</button>
-                  <button class="btn btn-primary" id="save">{% trans 'Guardar' %}</button>
-                </div>
-              </div>        
-            </div>
-            {% endif %}            
+        </form>
+        <div class="modal hide fade" id="modal_medicament" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="modalLabel">Nuevo fármaco</h3>
+          </div>
+          <div class="modal-body" id="modalForm">
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans 'Cerrar' %}</button>
+            <button class="btn btn-primary" id="save">{% trans 'Guardar' %}</button>
+          </div>
+        </div>               
     </section>
 {% endblock container %}
 
-{% block jquery_init %}
-  $('ul').addClass("without_decorator");
-
+{% block js %}
+function set_events(){
   <!-- REMOVE MEDICINE -->
+
   $('.remove_medicine').each(function(){
     $(this).on("click", function(){ 
                             var id = $(this).attr("id");
@@ -89,16 +88,48 @@
   });
 
   $("#yes_remove").click(function(){
-                    medicine_id = $('#medicine_id').val()
+                    medicine_id = $('#medicine_id').val();
                     var jqxhr = $.post(
                                   '{% url consulting_add_medicine action='remove' %}',
                                   {'medicine_id': medicine_id,
                                   'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()}, 
                                   function() {
-                                    $('#'+medicine_id).hide();
+                                    $('#'+medicine_id).remove();
                                   });
   });
 
+  <!-- STOP MEDICINE -->
+  $('.stop_medicine').each(function(){
+    $(this).on("click", function(){
+                            var id = $(this).attr("id");
+                            $('#medicine_id').val(id);     
+                        });      
+  });
+
+  $("#yes_stop").click(function(){
+                    medicine_id = $('#medicine_id').val();
+                    var jqxhr = $.post(
+                                  '{% url consulting_add_medicine action='stop' %}',
+                                  {'medicine_id': medicine_id,
+                                  'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()}, 
+                                  function() {
+                                    $('#'+medicine_id).remove();
+                                  });
+  });
+
+  $('#medicine-paginator').find('a').each(function(){
+    $(this).on("click", function(e){
+                            e.preventDefault();
+                            $('#active').load($(this).attr('href'), set_events);
+                            $('#log').load('{% url consulting_get_medicines filter_option='old' id_patient=patient_user.id %}', set_events);
+                            return false;
+                          });
+  });
+
+}; 
+{% endblock %}
+
+{% block jquery_init %}
   $('#save').live('click', function(){
     var $form = $('#modal_medicament').find('form');
     $form.ajaxSubmit({  target: null,
@@ -109,8 +140,12 @@
                             } else {
                                $('#medicament_container').html(response);
                                $('#modal_medicament').modal('hide');
+                               $('#modal_medicament').removeData('modal');
+                               set_events();
                             }
                         }
                     });
   });
+  $('ul').addClass("without_decorator");
+  $('#medicament_container').load('{% url consulting_get_medicines filter_option='previous' id_patient=patient_user.id %}', set_events);
 {% endblock %}

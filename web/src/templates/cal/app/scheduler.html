@@ -1,0 +1,37 @@
+{% extends "cal/includes/base.html" %}
+
+{% load i18n%}
+
+{% block right %}
+  {% include "cal/includes/calendar.html" %}
+{% endblock %}
+
+{% block container %}
+<legend class=""><h2>{% trans 'Calendario' %}</h2></legend>
+<div class="">
+    <ul class="pager">
+        <li class="previous">
+            <a href="{% url cal.select_month_year year|add:'-3' %}">&larr; Prev</a>
+        </li>
+        <li class="next">
+            <a href="{% url cal.select_month_year year|add:'3' %}">Next &rarr;</a>
+        </li>
+    </ul>
+</div>
+<div class="row-fluid">
+    {% for year, months in years %}
+        <div class="span4 well center">
+            <h2 class="label label-info">{{ year }}</h2>
+            <ul class="unstyled">
+                {% for month in months %}
+                    {% if month.entry %}<b>{% endif %}
+                    <li>
+                        <a class={% if month.current %}"label label-info"{% else %}""{% endif %}
+                        href="{% if patient_user %}{% url cal.day year month.n today patient_user.id %}{% else %}{% url cal.day year month.n today doctor.id %}{% endif %}">{{ month.name }}</a>        
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>
+{% endblock container %}

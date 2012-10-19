@@ -7,7 +7,7 @@
 
 {% block container %}
   <div class="page-header">
-    <h1>{% trans 'Nuevo día de vacaciones' %}
+    <h1>{% trans 'Nuevo periodo de vacaciones' %}
             <div class="btn-group pull-right">
                   <a class="btn btn-info" href="{% url cal.list_vacation %}">
                      <i class="icon-arrow-left icon-white"></i>
@@ -53,6 +53,13 @@
           </div>
         </div>
       {% endif %}
+      <div class="control-group">
+          <label for="id_end_date" class="control-label">{{form.end_date.label}}</label>
+          <div class="controls">
+            {{ form.end_date }}
+            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-calendar"></i>
+          </div>
+        </div>
       <!-- END DATE -->
 
       <!-- DESCRIPTION -->
@@ -92,5 +99,6 @@
 {% block jquery_init %}
 
   $('#id_date').datepicker({'format':'dd/mm/yyyy'});
+  $('#id_end_date').datepicker({'format':'dd/mm/yyyy'});
 
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends "ui/app.html" %}
 
-{% load i18n%}
+{% load i18n %}
 
 {% block js_files %}
   {{ block.super }}
@@ -8,58 +8,56 @@
 {% endblock %}
 
 {% block jquery_init %}
-       $('#pyramid_anxiety').Pyramid({
-          'height': 360,
-          'slices':4,
-          'slice_separation': 0.15,
-          'colours': ['#356635', '#999999', '#f89406', '#b94a48'],
-          'text': ['1', '2', '3', '4']
-       })
-       .on('click', function(event){ alert(event.text) });
+$('#main').remove();
+$('#right_bar').remove();
 
-        $('#pyramid_depression').Pyramid({
-          'height': 360,
-          'slices':5,
-          'slice_separation': 0.15,
-          'colours': ['#468847', '#3a87ad', '#999999', '#f89406', '#b94a48'],
-          'text': ['12 (12%)', '250 (34%)', '3', '4', '5']
-       })
-       .on('click', function(event){ alert(event.text) });
+ $('#pyramid_anxiety').Pyramid({
+    'height': 300,
+    'base': 400,
+    'top': 100,
+    'slices':{{anxiety_list|length}},
+    'slice_separation': 0.1,
+    'colours': ['#999999', '#F89406', '#B94A48', '#202020'],
+    'text': [{% for l in anxiety_list %}'{{l|length}} ({% widthratio l|length num_patient 100 %}%)',{% endfor %}]
+ })
+ .on('click', function(event){ alert(event.id) });
+
+  $('#pyramid_depression').Pyramid({
+    'height': 300,
+    'base': 400,
+    'top': 100,
+    'slices':{{depression_list|length}},
+    'slice_separation': 0.10,
+    'colours': ['#0088CC', '#999999', '#F89406', '#B94A48', '#202020'],
+    'text': [{% for l in depression_list %}'{{l|length}} ({% widthratio l|length num_patient 100 %}%)',{% endfor %}]
+ })
+ .on('click', function(event){ alert(event.id) });
 
 {% endblock %}
 
 
-{% block body %}
-    <div class="container">
-      <div class="row-fluid">
-        <div class="span2 bs-docs-sidebar">
-          {% block left %}
-          {% include "ui/includes/nav_bar_doctor_statistic.html" %}
-          {% endblock left%}
-        </div>
-        <div id="main" class="span10">
-          {% block container %}
-          <div class="page-header">
-            <h1>{% trans 'Pirámides de estratificación' %}</h1>
-          </div>
-           <section>
-              <div class="row-fluid">
-                <div class="span5" id="a">
-                    <h2><small>Ansiedad</small></h2>
-                    <div id="pyramid_anxiety"></div>
-                    <hr>
-                </div>
-                <div class="span5" id="d">
-                  <h2><small>Depresión</small></h2>
-                      <div id="pyramid_depression"></div>
-                    <hr>
-                </div>
-              </div>
-            </section>
-          {% endblock container %}
-        </div>
+{% block left %}
+  {% include "ui/includes/nav_bar_doctor_statistic.html" %}
+{% endblock left%}
+
+{% block large %}
+<div class="page-header">
+  <h1>{% trans 'Pirámides de estratificación' %}</h1>
+</div>
+ <section>
+    <div class="row-fluid">
+      <div class="span5" id="a">
+          <h2><small>Ansiedad</small></h2>
+          <div id="pyramid_anxiety"></div>
+          <hr>
+      </div>
+      <div class="span5" id="d">
+        <h2><small>Depresión</small></h2>
+            <div id="pyramid_depression"></div>
+          <hr>
       </div>
     </div>
-    {% endblock body %}
+  </section>
+{% endblock %}
 
 

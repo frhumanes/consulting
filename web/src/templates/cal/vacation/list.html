@@ -12,7 +12,7 @@
   <div class="page-header">
     <h1>{% trans 'Vacaciones' %}
             <div class="btn-group pull-right">
-                  <a class="btn btn-info btn" href="{% url cal.add_vacation %}"><i class="icon-plane icon-white"></i> {% trans "Añadir día" %}</a>
+                  <a class="btn btn-info btn" href="{% url cal.add_vacation %}"><i class="icon-plane icon-white"></i> {% trans "Añadir periodo" %}</a>
             </div>
         </h1>
   </div>
@@ -33,6 +33,7 @@
         {% endfor %}
       </tbody>
     </table>
+    {% if vacations.paginator.num_pages > 1%}
     <div id="vacations-paginator" class="pagination pagination-centered">
       <ul>
         {% if vacations.has_previous %}
@@ -40,7 +41,9 @@
         {% else %}
           <li class="disabled"><a>←</a></li>
         {% endif %}
-
+         {% for p in vacations.paginator.page_range %}
+         <li {% if p = vacations.number %}class="disabled"{% endif %}><a href="?page={{p}}">{{p}}</a></li>
+        {% endfor %}
         {% if vacations.has_next %}
           <li><a href="?page={{ vacations.next_page_number }}">→</a></li>
         {% else %}
@@ -48,6 +51,7 @@
         {% endif %}
       </ul>
     </div>
+    {% endif %}
 
     <div id="preview"></div>
   {% else %}

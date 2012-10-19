@@ -1,6 +1,8 @@
 {% extends "cal/includes/base.html" %}
 
 {% load i18n%}
+{% load url from future %}
+
 
 {% block js_files %}
   {{ block.super }}
@@ -19,7 +21,7 @@
   $("#searcher").autocomplete({
     source: function(request, response){
               $.ajax({
-                  url: '{% url cal.patient_searcher %}',
+                  url: '{% url 'cal.patient_searcher' %}',
                   type:'POST',
                   data: {
                       start: function() { return $("#searcher").val(); },
@@ -32,7 +34,13 @@
               })
             },
     select: function(event, ui){
-            window.location.href = '/calendar/app/add/'+'{{year}}/'+'{{month}}/'+'{{day}}/'+ ui.item.id;
+            {% if year and month and day %}
+            var pattern = '{% url destination year month day 1 %}';
+            window.location.href = pattern.replace('for/1', 'for/'+ui.item.id);
+            {% else %}
+            var pattern = '{% url destination 1 %}';
+            window.location.href = pattern.replace('1', ui.item.id);
+            {% endif %}
              }
   }); 
 

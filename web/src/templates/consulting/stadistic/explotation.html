@@ -37,6 +37,9 @@ text.malebar, text.femalebar {
 {% endblock %}
 
 {% block jquery_init %}
+$('#main').remove();
+$('#right_bar').remove();
+
 var data = [
   {% for labelname, values in data.items %}
     {% localize off %}
@@ -161,49 +164,68 @@ function refresh(data) {
     .transition()
       .attr("x", function(d) { return innerMargin - total(d.barData2) - 2 * labelSpace; });
 }
-
+  $('#reload_button').live('click',function(){
+      $(this).load('{% url rebuild_data %}', function(){
+        location.reload();
+    });
+  })
 {% endblock %}
 
 {% block left %}
   {% include "ui/includes/nav_bar_doctor_statistic.html" %}
 {% endblock left%}
-{% block container %}
+
+{% block large %}
 <div class="page-header">
-  <h1>{% trans 'Explotación de datos' %}</h1>
+  <h1>{% trans 'Explotación de datos' %}
+    <div class="btn-group pull-right">
+       <button id="reload_button" type="button" class="btn btn-info" data-loading-text="Actualizando..."><i class="icon-refresh icon-white"></i> {% trans "Actualizar datos" %}</button>
+    </div>
+  </h1>
 </div>
  <section>
-    <div id="vis"></div>
- </section>
- <section>
-    <div id="data" style="overflow-x:scroll;">
-      <table class="table table-condensed table-striped">
-        <thead>
-          <th colspan="4"></th>
+  <div id="data" style="overflow-x:scroll;">
+    <table class="table table-condensed table-striped">
+      <thead>
+        <th>#</th>
+        <th>Edad</th>
+        <th>Sexo</th>
+        <th>Profesión</th>
+        <th>Fecha<th>
+        {% for d in dimensions %}
+          <td><small>Dimensión {{d.name}}</small></td>
+        {% endfor %}
+        {% for v in variables %}
+          <td><small>{{v.name}}</small></td>
+        {% endfor %}
+        {% for s in status %}
+          <td><small>{{s}}</small></td>
+        {% endfor %}
+      </thead>
+      {% for r in reports %}
+        <tr>
+          <td>{{r.patient.id}}</td>
+          <td>{{r.patient.get_age}}</td>
+          <td>{{r.patient.get_sex}}</td>
+          <td>{{r.patient.profession}}</td>
+          <td>{{r.task.end_date|date:"j/m/Y"}}</td>
           {% for d in dimensions %}
-            <td><small>Dimensión {{d.name}}</small></td>
+            <td>{% dictvalue r.dimensions d.name %}</th>
           {% endfor %}
           {% for v in variables %}
-            <td><small>{{v.name}}</small></td>
+            <td>{% dictvalue r.variables v.name %}</th>
           {% endfor %}
-        </thead>
-        {% for r in reports %}
-          <tr>
-            <td>{{r.patient.id}}</td>
-            <td>{{r.patient.get_age}}</td>
-            <td>{{r.patient.get_sex}}</td>
-            <td>{{r.patient.profession}}</td>
-            {% for d in dimensions %}
-              <td>{% dictvalue r.dimensions d.name %}</th>
-            {% endfor %}
-            {% for v in variables %}
-              <td>{% dictvalue r.variables v.name %}</th>
-            {% endfor %}
-          <tr>
-        {% endfor %}
-      </table>
-    </div>
-    <section>
-{% endblock container %}
+          {% for s in status %}
+            <td>{% dictvalue r.status s %}</th>
+          {% endfor %}
+        <tr>
+      {% endfor %}
+    </table>
+  </div>
+<section>
+
+<div id="vis"></div>
+{% endblock %}
 
 
 

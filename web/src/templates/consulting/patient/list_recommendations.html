@@ -44,6 +44,7 @@
             {% endfor %}
           </tbody>
         </table>
+        {% if recommendations.paginator.num_pages > 1 %}
         <div id="recommendation-paginator" class="pagination pagination-centered">
           <ul class="pagination">
             {% if recommendations.has_previous %}
@@ -51,14 +52,17 @@
             {% else %}
               <li class="disabled"><a>←</a></li>
             {% endif %}
-
+            {% for p in recommendations.paginator.page_range %}
+             <li {% if p = recomendations.number %}class="disabled"{% endif %}><a href="?page={{p}}">{{p}}</a></li>
+            {% endfor %}
             {% if recommendations.has_next %}
               <li><a href="?page={{ recommendations.next_page_number }}">→</a></li>
             {% else %}
               <li class="disabled"><a>→</a></li>
             {% endif %}
           </ul>
-        </div>    
+        </div>
+        {% endif %}    
         <div id="overwrite"></div>                           
         {% else %}
             <div class="alert alert-info">{% trans "No hay Recomendaciones" %}</div>

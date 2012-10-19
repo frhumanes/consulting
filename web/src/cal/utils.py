@@ -28,6 +28,9 @@ def create_calendar(year, month, doctor=None):
     week = 0
 
     for day in month_days:
+        if len(lst[week]) == 7:
+            lst.append([])
+            week += 1
         apps = Appointment.objects.none()
         current = False
         vacations = False
@@ -48,23 +51,19 @@ def create_calendar(year, month, doctor=None):
             events = check_events(doctor, year, month, day)
 
         lst[week].append((day, apps, current, vacations, events))
-
-        if len(lst[week]) == 7:
-            lst.append([])
-            week += 1
     return lst
 
 
 def check_vacations(doctor, year, month, day):
     vacations = Vacation.objects.filter(doctor=doctor, date__year=year,
         date__month=month, date__day=day)
-    return vacations.count() > 0
+    return vacations
 
 
 def check_events(doctor, year, month, day):
     events = Event.objects.filter(doctor=doctor, date__year=year,
         date__month=month, date__day=day)
-    return events.count() > 0
+    return events
 
 
 def check_vacations_or_events(doctor, year, month, day):

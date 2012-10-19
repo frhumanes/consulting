@@ -6,6 +6,7 @@ from django.db import models
 
 from managers import SlotManager, AppointmentManager
 from log.models import TraceableModel
+from datetime import date
 
 
 class Vacation(TraceableModel):
@@ -109,3 +110,6 @@ class Appointment(TraceableModel):
 
     def is_first_appointment(self):
         return self == Appointment.objects.filter(patient=self.patient).order_by('date')[0]
+
+    def is_editable(self):
+        return self.date >= date.today()

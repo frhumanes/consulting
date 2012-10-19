@@ -5,14 +5,14 @@
 {% block title %}{% trans 'Appointments list' %}{% endblock %}
 
 {% block right %}
-  {% include "cal/includes/calendar.html" %}
+  {% include "cal/includes/calendar.html" with doctor=doctor patient_user=patient %}
 {% endblock %}
 
 {% block container %}
   <div class="page-header">
     <h1>{% trans 'Asignar cita' %}
             <div class="btn-group pull-right">
-                  <a class="btn btn-info" href= "{%if request.user.get_profile.is_doctor%}{%url cal.views.day year month day%}{%else%}{%url cal.views.doctor_day year month day doctor.id%}{%endif%}">
+                  <a class="btn btn-info" href= "{%if request.user.get_profile.is_doctor%}{%url cal.views.day year month day request.user.id %}{%else%}{%url cal.views.doctor_day doctor.id year month day %}{%endif%}">
                   <i class="icon-arrow-left icon-white"></i>
                   {% trans 'Volver' %}
                 </a>
@@ -20,16 +20,20 @@
         </h1>
   </div>
 
-<div class="well">
-  <p>Dr. {{ doctor.get_profile.get_full_name }}</p>
-</div>
-<div class="well">
-  <p>Paciente {{ patient.get_profile.get_full_name }}</p>
-</div>
 
-<div>
+{% if request.user.get_profile.is_administrative %}
+<div class="well">
+  <h4>Dr. {{ doctor.get_profile.get_full_name}}</h4>
+</div>
+{% endif %}
+{% if patient_user %}
+<div class="well">
+  <h4>{% trans "Paciente:" %} {{ patient_user.get_profile.get_full_name }}</h4>
+</div>
+{% endif %}
 
-<form class="form-horizontal well" method="post" action="{% url cal.add year month day patient.id doctor.id %}">{% csrf_token %}
+<div class="well">
+<form class="form-horizontal" method="post" action="{{request.path}}">{% csrf_token %}
   <legend>{% trans 'New Appointment' %} {{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
   <fieldset>
       {% if not_available_error %}

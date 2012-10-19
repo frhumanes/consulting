@@ -12,7 +12,28 @@
   {% endif %}
 {% endfor %}
 </table>
-<a class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal_medicament" href="{% if appointment %}{% url consulting_add_medicine action='prescribe' id_appointment=appointment.id %}{% else %}{% url consulting_add_medicine action='prescribe' %}{% endif %}">{% trans 'Prescribir nuevo fármaco' %}</a>
+<a class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal_medicament" href="{% if appointment %}{% url consulting_add_medicine action='prescribe' id_patient=appointment.id %}{% else %}{% url consulting_add_medicine action='prescribe' %}{% endif %}">{% trans 'Prescribir nuevo fármaco' %}</a>
+
+{% if medicines.paginator.num_pages > 1 %}
+  <div id="medicine-paginator" class="pagination pagination-centered">
+    <ul class="pagination">
+      {% if medicines.has_previous %}
+        <li><a href="{% url consulting_get_medicines filter_option=filter_option id_patient=patient_user.id %}?page={{ medicines.previous_page_number }}">←</a></li>
+      {% else %}
+        <li class="disabled"><a>←</a></li>
+      {% endif %}
+      {% for p in medicines.paginator.page_range %}
+         <li {% if p = medicines.number %}class="disabled"{% endif %}><a href="{% url consulting_get_medicines filter_option=filter_option id_patient=patient_user.id %}?page={{p}}">{{p}}</a></li>
+      {% endfor %}
+      {% if medicines.has_next %}
+        <li><a href="{% url consulting_get_medicines filter_option=filter_option id_patient=patient_user.id %}?page={{ medicines.next_page_number }}">→</a></li>
+      {% else %}
+        <li class="disabled"><a>→</a></li>
+      {% endif %}
+    </ul>
+  </div>          
+{% endif %}
+
 
 <div id="check_stop_medicine" class="modal hide fade" style="display: block;">
 <input id="medicine_id" type="hidden">

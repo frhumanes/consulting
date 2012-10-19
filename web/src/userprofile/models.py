@@ -200,17 +200,17 @@ class Profile(TraceableModel):
         return tasks
 
 
-    def get_anxiety_status(self):
+    def get_anxiety_status(self, index=False):
         try:
             latest_task = Task.objects.filter(patient=self.user, survey__id__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True).latest('end_date')
-            return latest_task.get_anxiety_status()
+            return latest_task.get_anxiety_status(index)
         except:
             pass
 
-    def get_depression_status(self):
+    def get_depression_status(self, index=False):
         try:
             latest_task = Task.objects.filter(patient=self.user, survey__id__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True).latest('end_date')
-            return latest_task.get_depression_status()
+            return latest_task.get_depression_status(index)
         except:
             pass
 

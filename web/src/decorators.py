@@ -13,8 +13,8 @@ def paginate(template_name=None, list_name='default', objects_per_page=10):
         def wrapped(request, *args, **kwargs):
             fn_res = fn(request, *args, **kwargs)
             objects = fn_res[list_name]
-            paginator = Paginator(objects, objects_per_page)
 
+            paginator = Paginator(objects, objects_per_page)
             try:
                 page = int(request.GET.get('page', '1'))
             except ValueError:
@@ -28,8 +28,11 @@ def paginate(template_name=None, list_name='default', objects_per_page=10):
                 loo = paginator.page(paginator.num_pages)
 
             fn_res.update({list_name: loo})
-
-            return render_to_response(template_name, fn_res,
+            if 'template_name' in fn_res:
+                return render_to_response(fn_res['template_name'], fn_res,
+                context_instance=RequestContext(request))
+            else:
+                return render_to_response(template_name, fn_res,
                 context_instance=RequestContext(request))
         return wraps(fn)(wrapped)
     return inner_p

@@ -12,3 +12,25 @@
   {% endif %}
 {% endfor %}
 </table>
+
+
+{% if medicines.paginator.num_pages > 1 %}
+  <div id="medicine-paginator" class="pagination pagination-centered">
+    <ul class="pagination">
+      {% if medicines.has_previous %}
+        <li><a href="{% url consulting_get_medicines filter_option=filter_option id_patient=patient_user.id %}?page={{ medicines.previous_page_number }}">←</a></li>
+      {% else %}
+        <li class="disabled"><a>←</a></li>
+      {% endif %}
+       {% for p in medicines.paginator.page_range %}
+         <li {% if p = medicines.number %}class="disabled"{% endif %}><a href="{% url consulting_get_medicines filter_option=filter_option id_patient=patient_user.id %}?page={{p}}">{{p}}</a></li>
+      {% endfor %}
+      {% if medicines.has_next %}
+        <li><a href="{% url consulting_get_medicines filter_option=filter_option id_patient=patient_user.id %}?page={{ medicines.next_page_number }}">→</a></li>
+      {% else %}
+        <li class="disabled"><a>→</a></li>
+      {% endif %}
+    </ul>
+  </div>          
+{% endif %}
+

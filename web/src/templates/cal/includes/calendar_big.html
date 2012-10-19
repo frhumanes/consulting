@@ -1,0 +1,151 @@
+{% load i18n %}
+
+{% load url from future %}
+
+<script src="{{ STATIC_URL }}js/jquery-ui-1.8.18.custom.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.ui.core.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.ui.position.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
+<link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+
+<script type="text/javascript">
+    function next(){
+        $('#large').load('{% url 'calendar_big' year=year month=month change='next' %}'); 
+    }
+
+    function prev(){
+        $('#large').load('{% url 'calendar_big' year=year month=month change='prev' %}'); 
+    }
+
+    $("#searcher").autocomplete({
+        source: function(request, response){
+              $.ajax({
+                  url: '{% url 'cal.patient_searcher' %}',
+                  type:'POST',
+                  data: {
+                      start: function() { return $("#searcher").val(); },
+                      csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val()
+                  },
+                  dataType: "json",
+                  success: function(data){
+                      response(data['completed_names'])
+                  }
+              })
+            },
+        select: function(event, ui){
+            var pattern = '{% url 'cal.app_list_patient' 1 %}';
+            window.location.href = pattern.replace('1', ui.item.id);
+            }
+    });
+
+    $('#calendar').find('td').each(function(){
+        $(this).on('click',function(){
+            window.location.href = $(this).find('a').attr('href');
+        })        
+    });
+
+    $('#main').remove();
+    $('#right_bar').remove();
+</script>
+
+
+
+
+{% if month_days %}
+<div class="row-fluid">
+<div class="pagination pagination-centered span7">
+    <ul>
+        <li class="previous">
+            <a href= "javascript:prev();">
+                <i class="icon-arrow-left"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#"><strong>{{ mname }} {{ year }}</strong></a>
+        </li>
+        <li class="next">
+            <a href= "javascript:next();" class="pull-right">
+                <i class="icon-arrow-right"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="span5">
+    <form class="form-inline pull-right">
+      {% csrf_token %}
+      <strong>{% trans 'PACIENTE' %}</strong>
+      <input type="text" id="searcher" class="input-medium search-query span8" style="margin: 20px 0">
+    </form>
+</div>  
+</div>   
+<table class="table" id="calendar">
+    <thead>
+      <tr>
+        <th style="text-align: right">&nbsp;{% trans "Mon" %}</th>
+        <th style="text-align: right">&nbsp;{% trans "Tue" %}</th>
+        <th style="text-align: right">&nbsp;{% trans "Wed" %}</th>
+        <th style="text-align: right">&nbsp;{% trans "Thu" %}</th>
+        <th style="text-align: right">&nbsp;{% trans "Fri" %}</th>
+        <th style="text-align: right">{% trans "Sat" %}</th>
+        <th style="text-align: right">{% trans "Sun" %}</th>
+      </tr>
+    </thead>
+    <tbody class="table-bordered">
+        {% for week in month_days %}
+            <tr class="center">
+            {% for day, entries, current, vacations, events in week %}
+                {% if day != 0 %}
+                    <td style="text-align: left; {{current|yesno:'background-color:#eeeeee;border: 1px solid #000000,'}}; cursor:pointer">
+                    {% if forloop.counter < 6 %}
+                        {% if request.user.get_profile.is_doctor %}
+                            {% url 'cal.views.day' year month day request.user.id as target %}
+                        {% else %}
+                            {% url 'cal.views.day' year month day doctor.id as target %}
+                        {% endif %}
+                        <div>
+                            {% if request.user.get_profile.is_doctor %}
+                            <a href="{{target}}" onMouseOver="this.className = 'label';" onMouseOut="this.className = '';">
+                                {{day}}
+                            </a>
+                            {% else %}
+                                {{day}}
+                            {% endif %}
+                        </div>
+                        <div id="events_list" style="min-height:50px">
+                        {% if vacations %}
+                           {% for v in vacations %}
+                              <div class="alert alert-error"><small>{% trans 'AUSENCIA' %}: {{v.description}}</small></div>  
+                            {% endfor %}
+                        {% else %}
+                            {% for e in events %}
+                              <div class="alert alert-warning"><small>{{e.start_time|time}}-{{e.end_time|time}} {{e.description}}</small></div>  
+                            {% endfor %}
+                            {% for a in entries %}
+                              <div class="text-info"><small>{{a.start_time|time}} {{a.patient.get_profile.get_full_name}}</small></div>  
+                            {% endfor %}
+                        {% endif %}
+                        </div>
+                    {% else %}
+                        <div>
+                            <span class="text-error">{{day}}</span>
+                        </diV>
+                        <div id="events_list" style="min-height:50px"></div>
+                    {% endif %}
+                {% else %}
+                <td>&nbsp;
+                {% endif %}
+                </td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% else %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#large').load('{% url 'calendar_big' year=year month=month change='this' %}');
+        })
+    </script>
+{% endif %}

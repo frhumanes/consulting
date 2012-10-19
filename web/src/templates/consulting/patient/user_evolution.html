@@ -1,109 +1,101 @@
 {% extends "consulting/patient/personal_data_pm.html" %}
 
-{% load i18n%}
+{% load i18n %}
+
+
+{% block css_files %}
+    {{ block.super }}
+    <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet">
+{% endblock %}
 
 {% block js_files %}
-	{{ block.super }}
-   	<script src="{{ STATIC_URL }}js/jquery.flot.js"></script>
- 	<script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/jquery.flot.resize.js"></script>
+    {{ block.super }}
+    <script src="{{ STATIC_URL }}js/jquery.flot.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.flot.resize.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
+{% endblock %}
+
+{% block jquery_init %}
+  $('#from_date').datepicker().on('changeDate',
+    function(ev){$('#from_date').datepicker('hide');
+  });
+  $('#to_date').datepicker().on('changeDate',
+    function(ev){$('#to_date').datepicker('hide');
+  });
+  $('#myTab a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+    $('#active_tab').val($(this).attr('href'));
+  });
+  $('.alert .close').live("click", function(e) {
+    $(this).parent().hide();
+  });
 {% endblock %}
 
 {% block right %}
     {% include 'consulting/patient/card.html' %}
 {% endblock %}
+
 {% block container %}
 	<div class="page-header">
 		<h1>Parámetros
             <div class="btn-group pull-right">
-                <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
-                Variables
-                <span class="caret"></span>
-                </a>
-                <ul id="choices" class="dropdown-menu">
-                <!-- dropdown menu links -->
-                </ul>
+               <a class="btn btn-info" href="#" onClick="$('#filter_options').show()"><i class="icon-filter icon-white"></i> {% trans "Filtrar" %}</a>
             </div>
         </h1>
 	</div>
-	<div class="well center">
-	<div id="placeholder" style="width:100%;height:300px;">
-		<div class="alert alert-info center">Use el botón <strong>Variables</strong> para visualizar su evolución.</div>
-	</div>
-    <div id="tools" class="clearfix">
-        <button class="btn pull-left" id="setAll">Seleccionar todas</button>
-        <button class="btn pull-right" id="cleanAll">Limpiar todas</button>
+    <div id="filter_options" class="alert alert-info hide fade in">
+        <a class="close pull-right" href="#">&times;</a>
+        <legend>{% trans 'Filtrar resultados' %}</legend>
+        <form class="form-inline" id="form" action="{{request.path}}" method="post" accept-charset="utf-8">
+            {% csrf_token %}
+            <input type="hidden" name="active_tab" id="active_tab" value="{{active_tab}}"/>
+            {% if form.non_field_errors.errors %}
+            <div class="text-error">
+              {{ form.non_field_errors.errors }}
+            </div>
+            {% endif %}
+            Desde
+            <div id="from_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
+             {{form.from_date}}
+              <span class="add-on">
+                <i class="icon-th"></i>
+              </span>
+            </div>
+            hasta
+            <div id="to_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
+                {{form.to_date}}
+              <span class="add-on">
+                <i class="icon-th"></i>
+              </span>
+            </div>
+            <button type="submit" class="btn">
+                {% trans 'Filtrar' %}
+            </button>
+        </form>
     </div>
-	</div>
-    
-	<div id="legend"></div>
+
+    <ul class="nav nav-tabs" id="myTab">
+        <li{% if not active_tab or active_tab = 'active' %} class="active"{%endif%}>
+            <a href="#variables" data-toggle="tab">Variables</a>
+        </li>
+        <li {% if active_tab = 'dimensions' %} class="active"{%endif%}><a href="#dimensions" data-toggle="tab">Dimensiones</a></li>
+        <li {% if active_tab = 'status' %} class="active"{%endif%}><a href="#status" data-toggle="tab">Estado</a></li>
+        <li {% if active_tab = 'treatment' %} class="active"{%endif%}><a href="#treatment" data-toggle="tab">Tratamiento</a></li>
+    </ul>
 	
-<script type="text/javascript">
-$(function () {
-    var datasets = {
-    	{% for label, marks in latest_marks.items %}
-        "{{label}}": {
-            label: "{{label|upper}}",
-            data: [{% for date, mark in marks %}[(Date.UTC({{date|date:'Y, m, d'}})),parseFloat("{{mark|floatformat}}".replace(",", "."))],{% endfor %}]
-        },        
-       {% endfor %}
-    };
-
-    // hard-code color indices to prevent them from shifting as
-    // countries are turned on/off
-    var i = 0;
-    $.each(datasets, function(key, val) {
-        val.color = i;
-        ++i;
-    });
-    
-    // insert checkboxes 
-    var choiceContainer = $("#choices");
-    var legendContainer = $("#legend");
-    var originalContent = $("#placeholder").html();
-    $.each(datasets, function(key, val) {
-        choiceContainer.append('<li><label class="checkbox"><input type="checkbox" name="' + key + '" value="'+  key +'">' + val.label + '</label><li>');
-    });
-    choiceContainer.find("input").click(plotAccordingToChoices);
-    $("#cleanAll").click(cleanAll);
-    $("#setAll").click(setAll);
-    
-    function cleanAll() {
-        choiceContainer.find("input").each(function () {
-            $(this).removeAttr("checked");
-        });
-        $("#placeholder").html(originalContent);
-    }
-
-    function setAll() {
-        choiceContainer.find("input").each(function () {
-            $(this).attr("checked", true);
-        });
-        plotAccordingToChoices();
-    }
-
-    function plotAccordingToChoices() {
-        var data = [];
-
-        choiceContainer.find("input:checked").each(function () {
-            var key = $(this).attr("name");
-            if (key && datasets[key])
-                data.push(datasets[key]);
-        });
-
-        if (data.length > 0)
-            $.plot($("#placeholder"), data, {
-            	lines: { show: true },
-            	points: { show: true },
-                yaxis: { min: 0, max: 5, ticks: 10, position: "right"},
-                xaxis: { mode: "time",  minTickSize: [1, "day"], min: (Date.UTC({{ticks|first|date:'Y, m, d-1, 23'}})),
-                max: (Date.UTC({{ticks|last|date:'Y, m, d, 01'}}))},
-                legend: { container: legendContainer, noColumns: 3 }
-            });
-    }
-
-    plotAccordingToChoices();
-
-});
-</script>
-
+    <div class="tab-content">
+        <div class="tab-pane {% if not active_tab or active_tab = 'treatment' %}active{% endif %}" id="variables">
+            {% include 'consulting/patient/plot_variables.html' with ticks=ticks_variables %}
+        </div>
+        <div class="tab-pane {% if active_tab = 'dimensions' %}active{% endif %}" id="dimensions">
+            {% include 'consulting/patient/plot_dimensions.html' with ticks=ticks_variables %}
+        </div>
+        <div class="tab-pane {% if active_tab = 'status' %}active{% endif %}" id="status">
+            {% include 'consulting/patient/plot_scales.html' with ticks=ticks_variables values=scales %}
+        </div>
+        <div class="tab-pane {% if active_tab = 'treatment' %}active{% endif %}" id="treatment">
+            {% include 'consulting/patient/plot_treatment.html' with ticks=ticks_treatment %}
+        </div>
+    </div>
 {% endblock %}

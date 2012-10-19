@@ -12,6 +12,7 @@ from medicament.models import Component
 from illness.models import Illness
 from cal.models import Appointment
 from formula.models import Formula, Dimension, Variable
+from numbers import Real
 
 
 class Task(TraceableModel):
@@ -34,7 +35,7 @@ class Task(TraceableModel):
     treated_blocks = models.ManyToManyField(Block, related_name='blocks_tasks')
 
     appointment = models.ForeignKey(Appointment,
-                                    related_name="appointment_tasks")
+                                    related_name="appointment_tasks", null=True)
 
     self_administered = models.NullBooleanField(_(u'¿Tarea autoadministrada?'))
 
@@ -137,7 +138,7 @@ class Task(TraceableModel):
         answers = self.get_answers()
         mark = 0
         submarks = {}
-        kind = self.treated_blocks.all().aggregate(Max('kind'))['kind__max']
+        kind = self.kind
         for a in answers:
             if not a.code.startswith('H') or a.code.startswith('Hd'):
                 continue
@@ -164,21 +165,31 @@ class Task(TraceableModel):
             if ave_mark < value:
                 return settings.AVE[value]
 
-    def get_depression_status(self):
+    def get_depression_status(self, index=False):
         l = settings.BECK.keys()
         l.sort()
         beck_mark = self.calculate_beck_mark()
+        if beck_mark is None:
+            return ''
         for value in l:
             if beck_mark < value:
-                return settings.BECK[value]
+                if index:
+                    return l.index(value)
+                else:
+                    return settings.BECK[value]
 
-    def get_anxiety_status(self):
+    def get_anxiety_status(self, index=False):
         l = settings.HAMILTON.keys()
         l.sort()
         hamilton_mark, hamilton_submarks = self.calculate_hamilton_mark()
+        if hamilton_mark is None:
+            return ''
         for value in l:
             if hamilton_mark < value:
-                return settings.HAMILTON[value]
+                if index:
+                    return l.index(value)
+                else:
+                    return settings.HAMILTON[value]
 
     def get_kind(self):
         if self.kind == settings.GENERAL:
@@ -210,7 +221,7 @@ class Task(TraceableModel):
         marks = {}
         variable_tuple = None
         
-        kind = self.treated_blocks.all().aggregate(Max('kind'))['kind__max']
+        kind = self.kind
 
         for f in Formula.objects.filter(kind=kind):
             total = None
@@ -221,18 +232,14 @@ class Task(TraceableModel):
                             total = 0
                         total += a.weight
                         break
-                #try:
-                #    total += result.options.get(question__code=item).weight
-                #except:
-                #    pass
             if total != None:
                 if f.variable in marks:
                     marks[f.variable]+=(float(total) * float(f.factor))
                 else:
                     marks[f.variable]=(float(total) * float(f.factor))
             else:
-                marks[f.variable] = -1
-        sorted(marks.items(), key=lambda x: -x[1])
+                marks[f.variable] = ''
+        #sorted(marks.items(), key=lambda x: -x[1])
 
         return marks
 
@@ -244,11 +251,10 @@ class Task(TraceableModel):
             total = 0
             for item in d.polynomial.split('+'):
                 variable = Variable.objects.get(code=item)
-                try:
-                    if isinstance(variables_mark[variable], float) and variables_mark[variable] > 0:
+                if variable in variables_mark and isinstance(variables_mark[variable], Real) and variables_mark[variable] >= 0:
                         total += variables_mark[variable]
-                except:
-                    pass
+                else:
+                    return {}
             if d.name in marks:
                 marks[d.name] += (float(total) * float(d.factor))
             else:

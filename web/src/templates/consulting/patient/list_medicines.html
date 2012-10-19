@@ -15,21 +15,10 @@
   <link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet">
 {% endblock %}
 
-{% block jquery_init %}
-  $('.medicine').each(function(){
-      $(this).on("click", function(){ 
-          var medicine_id = $(this).attr("id");
-
-          $(this).css("background", "#D9EDF7").siblings().removeAttr("style")
-
-          $('#overwrite').load(
-                '',
-                {'medicine_id': medicine_id,
-                'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()});
-          });
-  });
-
+{% block js %}
+function set_events(){
   <!-- REMOVE MEDICINE -->
+
   $('.remove_medicine').each(function(){
     $(this).on("click", function(){ 
                             var id = $(this).attr("id");
@@ -38,7 +27,7 @@
   });
 
   $("#yes_remove").click(function(){
-                    medicine_id = $('#medicine_id').val()
+                    medicine_id = $('#medicine_id').val();
                     var jqxhr = $.post(
                                   '{% url consulting_add_medicine action='remove' %}',
                                   {'medicine_id': medicine_id,
@@ -50,14 +39,14 @@
 
   <!-- STOP MEDICINE -->
   $('.stop_medicine').each(function(){
-    $(this).on("click", function(){ 
+    $(this).on("click", function(){
                             var id = $(this).attr("id");
                             $('#medicine_id').val(id);     
                         });      
   });
 
   $("#yes_stop").click(function(){
-                    medicine_id = $('#medicine_id').val()
+                    medicine_id = $('#medicine_id').val();
                     var jqxhr = $.post(
                                   '{% url consulting_add_medicine action='stop' %}',
                                   {'medicine_id': medicine_id,
@@ -67,25 +56,43 @@
                                   });
   });
 
+  $('#medicine-paginator').find('a').each(function(){
+    $(this).on("click", function(e){
+                            e.preventDefault();
+                            $('#active').load($(this).attr('href'), set_events);
+                            $('#log').load('{% url consulting_get_medicines filter_option='old' id_patient=patient_user.id %}', set_events);
+                            return false;
+                          });
+  });
 
+}; 
+{% endblock %}
+
+{% block jquery_init %}
   $('#save').live('click', function(){
     var $form = $('#modal_medicament').find('form');
     $form.ajaxSubmit({  target: null,
                         clearForm: true,
                         success: function(response) {
+                            var target = $('#tabs .active').find('a').attr('href');
                             if ($(response).find("form").length) {
                                $('#modalForm').html(response);
                             } else {
-                              if ($(response).find("#check_stop_medicine").length) {
-                               $('#active').html(response);
-                              } else {
-                               $('#previous').html(response);
-                              }
+                               $(target).html(response);
                                $('#modal_medicament').modal('hide');
-                            }
+                               set_events();                            }
                         }
                     });
   });
+
+   $('#modal_medicament').on('hidden', function () {
+      $(this).removeData();
+    })
+
+  $('#active').load('{% url consulting_get_medicines filter_option='current' id_patient=patient_user.id %}', set_events);
+  $('#log').load('{% url consulting_get_medicines filter_option='old' id_patient=patient_user.id %}', set_events);
+  $('#previous').load('{% url consulting_get_medicines filter_option='previous' id_patient=patient_user.id %}', set_events);
+   
 {% endblock %}
 
 {% block right %}
@@ -94,69 +101,26 @@
 
 
 {% block container %}
-<div class="page-header row-fluid">
+<div class="page-header">
     <h1>{% trans 'Tratamiento farmacológico' %}</h1>       
 </div>
-<input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
 <section>
-
   <div>      
-    <ul class="nav nav-tabs">
+    <ul id="tabs" class="nav nav-tabs">
       <li class="active"><a href="#active" data-toggle="tab">{% trans 'Actual' %}</a></li>
       <li><a href="#log" data-toggle="tab">{% trans 'Histórico' %}</a></li>
       <li><a href="#previous" data-toggle="tab">{% trans 'Previos' %}</a></li>
     </ul>
-    <div class="tab-content">
+    <div class="tab-content" style="overflow-y: never;">
       <div class="tab-pane active" id="active">
-        {% include 'consulting/medicine/list_current_treatment.html' %}
       </div>
       <div class="tab-pane" id="log">
-        {% include 'consulting/medicine/list_old_treatment.html' %}
       </div>
       <div class="tab-pane" id="previous">
-       {% include 'consulting/medicine/list_previous_treatment.html' %}
       </div>
-    </div>
-    <div id="overwrite_list" class="row-fluid">  
-    {% if medicines.object_list %}
-
-       <div id="medicine-paginator" class="span12 pagination pagination-centered">
-        <ul class="pagination">
-          {% if medicines.has_previous %}
-            <li><a href="?page={{ medicines.previous_page_number }}">←</a></li>
-          {% else %}
-            <li class="disabled"><a>←</a></li>
-          {% endif %}
-
-          {% if medicines.has_next %}
-            <li><a href="?page={{ medicines.next_page_number }}">→</a></li>
-          {% else %}
-            <li class="disabled"><a>→</a></li>
-          {% endif %}
-        </ul>
-      </div>          
-      {% endif %}
     </div>
   </div>
  
-  <div id="check_stop_medicine" class="modal hide fade" style="display: block;">
-    <input id="medicine_id" type="hidden">
-    <div class="modal-header">
-        <button class="close" data-dismiss="modal">
-          ×
-        </button>
-        <h3>Modificar Prescripción</h3>
-    </div>
-    <div class="modal-body">
-        <p>
-          {% trans '¿Está seguro que quiere cancelar el tratamiento de este fármaco?' %}
-        </p>
-    </div>
-    <div class="modal-footer">
-      <a id="yes" data-dismiss="modal" href="#" class="btn">Sí</a>
-      <a data-dismiss="modal" href="#" class="btn btn-primary">No</a>
-    </div>
-  </div>
   <div class="modal hide fade" id="modal_medicament" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>

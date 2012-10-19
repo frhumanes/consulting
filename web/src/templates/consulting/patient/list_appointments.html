@@ -30,6 +30,7 @@
         {% endfor %}
       </tbody>
     </table>
+    {% if events.paginator.num_pages > 1 %}
      <div id="events-paginator" class="pagination pagination-centered">
       <ul>
         {% if events.has_previous %}
@@ -37,30 +38,19 @@
         {% else %}
           <li class="disabled"><a>←</a></li>
         {% endif %}
-
+        {% for p in events.paginator.page_range %}
+         <li {% if p = events.number %}class="disabled"{% endif %}><a href="?page={{p}}">{{p}}</a></li>
+        {% endfor %}
         {% if events.has_next %}
           <li><a href="?page={{ events.next_page_number }}">→</a></li>
         {% else %}
           <li class="disabled"><a>→</a></li>
         {% endif %}
       </ul>
-    </div>      
+    </div>     
+    {% endif %} 
     <div id="preview"></div>
   {% else %}
     <div class="alert alert-info">{% trans "No se ha encontrado ninguna cita" %}</div>
   {% endif %}
 {% endblock container %}
-
-{% block jquery_init %}
-var load_icon = "<img src='{{STATIC_URL}}img/loading.gif' alt='loading...'/>";
-
-$('table tbody tr').live('click', function(event){
-  var id = $(this).attr('data-msg');
-  var id_patient = $(this).attr('id');
-  if(id){
-    $('section').hide();
-    <!-- window.location.href = '/calendar/app/edit/' +id+ '/' + {{ doctor.id }}; -->
-    window.location.href = '/calendar/app/edit/' +id+ '/' + id_patient + '/{{ doctor.id }}';
-  }
-});
-{% endblock %}

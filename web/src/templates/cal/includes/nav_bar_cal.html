@@ -1,33 +1,28 @@
 {% load i18n%}
 {% load consulting %}
 
-{% url cal.views.main as view_appointment %}
-{% url cal.select_month_year as set_appointment  %}
-{% url cal.lookfor_patient_app_list as users_appointment %}
+{% url doctors_calendar as doctors_calendar %}
+{% url search_patient_for_action action='new_app' as set_appointment  %}
+{% url search_patient_for_action action='list_app' as users_appointment %}
 {% url cal.list_slot_type as slot_type %}
 
 
 
 <ul class="nav nav-pills nav-stacked">
-  <li class="{% active_child request view_appointment %}">
-      <a href="{% url cal.views.main %}">
-        {% if request.user.get_profile.is_doctor %}
-          {% trans 'CITAS/HUECOS MÉDICO | DAR CITA' %}
-        {% endif %}
-        {% if request.user.get_profile.is_administrative %}
-          {% trans 'CITAS/HUECOS MÉDICO' %}
-        {% endif %}
+  <li class="{% active_child request set_appointment %}">
+      <a href="{{set_appointment}}">
+          {% trans 'DAR CITA' %}
       </a>
   </li>
   {% if request.user.get_profile.is_administrative %}
-  <li class="{% active_child request set_appointment %}">
-      <a href="{% url cal.select_month_year %}">
-        {% trans 'DAR CITA' %}
+  <li class="{% active_child request doctors_calendar %}">
+      <a href="{% url doctors_calendar %}">
+          {% trans 'AGENDA MÉDICO' %}
       </a>
   </li>
   {% endif %}
   <li class="{% active_child request users_appointment %}">
-      <a href="{% url cal.lookfor_patient_app_list %}">
+      <a href="{{ users_appointment }}">
         {% trans 'CITAS PACIENTE' %}
       </a>
   </li>
@@ -41,7 +36,7 @@
           <a href="{% url cal.list_slot_type %}">{% trans 'TIPOS' %}</a>
         </li>
         <li>
-          <a href="{% url cal.views.main %}">{% trans 'CITAS' %}</a>
+          <a href="#">{% trans 'CITAS' %}</a>
         </li>
       </ul>
   </li>

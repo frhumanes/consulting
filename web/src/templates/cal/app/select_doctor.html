@@ -2,35 +2,34 @@
 
 {% load i18n %}
 
-{% block left %}
-    {% include "cal/includes/nav_bar_cal.html" %}
-{% endblock  %}
- {%block container %}
+{% block container %}
+<div class="page-header">
+  <h3>{% trans "Asignación de médico" %}</h3>
+</div>
 
-    <legend>{% trans "Nueva Cita" %}</legend>
+<div class="well">
+  <h4>{% trans 'Paciente' %} {{patient_user.get_profile.get_full_name}}</h4>
+</div>
+<div class="hero-unit center">
+  <p>{% trans 'Es preciso que se le asigne un médico al paciente' %}</p>
 
-    <div class="hero-unit center">
-      <p>{% trans 'In order to make an appointment, first you need to choose a doctor:' %}</p>
-
-      <div class="">
-        <form class="form-horizontal" method="post" action="{% url cal.select_doctor year month day id_patient %}">{% csrf_token %}
-           <!-- DOCTOR -->
-          <div class="control-group">
-            <label class="control-label" for="id_doctor">{% trans 'Seleccione el médico para el que creará la cita:' %}</label>
-            <div class="controls">
-              {{ form.doctor }}
-                {% if form.doctor.errors %}
-                  {% for error in form.doctor.errors %}
-                     <span class="help-inline">{{ error|escape }}</span>
-                  {% endfor %}
-                {% endif %}
-            </div>
-          </div>
-            <!-- END DOCTOR -->
-             <button type="submit" class="btn btn-primary btn-large">Continuar</button>
-        </form>
+  <div class="">
+    <form class="form-horizontal" method="post" action="{{request.path}}">{% csrf_token %}
+       <!-- DOCTOR -->
+      <div class="control-group">
+        <label class="control-label" for="id_doctor">{% trans 'Médicos:' %}</label>
+        <div class="controls">
+          {{ form.doctor }}
+            {% if form.doctor.errors %}
+              {% for error in form.doctor.errors %}
+                 <span class="help-inline">{{ error|escape }}</span>
+              {% endfor %}
+            {% endif %}
+        </div>
       </div>
-    </div>
-
-
+        <!-- END DOCTOR -->
+         <button type="submit" class="btn btn-primary btn-large">Continuar</button>
+    </form>
+  </div>
+</div>
 {% endblock %}

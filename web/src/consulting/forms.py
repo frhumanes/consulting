@@ -262,3 +262,11 @@ class SymptomsWorseningForm(forms.Form):
         question = Question.objects.get(code=settings.CODE_SYMPTOMS_WORSENING)
         if question:
             self.fields['symptoms_worsening'].label = question.text
+
+class ParametersFilterForm(forms.Form):
+
+    from_date = forms.DateField(input_formats=(settings.DATE_FORMAT,),
+        widget=forms.DateInput(attrs={'class':'span6'},format=settings.DATE_FORMAT),required=False)
+
+    to_date = forms.DateField(input_formats=(settings.DATE_FORMAT,),
+        widget=forms.DateInput(attrs={'class':'span6'},format=settings.DATE_FORMAT),required=False)

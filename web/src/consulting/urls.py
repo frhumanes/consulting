@@ -15,58 +15,18 @@ urlpatterns = patterns('',
     url(r"^consultation/day/(\d+)/(\d+)/(\d+)/$", consulting_views.day,
         name='consulting_day'),
 
-    url(r"^consultation/month/(\d+)/(\d+)/(prev|next)/$",
-        consulting_views.month, name='consulting_month'),
-
     url(r'^treatment/(?P<action>\w+)_medicine/$',
         consulting_views.add_medicine,
         name='consulting_add_medicine'),
 
-    ##APPOINTMENT
-    url(r'^consultation/new_app/select_year_month/(\d+)/(\d+)/(\d+)/$',
-        consulting_views.select_year_month,
-        name='consulting_select_year_month'),
-    url(r'^consultation/new_app/select_year_month/(\d+)/(\d+)/$',
-        consulting_views.select_year_month,
-        name='consulting_select_year_month'),
-    url(r"^consultation/new_app/month/(\d+)/(\d+)/(prev|next)/(\d+)/(\d+)/$",
-        consulting_views.month_new_app, name='consulting_month_new_app'),
-    url(r"^consultation/new_app/month/(\d+)/(\d+)/(prev|next)/(\d+)/$",
-        consulting_views.month_new_app, name='consulting_month_new_app'),
-
-    url(r"^consultation/new_app/day/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/$",
-        consulting_views.day_new_app,
-        name='consulting_day_new_app'),
-    url(r"^consultation/new_app/day/(\d+)/(\d+)/(\d+)/(\d+)/$",
-        consulting_views.day_new_app,
-        name='consulting_day_new_app'),
-    url(r'^consultation/new_app/app_add/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/$',
-        consulting_views.app_add,
-        name='consulting_app_add'),
-    url(r'^consultation/new_app/app_add/(\d+)/(\d+)/(\d+)/(\d+)/$',
-        consulting_views.app_add,
-        name='consulting_app_add'),
+    url(r'^treatment/list_(?P<filter_option>\w+)/(?P<id_patient>\d+)/$',
+        consulting_views.get_medicines,
+        name='consulting_get_medicines'),
 
     ##MONITORING
     url(r'^consultation/task/(\d+)/not_assess/$',
         consulting_views.not_assess_task,
         name='consulting_not_assess_task'),
-
-    url(r'^consultation/monitoring/finish/select_year_month/(\d+)/(\d+)/(\d+)/$',
-        consulting_views.select_year_month_monitoring,
-        name='consulting_select_year_month_monitoring'),
-
-    url(r"^consultation/monitoring/finish/day/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/$",
-        consulting_views.day_monitoring,
-        name='consulting_day_monitoring'),
-
-    url(r'^consultation/monitoring/finish/app_add/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/$',
-        consulting_views.app_add_monitoring,
-        name='consulting_app_add_monitoring'),
-
-    url(r"^consultation/monitoring/finish/month/(\d+)/(\d+)/(prev|next)/(\d+)/(\d+)/$",
-        consulting_views.month_monitoring, name='consulting_month_monitoring'),
-
 
     ########################## PATIENT SURVEYS ################################
     url(r'^surveys/$', consulting_views.list_surveys,
@@ -148,12 +108,6 @@ urlpatterns = patterns('',
     url(r'^administration/newpatient/$', consulting_views.newpatient,
         name='consulting_newpatient_administration'),
 
-    # STATISTIC: DOCTOR ROLE
-    url(r'^statistic/stratification$', consulting_views.stratification,
-        name='consulting_stratification_statistic'),
-
-    url(r'^statistic/explotation$', consulting_views.explotation,
-        name='consulting_explotation_statistic'),
 
     #NEW URL'S
     url(r'^consultation/notes/save$',
@@ -206,12 +160,16 @@ urlpatterns = patterns('',
         consulting_views.add_medicine,
         name='consulting_add_medicine'),
 
-   url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/next_self_survey/$",
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/next_self_survey/$",
         consulting_views.select_self_administered_survey_monitoring,
         name='consulting_next_self_administered_survey'),
 
     url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/conclusions/$",
         consulting_views.conclusion_monitoring,
         name='consulting_set_conclusion'),
+
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/new_app/$",
+        consulting_views.new_app,
+        name='consulting_new_app'),
 
 )

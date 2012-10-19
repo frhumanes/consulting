@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block right %}
-  {% include "cal/includes/calendar.html" %}
+  {% include "cal/includes/calendar.html" with doctor=request.user %}
 {% endblock right %}
 
 {% block container %}
@@ -12,7 +12,7 @@
 </div>
 
   {% if events.object_list.count > 0 %}
-    {% if events.object_list.count > 10 %}
+    {% if events.paginator.num_pages > 1 %}
     <div id="events-paginator" class="pagination pagination-centered">
       <ul>
         {% if events.has_previous %}
@@ -20,7 +20,9 @@
         {% else %}
           <li class="disabled"><a>←</a></li>
         {% endif %}
-
+        {% for p in events.paginator.page_range %}
+         <li {% if p = events.number %}class="disabled"{% endif %}><a href="?page={{p}}">{{p}}</a></li>
+        {% endfor %}
         {% if events.has_next %}
           <li><a href="?page={{ events.next_page_number }}">→</a></li>
         {% else %}
@@ -28,7 +30,7 @@
         {% endif %}
       </ul>
     </div>
-    {% endif %}
+  {% endif %}
 
   <table id="events_list" class="table table-striped">
     <thead>

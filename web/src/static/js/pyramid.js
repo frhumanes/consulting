@@ -32,6 +32,7 @@
     var pluginName = 'Pyramid',
         defaults = {
             base: 400,
+            top: 0,
             height: 400,
             slices: 4,
             slice_separation: 0.15,
@@ -82,6 +83,7 @@
         // the options via the instance, e.g. this.element
         // and this.options
         this.base = this.options.base;
+        this.top = this.options.top;
         this.height = this.options.height;
         this.slices = this.options.slices;
         this.slice_separation = this.options.slice_separation;
@@ -106,21 +108,21 @@
 
         //create bottom slice
         var coords = [points[0][0], points[0][1], points[1][1], points[1][0]];
-        this.createPolygon(coords, this.text[0], this.colours[0]);
+        this.createPolygon(coords, this.text[0], this.colours[0], 1);
 
         //create middle slices
         for(var i=1; i<this.slices - 1; i++){
             //var coords = [points[i][2], points[i][3], points[i + 1][1], points[i + 1][0]]
             var coords = [points[i][2], points[i][3], points[i + 1][1], points[i + 1][0]]
-            this.createPolygon(coords, this.text[i], this.colours[i]);
+            this.createPolygon(coords, this.text[i], this.colours[i], i);
         }
 
         //create top slice
         coords = [points[this.slices-1][2],points[this.slices-1][3], points[this.slices][0], points[this.slices][1]];
-        this.createPolygon(coords, this.text[this.slices - 1], this.colours[this.slices - 1]);
+        this.createPolygon(coords, this.text[this.slices - 1], this.colours[this.slices - 1], this.slices);
     }
 
-    Plugin.prototype.createPolygon = function (points, text, colour){
+    Plugin.prototype.createPolygon = function (points, text, colour, id){
         var middle_point = this.get_xy_middle(points[0], points[2]);
         var svg_root = this.element.parent('div').find('#svg_root');
 
@@ -140,11 +142,17 @@
         text.setAttributeNS(null, "y", middle_point.y);
         text.setAttributeNS(null, "font-size", this.text_size);
         text.setAttributeNS(null, "text-anchor", "middle");
-        text.setAttributeNS(null, "fill", "black");
+        text.setAttributeNS(null, "fill", "white");
         text.appendChild(data);
+
+        var data = document.createTextNode(id);
+        var id = document.createElementNS(svgns,"id");
+        id.appendChild(data);
+
 
         svg_root.append(polygon);
         svg_root.append(text);
+        svg_root.append(id);
     }
 
     Plugin.prototype.click = function (e) {
@@ -157,12 +165,16 @@
                 case 'polygon':
                     var nodetext =  $(target[0]).next();
                     var _text = nodetext.text();
-                    this.element.trigger({type: 'click', text:_text});
+                    var nodetext =  nodetext.next();
+                    var _id = nodetext.text();
+                    this.element.trigger({type: 'click', text:_text, id:_id});
                     break;
 
                 case 'text':
+                    var nodetext =  $(target[0]).next();
+                    var _id = nodetext.text();
                     var _text = target.text();
-                    this.element.trigger({type: 'click', text:_text});
+                    this.element.trigger({type: 'click', text:_text, id:_id});
                     break;
             }
         }
@@ -171,10 +183,11 @@
     Plugin.prototype.getPoints = function () {
         var a = new Point(0, this.height);
         var b = new Point(this.base, this.height);
-        var c = new Point(this.base * 0.5, 0);
+        var c = new Point((this.base + this.top) / 2, 0);
+        var d = new Point((this.base - this.top) / 2, 0);
 
         var middle_slice_separation = (this.slice_separation * (this.height / this.slices))/2;
-        var k = this.base / (this.height * 2);
+        var k = (this.base - this.top) / (this.height * 2);
 
         var points = {};
 
@@ -201,7 +214,7 @@
                 case this.slices:
                     //top vertex
                     points[i].push(c);
-                    points[i].push(c);
+                    points[i].push(d);
                     break;
 
                 default:

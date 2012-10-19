@@ -1,31 +1,66 @@
 {% load i18n %}
 
-<h4 class="center">{{ mname }} {{ year }}</h4>
-<table class="table table-condensed table-nohover table-hover-element">
+ <script type="text/javascript">
+        function next(){
+             {% if patient_user %}
+            $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=patient_user.id change='next' %}');
+            {% else %}
+            $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=doctor.id change='next' %}');
+            {% endif %}    
+        }
+
+        function prev(){
+            {% if patient_user %}
+            $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=patient_user.id change='prev' %}');
+            {% else %}
+            $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=doctor.id change='prev' %}');
+            {% endif %} 
+        }
+</script>
+
+{% if month_days %}
+<div class="pagination pagination-centered">
+    <ul>
+        <li class="previous">
+            <a href= "javascript:prev();"><i class="icon-arrow-left"></i></a>
+        </li>
+        <li>
+            <a href="#"><strong>{{ mname }} {{ year }}</strong></a>
+        </li>
+        <li class="next">
+            <a href= "javascript:next();" class="pull-right"><i class="icon-arrow-right"></i></a>
+        </li>
+    </ul>
+</div>
+<table class="table table-condensed table-nohover">
     <thead>
       <tr>
-        <th>{% trans "Mon" %}</th>
-        <th>{% trans "Tue" %}</th>
-        <th>{% trans "Wed" %}</th>
-        <th>{% trans "Thu" %}</th>
-        <th>{% trans "Fri" %}</th>
-        <th>{% trans "Sat" %}</th>
-        <th>{% trans "Sun" %}</th>
+        <th style="text-align: right">&nbsp;{% trans "Mon" %}</th>
+        <th style="text-align: right">&nbsp;{% trans "Tue" %}</th>
+        <th style="text-align: right">&nbsp;{% trans "Wed" %}</th>
+        <th style="text-align: right">&nbsp;{% trans "Thu" %}</th>
+        <th style="text-align: right">&nbsp;{% trans "Fri" %}</th>
+        <th style="text-align: right">{% trans "Sat" %}</th>
+        <th style="text-align: right">{% trans "Sun" %}</th>
       </tr>
     </thead>
     <tbody>
         {% for week in month_days %}
             <tr class="center">
             {% for day, entries, current, vacations, events in week %}
-
-                <td class= "center" onMouseOver="this.bgColor='#eeeeee';" onMouseOut="this.bgColor='transparent';">
-
-                    {% if day != 0 %}
-                        <a href="{% if request.user.get_profile.is_doctor %}
-                                    {% url cal.views.day year month day %}
-                                 {% else %}
-                                    {% url cal.views.doctor_day year month day doctor.id %}
-                                 {% endif %}">
+                {% if day != 0 %}
+                    <td style="text-align: right">
+                    {% if forloop.counter < 6 %}
+                        {% if patient_user %}
+                            {% url cal.views.day year month day patient_user.id as target %}
+                        {% else %}
+                            {% if request.user.get_profile.is_doctor %}
+                                {% url cal.views.day year month day request.user.id as target %}
+                            {% else %}
+                                {% url cal.views.day year month day doctor.id as target %}
+                            {% endif %}
+                        {% endif %}
+                        <a rel="tooltip" title="{{entries.count}} cita{{entries.count|pluralize}}" href="{{target}}" onMouseOver="this.className = 'label';" onMouseOut="this.className = '';">
                             <span class="
                                 {% if current %}
                                     label label-info
@@ -42,56 +77,30 @@
                             </span>
                         </a>
                     {% else %}
-                        <a href="{% if request.user.get_profile.is_doctor %}
-                                   {% url cal.views.day year month day %}
-                                 {% else %}
-                                   {% url cal.views.doctor_day year month day doctor.id %}
-                                 {% endif %}">
-                            <span class="
-                                {% if current %}
-                                    label label-info
-                                {% else %}
-                                    {% if vacations %}
-                                        label label-important
-                                    {% else %}
-                                        {% if events %}
-                                            label label-warning
-                                        {% endif %}
-                                    {% endif %}
-                                {% endif %}">
-                                {% if entries.count > 0 %}
-                                    {{ day }} <i class="icon-list"></i>
-                                {% endif %}
-                            </span>
-                        </a>
+                        <span class="text-error">{{day}}</span>
                     {% endif %}
+                {% else %}
+                <td>&nbsp;
+                {% endif %}
                 </td>
             {% endfor %}
             </tr>
         {% endfor %}
     </tbody>
 </table>
-<ul class="pager">
-    <li class="previous">
-        <a href= "{% if request.user.get_profile.is_doctor %}
-                    {% url cal.views.month year month "prev" %}
-                  {% else %}
-                    {% url cal.views.doctor_month year month doctor.id "prev" %}
-                  {% endif %}">
-            &larr; Anterior
-        </a>
-    </li>
-    <li class="next">
-        <a href= "{% if request.user.get_profile.is_doctor %}
-                    {% url cal.views.month year month "next" %}
-                  {% else %}
-                    {% url cal.views.doctor_month year month doctor.id "next" %}
-                  {% endif %}" class="pull-right">
-            Posterior &rarr;
-        </a>
-    </li>
-</ul>
 
 <div id="info_day">
       {% include "cal/includes/extra_info.html" %}
 </div>
+
+{% else %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            {% if patient_user %}
+            $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=patient_user.id change='this' %}');
+            {% else %}
+            $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=doctor.id change='this' %}');
+            {% endif %}
+        })
+    </script>
+{% endif %}

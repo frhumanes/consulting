@@ -2,14 +2,6 @@
 
 {% load i18n%}
 
-{% block header%}
-    {%if request.user.get_profile.is_doctor %}
-        {% include "ui/includes/header_doctor.html" %}
-    {% else %}
-        {% include "ui/includes/header_administrative.html" %}
-    {% endif %}
-{% endblock  %}
-
 {% block js_files %}
   {{ block.super }}
   <script src="{{ STATIC_URL }}js/bootstrap-timepicker.js"></script>
@@ -24,6 +16,10 @@
 {% endblock %}
 
 {% block left %}
-  {% include "cal/includes/nav_bar_cal.html" %}
+  {% if request.session.appointment and request.session.illness %}
+    {% include "ui/includes/nav_bar_doctor_monitoring.html" with appointment=request.session.appointment illness=request.session.illness %}
+  {% else %}
+    {% include "cal/includes/nav_bar_cal.html" %}
+  {% endif %}
 {% endblock %}
 

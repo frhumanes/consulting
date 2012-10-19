@@ -129,7 +129,7 @@
 .datepicker td.active:hover.active,
 .datepicker td.active.disabled.active,
 .datepicker td.active.disabled:hover.active {
-  background-color: #003399 \9;
+  background-color: #003399;
 }
 .datepicker td span {
   display: block;
@@ -201,7 +201,7 @@
 .datepicker td span.active:hover.active,
 .datepicker td span.active.disabled.active,
 .datepicker td span.active.disabled:hover.active {
-  background-color: #003399 \9;
+  background-color: #003399;
 }
 .datepicker td span.old {
   color: #999999;

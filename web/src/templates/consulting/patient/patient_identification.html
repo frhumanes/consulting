@@ -18,7 +18,7 @@
                     {% trans '¿Desea crear una cita al paciente que acaba de dar de alta?' %}
                 </h4>
                 <p>
-                    <a href="{% url cal.select_month_year_new_patient patient_user.id %}" class="btn btn-primary">
+                    <a href="{% url cal.scheduler patient_user.id %}" class="btn btn-primary">
                         {% trans 'Sí' %}
                     </a>
                     <a href="{% url consulting_index %}" class="btn">

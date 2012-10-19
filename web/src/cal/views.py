@@ -11,6 +11,8 @@ from django.utils import simplejson
 from django.db.models import Q
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
+from django.forms.util import ErrorList
+
 
 from django.contrib.auth.models import User
 from django.template import RequestContext
@@ -49,7 +51,12 @@ from cal.utils import check_vacations
 @login_required
 @only_doctor_administrative
 def index(request):
-    return render_to_response("cal/main/index_cal.html",
+    if 'appointment' in request.session:
+        del request.session['appointment']
+    if 'illness' in request.session:
+        del request.session['illness']
+
+    return render_to_response("cal/main/index_cal.html", dict(year = time.localtime()[0],month = time.localtime()[1]),
         context_instance=RequestContext(request))
 
 
@@ -150,6 +157,41 @@ def select_month_year_new_patient(request, id_patient, year=None):
     return render_to_response("cal/app/select_month_year_new_patient.html",
         data, context_instance=RequestContext(request))
 
+@login_required
+def scheduler(request, id_patient, year=None):
+    patient = get_object_or_404(User, pk=int(id_patient))
+    if patient.get_profile().is_patient() and patient.get_profile().doctor is None:
+        return HttpResponseRedirect(reverse('cal.select_doctor', args=[id_patient]))
+    if year:
+        year = int(year)
+    else:
+        year = time.localtime()[0]
+
+    nowy, nowm = time.localtime()[:2]
+    lst = []
+
+    for y in [year, year + 1, year + 2]:
+        mlst = []
+        for n, month in enumerate(mnames):
+            slot = current = False
+            slots = Slot.objects.filter(date__year=y, date__month=n + 1)
+
+            if slots:
+                slot = True
+            if y == nowy and n + 1 == nowm:
+                current = True
+            mlst.append(dict(n=n + 1, name=month, slot=slot,
+                current=current))
+        lst.append((y, mlst))
+
+    today = time.localtime()[2:3][0]
+
+    data = dict(years=lst, year=year, month=nowm, today=today,
+            patient_user=patient, doctor=patient.get_profile().doctor)
+
+    return render_to_response("cal/app/scheduler.html",
+        data, context_instance=RequestContext(request))
+
 
 @login_required
 def month(request, year, month, change=None):
@@ -180,22 +222,95 @@ def month(request, year, month, change=None):
 @login_required
 @paginate(template_name='cal/doctor/list.html', list_name='events',
     objects_per_page=settings.OBJECTS_PER_PAGE)
-def day(request, year, month, day):
+def day(request, year, month, day, id_user):
+    user = User.objects.get(pk=int(id_user))
+    if user.get_profile().is_doctor():
+        doctor = user
+        patient = None
+    else:
+        doctor = user.get_profile().doctor
+        patient = user
     events = Appointment.objects.filter(date__year=year, date__month=month,
-            date__day=day, doctor=request.user).order_by('start_time')
-
-    lst = create_calendar(int(year), int(month), doctor=request.user)
+            date__day=day, doctor=doctor).order_by('start_time')
+    vacations = check_vacations(doctor, year, month, day)
+    lst = create_calendar(int(year), int(month), doctor=doctor)
 
     available, free_intervals = Appointment.objects.availability(
-                request.user,
+                doctor,
                 date(int(year), int(month), int(day)))
 
-    template_data = dict(year=year, month=month, day=day,
-        user=request.user, month_days=lst, mname=mnames[int(month) - 1],
-        events=events, free_intervals=free_intervals,
+    template_data = dict(year=year, month=month, day=day, vacations=vacations,
+        doctor=doctor, month_days=lst, mname=mnames[int(month) - 1],
+        events=events, free_intervals=free_intervals, patient_user=patient,
         context_instance=RequestContext(request))
 
     return template_data
+
+@login_required
+def calendar(request, year, month, day, id_user, change='this'):
+
+    if change in ("next", "prev"):
+        now, mdelta = date(int(year), int(month), 15), timedelta(days=31)
+
+        if change == "next":
+            mod = mdelta
+
+        elif change == "prev":
+            mod = -mdelta
+
+        year, month = (now + mod).timetuple()[:2]
+
+
+    user = User.objects.get(pk=int(id_user))
+    if user.get_profile().is_doctor():
+        doctor = user
+        patient = None
+    else:
+        doctor = user.get_profile().doctor
+        patient = user
+    lst = create_calendar(int(year), int(month), doctor=doctor)
+    if int(day):
+        available, free_intervals = Appointment.objects.availability(doctor,
+                date(int(year), int(month), int(day)))
+        doctor_preferences = get_doctor_preferences(year=year, month=month,
+                day=day, doctor=doctor.id)
+    else:
+        available, free_intervals, doctor_preferences = [],[],[]
+
+    return render_to_response('cal/includes/calendar.html', 
+                                dict(year=year, month=month, day=day,
+                                 doctor=doctor, month_days=lst, 
+                                 patient_user=patient, 
+                                 mname=mnames[int(month) - 1],
+                                 free_intervals=free_intervals,
+                                 doctor_preferences=doctor_preferences),
+        context_instance=RequestContext(request))
+
+
+@login_required
+def calendar_big(request, year, month, change='this'):
+
+    if change in ("next", "prev"):
+        now, mdelta = date(int(year), int(month), 15), timedelta(days=31)
+
+        if change == "next":
+            mod = mdelta
+
+        elif change == "prev":
+            mod = -mdelta
+
+        year, month = (now + mod).timetuple()[:2]
+
+
+    user = request.user
+    doctor = user
+    lst = create_calendar(int(year), int(month), doctor=doctor)
+
+    return render_to_response('cal/includes/calendar_big.html', 
+                                dict(year=year, month=month,
+                                 doctor=doctor, month_days=lst, 
+                                 mname=mnames[int(month) - 1]),
+        context_instance=RequestContext(request))
 
 
 @login_required
@@ -220,53 +335,16 @@ def day_consultation(request, year, month, day):
 
 
 @login_required
-@paginate(template_name='cal/app/list_new_app_admin.html',
-    list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE)
-def day_new_app_admin(request, year, month, day, id_doctor, id_patient):
-    doctor = get_object_or_404(User, pk=int(id_doctor))
-    patient = get_object_or_404(User, pk=int(id_patient))
-    if not doctor.get_profile().is_doctor():
-        raise Http404
-
-    vacations = check_vacations(doctor, year, month, day)
-    if not vacations:
-        events = Appointment.objects.filter(doctor=doctor, date__year=year,
-            date__month=month, date__day=day).order_by('start_time')
+def app_add(request, year, month, day, id_user):
+    user = User.objects.get(pk=int(id_user))
+    if user.get_profile().is_doctor():
+        doctor = user
+        patient = None
     else:
-        events = []
-
+        doctor = user.get_profile().doctor
+        patient = user
 
     lst = create_calendar(int(year), int(month), doctor=doctor)
-    doctor_preferences = get_doctor_preferences(year=year, month=month,
-        day=day, doctor=id_doctor)
-
-    available, free_intervals = Appointment.objects.availability(
-                doctor,
-                date(int(year), int(month), int(day)))
-
-    template_data = dict(year=year, month=month, day=day, user=request.user,
-        doctor=doctor, patient=patient, month_days=lst,
-        mname=mnames[int(month) - 1],
-        events=events, doctor_preferences=doctor_preferences,
-        vacations=vacations, free_intervals=free_intervals,
-        context_instance=RequestContext(request))
-
-    return template_data
-
-
-@login_required
-def app_add(request, year, month, day, id_patient, id_doctor=None):
-    patient = get_object_or_404(User, pk=int(id_patient))
-    if request.user.get_profile().is_doctor():
-        doctor = request.user
-        lst = create_calendar(int(year), int(month), doctor=doctor)
-    else:
-        if id_doctor:
-            doctor = get_object_or_404(User, pk=int(id_doctor))
-            lst = create_calendar(int(year), int(month), doctor=doctor)
-        else:
-            return HttpResponseRedirect(reverse('cal.views.main'))
-
     vacations = check_vacations(doctor, year, month, day)
 
     if vacations:
@@ -275,7 +353,7 @@ def app_add(request, year, month, day, id_patient, id_doctor=None):
                  'year': int(year), 'month': int(month), 'day': int(day),
                  'month_days': lst,
                  'doctor': doctor,
-                 'patient': patient,
+                 'patient_user': patient,
                  'not_available_error': True,
                  'error_msg': _('Appointment can not be set. '\
                     'Please, choose another time interval')},
@@ -284,7 +362,7 @@ def app_add(request, year, month, day, id_patient, id_doctor=None):
     mname = mnames[int(month) - 1]
 
     doctor_preferences = get_doctor_preferences(year=year, month=month,
-        day=day, doctor=id_doctor)
+        day=day, doctor=doctor.id)
 
     if request.method == 'POST':
         request_params = dict([k, v] for k, v in request.POST.items())
@@ -348,12 +426,13 @@ def app_add(request, year, month, day, id_patient, id_doctor=None):
             if available:
                 form.save()
 
-                if not request.user.get_profile().is_doctor():
-                    return redirect(reverse("cal.views.doctor_day",
-                        args=(int(year), int(month), int(day), doctor.id)))
+                if 'appointment' in request.session:
+                    return redirect(reverse("consulting_main",
+                        kwargs={'id_appointment':request.session['appointment'].id,
+                            'code_illness':request.session['illness'].code}))
                 else:
-                    return redirect(reverse("cal.views.day", args=(int(year),
-                        int(month), int(day))))
+                    return redirect(reverse("cal.views.day",
+                        args=(int(year), int(month), int(day), doctor.id)))
             else:
                 return render_to_response("cal/app/add.html",
                     {'form': form,
@@ -361,7 +440,7 @@ def app_add(request, year, month, day, id_patient, id_doctor=None):
                      'month_days': lst,
                      'mname': mname,
                      'doctor': doctor,
-                     'patient': patient,
+                     'patient_user': patient,
                      'doctor_preferences': doctor_preferences,
                      'free_intervals': free_intervals,
                      'not_available_error': True,
@@ -383,7 +462,7 @@ def app_add(request, year, month, day, id_patient, id_doctor=None):
                  'month_days': lst,
                  'mname': mname,
                  'doctor': doctor,
-                 'patient': patient,
+                 'patient_user': patient,
                  'doctor_preferences': doctor_preferences,
                  'free_intervals': free_intervals},
                 context_instance=RequestContext(request))
@@ -522,9 +601,13 @@ def app_add_new_app_admin(request, year, month, day, id_doctor, id_patient):
 
 
 @login_required
-def app_edit(request, pk, id_patient, id_doctor=None):
-    patient = get_object_or_404(User, pk=int(id_patient))
+def app_edit(request, pk, id_patient=None, id_doctor=None):
     app = get_object_or_404(Appointment, pk=int(pk))
+    if app.date < date.today():
+        raise Http404
+
+    patient = app.patient
+    doctor = app.doctor
 
     year = int(app.date.year)
     month = int(app.date.month)
@@ -532,12 +615,7 @@ def app_edit(request, pk, id_patient, id_doctor=None):
 
     mname = mnames[int(month) - 1]
 
-    if not request.user.get_profile().is_doctor():
-        doctor = get_object_or_404(User, pk=int(id_doctor))
-        lst = create_calendar(year, month, doctor=doctor)
-    else:
-        doctor = request.user
-        lst = create_calendar(year, month, doctor=doctor)
+    lst = create_calendar(year, month, doctor=doctor)
 
     vacations = check_vacations(doctor, year, month, day)
 
@@ -690,7 +768,7 @@ def app_delete(request):
     list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE)
 def app_list_patient(request, id_patient):
     patient = get_object_or_404(User, pk=int(id_patient))
-    events = Appointment.objects.filter(patient=patient)
+    events = Appointment.objects.filter(patient=patient).order_by('-date')
 
     template_data = dict(events=events, doctor=patient.get_profile().doctor,
                         patient=patient,
@@ -902,21 +980,19 @@ def delete_slot(request, pk):
 
 
 @login_required
-def doctor_calendar(request, year, month):
+def doctor_calendar(request):
     if request.method == 'POST':
         form = DoctorSelectionForm(request.POST)
         if form.is_valid():
-            year, month = int(year), int(month)
+            
             id_doctor = form.cleaned_data['doctor']
-            today = time.localtime()[2:3][0]
 
-            return redirect(reverse("cal.views.doctor_day",
-                args=(int(year), int(month), int(today), int(id_doctor))))
+            return redirect(reverse("cal.scheduler",
+                args=[int(id_doctor),]))
     else:
         form = DoctorSelectionForm()
 
-    return render_to_response('cal/app/admin.html', {'form': form,
-        'year': int(year), 'month': int(month)},
+    return render_to_response('cal/app/admin.html', {'form': form},
         context_instance=RequestContext(request))
 
 
@@ -950,70 +1026,6 @@ def doctor_month(request, year, month, id_doctor, change=None):
             context_instance=RequestContext(request))
 
 
-@login_required
-def doctor_month_new_app_admin(request, year, month, id_doctor, id_patient,
-    change=None):
-    year, month = int(year), int(month)
-
-    doctor = get_object_or_404(User, pk=int(id_doctor))
-    patient = get_object_or_404(User, pk=int(id_patient))
-    if not doctor.get_profile().is_doctor():
-        raise Http404
-
-    if change in ("next", "prev"):
-        now, mdelta = date(year, month, 15), timedelta(days=31)
-
-        if change == "next":
-            mod = mdelta
-
-        elif change == "prev":
-            mod = -mdelta
-
-        year, month = (now + mod).timetuple()[:2]
-
-    lst = create_calendar(year, month, doctor=doctor)
-    doctor_preferences = get_doctor_preferences(year=year, month=month,
-        doctor=id_doctor)
-    return render_to_response("cal/app/month_new_app_admin.html",
-        dict(year=year, month=month, user=request.user, doctor=doctor,
-            patient=patient, month_days=lst, mname=mnames[month - 1],
-            doctor_preferences=doctor_preferences),
-            context_instance=RequestContext(request))
-
-
-@login_required
-@paginate(template_name='cal/app/list_new_app_admin.html',
-    list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE)
-def doctor_day_new_app_admin(request, year, month, day, id_doctor, id_patient):
-    doctor = get_object_or_404(User, pk=int(id_doctor))
-    patient = get_object_or_404(User, pk=int(id_patient))
-    if not doctor.get_profile().is_doctor():
-        raise Http404
-
-    vacations = check_vacations(doctor, year, month, day)
-
-    if not vacations:
-        events = Appointment.objects.filter(doctor=doctor, date__year=year,
-            date__month=month, date__day=day).order_by('start_time')
-    else:
-        events = []
-
-    lst = create_calendar(int(year), int(month), doctor=doctor)
-    doctor_preferences = get_doctor_preferences(year=year, month=month,
-        day=day, doctor=id_doctor)
-
-    available, free_intervals = Appointment.objects.availability(
-                doctor,
-                date(int(year), int(month), int(day)))
-
-    template_data = dict(year=year, month=month, day=day, user=request.user,
-        doctor=doctor, patient=patient, month_days=lst,
-        mname=mnames[int(month) - 1],
-        events=events, doctor_preferences=doctor_preferences,
-        vacations=vacations, free_intervals=free_intervals,
-        context_instance=RequestContext(request))
-
-    return template_data
 
 
 @login_required
@@ -1054,7 +1066,7 @@ def doctor_day(request, year, month, day, id_doctor=None):
 @paginate(template_name='cal/vacation/list.html',
     list_name='vacations', objects_per_page=settings.OBJECTS_PER_PAGE)
 def list_vacation(request):
-    vacations = Vacation.objects.filter(doctor=request.user).order_by('date')
+    vacations = Vacation.objects.filter(doctor=request.user).order_by('-date')
     template_data = dict(user=request.user, vacations=vacations,
         context_instance=RequestContext(request))
 
@@ -1065,22 +1077,45 @@ def list_vacation(request):
 @only_doctor
 def add_vacation(request, template="cal/vacation/add.html"):
     if request.method == 'POST':
+        start_date = request.POST.get('date', None)
+        end_date = request.POST.get('end_date', start_date)
+        if not end_date:
+            end_date = start_date
+        error = None
         request_params = dict([k, v] for k, v in request.POST.items())
         request_params.update({
             'doctor': request.user.id,
             'created_by': request.user.id,
-            'date': datetime.now()
+            'date': start_date
         })
-
-        date = request.POST.get('date', None)
-        if date:
-            date = datetime.now().strptime(date, settings.DATE_FORMAT)
-            request_params.update({'date': date})
-
         form = VacationForm(request_params)
+        form.is_valid()
+        start_date = datetime.strptime(start_date, settings.DATE_FORMAT)
+        end_date = datetime.strptime(end_date, settings.DATE_FORMAT)
+        if end_date and end_date >= start_date:
+            for n in [0]+range(int((end_date - start_date).days)):
+                if Appointment.objects.filter(doctor=request.user, date=(start_date + timedelta(n))).count():
+                    form._errors['__all__'] = ErrorList([u"Existen citas concertadas en el intervalo de vacaciones. Elija otro intervalo de fechas o modifique las citas concertadas."])
+                    error = True
+                    break
+        else:
+            form._errors['end_date'] = ErrorList([u"Fecha final debe ser mayor que la fecha inicial"])
+            error = True
 
-        if form.is_valid():
-            form.save()
+        if not error:
+            for n in [0]+range(int ((end_date - start_date).days)):
+                request_params.update({
+                    'date': (start_date + timedelta(n)).strftime(settings.DATE_FORMAT)
+                })    
+
+                form = VacationForm(request_params)
+
+                if form.is_valid():
+                    form.save()
+                else:
+                     return render_to_response(template,
+                        {'form': form},
+                        context_instance=RequestContext(request))
             return redirect(reverse("cal.list_vacation"))
         else:
             return render_to_response(template,
@@ -1156,7 +1191,7 @@ def delete_vacation(request):
 @paginate(template_name='cal/event/list.html',
     list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE)
 def list_event(request):
-    events = Event.objects.filter(doctor=request.user).order_by('date')
+    events = Event.objects.filter(doctor=request.user).order_by('-date')
     template_data = dict(user=request.user, events=events,
         context_instance=RequestContext(request))
 
@@ -1254,13 +1289,20 @@ def delete_event(request):
 
 
 @login_required()
-def lookfor_patient(request, year, month, day):
-    if request.user.get_profile().is_doctor():
-        template = 'cal/patient/lookfor_patient.html'
-    else:
-        template = 'cal/patient/lookfor_patient_new_app_admin.html'
-    return render_to_response(template,
-            {"year": year, 'month': month, 'day': day},
+def lookfor_patient(request, action=None, year=None, month=None, day=None):
+    if action == 'info':
+        pass
+    elif action == 'new_app':
+        if year and month and day:
+            destination = 'cal.add'
+        else:
+            destination = 'cal.scheduler'
+    elif action == 'list_app':
+        destination = 'cal.app_list_patient'
+
+
+    return render_to_response('cal/patient/lookfor_patient.html',
+            {'destination':destination, 'year':year, 'month':month, 'day':day},
             context_instance=RequestContext(request))
 
 
@@ -1316,33 +1358,21 @@ def patient_searcher(request):
 
 
 @login_required()
-def check_patient(request, year, month, day, id_patient):
-    patient = get_object_or_404(User, pk=int(id_patient))
-    if patient.get_profile().doctor:
-        return HttpResponseRedirect(reverse('cal.doctor_day_new_app_admin',
-        args=[int(year), int(month), int(day),
-        int(patient.get_profile().doctor.id), int(id_patient)]))
-    else:
-        return HttpResponseRedirect(reverse('cal.select_doctor',
-        args=[int(year), int(month), int(day), int(id_patient)]))
-
-
-@login_required()
-def select_doctor(request, year, month, day, id_patient):
+def select_doctor(request, id_patient):
+    patient_user = get_object_or_404(User, pk=int(id_patient))
     if request.method == 'POST':
         form = DoctorSelectionForm(request.POST)
 
         if form.is_valid():
-            year, month = int(year), int(month)
-            id_doctor = form.cleaned_data['doctor']
+            profile = patient_user.get_profile()
+            profile.doctor = User.objects.get(pk=int(form.cleaned_data['doctor']))
+            profile.save()
 
-            return HttpResponseRedirect(reverse('cal.app_add_new_app_admin',
-                args=[int(year), int(month), int(day), int(id_doctor),
-                int(id_patient)]))
+            return HttpResponseRedirect(reverse('cal.scheduler',
+                args=[int(id_patient)]))
     else:
         form = DoctorSelectionForm()
 
     return render_to_response('cal/app/select_doctor.html', {'form': form,
-        'year': int(year), 'month': int(month), 'day': int(day),
-        'id_patient': int(id_patient)},
+        'patient_user': patient_user},
         context_instance=RequestContext(request))

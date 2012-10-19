@@ -61,7 +61,7 @@
 	{% endif %}
 {% endif %}
 
-{% if task.get_kind == 'Extenso' %}
+{% if dimensions and beck_scale and hamilton_scale %}
 <h3>PUNTUACIONES GLOBALES</h3>
 	<dl>
 		<dt>CUESTIONARIO DE DEPRESIÓN DE BECK 
@@ -71,12 +71,11 @@
 		<dt>ESCALA DE VALORACIÓN PSIQUIÁTRICA DE HAMILTON PARA LA ANSIEDAD
 			<div class="pull-right">{{hamilton_mark|floatformat}} puntos</div>
 		<dd>{{hamilton_scale|first}}</dd>
-		<dt>PUNTUACIÓN EN LA DIMENSIÓN COGNITIVA
-			<div class="pull-right">{{somatic_mark|floatformat}} / 10</div>
+		{% for name, value in dimensions.items %}
+		<dt>PUNTUACIÓN EN LA DIMENSIÓN {{name|upper}}
+			<div class="pull-right">{{value|floatformat}} / 10</div>
 		</dt>
-		<dt>PUNTUACIÓN EN LA DIMENSIÓN SOMÁTICA
-		    <div class="pull-right">{{cognitive_mark|floatformat}} / 10</div>
-		</dt>
+		{% endfor %}
 	</dl>
 {% endif %}
 
@@ -84,7 +83,7 @@
 <p>La puntuación del paciente en las diferentes variables integradas en las puntuaciones globales referidas son:</p>
 	<ul class="unstyled">
 		{% for var, value in marks.items %}
-		<li style="border-bottom: dotted 1px black; margin: 3px 0">{{var.name}}<div class="pull-right">{% if value and value >= 0 %}{{value|floatformat}}{% else %}&mdash;{% endif %}</div></li>
+		<li style="border-bottom: dotted 1px black; margin: 3px 0">{{var.name}}<div class="pull-right">{% if value >= 0 %}{{value|floatformat}}{% else %}&mdash;{% endif %}</div></li>
 		{% endfor %}
 	</ul>
 

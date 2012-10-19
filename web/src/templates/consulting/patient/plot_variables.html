@@ -1,0 +1,131 @@
+{% load l10n %}
+{% load i18n %}
+<div class="well center">
+	<div id="placeholder_variables" style="width:100%;height:300px;"></div>
+    <div id="tools" class="clearfix">
+        <button class="btn pull-left span4" id="setAll">Seleccionar todas</button>
+        <div class="btn-group dropup span4">
+                <a id="variables_selector" class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+                Variables
+                <span class="caret"></span>
+                </a>
+                <ul id="choices" class="dropdown-menu" style="max-height: 275px; overflow: hidden; overflow-y: auto;padding:10px; text-align: justify">
+                <!-- dropdown menu links -->
+                </ul>
+        </div>
+        <button class="btn pull-right span4" id="cleanAll">Limpiar todas</button>
+    </div>
+</div>
+    
+<div id="legend"></div>
+
+<section>
+    <legend>{% trans 'Valores' %}</legend>
+    <table class="table table-stripped table-bordered">
+        {% for label, marks in latest_marks.items %}
+        {% if forloop.counter0 = 0 %}
+        <thead>
+            <tr>
+                <th></th>
+                {% for date, mark in marks %}
+                <th>{{date|date:'d/m/y'}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>                
+            <tr>
+                <th>{{label}}</th>
+                {% for date, mark in marks %}
+                <td style="text-align:right">{{mark|floatformat:1}}</td>
+                {% endfor %}
+            </tr>
+        {% else %}
+            <tr>
+                <th>{{label}}</th>
+                {% for date, mark in marks %}
+                <td style="text-align:right">{{mark|floatformat:1}}</td>
+                {% endfor %}
+            </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+ </section>
+<script type="text/javascript">
+$(function () {
+    var datasets = {
+    	{% for label, marks in latest_marks.items %}
+        "{{label}}": {
+            label: "{{label|upper}}",
+            data: [{% for date, mark in marks %}{% if mark or mark = 0 %}[(Date.UTC({{date|date:'Y, m-1, j'}})),{{mark|unlocalize|floatformat:1}}],{% endif %}{% endfor %}]
+        },        
+       {% endfor %}
+    };
+
+    // hard-code color indices to prevent them from shifting as
+    // countries are turned on/off
+    var i = 0;
+    $.each(datasets, function(key, val) {
+        val.color = i;
+        ++i;
+    });
+    
+    // insert checkboxes 
+    var choiceContainer = $("#choices");
+    var legendContainer = $("#legend");
+    $.each(datasets, function(key, val) {
+        choiceContainer.append('<li><label class="checkbox"><input type="checkbox" name="' + key + '" value="'+  key +'">' + val.label + '</label><li>');
+    });
+    choiceContainer.find("input").click(plotAccordingToChoices);
+    $("#cleanAll").click(cleanAll);
+    $("#setAll").click(setAll);
+    
+    function cleanAll() {
+        choiceContainer.find("input").each(function () {
+            $(this).removeAttr("checked");
+        });
+        $("#placeholder_variables").html('');
+        $("#legend").html('');
+    }
+
+    function setAll() {
+        choiceContainer.find("input").each(function () {
+            $(this).attr("checked", true);
+        });
+        plotAccordingToChoices();
+    }
+
+    function plotAccordingToChoices() {
+        var data = [];
+
+        choiceContainer.find("input:checked").each(function () {
+            var key = $(this).attr("name");
+            if (key && datasets[key])
+                data.push(datasets[key]);
+        });
+
+        if (data.length > 0)
+            $.plot($("#placeholder_variables"), data, {
+            	lines: { show: true },
+            	points: { show: true },
+                yaxis: { min: 0, max: 5, ticks: 10, position: "right"},
+                xaxis: { mode: "time",  minTickSize: [1, "day"], min: (Date.UTC({{ticks|first|date:'Y, m-1, j'}})),
+                max: (Date.UTC({{ticks|last|date:'Y, m-1, j'}}))},
+                legend: { container: legendContainer, noColumns: 3 }
+            });
+    }
+
+    plotAccordingToChoices();
+
+    $('#variables_selector').popover({'title':'Aviso',
+                                      'content':'<p>Use el botón <strong>Variables</strong> para visualizar su evolución.</p>',
+                                      'placement':'top',
+                                      'trigger':'manual'});
+
+    $('#variables_selector').popover('show');
+    $('#variables_selector').on('click',function(){
+        $(this).popover('hide');
+    });
+    setInterval(function(){$('#variables_selector').popover('hide');},10000);
+});
+</script>

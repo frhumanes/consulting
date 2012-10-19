@@ -95,16 +95,16 @@
 	{% if task.get_organicity_list %}
 	y
 	{% endif %}
-	{% if medicaments_list %}
+	{% if treatment %}
 	se medica con
-		{% for med in medicaments_list %}
+		{% for med in treatment %}
 			{% if forloop.last and not forloop.first %}
-				 y {{med.component.name}} {{med.posology}} mg/24 horas desde hace {{med.months}} meses.
+				 y {{med.component.name}} {{med.posology}} mg/24 horas desde hace {{med.months}} mes{{med.months|pluralize:'es'}}.
 			{% else %}
 				{% if forloop.revcounter0 > 1 %}
-					{{med.component.name}} {{med.posology}} mg/24 horas desde hace {{med.months}} meses, 
+					{{med.component.name}} {{med.posology}} mg/24 horas desde hace {{med.months}} mes{{med.months|pluralize:'es'}}, 
 				{% else %}
-					{{med.component.name}} {{med.posology}} mg/24 horas desde hace {{med.months}} meses
+					{{med.component.name}} {{med.posology}} mg/24 horas desde hace {{med.months}} mes{{med.months|pluralize:'es'}}
 				{% endif %}
 			{% endif %}
 		
@@ -169,14 +169,34 @@
 
 {% include 'consulting/consultation/report/anxiety_depression.html' %}
 
+<section>
+	<dl>
+	    <dt>{% trans 'OBSERVACIONES' %}</dt>
+	    {% for c in conclusions %}
+	      {% if c.observation %}   
+	        <dd>{{c.observation}}</dd>
+	      {% endif %}
+	    {% endfor %}
+	    <dt>{% trans 'RECOMENDACIONES' %}</dt>
+	    {% for c in conclusions %}
+	      {% if c.recommendation %}
+	        <dd>{{c.recommendation}}</dd>
+	      {% endif %}
+	    {% endfor %}
+	 </dl>
+</section>
 
-<dl>
-	<dt>OBSERVACIONES</dt>
-	<dd>{{conclusion.observation}}</dd>
-	<dt>RECOMENDACIONES</dt>
-	<dd>{{conclusion.recommendation}}</dd>
-</dl>
-
-
+{% if treatment.count > 0 %}
+<section>
+	<dl>
+		<dt>{% trans 'TRATAMIENTO' %}</dt>
+		{% for m in treatment %}
+  		<dd>
+    		{{m.component}} [{{m.posology}} mg/día]
+  		</dd>
+	  	{% endfor %}
+	</dl>
+</section>
+{% endif %}
 
 {% endblock container %}

@@ -1,6 +1,8 @@
 {% load i18n%}
 {% load consulting %}
 
+{% if illness %}
+
 {% url consulting_list_incomplete_tasks appointment.id illness.code as incomplete_tasks %}
 {% url consulting_list_self_administered_tasks appointment.id illness.code as self_administered_tasks %}
 {% url consulting_select_successive_survey appointment.id illness.code as successive_tasks %}
@@ -9,6 +11,7 @@
 {% url consulting_show_prescription appointment.id illness.code as treatment %}
 {% url consulting_prev_treatment_block appointment.id illness.code as prev_treatment %}
 {% url consulting_set_conclusion appointment.id illness.code as conclusion %}
+{% url consulting_new_app appointment.id illness.code as scheduler %}
 
   <ul class="nav nav-pills nav-stacked bs-docs-sidenav">
       {% if not appointment.is_first_appointment %}
@@ -43,7 +46,7 @@
         <a href="{{treatment}}">{% trans 'PRESCRIBIR' %}</a>
       </li>
       <li>
-        <a href="">{% trans 'DAR CITA' %}</a>
+        <a href="{{scheduler}}">{% trans 'DAR CITA' %}</a>
       </li>
       {% if illness.code == 2 %}
       <li>
@@ -56,3 +59,5 @@
           </a>
       </li>                                                  
   </ul>
+
+  {% endif %}

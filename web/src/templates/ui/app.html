@@ -67,16 +67,20 @@
           {% block left %}
           <!--Left Sidebar content-->&nbsp;
           {% endblock left%}
-        </div>
+        </div>    
         <div id="main" class="span7">
           {% block container %}
            <!--Body content-->
           {% endblock container %}
         </div>
-        <div class="span3">
+        <div id="right_bar" class="span3">
           {% block right %}
           <!--Right Sidebar content-->
           {% endblock right %}
+        </div>
+        <div id="large" class="span10">
+          {% block large %}
+          {% endblock %} 
         </div>
       </div>
     </div>

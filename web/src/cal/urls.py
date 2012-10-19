@@ -11,23 +11,22 @@ from cal import views
 urlpatterns = patterns('',
     url(r'^cal_management/$', views.index, name='cal.index'),
 
-    url(r'^lookfor_patient/(\d+)/(\d+)/(\d+)/$', views.lookfor_patient,
-        name='cal.lookfor_patient'),
-    url(r'^lookfor_patient_app_list/$', direct_to_template,
-        {'template': 'cal/patient/patient_searcher.html'},
-        name='cal.lookfor_patient_app_list'),
+    url(r'^search_patient_for_(?P<action>(\w+))/$', views.lookfor_patient,
+        name='search_patient_for_action'),
+
+    url(r'^search_patient_for_(?P<action>(\w+))/(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/$', views.lookfor_patient,
+        name='search_patient_for_action_at'),
 
     url(r'^patient_searcher/$', views.patient_searcher,
         name='cal.patient_searcher'),
 
-    url(r'^check_patient/(\d+)/(\d+)/(\d+)/(\d+)/$', views.check_patient,
-        name='cal.check_patient'),
+    url(r'^schedule/(\d+)/$', views.scheduler,
+        name='cal.scheduler'),
 
-    url(r'^select_doctor/(\d+)/(\d+)/(\d+)/(\d+)/$', views.select_doctor,
+    url(r'^select_doctor/(\d+)/$', views.select_doctor,
         name='cal.select_doctor'),
 
-    url(r'^(\d+)/$', views.main),
-    url(r'^$', views.main),
+    url(r'^$', views.index),
 
     url(r'^select_month_year/(\d+)/$', views.select_month_year,
         name='cal.select_month_year'),
@@ -40,16 +39,16 @@ urlpatterns = patterns('',
         views.select_month_year_new_patient,
         name='cal.select_month_year_new_patient'),
 
-    url(r"^month/(\d+)/(\d+)/(prev|next)/$", views.month),
-    url(r"^month/(\d+)/(\d+)/$", views.month),
-    url(r"^month$", views.month),
 
-    url(r"^day/(\d+)/(\d+)/(\d+)/$", views.day, name='cal.day'),
+    url(r"^day/(\d+)/(\d+)/(\d+)/for/(\d+)/$", views.day, name='cal.day'),
     url(r"^day/consultation/(\d+)/(\d+)/(\d+)/$", views.day_consultation,
         name='cal.day_consultation'),
-    url(r"^day_new_app_admin/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/$",
-        views.day_new_app_admin, name='cal.day_new_app_admin'),
 
+    url(r"^widget/(?P<change>this|prev|next)/(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/for/(?P<id_user>\d+)/$",
+        views.calendar, name='calendar_widget'),
+
+    url(r"^month/(?P<change>this|prev|next)/(?P<year>\d+)/(?P<month>\d+)/$",
+        views.calendar_big, name='calendar_big'),
 
     # ---------
     # Slot Type
@@ -86,12 +85,10 @@ urlpatterns = patterns('',
     # -----------
     # Appointment
     # -----------
-    url(r'^app/add_new_app_admin/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/$',
-        views.app_add_new_app_admin, name='cal.app_add_new_app_admin'),
 
     url(r'^app/add/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/$', views.app_add,
         name='cal.add'),
-    url(r'^app/add/(\d+)/(\d+)/(\d+)/(\d+)/$', views.app_add, name='cal.add'),
+    url(r'^app/add/(\d+)/(\d+)/(\d+)/for/(\d+)/$', views.app_add, name='cal.add'),
 
     url(r'^app/edit/(\d+)/(\d+)/(\d+)/$', views.app_edit, name='cal.edit'),
     url(r'^app/edit/(\d+)/(\d+)/$', views.app_edit, name='cal.edit'),
@@ -107,20 +104,15 @@ urlpatterns = patterns('',
     # ------------
     # Doctor Views
     # ------------
-    url(r"^doctor/select/(\d+)/(\d+)/$", views.doctor_calendar),
+    url(r"^doctor/select/$", views.doctor_calendar, name='doctors_calendar'),
 
-    url(r"^doctor_new_app_admin/(\d+)/(\d+)/(\d+)/(\d+)/(prev|next)/$",
-        views.doctor_month_new_app_admin,
-        name='cal.doctor_month_new_app_admin'),
 
     url(r"^doctor/(\d+)/(\d+)/(\d+)/(prev|next)/$", views.doctor_month),
     url(r"^doctor/(\d+)/(\d+)/(\d+)/$", views.doctor_month),
     url(r"^doctor/(\d+)/(\d+)/$", views.doctor_month),
     url(r"^doctor/(\d+)/$", views.doctor_month),
 
-    url(r"^doctor/day/(\d+)/(\d+)/(\d+)/(\d+)/$", views.doctor_day),
-    url(r"^doctor/day_new_app_admin/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/$",
-        views.doctor_day_new_app_admin, name='cal.doctor_day_new_app_admin'),
+    url(r"^doctor/(\d+)/day/(\d+)/(\d+)/(\d+)/$", views.doctor_day),
 
     # --------
     # vacation

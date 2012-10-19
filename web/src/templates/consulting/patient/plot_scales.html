@@ -1,0 +1,72 @@
+{% load i18n %}
+
+<div class="well center">
+  <div id="placeholder_scales" style="width:100%;height:300px;"></div>
+</div>
+
+<section>
+  <legend>{% trans 'Valores' %}</legend>
+  <table class="table table-stripped table-bordered">
+      {% for label, marks in values.items %}
+      {% if forloop.counter0 = 0 %}
+      <thead>
+          <tr>
+              <th></th>
+              {% for date, mark in marks %}
+              <th>{{date|date:'d/m/y'}}</th>
+              {% endfor %}
+          </tr>
+      </thead>
+      <tbody>                
+          <tr>
+              <th>{{label}}</th>
+              {% for date, mark in marks %}
+              <td style="text-align:right">{{mark|floatformat:1}}</td>
+              {% endfor %}
+          </tr>
+      {% else %}
+          <tr>
+              <th>{{label}}</th>
+              {% for date, mark in marks %}
+              <td style="text-align:right">{{mark|floatformat:1}}</td>
+              {% endfor %}
+          </tr>
+      {% endif %}
+      {% endfor %}
+      </tbody>
+  </table>
+</section>
+  
+<script type="text/javascript">
+$(function () {
+    var data = [
+      {% for label, item in values.items %}
+       {
+            label: "{{label|upper}}",
+            yaxis: {{forloop.counter}},
+            data: [{% for date, val in item %}[(Date.UTC({{date|date:'Y, m-1, j'}})), {{val|floatformat:0}}],{% endfor %}]
+        },        
+       {% endfor %}
+    ];
+
+    // hard-code color indices to prevent them from shifting as
+    // countries are turned on/off
+    var i = 0;
+    $.each(data, function(val) {
+        val.color = i;
+        ++i;
+    });
+    
+  
+      $.plot($("#placeholder_scales"), data, {
+        lines: { show: true },
+        points: { show: true },
+        yaxes: [{ min: 0, position: "right"}, {min: 0, position:"left"}],
+        xaxis: { mode: "time", 
+                 minTickSize: [1, "day"], 
+                 min: (Date.UTC({{ticks|first|date:'Y, m-1, j'}})),
+                 max: (Date.UTC({{ticks|last|date:'Y, m-1, j'}}))
+               },
+      });
+  });
+</script>

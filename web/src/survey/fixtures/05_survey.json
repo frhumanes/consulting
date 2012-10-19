@@ -35,11 +35,11 @@
     "model": "survey.survey",
     "pk": 4,
     "fields": {
-      "name": "Adherencia al Trattamiento",
+      "name": "Adherencia al Tratamiento",
       "code": 8,
       "blocks": [8],
       "multitype": 0,
       "created_by": 1
     }
-  },
+  }
 ]

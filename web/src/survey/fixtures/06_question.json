@@ -22,17 +22,6 @@
     }
   }, 
   {
-    "pk": 11, 
-    "model": "survey.question", 
-    "fields": {
-      "text": "\u00bfHa padecido Ansiedad alguno de sus familiares?", 
-      "single": false, 
-      "code": "AF1", 
-      "kind": 0, 
-      "required": true
-    }
-  }, 
-  {
     "pk": 12, 
     "model": "survey.question", 
     "fields": {
@@ -1774,9 +1763,9 @@
     "pk": 171, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfEn qu\u00e9 grado ha seguido el paciente las recomendaciones y/o tratamiento indicados?", 
-      "single": true, 
-      "code": "ADT", 
+      "text": "\u00bfHa padecido Ansiedad alguno de sus familiares?", 
+      "single": false, 
+      "code": "AF1", 
       "kind": 0, 
       "required": true
     }
@@ -1909,6 +1898,17 @@
       "text": "\u00bfHa padecido Otros Trastornos psiqui\u00e1tricos alguno de sus familiares?", 
       "single": false, 
       "code": "AF13", 
+      "kind": 0, 
+      "required": true
+    }
+  },
+  {
+    "pk": 184, 
+    "model": "survey.question", 
+    "fields": {
+      "text": "\u00bfEn qu\u00e9 grado ha seguido el paciente las recomendaciones y/o tratamiento indicados?", 
+      "single": true, 
+      "code": "ADT", 
       "kind": 0, 
       "required": true
     }

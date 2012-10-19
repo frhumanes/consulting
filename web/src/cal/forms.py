@@ -19,7 +19,10 @@ import cal.settings as cal_settings
 class VacationForm(forms.ModelForm):
     date = forms.DateField(input_formats=(settings.DATE_FORMAT,),
         widget=forms.DateInput(format=settings.DATE_FORMAT,
-            attrs={'class': 'span9'}))
+            attrs={'class': 'span9'}),required=True)
+    end_date = forms.DateField(input_formats=(settings.DATE_FORMAT,),
+        widget=forms.DateInput(format=settings.DATE_FORMAT,
+            attrs={'class': 'span9'}),required=False)
 
     description = forms.CharField(widget=forms.Textarea(attrs={'cols': 60,
         'rows': 4, 'class': 'span9'}), required=False)

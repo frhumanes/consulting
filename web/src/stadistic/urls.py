@@ -1,3 +1,17 @@
+# -*- encoding: utf-8 -*-
 from django.conf.urls.defaults import *
 
-# place app url patterns here
+from stadistic import views 
+
+
+urlpatterns = patterns('',
+# STATISTIC: DOCTOR ROLE
+    url(r'^stratification/$', views.stratification,
+        name='stratification_statistic'),
+
+    url(r'^explotation/$', views.explotation,
+        name='explotation_statistic'),
+
+    url(r'^rebuild_data/$', views.regenerate_data,
+        name='rebuild_data'),
+)

@@ -29,7 +29,7 @@
                     href={% if request.user.get_profile.is_doctor %}
                             "{% url cal.views.day year month.n today %}"
                          {% else %}
-                            "{% url cal.views.doctor_calendar year month.n %}"
+                            "{% url cal.views.doctor_calendar %}"
                          {% endif %}>{{ month.name }}</a>
                     {% if request.user.get_profile.is_doctor %}
                         <a href="{% url cal.list_slot year month.n %}"><i class="icon-cog"></i></a>

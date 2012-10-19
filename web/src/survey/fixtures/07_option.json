@@ -85,7 +85,7 @@
     "fields": {
       "text": "Madre", 
       "code": "AF1.1", 
-      "question": 11, 
+      "question": 171, 
       "weight": null
     }
   }, 
@@ -95,7 +95,7 @@
     "fields": {
       "text": "Padre", 
       "code": "AF1.2", 
-      "question": 11, 
+      "question": 171, 
       "weight": null
     }
   }, 
@@ -105,7 +105,7 @@
     "fields": {
       "text": "Hermano/a", 
       "code": "AF1.3", 
-      "question": 11, 
+      "question": 171, 
       "weight": null
     }
   }, 
@@ -115,7 +115,7 @@
     "fields": {
       "text": "Hijo/a", 
       "code": "AF1.4", 
-      "question": 11, 
+      "question": 171, 
       "weight": null
     }
   }, 
@@ -125,7 +125,7 @@
     "fields": {
       "text": "Otros", 
       "code": "AF1.5", 
-      "question": 11, 
+      "question": 171, 
       "weight": null
     }
   }, 
@@ -135,7 +135,7 @@
     "fields": {
       "text": "Ninguno", 
       "code": "AF1.6", 
-      "question": 11, 
+      "question": 171, 
       "weight": null
     }
   }, 
@@ -2163,7 +2163,7 @@
     "pk": 217, 
     "model": "survey.option", 
     "fields": {
-      "text": "Repentino y serio deterioro de la udici\u00f3n y/o visi\u00f3n", 
+      "text": "Repentino y serio deterioro de la audici\u00f3n y/o de la visi\u00f3n", 
       "code": "AVE61", 
       "question": 23, 
       "weight": "81"
@@ -8925,7 +8925,7 @@
     "fields": {
       "text": "0", 
       "code": "ADT.0", 
-      "question": 171, 
+      "question": 184, 
       "weight": "0"
     }
   }, 
@@ -8935,7 +8935,7 @@
     "fields": {
       "text": "1", 
       "code": "ADT.1", 
-      "question": 171, 
+      "question": 184, 
       "weight": "1"
     }
   }, 
@@ -8945,7 +8945,7 @@
     "fields": {
       "text": "2", 
       "code": "ADT.2", 
-      "question": 171, 
+      "question": 184, 
       "weight": "2"
     }
   }, 
@@ -8955,7 +8955,7 @@
     "fields": {
       "text": "3", 
       "code": "ADT.3", 
-      "question": 171, 
+      "question": 184, 
       "weight": "3"
     }
   }, 
@@ -8965,7 +8965,7 @@
     "fields": {
       "text": "4", 
       "code": "ADT.4", 
-      "question": 171, 
+      "question": 184, 
       "weight": "4"
     }
   }, 
