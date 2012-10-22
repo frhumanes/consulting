@@ -46,17 +46,24 @@ $('#right_bar').remove();
 </div>
  <section>
     <div class="row-fluid">
-      <div class="span5" id="a">
-          <h2><small>Ansiedad</small></h2>
-          <div id="pyramid_anxiety"></div>
-          <hr>
+      <div style="min-width:400px; float:left" id="a">
+        <h2><small>Ansiedad</small></h2>
+        <div id="pyramid_anxiety" style="width: 400px; height:300px"></div>
       </div>
-      <div class="span5" id="d">
+      <div style="min-width:400px; float:left" id="d">
         <h2><small>Depresión</small></h2>
-            <div id="pyramid_depression"></div>
-          <hr>
+        <div id="pyramid_depression" style="width: 400px; height:300px"></div>
+      </div>
+      <div class="span2 center well">
+        <legend>Escala</legend>
+        <p><span class="label label-inverse">Muy grave</span></p>
+        <p><span class="label label-important">&nbsp;&nbsp;&nbsp;&nbsp;Grave&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+        <p><span class="label label-warning">Moderado</span></p>
+        <p><span class="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Leve&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+        <p><span class="label label-info">&nbsp;Muy leve&nbsp;</span></p>
       </div>
     </div>
+   
   </section>
 {% endblock %}
 

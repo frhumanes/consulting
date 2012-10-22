@@ -14,7 +14,7 @@ def generate_reports(full=False):
         report.created_by = task.created_by
         report.patient = task.patient.get_profile()
         report.variables = { k.name: v for k, v in task.get_variables_mark().items()}
-        report.dimensions = task.get_dimensions_mark(report.variables)
+        report.dimensions = task.get_dimensions_mark()
         report.status={u'Depresión': task.get_depression_status()[0],
                        u'Anxiedad': task.get_anxiety_status()[0]
                       }

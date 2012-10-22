@@ -2041,6 +2041,7 @@ def get_medicines(request, filter_option, id_patient):
 
     if id_patient:
         patient_user = User.objects.get(pk=int(id_patient))
+        appointment = Appointment.objects.get(pk=request.session['appointment_id'])
     else:
         patient_user_id = request.session['patient_user_id']
         patient_user = User.objects.get(id=patient_user_id)
@@ -2063,6 +2064,7 @@ def get_medicines(request, filter_option, id_patient):
                             'medicines': medicines.order_by('-created_at'),
                             'patient_user': patient_user,
                             'filter_option': filter_option,
+                            'appointment': appointment,
                             'template_name': template_name,
                             'csrf_token': get_token(request)})
     return template_data
@@ -2074,6 +2076,7 @@ def list_medicines(request, id_appointment=None, code_illness=None):
 
     if id_appointment and code_illness:
         appointment = Appointment.objects.get(pk=int(id_appointment))
+        request.session['appointment_id'] = appointment.id
         patient_user = appointment.patient
         illness = Illness.objects.get(code=int(code_illness))
     else:

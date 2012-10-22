@@ -32,12 +32,7 @@ urlpatterns = patterns('',
         name='cal.select_month_year'),
     url(r'^select_month_year/$', views.select_month_year,
         name='cal.select_month_year'),
-    url(r'^select_month_year_new_patient/(\d+)/(\d+)/$',
-        views.select_month_year_new_patient,
-        name='cal.select_month_year_new_patient'),
-    url(r'^select_month_year_new_patient/(\d+)/$',
-        views.select_month_year_new_patient,
-        name='cal.select_month_year_new_patient'),
+
 
 
     url(r"^day/(\d+)/(\d+)/(\d+)/for/(\d+)/$", views.day, name='cal.day'),

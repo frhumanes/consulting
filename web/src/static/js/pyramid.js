@@ -43,8 +43,8 @@
         svgns = 'http://www.w3.org/2000/svg',
         template =  ''+
                        ' <svg id="svg_root"'+
-                            'width="500" height="500"'+
-                            'viewBox="-800 0 2000 500"'+
+                            'width="360" height="360"'+
+                            'viewBox="0 0 400 400"'+
                             'preserveAspectRatio="xMidYMid slice"'+
                             'xmlns="' +svgns+ '" version="1.1">'+
                         '</svg>'+
