@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 import time
 import operator
+import xlwt
+import cStringIO
 from datetime import time as ttime
 from datetime import date, timedelta, datetime
 
@@ -915,12 +917,12 @@ def show_block(request, id_task, code_block=None, code_illness=None, id_appointm
         last_result = None
         try: 
             last_result =  task.task_results.filter(block=block).latest('date')
-            selected_options = last_result.options.all()
+            selected_options = Answer.objects.filter(result=last_result)
         except:
             if code_block == str(settings.PRECEDENT_RISK_FACTOR):
                 try:
                     last_result =  Result.objects.filter(block=block,patient=task.patient).latest('date')
-                    selected_options = last_result.options.all()
+                    selected_options = Answer.objects.filter(result=last_result)
                 except:
                     selected_options = []
             else:
@@ -2313,7 +2315,7 @@ def list_recommendations(request):
 
 @login_required()
 @only_doctor_consulting
-def user_evolution(request):
+def user_evolution(request, return_xls=False):
     logged_user_profile = request.user.get_profile()
 
     patient_user_id = request.session['patient_user_id']
@@ -2362,16 +2364,44 @@ def user_evolution(request):
     tasks = Task.objects.filter(Q(patient=patient_user,survey__id__in=[settings.ADHERENCE_TREATMENT], completed=True),date_filter).order_by('-end_date')[:limit]
     values = {}
     tticks = []
-    mindate = maxdate = datetime.now()
     for t in tasks:
-        mindate = t.end_date < mindate and t.end_date or mindate
-        maxdate = t.end_date > maxdate and t.end_date or maxdate
         for a in t.get_answers():
             if a.question.code in values:
                 values[a.question.code].append((t.end_date, a.weight))
             else:
                 values[a.question.code] =[(t.end_date, a.weight),]
-        tticks = [mindate, maxdate]
+            if not t.end_date in tticks:
+                tticks.append(t.end_date)
+    tticks.sort()
+
+    if request.GET.get('as', '') == 'xls':
+        sheets = [('Variables', latest_marks),
+                  ('Dimensiones', latest_dimensions),
+                  ('Escalas', scales),
+                  ('Adherencia al tratamiento', values)]
+        style_head = xlwt.easyxf('font: name Times New Roman, color-index black, bold on')
+        style_value = xlwt.easyxf('font: name Times New Roman, color-index blue', num_format_str='#,##0.00')
+        style_date = xlwt.easyxf(num_format_str='DD-MM-YYYY')
+
+        wb = xlwt.Workbook(encoding='utf-8')
+        for s, d in sheets:
+            ws = wb.add_sheet(s)
+            r, c = 1, 0
+            for name, lst in d.items():
+                ws.write(r, c , name, style_head)
+                for date, val in lst: 
+                    c += 1
+                    ws.write(r, c, val, style_value)
+                    if r == 1:
+                        ws.write(0, c, date, style_date)
+                c = 0
+                r += 1
+        tmp_io = cStringIO.StringIO()
+        wb.save(tmp_io)
+        response = HttpResponse(tmp_io.getvalue(), content_type='application/vnd.ms-excel')
+        tmp_io.close()
+        response['Content-Disposition'] = 'attachment; filename="%s.xls"' % (patient_user.username)
+        return response
 
 
     return render_to_response('consulting/patient/user_evolution.html', 

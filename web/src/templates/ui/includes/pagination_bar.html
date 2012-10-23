@@ -1,0 +1,26 @@
+{% load i18n %}
+
+<div class="row-fluid">
+  {% if objects.paginator.num_pages > 1 %}
+  <div id="message-paginator" class="pagination pagination-centered span8">
+    <ul>
+      {% if objects.has_previous %}
+        <li><a href="?page={{ objects.previous_page_number }}">←</a></li>
+      {% else %}
+        <li class="disabled"><a>←</a></li>
+      {% endif %}
+      {% for p in objects.paginator.page_range %}
+       <li {% if p = objects.number %}class="disabled"{% endif %}><a href="?page={{p}}">{{p}}</a></li>
+      {% endfor %}
+      {% if objects.has_next %}
+        <li><a href="?page={{ objects.next_page_number }}">→</a></li>
+      {% else %}
+        <li class="disabled"><a>→</a></li>
+      {% endif %}
+    </ul>
+  </div>
+  {% endif %}
+  <div class="pull-right span4">
+      <p class="pull-right">{% trans 'Elementos mostrados' %}: <em>{{objects.start_index}} -  {{objects.end_index}} {% trans 'de' %} {{objects.paginator.count}}</em></p>
+  </div>
+</div>

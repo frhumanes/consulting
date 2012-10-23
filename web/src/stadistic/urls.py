@@ -9,6 +9,9 @@ urlpatterns = patterns('',
     url(r'^stratification/$', views.stratification,
         name='stratification_statistic'),
 
+    url(r'^stratification/list_(\w+)/(\d+)/$', views.stratification_list,
+        name='stratification_list'),
+
     url(r'^explotation/$', views.explotation,
         name='explotation_statistic'),
 

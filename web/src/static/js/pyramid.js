@@ -114,7 +114,7 @@
         for(var i=1; i<this.slices - 1; i++){
             //var coords = [points[i][2], points[i][3], points[i + 1][1], points[i + 1][0]]
             var coords = [points[i][2], points[i][3], points[i + 1][1], points[i + 1][0]]
-            this.createPolygon(coords, this.text[i], this.colours[i], i);
+            this.createPolygon(coords, this.text[i], this.colours[i], i + 1);
         }
 
         //create top slice

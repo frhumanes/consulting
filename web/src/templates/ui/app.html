@@ -24,11 +24,21 @@
     {% endblock %}
 
     <script type="text/javascript">
+      function fix_bars(){
+        if ($(window).width() >= 1024) {
+          $("div.fixable").affix();
+        }
+        else {
+          $("div.fixable").removeAttr('data-spy');
+        }
+      };
       {% block js %}
       {% endblock %}
 
       $(document).ready(function(){
         $("#notes").editable();
+        $(window).resize(fix_bars);
+        fix_bars();
         {% block jquery_init %}
         {% endblock %}
       })
@@ -63,10 +73,12 @@
     {% block body %}
     <div class="container">
       <div class="row-fluid">
-        <div class="span2">
+        <div id="left_bar" class="span2">
+          <div class="fixable" style="max-width:180px">
           {% block left %}
           <!--Left Sidebar content-->&nbsp;
           {% endblock left%}
+          </div>
         </div>    
         <div id="main" class="span7">
           {% block container %}
@@ -74,9 +86,11 @@
           {% endblock container %}
         </div>
         <div id="right_bar" class="span3">
+          <div class="fixable" style="max-width:270px">
           {% block right %}
           <!--Right Sidebar content-->
           {% endblock right %}
+          </div>
         </div>
         <div id="large" class="span10">
           {% block large %}

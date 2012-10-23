@@ -165,6 +165,8 @@ function refresh(data) {
       .attr("x", function(d) { return innerMargin - total(d.barData2) - 2 * labelSpace; });
 }
   $('#reload_button').live('click',function(){
+      $(this).html('<img src="{{STATIC_URL}}/img/loading.gif" />Actualizando...');  
+      $(this).addClass('disabled');
       $(this).load('{% url rebuild_data %}', function(){
         location.reload();
     });

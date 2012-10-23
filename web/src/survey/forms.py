@@ -138,20 +138,20 @@ class QuestionsForm(forms.Form):
                 question = get_object_or_404(Question, pk=int(k))
                 values = dic[k]
                 if question.single:
-                    initial_option = ''
+                    initial_option, initial_value = '', ''
                     for v in values:
                         id_option = v[0]
                         if selected_options:
-                            if selected_options.filter(id=id_option):
+                            if selected_options.filter(option__id=id_option):
                                 initial_option = id_option
-                    values.insert(0,(u'options',[]))
+                                initial_value = selected_options.get(option__id=id_option).value
                     values.insert(0,('',u'Marque una opción'))
                     if question.code.startswith('DS'):
                         self.fields[question.code] = forms.ChoiceField(
                             label=question.text,
                             widget=forms.Select(attrs={'class': 'span6'}), choices=values,
                             required=False, initial=initial_option)
-                        self.fields[question.code+'_value'] = forms.CharField(label="DS", required=False, widget=forms.TextInput(attrs={'class': 'span2'}))
+                        self.fields[question.code+'_value'] = forms.CharField(label="DS", required=False, widget=forms.TextInput(attrs={'class': 'span2'}),initial=initial_value)
                     else:
                         self.fields[question.code] = forms.ChoiceField(
                             label=question.text,
@@ -163,7 +163,7 @@ class QuestionsForm(forms.Form):
                     for v in values:
                         id_option = v[0]
                         if selected_options:
-                            if selected_options.filter(id=id_option):
+                            if selected_options.filter(option__id=id_option):
                                 initial_options.append(id_option)
                     self.fields[question.code] = forms.MultipleChoiceField(
                             label=question.text,

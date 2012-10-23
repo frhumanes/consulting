@@ -96,12 +96,12 @@
             {% for day, entries, current, vacations, events in week %}
                 {% if day != 0 %}
                     <td style="text-align: left; {{current|yesno:'background-color:#eeeeee;border: 1px solid #000000,'}}; cursor:pointer">
+                    {% if request.user.get_profile.is_doctor %}
+                        {% url 'cal.views.day' year month day request.user.id as target %}
+                    {% else %}
+                        {% url 'cal.views.day' year month day doctor.id as target %}
+                    {% endif %}
                     {% if forloop.counter < 6 %}
-                        {% if request.user.get_profile.is_doctor %}
-                            {% url 'cal.views.day' year month day request.user.id as target %}
-                        {% else %}
-                            {% url 'cal.views.day' year month day doctor.id as target %}
-                        {% endif %}
                         <div>
                             {% if request.user.get_profile.is_doctor %}
                             <a href="{{target}}" onMouseOver="this.className = 'label';" onMouseOut="this.className = '';">
@@ -127,7 +127,13 @@
                         </div>
                     {% else %}
                         <div>
-                            <span class="text-error">{{day}}</span>
+                            {% if request.user.get_profile.is_doctor %}
+                            <a href="{{target}}" onMouseOver="this.className = 'label';" onMouseOut="this.className = '';">
+                                <span class="text-error">{{day}}</span>
+                            </a>
+                            {% else %}
+                                <span class="text-error">{{day}}</span>
+                            {% endif %}
                         </diV>
                         <div id="events_list" style="min-height:50px"></div>
                     {% endif %}

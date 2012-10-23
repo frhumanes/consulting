@@ -20,7 +20,10 @@ $('#right_bar').remove();
     'colours': ['#999999', '#F89406', '#B94A48', '#202020'],
     'text': [{% for l in anxiety_list %}'{{l|length}} ({% widthratio l|length num_patient 100 %}%)',{% endfor %}]
  })
- .on('click', function(event){ alert(event.id) });
+ .on('click', function(event){ 
+    url = '{% url stratification_list 'anxiety' 0 %}';
+    $('#modal_patient .modal-body').load(url.replace('0', event.id),'',$('#modal_patient').modal('show'));
+  });
 
   $('#pyramid_depression').Pyramid({
     'height': 300,
@@ -31,7 +34,10 @@ $('#right_bar').remove();
     'colours': ['#0088CC', '#999999', '#F89406', '#B94A48', '#202020'],
     'text': [{% for l in depression_list %}'{{l|length}} ({% widthratio l|length num_patient 100 %}%)',{% endfor %}]
  })
- .on('click', function(event){ alert(event.id) });
+ .on('click', function(event){
+    url = '{% url stratification_list 'depression' 0 %}';
+    $('#modal_patient .modal-body').load(url.replace('0', event.id),'',$('#modal_patient').modal('show'));
+});
 
 {% endblock %}
 
@@ -65,6 +71,18 @@ $('#right_bar').remove();
     </div>
    
   </section>
+
+<div id="modal_patient" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>{% trans 'Pacientes' %}</h3>
+  </div>
+  <div class="modal-body">
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary" data-dismiss="modal">{% trans 'Cerrar' %}</a>
+  </div>
+</div>
 {% endblock %}
 
 
