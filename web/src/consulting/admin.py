@@ -43,12 +43,11 @@ admin.site.register(Result, ResultAdmin)
 
 
 class ConclusionAdmin(admin.ModelAdmin):
-    fieldsets = [('Conclusions', {'fields': ['patient',
-                'appointment', 'observation', 'recommendation']})]
-    list_display = ('patient', 'appointment', 'observation',
+    fieldsets = [('Conclusions', {'fields': ['appointment', 'observation', 'recommendation']})]
+    list_display = ('appointment', 'observation',
                     'recommendation', 'date')
-    search_fields = ('patient', 'appointment', 'observation',
+    search_fields = ('appointment', 'observation',
                     'recommendation', 'date')
-    ordering = ('patient',)
+    ordering = ('appointment',)
 
 admin.site.register(Conclusion, ConclusionAdmin)

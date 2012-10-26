@@ -22,8 +22,8 @@ def stratification(request):
     ans_list = [[] for i in range(len(settings.HAMILTON.keys()), 1, -1)]
 
     for p in Profile.objects.all():
-        ans = p.get_anxiety_status(True)
-        dep = p.get_depression_status(True)
+        ans = p.get_anxiety_status(index=True)
+        dep = p.get_depression_status(index=True)
         if ans:
             ans_list[ans-1].append(p)
         if dep:

@@ -43,6 +43,7 @@ $(function () {
       {% for label, item in latest_dimensions.items %}
        {
             label: "{{label|upper}}",
+            yaxis: {% if forloop.counter|divisibleby:2 %}2{% else %}1{% endif %},
             data: [{% for date, val in item %}[(Date.UTC({{date|date:'Y, m-1, j'}})), {{val|floatformat:0}}],{% endfor %}]
         },        
        {% endfor %}
@@ -60,7 +61,8 @@ $(function () {
       $.plot($("#placeholder_dimensions"), data, {
         lines: { show: true },
         points: { show: true },
-        yaxis: { min: 0, max: 10, ticks: 20, position: "right"},
+        yaxes: [{ min: 0, max: 10, ticks: 10, position: "right"},
+                { min: 0, max: 10, ticks: 10, position: "left"}],
         xaxis: { mode: "time", 
                  minTickSize: [1, "day"], 
                  min: (Date.UTC({{ticks|first|date:'Y, m-1, j'}})),

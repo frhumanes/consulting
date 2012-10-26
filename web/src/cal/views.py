@@ -106,7 +106,7 @@ def select_month_year(request, year=None):
         mlst = []
         for n, month in enumerate(mnames):
             slot = current = False
-            slots = Slot.objects.filter(date__year=y, date__month=n + 1)
+            slots = Slot.objects.filter(year=y, month=n)
 
             if slots:
                 slot = True
@@ -141,11 +141,11 @@ def scheduler(request, id_patient, year=None):
         mlst = []
         for n, month in enumerate(mnames):
             slot = current = False
-            slots = Slot.objects.filter(date__year=y, date__month=n + 1)
+            slots = Slot.objects.filter(year=y, month=n)
 
             if slots:
                 slot = True
-            if y == nowy and n + 1 == nowm:
+            if y == nowy and n + 1== nowm:
                 current = True
             mlst.append(dict(n=n + 1, name=month, slot=slot,
                 current=current))
@@ -189,7 +189,7 @@ def month(request, year, month, change=None):
 @login_required
 @paginate(template_name='cal/doctor/list.html', list_name='events',
     objects_per_page=settings.OBJECTS_PER_PAGE)
-def day(request, year, month, day, id_user):
+def day(request, year, month, day, id_user, change=None):
     user = User.objects.get(pk=int(id_user))
     if user.get_profile().is_doctor():
         doctor = user
@@ -197,6 +197,18 @@ def day(request, year, month, day, id_user):
     else:
         doctor = user.get_profile().doctor
         patient = user
+
+    if change in ("next", "prev"):
+        now, mdelta = date(int(year), int(month), int(day)), timedelta(days=1)
+
+        if change == "next":
+            mod = mdelta
+
+        elif change == "prev":
+            mod = -mdelta
+
+        year, month, day= (now + mod).timetuple()[:3]
+
     events = Appointment.objects.filter(date__year=year, date__month=month,
             date__day=day, doctor=doctor).order_by('start_time')
     vacations = check_vacations(doctor, year, month, day)
@@ -255,7 +267,7 @@ def calendar(request, year, month, day, id_user, change='this'):
 
 
 @login_required
-def calendar_big(request, year, month, change='this'):
+def calendar_big(request, year, month, change='this', id_doctor=None):
 
     if change in ("next", "prev"):
         now, mdelta = date(int(year), int(month), 15), timedelta(days=31)
@@ -268,15 +280,21 @@ def calendar_big(request, year, month, change='this'):
 
         year, month = (now + mod).timetuple()[:2]
 
+    if id_doctor:
+        doctor = User.objects.get(pk=int(id_doctor))
+        lst = create_calendar(int(year), int(month), doctor=doctor)
+    else:
+        doctor = None
+        lst = create_calendar(int(year), int(month), doctor=request.user)
 
-    user = request.user
-    doctor = user
-    lst = create_calendar(int(year), int(month), doctor=doctor)
+    doctors = Profile.objects.filter(role=settings.DOCTOR).order_by('first_surname', 'second_surname','name')
+
+    form = DoctorSelectionForm()
 
     return render_to_response('cal/includes/calendar_big.html', 
-                                dict(year=year, month=month,
+                                dict(year=year, month=month, doctors=doctors,
                                  doctor=doctor, month_days=lst, 
-                                 mname=mnames[int(month) - 1]),
+                                 mname=mnames[int(month) - 1], form = form),
         context_instance=RequestContext(request))
 
 
@@ -706,55 +724,66 @@ def delete_slot_type(request):
 
 @login_required
 @only_doctor
-def list_slot(request, year, month):
-    slots = Slot.objects \
-        .filter(creator=request.user, date__year=year, date__month=month)
+def list_slot(request, year=None):
+    if not year:
+        year = time.localtime()[0]
+    slots = Slot.objects.filter(creator=request.user, year=int(year))
 
     return render_to_response('cal/slot/list.html',
-        dict(slots=slots, year=int(year), month=int(month)),
+        dict(slots=slots, year=int(year)),
         context_instance=RequestContext(request))
 
 
 @login_required
 @only_doctor
-def add_slot(request, year, month):
+def add_slot(request, year, month=1):
     if request.method == 'POST':
         start_time = request.POST.get('start_time', None)
+        end_time = request.POST.get('end_time', None)
         id_slot_type = request.POST.get('slot_type', None)
+        months = request.POST.getlist('months')
+        weekdays = request.POST.getlist('weekdays')
 
         request_params = dict([k, v] for k, v in request.POST.items())
         request_params.update({
-                'creator': request.user.id,
-                'created_by': request.user.id,
-                'date': datetime(int(year), int(month), 1)
+            'months': months,
+            'weekdays': weekdays,
             })
+        slot_type = get_object_or_404(SlotType, pk=int(id_slot_type))
 
-        if id_slot_type and start_time:
-            slot_type = get_object_or_404(SlotType, pk=int(id_slot_type))
+        if id_slot_type and start_time and not end_time:
+            st = time.strptime(start_time, '%H:%M')
+            end_time = add_minutes(st, slot_type.duration)
 
-            start_time = time.strptime(start_time, '%H:%M')
-            end_time = add_minutes(start_time, slot_type.duration)
-
-            request_params.update({
-                'end_time': end_time,
-                'duration': slot_type.duration
-            })
+            
 
         form = SlotForm(request_params, user=request.user)
 
         if form.is_valid():
-            form.save()
+            for m in months:
+                for d in weekdays:
+                    s = Slot()
+                    s.weekday = d
+                    s.month = m
+                    s.year = int(year)
+                    s.start_time = start_time
+                    s.end_time = end_time
+                    s.creator = request.user
+                    s.created_by = request.user
+                    s.description = form.cleaned_data['description']
+                    s.slot_type = slot_type
+                    s.save()
             return redirect(reverse("cal.list_slot", args=(int(year),
-                int(month))))
+                )))
         else:
             return render_to_response('cal/slot/add.html',
-                {'form': form, 'year': year, 'month': month},
+                {'form': form, 'year': year,},
                 context_instance=RequestContext(request))
     else:
         form = SlotForm(user=request.user)
 
     return render_to_response('cal/slot/add.html', {'form': form,
-        'year': year, 'month': month},
+        'year': year,},
         context_instance=RequestContext(request))
 
 
@@ -765,43 +794,48 @@ def edit_slot(request, pk):
 
     if request.method == 'POST':
         start_time = request.POST.get('start_time', None)
+        end_time = request.POST.get('end_time', None)
         id_slot_type = request.POST.get('slot_type', None)
+        months = request.POST.get('months')
+        weekdays = request.POST.get('weekdays')
 
         request_params = dict([k, v] for k, v in request.POST.items())
         request_params.update({
-                'creator': request.user.id,
-                'created_by': request.user.id,
-                'date': slot.date
+            'months': months,
+            'weekdays': weekdays,
             })
+        slot_type = get_object_or_404(SlotType, pk=int(id_slot_type))
 
-        if id_slot_type and start_time:
-            event_type = get_object_or_404(SlotType, pk=int(id_slot_type))
+        if id_slot_type and start_time and not end_time:
+            st = time.strptime(start_time, '%H:%M')
+            end_time = add_minutes(st, slot_type.duration)
 
-            start_time = time.strptime(start_time, '%H:%M')
-            end_time = add_minutes(start_time, event_type.duration)
-
-            request_params.update({
-                'end_time': end_time,
-                'duration': event_type.duration
-            })
-
-        form = SlotForm(request_params, instance=slot, user=request.user)
+        form = SlotForm(request_params, user=request.user, slot=slot)
 
         if form.is_valid():
-            form.save()
-            return redirect(reverse("cal.list_slot", args=(slot.date.year,
-                slot.date.month)))
+            s = slot
+            s.weekday = weekdays
+            s.month = months
+            s.start_time = start_time
+            s.end_time = end_time
+            s.creator = request.user
+            s.created_by = request.user
+            s.description = form.cleaned_data['description']
+            s.slot_type = slot_type
+            s.save()
+            return redirect(reverse("cal.list_slot", args=(slot.year,
+                )))
         else:
             return render_to_response('cal/slot/edit.html',
                 {"form": form, 'slot': slot,
-                 'year': slot.date.year, 'month': slot.date.month},
+                 'year': slot.year, 'month': slot.month},
                 context_instance=RequestContext(request))
     else:
-        form = SlotForm(instance=slot, user=request.user)
+        form = SlotForm( dict(weekdays=[slot.weekday], months=[slot.month], start_time=slot.start_time, end_time=slot.end_time, slot_type=slot.slot_type), user=request.user, slot=slot)
 
     return render_to_response('cal/slot/edit.html',
-        {"form": form, 'slot': slot, 'year': slot.date.year,
-         'month': slot.date.month},
+        {"form": form, 'slot': slot, 'year': slot.year,
+         'month': slot.month},
         context_instance=RequestContext(request))
 
 
@@ -809,9 +843,9 @@ def edit_slot(request, pk):
 @only_doctor
 def delete_slot(request, pk):
     slot = get_object_or_404(Slot, pk=int(pk))
+    year = int(slot.year)
     slot.delete()
-    return redirect(reverse("cal.list_slot", args=(slot.date.year,
-        slot.date.month)))
+    return redirect(reverse("cal.list_slot", args=(year,)))
 
 
 @login_required
@@ -1186,7 +1220,7 @@ def patient_searcher(request):
                     'completed_names':
                     [{'id': user.id,
                     'label':
-                    (user.first_name + ' ' + user.last_name)}for user in users]
+                    (user.get_profile().get_full_name())}for user in users]
                     }
         return HttpResponse(simplejson.dumps(data))
     return HttpResponseRedirect(reverse('consulting_index'))

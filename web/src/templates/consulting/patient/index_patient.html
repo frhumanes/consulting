@@ -28,11 +28,13 @@
 			<dd>
 				<table class="table table-striped table-condensed">
 				{% for m in patient_user.get_treatment %}
+					{% if not m.is_previous %}
 					<tr>
 						<td>{{m.component}}</td>
 						<td style="text-align:right">{{m.posology}}</td>
 						<td>{% trans 'mg/día' %}</td>
 					</tr>
+					{% endif %}
 				{% endfor %}
 				</table>
 			</dd>

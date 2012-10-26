@@ -2,7 +2,13 @@
 
  <script type="text/javascript">
         function next(){
-             {% if patient_user %}
+            var loader = '<img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />';
+            var width = $('#current').width();
+            $('#current').html(loader);
+            $('#current').width(width);
+            $('#calendar').fadeTo(500, 0.25);
+
+            {% if patient_user %}
             $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=patient_user.id change='next' %}');
             {% else %}
             $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=doctor.id change='next' %}');
@@ -10,6 +16,11 @@
         }
 
         function prev(){
+            var loader = '<img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />';
+            var width = $('#current').width();
+            $('#current').html(loader);
+            $('#current').width(width);
+            $('#calendar').fadeTo(500, 0.25);
             {% if patient_user %}
             $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=patient_user.id change='prev' %}');
             {% else %}
@@ -19,19 +30,21 @@
 </script>
 
 {% if month_days %}
+<div id="calendar_container">
 <div class="pagination pagination-centered">
     <ul>
         <li class="previous">
             <a href= "javascript:prev();"><i class="icon-arrow-left"></i></a>
         </li>
         <li>
-            <a href="#"><strong>{{ mname }} {{ year }}</strong></a>
+            <a id="current" href="#"><strong>{{ mname }} {{ year }}</strong></a>
         </li>
         <li class="next">
             <a href= "javascript:next();" class="pull-right"><i class="icon-arrow-right"></i></a>
         </li>
     </ul>
 </div>
+<div id="calendar">
 <table class="table table-condensed table-nohover">
     <thead>
       <tr>
@@ -88,12 +101,17 @@
         {% endfor %}
     </tbody>
 </table>
+</div>
 
 <div id="info_day">
       {% include "cal/includes/extra_info.html" %}
 </div>
+</div>
 
 {% else %}
+    <div class="center">
+        <img style="padding-top: 100px" src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+    </div>
     <script type="text/javascript">
         $(document).ready(function(){
             {% if patient_user %}

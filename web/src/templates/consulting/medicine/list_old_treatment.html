@@ -12,10 +12,12 @@
   {% endif %}
 {% endfor %}
 </table>
-
+<div>
+  <p style="text-align: right; margin: 5px 20px">{% trans 'Elementos mostrados' %}: <em>{{medicines.start_index}} -  {{medicines.end_index}} {% trans 'de' %} {{medicines.paginator.count}}</em></p>
+</div>
 
 {% if medicines.paginator.num_pages > 1 %}
-  <div id="medicine-paginator" class="pagination pagination-centered">
+  <div id="medicine-paginator2" class="pagination pagination-centered">
     <ul class="pagination">
       {% if medicines.has_previous %}
         <li><a href="{% url consulting_get_medicines filter_option=filter_option id_patient=patient_user.id %}?page={{ medicines.previous_page_number }}">←</a></li>

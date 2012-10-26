@@ -44,21 +44,7 @@
             {% endfor %}
           </tbody>
         </table>
-        <div id="report-paginator" class="pagination pagination-centered">
-          <ul class="pagination">
-            {% if reports.has_previous %}
-              <li><a href="?page={{ reports.previous_page_number }}">←</a></li>
-            {% else %}
-              <li class="disabled"><a>←</a></li>
-            {% endif %}
-
-            {% if reports.has_next %}
-              <li><a href="?page={{ reports.next_page_number }}">→</a></li>
-            {% else %}
-              <li class="disabled"><a>→</a></li>
-            {% endif %}
-          </ul>
-        </div>    
+        {% include 'ui/includes/pagination_bar.html' with objects=reports %}
         <div id="overwrite"></div>                           
         {% else %}
             <div class="alert alert-info">{% trans "No hay Informes" %}</div>

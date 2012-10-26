@@ -121,11 +121,16 @@ class SlotTypeForm(forms.ModelForm):
         return cleaned_data
 
 
-class SlotForm(forms.ModelForm):
+class SlotForm(forms.Form):
     def __init__(self, *args, **kwargs):
         if 'user' in kwargs:
             user = kwargs.pop('user')
+            initial_slot = None
+            if 'slot' in kwargs:
+                slot = kwargs.pop('slot')
+                initial_slot = slot.slot_type.id
             super(SlotForm, self).__init__(*args, **kwargs)
+            
 
             if not user is None:
                 if user.get_profile().is_doctor():
@@ -136,7 +141,15 @@ class SlotForm(forms.ModelForm):
                 self.fields['slot_type'] = SlotTypeChoiceField(
                     label=_(u"Slot type"),
                     queryset=queryset,
-                    widget=forms.Select(attrs={'class': 'span9'}))
+                    widget=forms.Select(attrs={'class': 'span9'}),initial=initial_slot)
+
+                if initial_slot:
+                    self.fields['weekdays'] = forms.ChoiceField(required=True,
+                            widget=forms.RadioSelect(attrs={'class': 'span9'}),
+                            choices=Slot.WEEKDAYS)
+                    self.fields['months'] = forms.ChoiceField(required=True,
+                            widget=forms.RadioSelect(attrs={'class': 'span9'}),
+                            choices=Slot.MONTH)
         else:
             super(SlotForm, self).__init__(*args, **kwargs)
 
@@ -144,25 +157,19 @@ class SlotForm(forms.ModelForm):
         queryset=SlotType.objects.none(),
         widget=forms.Select(attrs={'class': 'span9'}))
 
-    weekday = forms.CharField(widget=forms.Select(
-        attrs={'class': 'span9'}, choices=Slot.WEEKDAYS))
-
-    date = forms.DateField(input_formats=(settings.DATE_FORMAT,),
-        widget=forms.DateInput(format=settings.DATE_FORMAT,
-            attrs={'class': 'span9'}))
+    weekdays = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(
+        attrs={'class': 'span9'}), choices=Slot.WEEKDAYS)
+    months = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(
+        attrs={'class': 'span9'}), choices=Slot.MONTH)
 
     start_time = forms.TimeField(widget=forms.TimeInput(
         attrs={'class': 'span9'}))
 
     end_time = forms.TimeField(widget=forms.TimeInput(
-        attrs={'class': 'span9'}))
+        attrs={'class': 'span9'}), required=False)
 
     description = forms.CharField(widget=forms.Textarea(attrs={'cols': 60,
         'rows': 4, 'class': 'span9'}), required=False)
-
-    class Meta:
-        model = Slot
-        exclude = ('created_at', 'updated_at')
 
     def clean(self):
         cleaned_data = self.cleaned_data

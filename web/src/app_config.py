@@ -121,12 +121,12 @@ BECK = {10:[u'No depresión', 'success'],
 		19:[u'Depresión leve', 'default'],
 		30:[u'Depresión moderada', 'warning'],
 		40:[u'Depresión grave', 'important'],
-		999:[u'Depresión muy grave', 'inverse']}
+		63:[u'Depresión muy grave', 'inverse']}
 HAMILTON = {18:[u'No ansiedad', 'success'],
 			28:[u'Ansiedad leve', 'default'],
 			38:[u'Ansiedad moderada', 'warning'],
 			48:[u'Ansiedad grave', 'important'],
-			999:[u'Ansiedad muy grave', 'inverse']}
+			56:[u'Ansiedad muy grave', 'inverse']}
 
 #WKHTMLTOPDF
 WKHTMLTOPDF_CMD = '/usr/local/bin/wkhtmltopdf'

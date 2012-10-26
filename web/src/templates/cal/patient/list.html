@@ -1,51 +1,25 @@
-{% extends "cal/includes/base.html" %}
-
 {% load i18n%}
 
 {% block container %}  
-<div class="page-header">
-  <h1>{% trans 'Citas' %}</h1>
-</div>
-
   {% if events.object_list.count > 0 %}
-   
     <table id="events_list" class="table table-striped">
       <thead>
           <tr>
             <th>{% trans "Fecha" %}</th>
             <th>{% trans "Inicio" %}</th>
             <th>{% trans "Final" %}</th>
-            <th>{% trans "Paciente" %}</th>
+            <th>{% trans "Doctor" %}</th>
             <th>{% trans "Tipo de cita" %}</th>
             <th>{% trans "Notas" %}</th>
           </tr>
       </thead>
       <tbody>
         {% for event in events.object_list %}
-          {% include "cal/app/appointment.html" %}
+          {% include "cal/includes/appointment_doctor.html" %}
         {% endfor %}
       </tbody>
     </table>
-    {% if events.paginator.num_pages > 1 %}
-     <div id="events-paginator" class="pagination pagination-centered">
-      <ul>
-        {% if events.has_previous %}
-          <li><a href="?page={{ events.previous_page_number }}">←</a></li>
-        {% else %}
-          <li class="disabled"><a>←</a></li>
-        {% endif %}
-        {% for p in events.paginator.page_range %}
-         <li {% if p = events.number %}class="disabled"{% endif %}><a href="?page={{p}}">{{p}}</a></li>
-        {% endfor %}
-        {% if events.has_next %}
-          <li><a href="?page={{ events.next_page_number }}">→</a></li>
-        {% else %}
-          <li class="disabled"><a>→</a></li>
-        {% endif %}
-      </ul>
-    </div> 
-    {% endif %}     
-    <div id="preview"></div>
+    {% include 'ui/includes/pagination_bar.html' with objects=events %}
   {% else %}
     <div class="alert alert-info">{% trans "No se ha encontrado ninguna cita" %}</div>
   {% endif %}

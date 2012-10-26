@@ -58,14 +58,29 @@ class Slot(TraceableModel):
         (6, _('Sunday')),
     )
 
+    MONTH = (
+        (0, _('January')),
+        (1, _('February')),
+        (2, _('March')),
+        (3, _('April')),
+        (4, _('May')),
+        (5, _('June')),
+        (6, _('July')),
+        (7, _('August')),
+        (8, _('September')),
+        (9, _('October')),
+        (10, _('November')),
+        (11, _('December')),
+    )
+
     creator = models.ForeignKey(User, related_name='slot_creator')
     slot_type = models.ForeignKey(SlotType, related_name='slot_event_type',
         on_delete=models.PROTECT)
     weekday = models.IntegerField(choices=WEEKDAYS)
-    date = models.DateField(null=False, blank=False)
+    month = models.IntegerField(choices=MONTH)
+    year = models.IntegerField()
     start_time = models.TimeField(null=False, blank=False)
     end_time = models.TimeField(null=False, blank=False)
-    duration = models.IntegerField(null=False, blank=False)
     description = models.CharField(max_length=5000, blank=True, null=True)
 
     #reserved = models.BooleanField(default=False)
@@ -78,7 +93,7 @@ class Slot(TraceableModel):
             % (self.id, self.slot_type, self.start_time)
 
     class Meta:
-        ordering = ["weekday", "start_time"]
+        ordering = ["month", "weekday", "start_time"]
 
 
 class Appointment(TraceableModel):

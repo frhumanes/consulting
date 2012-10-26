@@ -9,7 +9,7 @@ from cal import views
 
 
 urlpatterns = patterns('',
-    url(r'^cal_management/$', views.index, name='cal.index'),
+    url(r'^$', views.index, name='cal.index'),
 
     url(r'^search_patient_for_(?P<action>(\w+))/$', views.lookfor_patient,
         name='search_patient_for_action'),
@@ -36,14 +36,20 @@ urlpatterns = patterns('',
 
 
     url(r"^day/(\d+)/(\d+)/(\d+)/for/(\d+)/$", views.day, name='cal.day'),
-    url(r"^day/consultation/(\d+)/(\d+)/(\d+)/$", views.day_consultation,
-        name='cal.day_consultation'),
+    url(r"^(?P<change>next|prev)_day/(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/for/(?P<id_user>\d+)/$", views.day, name='cal.day'),
+
+
+    #url(r"^day/consultation/(\d+)/(\d+)/(\d+)/$", views.day_consultation,
+    #    name='cal.day_consultation'),
 
     url(r"^widget/(?P<change>this|prev|next)/(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/for/(?P<id_user>\d+)/$",
         views.calendar, name='calendar_widget'),
 
     url(r"^month/(?P<change>this|prev|next)/(?P<year>\d+)/(?P<month>\d+)/$",
         views.calendar_big, name='calendar_big'),
+
+    url(r"^doctor/(?P<id_doctor>\d+)/month/(?P<change>this|prev|next)/(?P<year>\d+)/(?P<month>\d+)/$",
+        views.calendar_big, name='doctors_calendar_big'),
 
     # ---------
     # Slot Type
@@ -64,10 +70,13 @@ urlpatterns = patterns('',
     # ----
     # Slot
     # ----
-    url(r"^slot/list/(\d+)/(\d+)/$",
+    url(r"^slot/list/(\d+)/$",
         views.list_slot,
         name='cal.list_slot'),
-    url(r"^slot/add/(\d+)/(\d+)/$",
+     url(r"^slot/list/$",
+        views.list_slot,
+        name='cal.list_slot'),
+    url(r"^slot/add/(\d+)/$",
         views.add_slot,
         name='cal.add_slot'),
     url(r"^slot/edit/(?P<pk>\d+)/$",

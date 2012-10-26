@@ -12,26 +12,6 @@
 </div>
 
   {% if events.object_list.count > 0 %}
-    {% if events.paginator.num_pages > 1 %}
-    <div id="events-paginator" class="pagination pagination-centered">
-      <ul>
-        {% if events.has_previous %}
-          <li><a href="?page={{ events.previous_page_number }}">←</a></li>
-        {% else %}
-          <li class="disabled"><a>←</a></li>
-        {% endif %}
-        {% for p in events.paginator.page_range %}
-         <li {% if p = events.number %}class="disabled"{% endif %}><a href="?page={{p}}">{{p}}</a></li>
-        {% endfor %}
-        {% if events.has_next %}
-          <li><a href="?page={{ events.next_page_number }}">→</a></li>
-        {% else %}
-          <li class="disabled"><a>→</a></li>
-        {% endif %}
-      </ul>
-    </div>
-  {% endif %}
-
   <table id="events_list" class="table table-striped">
     <thead>
         <tr>
@@ -48,6 +28,7 @@
       {% endfor %}
     </tbody>
   </table>
+  {% include 'ui/includes/pagination_bar.html' with objects=events %}
 
   <div id="preview"></div>
   {% else %}

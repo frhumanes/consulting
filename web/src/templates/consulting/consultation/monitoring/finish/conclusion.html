@@ -7,8 +7,13 @@
       <h1>{% trans 'Conclusión' %}</h1>
     </div>
   <section>
+    {% if form.non_field_errors %}
+    <div class="alert-error alert">
+      {{form.non_field_errors}}
+    </div>
+    {% endif %}
      <form class="form-horizontal well" id="form" action="{{request.path}}" method="post" accept-charset="utf-8">{% csrf_token %}
-            {{form.component}}
+
             <div class="control-group">
               <label class="control-label">
                 {{form.observation.label}}

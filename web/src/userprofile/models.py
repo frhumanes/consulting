@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.db.models import Q
 
 from log.models import TraceableModel
 from illness.models import Illness
@@ -182,7 +183,7 @@ class Profile(TraceableModel):
         return nextAppointment
 
     def get_conclusions(self):
-        return Conclusion.objects.filter(patient=self.user).latest('date')
+        return Conclusion.objects.filter(appointment__patient=self.user).latest('date')
 
     def get_treatment(self):
         return Medicine.objects.filter(patient=self.user,date__isnull=True).order_by('component')
@@ -200,17 +201,23 @@ class Profile(TraceableModel):
         return tasks
 
 
-    def get_anxiety_status(self, index=False):
+    def get_anxiety_status(self, at_date=None, index=False):
+        filter_option = Q(patient=self.user, survey__id__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True)
+        if at_date:
+            filter_option = filter_option & Q(end_date__lte=at_date)
         try:
-            latest_task = Task.objects.filter(patient=self.user, survey__id__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True).latest('end_date')
-            return latest_task.get_anxiety_status(index)
+            task = Task.objects.filter(filter_option).latest('end_date')
+            return task.get_anxiety_status(index)
         except:
             pass
 
-    def get_depression_status(self, index=False):
+    def get_depression_status(self, at_date=None, index=False):
+        filter_option = Q(patient=self.user, survey__id__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True)
+        if at_date:
+            filter_option = filter_option & Q(end_date__lte=at_date)
         try:
-            latest_task = Task.objects.filter(patient=self.user, survey__id__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True).latest('end_date')
-            return latest_task.get_depression_status(index)
+            task = Task.objects.filter(filter_option).latest('end_date')
+            return task.get_depression_status(index)
         except:
             pass
 

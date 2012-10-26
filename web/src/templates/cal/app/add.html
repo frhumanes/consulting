@@ -12,7 +12,7 @@
   <div class="page-header">
     <h1>{% trans 'Asignar cita' %}
             <div class="btn-group pull-right">
-                  <a class="btn btn-info" href= "{%if request.user.get_profile.is_doctor%}{%url cal.views.day year month day request.user.id %}{%else%}{%url cal.views.doctor_day doctor.id year month day %}{%endif%}">
+                  <a class="btn btn-info" href= "{% if patient_user %}{% url cal.views.day year month day patient_user.id %}{% else %}{% url cal.views.doctor_day doctor.id year month day %}{% endif %}">
                   <i class="icon-arrow-left icon-white"></i>
                   {% trans 'Volver' %}
                 </a>
@@ -28,7 +28,7 @@
 {% endif %}
 {% if patient_user %}
 <div class="well">
-  <h4>{% trans "Paciente:" %} {{ patient_user.get_profile.get_full_name }}</h4>
+  <h4>{% trans "Paciente" %}: {{ patient_user.get_profile.get_full_name }}</h4>
 </div>
 {% endif %}
 
@@ -142,7 +142,7 @@
 
       <p class="center">
         <button class="btn btn-large btn-primary" type="submit">
-          <i class="icon-play icon-white"></i>
+          <i class="icon-ok-sign icon-white"></i>
           {% trans 'Add' %}</button>
       </p>
 

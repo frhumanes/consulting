@@ -12,7 +12,7 @@
   <div class="page-header">
     <h1>{% trans 'Vacaciones' %}
             <div class="btn-group pull-right">
-                  <a class="btn btn-info btn" href="{% url cal.add_vacation %}"><i class="icon-plane icon-white"></i> {% trans "Añadir periodo" %}</a>
+                  <a class="btn btn-info btn" href="{% url cal.add_vacation %}"><i class="icon-plus-sign icon-white"></i> {% trans "Añadir" %}</a>
             </div>
         </h1>
   </div>
@@ -33,25 +33,7 @@
         {% endfor %}
       </tbody>
     </table>
-    {% if vacations.paginator.num_pages > 1%}
-    <div id="vacations-paginator" class="pagination pagination-centered">
-      <ul>
-        {% if vacations.has_previous %}
-          <li><a href="?page={{ vacations.previous_page_number }}">←</a></li>
-        {% else %}
-          <li class="disabled"><a>←</a></li>
-        {% endif %}
-         {% for p in vacations.paginator.page_range %}
-         <li {% if p = vacations.number %}class="disabled"{% endif %}><a href="?page={{p}}">{{p}}</a></li>
-        {% endfor %}
-        {% if vacations.has_next %}
-          <li><a href="?page={{ vacations.next_page_number }}">→</a></li>
-        {% else %}
-          <li class="disabled"><a>→</a></li>
-        {% endif %}
-      </ul>
-    </div>
-    {% endif %}
+    {% include 'ui/includes/pagination_bar.html' with objects=vacations %}
 
     <div id="preview"></div>
   {% else %}

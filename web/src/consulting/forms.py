@@ -15,64 +15,6 @@ from medicament.models import Component
 from survey.models import Question
 
 
-
-# class RecipientChoiceField(forms.ModelChoiceField):
-#     def label_from_instance(self, obj):
-#         return "%s %s" % (obj.first_name, obj.last_name)
-
-
-# class AppointmentForm(forms.ModelForm):
-#     format = _(u'%d/%m/%Y')
-#     input_formats = [format]
-
-#     date = forms.DateField(label=_(u'Fecha'), widget=DateInput(
-#             attrs={'class': 'span2', 'size': '16'}))
-#     hour = forms.TimeField(label=_(u'Hora'),
-#                                 widget=forms.TextInput(
-#                                 attrs={'class': 'input-mini'}))
-#     # date_appointment = forms.DateField(label=_(u'Fecha'),
-#     #                                 input_formats=('%d/%m/%Y',),
-#     #                                 widget=DateInput(
-#     #                                 attrs={'class': 'span2', 'size': '16'},
-#     #                                 format='%d/%m/%Y'))
-#     # hour_start = forms.TimeField(label=_(u'Hora de Inicio de la cita'),
-#     #                             widget=forms.TextInput(
-#     #                             attrs={'class': 'input-mini'}))
-#     # hour_finish = forms.TimeField(label=_(u'Hora de Fin de la Cita'),
-#     #                             widget=forms.TextInput(
-#     #                             attrs={'class': 'input-mini'}))
-
-#     def __init__(self, *args, **kwargs):
-#         if 'readonly_doctor' in kwargs and 'doctor_user' in kwargs:
-#             readonly_doctor = kwargs.pop('readonly_doctor')
-#             doctor_user = kwargs.pop('doctor_user')
-#             super(AppointmentForm, self).__init__(*args, **kwargs)
-
-#             profiles_doctor = Profile.objects.filter(role=settings.DOCTOR)
-#             ids_doctor = [profile.user.id for profile in profiles_doctor]
-#             queryset = User.objects.filter(pk__in=ids_doctor)
-
-#             self.fields['doctor'] = RecipientChoiceField(
-#                                                 label=_(u"Médico"),
-#                                                 queryset=queryset,
-#                                                 validators=[validate_choice])
-#             if readonly_doctor and not doctor_user is None:
-#                 self.fields.pop('doctor')
-
-#         else:
-#             super(AppointmentForm, self).__init__(*args, **kwargs)
-
-#     doctor = RecipientChoiceField(label=_(u'Médico'),
-#                                     queryset=User.objects.none(),
-#                                     validators=[validate_choice])
-
-#     class Meta:
-#         model = Appointment
-#         exclude = ('patient', 'questionnaire', 'answers', 'medicine')
-#         # exclude = ('patient', 'questionnaire', 'answers', 'medicine',
-#         #             'status', 'date_modified', 'date_cancel')
-
-
 class AdminRadioFieldRenderer(RadioFieldRenderer):
     def render(self):
         """Outputs a <ul> for this set of radio fields."""
@@ -138,7 +80,7 @@ class MedicineForm(forms.ModelForm):
 class ConclusionForm(forms.ModelForm):
     observation = forms.CharField(label=_(u'Observaciones'),
                                     widget=forms.Textarea(attrs={'cols': 60,
-                                                'rows': 4, 'class': 'span12'}))
+                                                'rows': 4, 'class': 'span12'}), required=False)
     recommendation = forms.CharField(label=_(u'Recomendaciones'),
                                     widget=forms.Textarea(attrs={'cols': 60,
                                                 'rows': 4, 'class': 'span12'}),
@@ -148,6 +90,16 @@ class ConclusionForm(forms.ModelForm):
         model = Conclusion
         exclude = ('created_at', 'updated_at', 'patient', 'result',
                     'appointment', 'date', 'appointment')
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        observation = cleaned_data.get("observation")
+        recommendation = cleaned_data.get("recommendation")
+
+        if not observation and not recommendation:
+            msg = _(u"Debe rellenar al menos uno de los dos campos")
+            self._errors['__all__'] = self.error_class([msg])
+        return cleaned_data
 
 
 class ActionSelectionForm(forms.Form):
@@ -170,6 +122,12 @@ class SelectOtherTaskForm(forms.Form):
     survey = forms.ChoiceField(label=_(u'Encuesta'),
             widget=forms.Select(
                         attrs={'class': 'input-medium search-query span12'}))
+    NEXT_SURVEY = [
+                ('', _(u'--------')),
+                (settings.ANXIETY_DEPRESSION_SURVEY,
+                    _(u'Valoración de la depresión y la ansiedad')),
+                (settings.CUSTOM, _(u'Variables más puntuadas')),
+            ]
 
     def __init__(self, *args, **kwargs):
         if 'variables' in kwargs:
@@ -182,21 +140,14 @@ class SelectOtherTaskForm(forms.Form):
                     choices=variables,
                     initial=[x[0] for x in variables],
                     required=False)
-            NEXT_SURVEY = (
-                ('', _(u'--------')),
-                (settings.INITIAL_ASSESSMENT,
-                    _(u'Valoración Inicial')),
-                (settings.ANXIETY_DEPRESSION_SURVEY,
-                    _(u'Valoración de la depresión y la ansiedad')),
-                (settings.CUSTOM, _(u'Variables más puntuadas')),
-            )
-
-            
             if not variables:
-                NEXT_SURVEY = NEXT_SURVEY[:-1]
-            self.fields['survey'].choices = NEXT_SURVEY
+                self.NEXT_SURVEY = self.NEXT_SURVEY[:-1]
+            self.fields['survey'].choices = self.NEXT_SURVEY
         else:
             super(SelectOtherTaskForm, self).__init__(*args, **kwargs)
+            self.NEXT_SURVEY = ((settings.INITIAL_ASSESSMENT,
+                    _(u'Valoración Inicial')),)
+            self.fields['survey'].choices = self.NEXT_SURVEY[:2]
         self.fields['kind'] = forms.ChoiceField(
                     label=_(u'Tipo'),
                     widget=forms.Select(),
@@ -207,11 +158,12 @@ class SelectOtherTaskForm(forms.Form):
     def clean(self):
         cleaned_data = self.cleaned_data
         survey = cleaned_data.get("survey")
-        variables = cleaned_data.get("variables")
+        
 
-        if survey == str(settings.CUSTOM) and not variables:
-            msg = _(u"Este campo es obligatorio")
-            self._errors['variables'] = self.error_class([msg])
+        if survey == str(settings.CUSTOM):
+            if not cleaned_data.get("variables"):
+                msg = _(u"Este campo es obligatorio")
+                self._errors['variables'] = self.error_class([msg])
 
         return cleaned_data
 
@@ -220,12 +172,6 @@ class SelectTaskForm(SelectOtherTaskForm):
             label=_(u'Visible'),
             widget=forms.TextInput(),
             required=True)
-    NEXT_SURVEY = (
-                ('', _(u'--------')),
-                (settings.ANXIETY_DEPRESSION_SURVEY,
-                    _(u'Valoración de la depresión y la ansiedad')),
-                (settings.CUSTOM, _(u'Variables más puntuadas')),
-            )
 
 class SelectNotAssessedVariablesForm(forms.Form):
     def __init__(self, *args, **kwargs):

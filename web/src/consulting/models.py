@@ -63,6 +63,8 @@ class Task(TraceableModel):
     observations = models.CharField(max_length=5000, blank=True,
                                             null=True)
 
+    
+
     def __unicode__(self):
         return u'id: %s task: %s %s %s' \
             % (self.id, self.patient, self.survey, self.creation_date)
@@ -74,9 +76,17 @@ class Task(TraceableModel):
             return _(u'No')
 
     def get_answers(self):
+        if hasattr(self, '_answers') and self._answers:
+            return self._answers
+        #Cache
+        self._answers = None
+        self._marks = None
+        self._status = {}
+
         answers = []
         for r in self.task_results.values('block').annotate(Max('date'),Max('id')).order_by():
-            answers += Result.objects.get(id=r['id__max']).options.all()
+            answers += Result.objects.get(id=r['id__max']).options.select_related().all()
+        self._answers = list(answers)
         return answers
 
     def is_completed(self):
@@ -166,6 +176,11 @@ class Task(TraceableModel):
                 return settings.AVE[value]
 
     def get_depression_status(self, index=False):
+        if hasattr(self, '_status') and 'depression' in self._status:
+            if index:
+                return self._status['depression'][0]
+            else:
+                return self._status['depression'][1]
         l = settings.BECK.keys()
         l.sort()
         beck_mark = self.calculate_beck_mark()
@@ -173,12 +188,18 @@ class Task(TraceableModel):
             return ''
         for value in l:
             if beck_mark < value:
+                self._status['depression'] = [l.index(value), settings.BECK[value]]
                 if index:
                     return l.index(value)
                 else:
                     return settings.BECK[value]
 
     def get_anxiety_status(self, index=False):
+        if  hasattr(self, '_status') and 'anxiety' in self._status:
+            if index:
+                return self._status['anxiety'][0]
+            else:
+                return self._status['anxiety'][1]
         l = settings.HAMILTON.keys()
         l.sort()
         hamilton_mark, hamilton_submarks = self.calculate_hamilton_mark()
@@ -186,6 +207,7 @@ class Task(TraceableModel):
             return ''
         for value in l:
             if hamilton_mark < value:
+                self._status['anxiety'] = (l.index(value), settings.HAMILTON[value])
                 if index:
                     return l.index(value)
                 else:
@@ -217,6 +239,8 @@ class Task(TraceableModel):
         return lv
 
     def get_variables_mark(self):
+        if hasattr(self, '_marks') and self._marks:
+            return self._marks
         answers = self.get_answers()
         marks = {}
         variable_tuple = None
@@ -240,7 +264,7 @@ class Task(TraceableModel):
             else:
                 marks[f.variable] = ''
         #sorted(marks.items(), key=lambda x: -x[1])
-
+        self._marks = marks
         return marks
 
     def get_dimensions_mark(self, variables_mark=None):
@@ -332,8 +356,6 @@ class Result(TraceableModel):
 
 
 class Conclusion(TraceableModel):
-    patient = models.ForeignKey(User, related_name='patient_conclusions')
-
     appointment = models.ForeignKey(Appointment,
                                     related_name="appointment_conclusions")
 
@@ -347,7 +369,7 @@ class Conclusion(TraceableModel):
 
     def __unicode__(self):
         return u'id: %s conclusion: %s %s' \
-                                % (self.id, self.patient, self.appointment)
+                                % (self.id, self.appointment.patient, self.appointment)
 
 
 class Answer(models.Model):

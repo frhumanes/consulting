@@ -10,12 +10,35 @@
 
 <script type="text/javascript">
     function next(){
+        var loader = '<img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />';
+        var width = $('#current').width();
+        $('#current').html(loader);
+        $('#current').width(width);
+        $('#calendar').fadeTo(500, 0.25);
+        {% if doctor %}
+        $('#large').load('{% url 'doctors_calendar_big' id_doctor=doctor.id year=year month=month change='next' %}'); 
+        {% else %}
         $('#large').load('{% url 'calendar_big' year=year month=month change='next' %}'); 
-    }
+        {% endif %}
+    };
 
     function prev(){
+        var loader = '<img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />';
+        var width = $('#current').width();
+        $('#current').html(loader);
+        $('#current').width(width);
+        $('#calendar').fadeTo(500, 0.25);
+        {% if doctor %}
+        $('#large').load('{% url 'doctors_calendar_big' id_doctor=doctor.id year=year month=month change='prev' %}'); 
+        {% else %}
         $('#large').load('{% url 'calendar_big' year=year month=month change='prev' %}'); 
-    }
+        {% endif %}
+    };
+
+    $('a.change_doctor').live('click', function(e){
+        e.preventDefault();
+        $('#large').load($(this).attr('href')); 
+     });
 
     $("#searcher").autocomplete({
         source: function(request, response){
@@ -34,13 +57,18 @@
             },
         select: function(event, ui){
             var pattern = '{% url 'cal.app_list_patient' 1 %}';
-            window.location.href = pattern.replace('1', ui.item.id);
+            $('#myModalLabel').text('{% trans "Citas de " %}'+ui.item.label);
+            $('#myModal').modal('show');
+            $('#myModalBody').load(pattern.replace('1', ui.item.id));
             }
     });
 
     $('#calendar').find('td').each(function(){
         $(this).on('click',function(){
-            window.location.href = $(this).find('a').attr('href');
+            var url = $(this).find('a').attr('href')
+            if(url){
+                window.location.href = url;
+            }  
         })        
     });
 
@@ -53,49 +81,95 @@
 
 {% if month_days %}
 <div class="row-fluid">
-<div class="pagination pagination-centered span7">
-    <ul>
-        <li class="previous">
-            <a href= "javascript:prev();">
-                <i class="icon-arrow-left"></i>
+    <div class="span5 btn-toolbar" style="margin: 20px 0">
+        <a class="btn btn-primary btn-large"  href="{% url 'search_patient_for_action' action='new_app' %}">
+              <i class="icon-calendar icon-white"></i> {% trans 'DAR CITA' %}
+        </a>
+        {% if request.user.get_profile.is_administrative %}
+        <div class="btn-group">
+            <button class="btn btn-info disabled"><i class="icon-user icon-white"></i> {% if doctor %}Dr. {{doctor.get_profile.get_full_name}}{% else %}{% trans 'DOCTORES' %}{% endif %}</button>
+            <button class="btn dropdown-toggle btn-info" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                {% for d in doctors %}
+                <li><a class="change_doctor" href="{% url 'doctors_calendar_big' id_doctor=d.user.id year=year month=month change='this' %}">{{d.get_full_name}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}  
+        {% if request.user.get_profile.is_doctor %}
+        <div class="btn-group">
+          <a class="btn dropdown-toggle btn-large" data-toggle="dropdown" href="#">
+            <i class="icon-wrench"></i> <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="{% url 'cal.list_slot_type' %}">{% trans 'TIPOS DE CITA' %}</a>
+            </li>
+            <li>
+              <a href="{% url 'cal.list_slot' year %}">{% trans 'POR MESES' %}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="btn-group">
+            <a class="btn dropdown-toggle btn-large" data-toggle="dropdown" href="#">
+              <i class="icon-lock"></i> {% trans 'AUSENCIAS' %} <b class="caret"></b>
             </a>
-        </li>
-        <li>
-            <a href="#"><strong>{{ mname }} {{ year }}</strong></a>
-        </li>
-        <li class="next">
-            <a href= "javascript:next();" class="pull-right">
-                <i class="icon-arrow-right"></i>
-            </a>
-        </li>
-    </ul>
-</div>
-<div class="span5">
-    <form class="form-inline pull-right">
-      {% csrf_token %}
-      <strong>{% trans 'PACIENTE' %}</strong>
-      <input type="text" id="searcher" class="input-medium search-query span8" style="margin: 20px 0">
-    </form>
-</div>  
+            <ul class="dropdown-menu">
+              <li>
+                <a href="{% url 'cal.list_vacation' %}"><i class="icon-plane"></i>  {% trans "VACACIONES" %}</a>
+              </li>
+              <li>                                                     
+                <a href="{% url 'cal.list_event' %}"><i class="icon-briefcase"></i>  {% trans "EVENTOS" %}</a>
+              </li>
+            </ul>
+        </div>
+        {% endif %}  
+    </div>
+    <div class="pagination pagination-centered span3">
+        <ul>
+            <li class="previous">
+                <a href= "javascript:prev();">
+                    <i class="icon-arrow-left"></i>
+                </a>
+            </li>
+            <li>
+                <a id="current" href="#"><strong>{{ mname }} {{ year }}</strong></a>
+            </li>
+            <li class="next">
+                <a href= "javascript:next();" class="pull-right">
+                    <i class="icon-arrow-right"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="span4">
+        <form class="form-inline pull-right">
+          {% csrf_token %}
+          <strong>{% trans 'PACIENTE' %}</strong>
+          <input type="text" id="searcher" class="input-medium search-query span8" style="margin: 20px 0">
+        </form>
+    </div>  
 </div>   
 <table class="table" id="calendar">
     <thead>
       <tr>
-        <th style="text-align: right">&nbsp;{% trans "Mon" %}</th>
-        <th style="text-align: right">&nbsp;{% trans "Tue" %}</th>
-        <th style="text-align: right">&nbsp;{% trans "Wed" %}</th>
-        <th style="text-align: right">&nbsp;{% trans "Thu" %}</th>
-        <th style="text-align: right">&nbsp;{% trans "Fri" %}</th>
-        <th style="text-align: right">{% trans "Sat" %}</th>
-        <th style="text-align: right">{% trans "Sun" %}</th>
+        <th>&nbsp;{% trans "Monday" %}</th>
+        <th>&nbsp;{% trans "Tuesday" %}</th>
+        <th>&nbsp;{% trans "Wednesday" %}</th>
+        <th>&nbsp;{% trans "Thursday" %}</th>
+        <th>&nbsp;{% trans "Friday" %}</th>
+        <th>{% trans "Saturday" %}</th>
+        <th>{% trans "Sunday" %}</th>
       </tr>
     </thead>
-    <tbody class="table-bordered">
+    <tbody class="table-bordered table-condensed">
         {% for week in month_days %}
             <tr class="center">
             {% for day, entries, current, vacations, events in week %}
                 {% if day != 0 %}
-                    <td style="text-align: left; {{current|yesno:'background-color:#eeeeee;border: 1px solid #000000,'}}; cursor:pointer">
+                    <td style="text-align: left; {{current|yesno:'background-color:#eeeeee;border: 1px solid #000000;,'}}{{vacations|yesno:'background-color:#f2dede; border: 1px solid #b94a48;,'}} cursor:pointer">
                     {% if request.user.get_profile.is_doctor %}
                         {% url 'cal.views.day' year month day request.user.id as target %}
                     {% else %}
@@ -103,7 +177,7 @@
                     {% endif %}
                     {% if forloop.counter < 6 %}
                         <div>
-                            {% if request.user.get_profile.is_doctor %}
+                            {% if request.user.get_profile.is_doctor or doctor %}
                             <a href="{{target}}" onMouseOver="this.className = 'label';" onMouseOut="this.className = '';">
                                 {{day}}
                             </a>
@@ -114,11 +188,11 @@
                         <div id="events_list" style="min-height:50px">
                         {% if vacations %}
                            {% for v in vacations %}
-                              <div class="alert alert-error"><small>{% trans 'AUSENCIA' %}: {{v.description}}</small></div>  
+                              <div class="text-error"><small>{% trans 'AUSENCIA' %}: {{v.description}}</small></div>  
                             {% endfor %}
                         {% else %}
                             {% for e in events %}
-                              <div class="alert alert-warning"><small>{{e.start_time|time}}-{{e.end_time|time}} {{e.description}}</small></div>  
+                              <div class="text-warning"><small>{{e.start_time|time}}-{{e.end_time|time}} {{e.description}}</small></div>  
                             {% endfor %}
                             {% for a in entries %}
                               <div class="text-info"><small>{{a.start_time|time}} {{a.patient.get_profile.get_full_name}}</small></div>  
@@ -127,7 +201,7 @@
                         </div>
                     {% else %}
                         <div>
-                            {% if request.user.get_profile.is_doctor %}
+                            {% if request.user.get_profile.is_doctor or doctor %}
                             <a href="{{target}}" onMouseOver="this.className = 'label';" onMouseOut="this.className = '';">
                                 <span class="text-error">{{day}}</span>
                             </a>
@@ -147,8 +221,22 @@
     </tbody>
 </table>
 
-
+<div class="modal fade hide" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel"></h3>
+    </div>
+    <div id="myModalBody" class="modal-body">
+        <div class="center"><img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." /></div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">{% trans 'Cerrar' %}</button>
+    </div>
+</div>
 {% else %}
+    <div class="center">
+        <img style="padding-top: 100px" src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+    </div>
     <script type="text/javascript">
         $(document).ready(function(){
             $('#large').load('{% url 'calendar_big' year=year month=month change='this' %}');

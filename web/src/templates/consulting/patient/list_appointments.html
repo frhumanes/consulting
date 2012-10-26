@@ -19,14 +19,14 @@
             <th>{% trans "Fecha" %}</th>
             <th>{% trans "Inicio" %}</th>
             <th>{% trans "Final" %}</th>
-            <th>{% trans "Paciente" %}</th>
+            <th>{% trans "Doctor" %}</th>
             <th>{% trans "Tipo de cita" %}</th>
             <th>{% trans "Notas" %}</th>
           </tr>
       </thead>
       <tbody>
         {% for event in events.object_list %}
-          {% include "cal/app/appointment.html" %}
+          {% include "cal/includes/appointment_doctor.html" %}
         {% endfor %}
       </tbody>
     </table>

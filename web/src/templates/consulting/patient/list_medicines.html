@@ -53,19 +53,19 @@ function set_events(){
                                   'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()}, 
                                   function() {
                                     $('#'+medicine_id).remove();
+                                    $('#log').load('{% url consulting_get_medicines filter_option='old' id_patient=patient_user.id %}', set_events);
                                   });
   });
 
-  $('#medicine-paginator').find('a').each(function(){
-    $(this).on("click", function(e){
-                            e.preventDefault();
-                            $('#active').load($(this).attr('href'), set_events);
-                            $('#log').load('{% url consulting_get_medicines filter_option='old' id_patient=patient_user.id %}', set_events);
-                            return false;
-                          });
-  });
+    $('.pagination').find('a').each(function(){
+      $(this).on("click", function(e){
+                              e.preventDefault();
+                              var target = $('#tabs .active').find('a').attr('href');
+                              $(target).load($(this).attr('href'), set_events);
+                            });
+    });
 
-}; 
+  }; 
 {% endblock %}
 
 {% block jquery_init %}
@@ -105,18 +105,22 @@ function set_events(){
     <h1>{% trans 'Tratamiento farmacológico' %}</h1>       
 </div>
 <section>
+  <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
   <div>      
     <ul id="tabs" class="nav nav-tabs">
       <li class="active"><a href="#active" data-toggle="tab">{% trans 'Actual' %}</a></li>
       <li><a href="#log" data-toggle="tab">{% trans 'Histórico' %}</a></li>
       <li><a href="#previous" data-toggle="tab">{% trans 'Previos' %}</a></li>
     </ul>
-    <div class="tab-content" style="overflow-y: never;">
+    <div class="tab-content" style="overflow-y: hidden;">
       <div class="tab-pane active" id="active">
+        <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
       </div>
       <div class="tab-pane" id="log">
+        <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
       </div>
       <div class="tab-pane" id="previous">
+        <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
       </div>
     </div>
   </div>

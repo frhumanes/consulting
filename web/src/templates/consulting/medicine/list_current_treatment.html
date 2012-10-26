@@ -12,10 +12,13 @@
   {% endif %}
 {% endfor %}
 </table>
+<div>
+  <p style="text-align: right; margin: 5px 20px">{% trans 'Elementos mostrados' %}: <em>{{medicines.start_index}} -  {{medicines.end_index}} {% trans 'de' %} {{medicines.paginator.count}}</em></p>
+</div>
 <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal_medicament" href="{% if appointment %}{% url consulting_add_medicine action='prescribe' id_appointment=appointment.id %}{% else %}{% url consulting_add_medicine action='prescribe' %}{% endif %}">{% trans 'Prescribir nuevo fármaco' %}</a>
 
 {% if medicines.paginator.num_pages > 1 %}
-  <div id="medicine-paginator" class="pagination pagination-centered">
+  <div id="medicine-paginator1" class="pagination pagination-centered">
     <ul class="pagination">
       {% if medicines.has_previous %}
         <li><a href="{% url consulting_get_medicines filter_option=filter_option id_patient=patient_user.id %}?page={{ medicines.previous_page_number }}">←</a></li>
@@ -31,25 +34,26 @@
         <li class="disabled"><a>→</a></li>
       {% endif %}
     </ul>
-  </div>          
+  </div>     
 {% endif %}
 
 
+
 <div id="check_stop_medicine" class="modal hide fade" style="display: block;">
-<input id="medicine_id" type="hidden">
-<div class="modal-header">
-    <button class="close" data-dismiss="modal">
-      ×
-    </button>
-    <h3>Modificar Prescripción</h3>
-</div>
-<div class="modal-body">
-    <p>
-      {% trans '¿Está seguro que quiere cancelar el tratamiento de este fármaco?' %}
-    </p>
-</div>
-<div class="modal-footer">
-  <a id="yes_stop" data-dismiss="modal" href="#" class="btn">Sí</a>
-  <a data-dismiss="modal" href="#" class="btn btn-primary">No</a>
-</div>
+  <input id="medicine_id" type="hidden">
+  <div class="modal-header">
+      <button class="close" data-dismiss="modal">
+        ×
+      </button>
+      <h3>Modificar Prescripción</h3>
+  </div>
+  <div class="modal-body">
+      <p>
+        {% trans '¿Está seguro que quiere cancelar el tratamiento de este fármaco?' %}
+      </p>
+  </div>
+  <div class="modal-footer">
+    <a id="yes_stop" data-dismiss="modal" href="#" class="btn">Sí</a>
+    <a data-dismiss="modal" href="#" class="btn btn-primary">No</a>
+  </div>
 </div>

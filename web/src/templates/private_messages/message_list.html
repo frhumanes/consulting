@@ -1,6 +1,9 @@
 {% extends "private_messages/includes/base.html" %}
 
-{% load i18n messages %}
+{% load i18n %}
+{% load messages %}
+
+{% match_referer "inbox" as match_inbox %}
 
 {% block title %}{% trans 'Message list' %}{% endblock %}
 
@@ -13,7 +16,7 @@
   {% include "private_messages/includes/mail_actions.html" %}
 {% endblock %}
 
-{% block container %}
+{% block large %}
   <div class="page-header">
     <h1>{% get_header request %}
             <div class="btn-group pull-right">
@@ -42,7 +45,7 @@
         {% for p in messages.paginator.page_range %}
          <li {% if p = messages.number %}class="disabled"{% endif %}><a href="?page={{p}}">{{p}}</a></li>
         {% endfor %}
-        {% if messages.has_next %}
+        {% if not match_outbox %}
           <li><a href="?page={{ messages.next_page_number }}">→</a></li>
         {% else %}
           <li class="disabled"><a>→</a></li>
@@ -55,22 +58,33 @@
     <div class="alert alert-info">{% trans "No hay mensajes" %}</div>
   {% endif %}
 </div>
-{% endblock %}
+<div class="modal fade hide" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="subject">Mensaje</h3>
+  </div>
+  <div id="preview" class="modal-body">
+  </div>
+  <div class="modal-footer">
 
+    {% if 1  %}
+    <button id="reply" class="btn btn-primary"><i class="icon-share-alt"></i> {% trans 'Responder' %}</button>
+    {% endif %}
+    <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans 'Cerrar' %}</button>
+  </div>
+</div>
 
-{% block right %}
-<div id="preview" class="alert alert-info"></div>
 {% endblock %}
 
 {% block jquery_init %}
 
 $('table tbody tr').on('click', function(event){
   var id = $(this).attr('data-msg');
-  var sp = start_spinner('preview');
+  var loader = '<img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />';
+  $('#preview').html(loader);
+  $('#myModal').modal('show');
 
-  $('#preview').load("/messages/view/" + id, function() {
-     sp.stop();
-  });
+  $('#preview').load("/messages/view/" + id);
 });
 
 function start_spinner(el){

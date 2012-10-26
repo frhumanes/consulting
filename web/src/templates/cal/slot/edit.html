@@ -12,7 +12,7 @@
   <div class="page-header">
     <h1>{% trans "Editar preferencia" %}
             <div class="btn-group pull-right">
-              <a class="btn btn-info" href="{% url cal.list_slot year month %}">
+              <a class="btn btn-info" href="{% url cal.list_slot year %}">
                 <i class="icon-arrow-left icon-white"></i>
                 {% trans 'Volver' %}
               </a>
@@ -20,140 +20,170 @@
         </h1>
   </div>
 
-<div class="well center">
+<div class="center">
 
-<form class="form-horizontal" method="post" action="{% url cal.edit_slot slot.id %}">{% csrf_token %}
+<form class="form" method="post" action="{{request.path}}">
+  {% csrf_token %}
   <fieldset>
+    {% if form.non_field_errors %}
+      <div class="alert alert-error">
+          {% for error in form.non_field_errors %}
+            <strong>{% trans '¡Error!' %}</strong>
+            {{ error|escape }}
+          {% endfor %}
+      </div>
+    {% endif %}
+    <div class="well span6">
+    <!-- SLOT_TYPE -->
+    {% if form.slot_type.errors %}
+      <div class="control-group error">
+        <label for="id_slot_type" class="control-label">{{form.slot_type.label}}</label>
+        <div class="controls">
+          {{ form.slot_type }}
+          {% for error in form.slot_type.errors %}
+             <span class="help-inline">{{ error|escape }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <div class="control-group">
+        <label for="id_event_type" class="control-label">{{form.slot_type.label}}</label>
+        <div class="controls">
+          {{ form.slot_type }}
+        </div>
+      </div>
+    {% endif %}
+    <!-- END SLOT_TYPE -->
 
-      {% if  form.non_field_errors  %}
-        <div class="alert alert-error">
-            {% for error in form.non_field_errors %}
-                <strong>{% trans '¡Error!' %}</strong>
-                {{ error|escape }}
-            {% endfor %}
+    <!-- START_TIME -->
+    {% if form.start_time.errors %}
+      <div class="control-group error">
+        <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
+        <div class="controls">
+          {{ form.start_time }}
+          <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+          {% for error in form.start_time.errors %}
+             <span class="help-inline">{{ error|escape }}</span>
+          {% endfor %}
         </div>
-      {% endif %}
+      </div>
+    {% else %}
+      <div class="control-group">
+        <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
+        <div class="controls">
+          {{ form.start_time }}
+          <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+        </div>
+      </div>
+    {% endif %}
+    <!-- END START_TIME -->
 
-      <!-- WEEKDAY -->
-      {% if form.weekday.errors %}
-        <div class="control-group error">
-          <label for="id_weekday" class="control-label">{{form.weekday.label}}</label>
-          <div class="controls">
-            {{ form.weekday }}
-            {% for error in form.weekday.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
-          </div>
+    <!-- END_TIME -->
+    {% if form.end_time.errors %}
+      <div class="control-group error">
+        <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
+        <div class="controls">
+          {{ form.end_time }}
+          <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+          {% for error in form.end_time.errors %}
+             <span class="help-inline">{{ error|escape }}</span>
+          {% endfor %}
         </div>
-      {% else %}
-        <div class="control-group">
-          <label for="id_weekday" class="control-label">{{form.weekday.label}}</label>
-          <div class="controls">
-            {{ form.weekday }}
-          </div>
+      </div>
+    {% else %}
+      <div class="control-group">
+        <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
+        <div class="controls">
+          {{ form.end_time }}
+          <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
         </div>
-      {% endif %}
-      <!-- END WEEKDAY -->
+      </div>
+    {% endif %}
+    <!-- END END_TIME -->
 
-      <!-- SLOT_TYPE -->
-      {% if form.slot_type.errors %}
-        <div class="control-group error">
-          <label for="id_slot_type" class="control-label">{{form.slot_type.label}}</label>
-          <div class="controls">
-            {{ form.slot_type }}
-            {% for error in form.slot_type.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
-          </div>
+    <!-- NOTE -->
+    {% if form.description.errors %}
+      <div class="control-group error">
+        <label for="id_description" class="control-label">{{form.description.label}}</label>
+        <div class="controls">
+          {{ form.description }}
+          {% for error in form.description.errors %}
+             <span class="help-inline">{{ error|escape }}</span>
+          {% endfor %}
         </div>
-      {% else %}
-        <div class="control-group">
-          <label for="id_event_type" class="control-label">{{form.slot_type.label}}</label>
-          <div class="controls">
-            {{ form.slot_type }}
-          </div>
+      </div>
+    {% else %}
+      <div class="control-group">
+        <label for="id_description" class="control-label">{{form.description.label}}</label>
+        <div class="controls">
+          {{ form.description }}
         </div>
-      {% endif %}
-      <!-- END SLOT_TYPE -->
+      </div>
+    {% endif %}
+    <!-- END NOTE -->
+    </div>
 
-      {% comment %}
-      <!-- END_DATE -->
-      {% if form.date.errors %}
-        <div class="control-group error">
-          <label for="id_date" class="control-label">{{form.date.label}}</label>
-          <div class="controls">
-            {{ form.date }}
-            {% for error in form.date.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
-          </div>
+    <div class="well span3">
+    <!-- WEEKDAY -->
+    {% if form.weekday.errors %}
+      <div class="control-group error">
+        <label for="id_weekday"s class="control-label">{{form.weekdays.label}}</label>
+        <hr>
+        <div class="controls" style="text-align: left">
+          {{ form.weekdays }}
+          {% for error in form.weekdays.errors %}
+             <span class="help-inline">{{ error|escape }}</span>
+          {% endfor %}
         </div>
-      {% else %}
-        <div class="control-group">
-          <label for="id_end_time" class="control-label">{{form.date.label}}</label>
-          <div class="controls">
-            {{ form.date }}
-          </div>
+      </div>
+    {% else %}
+      <div class="control-group">
+        <label for="id_weekdays" class="control-label">{{form.weekdays.label}}</label>
+        <hr>
+        <div class="controls"  style="text-align: left">
+          {{ form.weekdays }}
         </div>
-      {% endif %}
-      <!-- END END_DATE -->
-      {% endcomment %}
+      </div>
+    {% endif %}
+    <!-- END WEEKDAY -->
+    </div>
 
-      <!-- START_TIME -->
-      {% if form.start_time.errors %}
-        <div class="control-group error">
-          <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
-          <div class="controls">
-            {{ form.start_time }}
-            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
-            {% for error in form.start_time.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
-          </div>
+    <div class="well span3">
+    <!-- MONTH -->
+    {% if form.month.errors %}
+      <div class="control-group error">
+        <label for="id_months" class="control-label">{{form.months.label}}</label>
+        <hr>
+        <div class="controls"  style="text-align: left">
+          {{ form.months }}
+          {% for error in form.months.errors %}
+             <span class="help-inline">{{ error|escape }}</span>
+          {% endfor %}
         </div>
-      {% else %}
-        <div class="control-group">
-          <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
-          <div class="controls">
-            {{ form.start_time }}
-            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
-          </div>
+      </div>
+    {% else %}
+      <div class="control-group">
+        <label for="id_months" class="control-label">{{form.months.label}}</label>
+        <hr>
+        <div class="controls"  style="text-align: left">
+          {{ form.months }}
         </div>
-      {% endif %}
-      <!-- END START_TIME -->
+      </div>
+    {% endif %}
+    <!-- END MONTH -->
+    </div>
+  </fieldset>
 
-      <!-- NOTE -->
-      {% if form.description.errors %}
-        <div class="control-group error">
-          <label for="id_description" class="control-label">{{form.description.label}}</label>
-          <div class="controls">
-            {{ form.description }}
-            {% for error in form.description.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
-          </div>
-        </div>
-      {% else %}
-        <div class="control-group">
-          <label for="id_description" class="control-label">{{form.description.label}}</label>
-          <div class="controls">
-            {{ form.description }}
-          </div>
-        </div>
-      {% endif %}
-      <!-- END NOTE -->
-
-      <p class="center">
+      <div class="center">
         <a id="remove-event" class="btn btn-large btn-danger" >
-          <i class="icon-minus icon-white"></i>
+          <i class="icon-remove-sign icon-white"></i>
           {% trans 'Delete' %}
         </a>
         <button class="btn btn-large btn-primary" type="submit">
-          <i class="icon-play icon-white"></i>
+          <i class="icon-ok-sign icon-white"></i>
           {% trans 'Save' %}</button>
-      </p>
+      </div>
 
-  </fieldset>
 </form>
 </div>
 
@@ -162,17 +192,20 @@
     <h3>{% trans 'Eliminar evento' %}</h3>
   </div>
   <div class="modal-body">
-    <p>"{% trans '¿Desea eliminar el evento seleccionado?' %}"</p>
+    <p>{% trans '¿Desea eliminar el evento seleccionado?' %}</p>
   </div>
   <div class="modal-footer">
-    <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Yes' %}" data-loadingmsg="{% trans 'Removing ... ' %}">{% trans 'Sí' %}</a>
+    <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Yes' %}" data-loadingmsg="{% trans 'Borrando' %}...">{% trans 'Sí' %}</a>
     <a href="#" class="btn btn-primary" data-dismiss="modal">{% trans 'No' %}</a>
   </div>
 </div>
 {% endblock %}
 
 {% block jquery_init %}
-$('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.start_time.value|time:"H:i" }}' });
+  $('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': '{% if form.start_time.value %}{{ form.start_time.value|time:"H:i" }}{% else %}08:00{% endif %}' });
+  $('#id_end_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.end_time.value|time:"H:i" }}'});
+  $('#id_date').datepicker({'format':'dd/mm/yyyy'});
+  $('ul').addClass("without_decorator");
 
 $('#remove-event').live('click', function(event){
     $('#modal-screen').modal({
@@ -190,7 +223,7 @@ $('#remove-event').live('click', function(event){
     $(this).siblings().attr('data-dismiss', 'static');
 
   $.get('{% url cal.delete_slot slot.id %}', function(data) {
-      window.location.href = '{% url cal.list_slot year month %}';
+      window.location.href = '{% url cal.list_slot year %}';
   });
 
 });

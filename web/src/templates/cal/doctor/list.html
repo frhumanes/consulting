@@ -9,14 +9,12 @@
 {% endblock %}
 
 {% block container %}
-  <legend>
-    <div>
-      {{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}
-      {% if not vacations %}
-       <a class="btn btn-info pull-right" href="{% if patient_user %}{% url cal.add year month day patient_user.id %}{% else %}{% url search_patient_for_action_at action='new_app' year=year month=month day=day %}{% endif %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva cita" %}</a>
-      {% endif %}
-   </div>
-  </legend>
+  {% if patient_user %}
+    {% include "cal/includes/pagination_day.html" with user=patient_user %}
+  {% else %}
+    {% include "cal/includes/pagination_day.html" with user=doctor %}
+  {% endif %}
+  <hr>
 
   {% if request.user.get_profile.is_administrative %}
   <div class="well">
@@ -50,25 +48,7 @@
       </tbody>
     </table>
 
-    {% if events.paginator.num_pages > 1 %}
-    <div id="events-paginator" class="pagination pagination-centered">
-      <ul>
-        {% if events.has_previous %}
-          <li><a href="?page={{ events.previous_page_number }}">←</a></li>
-        {% else %}
-          <li class="disabled"><a>←</a></li>
-        {% endif %}
-        {% for p in events.paginator.page_range %}
-         <li {% if p = events.number %}class="disabled"{% endif %}><a href="?page={{p}}">{{p}}</a></li>
-        {% endfor %}
-        {% if events.has_next %}
-          <li><a href="?page={{ events.next_page_number }}">→</a></li>
-        {% else %}
-          <li class="disabled"><a>→</a></li>
-        {% endif %}
-      </ul>
-    </div>
-    {% endif %}
+    {% include 'ui/includes/pagination_bar.html' with objects=events %}
 
     <div id="preview"></div>
   {% else %}

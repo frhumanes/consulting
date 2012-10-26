@@ -1,0 +1,17 @@
+{% load i18n %}
+<div>
+  <div class="pagination" style="display: inline">
+    <ul>
+        <li class="previous">
+            <a href="{% url cal.views.day 'prev' year month day user.id %}"><i class="icon-arrow-left"></i></a>
+        </li>
+        <li>
+          <a href="#"><h5 style="display: inline">{{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}</h5></a>
+        <li>
+        <li class="next">
+            <a href="{% url cal.views.day 'next' year month day user.id %}" class="pull-right"><i class="icon-arrow-right"></i></a>
+        </li>
+    </ul>
+  </div>
+  <a class="btn btn-info pull-right {% if vacations %}disabled{% endif %}" style="margin: 5px 0" href="{% url cal.add year month day user.id %}"><i class="icon-plus-sign icon-white"></i> <strong>{% trans "Cita" %}</strong></a>
+</div>

@@ -1,6 +1,6 @@
 {% extends "ui/app.html" %}
 
-{% load i18n%}
+{% load i18n consulting %}
 
 {% block js_files %}
   {{ block.super }}
@@ -13,6 +13,17 @@
 {% block css_files %}
   {{ block.super }}
   <link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+{% endblock %}
+
+{% block css_inline %}
+@media (max-width: 800px){
+  #right_bar, #left_bar{
+   visibility: hidden
+  }
+  #main{
+    width:100% 
+  }
+}
 {% endblock %}
 
 {% block right %}
@@ -32,7 +43,7 @@
                 {% else %}
                 <div class="control-group">
                     <label class="control-label span7">
-                        {{field.label}}
+                        {{field.label|sexify:patient_user}}
                     </label>
                     <div class="controls span5">
                         {{ field }}
@@ -69,8 +80,8 @@
           <div class="modal-body" id="modalForm">
           </div>
           <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans 'Cerrar' %}</button>
             <button class="btn btn-primary" id="save">{% trans 'Guardar' %}</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans 'Cerrar' %}</button>
           </div>
         </div>               
     </section>
@@ -98,54 +109,41 @@ function set_events(){
                                   });
   });
 
-  <!-- STOP MEDICINE -->
-  $('.stop_medicine').each(function(){
-    $(this).on("click", function(){
-                            var id = $(this).attr("id");
-                            $('#medicine_id').val(id);     
-                        });      
-  });
 
-  $("#yes_stop").click(function(){
-                    medicine_id = $('#medicine_id').val();
-                    var jqxhr = $.post(
-                                  '{% url consulting_add_medicine action='stop' %}',
-                                  {'medicine_id': medicine_id,
-                                  'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()}, 
-                                  function() {
-                                    $('#'+medicine_id).remove();
-                                  });
-  });
+    $('.pagination').find('a').each(function(){
+      $(this).on("click", function(e){
+                              e.preventDefault();
+                              var target = '#medicament_container';
+                              $(target).load($(this).attr('href'), set_events);
+                            });
+    });
 
-  $('#medicine-paginator').find('a').each(function(){
-    $(this).on("click", function(e){
-                            e.preventDefault();
-                            $('#active').load($(this).attr('href'), set_events);
-                            $('#log').load('{% url consulting_get_medicines filter_option='old' id_patient=patient_user.id %}', set_events);
-                            return false;
-                          });
-  });
-
-}; 
+  }; 
 {% endblock %}
 
 {% block jquery_init %}
-  $('#save').live('click', function(){
+  $('#save').on('click', function(){
     var $form = $('#modal_medicament').find('form');
     $form.ajaxSubmit({  target: null,
                         clearForm: true,
                         success: function(response) {
+                            var target = '#medicament_container';
                             if ($(response).find("form").length) {
                                $('#modalForm').html(response);
                             } else {
-                               $('#medicament_container').html(response);
+                               $(target).html(response);
                                $('#modal_medicament').modal('hide');
-                               $('#modal_medicament').removeData('modal');
-                               set_events();
-                            }
+                               set_events();                            }
                         }
                     });
   });
+
+   $('#modal_medicament').on('hidden', function () {
+      $(this).removeData();
+    })
+
   $('ul').addClass("without_decorator");
+
   $('#medicament_container').load('{% url consulting_get_medicines filter_option='previous' id_patient=patient_user.id %}', set_events);
+
 {% endblock %}

@@ -36,21 +36,7 @@
         {% endfor %}
       </tbody>
     </table>
-    <div id="events-paginator" class="pagination pagination-centered">
-      <ul>
-        {% if events.has_previous %}
-          <li><a href="?page={{ events.previous_page_number }}">←</a></li>
-        {% else %}
-          <li class="disabled"><a>←</a></li>
-        {% endif %}
-
-        {% if events.has_next %}
-          <li><a href="?page={{ events.next_page_number }}">→</a></li>
-        {% else %}
-          <li class="disabled"><a>→</a></li>
-        {% endif %}
-      </ul>
-    </div>
+    {% include 'ui/includes/pagination_bar.html' with objects=events %}
 
     <div id="preview"></div>
   {% else %}

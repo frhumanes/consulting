@@ -54,13 +54,19 @@ class SelectWidgetBootstrap(forms.Select):
             if (selected_a.length > 0) {
                 val = selected_a.attr('data-value');
                 label = selected_a.html();
+                if(val) {
+                    btngroup.find('.btn-group-label').css('background-color','#ffffff');
+                } else {
+                    btngroup.find('.btn-group-label').css('background-color','#eeeeee');
+                }
             } else {
                 btngroup.find('a').first().attr('selected', 'selected');
                 setBtnGroupVal(elem);
+                
             }
             btngroup.find('input[type=hidden]').val(val);
-            /*btngroup.find('.btn-group-label').html(label.substring(0, 20)+'...');*/
             btngroup.find('.btn-group-label').val(label);
+
         }
         $(document).ready(function() {
             $('.btn-group-form input').each(function() {
@@ -133,10 +139,10 @@ class QuestionsForm(forms.Form):
             selected_options = kwargs.pop('selected_options')
             super(QuestionsForm, self).__init__(*args, **kwargs)
             pkeys = dic.keys()
-            pkeys.sort()
-            for k in pkeys:
-                question = get_object_or_404(Question, pk=int(k))
-                values = dic[k]
+            pkeys.sort(key=lambda q: q.id)
+            for question in pkeys:
+                #question = get_object_or_404(Question, pk=int(k))
+                values = dic[question]
                 if question.single:
                     initial_option, initial_value = '', ''
                     for v in values:
@@ -153,6 +159,7 @@ class QuestionsForm(forms.Form):
                             required=False, initial=initial_option)
                         self.fields[question.code+'_value'] = forms.CharField(label="DS", required=False, widget=forms.TextInput(attrs={'class': 'span2'}),initial=initial_value)
                     else:
+                        values.insert(1,('',[]))
                         self.fields[question.code] = forms.ChoiceField(
                             label=question.text,
                             widget=SelectWidgetBootstrap(), choices=values,

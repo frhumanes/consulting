@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n consulting %}
 
 {% if task.survey.id = 2 %}
 	{% if task.get_rp_dict or ave_mark > 140 or as_mark < 17 or light_mark > 2 and beck_mark > 10 or light_mark > 2 and h6_mark > 2 %}
@@ -11,7 +11,7 @@
 			<li>La falta de apoyo social, con puntuación en el cuestionario de Blaxter de {{as_mark}} puntos sobre 21</li>
 		{% endif %}
 		{% if ave_mark > 140 %}
-			<li>El nivel de estrés gererado por los acontecimientos sufridos por el/la paciente durante el último año. Ha puntuado {{ave_mark}} en la escala de Acontecimientos Vitales Estresantes, considerádose {{ave_status}} el grado de estrés generados por los mismos</li>
+			<li>El nivel de estrés gererado por los acontecimientos sufridos por {{ 'el/la'|sexify:task.patient }} paciente durante el último año. Ha puntuado {{ave_mark}} en la escala de Acontecimientos Vitales Estresantes, considerádose {{ave_status}} el grado de estrés generados por los mismos</li>
 		{% endif %}
 		{% if task.get_rp_dict %}
 			<li>Algunos rasgos de la personalidad:

@@ -9,12 +9,23 @@
 {% endblock %}
 
 {% block container %}
-  <legend>
-     <div>
-      {{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}
-       <a class="btn btn-info pull-right" href="{% url cal.add year month day doctor.id %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva cita" %}</a>
-     </div>
-  </legend>
+  <div>
+    <div class="pagination" style="display: inline">
+      <ul>
+          <li class="previous">
+              <a href= "javascript:prev_day();"><i class="icon-arrow-left"></i></a>
+          </li>
+          <li>
+            <a href="#"><h5 style="display: inline">{{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}</h5></a>
+          <li>
+          <li class="next">
+              <a href= "javascript:next_day();" class="pull-right"><i class="icon-arrow-right"></i></a>
+          </li>
+      </ul>
+    </div>
+    <a class="btn btn-info pull-right" style="margin: 5px 0" href="{% url cal.add year month day doctor.id %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva cita" %}</a>
+   </div>
+  <hr>
 
   {% if events.object_list.count > 0 %}
 
@@ -35,21 +46,7 @@
         {% endfor %}
       </tbody>
     </table>
-    <div id="events-paginator" class="pagination pagination-centered">
-      <ul>
-        {% if events.has_previous %}
-          <li><a href="?page={{ events.previous_page_number }}">←</a></li>
-        {% else %}
-          <li class="disabled"><a>←</a></li>
-        {% endif %}
-
-        {% if events.has_next %}
-          <li><a href="?page={{ events.next_page_number }}">→</a></li>
-        {% else %}
-          <li class="disabled"><a>→</a></li>
-        {% endif %}
-      </ul>
-    </div>
+    {% include 'ui/includes/pagination_bar.html' with objects=events %}
     <div id="preview"></div>
   {% else %}
     <div class="alert alert-info">{% trans "No hay citas concertadas para este día" %}</div>

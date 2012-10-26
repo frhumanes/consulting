@@ -1,55 +1,50 @@
 {% load i18n%}
 {% load consulting %}
 
-{% url doctors_calendar as doctors_calendar %}
+
 {% url search_patient_for_action action='new_app' as set_appointment  %}
 {% url search_patient_for_action action='list_app' as users_appointment %}
 {% url cal.list_slot_type as slot_type %}
 
 
-
-<ul class="nav nav-pills nav-stacked">
-  <li class="{% active_child request set_appointment %}">
-      <a href="{{set_appointment}}">
-          {% trans 'DAR CITA' %}
-      </a>
-  </li>
-  {% if request.user.get_profile.is_administrative %}
-  <li class="{% active_child request doctors_calendar %}">
-      <a href="{% url doctors_calendar %}">
-          {% trans 'AGENDA MÉDICO' %}
-      </a>
-  </li>
+<a class="btn btn-primary btn-large btn-block" href="{{set_appointment}}">
+  {% if patient_user %}
+    <i class="icon-search icon-white"></i> {% trans 'PACIENTE' %}
+  {% else %}
+     {% trans 'DAR CITA' %}
   {% endif %}
-  <li class="{% active_child request users_appointment %}">
-      <a href="{{ users_appointment }}">
-        {% trans 'CITAS PACIENTE' %}
+</a>
+<hr>
+<ul class="nav nav-pills nav-stacked">
+  <li>
+      <a href="{% url cal.index %}">
+          <i class="icon-calendar"></i> {% trans 'CALENDARIO' %}
       </a>
   </li>
   {% if request.user.get_profile.is_doctor %}
-  <li  class="dropdown {% active_child request slot_type %}">
+  <li class="dropdown {% active_child request slot_type %}">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        {% trans 'PREFERENCIAS' %}<b class="caret"></b>
+        <i class="icon-wrench"></i> {% trans 'PREFERENCIAS' %} <b class="caret"></b>
       </a>
       <ul class="dropdown-menu">
         <li>
-          <a href="{% url cal.list_slot_type %}">{% trans 'TIPOS' %}</a>
+          <a href="{% url cal.list_slot_type %}">{% trans 'TIPOS DE CITA' %}</a>
         </li>
         <li>
-          <a href="#">{% trans 'CITAS' %}</a>
+          <a href="{% url cal.list_slot %}">{% trans 'POR MESES' %}</a>
         </li>
       </ul>
   </li>
   <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-      {% trans 'AUSENCIAS' %}<b class="caret"></b>
+      <i class="icon-lock"></i> {% trans 'AUSENCIAS' %} <b class="caret"></b>
     </a>
     <ul class="dropdown-menu">
       <li>
-        <a href="{% url cal.list_vacation %}">{% trans "VACACIONES" %}</a>
+        <a href="{% url cal.list_vacation %}"><i class="icon-plane"></i> {% trans "VACACIONES" %}</a>
       </li>
       <li>                                                     
-        <a href="{% url cal.list_event %}">{% trans "EVENTOS" %}</a>
+        <a href="{% url cal.list_event %}"><i class="icon-briefcase"></i> {% trans "EVENTOS" %}</a>
       </li>
     </ul>
   </li>

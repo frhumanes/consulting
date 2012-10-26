@@ -17,7 +17,7 @@ class Survey(TraceableModel):
 
     name = models.CharField(_(u'Nombre'), max_length=100)
 
-    code = models.IntegerField(_(u'Código'), blank=True, null=True)
+    code = models.IntegerField(_(u'Código'), blank=True, null=True, db_index=True)
 
 
     def __unicode__(self):
@@ -38,7 +38,7 @@ class Category(TraceableModel):
                                         related_name='questions_categories')
     name = models.CharField(_(u'Nombre'), max_length=100)
 
-    code = models.IntegerField(_(u'Código'), blank=True, null=True)
+    code = models.IntegerField(_(u'Código'), blank=True, null=True, db_index=True)
 
     kind = models.IntegerField(_(u'Tipo'), choices=KIND)
 
@@ -61,7 +61,7 @@ class Block(TraceableModel):
 
     name = models.CharField(_(u'Nombre'), max_length=100)
 
-    code = models.IntegerField(_(u'Código'))
+    code = models.IntegerField(_(u'Código'), db_index=True)
 
     def __unicode__(self):
         return u'id: %s block: %s kind: %s' % (self.id, self.name, self.kind)
@@ -84,7 +84,7 @@ class Question(models.Model):
 
     text = models.CharField(_(u'Text'), max_length=500)
 
-    code = models.CharField(_(u'Código'), max_length=10)
+    code = models.CharField(_(u'Código'), max_length=10, db_index=True)
 
     single = models.BooleanField(_(u'¿Respuesta única?'), default=False)
 
@@ -106,12 +106,16 @@ class Question(models.Model):
     def get_af_illness(self):
         return self.text[self.text.find('padecido')+9:self.text.find(' alguno')]
 
+    class Meta:
+        ordering = ['id','code']
+
+
 class Option(models.Model):
 
 
     question = models.ForeignKey('Question', related_name="question_options")
 
-    code = models.CharField(_(u'Código'), max_length=10)
+    code = models.CharField(_(u'Código'), max_length=10, db_index=True)
 
     weight = models.DecimalField(_(u'Peso'), max_digits=5, decimal_places=2,
         blank=True, null=True)

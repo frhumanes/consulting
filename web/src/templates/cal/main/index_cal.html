@@ -1,6 +1,9 @@
 {% extends "cal/includes/base.html" %}
 {% load i18n%}
 
-{% block large %}
+
+{% block body %}
+	<div id="large" class="span12" style="margin:0 50px">
 	{% include 'cal/includes/calendar_big.html' %}
+	</div>
 {% endblock %}

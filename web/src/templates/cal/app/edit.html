@@ -6,10 +6,17 @@
 
 
 {% block container %}
-<a class="btn btn-primary" href="javascript:back();">
-  <i class="icon-arrow-left icon-white"></i>
-  {% trans 'Volver' %}
-</a>
+<div class="page-header">
+  <h1>{% trans 'Editar cita' %}
+      <div class="btn-group pull-right">
+        <a class="btn btn-primary" href="javascript:back();">
+          <i class="icon-arrow-left icon-white"></i>
+          {% trans 'Volver' %}
+        </a>
+      </div>
+  </h1>
+</div>
+
 
 
 
@@ -145,11 +152,11 @@
 
         <p class="center">
           <a id="remove-event" class="btn btn-large btn-danger" >
-            <i class="icon-minus icon-white"></i>
+            <i class="icon-remove-sign icon-white"></i>
             {% trans 'Delete' %}
           </a>
           <button class="btn btn-large btn-primary" type="submit">
-            <i class="icon-play icon-white"></i>
+            <i class="icon-ok-sign icon-white"></i>
             {% trans 'Save' %}</button>
         </p>
 

@@ -23,6 +23,11 @@
       <link href="{{ STATIC_URL }}css/table-calendar.css" rel="stylesheet"/>
     {% endblock %}
 
+    <style type="text/css">
+    {% block css_inline %}
+    {% endblock %}
+    </style>
+
     <script type="text/javascript">
       function fix_bars(){
         if ($(window).width() >= 1024) {

@@ -8,55 +8,57 @@
 {% url consulting_select_successive_survey appointment.id illness.code as successive_tasks %}
 {% url consulting_list_provisional_reports appointment.id illness.code as provisional_reports %}
 {% url consulting_next_self_administered_survey appointment.id illness.code as next_self_survey %}
+{% url consulting_prev_treatment_block appointment.id illness.code as treatment_survey %}
 {% url consulting_show_prescription appointment.id illness.code as treatment %}
-{% url consulting_prev_treatment_block appointment.id illness.code as prev_treatment %}
 {% url consulting_set_conclusion appointment.id illness.code as conclusion %}
 {% url consulting_new_app appointment.id illness.code as scheduler %}
 
-  <ul class="nav nav-pills nav-stacked bs-docs-sidenav">
+  <ul class="nav nav-list">
       {% if not appointment.is_first_appointment %}
-      <li>
+      <li class="nav-header">{% trans 'COMPLETAR' %}</li>
+      <li class="{% active_leaf request incomplete_tasks %}">
           <a href="{{ incomplete_tasks }}">
-            {% trans 'ENCUESTAS<br>SIN COMPLETAR' %}
+            {% trans 'Cuestionarios<br>Pendientes' %}
           </a>
       </li>
-      <li>
+      <li class="{% active_leaf request self_administered_tasks %}">
           <a href="{{self_administered_tasks}}">
-            {% trans 'ENCUESTA<br>AUTOADMINISTRADA' %}
+            {% trans 'Cuestionario<br>Autoadministrado' %}
           </a>
       </li>
-      {% endif %} 
-      <li>
+      {% endif %}
+      <li class="nav-header">{% trans 'REALIZAR' %}</li>
+      <li class="{% active_leaf request successive_tasks %}">
           <a href="{{successive_tasks}}">
-            {% trans 'ENCUESTA<br>HETEROADMINISTRADA' %}
+            {% trans 'Cuestionario<br>Heteroadministrado' %}
           </a>
       </li>
       {% if not appointment.is_first_appointment %}
       <li>
-          <a href="{{prev_treatment}}">
-            {% trans 'ENCUESTA<br>ADHERENCIA AL TRATAMIENTO' %}
+          <a href="{{treatment_survey}}">
+            {% trans 'Cuestionario de<br>Adherencia al tratamiento' %}
           </a>
       </li>
       {% endif %}
       <li class="divider"></li>
-      <li>
-        <a href="{{provisional_reports}}">{% trans 'INFORMES<br>GENERADOS' %}</a>
+      <li class="{% active_leaf request provisional_reports %}">
+        <a href="{{provisional_reports}}">{% trans 'INFORMES' %}</a>
       </li>
-      <li>
-        <a href="{{treatment}}">{% trans 'PRESCRIBIR' %}</a>
+      <li class="divider"></li>
+      <li class="nav-header">{% trans 'FINALIZAR CONSULTA' %}</li>
+      <li class="{% active_leaf request treatment %}">
+        <a href="{{treatment}}">{% trans 'Prescribir' %}</a>
       </li>
-      <li>
-        <a href="{{scheduler}}">{% trans 'DAR CITA' %}</a>
+      <li class="{% active_leaf request scheduler %}">
+        <a href="{{scheduler}}">{% trans 'Dar cita' %}</a>
       </li>
       {% if illness.code == 2 %}
-      <li>
-        <a href="{{next_self_survey}}">{% trans 'ASIGNAR ENCUESTA<br>AUTOADMINISTRADA' %}</a>
+      <li class="{% active_leaf request next_self_survey %}">
+        <a href="{{next_self_survey}}">{% trans 'Asignar<br>Cuestionario' %}</a>
       </li>
       {% endif %}
-      <li class="">
-          <a data-toggle="modal" href="{{conclusion}}">
-            {% trans 'FINALIZAR<br>CONSULTA' %}
-          </a>
+      <li class="{% active_leaf request conclusion %}">
+        <a href="{{conclusion}}">{% trans 'Conclusiones' %}</a>
       </li>                                                  
   </ul>
 

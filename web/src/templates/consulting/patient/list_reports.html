@@ -1,6 +1,6 @@
 {% extends "consulting/patient/personal_data_pm.html" %}
 
-{% load i18n%}
+{% load i18n consulting %}
 
 {% block right %}
   {% include "consulting/patient/card.html" %}
@@ -9,6 +9,7 @@
 {% block jquery_init %}
     $('#modal').on('hidden', function () {
       $(this).removeData();
+      $('.modal-body').html('');
     })
 {% endblock %}
 
@@ -30,7 +31,7 @@
                 {% trans 'FECHA' %}
               </th>
               <th style="text-align:center;">
-                {% trans 'INFORME' %}
+                {% trans 'CUESTIONARIO' %}
               </th>
               <th style="text-align:center;">
                 {% trans 'ANSIEDAD' %}
@@ -39,7 +40,7 @@
                 {% trans 'DEPRESION' %}
               </th>
               <th style="text-align:center;">
-                {% trans 'PDF' %}
+                {% trans 'INFORME' %}
               </th>               
             </tr>
           </thead>        
@@ -47,34 +48,20 @@
             {% for report in reports.object_list %}
               <tr id="{{report.id}}" class="report">
                 <td style="text-align:center;">{{report.end_date|date:"d/M/Y"|lower}}</td>
-                <td style="text-align:center;"><a class="btn btn-link" data-target="#modal" href="{% url consulting_view_report report.id %}" role="button" data-toggle="modal">{{report.survey.name}}</a></td>
-                <td style="text-align:center;"><span class="label label-{{report.get_anxiety_status|last}}">{{report.get_anxiety_status|first}}</span></td>
-                <td style="text-align:center;"><span class="label label-{{report.get_depression_status|last}}">{{report.get_depression_status|first}}</span></td>              
-                <td style="text-align:center;"><a class="btn btn-link" href="{% url consulting_view_report report.id%}?as=pdf" ><i class="icon-download-alt"></i></a>   
+                <td style="text-align:left;"><a class="btn btn-small btn-link" data-target="#modal" href="{% url consulting_view_report report.id %}" role="button" data-toggle="modal">{{report.survey.name}}</a></td>
+                <td style="text-align:center;"><span class="label label-{% get_anxiety_status_at report.appointment.patient report.end_date 1 %}">{% get_anxiety_status_at report.appointment.patient report.end_date 0 %}</span></td>
+
+                <td style="text-align:center;"><span class="label label-{% get_depression_status_at report.appointment.patient report.end_date 1 %}">{% get_depression_status_at report.appointment.patient report.end_date 0 %}</span></td>   
+
+                <td style="text-align:center;">
+                  <a class="btn btn-small btn-link" data-target="#modal" href="{% url consulting_view_report report.id %}" role="button" data-toggle="modal">HTML</a>|
+                  <a class="btn btn-small btn-link" href="{% url consulting_view_report report.id%}?as=pdf" >PDF</i></a>   
                 </td>
               </tr>
             {% endfor %}
           </tbody>
         </table>
-        {% if reports.paginator.num_pages > 1 %}
-        <div id="report-paginator" class="pagination pagination-centered">
-          <ul class="pagination">
-            {% if reports.has_previous %}
-              <li><a href="?page={{ reports.previous_page_number }}">←</a></li>
-            {% else %}
-              <li class="disabled"><a>←</a></li>
-            {% endif %}
-            {% for p in reports.paginator.page_range %}
-             <li {% if p = reports.number %}class="disabled"{% endif %}><a href="?page={{p}}">{{p}}</a></li>
-            {% endfor %}
-            {% if reports.has_next %}
-              <li><a href="?page={{ reports.next_page_number }}">→</a></li>
-            {% else %}
-              <li class="disabled"><a>→</a></li>
-            {% endif %}
-          </ul>
-        </div>   
-        {% endif %} 
+       {% include 'ui/includes/pagination_bar.html' with objects=reports %}
         <div id="overwrite"></div>                           
         {% else %}
             <div class="alert alert-info">{% trans "No hay Informes" %}</div>
@@ -90,7 +77,9 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Previsualización de informe</h3>
   </div>
-  <div class="modal-body"></div>
+  <div class="modal-body">
+    <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+  </div>
   <div class="modal-footer">
     <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
   </div>

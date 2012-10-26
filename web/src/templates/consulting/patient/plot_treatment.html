@@ -43,7 +43,7 @@ $(function () {
       {% for label, item in values.items %}
        {
             label: "{{label|upper}}",
-            data: [{% for date, val in item %}[(Date.UTC({{date|date:'Y, m-1, j'}})), {{val|floatformat:0}}],{% endfor %}]
+            data: [{% for date, val in item %}[(Date.UTC({{date|date:'Y, m-1, j'}})), {{val}}],{% endfor %}]
         },        
        {% endfor %}
     ];

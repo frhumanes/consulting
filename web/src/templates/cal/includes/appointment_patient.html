@@ -1,0 +1,18 @@
+<tr id={{event.patient.id}} data-msg="{{ event.id }}">
+  <td>
+  	{%if event.is_editable %}
+  	<a href="{% url cal.edit event.id %}">{{ event.date|date:"d/M/Y" }}</a>
+  	{% else %}
+	  	{% if request.user.get_profile.is_doctor %}
+	  		<a href="{% url consulting_start event.id %}">{{ event.date|date:"d/M/Y" }}</a>
+	  	{% else %}
+	  		{{ event.date|date:"d/M/Y" }}
+	  	{% endif %}
+  	{% endif %}
+  </td>
+  <td>{{ event.start_time|time:"H:i" }}</td>  
+  <td>{{ event.end_time|time:"H:i" }}</td>
+  <td>{{ event.patient.get_profile.get_full_name }}</td>
+  <td>{{ event.app_type}}</td>
+  <td>{{ event.description|striptags|safe|truncatewords:5 }}</td>
+</tr>

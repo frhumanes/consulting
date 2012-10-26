@@ -489,7 +489,6 @@ def conclusion(request, id_appointment, id_result=None):
         form = ConclusionForm(request_params)
         if form.is_valid():
             conclusion = form.save(commit=False)
-            conclusion.patient = appointment.patient
             conclusion.appointment = appointment
             conclusion.save()
             if id_result:
@@ -840,6 +839,7 @@ def administrative_data(request, id_task, code_block=None, code_illness=None, id
 def show_block(request, id_task, code_block=None, code_illness=None, id_appointment=None):
     task = get_object_or_404(Task, pk=int(id_task))
     appointment = get_object_or_404(Appointment, pk=int(id_appointment))
+    request.session['patient_user_id'] = appointment.patient.id
     if code_block is None or code_block == str(0):
         block = task.survey.blocks.filter(kind__in=(settings.GENERAL,task.kind)).order_by('code')[0]
         return HttpResponseRedirect(
@@ -862,11 +862,11 @@ def show_block(request, id_task, code_block=None, code_illness=None, id_appointm
             questions = category.questions.filter(kind__in=[settings.UNISEX, task.patient.get_profile().sex]).order_by('id')
             for question in questions:
                 options = question.question_options.all().order_by('id')
-                dic[question.id] = [(option.id, option.text)for option in options]
+                dic[question] = [(option.id, option.text)for option in options]
     else:
         for question in questions:
             options = question.question_options.all().order_by('id')
-            dic[question.id] = [(option.id, option.text)for option in options]
+            dic[question] = [(option.id, option.text)for option in options]
     if request.method == 'POST':
         form = QuestionsForm(request.POST, dic=dic, selected_options=[])
         if form.is_valid():
@@ -917,12 +917,12 @@ def show_block(request, id_task, code_block=None, code_illness=None, id_appointm
         last_result = None
         try: 
             last_result =  task.task_results.filter(block=block).latest('date')
-            selected_options = Answer.objects.filter(result=last_result)
+            selected_options = Answer.objects.select_related('option').filter(result=last_result)
         except:
             if code_block == str(settings.PRECEDENT_RISK_FACTOR):
                 try:
                     last_result =  Result.objects.filter(block=block,patient=task.patient).latest('date')
-                    selected_options = Answer.objects.filter(result=last_result)
+                    selected_options = Answer.objects.select_related('option').filter(result=last_result)
                 except:
                     selected_options = []
             else:
@@ -991,7 +991,7 @@ def self_administered_block(request, id_task):
     if questions:
         for question in questions:
             options = question.question_options.all().order_by('id')
-            dic[question.id] = [
+            dic[question] = [
                             (option.id, option.text)for option in options]
     else:
         categories = block.categories.all().order_by('id')
@@ -1000,7 +1000,7 @@ def self_administered_block(request, id_task):
             questions = category.questions.all().order_by('id')
             for question in questions:
                 options = question.question_options.all().order_by('id')
-                dic[question.id] = [
+                dic[question] = [
                                 (option.id, option.text)for option in options]
 
     if request.method == 'POST':
@@ -1240,7 +1240,7 @@ def config_task_variables(request, id_task):
 def select_successive_survey(request, id_appointment, code_illness=None):
     appointment = get_object_or_404(Appointment, pk=int(id_appointment))
     illness = get_object_or_404(Illness, code=int(code_illness))
-    variables = {}
+    variables = None
     tasks = Task.objects.filter(
     Q(patient=appointment.patient, completed=True,
         survey__surveys_illnesses__code=code_illness))
@@ -1254,7 +1254,10 @@ def select_successive_survey(request, id_appointment, code_illness=None):
         ClassForm = SelectOtherTaskForm
 
     if request.method == 'POST':
-        form = ClassForm(request.POST, variables=variables)
+        if variables is None:
+            form = ClassForm(request.POST)
+        else:
+            form = ClassForm(request.POST, variables=variables)
         if form.is_valid():
             code_survey = form.cleaned_data['survey']
             if 'kind' in form.cleaned_data:
@@ -1290,7 +1293,10 @@ def select_successive_survey(request, id_appointment, code_illness=None):
                                         'code_block':0
                                         }))
     else:
-        form = ClassForm(variables=variables)
+        if variables is None:
+            form = ClassForm()
+        else:
+            form = ClassForm(variables=variables)
 
     return render_to_response(
             'consulting/consultation/monitoring/successive_survey/select.html',
@@ -1322,73 +1328,6 @@ def prev_treatment_block(request, id_appointment, code_illness=None):
                             'id_appointment':id_appointment
                             }))
 
-
-@login_required()
-@only_doctor_consulting
-def treatment_block(request, id_task, id_appointment):
-    task = get_object_or_404(Task, pk=int(id_task))
-    appointment = get_object_or_404(Appointment, pk=int(id_appointment))
-
-    at_survey = get_object_or_404(Survey, code=settings.ADHERENCE_TREATMENT)
-
-    dic = {}
-    treated_blocks = task.treated_blocks.all()
-    block = at_survey.blocks.all()[0]
-    categories = block.categories.all().order_by('id')
-
-    for category in categories:
-        questions = category.questions.all().order_by('id')
-        for question in questions:
-            options = question.question_options.all().order_by('id')
-            dic[question.id] = [
-                            (option.id, option.text)for option in options]
-
-    if request.method == 'POST':
-        form = QuestionsForm(request.POST, dic=dic, selected_options=[])
-
-        if form.is_valid():
-            result = Result(patient=task.patient, survey=at_survey, task=task,
-                    created_by=request.user, appointment=appointment, block=block)
-            result.save()
-
-            task.start_date = result.date
-            task.save()
-
-            items = form.cleaned_data.items()
-            for name_field, values_list in items:
-                if values_list:
-                    if isinstance(values_list, list):
-                        for value in values_list:
-                            option = Option.objects.get(pk=int(value))
-                            answer = Answer(result = result, option = option)
-                            answer.save()
-                    elif values_list:
-                        option = Option.objects.get(pk=int(values_list))
-                        answer = Answer(result = result, option = option)
-                        answer.save()
-
-            if block not in treated_blocks:
-                task.treated_blocks.add(block)
-
-            if check_task_completion(task.id):
-                task.completed = True
-                task.end_date = datetime.now()
-                task.save()
-
-            return HttpResponseRedirect(reverse('consulting_monitoring',
-                                                args=[id_appointment]))
-
-    else:
-        form = QuestionsForm(dic=dic, selected_options=[])
-
-    return render_to_response(
-    'consulting/consultation/monitoring/treatment_survey/block.html',
-    {'form': form,
-    'task': task,
-    'appointment': appointment,
-    'my_block': block,
-    'patient_user': task.patient},
-    context_instance=RequestContext(request))
 
 
 @login_required
@@ -1958,14 +1897,12 @@ def searcher_component(request):
             if int(kind_component) == settings.ACTIVE_INGREDIENT:
                 components = Component.objects.filter(
                 Q(kind_component__exact=settings.ACTIVE_INGREDIENT),
-                Q(name__istartswith=start) |
-                Q(groups__name__istartswith=start)).distinct()
+                Q(name__istartswith=start)).distinct()
             else:
                 #settings.MEDICINE
                 components = Component.objects.filter(
                 Q(kind_component__exact=settings.MEDICINE),
-                Q(name__istartswith=start) |
-                Q(groups__name__istartswith=start)).distinct()
+                Q(name__istartswith=start)).distinct()
 
             data = {'ok': True,
                     'components':
@@ -2043,7 +1980,10 @@ def get_medicines(request, filter_option, id_patient):
 
     if id_patient:
         patient_user = User.objects.get(pk=int(id_patient))
-        appointment = Appointment.objects.get(pk=request.session['appointment_id'])
+        if 'appointment_id' in request.session:
+            appointment = Appointment.objects.get(pk=request.session['appointment_id'])
+        else:
+            appointment = None
     else:
         patient_user_id = request.session['patient_user_id']
         patient_user = User.objects.get(id=patient_user_id)
@@ -2092,6 +2032,7 @@ def list_medicines(request, id_appointment=None, code_illness=None):
                             {'patient_user': patient_user,
                             'appointment':appointment,
                             'illness': illness,
+                            'csrf_token': get_token(request)
                             },
                     context_instance=RequestContext(request))
 
@@ -2174,6 +2115,7 @@ def view_report(request, id_task):
     ave_mark = task.calculate_mark_by_code('AVE')
     light_mark = task.calculate_mark_by_code('L')
     blaxter_mark = task.calculate_mark_by_code('AS')
+    prev_meds = Medicine.objects.filter(patient=task.patient, is_previous=True).order_by('-date')
     medicines = Medicine.objects.filter(patient=task.patient,
     appointment=task.appointment, is_previous=False).order_by('-date')
 
@@ -2204,7 +2146,8 @@ def view_report(request, id_task):
             'light_mark':light_mark,
             'blaxter_mark':blaxter_mark,
             'as_mark':task.calculate_mark_by_code('AS'),
-            'treatment':medicines
+            'treatment':medicines,
+            'prev_treatment':prev_meds
             }
 
     if request.GET and request.GET.get('as', '') == 'pdf':
@@ -2293,7 +2236,7 @@ def list_messages(request):
 
 @login_required()
 @paginate(template_name='consulting/patient/list_recommendations.html',
-    list_name='recommendations', objects_per_page=settings.OBJECTS_PER_PAGE)
+    list_name='conclusions', objects_per_page=settings.OBJECTS_PER_PAGE)
 def list_recommendations(request):
     logged_user_profile = request.user.get_profile()
 
@@ -2302,11 +2245,11 @@ def list_recommendations(request):
     if logged_user_profile.is_doctor():
         patient_user = User.objects.get(id=patient_user_id)
 
-        recommendations = Conclusion.objects.filter(patient=patient_user).exclude(recommendation__exact="").order_by('-date')
+        recommendations = Conclusion.objects.filter(appointment__patient=patient_user).exclude(recommendation__exact="").order_by('-date')
 
         template_data = {}
         template_data.update({'patient_user': patient_user,
-                                'recommendations': recommendations,
+                                'conclusions': recommendations,
                                 'patient_user_id': patient_user_id,
                                 'csrf_token': get_token(request)})
         return template_data
@@ -2358,6 +2301,13 @@ def user_evolution(request, return_xls=False):
                 vticks.append(t.end_date)
         scales['beck'].insert(0, [t.end_date, t.calculate_beck_mark()])
         scales['hamilton'].insert(0, [t.end_date, t.calculate_hamilton_mark()[0]])
+    yscales = {}
+    pkeys = settings.BECK.keys()
+    pkeys.sort()
+    yscales['beck'] = pkeys
+    pkeys = settings.HAMILTON.keys()
+    pkeys.sort()
+    yscales['hamilton'] = pkeys
 
     vticks.sort()
 
@@ -2410,6 +2360,7 @@ def user_evolution(request, return_xls=False):
                                  'latest_marks': latest_marks,
                                  'latest_dimensions': latest_dimensions,
                                  'scales': scales,
+                                 'yscales': yscales,
                                  'values': values,
                                  'active_tab': (request.POST.get('active_tab','')).replace('#',''),
                                  'ticks_variables':vticks,

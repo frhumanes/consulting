@@ -1,13 +1,13 @@
 {% extends as_pdf|yesno:"ui/pdf.html,ui/dummy.html" %}
 
-{% load i18n %}
+{% load i18n consulting %}
 
 {% block container %}
 <h2>INFORME RESUMEN DE {{task.survey.name|upper}}</h2>
 {% if task.survey.id < 3 %}
 <p>{{patient.name}} {{patient.first_surname}} {{patient.second_surname}} de {{patient.get_age}} años de edad presenta desde hace {{task.get_time_interval|lower}} los síntomas que le han hecho acudir a consulta.
 	{% if task.get_ap_dict %}
-		Ha sido diagnosticado/a de 
+		Ha sido {{ 'diagnosticado/a'|sexify:task.patient }} de 
 		{% for ap in task.get_ap_dict %}
 			{% if forloop.last and not forloop.first %}
 					 y {{ap.text}}
@@ -20,7 +20,7 @@
 				{% endif %}
 		{%  endfor %}
 	{% else %}
-		No ha sido diagnosticado/a 
+		No ha sido {{ 'diagnosticado/a'|sexify:task.patient }}
 	{% endif %}
 	con anterioridad y en su familia
 	{% if task.get_af_dict|length %}
@@ -95,9 +95,9 @@
 	{% if task.get_organicity_list %}
 	y
 	{% endif %}
-	{% if treatment %}
+	{% if prev_treatment %}
 	se medica con
-		{% for med in treatment %}
+		{% for med in prev_treatment %}
 			{% if forloop.last and not forloop.first %}
 				 y {{med.component.name}} {{med.posology}} mg/24 horas desde hace {{med.months}} mes{{med.months|pluralize:'es'}}.
 			{% else %}

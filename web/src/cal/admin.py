@@ -17,7 +17,7 @@ class SlotTypeAdmin(admin.ModelAdmin):
 
 class SlotAdmin(admin.ModelAdmin):
     list_display = ["creator", "slot_type", "weekday", "start_time",
-        "end_time", "date", "description"]
+        "end_time", "description"]
     list_filter = ["creator", "slot_type", "weekday"]
     readonly_fields = ('created_at', 'updated_at')
 

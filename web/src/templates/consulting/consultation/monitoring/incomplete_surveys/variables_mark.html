@@ -10,6 +10,7 @@
       <div class="alert alert-info">
         ATENCIÓN, las siguientes puntuaciones han sido obtenidas del cuestionario <strong>{{task.get_kind}}</strong>
       </div>
+      {% if dimensions %}
         <table class="table table-bordered table-condensed">  
           <thead>
             <tr>
@@ -30,6 +31,7 @@
             {% endfor %}
           </tbody>
         </table>
+      {% endif %}
         <table class="table table-bordered table-condensed">  
           <thead>
             <tr>
@@ -51,9 +53,9 @@
           </tbody>
         </table>
         <div class="pull-right">
-          <a id="goback" href="{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}" class="btn btn-info btn-large">
+          <a id="goback" href="{% if illness %}{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}" class="btn btn-info btn-large">
             {% trans 'Volver' %}
-          </a>         
+          </a>      
         </div>                             
   </section>
 {% endblock container %}
