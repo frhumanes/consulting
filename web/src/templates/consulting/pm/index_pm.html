@@ -40,6 +40,10 @@
 
 {% endblock %}
 
+{% block left %}
+  <a class="btn btn-large btn-primary" href="{% url consulting_newpatient %}"><i class="icon-plus-sign icon-white"></i> {% trans 'Nuevo Paciente' %}</a>
+{% endblock %}
+
 {% block container %}
 <div class="row-fluid" style="margin-top:150px;">      
   <div class="span6" style="text-align:right;">

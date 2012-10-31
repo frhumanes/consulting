@@ -13,35 +13,31 @@
 </div>
 <section>
   <div class="">
-    {% if tasks.object_list.count > 0 %}
-    <div class="">
-      <table id="tasks_list" class="table table-striped">
-        <thead>
-          <tr>
-            <th>{% trans "Médico" %}</th>
-            <th>{% trans "Fecha límite" %}</th>
-            <th>{% trans "Última modificación" %}</th>
+    {% if tasks.object_list %}
+    <table id="tasks_list" class="table table-striped">
+      <thead>
+        <tr>
+          <th>{% trans "Médico" %}</th>
+          <th>{% trans "Fecha límite" %}</th>
+          <th>{% trans "Última modificación" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in tasks.object_list %}
+          <tr data-msg="{{ task.id }}" style="cursor:pointer">
+            <td>{{ task.patient.get_profile.doctor.get_full_name }}</td>
+            <td>{{ task.patient.get_profile.get_nextAppointment.date|date:'d/M/Y' }}</td>
+             <td>{{ task.updated_at|date:'d/M/Y H:i' }}</td>              
           </tr>
-        </thead>
-        <tbody>
-          {% for task in tasks.object_list %}
-            <tr data-msg="{{ task.id }}" style="cursor:pointer">
-              <td>{{ task.patient.get_profile.doctor.get_profile.name }} {{ task.patient.get_profile.doctor.get_profile.first_surname }} {{ task.patient.get_profile.doctor.get_profile.second_surname }}</td>
-              <td>{{ task.patient.get_profile.get_nextAppointment.date|date:'d/M/Y' }}</td>
-               <td>{{ task.updated_at|date:'d/M/Y H:i' }}</td>              
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      {% include 'ui/includes/pagination_bar.html' with objects=tasks %}
+        {% endfor %}
+      </tbody>
+    </table>
+    {% include 'ui/includes/pagination_bar.html' with objects=tasks %}
 
-      <div id="preview"></div>
-      {% else %}
-        <div class="">
-          <div class="alert alert-info">{% trans "No hay cuestionarios pendientes en este momento" %}</div>
-        </div>
-      {% endif %}
-    </div>
+    <div id="preview"></div>
+    {% else %}
+        <div class="alert alert-info">{% trans "No hay cuestionarios pendientes en este momento" %}</div>
+    {% endif %}
   </div>
 </section>
 

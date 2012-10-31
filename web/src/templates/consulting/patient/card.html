@@ -5,7 +5,7 @@
       <tr>            
         <th colspan="2" style="text-align:center;">
           <h4>
-            {{patient_user.get_profile.name|upper}} {{patient_user.get_profile.first_surname|upper}} {{patient_user.get_profile.second_surname|upper}}
+            <a target="_blank" href="{% url consulting_pre_personal_data_pm patient_user.id %}">{{patient_user.get_profile.get_full_name|upper}}<a>
           <a href="{% url consulting_editpatient_pm patient_user.id %}?next={{request.path}}" data-dismiss="alert" class="icon-edit pull-right"></a> 
           </h4>
         </th>

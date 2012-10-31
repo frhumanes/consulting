@@ -7,7 +7,11 @@
 
 {% if match_outbox or message.author = patient_user %}
   <td><i class="icon-share"></i></td>
-  <td  style="font-weight: {{ message.unread|yesno:'bold,normal' }}">{{ message.recipient.get_profile.get_full_name }}</td>
+  {% if request.user.get_profile.is_doctor %}
+  <td style="font-weight: {{ message.unread|yesno:'bold,normal' }}">{{ message.recipient.get_profile.get_full_name }}</td>
+  {% else %}
+  <td>{{ message.recipient.get_profile.get_full_name }}</td>
+  {% endif %}
 {% endif %}
 
 {% if match_inbox or message.recipient = patient_user %}
@@ -15,6 +19,6 @@
    <td style="font-weight: {{ message.unread|yesno:'bold,normal' }}">{{ message.author.get_profile.get_full_name }}</td>
 {% endif %}
 
-  <td><span style="font-weight: {{ message.unread|yesno:'bold,normal' }}">{{ message.subject|striptags|safe}}</span> - <span class="muted">{{ message.body|striptags|safe|truncatewords:7 }}</span></td>
+  <td><span {% if request.user.get_profile.is_doctor %}style="font-weight: {{ message.unread|yesno:'bold,normal' }}"{% endif %}>{{ message.subject|striptags|safe}}</span> - <span class="muted">{{ message.body|striptags|safe|truncatewords:7 }}</span></td>
   <td>{{ message.sent_at|date:"d/M/y" }}</td>
 </tr>

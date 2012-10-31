@@ -11,13 +11,16 @@ def generate_reports(full=False):
         except:
             report = Report()
         report.task = task
+        report.date = report.task.end_date
         report.created_by = task.created_by
         report.patient = task.patient.get_profile()
+        report.age = report.patient.get_age()
+        report.sex = report.patient.sex
+        report.profession = task.patient.get_profile().profession
         report.variables = { k.name: v for k, v in task.get_variables_mark().items()}
         report.dimensions = task.get_dimensions_mark()
-        report.status={u'Depresión': task.get_depression_status()[0],
-                       u'Anxiedad': task.get_anxiety_status()[0]
+        report.status={u'Depresión': report.patient.get_depression_status(task.end_date, True),
+                       u'Ansiedad': report.patient.get_anxiety_status(task.end_date, True)
                       }
         report.aves = task.get_ave_list()
         report.save()
-

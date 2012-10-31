@@ -4,41 +4,112 @@
 {% load l10n %}
 {% load stadistic %}
 
+{% block css_inline %}
+  .shared, .bar, .label {
+    font-size: 8pt;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+  }
+  .femalebar {
+    fill: #F47777;
+    }
+  .malebar {
+    fill: #77F4D7;
+  }
+  .highlight rect.malebar, .highlight rect.femalebar {
+    fill: #007ACC;
+  }
+  text.malebar, text.femalebar {
+    display: none;
+  }
+  .highlight text {
+    display: block;
+    fill: #000;
+  }
+  .accordion-inner {
+    max-height:200px; 
+    overflow-y:auto
+  }
+
+  .accordion-heading {
+    font-weight: bold;
+  }
+
+  thead { display:block }
+  thead th { width: 100px; }
+  tbody { display:block; overflow-y:auto; overflow-x:hidden; height:200px; }
+{% endblock %}
+
 {% block css_files %}
   {{block.super}}
-  <style>
-.shared, .bar, .label {
-  font-size: 8pt;
-  font-weight: bold;
-  font-family: Arial, sans-serif;
-}
-.femalebar {
-  fill: #F47777;
-  }
-.malebar {
-  fill: #77F4D7;
-}
-.highlight rect.malebar, .highlight rect.femalebar {
-  fill: #007ACC;
-}
-text.malebar, text.femalebar {
-  display: none;
-}
-.highlight text {
-  display: block;
-  fill: #000;
-}
-</style>
+  <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet">
+  <link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet"/>
 {% endblock %}
 
 {% block js_files %}
   {{ block.super }}
   <script src="http://d3js.org/d3.v2.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery-ui-1.8.18.custom.js"></script>
+  <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
 {% endblock %}
 
 {% block jquery_init %}
-$('#main').remove();
-$('#right_bar').remove();
+
+$('button[type="reset"]').on('click', function(){
+  var form = $(this).parentsUntil('form').parent();
+  form.clearForm('.span3:hidden');
+  form.find('.text-info').html('');
+  form.find('input').removeAttr('checked');
+});
+
+$('#download_xls').live("click", function(e) {
+    var form = $('#form');
+    var orig_action = form.attr('action');
+    form.attr('action', orig_action+'?as=xls');
+    form.submit();
+    form.attr('action', orig_action);
+});
+
+$(".range").each(function(){
+    var min = $(this).find('input[id$="_0"]').attr('min');
+    var max = $(this).find('input[id$="_0"]').attr('max');
+    var selected_min = ($(this).find('input[id$="_0"]').val()) ? $(this).find('input[id$="_0"]').val() : min;
+    var selected_max = ($(this).find('input[id$="_1"]').val()) ? $(this).find('input[id$="_1"]').val() : max;
+
+    if ($(this).find('input[id$="_1"]').val() | $(this).find('input[id$="_0"]').val()) {
+      var value = selected_min + ' - ' + selected_max;
+      $(this).parentsUntil('div.stop').parent().find('.text-info').html(value);
+      $(this).parent().find('.text-info').html(value);
+    }
+
+    $(this).slider({
+      range: true,
+      min: min,
+      max: max,
+      values: [eval(selected_min), eval(selected_max)],
+      slide: function( event, ui ) {
+          if (ui.values[0] == ui.values[1]){
+            value = ui.values[0];
+          } 
+          else {
+            value = ui.values[0] + ' - ' + ui.values[1];
+          }
+          $(this).parentsUntil('div.stop').parent().find('.text-info').html(value);
+          $(this).parent().find('.text-info').html(value);
+          $(this).find('input[id$="_0"]').val(ui.values[0]);
+          $(this).find('input[id$="_1"]').val(ui.values[1]);
+      }
+  });
+});
+
+$('#id_date_0').datepicker().on('changeDate',
+    function(ev){$('#id_date_0').datepicker('hide');
+  });
+$('#id_date_1').datepicker().on('changeDate',
+    function(ev){$('#id_date_1').datepicker('hide');
+  });
+
+$('ul').addClass("without_decorator");
 
 var data = [
   {% for labelname, values in data.items %}
@@ -49,16 +120,16 @@ var data = [
 ];
 
 /* edit these settings freely */  
-var w = 600,
-    h = 400,
+var w = 550,
+    h = 500,
     topMargin = 15,
     labelSpace = 120,
     innerMargin = w/2+labelSpace,
     outerMargin = 15,
     gap = 2,
     dataRange = d3.max(data.map(function(d) { return Math.max(d.barData1, d.barData2) }));
-    leftLabel = "Mujeres",
-    rightLabel = "Hombres";
+    leftLabel = "Hombres",
+    rightLabel = "Mujeres";
 
 /* edit with care */
 var chartWidth = w - innerMargin - outerMargin,
@@ -177,7 +248,80 @@ function refresh(data) {
   {% include "ui/includes/nav_bar_doctor_statistic.html" %}
 {% endblock left%}
 
-{% block large %}
+{% block right %}
+<h4>{% trans 'Opciones de filtrado' %}</h4>
+<hr>
+<form class="form-inline" id="form" action="{{request.path}}" method="post" accept-charset="utf-8">
+  {% csrf_token %}
+  <div class="btn-group center">
+    <button type="reset" class="btn btn-small">
+      {% trans 'Limpiar filtros' %}
+    </button>
+    <button type="submit" class="btn btn-small btn-primary"><i class="icon-filter icon-white"></i>
+      {% trans 'Aplicar filtros' %}
+    </button>
+  </div>
+  <hr>
+  <div class="accordion" id="accordion_filter">
+  {% for f in form %}
+  <div class="accordion-group stop">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_filter" href="#collapse_{{forloop.counter}}">
+      {{f.label}}
+      <span class="pull-right text-info"></span>
+      </a>
+    </div>
+    <div id="collapse_{{forloop.counter}}" class="accordion-body collapse">
+      <div class="accordion-inner">
+        {{f}}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_filter" href="#collapse_variables">
+      {% trans 'Variables' %}
+      </a>
+    </div>
+    <div id="collapse_variables" class="accordion-body collapse">
+      <div class="accordion-inner">
+        {% for f in form.variables %}
+        <div class="stop">
+          <p>{{f.label|cut:"variables."}}<span class="pull-right text-info"></span></p>
+          {{f.draw}}
+        </div><br>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_filter" href="#collapse_dimensions">
+      {% trans 'Dimensiones' %}
+      </a>
+    </div>
+    <div id="collapse_dimensions" class="accordion-body collapse">
+      <div class="accordion-inner">
+        {% for f in form.dimensions %}
+        <div class="stop">
+          <div>{{f.label|cut:"dimensions."}}<span class="pull-right text-info"></span></div>
+          {{f.draw}}
+        </div><br>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  
+  </div>
+
+</form>
+{% endblock %}
+
+
+{% block container %}
 <div class="page-header">
   <h1>{% trans 'Explotación de datos' %}
     <div class="btn-group pull-right">
@@ -186,47 +330,94 @@ function refresh(data) {
   </h1>
 </div>
  <section>
-  <div id="data" style="overflow-x:scroll;">
-    <table class="table table-condensed table-striped">
-      <thead>
-        <th>#</th>
-        <th>Edad</th>
-        <th>Sexo</th>
-        <th>Profesión</th>
-        <th>Fecha</th>
-        {% for d in dimensions %}
-          <td><small>Dimensión {{d.name}}</small></td>
-        {% endfor %}
-        {% for v in variables %}
-          <td><small>{{v.name}}</small></td>
-        {% endfor %}
-        {% for s in status %}
-          <td><small>{{s}}</small></td>
-        {% endfor %}
-      </thead>
-      {% for r in reports %}
-        <tr>
-          <td>{{r.patient.id}}</td>
-          <td>{{r.patient.get_age}}</td>
-          <td>{{r.patient.get_sex}}</td>
-          <td>{{r.patient.profession}}</td>
-          <td>{{r.task.end_date|date:"j/m/Y"}}</td>
-          {% for d in dimensions %}
-            <td>{% dictvalue r.dimensions d.name %}</th>
-          {% endfor %}
-          {% for v in variables %}
-            <td>{% dictvalue r.variables v.name %}</th>
-          {% endfor %}
-          {% for s in status %}
-            <td>{% dictvalue r.status s %}</th>
-          {% endfor %}
-        <tr>
-      {% endfor %}
-    </table>
+  
+  {% if reports|length %}
+  <div class="alert alert-info">La consulta devolvió <strong class="text-info">{{reports|length}}</strong> resultados</div>
+  <div class="hero-unit">
+    <button id="download_xls" class="btn btn-primary btn-block btn-large">{% trans 'Descargar datos en formato Excel' %}</button>
+    <a href="#myModal" role="button" class="btn  btn-block" data-toggle="modal">{% trans 'Previsualizar datos' %}</a>
   </div>
+  
+  <div id="vis" class="center"></div>
+  {% else %}
+    <div class="alert alert-warning">
+      <p>La consulta no devolvió <strong class="text-info">ningún</strong> resultado.</p>
+      <p>Utilice criterios de filtrado menos restrictivos e inténtelo de nuevo.</p>
+    </div>
+  {% endif %}
 <section>
 
-<div id="vis"></div>
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">{% trans 'Explotación de datos' %}</h3>
+  </div>
+  <div class="modal-body" style="max-height: 300px; overflow: auto">
+    <div id="data">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Edad</th>
+            <th>Sexo</th>
+            <th>Profesión</th>
+            <th>Fecha</th>
+          {% for d in dimensions %}
+            <td><small>Dimensión {{d.name}}</small></td>
+          {% endfor %}
+          {% for v in variables %}
+            <td><small>{{v.name}}</small></td>
+          {% endfor %}
+          {% for s in status %}
+            <td><small>{{s}}</small></td>
+          {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for r in reports %}
+          <tr>
+            <td>{{r.patient.id}}</td>
+            <td>{{r.age}}</td>
+            <td>{{r.sex}}</td>
+            <td>{{r.profession}}</td>
+            <td>{{r.task.end_date|date:"j/m/Y"}}</td>
+            {% for d in dimensions %}
+              <td>{% dictvalue r.dimensions d.name %}</td>
+            {% endfor %}
+            {% for v in variables %}
+              <td>{% dictvalue r.variables v.name %}</td>
+            {% endfor %}
+            {% for s in status %}
+              <td>{% dictvalue r.status s %}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+          <tr>
+            <th>#</th>
+            <th>Edad</th>
+            <th>Sexo</th>
+            <th>Profesión</th>
+            <th>Fecha</th>
+          {% for d in dimensions %}
+            <td><small>Dimensión {{d.name}}</small></td>
+          {% endfor %}
+          {% for v in variables %}
+            <td><small>{{v.name}}</small></td>
+          {% endfor %}
+          {% for s in status %}
+            <td><small>{{s}}</small></td>
+          {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">{% trans 'Cerrar' %}</button>
+  </div>
+</div>
+
+
 {% endblock %}
 
 

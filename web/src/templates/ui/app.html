@@ -11,7 +11,7 @@
       <script src="{{ STATIC_URL }}js/jquery.js"></script>
       <script src="{{ STATIC_URL }}js/jquery.form.js"></script>
       <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
-      <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="excanvas.min.js"></script><![endif]-->
+      <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/excanvas.min.js"></script><![endif]-->
       <script src="{{ STATIC_URL }}js/bootstrap-editable.min.js"></script>
     {% endblock %}
 
@@ -24,6 +24,19 @@
     {% endblock %}
 
     <style type="text/css">
+        @media (min-width: 768px) and (max-width: 1024px){
+          #calendar table {
+           font-size:0.8em
+          }
+          .pagination {
+            min-width: 220px
+          }
+        }
+        @media(max-width:1024px){
+          h1{
+             font-size:2em 
+            }
+          }
     {% block css_inline %}
     {% endblock %}
     </style>
@@ -58,13 +71,13 @@
   <body>
     {% block header%}
       {% if request.user.get_profile.is_doctor %}
-        {% include "ui/includes/header_doctor.html" %}
+        {% include "ui/includes/header_doctor.html" with user=request.user %}
       {% else %}
         {% if request.user.get_profile.is_administrative %}
-          {% include "ui/includes/header_administrative.html" %}
+          {% include "ui/includes/header_administrative.html" with user=request.user %}
         {% else %}
           {% if request.user.get_profile.is_patient %}
-            {% include "ui/includes/header_patient.html" %}
+            {% include "ui/includes/header_patient.html" with user=request.user %}
           {% endif%}
         {% endif%}
       {% endif%}

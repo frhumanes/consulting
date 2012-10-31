@@ -711,8 +711,8 @@ def administrative_data(request, id_task, code_block=None, code_illness=None, id
     treated_blocks = task.treated_blocks.all()
 
     # CHECK IF DOCTOR CONTAINS THIS PATIENT
-    if not user in request.user.get_profile().patients.all():
-        return HttpResponseRedirect(reverse('consulting_index'))
+    if not user.get_profile().doctor == request.user:
+       return HttpResponseRedirect(reverse('consulting_index'))
 
     if request.method == "POST":
         exclude_list = ['user', 'role', 'doctor', 'patients', 'username',
@@ -980,7 +980,7 @@ def self_administered_block(request, id_task):
         last_result = task.task_results.latest('date')
 
         if last_result:
-            selected_options = last_result.options.all()
+            selected_options = Answer.objects.select_related('option').filter(result=last_result)
     else:
         selected_options = []
 
@@ -1414,7 +1414,7 @@ def select_self_administered_survey_monitoring(request, id_appointment, code_ill
             if id_variables and code_survey==str(settings.CUSTOM):
                 variables = Variable.objects.filter(id__in=id_variables)
                 for variable in variables:
-                    formulas = variable.variable_formulas.filter(formula__kind=kind)
+                    formulas = variable.variable_formulas.filter(kind=kind)
                     for formula in formulas:
                         codes = formula.polynomial.split('+')
                         for code in codes:
@@ -1655,31 +1655,22 @@ def patient_searcher(request):
 
             if logged_user_profile.is_administrative():
                 profiles = Profile.objects.filter(
-                                Q(role__exact=settings.PATIENT,
-                                nif__istartswith=start)|
-                                Q(role__exact=settings.PATIENT,
-                                name__istartswith=start)|
-                                Q(role__exact=settings.PATIENT,
-                                first_surname__istartswith=start)|
-                                Q(role__exact=settings.PATIENT,
-                                second_surname__istartswith=start)).order_by(
+                                Q(role__exact=settings.PATIENT) &
+                                (Q(nif__istartswith=start)|
+                                Q(name__istartswith=start)|
+                                Q(first_surname__istartswith=start)|
+                                Q(second_surname__istartswith=start))).order_by(
                                 'name', 'first_surname', 'second_surname')
             else:
                 doctor_user = logged_user_profile.user
                 profiles = Profile.objects.filter(
                                 Q(doctor=doctor_user,
-                                role__exact=settings.PATIENT,
-                                nif__istartswith=start)|
-                                Q(doctor=doctor_user,
-                                role__exact=settings.PATIENT,
-                                name__istartswith=start)|
-                                Q(doctor=doctor_user,
-                                role__exact=settings.PATIENT,
-                                first_surname__istartswith=start)|
-                                Q(doctor=doctor_user,
-                                role__exact=settings.PATIENT,
-                                second_surname__istartswith=start)).order_by(
-                                'name', 'first_surname', 'second_surname')
+                                role__exact=settings.PATIENT) &
+                                (Q(nif__istartswith=start)|
+                                 Q(name__istartswith=start)|
+                                 Q(first_surname__istartswith=start)|
+                                 Q(second_surname__istartswith=start)
+                                )).order_by('name', 'first_surname', 'second_surname')
 
             users =[]
             [users.append(profile.user) for profile in profiles]
@@ -1688,7 +1679,7 @@ def patient_searcher(request):
                     'completed_names':
                     [{'id': user.id,
                     'label':
-                    user.get_profile().get_full_name()}for user in users]
+                    (user.get_profile().get_full_name())}for user in users]
                     }
         return HttpResponse(simplejson.dumps(data))
     return HttpResponseRedirect(reverse('consulting_index'))
@@ -1847,7 +1838,7 @@ def personal_data_pm(request):
 
             # CHECK IF DOCTOR CONTAINS THIS PATIENT
             if logged_user_profile.is_doctor():
-                if not patient_user in logged_user_profile.patients.all():
+                if not patient_user.get_profile().doctor == request.user:
                     return HttpResponseRedirect(reverse('consulting_index'))
 
             return render_to_response(

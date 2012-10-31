@@ -6,6 +6,20 @@
   {% include "cal/includes/calendar.html" with doctor=request.user %}
 {% endblock right %}
 
+{% block css_inline %}
+@media(max-width:1024px){
+  #left_bar {
+    width:0%
+  }
+  #main {
+    min-width: 450px
+  }
+  h1{
+   font-size:2em 
+  }
+}
+{% endblock %}
+
 {% block container %}
 <div class="page-header">
   <h1>{% trans "Citas del " %}{{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}</h1>

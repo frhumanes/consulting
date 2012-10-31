@@ -1187,30 +1187,21 @@ def patient_searcher(request):
 
             if logged_user_profile.is_administrative():
                 profiles = Profile.objects.filter(
-                                Q(role__exact=settings.PATIENT,
-                                nif__istartswith=start)|
-                                Q(role__exact=settings.PATIENT,
-                                name__istartswith=start)|
-                                Q(role__exact=settings.PATIENT,
-                                first_surname__istartswith=start)|
-                                Q(role__exact=settings.PATIENT,
-                                second_surname__istartswith=start)).order_by(
+                                Q(role__exact=settings.PATIENT),
+                                Q(nif__istartswith=start)|
+                                Q(name__istartswith=start)|
+                                Q(first_surname__istartswith=start)|
+                                Q(second_surname__istartswith=start)).order_by(
                                 'name', 'first_surname', 'second_surname')
             else:
                 doctor_user = logged_user_profile.user
                 profiles = Profile.objects.filter(
                                 Q(doctor=doctor_user,
-                                role__exact=settings.PATIENT,
-                                nif__istartswith=start)|
-                                Q(doctor=doctor_user,
-                                role__exact=settings.PATIENT,
-                                name__istartswith=start)|
-                                Q(doctor=doctor_user,
-                                role__exact=settings.PATIENT,
-                                first_surname__istartswith=start)|
-                                Q(doctor=doctor_user,
-                                role__exact=settings.PATIENT,
-                                second_surname__istartswith=start)).order_by(
+                                role__exact=settings.PATIENT),
+                                Q(nif__istartswith=start)|
+                                Q(name__istartswith=start)|
+                                Q(first_surname__istartswith=start)|
+                                Q(second_surname__istartswith=start)).order_by(
                                 'name', 'first_surname', 'second_surname')
 
             users =[]

@@ -18,7 +18,7 @@
 
 {% block large %}
   <div class="page-header">
-    <h1>{% get_header request %}
+    <h1>{% get_header request %} {% if request.user|unread_messages %}<small>[{{ request.user|unread_messages }}]</small>{% endif %}
             <div class="btn-group pull-right">
                <a class="btn btn-info" href="{% url private_messages_new %}"><i class="icon-pencil icon-white"></i> {% trans "Redactar" %}</a>
             </div>
@@ -67,8 +67,8 @@
   </div>
   <div class="modal-footer">
 
-    {% if 1  %}
-    <button id="reply" class="btn btn-primary"><i class="icon-share-alt"></i> {% trans 'Responder' %}</button>
+    {% if messages.object_list.0.recipient = request.user  %}
+    <button id="reply" class="btn btn-primary"><i class="icon-share-alt icon-white"></i> {% trans 'Responder' %}</button>
     {% endif %}
     <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans 'Cerrar' %}</button>
   </div>
