@@ -28,23 +28,30 @@ from stadistic.forms import FiltersForm
 @login_required()
 @only_doctor_consulting
 def stratification(request):
-    dep_list = [[] for i in range(len(settings.BECK.keys()), 1, -1)]
-    ans_list = [[] for i in range(len(settings.HAMILTON.keys()), 1, -1)]
+    dep_list = [[] for i in range(len(settings.BECK.keys())+1)]
+    ans_list = [[] for i in range(len(settings.HAMILTON.keys())+1)]
 
-    for p in Profile.objects.all():
+    filtered = request.GET.get('filter','')
+    if filtered == 'mine':
+        patient_list = Profile.objects.filter(role=settings.PATIENT, doctor=request.user)
+    else:
+        patient_list = Profile.objects.filter(role=settings.PATIENT)
+    for p in patient_list:
         ans = p.get_anxiety_status(index=True)
         dep = p.get_depression_status(index=True)
-        if ans:
-            ans_list[ans-1].append(p)
-        if dep:
-            dep_list[dep-1].append(p)
-
-
-
+        if isinstance(ans, int):
+            ans_list[ans+1].append(p)
+        else:
+            ans_list[0].append(p)
+        if isinstance(dep, int):
+            dep_list[dep+1].append(p)
+        else:
+            dep_list[0].append(p)
     return render_to_response('consulting/stadistic/stratification.html', 
                               {'depression_list':dep_list, 
                                'anxiety_list':ans_list,
-                               'num_patient':Profile.objects.filter(role=settings.PATIENT).count()},
+                               'filtered': filtered,
+                               'num_patient':patient_list.count()},
                                 context_instance=RequestContext(request))
 
 
@@ -63,6 +70,8 @@ def update_filter(dict_filters, key, value):
   else:
     name = unpack[0]
     op = None
+  if key.startswith('\\'):
+    name = key.replace('\\','')
   if isinstance(value, list):
     op = 2
 
@@ -85,10 +94,14 @@ def update_filter(dict_filters, key, value):
 @only_doctor_consulting
 def explotation(request):
     data = {}
+    data1 = {12:0, 18:0, 25:0, 32:0, 40:0, 50:0, 65: 0, '>65':0}
+    data2 = {'beck':[0 for i in range(len(settings.BECK.keys())+2)],
+             'hamilton':[0 for i in range(len(settings.HAMILTON.keys())+2)]}
     marks = {}
     form = FiltersForm()
     reports = []
     filters = {}
+    group = False
     if request.method == 'POST':
       form = FiltersForm(request.POST)
       for k, v in request.POST.items():
@@ -108,27 +121,55 @@ def explotation(request):
             filters = update_filter(filters, 'status.Depresión', [int(v) for v in request.POST.getlist('depression')])
           if k.startswith('ave'):
             filters = update_filter(filters, k, [int(v) for v in request.POST.getlist(k)])
-          if k.startswith('variables') or k.startswith('dimensions'):
+          if k.startswith('variables') or k.startswith('dimensions')           or k.startswith('treatment'):
             filters = update_filter(filters, k, int(v))
-
+          if k.startswith('options'):
+            for o in request.POST.getlist(k):
+              if o == 'filter':
+                lp = [i['id'] for i in Profile.objects.filter(doctor=request.user).values('id')]
+                filters = update_filter(filters, '\patient_id', lp)
+              if o == 'group':
+                group = True
     reports = Report.objects.raw_query(filters)
+
+    if group:
+      for r in reports:
+        if r.patient in data:
+          for var, mark in r.variables.items():
+            if mark and isinstance(mark, (int, long, float)):
+              if var in data[r.patient].variables:
+                data[r.patient].variables[var].append(mark)
+              else:
+                data[r.patient].variables[var] = [mark,]
+          for dim, mark in r.dimensions.items():
+            if mark and isinstance(mark, (int, long, float)):
+              if dim in data[r.patient].dimensions:
+                data[r.patient].dimensions[dim].append(mark)
+              else:
+                data[r.patient].dimensions[dim] = [mark,]
+        else:
+          data[r.patient] = r
+          for var, mark in r.variables.items():
+            if mark and isinstance(mark, (int, long, float)):
+              data[r.patient].variables[var] = [mark,]
+          for dim, mark in r.dimensions.items():
+            if mark and isinstance(mark, (int, long, float)):
+              data[r.patient].dimensions[dim] = [mark,]
+          data[r.patient].status[u'Ansiedad'] = r.patient.get_anxiety_status(index=True)
+          data[r.patient].status[u'Depresión'] = r.patient.get_depression_status(index=True)
+
+      for p in data.keys():
+        for key, l in data[p].variables.items():
+          if l:
+            data[p].variables[key]=reduce(lambda x, y: x + y, l) / len(l)
+        for key, l in data[p].dimensions.items():
+          if l:
+            data[p].dimensions[key]=reduce(lambda x, y: x + y, l) / len(l)
+      reports = data.values()
+      data = {}
     #raise Exception
-    for r in reports:
-        p = r.patient
-        for var, mark in r.variables.items():
-            if mark >= 0 and mark:
-                if var in data.keys() and p.sex in data[var].keys():
-                    data[var][p.sex].append(mark)
-                elif var in data.keys():
-                     data[var][p.sex] = [mark,]
-                else:
-                    data[var] = {p.sex:[mark,]}
-    for varname, marks in data.items():
-        for key, l in marks.items():
-            if l:
-                data[varname][key]=reduce(lambda x, y: x + y, l) / len(l)
-            else:
-                data[varname][key] = 0
+
+  
 
     if request.GET.get('as', '') == 'xls':
       style_head = xlwt.easyxf('font: name Times New Roman, color-index black, bold on')
@@ -183,8 +224,55 @@ def explotation(request):
       return response
 
     else:
-      return render_to_response('consulting/stadistic/explotation.html', 
+        #### Pyramids ####
+        for r in reports:
+            p = r.patient
+            for var, mark in r.variables.items():
+                if mark >= 0 and mark:
+                    if var in data.keys() and p.sex in data[var].keys():
+                        data[var][p.sex].append(mark)
+                    elif var in data.keys():
+                         data[var][p.sex] = [mark,]
+                    else:
+                        data[var] = {p.sex:[mark,]}
+            found = False
+            for age in sorted(data1.keys())[:-1]:
+                if r.age <= age:
+                    data1[age] += 1
+                    found = True
+                    break
+            if not found:
+                data1['>65'] += 1
+            ans = r.status[u'Ansiedad']
+            if not isinstance(ans, int):
+              ans = -1
+            if ans >= 1:
+              ans +=1
+            data2['hamilton'][ans+1] += 1
+            dep = r.status[u'Depresión']
+            if not isinstance(dep, int):
+              dep = -1
+            data2['beck'][dep+1] += 1
+
+        for varname, marks in data.items():
+            for key, l in marks.items():
+                if l:
+                    data[varname][key]=reduce(lambda x, y: x + y, l) / len(l)
+                else:
+                    data[varname][key] = 0
+        prev = None
+        for age in sorted(data1.keys()):
+            if prev and isinstance(age, int):
+                label = "%d-%d" % (prev, age)
+                data1[label] = data1[age]
+                data1.pop(age)
+            prev = age
+            
+        return render_to_response('consulting/stadistic/explotation.html', 
                                 {'data':data,
+                                 'data1':data1,
+                                 'data2': data2,
+                                 'labels_for_data1':sorted(data1.keys()),
                                  'form' : form,
                                  'reports':list(reports),
                                  'variables':Variable.objects.all(),
@@ -204,10 +292,19 @@ def regenerate_data(request):
     list_name='patients', objects_per_page=settings.OBJECTS_PER_PAGE)
 def stratification_list(request, illness, level):
     patients = []
-    for p in Profile.objects.all():
-        if illness == 'anxiety' and p.get_anxiety_status(index=True) == int(level):
+    filtered = request.GET.get('filter','')
+    if int(level) < 0:
+      level = None
+    else:
+      level = int(level)
+    if filtered == 'mine':
+      patient_list = Profile.objects.filter(role=settings.PATIENT, doctor=request.user)
+    else:
+      patient_list = Profile.objects.filter(role=settings.PATIENT)
+    for p in patient_list:
+        if illness == 'anxiety' and p.get_anxiety_status(index=True) == level:
             patients.append(p)
-        if illness == 'depression' and p.get_depression_status(index=True) == int(level):
+        if illness == 'depression' and p.get_depression_status(index=True) == level:
             patients.append(p)
 
     template_data = dict(patients=patients,

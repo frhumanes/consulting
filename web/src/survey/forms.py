@@ -94,7 +94,7 @@ class SelectWidgetBootstrap(forms.Select):
         final_attrs = self.build_attrs(attrs, name=name)
         output = ["""<div%(attrs)s>"""
                   """    <input class="btn-group-label" type="text" readonly="readonly" value="%(label)s" />"""
-                  """    <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">"""
+                  """    <button class="btn btn-info dropdown-toggle" type="button" style="position:relative; top: -5px; left: -2px" data-toggle="dropdown">"""
                   """        <span class="caret"></span>"""
                   """    </button>"""
                   """    <ul class="dropdown-menu">"""
@@ -148,33 +148,37 @@ class QuestionsForm(forms.Form):
                     for v in values:
                         id_option = v[0]
                         if selected_options:
-                            if selected_options.filter(option__id=id_option):
+                            if isinstance(id_option, long) and selected_options.filter(option__id=id_option):
                                 initial_option = id_option
                                 initial_value = selected_options.get(option__id=id_option).value
-                    values.insert(0,('',u'Marque una opción'))
+                    if values[0][0]:
+                        values.insert(0,('',u'Marque una opción'))
                     if question.code.startswith('DS'):
                         self.fields[question.code] = forms.ChoiceField(
                             label=question.text,
                             widget=forms.Select(attrs={'class': 'span6'}), choices=values,
                             required=False, initial=initial_option)
-                        self.fields[question.code+'_value'] = forms.CharField(label="DS", required=False, widget=forms.TextInput(attrs={'class': 'span2'}),initial=initial_value)
+                        self.fields[question.code+'_value'] = forms.CharField(label=question.code, required=False, widget=forms.TextInput(attrs={'class': 'span2'}),initial=initial_value)
                     else:
                         values.insert(1,('',[]))
                         self.fields[question.code] = forms.ChoiceField(
                             label=question.text,
                             widget=SelectWidgetBootstrap(), choices=values,
                             required=False, initial=initial_option)
+                    
 
                 else:
-                    initial_options = []
+                    initial_options, initial_value = [], ''
                     for v in values:
                         id_option = v[0]
                         if selected_options:
                             if selected_options.filter(option__id=id_option):
                                 initial_options.append(id_option)
+                                initial_value = selected_options.filter(option__id=id_option)[0].value
                     self.fields[question.code] = forms.MultipleChoiceField(
                             label=question.text,
                             widget=forms.CheckboxSelectMultiple(), choices=values,
                             required=False, initial=initial_options)
+                    self.fields[question.code+'_value'] = forms.CharField(label='', required=False, widget=forms.TextInput(attrs={'class': 'span12'}), initial=initial_value)
         else:
             super(QuestionsForm, self).__init__(*args, **kwargs)

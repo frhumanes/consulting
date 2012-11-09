@@ -38,15 +38,8 @@
 </section>
   
 <script type="text/javascript">
-$(function () {
-    var data = [
-      {% for label, item in values.items %}
-       {
-            label: "{{label|upper}}",
-            data: [{% for date, val in item %}[(Date.UTC({{date|date:'Y, m-1, j'}})), {{val}}],{% endfor %}]
-        },        
-       {% endfor %}
-    ];
+function plotTreatment() {
+    var data = [{% for label, item in values.items %}{label: "{{label|upper}}", data: [{% for date, val in item %}[(Date.UTC({{date|date:'Y, m-1, j'}})), {{val}}],{% endfor %}]}{% if not forloop.last %},{% endif %}{% endfor %}];
 
     // hard-code color indices to prevent them from shifting as
     // countries are turned on/off
@@ -55,8 +48,7 @@ $(function () {
         val.color = i;
         ++i;
     });
-    
-  
+
     $.plot($("#placeholder_treatment"), data, {
         lines: { show: true },
         points: { show: true },
@@ -67,5 +59,8 @@ $(function () {
                  max: (Date.UTC({{ticks|last|date:'Y, m-1, j'}}))
                },
       });
-  });
+  };
+
+  $('#treatment_tab').on('shown', plotTreatment);
+
 </script>

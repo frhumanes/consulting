@@ -4,6 +4,7 @@ from django.conf import settings
 from userprofile.models import Profile
 from formula.models import Variable, Dimension
 from survey.models import Option
+from consulting.models import Medicine
 from django.utils.translation import ugettext_lazy as _
 
 class MultipleValueField(forms.MultiValueField):
@@ -40,6 +41,13 @@ class DateWidget(forms.MultiWidget):
         return u' - '.join(rendered_widgets)
 
 class FiltersForm(forms.Form):
+    options = forms.MultipleChoiceField(
+                    label=_(u'Opciones'),
+                    choices=[('filter', u'Mostrar sólo mis pacientes'),
+                             ('group', u'Agrupar pacientes repetidos*')],
+                    widget=forms.CheckboxSelectMultiple(),
+                    help_text=_(u'* Calcula la media de los parámetros disponibles'))
+
     sex = forms.MultipleChoiceField(
                     label=_(u'Sexo'),
                     choices=Profile.SEX[1:],
@@ -70,6 +78,18 @@ class FiltersForm(forms.Form):
                     label='dimensions.'+d.name,
                     widget=RangeWidget(attrs={'class':'span3','min':'0', 'max':'10'})))
 
+    treatment = [MultipleValueField(
+                    label='variables.Adherencia',
+                    widget=RangeWidget(attrs={'class':'span3',
+                                              'min':'0', 
+                                              'max':'4'}))]
+    for c in  Medicine.objects.values('component__name').order_by('component__name').distinct('component'):
+        treatment.append(MultipleValueField(
+                    label='treatment.'+c['component__name'],
+                    widget=RangeWidget(attrs={'class':'span3',
+                                              'min':'0', 
+                                              'max':'1000'})))
+
     anxiety = forms.MultipleChoiceField(
                     label=_(u'Nivel de Ansiedad'),
                     choices=[(c, settings.HAMILTON[v][0]) for c, v in enumerate(sorted(settings.HAMILTON))],
@@ -90,3 +110,6 @@ class FiltersForm(forms.Form):
                     #input_formats=(settings.DATE_FORMAT,),
                     widget=DateWidget(attrs={'class':'span5'},
                                            format=settings.DATE_FORMAT))
+
+    
+

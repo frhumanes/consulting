@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+BRAND = "Consulting 3.0"
 #DATE AND TIME FORMAT
 TIME_FORMAT = "H:i"
 DATE_FORMAT = "%d/%m/%Y"

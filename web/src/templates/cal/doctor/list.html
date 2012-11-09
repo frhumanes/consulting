@@ -18,7 +18,7 @@
 
   {% if request.user.get_profile.is_administrative %}
   <div class="well">
-    <h4>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</h4>
+    <h4>Dr. {{ doctor.get_profile.get_full_name }}</h4>
   </div>
   {% endif %}
   {% if patient_user %}

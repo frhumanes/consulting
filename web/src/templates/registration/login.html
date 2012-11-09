@@ -51,6 +51,7 @@
                     {% for error in form.password.errors %}
                        <span class="help-inline">{{ error|escape }}</span>
                     {% endfor %}
+                    <span class="help-inline"><a href="{% url password_reset %}">{% trans '¿Ha olvidado la contraseña?' %}</a></span>
                   </div>
                 </div>
               {% else %}
@@ -59,6 +60,7 @@
                   </label>
                   <div class="controls">
                     {{ form.password }}
+                    <span class="help-inline"><a href="{% url password_reset %}">{% trans '¿Ha olvidado la contraseña?' %}</a></span>
                   </div>
                 </div>
               {% endif %}

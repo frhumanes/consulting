@@ -43,10 +43,10 @@
 
 {% block container %}
 <div class="row-fluid" style="margin-top:150px;">      
-  <div class="span6" style="text-align:right;">
+  <div style="width:50%" style="text-align:right;">
     <h3>{% trans 'BUSCAR PACIENTE' %}</h3>
   </div>
-  <div class="span6">
+  <div style="width:50%">
     <form class="">{% csrf_token %}
       <input type="text" id="searcher" class="input-medium search-query span12" style="margin: 13px 0">
     </form>

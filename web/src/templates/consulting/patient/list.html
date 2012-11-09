@@ -12,7 +12,13 @@
       <tbody>
         {% for p in patients.object_list %}
           <tr>
-            <td><a href="{% url consulting_pre_personal_data_pm p.user.id %}" target="_blank">{{p.get_full_name}}</a></td>
+            <td>
+              {% if p.doctor.id = request.user.id or request.user.get_profile.is_administrative %}
+              <a href="{% url consulting_pre_personal_data_pm p.user.id %}" target="_blank">{{p.get_full_name}}</a>
+              {% else %}
+                XXXXX XXXXXX XXXXXX
+              {% endif %}
+            </td>
             <td>{{p.get_sex}}</td>
             <td>{{p.get_age}}</td>
             <td>{{p.doctor.get_profile.get_full_name}}</td>

@@ -38,27 +38,19 @@
 </section>
   
 <script type="text/javascript">
-$(function () {
-    var data = [
-      {% for label, item in latest_dimensions.items %}
-       {
-            label: "{{label|upper}}",
-            yaxis: {% if forloop.counter|divisibleby:2 %}2{% else %}1{% endif %},
-            data: [{% for date, val in item %}[(Date.UTC({{date|date:'Y, m-1, j'}})), {{val|floatformat:0}}],{% endfor %}]
-        },        
-       {% endfor %}
-    ];
+function plotDimensions() {
+    var dataD = [{% for label, item in latest_dimensions.items %}{label: "{{label|upper}}", yaxis: {% if forloop.counter|divisibleby:2 %}2{% else %}1{% endif %}, data: [{% for date, val in item %}[(Date.UTC({{date|date:'Y, m-1, j'}})), {{val|floatformat:0}}]{% if not forloop.last %},{% endif %}{% endfor %}]}{% if not forloop.last %},{% endif %}{% endfor %}];
 
     // hard-code color indices to prevent them from shifting as
     // countries are turned on/off
     var i = 0;
-    $.each(data, function(val) {
+    $.each(dataD, function(val) {
         val.color = i;
         ++i;
     });
     
   
-      $.plot($("#placeholder_dimensions"), data, {
+      $.plot($("#placeholder_dimensions"), dataD, {
         lines: { show: true },
         points: { show: true },
         yaxes: [{ min: 0, max: 10, ticks: 10, position: "right"},
@@ -69,5 +61,7 @@ $(function () {
                  max: (Date.UTC({{ticks|last|date:'Y, m-1, j'}}))
                },
       });
-  });
+  };
+
+   $('#dimensions_tab').on('shown', plotDimensions);
 </script>

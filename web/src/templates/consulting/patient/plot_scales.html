@@ -38,27 +38,19 @@
 </section>
   
 <script type="text/javascript">
-$(function () {
-    var data = [
-      {% for label, item in values.items %}
-       {
-            label: "{{label|upper}}",
-            yaxis: {{forloop.counter}},
-            data: [{% for date, val in item %}[(Date.UTC({{date|date:'Y, m-1, j'}})), {{val|floatformat:0}}],{% endfor %}]
-        },        
-       {% endfor %}
-    ];
+function plotStatus() {
+    var dataS = [{% for label, item in values.items %}{label: "{{label|upper}}",yaxis: {{forloop.counter}},data: [{% for date, val in item %}[(Date.UTC({{date|date:'Y, m-1, j'}})), {{val|floatformat:0}}]{% if not forloop.last %},{% endif %}{% endfor %}]}{% if not forloop.last %},{% endif %}{% endfor %}];
 
     // hard-code color indices to prevent them from shifting as
     // countries are turned on/off
     var i = 0;
-    $.each(data, function(val) {
+    $.each(dataS, function(val) {
         val.color = i;
         ++i;
     });
     
   
-      $.plot($("#placeholder_scales"), data, {
+      $.plot($("#placeholder_scales"), dataS, {
         lines: { show: true },
         points: { show: true },
         yaxes: [{ min: 0, max: {{yscales.beck|last}}, ticks: {{yscales.beck}}, position: "right"}, {min: 0, max: {{yscales.hamilton|last}}, ticks: {{yscales.hamilton}}, position:"left"}],
@@ -68,5 +60,7 @@ $(function () {
                  max: (Date.UTC({{ticks|last|date:'Y, m-1, j'}}))
                },
       });
-  });
+  };
+
+   $('#status_tab').on('shown', plotStatus);
 </script>

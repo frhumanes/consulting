@@ -287,7 +287,6 @@ class Task(TraceableModel):
 
 
 
-
 class Medicine(TraceableModel):
     patient = models.ForeignKey(User, related_name='patient_medicines')
 
@@ -304,9 +303,10 @@ class Medicine(TraceableModel):
                                     los síntomas'), default=True)
     months = models.IntegerField(_(u'Número de meses de toma del fármaco'),
                                     blank=True, null=True)
-    posology = models.CharField(_(u'Posología (mg/día)'), max_length=255,
-                                    blank=True)
-    date = models.DateTimeField(_(u'Fecha'), null=True)
+    posology = models.IntegerField(_(u'Posología (mg/día)'))
+    dosification = models.CharField(_(u'Modo de administración'), max_length=255,
+                                    blank=True, null=True)
+    date = models.DateTimeField(_(u'Fecha Fin'), null=True)
 
 
 

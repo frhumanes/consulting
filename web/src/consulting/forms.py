@@ -40,6 +40,9 @@ class TreatmentForm(forms.ModelForm):
                                     widget=forms.HiddenInput, initial='-1')
     posology = forms.IntegerField(label=_(u'Posología (mg/día)'))
 
+    dosification = forms.CharField(label=_(u'Modo de administración'),
+                                    max_length=255)
+
     class Meta:
         model = Medicine
         exclude = ('patient', 'date', 'created_at', 'updated_at', 'months', 'after_symptoms')
@@ -74,7 +77,7 @@ class MedicineForm(forms.ModelForm):
 
     class Meta:
         model = Medicine
-        exclude = ('patient', 'appointment', 'is_previous', 'date', 'created_at', 'updated_at')
+        exclude = ('patient', 'appointment', 'is_previous', 'date', 'created_at', 'updated_at', 'dosification')
 
 
 class ConclusionForm(forms.ModelForm):
@@ -89,7 +92,7 @@ class ConclusionForm(forms.ModelForm):
     class Meta:
         model = Conclusion
         exclude = ('created_at', 'updated_at', 'patient', 'result',
-                    'appointment', 'date', 'appointment')
+                    'appointment', 'date', 'appointment', 'created_by')
 
     def clean(self):
         cleaned_data = self.cleaned_data

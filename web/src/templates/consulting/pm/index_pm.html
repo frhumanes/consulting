@@ -15,6 +15,10 @@
   <link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet">
 {% endblock %}
 
+{% block js %}
+
+{% endblock %}
+
 {% block jquery_init %}  
   $("#searcher").autocomplete({
     source: function(request, response){
@@ -37,22 +41,50 @@
             },
     
   }); 
-
+  $('.btn-link').on('click', function() {
+    url = $(this).attr('href');
+    $('#modal_patient .modal-body').load(url,'',$('#modal_patient').modal('show'));
+  });
 {% endblock %}
 
 {% block left %}
   <a class="btn btn-large btn-primary" href="{% url consulting_newpatient %}"><i class="icon-plus-sign icon-white"></i> {% trans 'Nuevo Paciente' %}</a>
 {% endblock %}
 
+{% block right %}
+  {% if doctors %}
+  <div style="text-align: right">
+    <ul class="nav nav-list" >
+      <li class="nav-header">{% trans 'Filtrar por doctores' %}</li>
+      {% for d in doctors %}
+      <li><button class="btn btn-link" style="text-align: right" href="{% url consulting_patient_list d.user.id %}">{{d.get_full_name}}</button></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+{% endblock %}
+
 {% block container %}
 <div class="row-fluid" style="margin-top:150px;">      
-  <div class="span6" style="text-align:right;">
+  <div class="span6 relative" style="text-align:right;">
     <h3>{% trans 'BUSCAR PACIENTE' %}</h3>
   </div>
-  <div class="span6">
+  <div class="span6 relative">
     <form class="">{% csrf_token %}
       <input type="text" id="searcher" class="input-medium search-query span12" style="margin: 13px 0">
     </form>
   </div>     
-</div>  
+</div>
+
+<div id="modal_patient" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>{% trans 'Pacientes' %}</h3>
+  </div>
+  <div class="modal-body">
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary" data-dismiss="modal">{% trans 'Cerrar' %}</a>
+  </div>
+</div>
 {% endblock %}

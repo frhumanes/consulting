@@ -36,41 +36,41 @@
   <h3>{% trans 'Bloque' %} {{my_block.code}}: {{my_block.name}} <small>[{{my_block.get_kind}}]</small></h2>
 </div> 
     <section>
-        <form class="form-horizontal" method="post" action="{{request.path}}">{% csrf_token %}
-            {% for field in form %}
-                {% if field.label = 'DS' %}
-                    <script>$('#id_{{field.label}}').parent().prepend('{{field}}');</script>
-                {% else %}
-                <div class="control-group">
-                    <label class="control-label span7">
-                        {{field.label|sexify:patient_user}}
-                    </label>
-                    <div class="controls span5">
-                        {{ field }}
-                        {% if field.errors|length %}
-                            {% for error in field.errors %}
-                                <span class="help-inline">
-                                    {{ error|escape }}
-                                </span>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                </div>
+        <form class="form" method="post" action="{{request.path}}">{% csrf_token %}
+          {% for field in form %}
+            {% if field.label = 'DS' %}
+                <script>$('#id_{{field.label}}').parent().prepend('{{field}}');</script>
+            {% else %}
+            <div class="control-group row-fluid">
+              <label class="control-label span7 relative" style="text-align: justify">
+                  {{field.label|sexify:patient_user}}
+              </label>
+              <div class="controls span5 relative">
+                {{ field }}
+                {% if field.errors|length %}
+                  {% for error in field.errors %}
+                    <span class="help-inline">
+                      {{ error|escape }}
+                    </span>
+                  {% endfor %}
                 {% endif %}
-            {% endfor %}
-            {% if my_block.code = 2 %}
-            <div class="well">
-                <h4>{% trans 'Medicación previa' %}</h4>
-                <p>{% trans '¿Toma algún medicamento?' %}</p>
-                <div id="medicament_container">
-                </div>    
+              </div>
             </div>
-            {% endif %} 
-            <div class="controls">
-                <button type="submit" class="btn btn-primary btn-large" data-loading-text="Guardando...">
-                  {% trans 'Guardar y continuar' %}
-                </button>
-            </div>
+            {% endif %}
+          {% endfor %}
+          {% if my_block.code = 2 %}
+          <div class="well">
+              <h4>{% trans 'Medicación previa' %}</h4>
+              <p>{% trans '¿Toma algún medicamento?' %}</p>
+              <div id="medicament_container">
+              </div>    
+          </div>
+          {% endif %} 
+          <div class="center">
+              <button type="submit" class="btn btn-primary btn-large" data-loading-text="Guardando...">
+                {% trans 'Guardar y continuar' %}
+              </button>
+          </div>
         </form>
         <div class="modal hide fade" id="modal_medicament" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
           <div class="modal-header">
@@ -122,6 +122,26 @@ function set_events(){
 {% endblock %}
 
 {% block jquery_init %}
+  $('input[type="checkbox"]').each(function(){
+    if($('label[for="'+this.id+'"]').text().match(/^ Otr/) && $(this).attr('checked')) {
+      $('label[for="'+this.id+'"]').after($('input[name="' + this.name + '_value"]'));
+      $('input[name="' + this.name + '_value"]').css('display','block');
+    } else {
+      $('input[name="' + this.name + '_value"]').css('display','none');
+    }
+  });
+
+  $('input[type="checkbox"]').on('change', function(){
+    if($('label[for="'+this.id+'"]').text().match(/^ Otr/)) {
+      if($(this).attr('checked')) {
+        $('label[for="'+this.id+'"]').after($('input[name="' + this.name + '_value"]'));
+        $('input[name="' + this.name + '_value"]').css('display','block');
+      } else {
+        $('input[name="' + this.name + '_value"]').css('display','none');
+      }
+    }
+  });
+  
   $('#save').on('click', function(){
     var $form = $('#modal_medicament').find('form');
     $form.ajaxSubmit({  target: null,

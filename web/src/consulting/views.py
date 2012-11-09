@@ -400,6 +400,7 @@ def select_illness(request, id_appointment):
         if form.is_valid():
             code_illness = form.cleaned_data['illness']
             if code_illness:
+                request.session["notes"] = ''
                 return HttpResponseRedirect(reverse('consulting_main',
                         kwargs={'id_appointment':id_appointment, 
                                 'code_illness': code_illness}))
@@ -475,44 +476,6 @@ def select_action(request, id_appointment):
                                 {'form': form,
                                 'patient_user': appointment.patient,
                                 'id_appointment': id_appointment},
-                                context_instance=RequestContext(request))
-
-
-@login_required
-@only_doctor_consulting
-def conclusion(request, id_appointment, id_result=None):
-    appointment = get_object_or_404(Appointment, pk=int(id_appointment))
-
-    if request.method == 'POST':
-        request_params = dict([k, v] for k, v in request.POST.items())
-        request_params.update({'created_by': request.user.id})
-        form = ConclusionForm(request_params)
-        if form.is_valid():
-            conclusion = form.save(commit=False)
-            conclusion.appointment = appointment
-            conclusion.save()
-            if id_result:
-                result = get_object_or_404(Result, pk=int(id_result))
-                conclusion.result = result
-                conclusion.task = result.task
-                conclusion.save()
-
-                if result.survey.code == settings.PREVIOUS_STUDY:
-                    return HttpResponseRedirect(
-                        reverse('consulting_add_illness', args=[conclusion.id]))
-
-            return HttpResponseRedirect(
-                                reverse('consulting_new_medicine_conclusion',
-                                        args=[conclusion.id]))
-    else:
-        conclusion = Conclusion(observation=request)
-        form = ConclusionForm()
-
-    return render_to_response('consulting/consultation/conclusion/conclusion.html',
-                                {'form': form,
-                                'patient_user': appointment.patient,
-                                'id_appointment': id_appointment,
-                                'id_result': id_result},
                                 context_instance=RequestContext(request))
 
 
@@ -715,7 +678,7 @@ def administrative_data(request, id_task, code_block=None, code_illness=None, id
        return HttpResponseRedirect(reverse('consulting_index'))
 
     if request.method == "POST":
-        exclude_list = ['user', 'role', 'doctor', 'patients', 'username',
+        exclude_list = ['user', 'role', 'doctor', 'username',
                         'illnesses']
 
         request_params = dict([k, v] for k, v in request.POST.items())
@@ -814,7 +777,7 @@ def administrative_data(request, id_task, code_block=None, code_illness=None, id
                             'my_block': block},
                             context_instance=RequestContext(request))
     else:
-        exclude_list = ['user', 'role', 'doctor', 'patients', 'username',
+        exclude_list = ['user', 'role', 'doctor',  'username',
                         'illnesses']
 
         if user.is_active:
@@ -881,19 +844,22 @@ def show_block(request, id_task, code_block=None, code_illness=None, id_appointm
             answers = {}
             for name_field, values in form.cleaned_data.items():
                 if name_field.endswith('_value'):
-                    answers[name_field[:name_field.find('_value')]] = values
+                    field = name_field[:name_field.find('_value')]
+                    answers[field] = values
                 else:
                     items[name_field] = values
-
             for name_field, values in items.items():
                 if name_field in answers.keys():
-                    value = answers[name_field]
+                    val = answers[name_field]
                 else:
-                    value = None
+                    val = None
                 if isinstance(values, list):
                     for value in values:
-                        option = Option.objects.get(pk=int(value))
-                        answer = Answer(result = new_result, option = option, value = value)
+                        if value.isdigit():
+                            option = Option.objects.get(pk=int(value))
+                        else:
+                            val = value
+                        answer = Answer(result = new_result, option = option, value = val)
                         answer.save()
                 elif values:
                     option = Option.objects.get(pk=int(values))
@@ -913,21 +879,21 @@ def show_block(request, id_task, code_block=None, code_illness=None, id_appointm
             task.save()
 
             return next_block(task, block, code_illness, id_appointment)
-    else:
-        last_result = None
-        try: 
-            last_result =  task.task_results.filter(block=block).latest('date')
-            selected_options = Answer.objects.select_related('option').filter(result=last_result)
-        except:
-            if code_block == str(settings.PRECEDENT_RISK_FACTOR):
-                try:
-                    last_result =  Result.objects.filter(block=block,patient=task.patient).latest('date')
-                    selected_options = Answer.objects.select_related('option').filter(result=last_result)
-                except:
-                    selected_options = []
-            else:
+
+    last_result = None
+    try: 
+        last_result =  task.task_results.filter(block=block).latest('date')
+        selected_options = Answer.objects.select_related('option').filter(result=last_result)
+    except:
+        if code_block == str(settings.PRECEDENT_RISK_FACTOR):
+            try:
+                last_result =  Result.objects.filter(block=block,patient=task.patient).latest('date')
+                selected_options = Answer.objects.select_related('option').filter(result=last_result)
+            except:
                 selected_options = []
-        form = QuestionsForm(dic=dic, selected_options=selected_options)
+        else:
+            selected_options = []
+    form = QuestionsForm(dic=dic, selected_options=selected_options)
 
     return render_to_response('consulting/consultation/block.html',
                             {'form': form,
@@ -1335,13 +1301,16 @@ def prev_treatment_block(request, id_appointment, code_illness=None):
 def conclusion_monitoring(request, id_appointment, code_illness):
     appointment = get_object_or_404(Appointment, pk=int(id_appointment))
     illness= get_object_or_404(Illness, code=int(code_illness))
+    try:
+        conclusion = Conclusion.objects.get(appointment=appointment)
+    except:
+        conclusion = Conclusion()
 
     if request.method == 'POST':
-        request_params = dict([k, v] for k, v in request.POST.items())
-        request_params.update({'created_by': request.user.id})
-        form = ConclusionForm(request_params)
+        form = ConclusionForm(request.POST, instance=conclusion)
         if form.is_valid():
             conclusion = form.save(commit=False)
+            conclusion.created_by = request.user
             conclusion.patient = appointment.patient
             conclusion.appointment = appointment
             conclusion.save()
@@ -1350,8 +1319,7 @@ def conclusion_monitoring(request, id_appointment, code_illness):
                                 reverse('consulting_main',
                                         kwargs={'id_appointment':id_appointment,'code_illness':code_illness}))
     else:
-        conclusion = None#Conclusion.objects.get(appointment=appointment)
-        if not conclusion and 'notes' in request.session:
+        if not conclusion.observation and 'notes' in request.session:
             conclusion = Conclusion(observation=request.session["notes"])
         form = ConclusionForm(instance=conclusion)
 
@@ -1532,10 +1500,10 @@ def newpatient(request):
 
         if request.method == "POST":
             if logged_user_profile.is_doctor():
-                    exclude_list = ['user', 'role', 'doctor', 'patients',
+                    exclude_list = ['user', 'role', 'doctor', 
                                     'username']
             else:
-                exclude_list = ['user', 'role', 'doctor', 'patients',
+                exclude_list = ['user', 'role', 'doctor', 
                                 'username', 'sex', 'status', 'profession']
             request_params = dict([k, v] for k, v in request.POST.items())
             request_params.update({'created_by': request.user.id})
@@ -1583,10 +1551,7 @@ def newpatient(request):
                         profile.illnesses.add(default_illness)
                         profile.save()
 
-                        #Relationships between doctor and her/his patients
-                        if logged_user_profile.is_doctor():
-                            logged_user_profile.patients.add(user)
-                            logged_user_profile.save()
+                        
                     except Exception:
                         user.delete()
                         return HttpResponseRedirect(
@@ -1602,10 +1567,10 @@ def newpatient(request):
                             context_instance=RequestContext(request))
         else:
             if logged_user_profile.is_doctor():
-                exclude_list = ['user', 'role', 'doctor', 'patients',
+                exclude_list = ['user', 'role', 'doctor', 
                                 'username']
             else:
-                exclude_list = ['user', 'role', 'doctor', 'patients',
+                exclude_list = ['user', 'role', 'doctor', 
                                 'username', 'sex', 'status', 'profession']
             form = ProfileForm(exclude_list=exclude_list)
 
@@ -1625,12 +1590,7 @@ def patient_identification_pm(request, patient_user_id):
         logged_user_profile.is_administrative():
         next = request.GET.get('next', '')
         try:
-            user = User.objects.get(id=patient_user_id)
-
-            # CHECK IF DOCTOR CONTAINS THIS PATIENT
-            if logged_user_profile.is_doctor():
-                if not user in logged_user_profile.patients.all():
-                    return HttpResponseRedirect(reverse('consulting_index'))
+            user = User.objects.get(id=patient_user_id, profiles__doctor=request.user)
 
             return render_to_response(
                             'consulting/patient/patient_identification.html',
@@ -1689,143 +1649,148 @@ def patient_searcher(request):
 def editpatient_pm(request, patient_user_id):
     logged_user_profile = request.user.get_profile()
 
-    if logged_user_profile.is_doctor() or\
-        logged_user_profile.is_administrative():
+    if logged_user_profile.is_doctor():
+        try:
+            user = User.objects.get(id=patient_user_id, profiles__doctor=request.user)
+        except User.DoesNotExist:
+            return HttpResponseRedirect(reverse('consulting_index'))
+    elif logged_user_profile.is_administrative():
         try:
             user = User.objects.get(id=patient_user_id)
-            profile = user.get_profile()
-
-            # CHECK IF DOCTOR CONTAINS THIS PATIENT
-            if logged_user_profile.is_doctor():
-                if not user in logged_user_profile.patients.all():
-                    return HttpResponseRedirect(reverse('consulting_index'))
-
-            if request.method == "POST":
-                redirect_to = request.POST.get('next', '')
-                if logged_user_profile.is_doctor():
-                    exclude_list = ['user', 'role', 'doctor', 'patients',
-                                    'username', 'illnesses']
-                else:
-                    exclude_list = ['user', 'role', 'doctor', 'patients',
-                                    'username', 'illnesses', 'sex', 'status',
-                                    'profession']
-
-                request_params = dict([k, v] for k, v in request.POST.items())
-                request_params.update({'created_by': request.user.id})
-
-                form = ProfileForm(request_params, instance=profile,
-                                    exclude_list=exclude_list)
-
-                #Field to username
-                name = profile.name
-                first_surname = profile.first_surname
-                nif = profile.nif
-                dob = profile.dob
-
-                if form.is_valid():
-                    ######################## ACTIVE USER ######################
-                    if format_string(form.cleaned_data['active']) == '1':
-                        user.is_active = True
-                    else:
-                        user.is_active = False
-                    user.save()
-                    ###########################################################
-                    profile = form.save(commit=False)
-                    if not form.cleaned_data['postcode']:
-                        profile.postcode = None
-
-                    #Automatic to format name, first_surname and
-                    #second_surname
-                    profile.name = format_string(form.cleaned_data['name'])
-                    profile.first_surname = format_string(
-                                    form.cleaned_data['first_surname'])
-                    profile.second_surname = format_string(
-                                    form.cleaned_data['second_surname'])
-
-                    #######################CHECK USERNAME #####################
-                    #NUEVO USERNAME si se ha modificado el nombre o el
-                    #primer apellido o el nif, o si ahora el nif está vacío y
-                    #se ha modificado la fecha de nacimiento
-                    name_form = form.cleaned_data['name']
-                    first_surname_form = form.cleaned_data['first_surname']
-                    nif_form = form.cleaned_data['nif']
-                    dob_form = form.cleaned_data['dob']
-
-                    if (name != name_form or\
-                        first_surname != first_surname_form or\
-                        nif != nif_form) or\
-                        (nif_form == '' and dob != dob_form):
-
-                        username = generate_username(form)
-                        profile.user.username = username
-                        profile.user.save()
-                        profile.username = username
-
-                        profile.save()
-
-                        #SEN EMAIL to warn new username
-                        sendemail(user)
-                        patient_user_id = user.id
-
-                        return HttpResponseRedirect(
-                            '%s?next=%s' % (
-                            reverse('consulting_patient_identification_pm',
-                                    args=[patient_user_id]),
-                            redirect_to))
-                    else:
-                        profile.save()
-                        return HttpResponseRedirect(redirect_to)
-                else:
-                    return render_to_response(
-                                    'consulting/patient/patient.html',
-                                    {'form': form,
-                                    'edit': True,
-                                    'patient_user_id': patient_user_id,
-                                    'next': redirect_to},
-                                    context_instance=RequestContext(request))
-            else:
-                next = request.GET.get('next', '')
-                if logged_user_profile.is_doctor():
-                    exclude_list = ['user', 'role', 'doctor', 'patients',
-                                    'username', 'illnesses']
-                else:
-                    exclude_list = ['user', 'role', 'doctor', 'patients',
-                                    'username', 'illnesses', 'sex', 'status',
-                                    'profession']
-
-                if user.is_active:
-                    active = settings.ACTIVE
-                else:
-                    active = settings.DEACTIVATE
-
-                form = ProfileForm(instance=profile, exclude_list=exclude_list,
-                                    initial={'active': active})
-
-            return render_to_response('consulting/patient/patient.html',
-                                    {'form': form,
-                                    'edit': True,
-                                    'patient_user_id': patient_user_id,
-                                    'next': next},
-                                    context_instance=RequestContext(request))
         except User.DoesNotExist:
             return HttpResponseRedirect(reverse('consulting_index'))
     else:
         return HttpResponseRedirect(reverse('consulting_index'))
+
+    profile = user.get_profile()
+
+    if request.method == "POST":
+        redirect_to = request.POST.get('next', '')
+        if logged_user_profile.is_doctor():
+            exclude_list = ['user', 'role', 'doctor',
+                            'username', 'illnesses']
+        else:
+            exclude_list = ['user', 'role', 'doctor',
+                            'username', 'illnesses', 'sex', 'status',
+                            'profession']
+
+        request_params = dict([k, v] for k, v in request.POST.items())
+        request_params.update({'created_by': request.user.id})
+
+        form = ProfileForm(request_params, instance=profile,
+                            exclude_list=exclude_list)
+
+        #Field to username
+        name = profile.name
+        first_surname = profile.first_surname
+        nif = profile.nif
+        dob = profile.dob
+
+        if form.is_valid():
+            ######################## ACTIVE USER ######################
+            if format_string(form.cleaned_data['active']) == '1':
+                user.is_active = True
+            else:
+                user.is_active = False
+            user.save()
+            ###########################################################
+            profile = form.save(commit=False)
+            if not form.cleaned_data['postcode']:
+                profile.postcode = None
+
+            #Automatic to format name, first_surname and
+            #second_surname
+            profile.name = format_string(form.cleaned_data['name'])
+            profile.first_surname = format_string(
+                            form.cleaned_data['first_surname'])
+            profile.second_surname = format_string(
+                            form.cleaned_data['second_surname'])
+
+            #######################CHECK USERNAME #####################
+            #NUEVO USERNAME si se ha modificado el nombre o el
+            #primer apellido o el nif, o si ahora el nif está vacío y
+            #se ha modificado la fecha de nacimiento
+            name_form = form.cleaned_data['name']
+            first_surname_form = form.cleaned_data['first_surname']
+            nif_form = form.cleaned_data['nif']
+            dob_form = form.cleaned_data['dob']
+
+            if (name != name_form or\
+                first_surname != first_surname_form or\
+                nif != nif_form) or\
+                (nif_form == '' and dob != dob_form):
+
+                username = generate_username(form)
+                profile.user.username = username
+                profile.user.save()
+                profile.username = username
+
+                profile.save()
+
+                #SEN EMAIL to warn new username
+                sendemail(user)
+                patient_user_id = user.id
+
+                return HttpResponseRedirect(
+                    '%s?next=%s' % (
+                    reverse('consulting_patient_identification_pm',
+                            args=[patient_user_id]),
+                    redirect_to))
+            else:
+                profile.save()
+                return HttpResponseRedirect(redirect_to)
+        else:
+            return render_to_response(
+                            'consulting/patient/patient.html',
+                            {'form': form,
+                            'edit': True,
+                            'patient_user_id': patient_user_id,
+                            'next': redirect_to},
+                            context_instance=RequestContext(request))
+    else:
+        next = request.GET.get('next', '')
+        if logged_user_profile.is_doctor():
+            exclude_list = ['user', 'role', 'doctor', 
+                            'username', 'illnesses']
+        else:
+            exclude_list = ['user', 'role', 'doctor', 
+                            'username', 'illnesses', 'sex', 'status',
+                            'profession']
+
+        if user.is_active:
+            active = settings.ACTIVE
+        else:
+            active = settings.DEACTIVATE
+
+        form = ProfileForm(instance=profile, exclude_list=exclude_list,
+                            initial={'active': active})
+
+    return render_to_response('consulting/patient/patient.html',
+                            {'form': form,
+                            'edit': True,
+                            'patient_user_id': patient_user_id,
+                            'next': next},
+                            context_instance=RequestContext(request))
+
 
 
 #METE EN SESIÓN EL PACIENTE
 @login_required()
 def pre_personal_data_pm(request, patient_user_id):
     logged_user_profile = request.user.get_profile()
+    try:
+        User.objects.get(id=patient_user_id)
+    except User.DoesNotExist:
+        return HttpResponseRedirect(reverse('consulting_index'))
 
     if logged_user_profile.is_doctor():
-        try:
-            User.objects.get(id=patient_user_id)
-            request.session['patient_user_id'] = patient_user_id
-            return HttpResponseRedirect(reverse('consulting_personal_data_pm'))
-        except User.DoesNotExist:
-            return HttpResponseRedirect(reverse('consulting_index'))
+        request.session['patient_user_id'] = patient_user_id
+        return HttpResponseRedirect(reverse('consulting_personal_data_pm'))
+    elif logged_user_profile.is_administrative():
+        return HttpResponseRedirect(reverse('consulting_editpatient_pm', kwargs={'patient_user_id': patient_user_id}))
 
+
+    return HttpResponseRedirect(reverse('consulting_index'))
 
 @login_required()
 def personal_data_pm(request):
@@ -1835,11 +1800,8 @@ def personal_data_pm(request):
         patient_user_id = request.session['patient_user_id']
         try:
             patient_user = User.objects.get(id=patient_user_id)
-
-            # CHECK IF DOCTOR CONTAINS THIS PATIENT
-            if logged_user_profile.is_doctor():
-                if not patient_user.get_profile().doctor == request.user:
-                    return HttpResponseRedirect(reverse('consulting_index'))
+            if not patient_user.get_profile().doctor == request.user:
+                return HttpResponseRedirect(reverse('consulting_index'))
 
             return render_to_response(
                         'consulting/patient/personal_data_pm.html',
@@ -1856,12 +1818,26 @@ def personal_data_pm(request):
 def patient_management(request):
     logged_user_profile = request.user.get_profile()
 
-    if logged_user_profile.is_doctor():
-        return render_to_response('consulting/pm/index_pm.html', {},
+    if logged_user_profile.is_doctor() or logged_user_profile.is_administrative():
+        doctors = []
+        if logged_user_profile.is_administrative():
+            doctors = Profile.objects.filter(role=settings.DOCTOR)
+        return render_to_response('consulting/pm/index_pm.html', {'doctors': doctors},
                             context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect(reverse('consulting_index'))
 
+@login_required()
+@paginate(template_name='consulting/patient/list.html',
+    list_name='patients', objects_per_page=settings.OBJECTS_PER_PAGE)
+def patient_list(request, doctor_user_id):
+    patients = []
+    if request.user.get_profile().is_administrative():
+        patients = Profile.objects.filter(doctor__id=int(doctor_user_id),
+                                          role=settings.PATIENT)
+    template_data = {}
+    template_data.update({'patients': patients})
+    return template_data
 
 @login_required()
 @paginate(template_name='consulting/patient/surveys/list.html',
@@ -2253,7 +2229,7 @@ def user_evolution(request, return_xls=False):
     logged_user_profile = request.user.get_profile()
 
     patient_user_id = request.session['patient_user_id']
-    limit = 6
+    limit = 5
     patient_user = User.objects.get(id=patient_user_id)
     date_filter = Q(end_date__lte=datetime.now())
     form = ParametersFilterForm()
@@ -2341,7 +2317,7 @@ def user_evolution(request, return_xls=False):
         wb.save(tmp_io)
         response = HttpResponse(tmp_io.getvalue(), content_type='application/vnd.ms-excel')
         tmp_io.close()
-        response['Content-Disposition'] = 'attachment; filename="%s.xls"' % (patient_user.username)
+        response['Content-Disposition'] = 'attachment; filename="Consulting30_parameters.xls"'
         return response
 
 

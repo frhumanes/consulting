@@ -14,7 +14,7 @@
   {% endfor %}
 </table>
 <div>
-  <p style="text-align: right; margin: 5px 20px">{% trans 'Elementos mostrados' %}: <em>{{medicines.start_index}} -  {{medicines.end_index}} {% trans 'de' %} {{medicines.paginator.count}}</em></p>
+  <p style="text-align: right; margin: 5px 20px" class="muted">{% trans 'Elementos mostrados' %}: <em>{{medicines.start_index}} -  {{medicines.end_index}} {% trans 'de' %} {{medicines.paginator.count}}</em></p>
 </div>
 <a class="btn btn-block btn-info" data-toggle="modal" data-target="#modal_medicament" href="{% if appointment %}{% url consulting_add_medicine action='register' id_appointment=appointment.id %}{% else %}{% url consulting_add_medicine action='register' %}{% endif %}">{% trans 'Registrar nuevo fármaco' %}</a>
 

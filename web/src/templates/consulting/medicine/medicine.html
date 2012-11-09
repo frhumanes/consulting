@@ -64,6 +64,19 @@
           {% endif %}
         </div>
       </div>
+      {% if form.dosification %}
+        <div class="control-group {% if form.dosification.errors %}error{% endif %}">
+          <label class="control-label">
+            {{form.dosification.label}}
+          </label>
+          <div class="controls">
+            {{form.dosification}}                    
+            {% if form.dosification.errors %}
+              {{ form.dosification.errors }}
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
     </form>          
   </div>
 </section>

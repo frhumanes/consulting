@@ -20,14 +20,16 @@
           <th>{% trans "Médico" %}</th>
           <th>{% trans "Fecha límite" %}</th>
           <th>{% trans "Última modificación" %}</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {% for task in tasks.object_list %}
           <tr data-msg="{{ task.id }}" style="cursor:pointer">
-            <td>{{ task.patient.get_profile.doctor.get_full_name }}</td>
+            <td>{{ task.patient.get_profile.doctor.get_profile.get_full_name }}</td>
             <td>{{ task.patient.get_profile.get_nextAppointment.date|date:'d/M/Y' }}</td>
-             <td>{{ task.updated_at|date:'d/M/Y H:i' }}</td>              
+             <td>{% if task.updated_at != task.created_at %}{{ task.updated_at|date:'d/M/Y H:i' }}{% endif %}</td> 
+             <td><a class="btn btn-small btn-info" href="{% url consulting_self_administered_block task.id%}">{% trans 'Continuar' %}</a></td>             
           </tr>
         {% endfor %}
       </tbody>

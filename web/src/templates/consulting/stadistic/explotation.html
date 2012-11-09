@@ -11,13 +11,13 @@
     font-family: Arial, sans-serif;
   }
   .femalebar {
-    fill: #F47777;
+    fill: #AAAADD;
     }
   .malebar {
-    fill: #77F4D7;
+    fill: #8E8EB5;
   }
   .highlight rect.malebar, .highlight rect.femalebar {
-    fill: #007ACC;
+    fill: #555566;
   }
   text.malebar, text.femalebar {
     display: none;
@@ -27,7 +27,7 @@
     fill: #000;
   }
   .accordion-inner {
-    max-height:200px; 
+    max-height:300px; 
     overflow-y:auto
   }
 
@@ -35,9 +35,14 @@
     font-weight: bold;
   }
 
+  .arc path {
+    stroke: #fff;
+  }
+
   thead { display:block }
   thead th { width: 100px; }
   tbody { display:block; overflow-y:auto; overflow-x:hidden; height:200px; }
+  tbody tr {height: 20px}
 {% endblock %}
 
 {% block css_files %}
@@ -48,7 +53,6 @@
 
 {% block js_files %}
   {{ block.super }}
-  <script src="http://d3js.org/d3.v2.js"></script>
   <script src="{{ STATIC_URL }}js/jquery-ui-1.8.18.custom.js"></script>
   <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
 {% endblock %}
@@ -68,6 +72,10 @@ $('#download_xls').live("click", function(e) {
     form.attr('action', orig_action+'?as=xls');
     form.submit();
     form.attr('action', orig_action);
+});
+
+$('#myCarousel').on('slid',function(){
+    $(this).find('.active').find('.carousel-caption').fadeIn('slow').delay(5000).fadeOut('slow');
 });
 
 $(".range").each(function(){
@@ -111,137 +119,46 @@ $('#id_date_1').datepicker().on('changeDate',
 
 $('ul').addClass("without_decorator");
 
-var data = [
+$('#reload_button').live('click',function(){
+    $(this).html('<img src="{{STATIC_URL}}/img/loading.gif" />Actualizando...');  
+    $(this).addClass('disabled');
+    $(this).load('{% url rebuild_data %}', function(){
+      location.reload();
+  });
+})
+
+if ($.browser.msie && $.browser.version < '9') {
+  $('#myCarousel').remove();
+} else {
+  $('#myCarousel').fadeIn('slow');
+  var data = [
   {% for labelname, values in data.items %}
     {% localize off %}
       {"sharedLabel": "{{labelname}}", "barData1": {% if values.1 %}{{values.1|unlocalize}}{% else %}0{% endif %}, "barData2": {% if values.2 %}{{values.2|unlocalize}}{% else %}0{% endif %}},
     {% endlocalize %}
   {% endfor %}
-];
+  ];
+  init_bars(data, '#vis');
+  data = [
+    {% for labelname, value in data1.items %}
+      {% if value %}
+      {
+      "age":"{% if labelname = labels_for_data1|first %}≤{% endif %}{{labelname}} [{{value}}]", "population":{{value}}
+      }, 
+      {% endif %}
+    {% endfor %}
+  ];
+  init_pie(data, '#pie');
+  
 
-/* edit these settings freely */  
-var w = 550,
-    h = 500,
-    topMargin = 15,
-    labelSpace = 120,
-    innerMargin = w/2+labelSpace,
-    outerMargin = 15,
-    gap = 2,
-    dataRange = d3.max(data.map(function(d) { return Math.max(d.barData1, d.barData2) }));
-    leftLabel = "Hombres",
-    rightLabel = "Mujeres";
-
-/* edit with care */
-var chartWidth = w - innerMargin - outerMargin,
-    barWidth = h / data.length,
-    yScale = d3.scale.linear().domain([0, data.length]).range([0, h-topMargin]),
-    total = d3.scale.linear().domain([0, dataRange]).range([0, chartWidth - labelSpace/2]),
-    commas = d3.format(",.3f");
-
-/* main panel */
-var vis = d3.select("#vis").append("svg")
-    .attr("width", w)
-    .attr("height", h);
-
-/* barData1 label */
-vis.append("text")
-  .attr("class", "label")
-  .text(leftLabel)
-  .attr("x", w-innerMargin)
-  .attr("y", topMargin-3)
-  .attr("text-anchor", "end");
-
-/* barData2 label */
-vis.append("text")
-  .attr("class", "label")
-  .text(rightLabel)
-  .attr("x", innerMargin)
-  .attr("y", topMargin-3);
-
-/* female bars and data labels */ 
-var bar = vis.selectAll("g.bar")
-    .data(data)
-  .enter().append("g")
-    .attr("class", "bar")
-    .attr("transform", function(d, i) {
-      return "translate(0," + (yScale(i) + topMargin) + ")";
-    });
-
-var wholebar = bar.append("rect")
-    .attr("width", w)
-    .attr("height", barWidth-gap)
-    .attr("fill", "none")
-    .attr("pointer-events", "all");
-
-var highlight = function(c) {
-  return function(d, i) {
-    bar.filter(function(d, j) {
-      return i === j;
-    }).attr("class", c);
-  };
+  var dataset = {
+    ANSIEDAD: {{data2.hamilton}},
+    DEPRESION: {{data2.beck}}
+  };  
+  init_donuts(dataset, '#donuts');
 };
 
-bar
-  .on("mouseover", highlight("highlight bar"))
-  .on("mouseout", highlight("bar"));
 
-bar.append("rect")
-    .attr("class", "femalebar")
-    .attr("height", barWidth-gap);
-
-bar.append("text")
-    .attr("class", "femalebar")
-    .attr("dx", -3)
-    .attr("dy", "1em")
-    .attr("text-anchor", "end");
-
-bar.append("rect")
-    .attr("class", "malebar")
-    .attr("height", barWidth-gap)
-    .attr("x", innerMargin);
-
-bar.append("text")
-    .attr("class", "malebar")
-    .attr("dx", 3)
-    .attr("dy", "1em");
-
-/* sharedLabels */
-bar.append("text")
-    .attr("class", "shared")
-    .attr("x", w/2)
-    .attr("dy", "1em")
-    .attr("text-anchor", "middle")
-    .text(function(d) { return d.sharedLabel; });
-
-refresh(data);
-
-function refresh(data) {
-  var bars = d3.selectAll("g.bar")
-      .data(data);
-  bars.selectAll("rect.malebar")
-    .transition()
-      .attr("width", function(d) { return total(d.barData1); });
-  bars.selectAll("rect.femalebar")
-    .transition()
-      .attr("x", function(d) { return innerMargin - total(d.barData2) - 2 * labelSpace; }) 
-      .attr("width", function(d) { return total(d.barData2); });
-
-  bars.selectAll("text.malebar")
-      .text(function(d) { return commas(d.barData1); })
-    .transition()
-      .attr("x", function(d) { return innerMargin + total(d.barData1); });
-  bars.selectAll("text.femalebar")
-      .text(function(d) { return commas(d.barData2); })
-    .transition()
-      .attr("x", function(d) { return innerMargin - total(d.barData2) - 2 * labelSpace; });
-}
-  $('#reload_button').live('click',function(){
-      $(this).html('<img src="{{STATIC_URL}}/img/loading.gif" />Actualizando...');  
-      $(this).addClass('disabled');
-      $(this).load('{% url rebuild_data %}', function(){
-        location.reload();
-    });
-  })
 {% endblock %}
 
 {% block left %}
@@ -249,6 +166,9 @@ function refresh(data) {
 {% endblock left%}
 
 {% block right %}
+<script type="text/javascript">
+  $('#right_bar').find('.fixable').removeClass('fixable');
+</script>
 <h4>{% trans 'Opciones de filtrado' %}</h4>
 <hr>
 <form class="form-inline" id="form" action="{{request.path}}" method="post" accept-charset="utf-8">
@@ -274,6 +194,9 @@ function refresh(data) {
     <div id="collapse_{{forloop.counter}}" class="accordion-body collapse">
       <div class="accordion-inner">
         {{f}}
+        {% if f.help_text %}
+          <em class="muted">{{f.help_text}}</em>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -314,6 +237,37 @@ function refresh(data) {
       </div>
     </div>
   </div>
+
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_filter" href="#collapse_treatment">
+      {% trans 'Tratamiento' %}
+      </a>
+    </div>
+    <div id="collapse_treatment" class="accordion-body collapse">
+      <div class="accordion-inner">
+        {% for f in form.treatment %}
+        {% if forloop.counter = 1 %}
+          <div class="stop">
+            <div>{{f.label|cut:"variables."}}<span class="pull-right text-info"></span></div>
+            {{f.draw}}
+          </div>
+          <hr />
+          <h5>{% trans 'Fármaco' %}<small class="text-info pull-right">[mg/día]</small></h5>
+           <em class="muted">
+            <p>{% trans 'Sólo se muestran los recetados en alguna ocasión' %}</p>
+          </em>
+        {% else %}
+          <div class="stop">
+            <div>{{f.label|cut:"treatment."}}<span class="pull-right text-info"></span></div>
+            {{f.draw}}
+          </div>
+          <br>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
   
   </div>
 
@@ -329,23 +283,50 @@ function refresh(data) {
     </div>
   </h1>
 </div>
- <section>
-  
-  {% if reports|length %}
-  <div class="alert alert-info">La consulta devolvió <strong class="text-info">{{reports|length}}</strong> resultados</div>
-  <div class="hero-unit">
-    <button id="download_xls" class="btn btn-primary btn-block btn-large">{% trans 'Descargar datos en formato Excel' %}</button>
-    <a href="#myModal" role="button" class="btn  btn-block" data-toggle="modal">{% trans 'Previsualizar datos' %}</a>
-  </div>
-  
-  <div id="vis" class="center"></div>
-  {% else %}
-    <div class="alert alert-warning">
-      <p>La consulta no devolvió <strong class="text-info">ningún</strong> resultado.</p>
-      <p>Utilice criterios de filtrado menos restrictivos e inténtelo de nuevo.</p>
+{% if reports|length %}
+<div class="alert alert-info">La consulta devolvió <strong class="text-info">{{reports|length}}</strong> resultados</div>
+<div class="hero-unit">
+  <button id="download_xls" class="btn btn-primary btn-block btn-large">{% trans 'Descargar datos en formato Excel' %}</button>
+  <a href="#myModal" role="button" class="btn  btn-block" data-toggle="modal">{% trans 'Previsualizar datos' %}</a>
+</div>
+
+
+<div id="myCarousel" class="carousel slide hide" data-interval="">
+  <div class="carousel-inner" style="min-height: 500px">
+    <div class="item">
+      <div id="vis" class="center"></div>
+      <div class="carousel-caption">
+        <h4>{% trans 'Valor medio de las variables' %}</h4>
+        <p>Pase el ratón por cada variable para comparar sus valores.</p>
+      </div>
     </div>
-  {% endif %}
-<section>
+    <div class="active item">
+      <div id="pie" class="center"></div>
+      <div class="carousel-caption">
+        <h4>{% trans 'Distribución por edades' %}</h4>
+        <p></p>
+      </div>
+    </div>
+    <div class="item">
+      <div id="donuts" class="center">
+      </div>
+      <div class="carousel-caption">
+        <h4>{% trans 'Estratificación de pacientes' %}</h4>
+        <p></p>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+
+
+{% else %}
+  <div class="alert alert-warning">
+    <p>La consulta no devolvió <strong class="text-info">ningún</strong> resultado.</p>
+    <p>Utilice criterios de filtrado menos restrictivos e inténtelo de nuevo.</p>
+  </div>
+{% endif %}
 
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
@@ -378,7 +359,7 @@ function refresh(data) {
           <tr>
             <td>{{r.patient.id}}</td>
             <td>{{r.age}}</td>
-            <td>{{r.sex}}</td>
+            <td>{{r.patient.get_sex}}</td>
             <td>{{r.profession}}</td>
             <td>{{r.task.end_date|date:"j/m/Y"}}</td>
             {% for d in dimensions %}
@@ -417,7 +398,8 @@ function refresh(data) {
   </div>
 </div>
 
-
+<script src="{{ STATIC_URL }}js/d3.v3.min.js"></script>
+<script src="{{ STATIC_URL }}js/explotation-data.plot.js"></script>
 {% endblock %}
 
 

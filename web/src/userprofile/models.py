@@ -40,8 +40,8 @@ class Profile(TraceableModel):
     user = models.ForeignKey(User, unique=True, related_name='profiles')
     doctor = models.ForeignKey(User, blank=True, null=True,
                                 related_name='doctor')
-    patients = models.ManyToManyField(User, related_name='patients_profiles',
-                                        blank=True, null=True)
+    #patients = models.ManyToManyField(User, related_name='patients_profiles',
+    #                                    blank=True, null=True)
 
     illnesses = models.ManyToManyField(Illness,
                                     related_name='illnesses_profiles',
@@ -185,8 +185,15 @@ class Profile(TraceableModel):
     def get_conclusions(self):
         return Conclusion.objects.filter(appointment__patient=self.user).latest('date')
 
-    def get_treatment(self):
-        return Medicine.objects.filter(patient=self.user,date__isnull=True).order_by('component')
+    def get_treatment(self, at_date=None):
+        if at_date:
+            return Medicine.objects.filter(Q(patient=self.user,
+                                             created_at__lte=at_date,
+                                             is_previous=False),
+                                           Q(date__isnull=True) |
+                                           Q(date__gte=at_date)).order_by('id')
+        else:
+            return Medicine.objects.filter(patient=self.user,date__isnull=True, is_previous=False).order_by('component')
 
     def get_pending_tasks(self):
         next_app = self.get_nextAppointment()

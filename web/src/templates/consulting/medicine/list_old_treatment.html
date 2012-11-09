@@ -8,12 +8,13 @@
     <td><em>{{medicine.date|date:'d/M/Y'}}</em></td>
     <td><strong>{{medicine.component}}</strong></td>
     <td>{{medicine.posology}} mg/día</td>
+    <td>{{medicine.dosification}}</td>
   </tr>
   {% endif %}
 {% endfor %}
 </table>
 <div>
-  <p style="text-align: right; margin: 5px 20px">{% trans 'Elementos mostrados' %}: <em>{{medicines.start_index}} -  {{medicines.end_index}} {% trans 'de' %} {{medicines.paginator.count}}</em></p>
+  <p style="text-align: right; margin: 5px 20px" class="muted">{% trans 'Elementos mostrados' %}: <em>{{medicines.start_index}} -  {{medicines.end_index}} {% trans 'de' %} {{medicines.paginator.count}}</em></p>
 </div>
 
 {% if medicines.paginator.num_pages > 1 %}

@@ -58,14 +58,18 @@ urlpatterns = patterns('',
         consulting_views.personal_data_pm,
         name='consulting_personal_data_pm'),
 
-    url(r'^editpatient_pm/(?P<patient_user_id>\d+)$',
+    url(r'^editpatient_pm/(?P<patient_user_id>\d+)/$',
         consulting_views.editpatient_pm,
         name='consulting_editpatient_pm'),
 
     url(r'^patient_management/patient_identification_pm/\
-            (?P<patient_user_id>\d+)$',
+            (?P<patient_user_id>\d+)/$',
         consulting_views.patient_identification_pm,
         name='consulting_patient_identification_pm'),
+
+    url(r'^patient_management/list_by_doctor/(?P<doctor_user_id>\d+)/$',
+        consulting_views.patient_list,
+        name='consulting_patient_list'),
 
     # MEDICINES
     url(r'^searcher_component/', consulting_views.searcher_component,

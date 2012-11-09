@@ -16,10 +16,10 @@
     {% endblock %}
 
     {% block css_files %}
-      <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet"/>
       <link href="{{ STATIC_URL }}css/app.css" rel="stylesheet"/>
+      <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet"/>
+      
       <link href="{{ STATIC_URL }}css/bootstrap-editable.css" rel="stylesheet">
-      <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet"/>
       <link href="{{ STATIC_URL }}css/table-calendar.css" rel="stylesheet"/>
     {% endblock %}
 
@@ -43,11 +43,26 @@
 
     <script type="text/javascript">
       function fix_bars(){
-        if ($(window).width() >= 1024) {
-          $("div.fixable").affix();
-        }
-        else {
-          $("div.fixable").removeAttr('data-spy');
+        if (!$.browser.msie || $.browser.version >= '9') {
+          if ($(window).width() >= 1024) {
+            $("div.fixable").affix({offset: {y: 10}});
+          }
+          else {
+            $("div.fixable").removeAttr('data-spy');
+          }
+        } else {
+          if ($(window).width() > 1170) {
+            $("div.container").css('width', 1170);
+            for (var i=1; i<=12; i++) {
+              $("div.span"+i).not(".relative").css('width', (i-1)*100+70);
+            }
+          }
+          else {
+            $("div.container").not(".relative").css('width', 940);
+            for (var i=1; i<=12; i++) {
+              $("div.span"+i).not(".relative").css('width', (i*80)-20);
+            }
+          }
         }
       };
       {% block js %}
@@ -83,9 +98,10 @@
       {% endif%}
     {% endblock  %}
     {% block nav-bar%}{% endblock  %}
-    <div class="offset2 span10">
+    <div class="offset2 span10 pull-right">
     {% block subheader %}
     {% endblock subheader %}
+     
     </div>
 
     {% block body %}
@@ -121,6 +137,7 @@
     
 
     {% block footer%}
+      {% include 'ui/includes/footer.html' %}
     {% endblock %}
   </body>
 </html>

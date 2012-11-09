@@ -63,8 +63,7 @@
       window.open(image.src);
       //var url = image.src.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
       //window.open(url, '{{patient_user.username}}_plot.png');
-   })
-
+   });
 {% endblock %}
 
 {% block right %}
@@ -128,9 +127,9 @@
         <li{% if not active_tab or active_tab = 'active' %} class="active"{%endif%}>
             <a href="#variables" data-toggle="tab">Variables</a>
         </li>
-        <li {% if active_tab = 'dimensions' %} class="active"{%endif%}><a href="#dimensions" data-toggle="tab">Dimensiones</a></li>
-        <li {% if active_tab = 'status' %} class="active"{%endif%}><a href="#status" data-toggle="tab">Estado</a></li>
-        <li {% if active_tab = 'treatment' %} class="active"{%endif%}><a href="#treatment" data-toggle="tab">Tratamiento</a></li>
+        <li {% if active_tab = 'dimensions' %} class="active"{%endif%}><a href="#dimensions" data-toggle="tab" id="dimensions_tab">Dimensiones</a></li>
+        <li {% if active_tab = 'status' %} class="active"{%endif%}><a href="#status" data-toggle="tab" id="status_tab">Estado</a></li>
+        <li {% if active_tab = 'treatment' %} class="active"{%endif%}><a href="#treatment" data-toggle="tab" id="treatment_tab">Tratamiento</a></li>
     </ul>
 	
     <div class="tab-content" style="overflow-x: hidden">
@@ -147,5 +146,6 @@
             {% include 'consulting/patient/plot_treatment.html' with ticks=ticks_treatment %}
         </div>
     </div>
+
 
 {% endblock %}

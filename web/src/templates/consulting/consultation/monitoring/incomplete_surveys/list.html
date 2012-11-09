@@ -39,21 +39,7 @@
     </div>
 
     
-    <div id="medicine-paginator" class="pagination pagination-centered">
-      <ul class="pagination">
-        {% if tasks.has_previous %}
-          <li><a href="?page={{ tasks.previous_page_number }}">←</a></li>
-        {% else %}
-          <li class="disabled"><a>←</a></li>
-        {% endif %}
-
-        {% if tasks.has_next %}
-          <li><a href="?page={{ tasks.next_page_number }}">→</a></li>
-        {% else %}
-          <li class="disabled"><a>→</a></li>
-        {% endif %}
-      </ul>
-    </div>     
+    {% include 'ui/includes/pagination_bar.html' with objects=tasks %}   
     <div id="overwrite"></div>                                       
     {% else %}
         <div class="alert alert-info">{% trans "No hay encuestas sin completar" %}</div>                  

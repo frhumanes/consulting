@@ -22,6 +22,13 @@
         <a class="brand" href="{% url consulting_index %}">Consulting 3.0</a>
         <div class="nav-collapse collapse">
             <ul class="nav">
+                <li>
+                    <div id="notes" style="display:none; width: 0; height: 0;" data-pk="1" data-params="{'csrfmiddlewaretoken':'{{ csrf_token }}'}" data-toggle="#edit_notes" data-type="textarea" data-url="{% url consulting_save_notes %}" data-original-title="Notas" data-placement="bottom">{{request.session.notes}}</div>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-collapse collapse navbar-responsive-collapse">
+            <ul class="nav">
                 <li class="{% active_root request today %}">
                     <a href="{% url consulting_today %}">
                       {% trans 'CONSULTA' %}
@@ -56,22 +63,30 @@
                     </a>
                 </li>
             </ul>
-            <div class="nav pull-right">
-                <div class="btn-group pull-right">
-                    <a class="btn btn-warning" href="#" id="edit_notes"><i class="icon-comment icon-white"></i> NOTAS<div style="width:0;height:0; visibility:hidden" id="notes" data-pk="1" data-params="{'csrfmiddlewaretoken':'{{ csrf_token }}'}" data-toggle="#edit_notes" data-type="textarea" data-url="{% url consulting_save_notes %}" data-original-title="Notas" data-placement="bottom">{{request.session.notes}}</div></a>
-                    <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+            <ul class="nav pull-right">
+                <li class="vertical-divider"></li>
+
+                <li>
+                    <a class="btn-warning" href="#" id="edit_notes"><i class="icon-comment icon-white"></i> NOTAS</a>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle btn-inverse" data-toggle="dropdown" href="#">
                     <i class="icon-user icon-white"></i> {{user.username}}
-                    <span class="caret"></span>
+                    <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="icon-user"></i><strong>{{ user.get_profile.get_full_name }}</strong></a></li>
+                        <li><a href="#"><i class="icon-user"></i> <strong>{{ user.get_profile.get_full_name }}</strong></a></li>
+                        <li><a href="{% url password_change %}"><i class="icon-lock"></i> {% trans 'Cambiar contraseña' %}</a></li>
                         <li class="divider"></li>
-                        <li><a href="{% url registration_logout %}"><i class="icon-off"></i>{% trans 'Desconectar' %}</a></li>
+                        <li><a href="{% url registration_logout %}"><i class="icon-off"></i> {% trans 'Desconectar' %}</a></li>
                     </ul>
-                </div>
-            </div>
+                </li>
+            </ul>
         </div>
+
     </div>
   </div>
 </div>
+
 

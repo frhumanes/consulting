@@ -94,6 +94,7 @@
                                 click: $.proxy(this.click, this)
                         });
 
+
         if (this.component){
             this.component.on('click', $.proxy(this.show, this));
         } else {
@@ -125,7 +126,7 @@
     Plugin.prototype.createPolygon = function (points, text, colour, id){
         var middle_point = this.get_xy_middle(points[0], points[2]);
         var svg_root = this.element.parent('div').find('#svg_root');
-
+        
         var path_points = points[0].x +' '+ points[0].y +','+
         points[1].x +' '+ points[1].y +','+
         points[2].x +' '+ points[2].y +','+
@@ -139,10 +140,14 @@
         var data = document.createTextNode(text);
         var text = document.createElementNS(svgns,"text");
         text.setAttributeNS(null, "x", middle_point.x);
-        text.setAttributeNS(null, "y", middle_point.y);
+        text.setAttributeNS(null, "y", middle_point.y+this.text_size/3);
         text.setAttributeNS(null, "font-size", this.text_size);
         text.setAttributeNS(null, "text-anchor", "middle");
-        text.setAttributeNS(null, "fill", "white");
+        if(colour == '#FFFFFF') {
+            text.setAttributeNS(null, "fill", "black");
+        } else {
+            text.setAttributeNS(null, "fill", "white");
+        }
         text.appendChild(data);
 
         var data = document.createTextNode(id);
@@ -153,6 +158,7 @@
         svg_root.append(polygon);
         svg_root.append(text);
         svg_root.append(id);
+
     }
 
     Plugin.prototype.click = function (e) {

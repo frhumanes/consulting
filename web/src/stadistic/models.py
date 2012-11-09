@@ -14,6 +14,7 @@ class Report(models.Model):
     sex = models.IntegerField(null=True)
     profession = models.CharField(max_length=150)
     age = models.IntegerField(null=True)
+    treatment = DictField()
     variables = DictField()
     aves = ListField()
     dimensions = DictField()

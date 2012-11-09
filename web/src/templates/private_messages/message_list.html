@@ -34,25 +34,7 @@
         {% endfor %}
       </tbody>
     </table>
-    {% if messages.paginator.num_pages > 1 %}
-    <div id="message-paginator" class="pagination pagination-centered">
-      <ul>
-        {% if messages.has_previous %}
-          <li><a href="?page={{ messages.previous_page_number }}">←</a></li>
-        {% else %}
-          <li class="disabled"><a>←</a></li>
-        {% endif %}
-        {% for p in messages.paginator.page_range %}
-         <li {% if p = messages.number %}class="disabled"{% endif %}><a href="?page={{p}}">{{p}}</a></li>
-        {% endfor %}
-        {% if not match_outbox %}
-          <li><a href="?page={{ messages.next_page_number }}">→</a></li>
-        {% else %}
-          <li class="disabled"><a>→</a></li>
-        {% endif %}
-      </ul>
-    </div>
-    {% endif %}
+     {% include 'ui/includes/pagination_bar.html' with objects=messages %}
     
   {% else %}
     <div class="alert alert-info">{% trans "No hay mensajes" %}</div>

@@ -34,7 +34,7 @@ class MessageForm(forms.ModelForm):
                 queryset = None
 
                 if profile.is_doctor():
-                    queryset = profile.patients
+                    queryset = User.objects.filter(profiles__doctor=user)
                 else:
                     queryset = User.objects.filter(profiles=profile.doctor.get_profile())
                 self.fields['recipient'] = RecipientChoiceField(

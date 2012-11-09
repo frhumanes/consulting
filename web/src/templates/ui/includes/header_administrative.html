@@ -2,6 +2,7 @@
 {% load consulting %}
 
 {% url consulting_newpatient as newpatient %}
+{% url consulting_index_pm as index_pm %}
 {% url cal.index as cal %}
 
 
@@ -14,11 +15,11 @@
             <span class="icon-bar"></span>
         </a>
         <a class="brand" href="{% url consulting_index %}">Consulting 3.0</a>
-        <div class="nav-collapse collapse">
+        <div class="nav-collapse collapse navbar-responsive-collapse" style="height: auto;">
             <ul class="nav">
-                <li class="{% active_root request newpatient %}">
-                    <a href="{% url consulting_newpatient %}">
-                      {% trans 'ALTA PACIENTE' %}
+                <li class="{% active_root request index_pm %}">
+                    <a href="{% url consulting_index_pm %}">
+                        {% trans 'GESTIÓN PACIENTES' %}
                     </a>
                 </li>
                 <li class="{% active_root request cal %}">
@@ -28,18 +29,19 @@
                 </li>                                                     
             </ul>
             <ul class="nav pull-right">
-                <div class="btn-group pull-right">
-                    <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+                <li class="dropdown">
+                    <a class="dropdown-toggle btn-inverse" data-toggle="dropdown" href="#">
                     <i class="icon-user icon-white"></i> {{user.username}}
-                    <span class="caret"></span>
+                    <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="icon-user"></i><strong>{{ user.get_profile.get_full_name }}</strong></a></li>
+                        <li><a href="#"><i class="icon-user"></i> <strong>{{ user.get_profile.get_full_name }}</strong></a></li>
+                        <li><a href="{% url password_change %}"><i class="icon-lock"></i> {% trans 'Cambiar contraseña' %}</a></li>
                         <li class="divider"></li>
-                        <li><a href="{% url registration_logout %}"><i class="icon-off"></i>{% trans 'Desconectar' %}</a></li>
+                        <li><a href="{% url registration_logout %}"><i class="icon-off"></i> {% trans 'Desconectar' %}</a></li>
                     </ul>
-                </div>
-            </ul>                  
+                </li>
+            </ul>
         </div>
     </div>
   </div>
