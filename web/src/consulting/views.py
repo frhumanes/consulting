@@ -46,7 +46,7 @@ from illness.forms import IllnessSelectionForm, IllnessAddPatientForm
 from survey.forms import SelectBlockForm
 from survey.forms import QuestionsForm
 from survey.forms import SelectBehaviorSurveyForm
-from cal.forms import AppointmentForm
+from cal.forms import AppointmentForm, DoctorSelectionForm
 
 from cal.views import scheduler, day, app_add
 
@@ -429,7 +429,7 @@ def check_task_completion(id_task):
     for question in questions:
         found = False
         for answer in answers:
-            found = (answer.question == question)
+            found = (answer.option.question == question)
             if found:
                 break
         if not found:
@@ -678,7 +678,7 @@ def administrative_data(request, id_task, code_block=None, code_illness=None, id
        return HttpResponseRedirect(reverse('consulting_index'))
 
     if request.method == "POST":
-        exclude_list = ['user', 'role', 'doctor', 'username',
+        exclude_list = ['user', 'role', 'doctor',
                         'illnesses']
 
         request_params = dict([k, v] for k, v in request.POST.items())
@@ -730,7 +730,6 @@ def administrative_data(request, id_task, code_block=None, code_illness=None, id
                 username = generate_username(form)
                 profile.user.username = username
                 profile.user.save()
-                profile.username = username
 
                 profile.save()
                 result = new_result_sex_status(request.user.id, task.id,
@@ -777,7 +776,7 @@ def administrative_data(request, id_task, code_block=None, code_illness=None, id
                             'my_block': block},
                             context_instance=RequestContext(request))
     else:
-        exclude_list = ['user', 'role', 'doctor',  'username',
+        exclude_list = ['user', 'role', 'doctor',
                         'illnesses']
 
         if user.is_active:
@@ -794,6 +793,14 @@ def administrative_data(request, id_task, code_block=None, code_illness=None, id
                             'task': task,
                             'id_appointment': id_appointment,
                             'my_block': block},
+                            context_instance=RequestContext(request))
+
+@login_required()
+@only_doctor_consulting
+def show_task(request, id_task):
+    task = get_object_or_404(Task, pk=int(id_task))
+    return render_to_response('consulting/consultation/task.html',
+                            {'task':task},
                             context_instance=RequestContext(request))
 
 
@@ -863,7 +870,7 @@ def show_block(request, id_task, code_block=None, code_illness=None, id_appointm
                         answer.save()
                 elif values:
                     option = Option.objects.get(pk=int(values))
-                    answer = Answer(result = new_result, option = option, value = value)
+                    answer = Answer(result = new_result, option = option, value = val)
                     answer.save()
 
 
@@ -1138,7 +1145,8 @@ def resume_task(request, id_appointment, code_illness, id_task):
         for t in tasks:
             mindate = t.end_date < mindate and t.end_date or mindate
             maxdate = t.end_date > maxdate and t.end_date or maxdate
-            for a in t.get_answers():
+            for answer in t.get_answers():
+                a = answer.option
                 if a.question.code in values:
                     values[a.question.code].append((t.end_date, a.weight))
                 else:
@@ -1149,6 +1157,14 @@ def resume_task(request, id_appointment, code_illness, id_task):
                 {'values': values,
                  'task': task,
                  'ticks': ticks,
+                'appointment': appointment,
+                'illness': illness,
+                'patient_user': appointment.patient},
+                context_instance=RequestContext(request))
+    elif task.survey.code == settings.PREVIOUS_STUDY:
+        return render_to_response(
+        'consulting/consultation/monitoring/task_details.html', {
+                'task': task,
                 'appointment': appointment,
                 'illness': illness,
                 'patient_user': appointment.patient},
@@ -1465,7 +1481,7 @@ def generate_username(form):
         code = str(dob.strftime('%d%m'))
         username = first_letter + second_letter + first_surname.lower() +\
                     code
-        while Profile.objects.filter(username=username).count() > 0:
+        while Profile.objects.filter(user__username=username).count() > 0:
             code = str(randint(0, 9999))
             username = first_letter + second_letter + first_surname.lower() +\
                     code
@@ -1500,18 +1516,17 @@ def newpatient(request):
 
         if request.method == "POST":
             if logged_user_profile.is_doctor():
-                    exclude_list = ['user', 'role', 'doctor', 
-                                    'username']
+                    exclude_list = ['user', 'role', 'doctor']
             else:
                 exclude_list = ['user', 'role', 'doctor', 
-                                'username', 'sex', 'status', 'profession']
+                                'sex', 'status', 'profession']
             request_params = dict([k, v] for k, v in request.POST.items())
             request_params.update({'created_by': request.user.id})
             form = ProfileForm(request_params, exclude_list=exclude_list)
             if form.is_valid():
                 username = generate_username(form)
                 try:
-                    Profile.objects.get(username=username)
+                    Profile.objects.get(user__username=username)
                     same_username = True
                 except Profile.DoesNotExist:
                     ############################USER###########################
@@ -1537,7 +1552,6 @@ def newpatient(request):
                         profile.second_surname = format_string(
                                         form.cleaned_data['second_surname'])
 
-                        profile.username = username
                         profile.role = settings.PATIENT
                         if not form.cleaned_data['postcode']:
                             profile.postcode = None
@@ -1550,12 +1564,9 @@ def newpatient(request):
                                                 id=settings.DEFAULT_ILLNESS)
                         profile.illnesses.add(default_illness)
                         profile.save()
-
-                        
                     except Exception:
                         user.delete()
-                        return HttpResponseRedirect(
-                                                reverse('consulting_index'))
+                        return HttpResponseRedirect(reverse('consulting_index'))
                     ###########################################################
                     #SEND EMAIL
                     sendemail(user)
@@ -1567,11 +1578,10 @@ def newpatient(request):
                             context_instance=RequestContext(request))
         else:
             if logged_user_profile.is_doctor():
-                exclude_list = ['user', 'role', 'doctor', 
-                                'username']
+                exclude_list = ['user', 'role', 'doctor']
             else:
                 exclude_list = ['user', 'role', 'doctor', 
-                                'username', 'sex', 'status', 'profession']
+                                'sex', 'status', 'profession']
             form = ProfileForm(exclude_list=exclude_list)
 
         return render_to_response('consulting/patient/patient.html',
@@ -1648,7 +1658,7 @@ def patient_searcher(request):
 @login_required()
 def editpatient_pm(request, patient_user_id):
     logged_user_profile = request.user.get_profile()
-
+    
     if logged_user_profile.is_doctor():
         try:
             user = User.objects.get(id=patient_user_id, profiles__doctor=request.user)
@@ -1663,16 +1673,15 @@ def editpatient_pm(request, patient_user_id):
         return HttpResponseRedirect(reverse('consulting_index'))
 
     profile = user.get_profile()
+    doctor_form = DoctorSelectionForm(patient=profile)
 
     if request.method == "POST":
         redirect_to = request.POST.get('next', '')
         if logged_user_profile.is_doctor():
-            exclude_list = ['user', 'role', 'doctor',
-                            'username', 'illnesses']
+            exclude_list = ['user', 'role', 'doctor', 'illnesses']
         else:
             exclude_list = ['user', 'role', 'doctor',
-                            'username', 'illnesses', 'sex', 'status',
-                            'profession']
+                            'illnesses', 'sex', 'status', 'profession']
 
         request_params = dict([k, v] for k, v in request.POST.items())
         request_params.update({'created_by': request.user.id})
@@ -1723,7 +1732,6 @@ def editpatient_pm(request, patient_user_id):
                 username = generate_username(form)
                 profile.user.username = username
                 profile.user.save()
-                profile.username = username
 
                 profile.save()
 
@@ -1743,6 +1751,7 @@ def editpatient_pm(request, patient_user_id):
             return render_to_response(
                             'consulting/patient/patient.html',
                             {'form': form,
+                            'doctor_form': doctor_form,
                             'edit': True,
                             'patient_user_id': patient_user_id,
                             'next': redirect_to},
@@ -1750,12 +1759,10 @@ def editpatient_pm(request, patient_user_id):
     else:
         next = request.GET.get('next', '')
         if logged_user_profile.is_doctor():
-            exclude_list = ['user', 'role', 'doctor', 
-                            'username', 'illnesses']
+            exclude_list = ['user', 'role', 'doctor', 'illnesses']
         else:
-            exclude_list = ['user', 'role', 'doctor', 
-                            'username', 'illnesses', 'sex', 'status',
-                            'profession']
+            exclude_list = ['user', 'role', 'doctor', 'illnesses', 
+                            'sex', 'status', 'profession']
 
         if user.is_active:
             active = settings.ACTIVE
@@ -1767,6 +1774,7 @@ def editpatient_pm(request, patient_user_id):
 
     return render_to_response('consulting/patient/patient.html',
                             {'form': form,
+                            'doctor_form': doctor_form,
                             'edit': True,
                             'patient_user_id': patient_user_id,
                             'next': next},
@@ -2282,7 +2290,8 @@ def user_evolution(request, return_xls=False):
     values = {}
     tticks = []
     for t in tasks:
-        for a in t.get_answers():
+        for answer in t.get_answers():
+            a = answer.option
             if a.question.code in values:
                 values[a.question.code].append((t.end_date, a.weight))
             else:

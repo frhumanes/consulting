@@ -14,5 +14,5 @@
   <td>{{ event.end_time|time:"H:i" }}</td>
   <td>{{ event.patient.get_profile.doctor.get_profile.get_full_name }}</td>
   <td>{{ event.app_type}}</td>
-  <td>{{ event.description|striptags|safe|truncatewords:5 }}</td>
+  <td><em>{{ event.description|striptags|safe|truncatewords:5 }}</em></td>
 </tr>

@@ -116,7 +116,7 @@ urlpatterns = patterns('',
     url(r"^doctor/(\d+)/(\d+)/$", views.doctor_month),
     url(r"^doctor/(\d+)/$", views.doctor_month),
 
-    url(r"^doctor/(\d+)/day/(\d+)/(\d+)/(\d+)/$", views.doctor_day),
+    url(r"^doctor/(\d+)/day/(\d+)/(\d+)/(\d+)/$", views.doctor_day, name="doctor_day"),
 
     # --------
     # vacation

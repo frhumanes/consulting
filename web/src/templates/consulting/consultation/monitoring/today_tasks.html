@@ -2,7 +2,8 @@
 
 <section>
   <legend>{% trans 'Cuestionarios' %}</legend>
-  <table class="table table-bordered table-condensed">  
+  <div class="thumbnail">
+  <table class="table table-condensed">  
     <thead>
       <tr>
         <th style="text-align:left;">
@@ -11,7 +12,7 @@
         <th style="text-align:center;">
           {% trans 'Tipo' %}
         </th> 
-        <th colspan="3" style="text-align:center;">Acciones</th>                                  
+        <th colspan="3" style="text-align:center;">Acciones</th>     
       </tr>
     </thead>        
     <tbody>                
@@ -26,6 +27,7 @@
       {% endfor %}
     </tbody>
   </table>
+  </div>
   <div class="modal hide fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>

@@ -1,1 +1,2 @@
-Bienvenido a Consulting 3.0
+{% load consulting }
+Bienvenido a {% get_brand %}

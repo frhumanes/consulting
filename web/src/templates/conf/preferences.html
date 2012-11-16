@@ -2,8 +2,6 @@
 
 {% load i18n messages %}
 
-{% block title %}{% trans 'Calendar list' %}{% endblock %}
-
 {% block left_panel %}
   {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
 {% endblock %}
@@ -20,7 +18,7 @@
           </div>
           <div class="btn-group">
             <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> {% trans "Absences" %}</a>
-            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="{% url cal.list_vacation %}"><i class="icon-plane"></i> {% trans "Vacations" %}</a></li>
                 <li><a href="{% url cal.list_event %}"><i class="icon-calendar"></i> {% trans "Events" %}</a></li>

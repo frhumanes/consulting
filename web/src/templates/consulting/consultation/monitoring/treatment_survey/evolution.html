@@ -4,8 +4,12 @@
 
 {% block js_files %}
   {{ block.super }}
-    <script src="{{ STATIC_URL }}js/jquery.flot.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.flot.js"></script>
   <script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/jquery.flot.resize.js"></script>
+{% endblock %}
+
+{% block jquery_init %}
+  plotTreatment();
 {% endblock %}
 
 {% block container %}

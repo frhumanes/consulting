@@ -2,10 +2,39 @@
 
 {% load i18n %}
 
-
 {% block css_files %}
     {{ block.super }}
     <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet">
+{% endblock %}
+
+{% block css_inline %}
+    {{ block.super }}
+.yaxisLabelLeft {
+    left: -18px;
+    top: 50%;
+    transform: rotate(-90deg);
+    transform-origin: 0 0;
+    -webkit-transform: rotate(-90deg);
+    -webkit-transform-origin: 0 0;
+    -moz-transform: rotate(-90deg);
+    /* for ie */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+.yaxisLabelRight {
+    float: right;
+    right: -102px;
+    top: 50%;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+    -webkit-transform: rotate(90deg);
+    -webkit-transform-origin: 0 0;
+    -moz-transform: rotate(90deg);
+}
+.axisLabel {
+    font-size: 12px;
+    position: absolute;
+    text-align: center;
+}
 {% endblock %}
 
 {% block js_files %}
@@ -13,6 +42,7 @@
     <script src="{{ STATIC_URL }}js/jquery.flot.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.flot.resize.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
+<script src="{{ STATIC_URL }}js/locales/bootstrap-datepicker.es.js"></script>
 {% endblock %}
 
 {% block jquery_init %}
@@ -67,7 +97,7 @@
 {% endblock %}
 
 {% block right %}
-    {% include 'consulting/patient/card.html' %}
+    {% include 'consulting/patient/card.html' with mini=1 %}
 {% endblock %}
 
 {% block container %}
@@ -78,7 +108,7 @@
           <button class="btn btn-info" onClick="$('#filter_options').show()"><i class="icon-filter icon-white"></i> {% trans "Filtrar" %}</button>
           <button class="btn dropdown-toggle btn-success" data-toggle="dropdown"><i class="icon-download-alt icon-white"></i> 
           {% trans 'Exportar' %}
-          <span class="caret"></span>
+          <b class="caret"></b>
           </button>
           <ul class="dropdown-menu">
             <li>
@@ -104,14 +134,14 @@
             </div>
             {% endif %}
             Desde
-            <div id="from_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
+            <div id="from_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1" data-date="{{form.from_date.value}}">
              {{form.from_date}}
               <span class="add-on">
                 <i class="icon-th"></i>
               </span>
             </div>
             hasta
-            <div id="to_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
+            <div id="to_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1" data-date="{{form.to_date.value}}">
                 {{form.to_date}}
               <span class="add-on">
                 <i class="icon-th"></i>
@@ -132,17 +162,17 @@
         <li {% if active_tab = 'treatment' %} class="active"{%endif%}><a href="#treatment" data-toggle="tab" id="treatment_tab">Tratamiento</a></li>
     </ul>
 	
-    <div class="tab-content" style="overflow-x: hidden">
-        <div class="tab-pane {% if not active_tab or active_tab = 'variables' %}active{% endif %}" id="variables" style="overflow-x: auto">
+    <div class="tab-content">
+        <div class="tab-pane {% if not active_tab or active_tab = 'variables' %}active{% endif %}" id="variables">
             {% include 'consulting/patient/plot_variables.html' with ticks=ticks_variables %}
         </div>
-        <div class="tab-pane {% if active_tab = 'dimensions' %}active{% endif %}" id="dimensions" style="overflow-x: auto">
+        <div class="tab-pane {% if active_tab = 'dimensions' %}active{% endif %}" id="dimensions" >
             {% include 'consulting/patient/plot_dimensions.html' with ticks=ticks_variables %}
         </div>
-        <div class="tab-pane {% if active_tab = 'status' %}active{% endif %}" id="status" style="overflow-x: auto">
+        <div class="tab-pane {% if active_tab = 'status' %}active{% endif %}" id="status">
             {% include 'consulting/patient/plot_scales.html' with ticks=ticks_variables values=scales %}
         </div>
-        <div class="tab-pane {% if active_tab = 'treatment' %}active{% endif %}" id="treatment" style="overflow-x: auto">
+        <div class="tab-pane {% if active_tab = 'treatment' %}active{% endif %}" id="treatment">
             {% include 'consulting/patient/plot_treatment.html' with ticks=ticks_treatment %}
         </div>
     </div>

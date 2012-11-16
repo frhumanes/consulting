@@ -26,7 +26,7 @@ ul#id_kind_component{
 /* Space out sub-sections more
 -------------------------------------------------- */
 section {
-  padding-top: 30px;
+  padding-top: 10px;
 }
 
 /************************************SUBNAV***********************************/
@@ -143,4 +143,21 @@ img {
          -moz-border-radius: 4px 4px 0 0;
               border-radius: 4px 4px 0 0;
   }
+}
+
+body > .navbar .brand {
+    color: #0470AA;
+    font-weight: bold;
+    float: left;
+    margin: 0 20px 0 10px;
+    padding-left: 0;
+    padding-right: 0;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.125);
+    transition: all 0.2s linear 0s;
+}
+
+body > .navbar .brand:hover {
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.4);
+    color: #FFFFFF;
 }

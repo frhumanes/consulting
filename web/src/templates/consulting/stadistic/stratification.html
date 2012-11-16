@@ -17,7 +17,7 @@ function show_patient_list(illness, level) {
   if($('#myfilter').hasClass('active')){
     url[illness] += '?filter=mine';
   }
-
+  $('#modal_patient .modal-body').html('<div class="center"><img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." /></div>');
   $('#modal_patient .modal-body').load(url[illness].replace('0', level),'',$('#modal_patient').modal('show'));
 }
 {% endblock %}
@@ -26,19 +26,18 @@ function show_patient_list(illness, level) {
 $('#main').remove();
 $('#right_bar').remove();
 $('#myfilter').on('click', function(e){
+  $(this).html('<img src="{{ STATIC_URL }}/img/ajax-bar-loader.gif" alt="loading..." />');
   if($(this).hasClass('active')){
-    $(this).html('<img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />');
     window.location = '{{request.path}}';
   }
   else {
-    $(this).html('<img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />');
     window.location = '{{request.path}}?filter=mine';
   }
 })
 
  $('#pyramid_anxiety').Pyramid({
     'height': 350,
-    'base': 400,
+    'base': 390,
     'top': 100,
     'slices':{{anxiety_list|length}},
     'slice_separation': 0.1,
@@ -51,7 +50,7 @@ $('#myfilter').on('click', function(e){
 
   $('#pyramid_depression').Pyramid({
     'height': 350,
-    'base': 400,
+    'base': 390,
     'top': 100,
     'slices':{{depression_list|length}},
     'slice_separation': 0.10,
@@ -75,8 +74,8 @@ $('#myfilter').on('click', function(e){
 <div class="page-header">
   <h1>{% trans 'Pirámides de estratificación' %}</h1>
 </div>
-<div class="row-fluid">
-  <div style="float:left" id="a">
+<div class="row-fluid img-polaroid">
+  <div style="float:left; margin-left: 10px" id="a">
     <h2><small>Ansiedad</small></h2>
     <div id="pyramid_anxiety" style="width: 400px; height:360px">
       <!--[if lte IE 8]><script type="image/svg+xml">
@@ -105,7 +104,7 @@ $('#myfilter').on('click', function(e){
        </script><![endif]-->
     </div>
   </div>
-  <div style="float:left" id="d">
+  <div style="float:left; margin-left: 10px" id="d" >
     <h2><small>Depresión</small></h2>
     <div id="pyramid_depression" style="width: 400px; height:360px">
       <!--[if lte IE 8]><script type="image/svg+xml">
@@ -137,7 +136,7 @@ $('#myfilter').on('click', function(e){
        </script><![endif]-->
     </div>
   </div>
-  <section class="span2 center" style="min-width:105px">
+  <div class="center" style="float: right; margin: 50px 11px 0 0; min-width:100px; max-width:179px">
     <div class="well">
       <legend>Escala</legend>
       <p><span class="label label-inverse">Muy grave</span></p>
@@ -148,7 +147,7 @@ $('#myfilter').on('click', function(e){
       <p><span class="label label-success">&nbsp;Ausente&nbsp;&nbsp;</span></p>
     </div>
     <button id="myfilter" type="button" class="btn {% if filtered %}active btn-info{% endif %}" data-toggle="button">{% trans 'Sólo mis pacientes' %}</button>
-  </section>
+  </div>
 </div>
    
 

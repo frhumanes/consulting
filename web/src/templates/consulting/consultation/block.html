@@ -4,15 +4,12 @@
 
 {% block js_files %}
   {{ block.super }}
-  <script src="{{ STATIC_URL }}js/jquery-ui-1.8.18.custom.js"></script>
-  <script src="{{ STATIC_URL }}js/jquery.ui.core.js"></script>
-  <script src="{{ STATIC_URL }}js/jquery.ui.position.js"></script>
-  <script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery-ui-1.9.1.custom.js"></script>
 {% endblock %}
 
 {% block css_files %}
   {{ block.super }}
-  <link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+  <link href="{{ STATIC_URL }}css/jquery-ui-1.9.1.custom.css" rel="stylesheet">
 {% endblock %}
 
 {% block css_inline %}
@@ -27,7 +24,7 @@
 {% endblock %}
 
 {% block right %}
-  {% include "consulting/patient/card.html" %}
+  {% include 'consulting/patient/card.html' with mini=1 %}
 {% endblock %}
 
 {% block container %}
@@ -42,7 +39,7 @@
                 <script>$('#id_{{field.label}}').parent().prepend('{{field}}');</script>
             {% else %}
             <div class="control-group row-fluid">
-              <label class="control-label span7 relative" style="text-align: justify">
+              <label id="{{field.html_name}}" class="control-label span7 relative" style="text-align: justify">
                   {{field.label|sexify:patient_user}}
               </label>
               <div class="controls span5 relative">
@@ -88,9 +85,16 @@
 {% endblock container %}
 
 {% block js %}
-function set_events(){
-  <!-- REMOVE MEDICINE -->
+  var show_warning = true;
+  $(window).bind('beforeunload', function() {
+    if (show_warning) {
+        return "{% trans 'Va a abandonar el cuestionario actual. Los datos no guardados se perderán. ¿Desea continuar de todos modos?' %}";
+    }
+  }); 
 
+function set_events(){
+    
+  <!-- REMOVE MEDICINE -->
   $('.remove_medicine').each(function(){
     $(this).on("click", function(){ 
                             var id = $(this).attr("id");
@@ -124,19 +128,24 @@ function set_events(){
 {% block jquery_init %}
   $('input[type="checkbox"]').each(function(){
     if($('label[for="'+this.id+'"]').text().match(/^ Otr/) && $(this).attr('checked')) {
+      $('label[for="'+this.id+'"]').parent().addClass('thumbnail');
       $('label[for="'+this.id+'"]').after($('input[name="' + this.name + '_value"]'));
       $('input[name="' + this.name + '_value"]').css('display','block');
     } else {
-      $('input[name="' + this.name + '_value"]').css('display','none');
+      if($('input[name="' + this.name + '_value"]').css('display') != 'block'){
+        $('input[name="' + this.name + '_value"]').css('display','none');
+      }
     }
   });
 
   $('input[type="checkbox"]').on('change', function(){
     if($('label[for="'+this.id+'"]').text().match(/^ Otr/)) {
       if($(this).attr('checked')) {
+        $('label[for="'+this.id+'"]').parent().addClass('thumbnail');
         $('label[for="'+this.id+'"]').after($('input[name="' + this.name + '_value"]'));
         $('input[name="' + this.name + '_value"]').css('display','block');
       } else {
+        $('label[for="'+this.id+'"]').parent().removeClass('thumbnail');
         $('input[name="' + this.name + '_value"]').css('display','none');
       }
     }
@@ -165,5 +174,35 @@ function set_events(){
   $('ul').addClass("without_decorator");
 
   $('#medicament_container').load('{% url consulting_get_medicines filter_option='previous' id_patient=patient_user.id %}', set_events);
+
+  $('.form').on('submit', function(e){
+    var pending = 0;
+    $(this).find('div.required').each(function(){
+      var answer = $(this).find('input[type="hidden"]').val()
+      if( (typeof answer === 'undefined') || answer == '' ) {
+        pending++;
+        $(this).parent().parent().addClass('error');
+      }
+    });
+    $(this).find('label.control-label').each(function(){
+      if($('input[type="checkbox"][name="'+this.id+'"].required').length && $('input[type="checkbox"][name="'+this.id+'"].required:checked').length == 0) {
+        pending++;
+        $(this).addClass('text-error');
+      }
+    });
+    $(this).find('select.required').each(function() {
+      if( !$(this).val() ){
+        pending++;
+        $(this).parent().parent().addClass('error');
+      }
+    });
+    if(pending && !confirm("{% trans 'Ha dejando '%}"+pending+"{% trans ' preguntas sin contestar. ¿Desea guardar los cambios y responderlas en otro momento?'%}")){
+      e.preventDefault();
+      var first = $(this).find('.error').first();
+      $('html,body').animate({scrollTop: first.offset().top - 100}, 500);
+    } else {
+      show_warning = false;
+    }
+  });
 
 {% endblock %}

@@ -2,7 +2,7 @@
 
  <script type="text/javascript">
         function next(){
-            var loader = '<img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />';
+            var loader = '<img src="{{ STATIC_URL }}/img/ajax-bar-loader.gif" alt="loading..." />';
             var width = $('#current').width();
             $('#current').html(loader);
             $('#current').width(width);
@@ -16,7 +16,7 @@
         }
 
         function prev(){
-            var loader = '<img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />';
+            var loader = '<img src="{{ STATIC_URL }}/img/ajax-bar-loader.gif" alt="loading..." />';
             var width = $('#current').width();
             $('#current').html(loader);
             $('#current').width(width);
@@ -44,7 +44,7 @@
         </li>
     </ul>
 </div>
-<div id="calendar">
+<div id="calendar" class="img-polaroid" style="min-width:220px">
 <table class="table table-condensed table-nohover">
     <thead>
       <tr>
@@ -102,7 +102,7 @@
     </tbody>
 </table>
 </div>
-
+<br>
 <div id="info_day">
       {% include "cal/includes/extra_info.html" %}
 </div>

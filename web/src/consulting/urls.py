@@ -95,6 +95,10 @@ urlpatterns = patterns('',
         consulting_views.view_report,
         name='consulting_view_report'),
 
+    url(r'^patient_management/task/(\d+)/$',
+        consulting_views.show_task,
+        name='consulting_view_task'),
+
     url(r'^patient_management/parameters/$',
         consulting_views.user_evolution,
         name='consulting_user_evolution'),

@@ -5,6 +5,7 @@
 {% block js_files %}
   {{ block.super }}
   <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
+<script src="{{ STATIC_URL }}js/locales/bootstrap-datepicker.es.js"></script>
 {% endblock %}
 
 {% block css_files %}
@@ -144,7 +145,7 @@
             {{form.dob.label}}
           </label>
           <div class="controls">
-            <div id="dp" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
+            <div id="dp" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1" data-date="{{form.dob.value|date:'d/m/Y'}}">
               {{form.dob}}
               <span class="add-on">
                 <i class="icon-th"></i>

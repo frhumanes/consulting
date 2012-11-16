@@ -1,5 +1,7 @@
-Bienvenido a Consulting 3.0
+{% load consulting }
 
-Ya puede hacer uso de Consulting 3.0. Acceda a 'http://consultingpre.wtelecom.es', su nombre de usuario es {{username}} y su contraseña {{password}}.
+Bienvenido a {% get_brand %}
+
+Ya puede hacer uso de su área personal de {% get_brand %}. Acceda a {% get_domain %}, su nombre de usuario es {{username}} y su contraseña {{password}}.
 
 Saludos.

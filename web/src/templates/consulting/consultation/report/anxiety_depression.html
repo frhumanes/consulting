@@ -67,10 +67,10 @@
 		<dt>CUESTIONARIO DE DEPRESIÓN DE BECK 
 			<div class="pull-right">{{beck_mark|floatformat}} puntos</div>
 		</dt>
-		<dd> {{beck_scale|first}}</dd>
+		<dd> {{beck_scale|first|striptags|striptags}}</dd>
 		<dt>ESCALA DE VALORACIÓN PSIQUIÁTRICA DE HAMILTON PARA LA ANSIEDAD
 			<div class="pull-right">{{hamilton_mark|floatformat}} puntos</div>
-		<dd>{{hamilton_scale|first}}</dd>
+		<dd>{{hamilton_scale|first|striptags}}</dd>
 		{% for name, value in dimensions.items %}
 		<dt>PUNTUACIÓN EN LA DIMENSIÓN {{name|upper}}
 			<div class="pull-right">{{value|floatformat}} / 10</div>

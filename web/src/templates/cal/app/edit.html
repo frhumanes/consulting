@@ -2,14 +2,15 @@
 
 {% load i18n messages %}
 
-{% block title %}{% trans 'Appointments list' %}{% endblock %}
-
+{% block right %}
+  {% include "cal/includes/calendar.html" with doctor=doctor patient_user=patient_user %}
+{% endblock %}
 
 {% block container %}
 <div class="page-header">
-  <h1>{% trans 'Editar cita' %}
+  <h1>{% trans 'Editar cita' %} <small>{{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}</small>
       <div class="btn-group pull-right">
-        <a class="btn btn-primary" href="javascript:back();">
+        <a class="btn btn-primary" href="javascript:history.back();">
           <i class="icon-arrow-left icon-white"></i>
           {% trans 'Volver' %}
         </a>
@@ -17,34 +18,31 @@
   </h1>
 </div>
 
-
-
-
 {% if vacations %}
   <div class="alert alert-error">
     <p>
       {% if request.user.get_profile.is_doctor %}
-        {% trans "You can not set an appointment if you have an event or vacation day" %}
+        {% trans "No es posible crear una cita en un día de vacaciones." %}
       {% else %}
-        {% trans "You can not set an appointment if the doctor has an event or vacation day" %}
+        {% trans "El doctor no está disponible este día." %}
       {% endif %}
     </p>
   </div>
 {% else %}
-{% if request.user.get_profile.is_administrative %}
-<div class="well">
-  <h4>Dr. {{ doctor.get_profile.get_full_name }}</h4>
-</div>
-{% endif %}
-{% if patient_user %}
-<div class="well">
-  <h4>{% trans "Paciente:" %} {{ patient_user.get_profile.get_full_name }}</h4>
-</div>
-{% endif %}
+  {% if request.user.get_profile.is_administrative %}
+  <div class="well">
+    <h4>Dr. {{ doctor.get_profile.get_full_name }}</h4>
+  </div>
+  {% endif %}
+  {% if patient_user %}
+  <div class="well">
+    <h4>{% trans "Paciente:" %} {{ patient_user.get_profile.get_full_name }}</h4>
+  </div>
+  {% endif %}
 
 <div class="well">
-  <form class="form-horizontal" method="post" action="{request.path}">{% csrf_token %}
-    <legend>{% trans 'Edit Appointment' %} {{ day }} {% trans "of" %} {{ mname }} {% trans "of" %} {{ year }}</legend>
+  <form class="form-horizontal" method="post" action="{{request.path}}">{% csrf_token %}
+    
     <fieldset>
         {% if not_available_error %}
           <div class="alert alert-error">
@@ -153,11 +151,11 @@
         <p class="center">
           <a id="remove-event" class="btn btn-large btn-danger" >
             <i class="icon-remove-sign icon-white"></i>
-            {% trans 'Delete' %}
+            {% trans 'Eliminar' %}
           </a>
           <button class="btn btn-large btn-primary" type="submit">
             <i class="icon-ok-sign icon-white"></i>
-            {% trans 'Save' %}</button>
+            {% trans 'Guardar cambios' %}</button>
         </p>
 
     </fieldset>
@@ -166,13 +164,13 @@
 
 <div id="modal-screen" class="modal hide">
   <div class="modal-header">
-    <h3>{% trans 'Delete Event' %}</h3>
+    <h3>{% trans 'Eliminar cita' %}</h3>
   </div>
   <div class="modal-body">
-    <p>"{% trans 'You are going to delete an appointment. Are you sure?' %}"</p>
+    <p>"{% trans 'Los cambios que va a realizar no se pueden deshacer. ¿Está usted seguro de querer eliminar la cita?' %}"</p>
   </div>
   <div class="modal-footer">
-    <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Yes' %}" data-loadingmsg="{% trans 'Removing ... ' %}">{% trans 'Yes' %}</a>
+    <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Yes' %}" data-loadingmsg="{% trans 'Removing ... ' %}">{% trans 'Sí' %}</a>
     <a href="#" class="btn btn-primary" data-dismiss="modal">{% trans 'No' %}</a>
   </div>
 </div>

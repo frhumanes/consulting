@@ -1,18 +1,18 @@
 {% load i18n%}
 {% load consulting %}
-<div class="alert alert-info">
-  <table class="table table-condensed">  
+<div class="img-polaroid" style="margin-top: 6px">
+  <table class="table {% if not mini %}table-condensed{% endif %}">  
     <thead>
       <tr>            
         <th colspan="2" style="text-align:center;">
           <h4>
-            <a target="_blank" href="{% url consulting_pre_personal_data_pm patient_user.id %}">{{patient_user.get_profile.get_full_name|upper}}<a>
+            <a rel="tooltip" placement="top" title="{% trans 'Ir a perfil del paciente' %}" target="_blank" href="{% url consulting_pre_personal_data_pm patient_user.id %}" >{{patient_user.get_profile.get_full_name|upper}}</a>&nbsp;
           <a href="{% url consulting_editpatient_pm patient_user.id %}?next={{request.path}}" data-dismiss="alert" class="icon-edit pull-right"></a> 
           </h4>
         </th>
       </tr>
     </thead>        
-    <tbody>           
+    <tbody {% if mini %}style="color:grey"{% endif %}>           
       <tr>            
         <td>{% trans 'NIF' %}</td>
         <td>{{patient_user.get_profile.nif}}</td>
@@ -31,6 +31,7 @@
         <td>{{patient_user.get_profile.get_status}}</td>
       </tr>
       {% endif %}
+      {% if not mini %}
       <tr>            
         <td>{% trans 'TELÉFONO 1' %}</td>
         <td>{{patient_user.get_profile.phone1}}</td>
@@ -55,6 +56,7 @@
         <td>{% trans 'CÓDIGO POSTAL' %}</td>
         <td>{% if patient_user.get_profile.postcode %}{{patient_user.get_profile.postcode}}{% endif %}</td>
       </tr>
+      {% endif %}
       {% if user.get_profile.is_doctor %}
       <tr>            
         <td>{% trans 'PROFESIÓN' %}</td>
@@ -73,10 +75,10 @@
       <tr>            
         <td colspan="2">{% trans 'NIVEL ESTRATIFICACIÓN' %}<br />
           {% if patient_user.get_profile.get_anxiety_status %}
-              <span class="label label-{{patient_user.get_profile.get_anxiety_status|last}}">{{patient_user.get_profile.get_anxiety_status|first}}</span>
+              <span class="label label-{{patient_user.get_profile.get_anxiety_status|last}}">{{patient_user.get_profile.get_anxiety_status|first|safe}}</span>
           {% endif %}
           {% if patient_user.get_profile.get_depression_status %}
-              <span class="label label-{{patient_user.get_profile.get_depression_status|last}}">{{patient_user.get_profile.get_depression_status|first}}</span>
+              <span class="label label-{{patient_user.get_profile.get_depression_status|last}}">{{patient_user.get_profile.get_depression_status|first|safe}}</span>
           {% else %}
               <span class="label">PENDIENTE DE CALCULAR</span>
           {% endif %}

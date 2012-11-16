@@ -1,9 +1,9 @@
-{% load i18n messages%}
+{% load i18n messages consulting %}
 
 {% match_url "private_messages_outbox" as match_outbox %}
 {% match_url "private_messages_inbox" as match_inbox %}
 
-<tr data-msg="{{ message.id }}" style="cursor:pointer" >
+<tr {% if match_inbox and request.user.get_profile.is_doctor and message.unread %}class="warning"{% endif %} data-msg="{{ message.id }}" style="cursor:pointer" >
 
 {% if match_outbox or message.author = patient_user %}
   <td><i class="icon-share"></i></td>
@@ -18,7 +18,9 @@
     <td><i class="{{ message.unread|yesno:'icon-envelope,icon-eye-open' }}"></i></td>
    <td style="font-weight: {{ message.unread|yesno:'bold,normal' }}">{{ message.author.get_profile.get_full_name }}</td>
 {% endif %}
-
-  <td><span {% if request.user.get_profile.is_doctor %}style="font-weight: {{ message.unread|yesno:'bold,normal' }}"{% endif %}>{{ message.subject|striptags|safe}}</span> - <span class="muted">{{ message.body|striptags|safe|truncatewords:7 }}</span></td>
+{% if match_inbox and request.user.get_profile.is_doctor %}
+  <td style="text-align:center;"><span style="min-width:100px" class="label label-{% get_anxiety_status_at message.author message.sent_at 1 %}">{% get_anxiety_status_at message.author message.sent_at 0 %}</span>&nbsp;<span style="min-width:100px" class="label label-{% get_depression_status_at message.author message.sent_at 1 %}">{% get_depression_status_at message.author message.sent_at 0 %}</span></td>
+{% endif %}
+  <td><span {% if request.user.get_profile.is_doctor %}style="font-weight: {{ message.unread|yesno:'bold,normal' }}"{% endif %}>{{ message.subject|striptags|safe}}</span> - <span class="muted">{{ message.body|striptags|safe|truncatewords:6 }}</span></td>
   <td>{{ message.sent_at|date:"d/M/y" }}</td>
 </tr>

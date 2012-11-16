@@ -5,6 +5,7 @@
 {% block js_files %}
   {{ block.super }}
   <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
+<script src="{{ STATIC_URL }}js/locales/bootstrap-datepicker.es.js"></script>
 {% endblock %}
 
 {% block css_files %}
@@ -15,6 +16,29 @@
 {% block jquery_init %}
   $('#dp').datepicker().on('changeDate',
     function(ev){$('#dp').datepicker('hide');
+  });
+
+  jQuery.ajaxSetup({
+        beforeSend: function (xhr) {
+              xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+              return xhr;
+        }
+   });
+
+  $('#doctor_selection').on('submit',function(event){
+    $('#message').css('display', 'none');
+    event.preventDefault();
+    $(this).ajaxSubmit({target: null,
+                        clearForm: false,
+                        success: function(response) {
+                                $('#message').html('<div class="alert alert-success">{% trans 'Cambio realizado correctamente.' %}<button type="button" class="close" data-dismiss="alert">×</button></div>');
+                                 $('#message').fadeIn('slow');
+                        },
+                        error: function(response) {
+                                $('#message').html('<div class="alert alert-error">{% trans 'Cambio no realizado.' %}<button type="button" class="close" data-dismiss="alert">×</button></div>');
+                                 $('#message').fadeIn('slow');
+                        }
+                      });
   });
 {% endblock %}
 
@@ -101,7 +125,7 @@
                   {{form.dob.label}}
                 </label>
                 <div class="controls info">
-                  <div id="dp" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
+                  <div id="dp" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1"  data-date="{{form.dob.value|date:'d/m/Y'}}">
                     {{form.dob}}
                     <span class="add-on">
                       <i class="icon-th"></i>
@@ -220,6 +244,7 @@
                 </div>
               </div>
               {% endif %}
+              <hr>
               <div class="control-group">
                 <label class="control-label">
                   {{form.active.label}}
@@ -236,9 +261,43 @@
                   {% trans 'Guardar' %}
                 </button>
               </div>
-            </fieldset>
             </form>
           </div>  
         </div>
       </section>
+{% endblock %}
+
+{% block right %}
+  {% if user.get_profile.is_administrative and patient_user_id %}
+  <div class="page-header">
+    <h3>{% trans "Asignación de médico" %}</h3>
+  </div>
+
+  <section>
+    <div id="message" style="display: none"></div>
+    <div class="well center">
+
+      <div class="">
+        <form id="doctor_selection" class="form" method="post" action="{% url cal.select_doctor patient_user_id %}">
+          {% csrf_token %}
+
+           <!-- DOCTOR -->
+          <div class="control-group">
+            <label class="control-label" for="id_doctor">{% trans 'Médico asignado' %}:</label>
+            <div class="controls">
+              {{ doctor_form.doctor }}
+                {% if doctor_form.doctor.errors %}
+                  {% for error in doctor_form.doctor.errors %}
+                     <span class="help-inline">{{ error|escape }}</span>
+                  {% endfor %}
+                {% endif %}
+            </div>
+          </div>
+            <!-- END DOCTOR -->
+             <button type="submit" class="btn btn-info btn-block">Traspasar paciente</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  {% endif %}
 {% endblock %}

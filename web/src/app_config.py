@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
-BRAND = "Consulting 3.0"
+import string, random
+
 #DATE AND TIME FORMAT
 TIME_FORMAT = "H:i"
 DATE_FORMAT = "%d/%m/%Y"
 
-DEFAULT_PASSWORD = '1234'
+#PASSWORD
+PASSWORD_MIN_LENGTH = 8
+DEFAULT_PASSWORD = '1234ABCD'
+def pwd_generator():
+	return ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(PASSWORD_MIN_LENGTH))
 
 
 #CODES
@@ -110,7 +115,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 # EMAIL_HOST_USER = 'redmine@wtelecom.es'
 # EMAIL_HOST_PASSWORD = 'password'
-EMAIL_HOST_USER = 'consulting3iwt2@gmail.com'
+EMAIL_HOST_USER = 'consulting3.development@gmail.com'
 EMAIL_HOST_PASSWORD = 'prueba123'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 EMAIL_USE_TLS = True
@@ -118,7 +123,7 @@ EMAIL_USE_TLS = True
 #RANGES
 AVE = {140:'', 200:u'importante', 300:u'bastante alto',9999:u'muy alto'}
 BECK = {10:[u'No depresión', 'success'], 
-		13:[u'Leve perturbación del estado de ánimo', 'info'],
+		13:[u'Leve perturbación <br>del estado de ánimo', 'info'],
 		19:[u'Depresión leve', 'default'],
 		30:[u'Depresión moderada', 'warning'],
 		40:[u'Depresión grave', 'important'],

@@ -2,8 +2,6 @@
 
 {% load i18n messages %}
 
-{% block title %}{% trans 'Slots list' %}{% endblock %}
-
 {% block container %}
   <div class="page-header">
     <h1>{% trans "Preferencias" %} {{year}}
@@ -31,13 +29,13 @@
 
         {% for weekday in slots_by_weekday %}
           <h4>{{ weekday.grouper }}</h4>
-          <table id="events_list" class="table">
+          <table id="events_list" class="table table-hover">
             <thead>
               <tr>
                 <th>{% trans "Tipo de cita" %}</th>
                 <th>{% trans "Hora inicial" %}</th>
                 <th>{% trans "Hora final" %}</th>
-                <th>{% trans "Notas" %}</th>
+                <th>{% trans "Descripción" %}</th>
               </tr>
             </thead>
             <tbody>

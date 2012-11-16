@@ -48,13 +48,14 @@
 {% block css_files %}
   {{block.super}}
   <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet">
-  <link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet"/>
+  <link href="{{ STATIC_URL }}css/jquery-ui-1.9.1.custom.css" rel="stylesheet"/>
 {% endblock %}
 
 {% block js_files %}
   {{ block.super }}
-  <script src="{{ STATIC_URL }}js/jquery-ui-1.8.18.custom.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery-ui-1.9.1.custom.js"></script>
   <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
+<script src="{{ STATIC_URL }}js/locales/bootstrap-datepicker.es.js"></script>
 {% endblock %}
 
 {% block jquery_init %}
@@ -74,8 +75,15 @@ $('#download_xls').live("click", function(e) {
     form.attr('action', orig_action);
 });
 
-$('#myCarousel').on('slid',function(){
-    $(this).find('.active').find('.carousel-caption').fadeIn('slow').delay(5000).fadeOut('slow');
+$('#refresh').live("click", function(e) {
+    var $form = $('#form');
+    $('#query-data').fadeTo(500, 0.25);
+    $form.ajaxSubmit({  target: '#query-data',
+                        clearForm: false,
+                        success: function(){
+                          $('#query-data').fadeTo(750, 1);
+                      }
+                    });
 });
 
 $(".range").each(function(){
@@ -89,7 +97,6 @@ $(".range").each(function(){
       $(this).parentsUntil('div.stop').parent().find('.text-info').html(value);
       $(this).parent().find('.text-info').html(value);
     }
-
     $(this).slider({
       range: true,
       min: min,
@@ -107,58 +114,25 @@ $(".range").each(function(){
           $(this).find('input[id$="_0"]').val(ui.values[0]);
           $(this).find('input[id$="_1"]').val(ui.values[1]);
       }
-  });
+    });
 });
 
-$('#id_date_0').datepicker().on('changeDate',
+$('#id_date_0').datepicker({format: 'dd/mm/yyyy'}).on('changeDate',
     function(ev){$('#id_date_0').datepicker('hide');
   });
-$('#id_date_1').datepicker().on('changeDate',
+$('#id_date_1').datepicker({format: 'dd/mm/yyyy'}).on('changeDate',
     function(ev){$('#id_date_1').datepicker('hide');
   });
 
 $('ul').addClass("without_decorator");
 
 $('#reload_button').live('click',function(){
-    $(this).html('<img src="{{STATIC_URL}}/img/loading.gif" />Actualizando...');  
+    $(this).html('<img src="{{STATIC_URL}}/img/ajax-bar-loader.gif" />&nbsp;Actualizando...');  
     $(this).addClass('disabled');
     $(this).load('{% url rebuild_data %}', function(){
       location.reload();
   });
 })
-
-if ($.browser.msie && $.browser.version < '9') {
-  $('#myCarousel').remove();
-} else {
-  $('#myCarousel').fadeIn('slow');
-  var data = [
-  {% for labelname, values in data.items %}
-    {% localize off %}
-      {"sharedLabel": "{{labelname}}", "barData1": {% if values.1 %}{{values.1|unlocalize}}{% else %}0{% endif %}, "barData2": {% if values.2 %}{{values.2|unlocalize}}{% else %}0{% endif %}},
-    {% endlocalize %}
-  {% endfor %}
-  ];
-  init_bars(data, '#vis');
-  data = [
-    {% for labelname, value in data1.items %}
-      {% if value %}
-      {
-      "age":"{% if labelname = labels_for_data1|first %}≤{% endif %}{{labelname}} [{{value}}]", "population":{{value}}
-      }, 
-      {% endif %}
-    {% endfor %}
-  ];
-  init_pie(data, '#pie');
-  
-
-  var dataset = {
-    ANSIEDAD: {{data2.hamilton}},
-    DEPRESION: {{data2.beck}}
-  };  
-  init_donuts(dataset, '#donuts');
-};
-
-
 {% endblock %}
 
 {% block left %}
@@ -169,19 +143,12 @@ if ($.browser.msie && $.browser.version < '9') {
 <script type="text/javascript">
   $('#right_bar').find('.fixable').removeClass('fixable');
 </script>
-<h4>{% trans 'Opciones de filtrado' %}</h4>
-<hr>
+<div class="page-header" style="margin-top:36px">
+  <h4>{% trans 'Opciones de filtrado' %}</h4>
+</div>
 <form class="form-inline" id="form" action="{{request.path}}" method="post" accept-charset="utf-8">
   {% csrf_token %}
-  <div class="btn-group center">
-    <button type="reset" class="btn btn-small">
-      {% trans 'Limpiar filtros' %}
-    </button>
-    <button type="submit" class="btn btn-small btn-primary"><i class="icon-filter icon-white"></i>
-      {% trans 'Aplicar filtros' %}
-    </button>
-  </div>
-  <hr>
+  
   <div class="accordion" id="accordion_filter">
   {% for f in form %}
   <div class="accordion-group stop">
@@ -270,7 +237,10 @@ if ($.browser.msie && $.browser.version < '9') {
   </div>
   
   </div>
-
+  <hr>
+  <button type="reset" class="btn btn-small btn-block">
+    {% trans 'Limpiar filtros' %}
+  </button>
 </form>
 {% endblock %}
 
@@ -283,123 +253,24 @@ if ($.browser.msie && $.browser.version < '9') {
     </div>
   </h1>
 </div>
-{% if reports|length %}
-<div class="alert alert-info">La consulta devolvió <strong class="text-info">{{reports|length}}</strong> resultados</div>
-<div class="hero-unit">
-  <button id="download_xls" class="btn btn-primary btn-block btn-large">{% trans 'Descargar datos en formato Excel' %}</button>
-  <a href="#myModal" role="button" class="btn  btn-block" data-toggle="modal">{% trans 'Previsualizar datos' %}</a>
-</div>
 
-
-<div id="myCarousel" class="carousel slide hide" data-interval="">
-  <div class="carousel-inner" style="min-height: 500px">
-    <div class="item">
-      <div id="vis" class="center"></div>
-      <div class="carousel-caption">
-        <h4>{% trans 'Valor medio de las variables' %}</h4>
-        <p>Pase el ratón por cada variable para comparar sus valores.</p>
-      </div>
-    </div>
-    <div class="active item">
-      <div id="pie" class="center"></div>
-      <div class="carousel-caption">
-        <h4>{% trans 'Distribución por edades' %}</h4>
-        <p></p>
-      </div>
-    </div>
-    <div class="item">
-      <div id="donuts" class="center">
-      </div>
-      <div class="carousel-caption">
-        <h4>{% trans 'Estratificación de pacientes' %}</h4>
-        <p></p>
-      </div>
-    </div>
-  </div>
-  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-</div>
-
-
-{% else %}
-  <div class="alert alert-warning">
-    <p>La consulta no devolvió <strong class="text-info">ningún</strong> resultado.</p>
-    <p>Utilice criterios de filtrado menos restrictivos e inténtelo de nuevo.</p>
-  </div>
-{% endif %}
-
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">{% trans 'Explotación de datos' %}</h3>
-  </div>
-  <div class="modal-body" style="max-height: 300px; overflow: auto">
-    <div id="data">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Edad</th>
-            <th>Sexo</th>
-            <th>Profesión</th>
-            <th>Fecha</th>
-          {% for d in dimensions %}
-            <td><small>Dimensión {{d.name}}</small></td>
-          {% endfor %}
-          {% for v in variables %}
-            <td><small>{{v.name}}</small></td>
-          {% endfor %}
-          {% for s in status %}
-            <td><small>{{s}}</small></td>
-          {% endfor %}
-        </tr>
-        </thead>
-        <tbody>
-        {% for r in reports %}
-          <tr>
-            <td>{{r.patient.id}}</td>
-            <td>{{r.age}}</td>
-            <td>{{r.patient.get_sex}}</td>
-            <td>{{r.profession}}</td>
-            <td>{{r.task.end_date|date:"j/m/Y"}}</td>
-            {% for d in dimensions %}
-              <td>{% dictvalue r.dimensions d.name %}</td>
-            {% endfor %}
-            {% for v in variables %}
-              <td>{% dictvalue r.variables v.name %}</td>
-            {% endfor %}
-            {% for s in status %}
-              <td>{% dictvalue r.status s %}</td>
-            {% endfor %}
-          </tr>
-        {% endfor %}
-          <tr>
-            <th>#</th>
-            <th>Edad</th>
-            <th>Sexo</th>
-            <th>Profesión</th>
-            <th>Fecha</th>
-          {% for d in dimensions %}
-            <td><small>Dimensión {{d.name}}</small></td>
-          {% endfor %}
-          {% for v in variables %}
-            <td><small>{{v.name}}</small></td>
-          {% endfor %}
-          {% for s in status %}
-            <td><small>{{s}}</small></td>
-          {% endfor %}
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">{% trans 'Cerrar' %}</button>
+<div class="hero-unit center">
+  <button id="download_xls" class="btn btn-primary btn-block btn-large {% if not reports|length %}disabled{% endif %}">{% trans 'Descargar datos en formato Excel' %}</button>
+  <br>
+  <div class="btn-group">
+    <a href="#myModal" role="button" class="btn btn-large {% if not reports|length %}disabled{% endif %}" data-toggle="modal"><i class="icon-eye-open"></i> {% trans 'Previsualizar datos' %}</a>
+    <button id="refresh" class="btn btn-large"><i class="icon-refresh"></i></button>
   </div>
 </div>
 
 <script src="{{ STATIC_URL }}js/d3.v3.min.js"></script>
 <script src="{{ STATIC_URL }}js/explotation-data.plot.js"></script>
+
+<div id="query-data">
+{% include 'consulting/stadistic/explotation-ajax.html' %}
+</div>
+
+
 {% endblock %}
 
 

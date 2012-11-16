@@ -6,6 +6,7 @@ from formula.models import Variable, Dimension
 from survey.models import Option
 from consulting.models import Medicine
 from django.utils.translation import ugettext_lazy as _
+from django.utils.html import strip_tags
 
 class MultipleValueField(forms.MultiValueField):
 
@@ -92,12 +93,12 @@ class FiltersForm(forms.Form):
 
     anxiety = forms.MultipleChoiceField(
                     label=_(u'Nivel de Ansiedad'),
-                    choices=[(c, settings.HAMILTON[v][0]) for c, v in enumerate(sorted(settings.HAMILTON))],
+                    choices=[(c, strip_tags(settings.HAMILTON[v][0])) for c, v in enumerate(sorted(settings.HAMILTON))],
                     widget=forms.CheckboxSelectMultiple())
 
     depression = forms.MultipleChoiceField(
                     label=_(u'Nivel de Depresión'),
-                    choices=[(c, settings.BECK[v][0]) for c, v in enumerate(sorted(settings.BECK))],
+                    choices=[(c, strip_tags(settings.BECK[v][0])) for c, v in enumerate(sorted(settings.BECK))],
                     widget=forms.CheckboxSelectMultiple())
 
     ave = forms.MultipleChoiceField(
@@ -107,7 +108,6 @@ class FiltersForm(forms.Form):
 
     date = forms.MultiValueField(
                     label=_(u'Fechas'),
-                    #input_formats=(settings.DATE_FORMAT,),
                     widget=DateWidget(attrs={'class':'span5'},
                                            format=settings.DATE_FORMAT))
 

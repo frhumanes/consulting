@@ -5,8 +5,6 @@
 
 {% match_referer "inbox" as match_inbox %}
 
-{% block title %}{% trans 'Message list' %}{% endblock %}
-
 {% block js_files %}
   {{ block.super }}
   <script src="{{ STATIC_URL }}js/spin.min.js"></script>
@@ -17,16 +15,16 @@
 {% endblock %}
 
 {% block large %}
-  <div class="page-header">
-    <h1>{% get_header request %} {% if request.user|unread_messages %}<small>[{{ request.user|unread_messages }}]</small>{% endif %}
-            <div class="btn-group pull-right">
-               <a class="btn btn-info" href="{% url private_messages_new %}"><i class="icon-pencil icon-white"></i> {% trans "Redactar" %}</a>
-            </div>
-        </h1>
-  </div>
-<div id="mail_area">
+<div class="page-header">
+  <h1>{% get_header request %} {% if request.user|unread_messages %}<small>[{{ request.user|unread_messages }}]</small>{% endif %}
+          <div class="btn-group pull-right">
+             <a class="btn btn-info" href="{% url private_messages_new %}"><i class="icon-pencil icon-white"></i> {% trans "Redactar" %}</a>
+          </div>
+      </h1>
+</div>
+<div id="mail_area" class="">
   {% if messages.object_list.count > 0 %}
-    <table id="message_list" class="table table-striped">
+    <table id="message_list" class="table table-hover">
       <thead></thead>
       <tbody>
         {% for message in messages.object_list %}
@@ -59,7 +57,8 @@
 {% endblock %}
 
 {% block jquery_init %}
-
+$('#main').remove();
+$('#right_bar').remove();
 $('table tbody tr').on('click', function(event){
   var id = $(this).attr('data-msg');
   var loader = '<img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />';

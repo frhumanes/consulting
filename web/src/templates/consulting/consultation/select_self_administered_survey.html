@@ -5,6 +5,7 @@
 {% block js_files %}
   {{ block.super }}
   <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
+<script src="{{ STATIC_URL }}js/locales/bootstrap-datepicker.es.js"></script>
 {% endblock %}
 
 {% block css_files %}
@@ -28,7 +29,7 @@
           <div class="control-group error">
             <label for="id_from_date" class="control-label">{{form.from_date.label}}</label>
             <div class="controls">
-              <div id="from_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
+              <div id="from_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1" data-date="{{form.from_date.value}}">
                 {{ form.from_date }} 
                 <span class="add-on">
                   <i class="icon-th"></i>
@@ -43,7 +44,7 @@
           <div class="control-group">
             <label for="from_date" class="control-label">{{form.from_date.label}}</label>
             <div class="controls">
-              <div id="from_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
+              <div id="from_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1" data-date="{{form.from_date.value|date:'d/m/Y'}}">
                 {{ form.from_date }}
                 <span class="add-on">
                   <i class="icon-th"></i>
@@ -56,7 +57,7 @@
           <div class="control-group error">
             <label for="to_date" class="control-label">{{form.to_date.label}}</label>
             <div class="controls">
-              <div id="to_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
+              <div id="to_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1"  data-date="{{form.to_date.value|date:'d/m/Y'}}">
                 {{ form.to_date }}
                 <span class="add-on">
                   <i class="icon-th"></i>
@@ -71,7 +72,7 @@
           <div class="control-group">
             <label for="id_to_date" class="control-label">{{form.to_date.label}}</label>
             <div class="controls">
-              <div id="to_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1">
+              <div id="to_date" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1" data-date="{{form.to_date.value|date:'d/m/Y'}}">
                 {{ form.to_date }}
                 <span class="add-on">
                   <i class="icon-th"></i>

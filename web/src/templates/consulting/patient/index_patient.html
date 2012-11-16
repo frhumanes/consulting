@@ -19,27 +19,28 @@
 
 {% block container %}
 	
-	<div class="hero-unit">
+	<div class="hero-unit" style="font-size: 1em">
 		<h2>{% trans 'Resumen de la última consulta' %}</h2>
-		<dl>
-			<dt>Recomendaciones</dt>
-			<dd>{{patient_user.get_conclusions.recommendation}}&nbsp;</dd>
-			<dt>Tratamiento</dt>
-			<dd>
-				<table class="table table-striped table-condensed">
-				{% for m in patient_user.get_treatment %}
-					{% if not m.is_previous %}
-					<tr>
-						<td>{{m.component}}</td>
-						<td style="text-align:right">{{m.posology}}</td>
-						<td>{% trans 'mg/día' %}</td>
-						<td>{{m.dosification}}</td>
-					</tr>
-					{% endif %}
-				{% endfor %}
-				</table>
-			</dd>
-		</dl>
+		<hr>
+		<div>
+			<h3>Recomendaciones</h3>
+			<div class="img-polaroid">
+				<p>{{patient_user.get_conclusions.recommendation}}&nbsp;</p>
+			</div>
+			<h3>Tratamiento</h3>
+			<div class="img-polaroid">
+			{% for m in patient_user.get_treatment %}
+				{% if not m.is_previous %}
+				<dl class="dl-horizontal">
+					<dt>{% trans 'Medicamento' %}</dt>
+					<dd>{{m.component}}</dd>
+					<dt>{% trans 'Posología' %}</dt>
+					<dd><em>{{m.posology}}</em> {% trans 'mg/día' %} {% if m.dosification %} repartidos en {{m.dosification}} tomas.{% endif %}</dd>
+				</dl>
+				{% endif %}
+			{% endfor %}
+			</div>
+		</div>
 	</div>
 
 {% endblock %}

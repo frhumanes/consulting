@@ -2,9 +2,6 @@
 
 {% load i18n messages %}
 
-{% block title %}{% trans 'Events list' %}{% endblock %}
-
-
 {% block container %}
 <div class="page-header">
   <h1>{% trans 'Nueva preferencia' %}
@@ -20,7 +17,6 @@
 <div class="center">
 <form class="form" method="post" action="{% url cal.add_slot year  %}">
   {% csrf_token %}
-  <fieldset>
     {% if form.non_field_errors %}
       <div class="alert alert-error">
           {% for error in form.non_field_errors %}
@@ -29,7 +25,8 @@
           {% endfor %}
       </div>
     {% endif %}
-    <div class="well span6">
+    <div class="row-fluid">
+    <div class="well" style="float: left; max-width: 276px; margin-left: 10px">
     <!-- SLOT_TYPE -->
     {% if form.slot_type.errors %}
       <div class="control-group error">
@@ -119,11 +116,10 @@
     <!-- END NOTE -->
     </div>
 
-    <div class="well span3">
+    <div class="well" style="float: left; max-width: 155px; margin-left: 20px">
     <!-- WEEKDAY -->
-    {% if form.weekday.errors %}
-      <div class="control-group error">
-        <label for="id_weekday"s class="control-label">{{form.weekdays.label}}</label>
+      <div class="control-group {% if form.weekdays.errors %}error{% endif %}">
+        <label for="id_weekdays" class="control-label">{{form.weekdays.label}}</label>
         <hr>
         <div class="controls" style="text-align: left">
           {{ form.weekdays }}
@@ -132,49 +128,31 @@
           {% endfor %}
         </div>
       </div>
-    {% else %}
-      <div class="control-group">
-        <label for="id_weekdays" class="control-label">{{form.weekdays.label}}</label>
-        <hr>
-        <div class="controls"  style="text-align: left">
-          {{ form.weekdays }}
-        </div>
-      </div>
-    {% endif %}
+    
     <!-- END WEEKDAY -->
     </div>
 
-    <div class="well span3">
+    <div class="well" style="float: left; max-width: 155px; margin-left: 20px">
     <!-- MONTH -->
-    {% if form.month.errors %}
-      <div class="control-group error">
+      <div class="control-group {% if form.months.errors %}error{% endif %}">
         <label for="id_months" class="control-label">{{form.months.label}}</label>
         <hr>
-        <div class="controls"  style="text-align: left">
+        <div class="controls" style="text-align: left">
           {{ form.months }}
           {% for error in form.months.errors %}
              <span class="help-inline">{{ error|escape }}</span>
           {% endfor %}
         </div>
       </div>
-    {% else %}
-      <div class="control-group">
-        <label for="id_months" class="control-label">{{form.months.label}}</label>
-        <hr>
-        <div class="controls"  style="text-align: left">
-          {{ form.months }}
-        </div>
-      </div>
-    {% endif %}
     <!-- END MONTH -->
     </div>
-  </fieldset>
-  <p class="center">
-    <button class="btn btn-large btn-primary" type="submit">
-      <i class="icon-ok-sign icon-white"></i>
-      {% trans 'Guardar' %}
-    </button>
-  </p>
+    </div>
+
+    <div class="center">
+      <button class="btn btn-large btn-primary" type="submit">
+        <i class="icon-ok-sign icon-white"></i>
+        {% trans 'Guardar' %}</button>
+    </div>
 </form>
 </div>
 {% endblock %}

@@ -44,7 +44,7 @@
         template =  ''+
                        ' <svg id="svg_root"'+
                             'width="360" height="360"'+
-                            'viewBox="0 0 400 400"'+
+                            'viewBox="-10 -10 400 400"'+
                             'preserveAspectRatio="xMidYMid slice"'+
                             'xmlns="' +svgns+ '" version="1.1">'+
                         '</svg>'+

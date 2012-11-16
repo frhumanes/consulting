@@ -549,11 +549,11 @@ def app_edit(request, pk, id_patient=None, id_doctor=None):
                 form.save()
 
                 if not request.user.get_profile().is_doctor():
-                    return redirect(reverse("cal.views.doctor_day",
-                        args=(year, month, day, doctor.id)))
+                    return redirect(reverse("doctor_day",
+                        args=(doctor.id, year, month, day)))
                 else:
                     return redirect(reverse("cal.views.day",
-                        args=(year, month, day)))
+                        args=(year, month, day, doctor.id)))
             else:
                 return render_to_response("cal/app/edit.html",
                 {'form': form,
@@ -562,12 +562,12 @@ def app_edit(request, pk, id_patient=None, id_doctor=None):
                  'month_days': lst,
                  'mname': mname,
                  'doctor': doctor,
-                 'patient': patient,
+                 'patient_user': patient,
                  'doctor_preferences': doctor_preferences,
                  'free_intervals': free_intervals,
                  'not_available_error': True,
-                 'error_msg': _('Appointment can not be set. '\
-                    'Please, choose another time interval')},
+                 'error_msg': _('No se pudo crear la cita. '\
+                    'Por favor, seleccione un intervalo de tiempo disponible')},
                 context_instance=RequestContext(request))
 
         else:
@@ -587,7 +587,7 @@ def app_edit(request, pk, id_patient=None, id_doctor=None):
          'month_days': lst,
          'mname': mname,
          'doctor': doctor,
-         'patient': patient,
+         'patient_user': patient,
          'doctor_preferences': doctor_preferences,
          'free_intervals': free_intervals},
         context_instance=RequestContext(request))
@@ -1227,9 +1227,12 @@ def select_doctor(request, id_patient):
             profile = patient_user.get_profile()
             profile.doctor = User.objects.get(pk=int(form.cleaned_data['doctor']))
             profile.save()
-
+            if request.is_ajax():
+                return HttpResponse('OK');
             return HttpResponseRedirect(reverse('cal.scheduler',
                 args=[int(id_patient)]))
+        elif request.is_ajax():
+            return Http404
     else:
         form = DoctorSelectionForm()
 

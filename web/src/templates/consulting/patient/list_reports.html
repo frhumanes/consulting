@@ -3,7 +3,7 @@
 {% load i18n consulting %}
 
 {% block right %}
-  {% include "consulting/patient/card.html" %}
+  {% include 'consulting/patient/card.html' with mini=1 %}
 {% endblock %}
 
 {% block jquery_init %}
@@ -34,10 +34,7 @@
                 {% trans 'CUESTIONARIO' %}
               </th>
               <th style="text-align:center;">
-                {% trans 'ANSIEDAD' %}
-              </th>
-              <th style="text-align:center;">
-                {% trans 'DEPRESION' %}
+                {% trans 'ESTADO' %}
               </th>
               <th style="text-align:center;">
                 {% trans 'INFORME' %}
@@ -48,10 +45,8 @@
             {% for report in reports.object_list %}
               <tr id="{{report.id}}" class="report">
                 <td style="text-align:center;">{{report.end_date|date:"d/M/Y"|lower}}</td>
-                <td style="text-align:left;"><a class="btn btn-small btn-link" data-target="#modal" href="{% url consulting_view_report report.id %}" role="button" data-toggle="modal">{{report.survey.name}}</a></td>
-                <td style="text-align:center;"><span class="label label-{% get_anxiety_status_at report.appointment.patient report.end_date 1 %}">{% get_anxiety_status_at report.appointment.patient report.end_date 0 %}</span></td>
-
-                <td style="text-align:center;"><span class="label label-{% get_depression_status_at report.appointment.patient report.end_date 1 %}">{% get_depression_status_at report.appointment.patient report.end_date 0 %}</span></td>   
+                <td style="text-align:left;"><a class="btn btn-link" data-target="#modal" href="{% url consulting_view_task report.id %}" role="button" data-toggle="modal">{{report.survey.name}}</a></td>
+                <td style="text-align:center;"><span style="min-width:100px" class="label label-{% get_anxiety_status_at report.appointment.patient report.end_date 1 %}">{% get_anxiety_status_at report.appointment.patient report.end_date 0 %}</span>&nbsp;<span style="min-width:100px" class="label label-{% get_depression_status_at report.appointment.patient report.end_date 1 %}">{% get_depression_status_at report.appointment.patient report.end_date 0 %}</span></td>   
 
                 <td style="text-align:center;">
                   <a class="btn btn-small btn-link" data-target="#modal" href="{% url consulting_view_report report.id %}" role="button" data-toggle="modal">HTML</a>|
@@ -75,7 +70,7 @@
 <div class="modal hide fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Previsualización de informe</h3>
+    <h3 id="myModalLabel">Previsualización de cuestionario/informe</h3>
   </div>
   <div class="modal-body">
     <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />

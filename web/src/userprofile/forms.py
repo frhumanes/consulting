@@ -19,8 +19,8 @@ from models import Profile
 class ProfileForm(forms.ModelForm):
     ADULT = 18
     ACTIVE = (
-        (settings.ACTIVE, _(u'Activado')),
-        (settings.DEACTIVATE, _(u'Desactivado')),
+        (settings.ACTIVE, _(u'Activada')),
+        (settings.DEACTIVATE, _(u'Desactivada')),
     )
 
     name = forms.CharField(label=_(u'Nombre'), max_length=150)
@@ -50,7 +50,7 @@ class ProfileForm(forms.ModelForm):
     email = forms.EmailField(label=_(u'Correo Electrónico'))
     profession = forms.CharField(label=_(u'Profesión'), max_length=150,
                                 required=False)
-    active = forms.ChoiceField(label=_(u'Estado Paciente'), choices=ACTIVE)
+    active = forms.ChoiceField(label=_(u'Estado de la cuenta'), choices=ACTIVE)
 
     def age(self, dob):
         today = date.today()

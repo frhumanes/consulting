@@ -1,5 +1,8 @@
 from django import template
 from django.conf import settings
+from django.contrib.sites.models import Site
+BRAND = Site.objects.get_current().name
+DOMAIN = Site.objects.get_current().domain
 
 register = template.Library()
 
@@ -76,6 +79,14 @@ def get_depression_status_at(patient, date, i=0):
         return patient.get_profile().get_depression_status(at_date=date)[i]
     except:
         return ' '
+
+@register.simple_tag
+def get_brand():
+    return BRAND
+
+@register.simple_tag
+def get_domain():
+    return DOMAIN
 
 @register.filter
 def sexify(value, patient):

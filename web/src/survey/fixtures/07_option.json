@@ -1073,7 +1073,7 @@
     "pk": 108, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hidorcefalia normotensiva", 
+      "text": "Hidrocefalia normotensiva", 
       "code": "AN7", 
       "question": 14, 
       "weight": null

@@ -2,7 +2,7 @@
 
 <div class="row-fluid">
   {% if objects.paginator.num_pages > 1 %}
-  <div id="message-paginator" class="pagination pagination-centered span8">
+  <div id="paginator" class="pagination pagination-centered span8">
     <ul>
       {% if objects.has_previous %}
         <li><a href="{{request.path}}?page={{ objects.previous_page_number }}">←</a></li>
@@ -20,8 +20,8 @@
     </ul>
   </div>
   {% endif %}
-  <div class="pull-right span4">
-      <p class="pull-right pagination muted">{% trans 'Elementos mostrados' %}: <em>{{objects.start_index}} -  {{objects.end_index}} {% trans 'de' %} {{objects.paginator.count}}</em></p>
+  <div class="pull-right pagination span4">
+      <p class="pull-right muted">{% trans 'Elementos mostrados' %}: <em>{{objects.start_index}} -  {{objects.end_index}} {% trans 'de' %} {{objects.paginator.count}}</em></p>
   </div>
 </div>
 

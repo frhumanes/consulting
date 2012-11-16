@@ -1,15 +1,16 @@
 {% extends "ui/app.html" %}
 
 {% block css_inline %}
-@media (max-width: 800px){
+@media (min-width: 768px ) and (max-width: 800px){
   #right_bar{
-   visibility: hidden
+   visibility: hidden;
+   display: none;
   }
   #left_bar{
    width:15%; 
   }
   #main{
-    width:75% 
+    width:75%; 
   }
 }
 {% endblock %}

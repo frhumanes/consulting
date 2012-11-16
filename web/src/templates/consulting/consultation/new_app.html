@@ -6,6 +6,7 @@
   {{ block.super }}
   <script src="{{ STATIC_URL }}js/bootstrap-timepicker.js"></script>
   <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
+<script src="{{ STATIC_URL }}js/locales/bootstrap-datepicker.es.js"></script>
   <script src="{{ STATIC_URL }}js/json2.js"></script>
 {% endblock %}
 
@@ -14,8 +15,6 @@
   <link href="{{ STATIC_URL }}css/timepicker.css" rel="stylesheet"/>
   <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet"/>
 {% endblock %}
-
-{% block title %}{% trans 'Lista de Citas' %}{% endblock %}
 
 {% block right %}
   {% include "consulting/consultation/calendar_new_app.html" %}

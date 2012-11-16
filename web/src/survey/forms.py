@@ -49,13 +49,14 @@ class SelectWidgetBootstrap(forms.Select):
     js = ("""
     <script type="text/javascript">
         function setBtnGroupVal(elem) {
-            btngroup = $(elem).parents('.btn-group');
+            btngroup = $(elem);
             selected_a = btngroup.find('a[selected]');
             if (selected_a.length > 0) {
                 val = selected_a.attr('data-value');
                 label = selected_a.html();
                 if(val) {
                     btngroup.find('.btn-group-label').css('background-color','#ffffff');
+                    btngroup.parent().parent().removeClass('error');
                 } else {
                     btngroup.find('.btn-group-label').css('background-color','#eeeeee');
                 }
@@ -66,17 +67,19 @@ class SelectWidgetBootstrap(forms.Select):
             }
             btngroup.find('input[type=hidden]').val(val);
             btngroup.find('.btn-group-label').val(label);
-
+            btngroup.attr('init', '1');
         }
+
         $(document).ready(function() {
-            $('.btn-group-form input').each(function() {
+            $('div[init="0"].btn-group-form').each(function() {
                 setBtnGroupVal(this);
+                $(this).find('a').click(function() {
+                    $(this).parent().siblings().find('a').attr('selected', false);
+                    $(this).attr('selected', true);
+                    setBtnGroupVal($(this).parentsUntil('.btn-group-form').parent());
+                });
             });
-            $('.btn-group-form li a').click(function() {
-                $(this).parent().siblings().find('a').attr('selected', false);
-                $(this).attr('selected', true);
-                setBtnGroupVal(this);
-            });
+
         })
     </script>
     """)
@@ -92,10 +95,10 @@ class SelectWidgetBootstrap(forms.Select):
     def render(self, name, value, attrs=None, choices=()):
         if value is None: value = ''
         final_attrs = self.build_attrs(attrs, name=name)
-        output = ["""<div%(attrs)s>"""
+        output = ["""<div%(attrs)s init="0">"""
                   """    <input class="btn-group-label" type="text" readonly="readonly" value="%(label)s" />"""
                   """    <button class="btn btn-info dropdown-toggle" type="button" style="position:relative; top: -5px; left: -2px" data-toggle="dropdown">"""
-                  """        <span class="caret"></span>"""
+                  """        <b class="caret"></b>"""
                   """    </button>"""
                   """    <ul class="dropdown-menu">"""
                   """        %(options)s"""
@@ -115,7 +118,7 @@ class SelectWidgetBootstrap(forms.Select):
     def render_option(self, selected_choices, option_value, option_label):
         option_value = force_unicode(option_value)
         selected_html = (option_value in selected_choices) and u' selected="selected"' or ''
-        return u'<li><a href="javascript:void(0)" data-value="%s"%s>%s</a></li>' % (
+        return u'<li><a href="#" data-value="%s"%s>%s</a></li>' % (
             escape(option_value), selected_html,
             conditional_escape(force_unicode(option_label)))
 
@@ -142,6 +145,9 @@ class QuestionsForm(forms.Form):
             pkeys.sort(key=lambda q: q.id)
             for question in pkeys:
                 #question = get_object_or_404(Question, pk=int(k))
+                css = ""
+                if question.required:
+                    css = 'required'
                 values = dic[question]
                 if question.single:
                     initial_option, initial_value = '', ''
@@ -156,14 +162,14 @@ class QuestionsForm(forms.Form):
                     if question.code.startswith('DS'):
                         self.fields[question.code] = forms.ChoiceField(
                             label=question.text,
-                            widget=forms.Select(attrs={'class': 'span6'}), choices=values,
+                            widget=forms.Select(attrs={'class': css +' span6'}), choices=values,
                             required=False, initial=initial_option)
-                        self.fields[question.code+'_value'] = forms.CharField(label=question.code, required=False, widget=forms.TextInput(attrs={'class': 'span2'}),initial=initial_value)
+                        self.fields[question.code+'_value'] = forms.CharField(label=question.code, required=False, widget=forms.TextInput(attrs={'class': css + ' span2'}),initial=initial_value)
                     else:
                         values.insert(1,('',[]))
                         self.fields[question.code] = forms.ChoiceField(
                             label=question.text,
-                            widget=SelectWidgetBootstrap(), choices=values,
+                            widget=SelectWidgetBootstrap(attrs={'class': css + ' btn-group pull-right btn-group-form'}), choices=values,
                             required=False, initial=initial_option)
                     
 
@@ -177,7 +183,7 @@ class QuestionsForm(forms.Form):
                                 initial_value = selected_options.filter(option__id=id_option)[0].value
                     self.fields[question.code] = forms.MultipleChoiceField(
                             label=question.text,
-                            widget=forms.CheckboxSelectMultiple(), choices=values,
+                            widget=forms.CheckboxSelectMultiple(attrs={'class': css}), choices=values,
                             required=False, initial=initial_options)
                     self.fields[question.code+'_value'] = forms.CharField(label='', required=False, widget=forms.TextInput(attrs={'class': 'span12'}), initial=initial_value)
         else:

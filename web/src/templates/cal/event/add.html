@@ -2,8 +2,6 @@
 
 {% load i18n messages %}
 
-{% block title %}{% trans 'Vacations list' %}{% endblock %}
-
 {% block container %}
 
   <div class="page-header">
@@ -17,7 +15,6 @@
 
 <div class="well">
   <form class="form-horizontal" method="post" action="{% url cal.add_event %}">{% csrf_token %}
-  <legend>{% trans 'New Event' %}</legend>
   <fieldset>
 
       {% if  form.non_field_errors  %}

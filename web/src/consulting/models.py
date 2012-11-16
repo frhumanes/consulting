@@ -75,6 +75,16 @@ class Task(TraceableModel):
         else:
             return _(u'No')
 
+    def get_answers_by_block(self):
+        answers = {}
+        for r in self.task_results.values('block').annotate(Max('date'),Max('id')).order_by():
+            block = []
+            for qid, qtext in Answer.objects.filter(result__id=r['id__max']).values_list('option__question__id','option__question__text').distinct().order_by('option__question__id'):
+                block.append({'question':qtext,
+                              'answers': [str(a) for a in Answer.objects.filter(result__id=r['id__max'],option__question__id=qid)]})
+            answers[r['block']] = block
+        return answers
+
     def get_answers(self):
         if hasattr(self, '_answers') and self._answers:
             return self._answers
@@ -85,7 +95,7 @@ class Task(TraceableModel):
 
         answers = []
         for r in self.task_results.values('block').annotate(Max('date'),Max('id')).order_by():
-            answers += Result.objects.get(id=r['id__max']).options.select_related().all()
+            answers += Answer.objects.filter(result__id=r['id__max']).select_related().all().order_by("option__question__id")
         self._answers = list(answers)
         return answers
 
@@ -101,7 +111,10 @@ class Task(TraceableModel):
 
     def get_af_dict(self):
         dic = {}
-        for opt in self.task_results.filter(block=settings.PRECEDENT_RISK_FACTOR).latest('id').options.filter(question__code__startswith='AF').exclude(text='Ninguno'):
+        result = Answer.objects.filter(result__task=self, result__block__code=settings.PRECEDENT_RISK_FACTOR).aggregate(latest=Max('result__id'))
+        answer = Answer.objects.filter(result__id=result['latest'], option__code__startswith='AF').exclude(option__text='Ninguno')
+        for a in answer:
+            opt = a.option
             if opt.text in dic:
                 dic[opt.text].append(opt.question.get_af_illness())
             else:
@@ -109,10 +122,14 @@ class Task(TraceableModel):
         return dic
 
     def get_ap_list(self):
-        return self.task_results.filter(block=settings.PRECEDENT_RISK_FACTOR).latest('id').options.filter(question__code__startswith='AP')
+        result = Answer.objects.filter(result__task=self, result__block__code=settings.PRECEDENT_RISK_FACTOR).aggregate(latest=Max('result__id'))
+        answer = Answer.objects.filter(result__id=result['latest'], option__question__code='AP').exclude(option__text='Ninguno').order_by('-id')
+        return answer
 
     def get_organicity_list(self):
-        return self.task_results.filter(block=settings.PRECEDENT_RISK_FACTOR).latest('id').options.filter(question__code__in=['AN','AE','AT','AI','AO'])
+        result = Answer.objects.filter(result__task=self, result__block__code=settings.PRECEDENT_RISK_FACTOR).aggregate(latest=Max('result__id'))
+        answer = Answer.objects.filter(result__id=result['latest'], option__question__code__in=['AN','AE','AT','AI','AO']).exclude(option__text='Ninguno').order_by('-id')
+        return answer
 
     def get_rp_list(self):
         return self.task_results.filter(block=settings.PRECEDENT_RISK_FACTOR).latest('id').options.filter(code__startswith='RP')
@@ -123,7 +140,8 @@ class Task(TraceableModel):
     def get_ave_list(self):
         answers = self.get_answers()
         l = []
-        for a in answers:
+        for answer in answers:
+            a = answer.option
             if a.code.startswith('AVE'):
                 l.append(a.id)
         return l
@@ -131,7 +149,8 @@ class Task(TraceableModel):
     def calculate_mark_by_code(self, code):
         answers = self.get_answers()
         mark = 0
-        for a in answers:
+        for answer in answers:
+            a = answer.option
             if a.code.startswith(code):
                 mark += a.weight
         return mark
@@ -139,7 +158,8 @@ class Task(TraceableModel):
     def calculate_beck_mark(self):
         answers = self.get_answers()
         mark = 0
-        for a in answers:
+        for answer in answers:
+            a = answer.option
             if a.code.startswith('B'):
                 mark += a.weight #* 5 / q.question_options.aggregate(Max('weight'))['weight__max']
         return mark
@@ -149,7 +169,8 @@ class Task(TraceableModel):
         mark = 0
         submarks = {}
         kind = self.kind
-        for a in answers:
+        for answer in answers:
+            a = answer.option
             if not a.code.startswith('H') or a.code.startswith('Hd'):
                 continue
             item = a.code.split('.')[0]
@@ -250,7 +271,8 @@ class Task(TraceableModel):
         for f in Formula.objects.filter(kind=kind):
             total = None
             for item in f.polynomial.split('+'):
-                for a in answers:
+                for answer in answers:
+                    a = answer.option
                     if a.question.code == item:
                         if not total:
                             total = 0
@@ -305,7 +327,7 @@ class Medicine(TraceableModel):
                                     blank=True, null=True)
     posology = models.IntegerField(_(u'Posología (mg/día)'))
     dosification = models.CharField(_(u'Modo de administración'), max_length=255,
-                                    blank=True, null=True)
+                                    blank=True, null=True, default='')
     date = models.DateTimeField(_(u'Fecha Fin'), null=True)
 
 
@@ -378,4 +400,9 @@ class Answer(models.Model):
     value = models.CharField(max_length=50, blank=True, null=True)
 
     def __unicode__(self):
-        return u'id: %s answer: %s %s' % (self.id, self.value, self.option.text)
+        if self.option.text.startswith('Otr') and self.value:
+            return self.value
+        elif self.value and self.option.question.code in ['DS']:
+            return u'%s %s' % (self.value, self.option.text)
+        else:
+            return u'%s' % (self.option.text)

@@ -1,106 +1,30 @@
 {% load i18n %}
+{% load userprofile %}
 
 {% load url from future %}
 
-<script src="{{ STATIC_URL }}js/jquery-ui-1.8.18.custom.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.ui.core.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.ui.position.js"></script>
-<script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
-<link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet">
-
-<script type="text/javascript">
-    function next(){
-        var loader = '<img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />';
-        var width = $('#current').width();
-        $('#current').html(loader);
-        $('#current').width(width);
-        $('#calendar').fadeTo(500, 0.25);
-        {% if doctor %}
-        $('#large').load('{% url 'doctors_calendar_big' id_doctor=doctor.id year=year month=month change='next' %}'); 
-        {% else %}
-        $('#large').load('{% url 'calendar_big' year=year month=month change='next' %}'); 
-        {% endif %}
-    };
-
-    function prev(){
-        var loader = '<img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />';
-        var width = $('#current').width();
-        $('#current').html(loader);
-        $('#current').width(width);
-        $('#calendar').fadeTo(500, 0.25);
-        {% if doctor %}
-        $('#large').load('{% url 'doctors_calendar_big' id_doctor=doctor.id year=year month=month change='prev' %}'); 
-        {% else %}
-        $('#large').load('{% url 'calendar_big' year=year month=month change='prev' %}'); 
-        {% endif %}
-    };
-
-    $('a.change_doctor').live('click', function(e){
-        e.preventDefault();
-        $('#large').load($(this).attr('href')); 
-     });
-
-    $("#searcher").autocomplete({
-        source: function(request, response){
-              $.ajax({
-                  url: '{% url 'cal.patient_searcher' %}',
-                  type:'POST',
-                  data: {
-                      start: function() { return $("#searcher").val(); },
-                      csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val()
-                  },
-                  dataType: "json",
-                  success: function(data){
-                      response(data['completed_names'])
-                  }
-              })
-            },
-        select: function(event, ui){
-            var pattern = '{% url 'cal.app_list_patient' 1 %}';
-            $('#myModalLabel').text('{% trans "Citas de " %}'+ui.item.label);
-            $('#myModal').modal('show');
-            $('#myModalBody').load(pattern.replace('1', ui.item.id));
-            }
-    });
-
-    $('#calendar').find('td').each(function(){
-        $(this).on('click',function(){
-            var url = $(this).find('a').attr('href')
-            if(url){
-                window.location.href = url;
-            }  
-        })        
-    });
-
-    $('#main').remove();
-    $('#right_bar').remove();
-</script>
-
-
-
-
 {% if month_days %}
-<div class="row-fluid">
-    <div class="span5 btn-toolbar" style="margin: 20px 0">
-        <a class="btn btn-primary btn-large"  href="{% url 'search_patient_for_action' action='new_app' %}">
+<div id="bigcal" class="row-fluid">
+    <div class="span5 btn-toolbar" style="margin-top: 18px">
+        <a class="btn btn-primary"  href="{% url 'search_patient_for_action' action='new_app' %}">
               <i class="icon-calendar icon-white"></i> {% trans 'DAR CITA' %}
         </a>
         {% if request.user.get_profile.is_administrative %}
         <div class="btn-group">
-            <button class="btn btn-info disabled"><i class="icon-user icon-white"></i> {% if doctor %}Dr. {{doctor.get_profile.get_full_name}}{% else %}{% trans 'DOCTORES' %}{% endif %}</button>
+            <button class="btn btn-info disabled"><i class="icon-user icon-white"></i> {% if doctor %}{{doctor.get_profile|name_with_title}}{% else %}{% trans 'DOCTORES' %}{% endif %}</button>
             <button class="btn dropdown-toggle btn-info" data-toggle="dropdown">
-                <span class="caret"></span>
+                <b class="caret"></b>
             </button>
             <ul class="dropdown-menu">
                 {% for d in doctors %}
-                <li><a class="change_doctor" href="{% url 'doctors_calendar_big' id_doctor=d.user.id year=year month=month change='this' %}">{{d.get_full_name}}</a></li>
+                <li><a class="change_doctor" href="{% url 'doctors_calendar_big' id_doctor=d.user.id year=year month=month change='this' %}">{{d|name_with_title}}</a></li>
                 {% endfor %}
             </ul>
         </div>
         {% endif %}  
         {% if request.user.get_profile.is_doctor %}
         <div class="btn-group">
-          <a class="btn dropdown-toggle btn-large" data-toggle="dropdown" href="#">
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
             <i class="icon-wrench"></i> <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
@@ -113,7 +37,7 @@
           </ul>
         </div>
         <div class="btn-group">
-            <a class="btn dropdown-toggle btn-large" data-toggle="dropdown" href="#">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
               <i class="icon-lock"></i> {% trans 'AUSENCIAS' %} <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
@@ -127,15 +51,15 @@
         </div>
         {% endif %}  
     </div>
-    <div class="pagination pagination-centered span3">
+    <div class="pagination pagination-centered span3" >
         <ul>
             <li class="previous">
                 <a href= "javascript:prev();">
                     <i class="icon-arrow-left"></i>
                 </a>
             </li>
-            <li>
-                <a id="current" href="#"><strong>{{ mname }} {{ year }}</strong></a>
+            <li >
+                <a id="current" href="#" data-date-minviewmode="months" data-date-viewmode="years" data-date-format="mm/yyyy" data-date="{{month}}/{{year}}"><strong>{{ mname }} {{ year }}</strong></a>
             </li>
             <li class="next">
                 <a href= "javascript:next();" class="pull-right">
@@ -144,15 +68,15 @@
             </li>
         </ul>
     </div>
-    <div class="span4">
+    <div class="span4 pagination">
         <form class="form-inline pull-right">
           {% csrf_token %}
           <strong>{% trans 'PACIENTE' %}</strong>
-          <input type="text" id="searcher" class="input-medium search-query span8" style="margin: 20px 0">
+          <input type="text" id="searcher" class="input-medium search-query span8">
         </form>
     </div>  
 </div>   
-<table class="table" id="calendar">
+<table class="table img-polaroid" id="calendar">
     <thead>
       <tr>
         <th>&nbsp;{% trans "Monday" %}</th>
@@ -169,7 +93,7 @@
             <tr class="center">
             {% for day, entries, current, vacations, events in week %}
                 {% if day != 0 %}
-                    <td style="text-align: left; {{current|yesno:'background-color:#eeeeee;border: 1px solid #000000;,'}}{{vacations|yesno:'background-color:#f2dede; border: 1px solid #b94a48;,'}} cursor:pointer">
+                    <td style="text-align: left; {{current|yesno:'background-color:#eeeeee;border: 1px solid #000000;,'}}{{vacations|yesno:'background-color:#f2dede; border: 1px solid #b94a48;,'}} cursor:pointer; width: 14%">
                     {% if request.user.get_profile.is_doctor %}
                         {% url 'cal.views.day' year month day request.user.id as target %}
                     {% else %}
@@ -195,7 +119,12 @@
                               <div class="text-warning"><small>{{e.start_time|time}}-{{e.end_time|time}} {{e.description}}</small></div>  
                             {% endfor %}
                             {% for a in entries %}
-                              <div class="text-info"><small>{{a.start_time|time}} {{a.patient.get_profile.get_full_name}}</small></div>  
+                              <div class="text-info"><small>{{a.start_time|time}}
+                              {% if request.user.get_profile.is_doctor %}
+                               {{a.patient.get_profile.get_full_name}}
+                              {% else %}
+                              - {{a.end_time|time}} {{a.app_type.title}}
+                              {% endif %}</small></div>  
                             {% endfor %}
                         {% endif %}
                         </div>
@@ -233,6 +162,79 @@
         <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">{% trans 'Cerrar' %}</button>
     </div>
 </div>
+
+<script src="{{ STATIC_URL }}js/jquery-ui-1.9.1.custom.min.js"></script>
+
+<link href="{{ STATIC_URL }}css/jquery-ui-1.9.1.custom.css" rel="stylesheet">
+
+<script type="text/javascript">
+    function next(){
+        var loader = '<img src="{{ STATIC_URL }}/img/ajax-bar-loader.gif" alt="loading..." />';
+        var width = $('#current').width();
+        $('#current').html(loader);
+        $('#current').width(width);
+        $('#calendar').fadeTo(500, 0.25);
+        {% if doctor %}
+        $('#large').load('{% url 'doctors_calendar_big' id_doctor=doctor.id year=year month=month change='next' %}'); 
+        {% else %}
+        $('#large').load('{% url 'calendar_big' year=year month=month change='next' %}'); 
+        {% endif %}
+    };
+
+    function prev(){
+        var loader = '<img src="{{ STATIC_URL }}/img/ajax-bar-loader.gif" alt="loading..." />';
+        var width = $('#current').width();
+        $('#current').html(loader);
+        $('#current').width(width);
+        $('#calendar').fadeTo(500, 0.25);
+        {% if doctor %}
+        $('#large').load('{% url 'doctors_calendar_big' id_doctor=doctor.id year=year month=month change='prev' %}'); 
+        {% else %}
+        $('#large').load('{% url 'calendar_big' year=year month=month change='prev' %}'); 
+        {% endif %}
+    };
+
+    $('a.change_doctor').on('click', function(e){
+        e.preventDefault();
+        $('#large').load($(this).attr('href')); 
+     });
+
+    $("#searcher").autocomplete({
+        source: function(request, response){
+              $.ajax({
+                  url: '{% url 'cal.patient_searcher' %}',
+                  type:'POST',
+                  data: {
+                      start: function() { return $("#searcher").val(); },
+                      csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val()
+                  },
+                  dataType: "json",
+                  success: function(data){
+                      response(data['completed_names'])
+                  }
+              })
+            },
+        select: function(event, ui){
+            var pattern = '{% url 'cal.app_list_patient' 1 %}';
+            $('#myModalLabel').text('{% trans "Citas de " %}'+ui.item.label);
+            $('#myModal').modal('show');
+            $('#myModalBody').load(pattern.replace('1', ui.item.id));
+            }
+    });
+
+    $('#calendar').find('td').each(function(){
+        $(this).on('click',function(){
+            var url = $(this).find('a').attr('href')
+            if(url){
+                window.location.href = url;
+            }  
+        })        
+    });
+
+    $("current").datepicker();
+    $('#main').remove();
+    $('#right_bar').remove();
+</script>
 {% else %}
     <div class="center">
         <img style="padding-top: 100px" src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
@@ -240,6 +242,8 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $('#large').load('{% url 'calendar_big' year=year month=month change='this' %}');
-        })
+        });
     </script>
 {% endif %}
+
+

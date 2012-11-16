@@ -2,30 +2,29 @@
 
 {% load i18n messages %}
 
-{% block title %}{% trans 'Appointments list' %}{% endblock %}
-
 {% block right %}
   {% include "cal/includes/calendar.html" %}
 {% endblock %}
 
 {% block container %}
-  <div>
-    <div class="pagination" style="display: inline">
-      <ul>
-          <li class="previous">
-              <a href= "javascript:prev_day();"><i class="icon-arrow-left"></i></a>
-          </li>
-          <li>
-            <a href="#"><h5 style="display: inline">{{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}</h5></a>
-          <li>
-          <li class="next">
-              <a href= "javascript:next_day();" class="pull-right"><i class="icon-arrow-right"></i></a>
-          </li>
-      </ul>
-    </div>
-    <a class="btn btn-info pull-right" style="margin: 5px 0" href="{% url cal.add year month day doctor.id %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva cita" %}</a>
-   </div>
-  <hr>
+<div class="page-header">
+  <div class="pagination" style="display: inline;">
+    <ul>
+        <li class="previous">
+            <a href= "javascript:prev_day();"><i class="icon-arrow-left"></i></a>
+        </li>
+        <li>
+          <a href="#"><h5 style="display: inline">{{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}</h5></a>
+        </li>
+        <li class="next">
+            <a href= "javascript:next_day();" class="pull-right"><i class="icon-arrow-right"></i></a>
+        </li>
+    </ul>
+  </div>
+  <a class="btn btn-info pull-right" style="margin: 5px 0" href="{% url cal.add year month day doctor.id %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva cita" %}</a>
+</div>
+<div>
+
 
   {% if events.object_list.count > 0 %}
 
@@ -51,6 +50,7 @@
   {% else %}
     <div class="alert alert-info">{% trans "No hay citas concertadas para este día" %}</div>
   {% endif %}
+</div>
 {% endblock %}
 
 {% block jquery_init %}

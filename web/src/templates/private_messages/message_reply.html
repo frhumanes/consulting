@@ -1,90 +1,107 @@
 {% load i18n%}
 
-<form class="form-horizontal" method="post" action="{% url private_messages_new %}">{% csrf_token %}
-  <fieldset>
-        <!-- RECIPIENT -->
-      {% if form.recipient.errors %}
-        <div class="control-group error">
-          <label for="id_recipient" class="control-label">{{form.recipient.label}}</label>
-          <div class="controls">
-            {{ form.recipient }}
-            {% for error in form.recipient.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
+{% if request.user.get_profile.is_doctor and recipient.get_profile.doctor != request.user %}
+  <div class="alert alert-warning">
+    {% trans 'No puede ponerse en contacto con este paciente.' %}
+  </div>
+{% else %}
+  {% if request.user.get_profile.is_patient and recipient != request.user.get_profile.doctor %}
+  <div class="alert alert-warning">
+    {% trans 'No puede ponerse en contacto con este doctor.' %}
+  </div>
+  {% else %}
+    {% if not recipient.is_active %}
+       <div class="alert alert-warning">
+          {% trans 'La cuenta de destino no está activa. Es posible que el destinatario no reciba su mensaje.' %}
+       </div>
+    {% endif %}
+    <form class="form-horizontal" method="post" action="{% url private_messages_new %}">{% csrf_token %}
+      <fieldset>
+            <!-- RECIPIENT -->
+          {% if form.recipient.errors %}
+            <div class="control-group error">
+              <label for="id_recipient" class="control-label">{{form.recipient.label}}</label>
+              <div class="controls">
+                {{ form.recipient }}
+                {% for error in form.recipient.errors %}
+                   <span class="help-inline">{{ error|escape }}</span>
+                {% endfor %}
+              </div>
+            </div>
+          {% else %}
+            <div class="control-group hide">
+              <label for="id_recipient" class="control-label">{{form.recipient.label}}</label>
+              <div class="controls">
+                {{ form.recipient }}
+                {{ form.parent }}
+              </div>
+            </div>
+          {% endif %}
+          <!-- END RECIPIENT -->
+          <!-- SUBJECT -->
+          {% if form.subject.errors %}
+            <div class="control-group error">
+              <label for="id_subject" class="control-label">{{form.subject.label}}</label>
+              <div class="controls">
+                {{ form.subject }}
+                {% for error in form.subject.errors %}
+                   <span class="help-inline">{{ error|escape }}</span>
+                {% endfor %}
+              </div>
+            </div>
+          {% else %}
+            <div class="control-group">
+              <label for="id_subject" class="control-label">{{form.subject.label}}</label>
+              <div class="controls">
+                {{ form.subject }}
+              </div>
+            </div>
+          {% endif %}
+          <!-- END SUBJECT -->
+
+          <!-- BODY -->
+          {% if form.body.errors %}
+            <div class="control-group error">
+              <label for="id_body" class="control-label">{{form.body.label}}</label>
+              <div class="controls">
+                {{ form.body }}
+                {% for error in form.body.errors %}
+                   <span class="help-inline">{{ error|escape }}</span>
+                {% endfor %}
+              </div>
+            </div>
+          {% else %}
+            <div class="control-group">
+              <label for="id_body" class="control-label">{{form.body.label}}</label>
+              <div class="controls">
+                 {{ form.body }}
+              </div>
+            </div>
+          {% endif %}
+
+
+
+          <!-- END BODY -->
+
+         
+
+
+          <div class="form-actions">
+            <button class="btn btn-large btn-primary btn-block" type="submit">{% trans 'Enviar' %}</button>
           </div>
-        </div>
-      {% else %}
-        <div class="control-group hide">
-          <label for="id_recipient" class="control-label">{{form.recipient.label}}</label>
-          <div class="controls">
-            {{ form.recipient }}
-            {{ form.parent }}
-          </div>
-        </div>
-      {% endif %}
-      <!-- END RECIPIENT -->
-      <!-- SUBJECT -->
-      {% if form.subject.errors %}
-        <div class="control-group error">
-          <label for="id_subject" class="control-label">{{form.subject.label}}</label>
-          <div class="controls">
-            {{ form.subject }}
-            {% for error in form.subject.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
-          </div>
-        </div>
-      {% else %}
-        <div class="control-group">
-          <label for="id_subject" class="control-label">{{form.subject.label}}</label>
-          <div class="controls">
-            {{ form.subject }}
-          </div>
-        </div>
-      {% endif %}
-      <!-- END SUBJECT -->
 
-      <!-- BODY -->
-      {% if form.body.errors %}
-        <div class="control-group error">
-          <label for="id_body" class="control-label">{{form.body.label}}</label>
-          <div class="controls">
-            {{ form.body }}
-            {% for error in form.body.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
-          </div>
-        </div>
-      {% else %}
-        <div class="control-group">
-          <label for="id_body" class="control-label">{{form.body.label}}</label>
-          <div class="controls">
-             {{ form.body }}
-          </div>
-        </div>
-      {% endif %}
+      </fieldset>
+    </form>
 
-
-
-      <!-- END BODY -->
-
-     
-
-
-      <div class="form-actions">
-        <button class="btn btn-large btn-primary btn-block" type="submit">{% trans 'Enviar' %}</button>
-      </div>
-
-  </fieldset>
-</form>
-
-<script type="text/javascript">
-  $('#id_body').wysihtml5({
-    "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
-    "emphasis": true, //Italics, bold, etc. Default true
-    "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
-    "html": false, //Button which allows you to edit the generated HTML. Default false
-    "link": false, //Button to insert a link. Default true
-    "image": false //Button to insert an image. Default true);
-  });
-</script>
+    <script type="text/javascript">
+      $('#id_body').wysihtml5({
+        "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+        "emphasis": true, //Italics, bold, etc. Default true
+        "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+        "html": false, //Button which allows you to edit the generated HTML. Default false
+        "link": false, //Button to insert a link. Default true
+        "image": false //Button to insert an image. Default true);
+      });
+    </script>
+  {% endif %}
+{% endif %}

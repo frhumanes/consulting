@@ -93,4 +93,4 @@ def reply_message(request, message_id):
         initial={'recipient': message_to_reply.author,'parent': message_to_reply})
 
     return render_to_response("private_messages/message_reply.html",
-                {"form": form}, context_instance=RequestContext(request))
+                {"form": form, "recipient":message_to_reply.author}, context_instance=RequestContext(request))

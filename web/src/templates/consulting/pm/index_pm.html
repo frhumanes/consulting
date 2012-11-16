@@ -1,18 +1,15 @@
 {% extends "ui/app.html" %}
 
-{% load i18n%}
+{% load i18n userprofile %}
 
 {% block js_files %}
   {{ block.super }}
-  <script src="{{ STATIC_URL }}js/jquery-ui-1.8.18.custom.js"></script>
-  <script src="{{ STATIC_URL }}js/jquery.ui.core.js"></script>
-  <script src="{{ STATIC_URL }}js/jquery.ui.position.js"></script>
-  <script src="{{ STATIC_URL }}js/jquery.ui.widget.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery-ui-1.9.1.custom.js"></script>
 {% endblock %}
 
 {% block css_files %}
   {{ block.super }}
-  <link href="{{ STATIC_URL }}css/jquery-ui-1.8.18.custom.css" rel="stylesheet">
+  <link href="{{ STATIC_URL }}css/jquery-ui-1.9.1.custom.css" rel="stylesheet">
 {% endblock %}
 
 {% block js %}
@@ -53,11 +50,11 @@
 
 {% block right %}
   {% if doctors %}
-  <div style="text-align: right">
+  <div style="text-align: right; max-height: 400px; overflow-y: auto" class="img-polaroid">
     <ul class="nav nav-list" >
       <li class="nav-header">{% trans 'Filtrar por doctores' %}</li>
       {% for d in doctors %}
-      <li><button class="btn btn-link" style="text-align: right" href="{% url consulting_patient_list d.user.id %}">{{d.get_full_name}}</button></li>
+      <li><button class="btn btn-link" style="text-align: right" href="{% url consulting_patient_list d.user.id %}">{{d|name_with_title}}</button></li>
       {% endfor %}
     </ul>
   </div>

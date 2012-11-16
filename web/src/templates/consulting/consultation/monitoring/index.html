@@ -2,7 +2,12 @@
 
 {% load i18n%}
 
-
+{% block jquery_init %}
+    $('.modal').on('hidden', function () {
+      $(this).removeData();
+      $('.modal-body').html('');
+    })
+{% endblock %}
 
 {% block left%}
   {% if illness %}
@@ -14,7 +19,8 @@
 
 {% block container%}
   <div class="page-header">
-      <h1>{{appointment.app_type.title}}<small class="pull-right">[{{appointment.duration}} min]</small></h1>
+      <h1>{{appointment.app_type.title}} <small class="pull-right">
+        {% if illness %}[{{appointment.duration}} min]{% else %}{{appointment.date|date:"d F Y"}}{% endif %}</small></h1>
   </div>
   {% if appointment.description %}
   <div class="well">
@@ -39,7 +45,7 @@
 {% endblock  %}
 
 {% block right %}
-  {% include "consulting/patient/card.html" %}
+  {% include 'consulting/patient/card.html' with mini=1 %}
 {% endblock %}
 
 

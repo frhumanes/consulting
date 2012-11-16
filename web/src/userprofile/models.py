@@ -47,9 +47,6 @@ class Profile(TraceableModel):
                                     related_name='illnesses_profiles',
                                     blank=True, null=True)
 
-    username = models.CharField(_(u'Nombre de usuario'), max_length=50,
-                                blank=True)
-
     name = models.CharField(_(u'Nombre'), max_length=150, blank=True)
 
     first_surname = models.CharField(_(u'Primer Apellido'), max_length=150,
@@ -92,7 +89,20 @@ class Profile(TraceableModel):
 
     role = models.IntegerField(_(u'Rol'), choices=ROLE, blank=True, null=True)
 
-    def get_full_name(self):
+    def get_full_name(self, title=False):
+        if title:
+            pre = ''
+            if self.role == settings.DOCTOR:
+                if self.sex == settings.WOMAN:
+                    pre = 'Dra.'
+                elif self.sex == settings.MAN:
+                    pre = 'Dr.'
+            else:
+                if self.sex == settings.WOMAN:
+                    pre = 'D.'
+                elif self.sex == settings.MAN:
+                    pre = 'D.ª'
+            return "%s %s %s %s" % (pre, self.name, self.first_surname, self.second_surname)
         return "%s %s %s" % (self.name, self.first_surname, self.second_surname)
 
     def is_doctor(self):

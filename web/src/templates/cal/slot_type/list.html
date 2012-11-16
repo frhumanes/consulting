@@ -2,8 +2,6 @@
 
 {% load i18n messages %}
 
-{% block title %}{% trans 'Type Events list' %}{% endblock %}
-
 {% block right %}
   {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
 {% endblock %}
@@ -22,7 +20,7 @@
   {% if slot_type.object_list.count > 0 %}
     
 
-    <table id="events_list" class="table table-striped">
+    <table id="events_list" class="table table-hover">
       <thead></thead>
       <tbody>
         {% for slot in slot_type.object_list %}
@@ -30,11 +28,11 @@
         {% endfor %}
       </tbody>
     </table>
-    {% include 'ui/includes/pagination_bar.html' with objects=type_events %}
+    {% include 'ui/includes/pagination_bar.html' with objects=slot_type %}
 
     <div id="preview"></div>
   {% else %}
-    <div class="alert alert-info">{% trans "There are no slots type" %}</div>
+    <div class="alert alert-info">{% trans "No hay ningún tipo definido" %}</div>
   {% endif %}
 {% endblock %}
 

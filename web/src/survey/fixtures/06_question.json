@@ -227,7 +227,7 @@
       "single": false, 
       "code": "RP", 
       "kind": 0, 
-      "required": true
+      "required": false
     }
   }, 
   {
@@ -311,7 +311,7 @@
     "pk": 39, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado de incapacidad para disfrutar ya de sus pasatiempos, siendo 0 la ausencia de incapacidad(es decir, puede disfrutar como antes) y 4 una intensidad invalidante.", 
+      "text": "Valore en escala del 0 al 4 el grado de incapacidad para disfrutar ya de sus pasatiempos, siendo 0 la ausencia de incapacidad (es decir, puede disfrutar como antes) y 4 una intensidad invalidante.", 
       "single": true, 
       "code": "H6.2", 
       "kind": 0, 

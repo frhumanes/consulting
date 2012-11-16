@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Max
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
+from django.utils.html import strip_tags
 
 from datetime import datetime
 
@@ -102,12 +103,14 @@ def explotation(request):
     reports = []
     filters = {}
     group = False
+    template_name = 'consulting/stadistic/explotation.html'
     if request.method == 'POST':
+      template_name ='consulting/stadistic/explotation-ajax.html'
       form = FiltersForm(request.POST)
       for k, v in request.POST.items():
         if v:
           if k.startswith('date'):
-            month, day, year  = v.split('/')
+            day, month, year  = v.split('/')
             filters = update_filter(filters, k, datetime(int(year), int(month), int(day)))
           if k.startswith('age'):
             filters = update_filter(filters, k, int(v))
@@ -152,9 +155,13 @@ def explotation(request):
           for var, mark in r.variables.items():
             if mark and isinstance(mark, (int, long, float)):
               data[r.patient].variables[var] = [mark,]
+            else:
+              data[r.patient].variables[var] = []
           for dim, mark in r.dimensions.items():
             if mark and isinstance(mark, (int, long, float)):
               data[r.patient].dimensions[dim] = [mark,]
+            else:
+              data[r.patient].dimensions[dim] = []
           data[r.patient].status[u'Ansiedad'] = r.patient.get_anxiety_status(index=True)
           data[r.patient].status[u'Depresión'] = r.patient.get_depression_status(index=True)
 
@@ -199,7 +206,13 @@ def explotation(request):
             for n in name:
               try:
                 if key == 'status':
-                  values.append((n, getattr(report, key)[n]))
+                  st = ''
+                  nst = getattr(report, key)[n]
+                  if n == u'Ansiedad':
+                    st = [settings.HAMILTON[k][0] for k in sorted(settings.HAMILTON.keys())][nst]
+                  elif n == u'Depresión':
+                    st = [settings.BECK[k][0] for k in sorted(settings.BECK.keys())][nst]
+                  values.append((n, strip_tags(st)))
                 else:
                   values.append((n, getattr(report, key)[n]))
               except:
@@ -268,7 +281,7 @@ def explotation(request):
                 data1.pop(age)
             prev = age
             
-        return render_to_response('consulting/stadistic/explotation.html', 
+        return render_to_response(template_name, 
                                 {'data':data,
                                  'data1':data1,
                                  'data2': data2,

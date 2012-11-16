@@ -6,16 +6,16 @@
 <h2>INFORME RESUMEN DE {{task.survey.name|upper}}</h2>
 {% if task.survey.id < 3 %}
 <p>{{patient.name}} {{patient.first_surname}} {{patient.second_surname}} de {{patient.get_age}} años de edad presenta desde hace {{task.get_time_interval|lower}} los síntomas que le han hecho acudir a consulta.
-	{% if task.get_ap_dict %}
+	{% if task.get_ap_list %}
 		Ha sido {{ 'diagnosticado/a'|sexify:task.patient }} de 
-		{% for ap in task.get_ap_dict %}
+		{% for ap in task.get_ap_list %}
 			{% if forloop.last and not forloop.first %}
-					 y {{ap.text}}
+					 y {{ap}}
 				{% else %}
 					{% if forloop.revcounter0 > 1 %}
-						{{ap.text}}, 
+						{{ap}}, 
 					{% else %}
-						{{ap.text}}
+						{{ap}}
 					{% endif %}
 				{% endif %}
 		{%  endfor %}
@@ -32,7 +32,7 @@
 					{% if forloop.last and not forloop.first %}
 						 y {{illness}}.
 					{% else %}
-						{% if forloop.revcounter0 > 1 %}
+						{% if forloop.revcounter0 > 1%}
 							{{illness}}, 
 						{% else %}
 							{{illness}}
@@ -40,7 +40,7 @@
 					{% endif %}
 				{%  endfor %}
 			{% else %}
-				{% if forloop.revcounter0 > 0 %}
+				{% if forloop.revcounter0 %}
 					su {{person|lower}} está diagnosticado de 
 					{% for illness in af_list %}
 						{% if forloop.last and not forloop.first %}
@@ -49,7 +49,7 @@
 							{% if forloop.revcounter0 > 1 %}
 								{{illness}}, 
 							{% else %}
-								{{illness}}
+								{{illness}},
 							{% endif %}
 						{% endif %}
 					{% endfor %}
@@ -80,12 +80,12 @@
 		padece
 		{% for org in task.get_organicity_list %}
 			{% if forloop.last and not forloop.first %}
-				 y {{org.text}}
+				 y {{org}}
 			{% else %}
 				{% if forloop.revcounter0 > 1 %}
-					{{org.text}}, 
+					{{org}}, 
 				{% else %}
-					{{org.text}}
+					{{org}}
 				{% endif %}
 			{% endif %}
 		{%  endfor %}
@@ -119,12 +119,12 @@
 				su
 			{% for org in organicity_list %}
 				{% if forloop.last and not forloop.first %}
-					 y {{org.text}}
+					 y {{org}}
 				{% else %}
 					{% if forloop.revcounter0 > 1 %}
-						{{org.text}}, 
+						{{org}}, 
 					{% else %}
-						{{org.text}}
+						{{org}}
 					{% endif %}
 				{% endif %}
 			{%  endfor %}

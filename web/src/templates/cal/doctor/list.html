@@ -1,8 +1,6 @@
 {% extends "cal/includes/base.html" %}
 
-{% load i18n messages %}
-
-{% block title %}{% trans 'Nueva cita' %}{% endblock %}
+{% load i18n messages userprofile %}
 
 {% block right %}
   {% include "cal/includes/calendar.html" with doctor=doctor %}
@@ -14,11 +12,10 @@
   {% else %}
     {% include "cal/includes/pagination_day.html" with user=doctor %}
   {% endif %}
-  <hr>
 
   {% if request.user.get_profile.is_administrative %}
   <div class="well">
-    <h4>Dr. {{ doctor.get_profile.get_full_name }}</h4>
+    <h4>{{ doctor.get_profile|name_with_title }}</h4>
   </div>
   {% endif %}
   {% if patient_user %}

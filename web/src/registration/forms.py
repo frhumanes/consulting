@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django import forms
+from django.conf import settings
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.utils.translation import ugettext as _
 
@@ -15,13 +16,12 @@ class UserRegistrationForm(AuthenticationForm):
 from django.contrib import auth
 
 class ValidatingPasswordChangeForm(PasswordChangeForm):
-    MIN_LENGTH = 8
 
     def clean_new_password1(self):
         password1 = self.cleaned_data.get('new_password1')
 
         # At least MIN_LENGTH long
-        if len(password1) < self.MIN_LENGTH:
+        if len(password1) < settings.PASSWORD_MIN_LENGTH:
             raise forms.ValidationError(_(u"La contraseña debe tener una longitud mínima de %d caracteres." % self.MIN_LENGTH))
 
         # At least one letter and one non-letter
