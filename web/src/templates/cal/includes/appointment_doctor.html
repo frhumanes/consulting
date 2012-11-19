@@ -1,3 +1,4 @@
+{% load i18n %}
 <tr id={{event.patient.id}} data-msg="{{ event.id }}">
   <td>
   	{%if event.is_editable %}
@@ -14,5 +15,8 @@
   <td>{{ event.end_time|time:"H:i" }}</td>
   <td>{{ event.patient.get_profile.doctor.get_profile.get_full_name }}</td>
   <td>{{ event.app_type}}</td>
-  <td><em>{{ event.description|striptags|safe|truncatewords:5 }}</em></td>
+  <td><em>{{ event.description|striptags|safe|truncatewords:5 }}</em>
+    {% if not event.has_activity and not event.is_editable %}
+      <span class="badge badge-important"><i class="icon-exclamation-sign icon-white"></i> {% trans 'NO ASISTIÓ' %}</span>
+    {% endif %}</td>
 </tr>

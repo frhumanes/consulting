@@ -55,24 +55,30 @@
   {{ block.super }}
   <script src="{{ STATIC_URL }}js/jquery-ui-1.9.1.custom.js"></script>
   <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
-<script src="{{ STATIC_URL }}js/locales/bootstrap-datepicker.es.js"></script>
+  <script src="{{ STATIC_URL }}js/locales/bootstrap-datepicker.es.js"></script>
 {% endblock %}
 
 {% block jquery_init %}
 
 $('button[type="reset"]').on('click', function(){
-  var form = $(this).parentsUntil('form').parent();
-  form.clearForm('.span3:hidden');
-  form.find('.text-info').html('');
-  form.find('input').removeAttr('checked');
+  var $form = $(this).parent();
+  $form.find('.span3:hidden').val('');
+  $(".range").each(function(){
+    var min = $(this).find('input[id$="_0"]').attr('min');
+    var max = $(this).find('input[id$="_0"]').attr('max');
+    $(this).slider("values", 0, min);
+    $(this).slider("values", 1, max);
+  });
+  $form.find('.text-info').html('');
+  $form.find('input').removeAttr('checked');
 });
 
 $('#download_xls').live("click", function(e) {
-    var form = $('#form');
-    var orig_action = form.attr('action');
-    form.attr('action', orig_action+'?as=xls');
-    form.submit();
-    form.attr('action', orig_action);
+    var $form = $('#form');
+    var orig_action = $form.attr('action');
+    $form.attr('action', orig_action+'?as=xls');
+    $form.submit();
+    $form.attr('action', orig_action);
 });
 
 $('#refresh').live("click", function(e) {

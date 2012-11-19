@@ -119,7 +119,7 @@
                               <div class="text-warning"><small>{{e.start_time|time}}-{{e.end_time|time}} {{e.description}}</small></div>  
                             {% endfor %}
                             {% for a in entries %}
-                              <div class="text-info"><small>{{a.start_time|time}}
+                              <div class="{% if not a.is_editable %}{{ a.has_activity|yesno:',muted' }}{% else %}text-info{% endif %}"><small>{{a.start_time|time}}
                               {% if request.user.get_profile.is_doctor %}
                                {{a.patient.get_profile.get_full_name}}
                               {% else %}
@@ -199,6 +199,16 @@
         $('#large').load($(this).attr('href')); 
      });
 
+    function capture_pager(){
+        $('.pagination').find('a').each(function(){
+            $(this).on("click", function(e){
+                        e.preventDefault();
+                        $('#myModalBody').load($(this).attr('href'), capture_pager);
+                    });
+        });
+
+    };
+
     $("#searcher").autocomplete({
         source: function(request, response){
               $.ajax({
@@ -218,7 +228,7 @@
             var pattern = '{% url 'cal.app_list_patient' 1 %}';
             $('#myModalLabel').text('{% trans "Citas de " %}'+ui.item.label);
             $('#myModal').modal('show');
-            $('#myModalBody').load(pattern.replace('1', ui.item.id));
+            $('#myModalBody').load(pattern.replace('1', ui.item.id),capture_pager);
             }
     });
 

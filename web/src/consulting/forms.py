@@ -41,7 +41,7 @@ class TreatmentForm(forms.ModelForm):
     posology = forms.IntegerField(label=_(u'Posología (mg/día)'))
 
     dosification = forms.CharField(label=_(u'Modo de administración'),
-                                    max_length=255)
+                                    max_length=255, required=False)
 
     class Meta:
         model = Medicine

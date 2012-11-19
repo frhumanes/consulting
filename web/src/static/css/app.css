@@ -29,6 +29,9 @@ section {
   padding-top: 10px;
 }
 
+section > .page-header, section > .lead {
+    color: #5A5A5A;
+}
 /************************************SUBNAV***********************************/
 .subnav {
   width: 100%;

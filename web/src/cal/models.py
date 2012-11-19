@@ -128,3 +128,6 @@ class Appointment(TraceableModel):
 
     def is_editable(self):
         return self.date >= date.today()
+
+    def has_activity(self):
+        return bool(self.appointment_tasks.all().count() or self.appointment_conclusions.all().count())

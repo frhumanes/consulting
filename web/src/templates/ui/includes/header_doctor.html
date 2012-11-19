@@ -58,7 +58,7 @@
                     <a href="{% url private_messages_inbox %}">
                         {% trans 'MENSAJERÍA' %}
                         {% if user.get_profile.get_unread_messages.count %}
-                            <span class="badge badge-important"><small>{{user.get_profile.get_unread_messages.count}}</small></span>
+                            <span id="unread_messages" class="badge badge-important"><small>{{user.get_profile.get_unread_messages.count}}</small></span>
                         {% endif %}
                     </a>
                 </li>

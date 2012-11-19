@@ -1,7 +1,13 @@
-{% load consulting }
+{% load consulting %}
 
 Bienvenido a {% get_brand %}
 
-Ya puede hacer uso de su área personal de {% get_brand %}. Acceda a {% get_domain %}, su nombre de usuario es {{username}} y su contraseña {{password}}.
+Ya puede hacer uso de su área personal de {% get_brand %}. Acceda a {% get_domain %} con los siguientes datos.
 
-Saludos.
+    Nombre de usuario: {{username}}
+    Contraseña: {{password}}
+
+No olvide cambiar su contraseña desde su área personal.
+
+
+Reciba un cordial saludo del equipo de {% get_brand %}.

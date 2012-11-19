@@ -54,7 +54,7 @@ if ($.browser.msie && $.browser.version < '9') {
     {% for labelname, value in data1.items %}
       {% if value %}
       {
-      "age":"{% if labelname = labels_for_data1|first %}≤{% endif %}{{labelname}} [{{value}}]", "population":{{value}}
+      "age":"{% if labelname = labels_for_data1|first %}≤{% endif %}{{labelname|safe}} [{{value}}]", "population":{{value}}
       }, 
       {% endif %}
     {% endfor %}

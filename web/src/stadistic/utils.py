@@ -19,12 +19,12 @@ def generate_reports(full=False):
         report.patient = task.patient.get_profile()
         report.age = report.patient.get_age()
         report.sex = report.patient.sex
-        report.treatment = {m.component.name: int(m.posology) for m in report.patient.get_treatment(report.date)}
+        report.treatment = dict((m.component.name, int(m.posology)) for m in report.patient.get_treatment(report.date))
         report.profession = task.patient.get_profile().profession
-        report.variables = { k.name: v for k, v in task.get_variables_mark().items()}
+        report.variables = dict((k.name, v) for (k, v) in task.get_variables_mark().items())
         try:
             adherence_task = Task.objects.filter(appointment=task.appointment, survey__code=settings.ADHERENCE_TREATMENT).latest('end_date')
-            report.variables[u'Adherencia'] = int(adherence_task.get_answers()[0].weight)
+            report.variables[u'Adherencia'] = int(adherence_task.get_answers()[0].option.weight)
         except:
             pass
         report.dimensions = task.get_dimensions_mark()

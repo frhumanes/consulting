@@ -73,10 +73,13 @@ class SelectWidgetBootstrap(forms.Select):
         $(document).ready(function() {
             $('div[init="0"].btn-group-form').each(function() {
                 setBtnGroupVal(this);
-                $(this).find('a').click(function() {
+                $(this).find('a').click(function(ev) {
+                    ev.preventDefault();
                     $(this).parent().siblings().find('a').attr('selected', false);
                     $(this).attr('selected', true);
-                    setBtnGroupVal($(this).parentsUntil('.btn-group-form').parent());
+                    var $btngroup = $(this).parentsUntil('.btn-group-form').parent();
+                    setBtnGroupVal($btngroup);
+                    $('html,body').animate({scrollTop: $btngroup.parentsUntil('.control-group').parent().offset().top - 50 }, 500);
                 });
             });
 

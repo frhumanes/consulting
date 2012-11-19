@@ -5,7 +5,7 @@
 {% block right %}
 	{% if patient_user.get_nextAppointment %}
 	<div class="alert alert-success" style="text-align: justify">
-		<h5>Su próxima cita tendrá lugar el <strong>{{patient_user.get_nextAppointment.date|date:"l d F Y"}}<strong> a las <strong>{{patient_user.get_nextAppointment.start_time|time:"H:i"}}<strong></h5>
+		<h5>Su próxima cita tendrá lugar el <strong>{{patient_user.get_nextAppointment.date}}<strong> a las <strong>{{patient_user.get_nextAppointment.start_time|time:"H:i"}}<strong></h5>
 	</div>
 	{% endif %}
 	{% if patient_user.get_pending_tasks %}

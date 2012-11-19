@@ -3,7 +3,7 @@
 {% match_url "private_messages_outbox" as match_outbox %}
 {% match_url "private_messages_inbox" as match_inbox %}
 
-<tr {% if match_inbox and request.user.get_profile.is_doctor and message.unread %}class="warning"{% endif %} data-msg="{{ message.id }}" style="cursor:pointer" >
+<tr {% if match_inbox and message.unread %}class="unread{% if request.user.get_profile.is_doctor %} warning{% endif %}"{% endif %} data-msg="{{ message.id }}" style="cursor:pointer" >
 
 {% if match_outbox or message.author = patient_user %}
   <td><i class="icon-share"></i></td>

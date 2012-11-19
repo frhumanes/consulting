@@ -153,12 +153,12 @@ def explotation(request):
         else:
           data[r.patient] = r
           for var, mark in r.variables.items():
-            if mark and isinstance(mark, (int, long, float)):
+            if isinstance(mark, (int, long, float)):
               data[r.patient].variables[var] = [mark,]
             else:
               data[r.patient].variables[var] = []
           for dim, mark in r.dimensions.items():
-            if mark and isinstance(mark, (int, long, float)):
+            if isinstance(mark, (int, long, float)):
               data[r.patient].dimensions[dim] = [mark,]
             else:
               data[r.patient].dimensions[dim] = []

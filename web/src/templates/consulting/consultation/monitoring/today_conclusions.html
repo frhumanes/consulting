@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <section>
-  <legend>{% trans 'Conclusiones' %}</legend>
+  <h4>{% trans 'Conclusiones' %}</h4>
   {% if conclusions.count = 0 %}
     {% if illness %}
     <div class="alert alert-warning">{% trans 'Pendiente.' %} <a href="{% url consulting_set_conclusion appointment.id illness.code %}"><strong class="warning">{% trans 'Rellenar ahora' %}</strong></a></div>
@@ -10,20 +10,22 @@
      </div>
     {% endif %}
   {% else %}
- 
-  <dl>
+  <div class="thumbnail">
+  <dl class="dl-horizontal">
     <dt>{% trans 'Observaciones' %}</dt>
     {% for c in conclusions %}
       {% if c.observation %}   
-        <dd>{{c.observation}}</dd>
+        <dd>{{c.observation}}&nbsp;</dd>
       {% endif %}
     {% endfor %}
     <dt>{% trans 'Recomendaciones' %}</dt>
     {% for c in conclusions %}
       {% if c.recommendation %}
-        <dd>{{c.recommendation}}</dd>
+        <dd>{{c.recommendation}}&nbsp;</dd>
       {% endif %}
     {% endfor %}
   </dl>
+  </div>
   {% endif %}
 </section>
+<hr>

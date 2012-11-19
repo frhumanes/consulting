@@ -18,6 +18,7 @@
 {% endblock  %}
 
 {% block container%}
+<section>
   <div class="page-header">
       <h1>{{appointment.app_type.title}} <small class="pull-right">
         {% if illness %}[{{appointment.duration}} min]{% else %}{{appointment.date|date:"d F Y"}}{% endif %}</small></h1>
@@ -41,7 +42,7 @@
     {% include 'consulting/consultation/monitoring/today_treatment.html' %}
   {% endif %}
 
-
+</section>
 {% endblock  %}
 
 {% block right %}
