@@ -1560,10 +1560,10 @@ def newpatient(request):
                             profile.doctor = logged_user_profile.user
                         profile.user = user
                         profile.save()
-                        default_illness = Illness.objects.get(
-                                                id=settings.DEFAULT_ILLNESS)
-                        profile.illnesses.add(default_illness)
-                        profile.save()
+                        #default_illness = Illness.objects.get(
+                        #                        id=settings.DEFAULT_ILLNESS)
+                        #profile.illnesses.add(default_illness)
+                        #profile.save()"""
                     except Exception:
                         user.delete()
                         return HttpResponseRedirect(reverse('consulting_index'))

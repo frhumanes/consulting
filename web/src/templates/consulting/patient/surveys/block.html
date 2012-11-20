@@ -1,39 +1,126 @@
 {% extends "ui/app.html" %}
 
-{% load i18n%}
+{% load i18n consulting %}
+
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/jquery-ui-1.9.1.custom.js"></script>
+{% endblock %}
+
+{% block css_files %}
+  {{ block.super }}
+  <link href="{{ STATIC_URL }}css/jquery-ui-1.9.1.custom.css" rel="stylesheet">
+{% endblock %}
+
+{% block css_inline %}
+@media (max-width: 800px){
+  #right_bar, #left_bar{
+   visibility: hidden
+  }
+  #main{
+    width:100% 
+  }
+}
+{% endblock %}
+
+{% block js %}
+  var show_warning = true;
+  $(window).bind('beforeunload', function() {
+    if (show_warning) {
+        return "{% trans 'Va a abandonar el cuestionario actual. Los datos no guardados se perderán. ¿Desea continuar de todos modos?' %}";
+    }
+  }); 
+{% endblock %}
+
+{% block jquery_init %}
+  $('input[type="checkbox"]').each(function(){
+    if($('label[for="'+this.id+'"]').text().match(/^ Otr/) && $(this).attr('checked')) {
+      $('label[for="'+this.id+'"]').parent().addClass('thumbnail');
+      $('label[for="'+this.id+'"]').after($('input[name="' + this.name + '_value"]'));
+      $('input[name="' + this.name + '_value"]').css('display','block');
+    } else {
+      if($('input[name="' + this.name + '_value"]').css('display') != 'block'){
+        $('input[name="' + this.name + '_value"]').css('display','none');
+      }
+    }
+  });
+
+  $('input[type="checkbox"]').on('change', function(){
+    if($('label[for="'+this.id+'"]').text().match(/^ Otr/)) {
+      if($(this).attr('checked')) {
+        $('label[for="'+this.id+'"]').parent().addClass('thumbnail');
+        $('label[for="'+this.id+'"]').after($('input[name="' + this.name + '_value"]'));
+        $('input[name="' + this.name + '_value"]').css('display','block');
+      } else {
+        $('label[for="'+this.id+'"]').parent().removeClass('thumbnail');
+        $('input[name="' + this.name + '_value"]').css('display','none');
+      }
+    }
+  });
+  
+  $('ul').addClass("without_decorator");
+
+  $('.form').on('submit', function(e){
+    var pending = 0;
+    $(this).find('div.required').each(function(){
+      var answer = $(this).find('input[type="hidden"]').val()
+      if( (typeof answer === 'undefined') || answer == '' ) {
+        pending++;
+        $(this).parent().parent().addClass('error');
+      }
+    });
+    $(this).find('label.control-label').each(function(){
+      if($('input[type="checkbox"][name="'+this.id+'"].required').length && $('input[type="checkbox"][name="'+this.id+'"].required:checked').length == 0) {
+        pending++;
+        $(this).addClass('text-error');
+      }
+    });
+    $(this).find('select.required').each(function() {
+      if( !$(this).val() ){
+        pending++;
+        $(this).parent().parent().addClass('error');
+      }
+    });
+    if(pending && !confirm("{% trans 'Ha dejando '%}"+pending+"{% trans ' preguntas sin contestar. ¿Desea guardar los cambios y responderlas en otro momento?'%}")){
+      e.preventDefault();
+      var first = $(this).find('.error,.text-error').first();
+      $('html,body').animate({scrollTop: first.offset().top - 100}, 500);
+    } else {
+      show_warning = false;
+    }
+  });
+
+{% endblock %}
 
 {% block container %}
 <div class="page-header">
   <h1>{% trans 'Encuesta programada ' %}</h1>              
 </div>
     <section>
-        <form class="form-horizontal" method="post" action="{% url consulting_self_administered_block task.id %}">{% csrf_token %}
+        <form class="form" method="post" action="{% url consulting_self_administered_block task.id %}">{% csrf_token %}
             {% for field in form %}
-                <div class="control-group">
-                    <label class="control-label span7">
-                        {{field.label}}
-                    </label>
-                    <div class="controls span5">
-                        {{ field }}
-                        {% if field.errors|length %}
-                            {% for error in field.errors %}
-                                <span class="help-inline">
-                                    {{ error|escape }}
-                                </span>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                </div>
+            <div class="control-group row-fluid">
+              <label id="{{field.html_name}}" class="control-label span7 relative" style="text-align: justify">
+                  {{field.label|sexify:request.user}}
+              </label>
+              <div class="controls span5 relative">
+                {{ field }}
+                {% if field.errors|length %}
+                  {% for error in field.errors %}
+                    <span class="help-inline">
+                      {{ error|escape }}
+                    </span>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            </div>
             {% endfor %}
-            <div class="controls">
-                <button type="submit" class="btn btn-primary btn-large">
-                  {% trans 'Guardar y Continuar' %}
+            <br>
+            <div class="center">
+                <button type="submit" class="btn btn-primary btn-large" data-loading-text="Guardando...">
+                  {% trans 'Guardar y continuar' %}
                 </button>
             </div>
         </form>               
     </section>
-{% endblock %}
-
-{% block jquery_init %}
-    $('ul').addClass("without_decorator");
 {% endblock %}
