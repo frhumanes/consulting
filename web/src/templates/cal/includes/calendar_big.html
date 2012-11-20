@@ -119,7 +119,7 @@
                               <div class="text-warning"><small>{{e.start_time|time}}-{{e.end_time|time}} {{e.description}}</small></div>  
                             {% endfor %}
                             {% for a in entries %}
-                              <div class="{% if not a.is_editable %}{{ a.has_activity|yesno:',muted' }}{% else %}text-info{% endif %}"><small>{{a.start_time|time}}
+                              <div class="{% if not a.is_editable %}{{ a.has_activity|yesno:',muted' }}{% else %}text-info{% endif %}"><small><strong>{{a.start_time|time}}</strong>
                               {% if request.user.get_profile.is_doctor %}
                                {{a.patient.get_profile.get_full_name}}
                               {% else %}

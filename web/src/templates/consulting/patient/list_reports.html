@@ -46,7 +46,7 @@
               <tr id="{{report.id}}" class="report">
                 <td style="text-align:center;">{{report.end_date|date:"d/M/Y"|lower}}</td>
                 <td style="text-align:left;"><a class="btn btn-link" data-target="#modal" href="{% url consulting_view_task report.id %}" role="button" data-toggle="modal">{{report.survey.name}}</a></td>
-                <td style="text-align:center;"><span style="min-width:100px" class="label label-{% get_anxiety_status_at report.appointment.patient report.end_date 1 %}">{% get_anxiety_status_at report.appointment.patient report.end_date 0 %}</span>&nbsp;<span style="min-width:100px" class="label label-{% get_depression_status_at report.appointment.patient report.end_date 1 %}">{% get_depression_status_at report.appointment.patient report.end_date 0 %}</span></td>   
+                <td style="text-align:center;">{% get_anxiety_status_at report.appointment.patient report.end_date %}&nbsp;{% get_depression_status_at report.appointment.patient report.end_date %}</td>   
 
                 <td style="text-align:center;">
                   <a class="btn btn-small btn-link" data-target="#modal" href="{% url consulting_view_report report.id %}" role="button" data-toggle="modal">HTML</a>|

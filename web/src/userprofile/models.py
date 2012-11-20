@@ -218,25 +218,34 @@ class Profile(TraceableModel):
         return tasks
 
 
-    def get_anxiety_status(self, at_date=None, index=False):
+    def get_anxiety_status(self, at_date=None, index=False, html=False):
         filter_option = Q(patient=self.user, survey__id__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True)
         if at_date:
             filter_option = filter_option & Q(end_date__lte=at_date)
         try:
             task = Task.objects.filter(filter_option).latest('end_date')
-            return task.get_anxiety_status(index)
+            status = task.get_anxiety_status(index)
+            if html:
+                return '<span style="min-width:100px" class="label label-%s" >%s</span>' % (status[1], status[0])
+            else:
+                return status
         except:
-            pass
+            return ''
 
-    def get_depression_status(self, at_date=None, index=False):
+    def get_depression_status(self, at_date=None, index=False, html=False):
         filter_option = Q(patient=self.user, survey__id__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True)
         if at_date:
             filter_option = filter_option & Q(end_date__lte=at_date)
         try:
             task = Task.objects.filter(filter_option).latest('end_date')
-            return task.get_depression_status(index)
+            status = task.get_depression_status(index)
+            if html:
+                return '<span style="min-width:100px" class="label label-%s" >%s</span>' % (status[1], status[0])
+            else:
+                return status
         except:
-            pass
+            return ''
+
 
     def get_unread_messages(self):
         return Message.objects.get_pending_for_user(self.user)

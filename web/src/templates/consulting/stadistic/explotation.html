@@ -252,6 +252,7 @@ $('#reload_button').live('click',function(){
 
 
 {% block container %}
+<section>
 <div class="page-header">
   <h1>{% trans 'Explotación de datos' %}
     <div class="btn-group pull-right">
@@ -275,7 +276,7 @@ $('#reload_button').live('click',function(){
 <div id="query-data">
 {% include 'consulting/stadistic/explotation-ajax.html' %}
 </div>
-
+</section>
 
 {% endblock %}
 

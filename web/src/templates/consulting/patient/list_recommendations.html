@@ -36,7 +36,7 @@
                 <td style="text-align:center;">{{conclusion.date|date:"d/M/Y"|lower}}</td>
                 <td style="text-align:justify;"><a href="#" class="muted" rel="popover" title="Dr. {{conclusion.created_by.get_profile.get_full_name}}" data-content="{{conclusion.recommendation|striptags|safe}}">{{conclusion.recommendation|striptags|safe|truncatewords:10}}</a></td>
 
-                <td style="text-align:center;"><span style="min-width:100px" class="label label-{% get_anxiety_status_at conclusion.appointment.patient conclusion.date 1 %}">{% get_anxiety_status_at conclusion.appointment.patient conclusion.date 0 %}</span>&nbsp;<span style="min-width:100px" class="label label-{% get_depression_status_at conclusion.appointment.patient conclusion.date 1 %}">{% get_depression_status_at conclusion.appointment.patient conclusion.date 0 %}</span></td>  
+                <td style="text-align:center;">{% get_anxiety_status_at conclusion.appointment.patient conclusion.date %}&nbsp;{% get_depression_status_at conclusion.appointment.patient conclusion.date %}</td>  
               </tr>
             {% endfor %}
           </tbody>

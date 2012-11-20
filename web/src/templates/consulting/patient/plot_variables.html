@@ -112,9 +112,43 @@ $(function () {
                 yaxes: [{ min: 0, max: 5, ticks: 10, position: "right"},
                         { min: 0, max: 5, ticks: 10, position: "left"}],
                 xaxis: { mode: "time",  minTickSize: [1, "day"], min: (Date.UTC({{ticks|first|date:'Y, m-1, j'}})),
+                grid: { hoverable: true},
                 max: (Date.UTC({{ticks|last|date:'Y, m-1, j'}}))},
                 legend: { container: legendContainer, noColumns: 3 }
             });
+
+        var previousPoint = null;
+
+        $("#placeholder_variables").bind("plothover", function (event, pos, item) {
+          $("#x").text(pos.x.toFixed(2));
+          $("#y").text(pos.y.toFixed(2));
+          if (item) {
+            if (previousPoint != item.dataIndex) {
+              previousPoint = item.dataIndex;
+              $("#tooltip").remove();
+              var x = item.datapoint[0].toFixed(2),
+              y = item.datapoint[1].toFixed(2);
+              showTooltip(item.pageX, item.pageY,
+              item.series.label + " = " + y);
+            }
+          }
+          else {
+            $("#tooltip").remove();
+            previousPoint = null;
+          }
+        }); 
+    }
+
+    function showTooltip(x, y, contents) {
+      $('<div id="tooltip" class="tooltip-inner tooltip.in">' + contents + '</div>').css( {
+        position: 'absolute',
+        width: '100px',
+        'text-align': 'center',
+        display: 'none',
+        top: y - 34,
+        left: x - 54,
+        'font-size': '11px',
+      }).appendTo("body").fadeIn('slow');
     }
 
     plotAccordingToChoices();

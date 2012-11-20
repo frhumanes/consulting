@@ -72,9 +72,9 @@
         $("#notes").editable();
         $(window).resize(fix_bars);
         $('a[rel="tooltip"]').tooltip();
-        fix_bars();
         {% block jquery_init %}
         {% endblock %}
+        fix_bars();
       });
     </script>
 

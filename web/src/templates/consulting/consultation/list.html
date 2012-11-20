@@ -9,7 +9,7 @@
 {% block css_inline %}
 @media(max-width:1024px){
   #left_bar {
-    width:0%
+    width:0
   }
   #main {
     min-width: 450px
@@ -20,10 +20,23 @@
 }
 {% endblock %}
 
+{% block jquery_init %}
+  $('#left_bar').remove();
+  $('#main').removeClass('span7').addClass('span9');
+
+  $('table tbody tr').on('click', function(event){
+    var id_appointment = $(this).attr('data-msg');
+    if(id_appointment){
+      $("#container").hide();
+      window.location.href = '/consultation/' + id_appointment;
+    }
+  });
+{% endblock %}
+
 {% block container %}
 <section>
 <div class="page-header">
-  <h1>{% trans "Citas del " %}{{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}</h1>
+  <h1 class="offset2">{% trans "Citas del " %}{{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}</h1>
 </div>
 
   {% if events.object_list.count > 0 %}
@@ -51,15 +64,3 @@
   {% endif %}
 </section>
 {% endblock container %}
-
-{% block jquery_init %}
-var load_icon = "<img src='{{STATIC_URL}}img/loading.gif' alt='loading...'/>";
-
-$('table tbody tr').live('click', function(event){
-  var id_appointment = $(this).attr('data-msg');
-  if(id_appointment){
-    $("#container").hide();
-    window.location.href = '/consultation/' + id_appointment;
-  }
-});
-{% endblock %}

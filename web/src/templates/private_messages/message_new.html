@@ -2,17 +2,27 @@
 
 {% load i18n%}
 
+{% block jquery_init %}
+  $('#id_body').wysihtml5({
+    "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+    "emphasis": true, //Italics, bold, etc. Default true
+    "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+    "html": false, //Button which allows you to edit the generated HTML. Default false
+    "link": false, //Button to insert a link. Default true
+    "image": false //Button to insert an image. Default true);
+  });
+{% endblock %}
+
 {% block container %}
-{% if replying %}
+<section>
   <div class="page-header">
+  {% if replying %}
     <h1>{% trans 'Nueva respuesta' %}</h1>
-  </div>
-  {% include "private_messages/message_detail.html" with message=parent_message replying=replying %}
-{% else %}
-  <div class="page-header">
+    {% include "private_messages/message_detail.html" with message=parent_message replying=replying %}
+  {% else %}
     <h1>{% trans 'Nuevo correo' %}</h1>
+  {% endif %}
   </div>
-{% endif %}
 
 {% if form.non_field_errors  %}
     <div class="alert alert-error">
@@ -22,7 +32,6 @@
         {% endfor %}
     </div>
 {% endif %}
-<section>
 <form class="form-horizontal" method="post" action="">{% csrf_token %}
   <fieldset>
       <!-- RECIPIENT -->
@@ -97,16 +106,4 @@
   </fieldset>
 </form>
 </section>
-
-<script type="text/javascript">
-  $('#id_body').wysihtml5({
-    "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
-    "emphasis": true, //Italics, bold, etc. Default true
-    "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
-    "html": false, //Button which allows you to edit the generated HTML. Default false
-    "link": false, //Button to insert a link. Default true
-    "image": false //Button to insert an image. Default true);
-  });
-</script>
-
 {% endblock %}

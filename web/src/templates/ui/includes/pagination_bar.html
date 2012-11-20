@@ -1,19 +1,29 @@
-{% load i18n %}
+{% load i18n consulting%}
 
 <div class="row-fluid">
   {% if objects.paginator.num_pages > 1 %}
   <div id="paginator" class="pagination pagination-centered span8">
     <ul>
       {% if objects.has_previous %}
-        <li><a href="{{request.path}}?page={{ objects.previous_page_number }}">←</a></li>
+        <li><a href="{{ request.path }}?page={{ objects.previous_page_number }}">←</a></li>
       {% else %}
         <li class="disabled"><a>←</a></li>
       {% endif %}
-      {% for p in objects.paginator.page_range %}
-       <li {% if p = objects.number %}class="disabled"{% endif %}><a href="{{request.path}}?page={{p}}">{{p}}</a></li>
+      {% for l in objects|get_pages_list %}
+        {% if forloop.counter0 and forloop.revcounter0 %}
+          {% for p in l %}
+           <li {% if p = objects.number %}class="active" style="font-weight: bold;"{% endif %}><a href="{{ request.path }}?page={{ p }}">{{ p }}</a></li>
+          {% endfor %}
+        {% else %}
+          {% if l %}
+          <li>
+            <a href="{{ request.path }}?page={{ l.0|add:"1" }}">...</a>
+          </li>
+          {% endif %}
+        {% endif %}
       {% endfor %}
       {% if objects.has_next %}
-        <li><a href="{{request.path}}?page={{ objects.next_page_number }}">→</a></li>
+        <li><a href="{{ request.path }}?page={{ objects.next_page_number }}">→</a></li>
       {% else %}
         <li class="disabled"><a>→</a></li>
       {% endif %}
@@ -21,7 +31,7 @@
   </div>
   {% endif %}
   <div class="pull-right pagination span4">
-      <p class="pull-right muted">{% trans 'Elementos mostrados' %}: <em>{{objects.start_index}} -  {{objects.end_index}} {% trans 'de' %} {{objects.paginator.count}}</em></p>
+      <p class="pull-right muted">{% trans 'Elementos mostrados' %}: <em>{{objects.start_index}} - {{objects.end_index}} {% trans 'de' %} {{objects.paginator.count}}</em></p>
   </div>
 </div>
 
