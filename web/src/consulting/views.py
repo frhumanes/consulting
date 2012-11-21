@@ -509,103 +509,6 @@ def add_illness(request, id_conclusion):
                         context_instance=RequestContext(request))
 
 
-@login_required()
-@only_doctor_consulting
-def select_self_administered_survey(request, id_appointment, id_result=None):
-    appointment = get_object_or_404(Appointment, pk=int(id_appointment))
-    if id_result:
-        tmp_result = get_object_or_404(Result, pk=int(id_result))
-        if tmp_result.task.is_completed():
-            result = tmp_result
-        else:
-            results = Result.objects.filter(patient=appointment.patient,
-                                            task__completed=True)
-            if results:
-                result = results.latest('date')
-            else:
-                return HttpResponseRedirect(reverse('consulting_index'))
-    else:
-        results = Result.objects.filter(patient=appointment.patient,
-                                        task__completed=True)
-        if results:
-            result = results.latest('date')
-        else:
-            return HttpResponseRedirect(reverse('consulting_index'))
-
-    code = result.survey.code
-    if not (code == settings.INITIAL_ASSESSMENT or\
-            code == settings.ANXIETY_DEPRESSION_SURVEY):
-        return HttpResponseRedirect(reverse('consulting_index'))
-
-    variables = get_variables(result.id, settings.DEFAULT_NUM_VARIABLES)
-
-    if request.method == 'POST':
-        form = SelectTaskForm(request.POST, variables=variables)
-        if form.is_valid():
-            code_survey = form.cleaned_data['survey']
-            previous_days = form.cleaned_data['previous_days']
-            kind = form.cleaned_data['kind']
-
-            if code_survey == str(settings.ANXIETY_DEPRESSION_SURVEY) and kind == settings.EXTENSO:
-                survey = get_object_or_404(Survey,
-                                code=settings.ANXIETY_DEPRESSION_SURVEY)
-                exc_block = get_object_or_404(Block,
-                                code=settings.BEHAVIOR_BLOCK, kind=settings.EXTENSO)
-            else:
-                exc_block = get_object_or_404(Block,
-                                code=settings.BEHAVIOR_BLOCK, kind=settings.ABREVIADO)
-                survey = get_object_or_404(Survey,
-                                code=settings.ANXIETY_DEPRESSION_SURVEY)
-
-            task = Task(created_by=request.user, patient=appointment.patient,
-            appointment=appointment, self_administered=True, survey=survey,
-            previous_days=previous_days, kind=kind)
-            task.save()
-
-            id_variables = form.cleaned_data['variables']
-            if id_variables and code_survey==str(settings.CUSTOM):
-                variables = Variable.objects.filter(id__in=id_variables)
-                for variable in variables:
-                    formulas = variable.variable_formulas.filter(kind=kind)
-                    for formula in formulas:
-                        codes = formula.polynomial.split('+')
-                        for code in codes:
-                            try:
-                                question = Question.objects.exclude(questions_categories__categories_blocks=exc_block).get(code=code)
-                                task.questions.add(question)
-                            except:
-                                pass
-            elif code_survey==str(settings.CUSTOM):
-                form = SelectTaskForm(variables=variables)
-                return render_to_response('consulting/consultation/monitoring/finish/select_self_administered_survey.html',
-                                            {'form': form,
-                                            'appointment': appointment,
-                                            'code_variables': settings.CUSTOM,
-                                            'patient_user': appointment.patient,
-                                            'appointment': appointment},
-                                            context_instance=RequestContext(request))
-            else:## HIDE DOCTOR's QUESTIONS
-                questions_list = Question.objects.filter(questions_categories__categories_blocks__blocks_surveys=survey).exclude(questions_categories__categories_blocks=exc_block)
-                for question in questions_list:
-                    task.questions.add(question)
-
-            return HttpResponseRedirect(reverse('consulting_index'))
-    else:
-        form = SelectTaskForm(variables=variables)
-
-    return render_to_response(
-                'consulting/consultation/select_self_administered_survey.html',
-                {'form': form,
-                'id_appointment': id_appointment,
-                'id_result': result.id,
-                'code_variables': settings.CUSTOM,
-                'patient_user': appointment.patient},
-                context_instance=RequestContext(request))
-
-
-
-
-
 def new_result_sex_status(id_logged_user, id_task, id_appointment):
     logged_user = get_object_or_404(User, pk=int(id_logged_user))
     task = get_object_or_404(Task, pk=int(id_task))
@@ -888,9 +791,10 @@ def show_block(request, id_task, code_block=None, code_illness=None, id_appointm
             return next_block(task, block, code_illness, id_appointment)
 
     last_result = None
-    try: 
+    try:
         last_result =  task.task_results.filter(block=block).latest('date')
         selected_options = Answer.objects.select_related('option').filter(result=last_result)
+
     except:
         if code_block == str(settings.PRECEDENT_RISK_FACTOR):
             try:
@@ -959,7 +863,7 @@ def self_administered_block(request, id_task):
 
     dic = {}
     treated_blocks = task.treated_blocks.all()
-    block = task.survey.blocks.all()[0]
+    block = task.survey.blocks.filter(kind=task.kind)[0]
     questions = task.questions.all()
     if questions:
         for question in questions:
@@ -981,8 +885,8 @@ def self_administered_block(request, id_task):
                                         selected_options=selected_options)
 
         if form.is_valid():
-            result = Result(patient=task.patient, survey=task.survey, task=task,block=block,
-                    created_by=request.user)
+            result = Result(patient=task.patient, survey=task.survey, 
+                            task=task,block=block, created_by=request.user)
             result.save()
 
             if task.task_results.count() == 1:
