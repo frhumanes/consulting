@@ -962,7 +962,7 @@ def add_vacation(request, template="cal/vacation/add.html"):
         start_date = datetime.strptime(start_date, settings.DATE_FORMAT)
         end_date = datetime.strptime(end_date, settings.DATE_FORMAT)
         if end_date and end_date >= start_date:
-            for n in [0]+range(int((end_date - start_date).days)):
+            for n in set([0]+range(int((end_date - start_date).days))):
                 if Appointment.objects.filter(doctor=request.user, date=(start_date + timedelta(n))).count():
                     form._errors['__all__'] = ErrorList([u"Existen citas concertadas en el intervalo de vacaciones. Elija otro intervalo de fechas o modifique las citas concertadas."])
                     error = True
@@ -972,7 +972,7 @@ def add_vacation(request, template="cal/vacation/add.html"):
             error = True
 
         if not error:
-            for n in [0]+range(int ((end_date - start_date).days)):
+            for n in set([0]+range(int ((end_date - start_date).days))):
                 request_params.update({
                     'date': (start_date + timedelta(n)).strftime(settings.DATE_FORMAT)
                 })    

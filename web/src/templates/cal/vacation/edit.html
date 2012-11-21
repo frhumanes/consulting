@@ -80,11 +80,11 @@
       <p class="center">
         <a id="remove-event" class="btn btn-large btn-danger" >
           <i class="icon-remove-sign icon-white"></i>
-          {% trans 'Delete' %}
+          {% trans 'Eliminar' %}
         </a>
         <button class="btn btn-large btn-primary" type="submit">
           <i class="icon-ok-sign icon-white"></i>
-          {% trans 'Save' %}</button>
+          {% trans 'Guardar cambios' %}</button>
       </p>
 
   </fieldset>
@@ -93,13 +93,13 @@
 
 <div id="modal-screen" class="modal hide">
   <div class="modal-header">
-    <h3>{% trans 'Delete Event' %}</h3>
+    <h3>{% trans 'Eliminar evento' %}</h3>
   </div>
   <div class="modal-body">
-    <p>{% trans 'You are going to delete a vacation. Are you sure?' %}</p>
+    <p>{% trans '¿Desea eliminar este evento' %}</p>
   </div>
   <div class="modal-footer">
-    <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Yes' %}" data-loadingmsg="{% trans 'Removing ... ' %}">{% trans 'Yes' %}</a>
+    <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Sí' %}" data-loadingmsg="{% trans 'Removing ... ' %}">{% trans 'Sí' %}</a>
     <a href="#" class="btn btn-primary" data-dismiss="modal">{% trans 'No' %}</a>
   </div>
 </div>
@@ -112,7 +112,7 @@
     <p>{% trans 'You can not delete a slot type with children' %}</p>
   </div>
   <div class="modal-footer">
-    <a href="#" onclick="window.location.href = '{% url cal.list_vacation %}';" class="btn btn-primary" data-dismiss="modal">{% trans 'Ok' %}</a>
+    <a href="#" onclick="window.location.href = '{% url cal.list_vacation %}';" class="btn btn-primary" data-dismiss="modal">{% trans 'Cerrar' %}</a>
   </div>
 </div>
 {% endblock %}

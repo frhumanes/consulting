@@ -188,7 +188,9 @@ function set_events(){
       if($('input[type="checkbox"][name="'+this.id+'"].required').length && $('input[type="checkbox"][name="'+this.id+'"].required:checked').length == 0) {
         pending++;
         $(this).addClass('text-error');
-      }
+      } else {
+        $(this).removeClass('text-error');
+    }
     });
     $(this).find('select.required').each(function() {
       if( !$(this).val() ){

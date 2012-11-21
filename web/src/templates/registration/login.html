@@ -2,6 +2,14 @@
 
 {% load i18n%}
 
+{% block jquery_init %}
+  if($('#id_username').val()){
+    $('#id_password').focus();
+  } else {
+    $('#id_username').focus();
+  }
+{% endblock %}
+
 {% block body %}
 <div class="container" style="padding-top:50px;">
     <div class="row" >

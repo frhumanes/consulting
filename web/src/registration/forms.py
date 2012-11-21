@@ -22,7 +22,7 @@ class ValidatingPasswordChangeForm(PasswordChangeForm):
 
         # At least MIN_LENGTH long
         if len(password1) < settings.PASSWORD_MIN_LENGTH:
-            raise forms.ValidationError(_(u"La contraseña debe tener una longitud mínima de %d caracteres." % self.MIN_LENGTH))
+            raise forms.ValidationError(_(u"La contraseña debe tener una longitud mínima de %d caracteres." % settings.PASSWORD_MIN_LENGTH))
 
         # At least one letter and one non-letter
         first_isalpha = password1[0].isalpha()
