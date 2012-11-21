@@ -139,13 +139,13 @@ def explotation(request):
       for r in reports:
         if r.patient in data:
           for var, mark in r.variables.items():
-            if mark and isinstance(mark, (int, long, float)):
+            if isinstance(mark, (int, long, float)):
               if var in data[r.patient].variables:
                 data[r.patient].variables[var].append(mark)
               else:
                 data[r.patient].variables[var] = [mark,]
           for dim, mark in r.dimensions.items():
-            if mark and isinstance(mark, (int, long, float)):
+            if isinstance(mark, (int, long, float)):
               if dim in data[r.patient].dimensions:
                 data[r.patient].dimensions[dim].append(mark)
               else:
@@ -155,13 +155,9 @@ def explotation(request):
           for var, mark in r.variables.items():
             if isinstance(mark, (int, long, float)):
               data[r.patient].variables[var] = [mark,]
-            else:
-              data[r.patient].variables[var] = []
           for dim, mark in r.dimensions.items():
             if isinstance(mark, (int, long, float)):
               data[r.patient].dimensions[dim] = [mark,]
-            else:
-              data[r.patient].dimensions[dim] = []
           data[r.patient].status[u'Ansiedad'] = r.patient.get_anxiety_status(index=True)
           data[r.patient].status[u'Depresión'] = r.patient.get_depression_status(index=True)
 

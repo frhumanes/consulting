@@ -36,7 +36,7 @@
     "pk": 4,
     "fields": {
       "name": "Adherencia al Tratamiento",
-      "code": 8,
+      "code": 4,
       "blocks": [8],
       "multitype": 0,
       "created_by": 1
