@@ -213,6 +213,8 @@ def day(request, year, month, day, id_user, change=None):
             date__day=day, doctor=doctor).order_by('start_time')
     vacations = check_vacations(doctor, year, month, day)
     lst = create_calendar(int(year), int(month), doctor=doctor)
+    doctor_preferences = get_doctor_preferences(year=year, month=month,
+                day=day, doctor=doctor.id)
 
     available, free_intervals = Appointment.objects.availability(
                 doctor,
@@ -220,7 +222,8 @@ def day(request, year, month, day, id_user, change=None):
 
     template_data = dict(year=year, month=month, day=day, vacations=vacations,
         doctor=doctor, month_days=lst, mname=mnames[int(month) - 1],
-        events=events, free_intervals=free_intervals, patient_user=patient,
+        events=events, free_intervals=free_intervals,
+        patient_user=patient, doctor_preferences=doctor_preferences,
         context_instance=RequestContext(request))
 
     return template_data
@@ -478,7 +481,8 @@ def app_edit(request, pk, id_patient=None, id_doctor=None):
                 context_instance=RequestContext(request))
 
     doctor_preferences = get_doctor_preferences(year=year, month=month,
-        day=day, doctor=id_doctor)
+        day=day, doctor=doctor.id)
+
 
     if request.method == 'POST':
         request_params = dict([k, v] for k, v in request.POST.items())

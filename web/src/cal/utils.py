@@ -103,12 +103,11 @@ def get_doctor_preferences(year=None, month=None, day=None, doctor=None):
             weekday = get_weekday(selected_date)
 
             slots = Slot.objects \
-            .filter(creator=doctor, year=year, month=month,
+            .filter(creator=doctor, year=year, month=int(month)-1,
                 weekday=weekday)
         else:
             slots = Slot.objects \
-            .filter(creator=doctor, year=year, month=month)
-
+            .filter(creator=doctor, year=year, month=int(month)-1)
         return slots
     else:
         return Slot.objects.none()

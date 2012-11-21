@@ -101,7 +101,7 @@ class FiltersForm(forms.Form):
                     choices=[(c, strip_tags(settings.BECK[v][0])) for c, v in enumerate(sorted(settings.BECK))],
                     widget=forms.CheckboxSelectMultiple())
 
-    ave = forms.MultipleChoiceField(
+    aves = forms.MultipleChoiceField(
                     label=_(u'Acontecimientos Vitales Estresantes'),
                     choices=[(op.id, op.text) for op in Option.objects.filter(code__startswith='AVE')],
                     widget=forms.CheckboxSelectMultiple())
