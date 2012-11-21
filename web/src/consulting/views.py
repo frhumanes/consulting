@@ -64,11 +64,15 @@ from wkhtmltopdf.views import *
 #################################### INDEX ####################################
 @login_required()
 def index(request):
-
-    logged_user_profile = request.user.get_profile()
+    try:
+        logged_user_profile = request.user.get_profile()
+    except:
+        if request.user.is_staff:
+            return HttpResponseRedirect('/admin/')
+        else:
+            HttpResponseRedirect(reverse('registration_logout'))
 
     if logged_user_profile.role == settings.DOCTOR:
-
         return render_to_response('consulting/doctor/index_doctor.html', {},
                                 context_instance=RequestContext(request))
     elif logged_user_profile.role == settings.ADMINISTRATIVE:
@@ -76,8 +80,8 @@ def index(request):
                     'consulting/administrative/index_administrative.html', {},
                     context_instance=RequestContext(request))
     elif logged_user_profile.role == settings.PATIENT:
-
-        return render_to_response('consulting/patient/index_patient.html', {'patient_user':request.user.get_profile()},
+        return render_to_response('consulting/patient/index_patient.html', 
+                                {'patient_user':request.user.get_profile()},
                                 context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect(reverse('consulting_index'))

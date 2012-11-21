@@ -303,7 +303,7 @@ def stratification_list(request, illness, level):
     patients = []
     filtered = request.GET.get('filter','')
     if int(level) < 0:
-      level = None
+      level = ''
     else:
       level = int(level)
     if filtered == 'mine':
