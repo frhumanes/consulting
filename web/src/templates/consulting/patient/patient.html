@@ -25,6 +25,14 @@
         }
    });
 
+  $('#id_doctor').change(function(){
+    if($(this).val() != "{{doctor_form.doctor.value}}"){
+      $('#assign_button').fadeIn('fast');
+    } else {
+      $('#assign_button').fadeOut('slow');
+    }
+  });
+
   $('#doctor_selection').on('submit',function(event){
     $('#message').css('display', 'none');
     event.preventDefault();
@@ -294,7 +302,7 @@
             </div>
           </div>
             <!-- END DOCTOR -->
-             <button type="submit" class="btn btn-info btn-block">Traspasar paciente</button>
+             <button id="assign_button" type="submit" class="btn btn-info btn-block hide">Traspasar paciente</button>
         </form>
       </div>
     </div>

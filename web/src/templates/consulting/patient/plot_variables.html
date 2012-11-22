@@ -159,7 +159,7 @@ $(function () {
                                       'trigger':'manual'});
 
     $('#variables_selector').popover('show');
-    $('#variables_selector').on('click',function(){
+    $('#variables_selector').on('click',function(e){
         $(this).popover('hide');
     });
     setInterval(function(){$('#variables_selector').popover('hide');},10000);

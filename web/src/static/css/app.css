@@ -149,7 +149,7 @@ img {
 }
 
 body > .navbar .brand {
-    color: #0470AA;
+    color: #FFFFFF;
     font-weight: bold;
     float: left;
     margin: 0 20px 0 10px;
@@ -162,7 +162,7 @@ body > .navbar .brand {
 body > .navbar .brand:hover {
     text-decoration: none;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.4);
-    color: #FFFFFF;
+    color: #0470AA;
 }
 
 @media (max-width: 979px) {

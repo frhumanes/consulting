@@ -7,6 +7,7 @@ from datetime import time as ttime
 from datetime import date, timedelta, datetime
 
 from random import randint
+from itertools import chain
 
 from decorators import paginate
 from decorators import only_doctor_consulting, only_patient_consulting
@@ -428,6 +429,8 @@ def check_task_completion(id_task):
     if task.treated_blocks.count() < task.survey.num_blocks():
         return False
     questions = task.questions.filter(required=True)
+    if task.self_administered and task.treated_blocks.count() >= 2:
+        questions = chain(questions, Question.objects.filter(required=True,kind__in=(0, task.patient.get_profile().sex), questions_categories__categories_blocks__kind__in=(settings.GENERAL, task.kind), questions_categories__categories_blocks__in=task.treated_blocks.all().exclude(code=settings.ANXIETY_DEPRESSION_BLOCK)))
     if not questions:
         questions = Question.objects.filter(required=True,kind__in=(0, task.patient.get_profile().sex), questions_categories__categories_blocks__kind__in=(settings.GENERAL, task.kind), questions_categories__categories_blocks__blocks_tasks=task)
     for question in questions:
@@ -790,6 +793,11 @@ def show_block(request, id_task, code_block=None, code_illness=None, id_appointm
                 task.completed = True
                 task.appointment = appointment
                 task.end_date = datetime.now()
+                if task.self_administered:
+                    task.assess =  False
+            else:
+                task.completed = False
+                task.end_date = None
             task.save()
 
             return next_block(task, block, code_illness, id_appointment)
@@ -831,6 +839,8 @@ def next_block(task, block, code_illness, id_appointment):
                                             'id_appointment':id_appointment
                                             }))
     elif task.self_administered and not block.code == settings.BEHAVIOR_BLOCK:
+        task.previous_days = 0
+        task.save()
         return HttpResponseRedirect(
                             reverse('consulting_show_task_block',
                                     kwargs={'id_task':task.id,
@@ -1000,8 +1010,9 @@ def list_incomplete_tasks(request, id_appointment, code_illness, self_administer
     illness = get_object_or_404(Illness, code=int(code_illness))
     patient = appointment.patient
     tasks = Task.objects.filter(
-    Q(patient=patient, completed=False, self_administered=self_administered,
-        assess=True,survey__surveys_illnesses__code=code_illness)).order_by('-creation_date')
+    Q(patient=patient, survey__surveys_illnesses__code=code_illness), 
+    Q(completed=False, assess=True, self_administered=self_administered) | 
+    Q(self_administered=self_administered, assess=True)).order_by('-creation_date')
 
     template_data = {}
     template_data.update({'patient_user': patient,
@@ -1113,7 +1124,8 @@ def config_task_variables(request, id_task):
                         question = get_object_or_404(Question, code=code)
                         if question not in task.questions.all():
                             task.questions.add(question)
-
+            task.previous_days = 0
+            task.save()
             return HttpResponseRedirect('')
     else:
         form = SelectNotAssessedVariablesForm(variables=variables)
@@ -1244,7 +1256,7 @@ def conclusion_monitoring(request, id_appointment, code_illness):
                                         kwargs={'id_appointment':id_appointment,'code_illness':code_illness}))
     else:
         if not conclusion.observation and 'notes' in request.session:
-            conclusion = Conclusion(observation=request.session["notes"])
+            conclusion.observation=request.session["notes"]
         form = ConclusionForm(instance=conclusion)
 
     return render_to_response(

@@ -214,7 +214,8 @@ class Profile(TraceableModel):
                                         self_administered=True, 
                                         completed=False,
                                         assess=True,
-                                        previous_days__gte=ddays).order_by('-creation_date')
+                                        previous_days__gte=ddays,
+                                        previous_days__gt=0).order_by('-creation_date')
         return tasks
 
 

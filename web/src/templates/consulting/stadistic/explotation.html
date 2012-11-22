@@ -81,6 +81,18 @@ $('#download_xls').live("click", function(e) {
     $form.attr('action', orig_action);
 });
 
+$('#refresh').popover({'title':'Aviso',
+                      'html': true,
+                      'content':'Actualice los resultados cada vez que<br> modifique las opciones de filtrado',
+                      'placement':'right',
+                      'trigger':'manual'});
+
+$('#refresh').popover('show');
+$('#refresh').on('click',function(e){
+    $(this).popover('hide');
+});
+setInterval(function(){$('#refresh').popover('hide');},10000);
+
 $('#refresh').live("click", function(e) {
     var $form = $('#form');
     $('#query-data').fadeTo(500, 0.25);
@@ -133,7 +145,7 @@ $('#id_date_1').datepicker({format: 'dd/mm/yyyy'}).on('changeDate',
 $('ul').addClass("without_decorator");
 
 $('#reload_button').live('click',function(){
-    $(this).html('<img src="{{STATIC_URL}}/img/ajax-bar-loader.gif" />&nbsp;Actualizando...');  
+    $(this).html('<img src="{{STATIC_URL}}/img/ajax-bar-loader.gif" />&nbsp;Cargando...');  
     $(this).addClass('disabled');
     $(this).load('{% url rebuild_data %}', function(){
       location.reload();
@@ -256,7 +268,7 @@ $('#reload_button').live('click',function(){
 <div class="page-header">
   <h1>{% trans 'Explotación de datos' %}
     <div class="btn-group pull-right">
-       <button id="reload_button" type="button" class="btn btn-info" data-loading-text="Actualizando..."><i class="icon-refresh icon-white"></i> {% trans "Actualizar datos" %}</button>
+       <button id="reload_button" type="button" class="btn btn-info" data-loading-text="Cargando..."><i class="icon-repeat icon-white"></i> {% trans "Recargar datos" %}</button>
     </div>
   </h1>
 </div>

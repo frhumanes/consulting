@@ -45,7 +45,7 @@ class FiltersForm(forms.Form):
     options = forms.MultipleChoiceField(
                     label=_(u'Opciones'),
                     choices=[('filter', u'Mostrar sólo mis pacientes'),
-                             ('group', u'Agrupar pacientes repetidos*')],
+                             ('group', u'Agrupar por pacientes*')],
                     widget=forms.CheckboxSelectMultiple(),
                     help_text=_(u'* Calcula la media de los parámetros disponibles'))
 

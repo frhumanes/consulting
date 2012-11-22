@@ -147,7 +147,7 @@ $('#myfilter').on('click', function(e){
       <p><span class="label label-info">&nbsp;Muy leve&nbsp;</span></p>
       <p><span class="label label-success">&nbsp;Ausente&nbsp;&nbsp;</span></p>
     </div>
-    <button id="myfilter" type="button" class="btn {% if filtered %}active btn-info{% endif %}" data-toggle="button">{% trans 'Sólo mis pacientes' %}</button>
+    <button id="myfilter" type="button" class="btn {% if filtered %}active btn-info{% endif %}" data-toggle="button">{% if filtered %}{% trans 'Ver todos' %}{% else %}{% trans 'Ver mis pacientes' %}{% endif %}</button>
   </div>
 </div>
    
