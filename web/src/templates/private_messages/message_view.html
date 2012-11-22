@@ -18,7 +18,6 @@
 <script type="text/javascript">
 
 $('#reply').on('click', function(event){
-  var sp = start_spinner('loading');
   $('#myModal').modal('hide');
   $('#mail_area').load('{% url private_messages_reply  message.id %}', function() {
      sp.stop();
@@ -27,34 +26,5 @@ $('#reply').on('click', function(event){
   });
 
 });
-
-function start_spinner(el){
-  $('#message').hide();
-  $('.pull-right').hide();
-  return create_spinner_on(el);
-}
-
-function create_spinner_on(el){
-  var opts = {
-    lines: 13, // The number of lines to draw
-    length: 7, // The length of each line
-    width: 4, // The line thickness
-    radius: 10, // The radius of the inner circle
-    rotate: 0, // The rotation offset
-    color: '#000', // #rgb or #rrggbb
-    speed: 1, // Rounds per second
-    trail: 60, // Afterglow percentage
-    shadow: false, // Whether to render a shadow
-    hwaccel: false, // Whether to use hardware acceleration
-    className: 'spinner', // The CSS class to assign to the spinner
-    zIndex: 2e9, // The z-index (defaults to 2000000000)
-    top: '0px', // Top position relative to parent in px
-    left: '0px' // Left position relative to parent in px
-  };
-
-  var target =  document.getElementById(el);
-  var spinner = new Spinner(opts).spin(target);
-  return spinner;
-}
 
 </script>
