@@ -17,7 +17,7 @@ function show_patient_list(illness, level) {
   if($('#myfilter').hasClass('active')){
     url[illness] += '?filter=mine';
   }
-  $('#modal_patient .modal-body').html('<div class="center"><img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." /></div>');
+  $('#modal_patient .modal-body').html('<div class="center"><img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="cargando..." /></div>');
   $('#modal_patient .modal-body').load(url[illness].replace('0', level),'',$('#modal_patient').modal('show'));
 }
 {% endblock %}
@@ -26,7 +26,7 @@ function show_patient_list(illness, level) {
 $('#main').remove();
 $('#right_bar').remove();
 $('#myfilter').on('click', function(e){
-  $(this).html('<img src="{{ STATIC_URL }}/img/ajax-bar-loader.gif" alt="loading..." />');
+  $(this).html('<img src="{{ STATIC_URL }}/img/ajax-bar-loader.gif" alt="cargando..." />');
   if($(this).hasClass('active')){
     window.location = '{{request.path}}';
   }

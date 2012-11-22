@@ -2483,7 +2483,7 @@
     "pk": 249, 
     "model": "survey.option", 
     "fields": {
-      "text": "Me siento tan triste o desgraciado que no puedo soportarlo", 
+      "text": "Me siento tan triste o desgraciado/a que no puedo soportarlo", 
       "code": "B1.3", 
       "question": 32, 
       "weight": "3"
@@ -2493,7 +2493,7 @@
     "pk": 250, 
     "model": "survey.option", 
     "fields": {
-      "text": "No me siento especialmente desanimado de cara al futuro", 
+      "text": "No me siento especialmente desanimado/a de cara al futuro", 
       "code": "B2.0", 
       "question": 34, 
       "weight": "0"
@@ -2503,7 +2503,7 @@
     "pk": 251, 
     "model": "survey.option", 
     "fields": {
-      "text": "Me siento desanimado de cara al futuro", 
+      "text": "Me siento desanimado/a de cara al futuro", 
       "code": "B2.1", 
       "question": 34, 
       "weight": "1"
@@ -2583,7 +2583,7 @@
     "pk": 259, 
     "model": "survey.option", 
     "fields": {
-      "text": "No me siento fracasado", 
+      "text": "No me siento fracasado/a", 
       "code": "B3.0", 
       "question": 37, 
       "weight": "0"
@@ -2653,7 +2653,7 @@
     "pk": 266, 
     "model": "survey.option", 
     "fields": {
-      "text": "Estoy insatisfecho o aburrido con respecto a todo", 
+      "text": "Estoy insatisfecho/a o aburrido/a con respecto a todo", 
       "code": "B4.3", 
       "question": 38, 
       "weight": "3"
@@ -2803,7 +2803,7 @@
     "pk": 281, 
     "model": "survey.option", 
     "fields": {
-      "text": "No creo que est\u00e9 siendo castigado", 
+      "text": "No creo que est\u00e9 siendo castigado/a", 
       "code": "B6.0", 
       "question": 42, 
       "weight": "0"
@@ -2813,7 +2813,7 @@
     "pk": 282, 
     "model": "survey.option", 
     "fields": {
-      "text": "Siento que quiz\u00e1s est\u00e9 siendo castigado", 
+      "text": "Siento que quiz\u00e1s est\u00e9 siendo castigado/a", 
       "code": "B6.1", 
       "question": 42, 
       "weight": "1"
@@ -2823,7 +2823,7 @@
     "pk": 283, 
     "model": "survey.option", 
     "fields": {
-      "text": "Espero ser castigado", 
+      "text": "Espero ser castigado/a", 
       "code": "B6.2", 
       "question": 42, 
       "weight": "2"
@@ -2833,7 +2833,7 @@
     "pk": 284, 
     "model": "survey.option", 
     "fields": {
-      "text": "Siento que estoy castigado", 
+      "text": "Siento que estoy castigado/a", 
       "code": "B6.3", 
       "question": 42, 
       "weight": "3"
@@ -3003,7 +3003,7 @@
     "pk": 301, 
     "model": "survey.option", 
     "fields": {
-      "text": "No estoy especialmente irritado", 
+      "text": "No estoy especialmente irritado/a", 
       "code": "B11.0", 
       "question": 48, 
       "weight": "0"
@@ -3023,7 +3023,7 @@
     "pk": 303, 
     "model": "survey.option", 
     "fields": {
-      "text": "Me siento irritado continuamente", 
+      "text": "Me siento irritado/a continuamente", 
       "code": "B11.2", 
       "question": 48, 
       "weight": "2"
@@ -3053,7 +3053,7 @@
     "pk": 306, 
     "model": "survey.option", 
     "fields": {
-      "text": "Estoy menos interesado en los dem\u00e1s que antes", 
+      "text": "Estoy menos interesado/a en los dem\u00e1s que antes", 
       "code": "B12.1", 
       "question": 50, 
       "weight": "1"
@@ -3483,7 +3483,7 @@
     "pk": 349, 
     "model": "survey.option", 
     "fields": {
-      "text": "Estoy preocupado porque parezco envejecido y poco atractivo", 
+      "text": "Estoy preocupado porque parezco envejecido/a y poco atractivo/a", 
       "code": "B14.1", 
       "question": 59, 
       "weight": "1"
@@ -4393,7 +4393,7 @@
     "pk": 440, 
     "model": "survey.option", 
     "fields": {
-      "text": "No me siento m\u00e1s cansado de lo normal", 
+      "text": "No me siento m\u00e1s cansado/a de lo normal", 
       "code": "B17.0", 
       "question": 78, 
       "weight": "0"
@@ -4423,7 +4423,7 @@
     "pk": 443, 
     "model": "survey.option", 
     "fields": {
-      "text": "Estoy demasiado cansado para hacer nada", 
+      "text": "Estoy demasiado cansado/a para hacer nada", 
       "code": "B17.3", 
       "question": 78, 
       "weight": "3"
@@ -5863,7 +5863,7 @@
     "pk": 587, 
     "model": "survey.option", 
     "fields": {
-      "text": "No estoy preocupado por mi salud", 
+      "text": "No estoy preocupado/a por mi salud", 
       "code": "B20.0", 
       "question": 108, 
       "weight": "0"
@@ -5883,7 +5883,7 @@
     "pk": 589, 
     "model": "survey.option", 
     "fields": {
-      "text": "Me preocupas las enfermedades y me resulta dif\u00edcil pensar en otras cosas", 
+      "text": "Me preocupa las enfermedades y me resulta dif\u00edcil pensar en otras cosas", 
       "code": "B20.2", 
       "question": 108, 
       "weight": "2"
@@ -5893,7 +5893,7 @@
     "pk": 590, 
     "model": "survey.option", 
     "fields": {
-      "text": "Estoy tan preocupada por las enfermedades que soy incapaz de pensar en otras cosas", 
+      "text": "Estoy tan preocupado/a por las enfermedades que soy incapaz de pensar en otras cosas", 
       "code": "B20.3", 
       "question": 108, 
       "weight": "3"
@@ -5923,7 +5923,7 @@
     "pk": 593, 
     "model": "survey.option", 
     "fields": {
-      "text": "Estoy menos interesado por el sexo que antes", 
+      "text": "Estoy menos interesado/a por el sexo que antes", 
       "code": "B21.2", 
       "question": 109, 
       "weight": "2"
@@ -7043,7 +7043,7 @@
     "pk": 705, 
     "model": "survey.option", 
     "fields": {
-      "text": "Se da cuenta de que est\u00e1 deprimido y enfermo", 
+      "text": "Se da cuenta de que est\u00e1 deprimido/a y enfermo/a", 
       "code": "Hd17.0", 
       "question": 132, 
       "weight": "0"

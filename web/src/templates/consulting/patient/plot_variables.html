@@ -58,7 +58,7 @@ $(function () {
         "{{label}}": {
             label: "{{label|upper}}",
             yaxis: {% if forloop.counter|divisibleby:2 %}2{% else %}1{% endif %},
-            data: [{% for date, mark in marks %}{% if mark or mark = 0 %}[(Date.UTC({{date|date:'Y, m-1, j'}})),{{mark|unlocalize|floatformat:1}}],{% endif %}{% endfor %}]
+            data: [{% for date, mark in marks %}{% if mark or mark = 0 %}[(Date.UTC({{date|date:'Y, m-1, j'}})),{{mark|unlocalize}}],{% endif %}{% endfor %}]
         }{% if forloop.revcounter0 %},{% endif %}       
        {% endfor %}
     };

@@ -52,6 +52,7 @@ from cal.forms import AppointmentForm, DoctorSelectionForm
 from cal.views import scheduler, day, app_add
 
 from consulting.helper import strip_accents
+from consulting.templatetags.consulting import sexify
 
 from cal.utils import create_calendar
 from cal.utils import mnames
@@ -742,11 +743,11 @@ def show_block(request, id_task, code_block=None, code_illness=None, id_appointm
             questions = category.questions.filter(kind__in=[settings.UNISEX, task.patient.get_profile().sex]).order_by('id')
             for question in questions:
                 options = question.question_options.all().order_by('id')
-                dic[question] = [(option.id, option.text)for option in options]
+                dic[question] = [(option.id, sexify(option.text,task.patient))for option in options]
     else:
         for question in questions:
             options = question.question_options.all().order_by('id')
-            dic[question] = [(option.id, option.text)for option in options]
+            dic[question] = [(option.id, sexify(option.text,task.patient))for option in options]
     if request.method == 'POST':
         form = QuestionsForm(request.POST, dic=dic, selected_options=[])
         if form.is_valid():
@@ -793,8 +794,7 @@ def show_block(request, id_task, code_block=None, code_illness=None, id_appointm
                 task.completed = True
                 task.appointment = appointment
                 task.end_date = datetime.now()
-                if task.self_administered:
-                    task.assess =  False
+                task.assess = False
             else:
                 task.completed = False
                 task.end_date = None
@@ -883,7 +883,7 @@ def self_administered_block(request, id_task):
         for question in questions:
             options = question.question_options.all().order_by('id')
             dic[question] = [
-                            (option.id, option.text)for option in options]
+                            (option.id, sexify(option.text,task.patient))for option in options]
     else:
         categories = block.categories.all().order_by('id')
 
@@ -892,7 +892,7 @@ def self_administered_block(request, id_task):
             for question in questions:
                 options = question.question_options.all().order_by('id')
                 dic[question] = [
-                                (option.id, option.text)for option in options]
+                                (option.id, sexify(option.text,task.patient))for option in options]
 
     if request.method == 'POST':
         form = QuestionsForm(request.POST, dic=dic,

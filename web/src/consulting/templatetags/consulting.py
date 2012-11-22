@@ -99,8 +99,10 @@ def sexify(value, patient):
     oa = {settings.MAN: 'o', settings.WOMAN: 'a'}
     ella = {settings.MAN: 'el', settings.WOMAN: 'la'}
     sex = patient.get_profile().sex
-    value = value.replace('el/la', ella[sex])
-    return value.replace('o/a', oa[sex])
+    if sex:
+        value = value.replace('el/la', ella[sex])
+        return value.replace('o/a', oa[sex])
+    return value
 
 @register.filter
 def get_pages_list(objects):

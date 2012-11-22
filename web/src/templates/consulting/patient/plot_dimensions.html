@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load l10n %}
 
 <div class="well center">
   <div id="placeholder_dimensions" style="width:100%;height:300px;"></div>
@@ -39,7 +40,7 @@
   
 <script type="text/javascript">
 function plotDimensions() {
-    var dataD = [{% for label, item in latest_dimensions.items %}{label: "{{label|upper}}", yaxis: {% if forloop.counter|divisibleby:2 %}2{% else %}1{% endif %}, data: [{% for date, val in item %}[(Date.UTC({{date|date:'Y, m-1, j'}})), {{val|floatformat:0}}]{% if not forloop.last %},{% endif %}{% endfor %}]}{% if not forloop.last %},{% endif %}{% endfor %}];
+    var dataD = [{% for label, item in latest_dimensions.items %}{label: "{{label|upper}}", yaxis: {% if forloop.counter|divisibleby:2 %}2{% else %}1{% endif %}, data: [{% for date, val in item %}[(Date.UTC({{date|date:'Y, m-1, j'}})), {{val|unlocalize}}]{% if not forloop.last %},{% endif %}{% endfor %}]}{% if not forloop.last %},{% endif %}{% endfor %}];
 
     // hard-code color indices to prevent them from shifting as
     // countries are turned on/off
