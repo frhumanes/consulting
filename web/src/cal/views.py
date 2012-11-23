@@ -904,7 +904,7 @@ def doctor_month(request, year, month, id_doctor, change=None):
 @login_required
 @paginate(template_name='cal/app/list.html',
     list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE)
-def doctor_day(request, year, month, day, id_doctor=None):
+def doctor_day(request, id_doctor, year, month, day):
     doctor = get_object_or_404(User, pk=int(id_doctor))
     if not doctor.get_profile().is_doctor():
         raise Http404

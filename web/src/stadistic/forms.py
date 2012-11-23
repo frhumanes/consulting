@@ -45,9 +45,9 @@ class FiltersForm(forms.Form):
     options = forms.MultipleChoiceField(
                     label=_(u'Opciones'),
                     choices=[('filter', u'Mostrar sólo mis pacientes'),
-                             ('group', u'Agrupar por pacientes*')],
+                             ('ungroup', u'Separar por episodios*')],
                     widget=forms.CheckboxSelectMultiple(),
-                    help_text=_(u'* Calcula la media de los parámetros disponibles'))
+                    help_text=_(u'* Segrega distintos episodios de un mismo paciente'))
 
     sex = forms.MultipleChoiceField(
                     label=_(u'Sexo'),
@@ -79,17 +79,15 @@ class FiltersForm(forms.Form):
                     label='dimensions.'+d.name,
                     widget=RangeWidget(attrs={'class':'span3','min':'0', 'max':'10'})))
 
-    treatment = [MultipleValueField(
+    adherence = [MultipleValueField(
                     label='variables.Adherencia',
                     widget=RangeWidget(attrs={'class':'span3',
                                               'min':'0', 
                                               'max':'4'}))]
-    for c in  Medicine.objects.values('component__name').order_by('component__name').distinct('component'):
-        treatment.append(MultipleValueField(
-                    label='treatment.'+c['component__name'],
-                    widget=RangeWidget(attrs={'class':'span3',
-                                              'min':'0', 
-                                              'max':'1000'})))
+    treatment =forms.MultipleChoiceField(
+                    label='Tratamiento',
+                    choices=[(m['component__name'], m['component__name']) for m in Medicine.objects.values('component__name').order_by('component__name').distinct('component')],
+                    widget=forms.CheckboxSelectMultiple())
 
     anxiety = forms.MultipleChoiceField(
                     label=_(u'Nivel de Ansiedad'),

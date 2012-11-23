@@ -231,7 +231,7 @@ $('#reload_button').live('click',function(){
     </div>
     <div id="collapse_treatment" class="accordion-body collapse">
       <div class="accordion-inner">
-        {% for f in form.treatment %}
+        {% for f in form.adherence %}
         {% if forloop.counter = 1 %}
           <div class="stop">
             <div>{{f.label|cut:"variables."}}<span class="pull-right text-info"></span></div>
@@ -250,6 +250,9 @@ $('#reload_button').live('click',function(){
           <br>
         {% endif %}
         {% endfor %}
+        <div>
+          {{form.treatment}}
+        </div>
       </div>
     </div>
   </div>

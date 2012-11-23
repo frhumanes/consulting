@@ -15,7 +15,7 @@
 		{% for a in answer_list %}
 		<div class="row-fluid">
 			<span class="span7" style="text-align: right"><strong>{{a.question|sexify:task.patient}}</strong></span>
-			<span class="span5">{% for e in a.answers %}{{e}}{% if forloop.revcounter0 %}, {% endif %}{% endfor %}</span>
+			<span class="span5">{% for e in a.answers %}{{e|sexify:task.patient}}{% if forloop.revcounter0 %}, {% endif %}{% endfor %}</span>
 		 </div>
 		 <br>
 

@@ -201,6 +201,8 @@ class DoctorSelectionForm(forms.Form):
         choices = [('', '--------')]
         if current:
             choices = []
+            if patient.get_nextAppointment():
+                self.fields['confirm_app'] = forms.BooleanField(label=_(u"Anular citas futuras del paciente con su médico actual"))
         choices.extend([(doc.id, doc.get_profile().get_full_name(title=True)) for doc in queryset])
         self.fields['doctor'] = forms.ChoiceField(label=_(u"Doctor"),
                                  widget=forms.Select(

@@ -27,6 +27,14 @@
 
   $('#id_doctor').change(function(){
     if($(this).val() != "{{doctor_form.doctor.value}}"){
+      $('#assign').fadeIn('fast');
+    } else {
+      $('#assign').fadeOut('slow');
+    }
+  });
+
+  $('#id_confirm_app').change(function(){
+    if($(this).is(':checked')){
       $('#assign_button').fadeIn('fast');
     } else {
       $('#assign_button').fadeOut('slow');
@@ -301,8 +309,17 @@
                 {% endif %}
             </div>
           </div>
-            <!-- END DOCTOR -->
-             <button id="assign_button" type="submit" class="btn btn-info btn-block hide">Traspasar paciente</button>
+          <div id="assign" class="hide">
+            {% if doctor_form.confirm_app %}
+              <div class="alert alert-warning alert-block">Este paciente ya tiene citas concertadas con su actual médico. Marque el siguiente campo para anularlas y proseguir con el traspaso.</div>
+              <div class="">
+                {{ doctor_form.confirm_app }} <strong>{{ doctor_form.confirm_app.label }}</strong>
+              </div>
+            {% endif %}
+            <br>
+             <!-- END DOCTOR -->
+             <button id="assign_button" type="submit" class="btn btn-info btn-block {% if doctor_form.confirm_app %}hide{% endif %}">Traspasar paciente</button>
+          </div>
         </form>
       </div>
     </div>

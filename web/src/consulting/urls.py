@@ -180,4 +180,9 @@ urlpatterns = patterns('',
         consulting_views.new_app,
         name='consulting_new_app'),
 
+    ##########################################
+    url(r"^keep_alive/(\d+)/$",
+        consulting_views.keep_alive,
+        name='consulting_keep_alive'),
+
 )

@@ -88,6 +88,16 @@ def index(request):
     else:
         return HttpResponseRedirect(reverse('consulting_index'))
 
+@login_required()
+def keep_alive(request, timeout):
+    if not int(timeout):
+        request.session.set_expiry(settings.SESSION_COOKIE_AGE)
+        request.session['timeout'] = settings.SESSION_COOKIE_AGE
+        return HttpResponse('')
+    if (int(timeout) <= 7200 and int(timeout) >= settings.SESSION_COOKIE_AGE):
+        request.session.set_expiry(int(timeout))
+        request.session['timeout'] = int(timeout)
+        return HttpResponse('')
 
 ################################# CONSULTATION ################################
 @login_required

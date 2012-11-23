@@ -65,6 +65,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request",
+    "context_processors.session"
 )
 
 # Language code for this installation. All choices can be found here:
@@ -163,7 +164,7 @@ INSTALLED_APPS = (
 
 AUTH_PROFILE_MODULE = 'userprofile.Profile'
 SESSION_SAVE_EVERY_REQUEST = True
-SESSION_COOKIE_AGE = 7200 # 2 HOURS
+SESSION_COOKIE_AGE = 600 # 2 HOURS
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 try:
    from local_settings import *

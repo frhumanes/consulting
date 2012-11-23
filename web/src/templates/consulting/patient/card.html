@@ -31,7 +31,6 @@
         <td>{{patient_user.get_profile.get_status}}</td>
       </tr>
       {% endif %}
-      {% if not mini %}
       <tr>            
         <td>{% trans 'TELÉFONO 1' %}</td>
         <td>{{patient_user.get_profile.phone1}}</td>
@@ -39,7 +38,8 @@
       <tr>            
         <td>{% trans 'TELÉFONO 2' %}</td>
         <td>{{patient_user.get_profile.phone2}}</td>
-      </tr> 
+      </tr>
+      {% if not mini %}
       <tr>            
         <td>{% trans 'CORREO' %}</td>
         <td><small>{{patient_user.get_profile.email}}</small></td>

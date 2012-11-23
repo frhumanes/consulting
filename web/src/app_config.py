@@ -123,13 +123,13 @@ EMAIL_USE_TLS = True
 
 #RANGES
 AVE = {140:'', 200:u'importante', 300:u'bastante alto',9999:u'muy alto'}
-BECK = {10:[u'No depresión', 'success'], 
+BECK = {10:[u' ', 'success'], 
 		13:[u'Leve perturbación <br>del estado de ánimo', 'info'],
 		19:[u'Depresión leve', 'default'],
 		30:[u'Depresión moderada', 'warning'],
 		40:[u'Depresión grave', 'important'],
 		63:[u'Depresión muy grave', 'inverse']}
-HAMILTON = {18:[u'No ansiedad', 'success'],
+HAMILTON = {18:[u' ', 'success'],
 			28:[u'Ansiedad leve', 'default'],
 			38:[u'Ansiedad moderada', 'warning'],
 			48:[u'Ansiedad grave', 'important'],

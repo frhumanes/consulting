@@ -19,7 +19,7 @@ def generate_reports(full=False):
         report.patient = task.patient.get_profile()
         report.age = report.patient.get_age()
         report.sex = report.patient.sex
-        report.treatment = dict((m.component.name, int(m.posology)) for m in report.patient.get_treatment(report.date))
+        report.treatment = list(m.component.name for m in report.patient.get_treatment(report.date))
         report.profession = task.patient.get_profile().profession
         report.variables = dict((k.name, v) for (k, v) in task.get_variables_mark().items())
         try:

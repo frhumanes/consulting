@@ -102,7 +102,7 @@ def explotation(request):
     form = FiltersForm()
     reports = []
     filters = {}
-    group = False
+    group = True
     template_name = 'consulting/stadistic/explotation.html'
     if request.method == 'POST':
       template_name ='consulting/stadistic/explotation-ajax.html'
@@ -122,17 +122,19 @@ def explotation(request):
             filters = update_filter(filters, 'status.Ansiedad', [int(v) for v in request.POST.getlist('anxiety')])
           if k.startswith('depression'):
             filters = update_filter(filters, 'status.Depresión', [int(v) for v in request.POST.getlist('depression')])
+          if k.startswith('treatment'):
+            filters = update_filter(filters, k, [v for v in request.POST.getlist(k)])
           if k.startswith('ave'):
             filters = update_filter(filters, k, [int(v) for v in request.POST.getlist(k)])
-          if k.startswith('variables') or k.startswith('dimensions')           or k.startswith('treatment'):
+          if k.startswith('variables') or k.startswith('dimensions'):
             filters = update_filter(filters, k, int(v))
           if k.startswith('options'):
             for o in request.POST.getlist(k):
               if o == 'filter':
                 lp = [i['id'] for i in Profile.objects.filter(doctor=request.user).values('id')]
                 filters = update_filter(filters, '\patient_id', lp)
-              if o == 'group':
-                group = True
+              if o == 'ungroup':
+                group = False
     reports = Report.objects.raw_query(filters)
 
     if group:
@@ -155,9 +157,13 @@ def explotation(request):
           for var, mark in r.variables.items():
             if isinstance(mark, (int, long, float)):
               data[r.patient].variables[var] = [mark,]
+            else:
+              data[r.patient].variables[var] = []
           for dim, mark in r.dimensions.items():
             if isinstance(mark, (int, long, float)):
               data[r.patient].dimensions[dim] = [mark,]
+            else:
+              data[r.patient].dimensions[dim] = []
           data[r.patient].status[u'Ansiedad'] = r.patient.get_anxiety_status(index=True)
           data[r.patient].status[u'Depresión'] = r.patient.get_depression_status(index=True)
 
@@ -165,9 +171,13 @@ def explotation(request):
         for key, l in data[p].variables.items():
           if l:
             data[p].variables[key]=reduce(lambda x, y: x + y, l) / len(l)
+          else:
+            data[p].variables[key] = ''
         for key, l in data[p].dimensions.items():
           if l:
             data[p].dimensions[key]=reduce(lambda x, y: x + y, l) / len(l)
+          else:
+            data[p].dimensions[key] = ''
       reports = data.values()
       data = {}
     #raise Exception

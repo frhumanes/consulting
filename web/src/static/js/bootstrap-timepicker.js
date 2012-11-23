@@ -409,7 +409,7 @@
     }
 
     $.fn.timepicker.defaults = {
-      minuteStep: 15
+      minuteStep: 5
     , secondStep: 15
     , disableFocus: false
     , defaultTime: 'current'

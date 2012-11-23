@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {% load consulting %}
+    {% load consulting i18n %}
     <meta charset="utf-8">
     <title>{% get_brand %}{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,6 +65,35 @@
           }
         }
       };
+      var timer;
+      var reminder = 300; // seg
+      function expiration_warning() {
+        document.title = '{% get_brand %}';
+        $('#warning_modal').modal('show');
+        $('#timeout').text(reminder);
+        timer = setInterval(function(){
+          if (parseInt($('#timeout').text())) {
+            $('#timeout').text(parseInt($('#timeout').text()) - 1)
+            if (parseInt($('#timeout').text()) % 2) {
+              document.title = '{% get_brand %}';
+            } else {
+              document.title = 'Aviso';
+            }
+          } else {
+            $('#warning_modal').modal('hide');
+            document.title = '{% get_brand %}';
+            clearInterval(timer);
+          }
+        }, 1000);
+      }
+      function postpone_session(val) {
+        $.ajax( '/keep_alive/'+val+'/' )
+        .done( setTimeout(expiration_warning, (val - reminder ) * 1000) )
+        .fail(function() { alert("error"); })
+        .always(function() { 
+          $('#warning_modal').modal('hide'); 
+          clearInterval(timer);});
+      }
       {% block js %}
       {% endblock %}
 
@@ -72,6 +101,11 @@
         $("#notes").editable();
         $(window).resize(fix_bars);
         $('a[rel="tooltip"]').tooltip();
+        $('#warning_modal').find('a.btn').on('click', function(ev) {
+          ev.preventDefault();
+          postpone_session($(this).attr('value'));
+        });
+        setTimeout(expiration_warning,({{request.session.timeout}} - reminder) * 1000);
         {% block jquery_init %}
         {% endblock %}
         fix_bars();
@@ -131,7 +165,22 @@
     </div>
     {% endblock body %}
 
-    
+    <div id="warning_modal" class="modal hide fade">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{% trans 'Aviso de fin de sesión programado' %}</h3>
+      </div>
+      <div class="modal-body">
+       <p id="warning_msg">Su sesión expirará en <strong id="timeout">60</strong> segundos.</p>
+       <p>{% trans 'Mantener la sesión abierta y no volver a recordarlo durante... ' %}</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" value="1800" class="btn btn-info">{% trans '30 minutos' %}</a>
+        <a href="#" value="3600" class="btn btn-info">{% trans '1 hora' %}</a>
+        <a href="#" value="7200" class="btn btn-info">{% trans '2 horas' %}</a>
+        <a href="#" value="{{SESSION_TIMEOUT}}" class="btn btn-primary">{% trans 'Predeterminado del sistema' %}</a>
+      </div>
+    </div>
 
     {% block footer%}
       {% include 'ui/includes/footer.html' %}
