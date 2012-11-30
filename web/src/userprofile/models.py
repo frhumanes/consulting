@@ -23,9 +23,9 @@ class Profile(TraceableModel):
     )
     STATUS = (
         (-1, ''),
-        (settings.MARRIED, _(u'Casado')),
+        (settings.MARRIED, _(u'Casado/a')),
         (settings.STABLE_PARTNER, _(u'Pareja Estable')),
-        (settings.DIVORCED, _(u'Divorciado')),
+        (settings.DIVORCED, _(u'Divorciado/a')),
         (settings.WIDOW_ER, _(u'Viudo/a')),
         (settings.SINGLE, _(u'Soltero/a')),
         (settings.OTHER, _(u'Otro')),
@@ -53,7 +53,7 @@ class Profile(TraceableModel):
                                     blank=True)
 
     second_surname = models.CharField(_(u'Segundo Apellido'), max_length=150,
-                                        blank=True)
+                                        blank=True, default='')
 
     nif = models.CharField(_(u'NIF'), max_length=9, null=True, unique=True)
 
@@ -83,7 +83,7 @@ class Profile(TraceableModel):
     phone2 = models.CharField(_(u'Teléfono 2'), max_length=9, blank=True)
 
     email = models.EmailField(_(u'Correo Electrónico'), max_length=150,
-                                blank=True, unique=True)
+                                null=True, unique=True)
 
     profession = models.CharField(_(u'Profesión'), max_length=150, blank=True)
 

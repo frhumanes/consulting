@@ -88,8 +88,8 @@
       "kind": 0, 
       "code": null, 
       "name": "Dummy", 
-      "created_at": null, 
-      "updated_at": null, 
+      "created_at": "2012-10-05 11:53:20", 
+      "updated_at": "2012-10-05 11:53:20", 
       "created_by": 1, 
       "questions": [], 
       "variables": []

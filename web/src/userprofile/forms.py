@@ -23,11 +23,11 @@ class ProfileForm(forms.ModelForm):
         (settings.DEACTIVATE, _(u'Desactivada')),
     )
 
-    name = forms.CharField(label=_(u'Nombre'), max_length=150)
+    name = forms.CharField(label=_(u'Nombre'), max_length=150, required=True)
     first_surname = forms.CharField(label=_(u'Primer Apellido'),
-                                    max_length=150)
+                                    max_length=150, required=True)
     second_surname = forms.CharField(label=_(u'Segundo Apellido'),
-                                        max_length=150)
+                                        max_length=150, required=False)
     nif = ESIdentityCardNumberField(label=_(u'NIF'), required=False,
                     error_messages={'unique': _(u'Este NIF ya existe')})
     sex = forms.ChoiceField(label=_(u'Sexo'), choices=Profile.SEX,
@@ -47,10 +47,10 @@ class ProfileForm(forms.ModelForm):
                                 choices=Profile.STATUS, required=False)
     phone1 = ESPhoneNumberField(label=_(u'Teléfono 1'))
     phone2 = ESPhoneNumberField(label=_(u'Teléfono 2'), required=False)
-    email = forms.EmailField(label=_(u'Correo Electrónico'))
+    email = forms.EmailField(label=_(u'Correo Electrónico'), required=False)
     profession = forms.CharField(label=_(u'Profesión'), max_length=150,
                                 required=False)
-    active = forms.ChoiceField(label=_(u'Estado de la cuenta'), choices=ACTIVE)
+    active = forms.ChoiceField(label=_(u'Estado de la cuenta'), choices=ACTIVE, help_text=_(u"Permite el inicio de sesión en el sistema"))
 
     def age(self, dob):
         today = date.today()

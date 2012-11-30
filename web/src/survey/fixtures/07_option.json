@@ -103,7 +103,7 @@
     "pk": 12, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hermano/a", 
+      "text": "Hermana/o", 
       "code": "AF1.3", 
       "question": 171, 
       "weight": null
@@ -113,7 +113,7 @@
     "pk": 13, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hijo/a", 
+      "text": "Hija/o", 
       "code": "AF1.4", 
       "question": 171, 
       "weight": null
@@ -163,7 +163,7 @@
     "pk": 18, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hermano/a", 
+      "text": "Hermana/o", 
       "code": "AF2.3", 
       "question": 172, 
       "weight": null
@@ -173,7 +173,7 @@
     "pk": 19, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hijo/a", 
+      "text": "Hija/o", 
       "code": "AF2.4", 
       "question": 172, 
       "weight": null
@@ -223,7 +223,7 @@
     "pk": 24, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hermano/a", 
+      "text": "Hermana/o", 
       "code": "AF3.3", 
       "question": 173, 
       "weight": null
@@ -233,7 +233,7 @@
     "pk": 25, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hijo/a", 
+      "text": "Hija/o", 
       "code": "AF3.4", 
       "question": 173, 
       "weight": null
@@ -283,7 +283,7 @@
     "pk": 30, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hermano/a", 
+      "text": "Hermana/o", 
       "code": "AF4.3", 
       "question": 174, 
       "weight": null
@@ -293,7 +293,7 @@
     "pk": 31, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hijo/a", 
+      "text": "Hija/o", 
       "code": "AF4.4", 
       "question": 174, 
       "weight": null
@@ -343,7 +343,7 @@
     "pk": 36, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hermano/a", 
+      "text": "Hermana/o", 
       "code": "AF5.3", 
       "question": 175, 
       "weight": null
@@ -353,7 +353,7 @@
     "pk": 37, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hijo/a", 
+      "text": "Hija/o", 
       "code": "AF5.4", 
       "question": 175, 
       "weight": null
@@ -403,7 +403,7 @@
     "pk": 42, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hermano/a", 
+      "text": "Hermana/o", 
       "code": "AF6.3", 
       "question": 176, 
       "weight": null
@@ -413,7 +413,7 @@
     "pk": 43, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hijo/a", 
+      "text": "Hija/o", 
       "code": "AF6.4", 
       "question": 176, 
       "weight": null
@@ -463,7 +463,7 @@
     "pk": 48, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hermano/a", 
+      "text": "Hermana/o", 
       "code": "AF7.3", 
       "question": 177, 
       "weight": null
@@ -473,7 +473,7 @@
     "pk": 49, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hijo/a", 
+      "text": "Hija/o", 
       "code": "AF7.4", 
       "question": 177, 
       "weight": null
@@ -523,7 +523,7 @@
     "pk": 54, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hermano/a", 
+      "text": "Hermana/o", 
       "code": "AF8.3", 
       "question": 178, 
       "weight": null
@@ -533,7 +533,7 @@
     "pk": 55, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hijo/a", 
+      "text": "Hija/o", 
       "code": "AF8.4", 
       "question": 178, 
       "weight": null
@@ -583,7 +583,7 @@
     "pk": 60, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hermano/a", 
+      "text": "Hermana/o", 
       "code": "AF9.3", 
       "question": 179, 
       "weight": null
@@ -593,7 +593,7 @@
     "pk": 61, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hijo/a", 
+      "text": "Hija/o", 
       "code": "AF9.4", 
       "question": 179, 
       "weight": null
@@ -643,7 +643,7 @@
     "pk": 66, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hermano/a", 
+      "text": "Hermana/o", 
       "code": "AF10.3", 
       "question": 180, 
       "weight": null
@@ -653,7 +653,7 @@
     "pk": 67, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hijo/a", 
+      "text": "Hija/o", 
       "code": "AF10.4", 
       "question": 180, 
       "weight": null
@@ -703,7 +703,7 @@
     "pk": 72, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hermano/a", 
+      "text": "Hermana/o", 
       "code": "AF11.3", 
       "question": 181, 
       "weight": null
@@ -713,7 +713,7 @@
     "pk": 73, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hijo/a", 
+      "text": "Hija/o", 
       "code": "AF11.4", 
       "question": 181, 
       "weight": null
@@ -763,7 +763,7 @@
     "pk": 78, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hermano/a", 
+      "text": "Hermana/o", 
       "code": "AF12.3", 
       "question": 182, 
       "weight": null
@@ -773,7 +773,7 @@
     "pk": 79, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hijo/a", 
+      "text": "Hija/o", 
       "code": "AF12.4", 
       "question": 182, 
       "weight": null
@@ -823,7 +823,7 @@
     "pk": 84, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hermano/a", 
+      "text": "Hermana/o", 
       "code": "AF13.3", 
       "question": 183, 
       "weight": null
@@ -833,7 +833,7 @@
     "pk": 85, 
     "model": "survey.option", 
     "fields": {
-      "text": "Hijo/a", 
+      "text": "Hija/o", 
       "code": "AF13.4", 
       "question": 183, 
       "weight": null

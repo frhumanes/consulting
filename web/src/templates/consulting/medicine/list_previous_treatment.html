@@ -1,6 +1,16 @@
 {% load i18n %}
 
 <table class="table-striped table">
+  <thead>
+    <tr>
+      <th>{% trans 'Duración' %}</th>
+      <th>{% trans 'Componente/Fármaco' %}</th>
+      <th>{% trans 'Inicio' %}</th>
+      <th>{% trans 'Posología' %}</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
   {% for medicine in medicines.object_list %}
     {% if medicine.is_previous %}
     <tr id="{{medicine.id}}" class="medicine">
@@ -12,6 +22,7 @@
     </tr>
     {% endif %}
   {% endfor %}
+</tbody>
 </table>
 <div>
   <p style="text-align: right; margin: 5px 20px" class="muted">{% trans 'Elementos mostrados' %}: <em>{{medicines.start_index}} -  {{medicines.end_index}} {% trans 'de' %} {{medicines.paginator.count}}</em></p>

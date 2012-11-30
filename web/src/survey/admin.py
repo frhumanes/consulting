@@ -14,12 +14,17 @@ class SurveyAdmin(admin.ModelAdmin):
                 }),
                 ('Ajustes', {
                     'fields':('multitype','blocks')
-                    })
+                    }),
+                (_(u'Registro'), {
+                    'classes': ('collapse',),
+                    'fields': ('created_by', 'created_at', 'updated_at')
+                })
                 ]
     list_display = ('name', 'code', 'multitype')
     search_fields = ('code', 'name')
     list_filter = ['multitype']
     ordering = ('code', 'name', 'multitype')
+    readonly_fields = ('created_at', 'updated_at')
     formfield_overrides = {
         models.ManyToManyField: {'widget': forms.CheckboxSelectMultiple},
     }
@@ -38,12 +43,17 @@ class CategoryAdmin(admin.ModelAdmin):
                  (u'Variables', {
                     'classes': ('collapse',),
                     'fields': ['variables']
-                    })
+                    }),
+                (_(u'Registro'), {
+                    'classes': ('collapse',),
+                    'fields': ('created_by', 'created_at', 'updated_at')
+                })
                 ]
     list_display = ('name', 'code', 'kind')
     list_filter = ['kind']
     search_fields = ('code', 'name')
     ordering = ('code', 'name', 'kind')
+    readonly_fields = ('created_at', 'updated_at')
     formfield_overrides = {
         models.ManyToManyField: {'widget': forms.CheckboxSelectMultiple},
     }
@@ -59,7 +69,7 @@ class BlockAdmin(admin.ModelAdmin):
                 ('Ajustes', {
                     'fields':('kind',)
                 }),
-                ('Bloques', {
+                (u'Categorías', {
                     'classes': ('collapse',),
                     'fields': ['categories']
                     }),
@@ -67,11 +77,16 @@ class BlockAdmin(admin.ModelAdmin):
                 #    'classes': ('collapse',),
                 #    'fields': ['formulas']
                 #    })
+                (_(u'Registro'), {
+                    'classes': ('collapse',),
+                    'fields': ('created_by', 'created_at', 'updated_at')
+                })
                 ]
     list_display = ('name', 'code', 'kind')
     list_filter = ['kind']
     search_fields = ('code', 'name')
     ordering = ('code', 'kind')
+    readonly_fields = ('created_at', 'updated_at')
     formfield_overrides = {
         models.ManyToManyField: {'widget': forms.CheckboxSelectMultiple},
     }

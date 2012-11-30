@@ -1,56 +1,82 @@
 [
   {
-    "model": "survey.survey",
-    "pk": 1,
+    "pk": 1, 
+    "model": "survey.survey", 
     "fields": {
-      "name": "Estudio Previo",
-      "code": 1,
-      "blocks": [1,2],
-      "created_by": 1
+      "code": 1, 
+      "blocks": [
+        1, 
+        2
+      ], 
+      "name": "Estudio Previo", 
+      "created_at": "2012-10-05 11:54:38", 
+      "updated_at": "2012-10-05 11:54:38", 
+      "created_by": 1, 
+      "multitype": false
     }
-  },
+  }, 
   {
-    "model": "survey.survey",
-    "pk": 2,
+    "pk": 2, 
+    "model": "survey.survey", 
     "fields": {
-      "name": "Valoración Inicial",
-      "code": 2,
-      "blocks": [1,2,3,4],
-      "multitype": 1,
-      "created_by": 1
+      "code": 2, 
+      "blocks": [
+        1, 
+        2, 
+        3, 
+        4
+      ], 
+      "name": "Valoraci\u00f3n Inicial", 
+      "created_at": "2012-10-05 11:54:39", 
+      "updated_at": "2012-10-05 11:54:39", 
+      "created_by": 1, 
+      "multitype": true
     }
-  },
+  }, 
   {
-    "model": "survey.survey",
-    "pk": 3,
+    "pk": 3, 
+    "model": "survey.survey", 
     "fields": {
-      "name": "Ansiedad/Depresión",
-      "code": 3,
-      "blocks": [3,4],
-      "multitype": 1,
-      "created_by": 1
+      "code": 3, 
+      "blocks": [
+        3, 
+        4
+      ], 
+      "name": "Ansiedad/Depresi\u00f3n", 
+      "created_at": "2012-10-05 11:54:39", 
+      "updated_at": "2012-10-05 11:54:39", 
+      "created_by": 1, 
+      "multitype": true
     }
-  },
+  }, 
   {
-    "model": "survey.survey",
-    "pk": 4,
+    "pk": 4, 
+    "model": "survey.survey", 
     "fields": {
-      "name": "Adherencia al Tratamiento",
-      "code": 4,
-      "blocks": [8],
-      "multitype": 0,
-      "created_by": 1
+      "code": 4, 
+      "blocks": [
+        8
+      ], 
+      "name": "Adherencia al tratamiento", 
+      "created_at": "2012-10-05 11:54:39", 
+      "updated_at": "2012-10-05 11:54:39", 
+      "created_by": 1, 
+      "multitype": false
     }
-  },
+  }, 
   {
-    "model": "survey.survey",
-    "pk": 5,
+    "pk": 5, 
+    "model": "survey.survey", 
     "fields": {
-      "name": "Seguimiento virtual",
-      "code": 5,
-      "blocks": [9],
-      "multitype": 0,
-      "created_by": 1
+      "code": 5, 
+      "blocks": [
+        9
+      ], 
+      "name": "Seguimiento virtual", 
+      "created_at": "2012-11-26 09:02:49", 
+      "updated_at": "2012-11-26 09:02:49", 
+      "created_by": 1, 
+      "multitype": false
     }
   }
 ]

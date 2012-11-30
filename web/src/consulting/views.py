@@ -1503,7 +1503,7 @@ def newpatient(request):
                                 format_string(
                                         form.cleaned_data['second_surname'])
                     user.email = form.cleaned_data['email']
-                    user.save()
+                    user.save(commit=False)
                     ##########################PROFILE##########################
                     try:
                         profile = form.save(commit=False)
@@ -1521,6 +1521,7 @@ def newpatient(request):
                         #Relationships between patient and doctor
                         if logged_user_profile.is_doctor():
                             profile.doctor = logged_user_profile.user
+                        user.save()
                         profile.user = user
                         profile.save()
                         #default_illness = Illness.objects.get(
@@ -1528,11 +1529,12 @@ def newpatient(request):
                         #profile.illnesses.add(default_illness)
                         #profile.save()"""
                     except Exception:
-                        user.delete()
+                        #user.delete()
                         return HttpResponseRedirect(reverse('consulting_index'))
                     ###########################################################
                     #SEND EMAIL
-                    sendemail(user)
+                    if self.email:
+                        sendemail(user)
 
                     return render_to_response(
                             'consulting/patient/patient_identification.html',
