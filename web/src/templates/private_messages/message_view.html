@@ -10,7 +10,20 @@
   </div>
    
   <br />
-    <div><span>{{ message.body|safe|escape|linebreaks }}</span></div>
+    <div><span>{{ message.body|safe|escape|linebreaks }}</span>
+      <br />
+      {% if message.parent %}
+        <span class="muted" style="max-height: 200px; overflow-y: auto">
+        {% with message=message.parent %}
+          <blockquote>
+            <small>{{message.sent_at|date:"d M y H:i"}}, {{ message.author.get_profile.get_full_name }} {% trans 'escribió' %}:</small>
+            <p>{{ message.body|safe|escape|linebreaks }}</p>
+          </blockquote>
+        {% endwith %}
+        </span>
+      {% endif %}
+
+    </div>
   <!-- END BODY -->
 </div>
 

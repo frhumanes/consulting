@@ -5,7 +5,7 @@
     "fields": {
       "code": 1,
       "name": "Ningún diagnóstico",
-      "surveys": [1],
+      "surveys": [1,5],
       "created_by": 1
     }
   },

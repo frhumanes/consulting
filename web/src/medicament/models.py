@@ -14,11 +14,14 @@ class Group(models.Model):
     def __unicode__(self):
         return u'%s' % (self.name)
 
+    class Meta:
+        verbose_name = "Grupo"
+
 
 class Component(models.Model):
     KIND = (
         (settings.ACTIVE_INGREDIENT, _(u'Principio Activo')),
-        (settings.MEDICINE, _(u'Fármaco(nombre comercial)')),
+        (settings.MEDICINE, _(u'Fármaco (nombre comercial)')),
     )
 
     groups = models.ManyToManyField(Group, related_name='groups_components')
@@ -26,8 +29,11 @@ class Component(models.Model):
     kind_component = models.IntegerField(_(u'Tipo de componente'),
                                         choices=KIND)
 
-    name = models.CharField(_(u'Nombre del componente'), max_length=255,
+    name = models.CharField(_(u'Nombre'), max_length=255,
                             blank=True)
 
     def __unicode__(self):
         return u'%s' % (self.name)
+
+    class Meta:
+        verbose_name = u"Fármaco"

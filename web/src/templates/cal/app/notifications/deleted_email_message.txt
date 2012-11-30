@@ -1,0 +1,6 @@
+{% load consulting userprofile %}
+Hola {{user.name}}, 
+
+Le comunicamos que su cita asignada para el {{app.date}} a las {{app.start_time|time:"H:i"}} con {{"el/la"|sexify:app.doctor}} {{app.doctor.get_profile|name_with_title}} ha sido anulada.
+
+Reciba un cordial saludo del equipo de {% get_brand %}.

@@ -3,7 +3,8 @@ from formula.models import *
 
 
 class DimensionAdmin(admin.ModelAdmin):
-    fieldsets = [('Dimensions', {'fields': ['name', 'polynomial', 'factor']})]
+    fieldsets = [(None, {'fields': ['name', 'polynomial', 'factor']})]
+    list_filter = ['name']
     list_display = ('name', 'polynomial', 'factor')
     search_fields = ('name', 'polynomial', 'factor')
     ordering = ('name',)
@@ -12,7 +13,8 @@ admin.site.register(Dimension, DimensionAdmin)
 
 
 class VariableAdmin(admin.ModelAdmin):
-    fieldsets = [('Variables', {'fields': ['dimension', 'name', 'code']})]
+    fieldsets = [(None, {'fields': ['dimension', 'name', 'code']})]
+    list_filter = ["dimension"]
     list_display = ('code', 'name', 'dimension')
     search_fields = ('code', 'name', 'dimension')
     ordering = ('dimension', 'code')
@@ -21,10 +23,11 @@ admin.site.register(Variable, VariableAdmin)
 
 
 class FormulaAdmin(admin.ModelAdmin):
-    fieldsets = [('Formulas', {'fields': ['variable', 'polynomial',
+    fieldsets = [(None, {'fields': ['variable', 'polynomial',
                 'factor', 'sibling']})]
-    list_display = ('variable', 'kind', 'polynomial', 'factor')
-    search_fields = ('variable', 'polynomial', 'factor')
+    list_filter = ["variable", "kind"]
+    list_display = ('variable', 'kind')
+    search_fields = ('variable__name', 'polynomial', 'factor')
     ordering = ('variable', )
 
 admin.site.register(Formula, FormulaAdmin)

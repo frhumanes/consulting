@@ -6,45 +6,57 @@ from django.db import models
 
 from managers import SlotManager, AppointmentManager
 from log.models import TraceableModel
-from datetime import date
+from datetime import date, datetime
+
+from django.template.loader import render_to_string
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 class Vacation(TraceableModel):
-    doctor = models.ForeignKey(User, related_name='vacation_doctor')
-    date = models.DateField(null=False, blank=False)
-    description = models.CharField(max_length=5000, blank=True, null=True)
+    doctor = models.ForeignKey(User, related_name='vacation_doctor',limit_choices_to = {'profiles__role':settings.DOCTOR})
+    date = models.DateField(null=False, blank=False, help_text="Please use the following format: <em>DD/MM/YYYY</em>.")
+    description = models.TextField(max_length=5000, blank=True, null=True)
 
     class Meta:
         unique_together = ('doctor', 'date')
+        verbose_name = _(u'Ausencia')
 
     def __unicode__(self):
-        return u'vac: %s %s [%s]' \
-            % (self.id, self.doctor, self.date)
+        return u'%s, %s' % (self.date, self.doctor)
 
 
 class Event(TraceableModel):
-    doctor = models.ForeignKey(User, related_name='event_doctor')
-    date = models.DateField(null=False, blank=False)
-    start_time = models.TimeField(null=False, blank=False)
-    end_time = models.TimeField(null=False, blank=False)
-    description = models.CharField(max_length=5000, blank=True, null=True)
+    doctor = models.ForeignKey(User, 
+                    related_name='event_doctor', 
+                    limit_choices_to = {'profiles__role':settings.DOCTOR})
+    date = models.DateField(null=False, blank=False, help_text="Please use the following format: <em>DD/MM/YYYY</em>.")
+    start_time = models.TimeField(null=False, blank=False, help_text="Please use the following format: <em>HH:mm</em>.")
+    end_time = models.TimeField(null=False, blank=False, help_text="Please use the following format: <em>HH:mm</em>.")
+    description = models.TextField(max_length=5000, blank=True, null=True)
 
     class Meta:
         unique_together = ('doctor', 'date', 'start_time', 'end_time')
+        verbose_name = "Evento"
 
     def __unicode__(self):
-        return u'event: %s %s [%s]' \
-            % (self.id, self.doctor, self.date)
+       return u'%s [%s-%s], %s' % (self.date, 
+                                  self.start_time, self.end_time,
+                                  self.doctor)
 
 
 class SlotType(TraceableModel):
-    doctor = models.ForeignKey(User, related_name='entry_type_doctor')
-    title = models.CharField(max_length=256)
-    duration = models.IntegerField(null=False, blank=False)
-    description = models.CharField(max_length=5000, blank=True, null=True)
+    doctor = models.ForeignKey(User, related_name='entry_type_doctor',limit_choices_to = {'profiles__role':settings.DOCTOR})
+    title = models.CharField(max_length=255)
+    duration = models.IntegerField(null=False, blank=False, help_text="En minutos")
+    description = models.TextField(max_length=5000, blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Tipo de cita"
+        verbose_name_plural = "Tipos de cita"
 
     def __unicode__(self):
-        return self.title
+        return u"%s [%d]" % (self.title, self.duration)
 
 
 class Slot(TraceableModel):
@@ -79,9 +91,9 @@ class Slot(TraceableModel):
     weekday = models.IntegerField(choices=WEEKDAYS)
     month = models.IntegerField(choices=MONTH)
     year = models.IntegerField()
-    start_time = models.TimeField(null=False, blank=False)
-    end_time = models.TimeField(null=False, blank=False)
-    description = models.CharField(max_length=5000, blank=True, null=True)
+    start_time = models.TimeField(null=False, blank=False, help_text="Please use the following format: <em>HH:mm</em>.")
+    end_time = models.TimeField(null=False, blank=False, help_text="Please use the following format: <em>HH:mm</em>.")
+    description = models.TextField(max_length=5000, blank=True, null=True)
 
     #reserved = models.BooleanField(default=False)
 
@@ -89,39 +101,43 @@ class Slot(TraceableModel):
     objects = SlotManager()
 
     def __unicode__(self):
-        return u'slot: %s %s [%s]' \
-            % (self.id, self.slot_type, self.start_time)
+        return u'%s [%s-%s], %s' \
+            % (self.slot_type.title, self.start_time, self.end_time, self.creator)
 
     class Meta:
         ordering = ["month", "weekday", "start_time"]
+        verbose_name = "Preferencia"
 
 
 class Appointment(TraceableModel):
 
-    doctor = models.ForeignKey(User, related_name='appointment_doctor')
+    doctor = models.ForeignKey(User, related_name='appointment_doctor',limit_choices_to = {'profiles__role':settings.DOCTOR})
 
-    patient = models.ForeignKey(User, related_name='appointment_patient')
+    patient = models.ForeignKey(User, related_name='appointment_patient',limit_choices_to = {'profiles__role':settings.PATIENT})
 
     app_type = models.ForeignKey(SlotType,
         related_name='appointment_slot_type', null=True)
 
-    date = models.DateField(null=False, blank=False)
+    date = models.DateField(null=False, blank=False, help_text="Please use the following format: <em>DD/MM/YYYY</em>.")
 
-    start_time = models.TimeField(null=False, blank=False)
+    start_time = models.TimeField(null=False, blank=False, help_text="Please use the following format: <em>HH:mm</em>.")
 
-    end_time = models.TimeField(null=False, blank=False)
+    end_time = models.TimeField(null=False, blank=False, help_text="Please use the following format: <em>HH:mm</em>.")
 
-    duration = models.IntegerField(null=False, blank=False)
-    description = models.CharField(max_length=5000, blank=True, null=True)
+    duration = models.IntegerField(null=False, blank=False, help_text="En minutos")
+    description = models.TextField(max_length=5000, blank=True, null=True)
 
     objects = AppointmentManager()
 
+    notify = models.BooleanField(_(u'Notificar cita'), default=True, help_text=_(u'Desmarcar para asignar citas virtuales que no requiren la presencia del paciente.'))
+
     class Meta:
         get_latest_by = "start_time"
+        verbose_name = "Cita"
 
     def __unicode__(self):
-        return u'app: %s %s [%s]' \
-            % (self.id, self.app_type, self.date)
+        return u'%s [%s-%s], %s' \
+            % (self.date, self.start_time, self.end_time, self.patient)
 
     def is_first_appointment(self):
         return self == Appointment.objects.filter(patient=self.patient).order_by('date')[0]
@@ -131,3 +147,38 @@ class Appointment(TraceableModel):
 
     def has_activity(self):
         return bool(self.appointment_tasks.all().count() or self.appointment_conclusions.all().count())
+
+    def save(self, *args, **kw):
+        status = None
+        orig = None
+        self.duration = (datetime.combine(date.today(), self.end_time) - datetime.combine(date.today(), self.start_time)).seconds/60
+        if self.pk is not None:
+            orig = Appointment.objects.get(pk=self.pk)
+            if orig.date != self.date or orig.start_time != self.start_time or orig.end_time != self.end_time:
+                status = 'changed'
+        else:
+            status = 'new'
+        super(Appointment, self).save(*args, **kw)
+        if self.notify and status:
+            self.warn_patient(status, orig)
+
+    def delete(self, *args, **kw):
+        if self.notify:
+            self.warn_patient('deleted')
+        super(Appointment, self).delete(*args, **kw)
+            
+
+    def warn_patient(self, action, app=None):
+        try:
+            subject = render_to_string('cal/app/notifications/'+action+'_email_subject.txt', {'user': self.patient.get_profile(),
+                                      'app': self})
+            # Email subject *must not* contain newlines
+            subject = ''.join(subject.splitlines())
+
+            message = render_to_string('cal/app/notifications/'+action+'_email_message.txt', {'user': self.patient.get_profile(),
+                                    'app': self, 'orig':app})
+
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, 
+                        [self.patient.get_profile().email])
+        except:
+            pass

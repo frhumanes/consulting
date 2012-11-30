@@ -5594,7 +5594,7 @@
     "model": "survey.option", 
     "fields": {
       "text": "1 - Intensidad leve", 
-      "code": "H11.1.1", 
+      "code": "H11.11.1", 
       "question": 102, 
       "weight": "1"
     }

@@ -119,7 +119,7 @@
 
 {% block jquery_init %}
 
-  $('#id_date').datepicker({'format':'dd/mm/yyyy'});
+  $('#id_date').datepicker({'format':'dd/mm/yyyy', language: 'es'});
 
   $('#remove-event').live('click', function(event){
     $('#modal-screen').modal({

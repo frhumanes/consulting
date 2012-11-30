@@ -135,11 +135,11 @@ $(".range").each(function(){
     });
 });
 
-$('#id_date_0').datepicker({format: 'dd/mm/yyyy'}).on('changeDate',
-    function(ev){$('#id_date_0').datepicker('hide');
+$('#id_date_0').datepicker({format: 'dd/mm/yyyy', weekStart: 1, language: 'es'}).on('changeDate',
+    function(ev){/*$('#id_date_0').datepicker('hide');*/
   });
-$('#id_date_1').datepicker({format: 'dd/mm/yyyy'}).on('changeDate',
-    function(ev){$('#id_date_1').datepicker('hide');
+$('#id_date_1').datepicker({format: 'dd/mm/yyyy', weekStart: 1, language: 'es'}).on('changeDate',
+    function(ev){/*$('#id_date_1').datepicker('hide');*/
   });
 
 $('ul').addClass("without_decorator");

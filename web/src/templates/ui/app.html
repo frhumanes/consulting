@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     {% load consulting i18n %}
     <meta charset="utf-8">
@@ -65,6 +65,7 @@
           }
         }
       };
+      {% if request.user.is_authenticated %}
       var timer;
       var reminder = 300; // seg
       function expiration_warning() {
@@ -91,9 +92,11 @@
         .done( setTimeout(expiration_warning, (val - reminder ) * 1000) )
         .fail(function() { alert("error"); })
         .always(function() { 
-          $('#warning_modal').modal('hide'); 
+          $('#warning_modal').modal('hide');
+          document.title = '{% get_brand %}'; 
           clearInterval(timer);});
       }
+      {% endif %}
       {% block js %}
       {% endblock %}
 
@@ -128,11 +131,16 @@
         {% endif%}
       {% endif%}
     {% endblock  %}
-    {% block nav-bar%}{% endblock  %}
-    <div class="offset2 span10 pull-right">
-    {% block subheader %}
-    {% endblock subheader %}
-     
+    <div class="row-fluid">
+      {% block nav-bar%}{% endblock  %}
+      {% block subheader %}
+        {% if EXPIRED_PASSWORD %}
+        <div class="offset3 span6">
+          <div class="alert alert-warning center">{% trans 'Por seguridad, le recomendamos que cambie su contraseña lo antes posible.' %} <a href="{% url password_change %}">{% trans 'Cambiar ahora' %}</a></div>
+        </div>
+        {% endif %}
+      {% endblock subheader %}
+
     </div>
 
     {% block body %}

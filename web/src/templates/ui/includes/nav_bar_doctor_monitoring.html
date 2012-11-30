@@ -52,11 +52,9 @@
       <li class="{% active_leaf request scheduler %}">
         <a href="{{scheduler}}">{% trans 'Dar cita' %}</a>
       </li>
-      {% if illness.code == 2 %}
       <li class="{% active_leaf request next_self_survey %}">
         <a href="{{next_self_survey}}">{% trans 'Asignar<br>Cuestionario' %}</a>
       </li>
-      {% endif %}
       <li class="{% active_leaf request conclusion %}">
         <a href="{{conclusion}}">{% trans 'Conclusiones' %}</a>
       </li>                                                  

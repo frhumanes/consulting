@@ -1,0 +1,1 @@
+{% load consulting %}{{user.name}}, tienes nuevos mensajes en {% get_brand %}

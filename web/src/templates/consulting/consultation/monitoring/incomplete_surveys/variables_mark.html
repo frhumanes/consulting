@@ -46,7 +46,7 @@
           <tbody>                  
             {% for variable, mark in variables.items %}
             <tr>
-              <td style="text-align:center;">{{variable.name}}</td>
+              <td style="text-align:center;">{{variable.code}} {{variable.name}}</td>
               <td style="text-align:center;">{{mark|floatformat}}</td>
             </tr>
             {% endfor %}

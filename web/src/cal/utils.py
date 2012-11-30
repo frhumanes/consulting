@@ -1,13 +1,12 @@
 # -*- encoding: utf-8 -*-
+import calendar
+import time
 
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
-
 from datetime import date, datetime, timedelta
-import calendar
-import time
-
+from datetime import time as dtime
 from cal.models import Appointment
 from cal.models import Vacation
 from cal.models import Event
@@ -84,7 +83,10 @@ def check_vacations_or_events(doctor, year, month, day):
 
 
 def add_minutes(tm, minutes):
-    fulldate = datetime(1, 1, 1, tm[3], tm[4], tm[5])
+    if isinstance(tm, dtime):
+        fulldate = datetime.combine(date.today(), tm)
+    else:
+        fulldate = datetime(1, 1, 1, tm[3], tm[4], tm[5])
     fulldate = fulldate + timedelta(minutes=minutes)
     return fulldate.time()
 

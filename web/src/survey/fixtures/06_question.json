@@ -234,7 +234,7 @@
     "pk": 32, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B1", 
       "kind": 0, 
@@ -256,7 +256,7 @@
     "pk": 34, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B2", 
       "kind": 0, 
@@ -289,7 +289,7 @@
     "pk": 37, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B3", 
       "kind": 0, 
@@ -300,7 +300,7 @@
     "pk": 38, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B4", 
       "kind": 0, 
@@ -333,7 +333,7 @@
     "pk": 41, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B5", 
       "kind": 0, 
@@ -344,7 +344,7 @@
     "pk": 42, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B6", 
       "kind": 0, 
@@ -355,7 +355,7 @@
     "pk": 43, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B7", 
       "kind": 0, 
@@ -366,7 +366,7 @@
     "pk": 44, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B8", 
       "kind": 0, 
@@ -377,7 +377,7 @@
     "pk": 45, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B9", 
       "kind": 0, 
@@ -388,7 +388,7 @@
     "pk": 46, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B10", 
       "kind": 0, 
@@ -410,7 +410,7 @@
     "pk": 48, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B11", 
       "kind": 0, 
@@ -432,7 +432,7 @@
     "pk": 50, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B12", 
       "kind": 0, 
@@ -443,7 +443,7 @@
     "pk": 51, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B13", 
       "kind": 0, 
@@ -531,7 +531,7 @@
     "pk": 59, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B14", 
       "kind": 0, 
@@ -542,7 +542,7 @@
     "pk": 60, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B15", 
       "kind": 0, 
@@ -652,7 +652,7 @@
     "pk": 70, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B16", 
       "kind": 0, 
@@ -740,7 +740,7 @@
     "pk": 78, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B17", 
       "kind": 0, 
@@ -1048,7 +1048,7 @@
     "pk": 106, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B18", 
       "kind": 0, 
@@ -1059,7 +1059,7 @@
     "pk": 107, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B19", 
       "kind": 0, 
@@ -1070,7 +1070,7 @@
     "pk": 108, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B20", 
       "kind": 0, 
@@ -1081,7 +1081,7 @@
     "pk": 109, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon c\u00faal de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
       "single": true, 
       "code": "B21", 
       "kind": 0, 
@@ -1334,7 +1334,7 @@
     "pk": 132, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en que medida observa en el/la paciente durante la entrevista.", 
+      "text": "Valore en que medida observa en el paciente durante la entrevista.", 
       "single": true, 
       "code": "Hd17", 
       "kind": 0, 
@@ -1345,7 +1345,7 @@
     "pk": 133, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a la tensi\u00f3n (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad m\u00e1xima (invalidante)).", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la tensi\u00f3n.", 
       "single": true, 
       "code": "H14.1", 
       "kind": 0, 
@@ -1356,7 +1356,7 @@
     "pk": 134, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a estar inc\u00f3modo/a.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a estar inc\u00f3modo.", 
       "single": true, 
       "code": "H14.2", 
       "kind": 0, 
@@ -1367,7 +1367,7 @@
     "pk": 135, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a la agitaci\u00f3n de las manos.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la agitaci\u00f3n de las manos.", 
       "single": true, 
       "code": "H14.3", 
       "kind": 0, 
@@ -1378,7 +1378,7 @@
     "pk": 136, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto frotar sus dedos.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto frotar sus dedos.", 
       "single": true, 
       "code": "H14.4", 
       "kind": 0, 
@@ -1389,7 +1389,7 @@
     "pk": 137, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a apretar los pu\u00f1os.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a apretar los pu\u00f1os.", 
       "single": true, 
       "code": "H14.5", 
       "kind": 0, 
@@ -1400,7 +1400,7 @@
     "pk": 138, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a posturas cambiantes.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a posturas cambiantes.", 
       "single": true, 
       "code": "H14.6", 
       "kind": 0, 
@@ -1411,7 +1411,7 @@
     "pk": 139, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto al temblor de las manos.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al temblor de las manos.", 
       "single": true, 
       "code": "H14.7", 
       "kind": 0, 
@@ -1422,7 +1422,7 @@
     "pk": 140, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto al ce\u00f1o arrugado.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al ce\u00f1o arrugado.", 
       "single": true, 
       "code": "H14.8", 
       "kind": 0, 
@@ -1433,7 +1433,7 @@
     "pk": 141, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a las facies tensa.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a las facies tensa.", 
       "single": true, 
       "code": "H14.9", 
       "kind": 0, 
@@ -1444,7 +1444,7 @@
     "pk": 142, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto al tono muscular (0 Ausente, 1 Intensidad leve, 2 Intensidad media, 3 Intensidad m\u00e1xima (invalidante)).", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al tono muscular.", 
       "single": true, 
       "code": "H14.10", 
       "kind": 0, 
@@ -1455,7 +1455,7 @@
     "pk": 143, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a la respiraci\u00f3n jadeante.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la respiraci\u00f3n jadeante.", 
       "single": true, 
       "code": "H14.11", 
       "kind": 0, 
@@ -1466,7 +1466,7 @@
     "pk": 144, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a la palidez facial.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la palidez facial.", 
       "single": true, 
       "code": "H14.12", 
       "kind": 0, 
@@ -1477,7 +1477,7 @@
     "pk": 145, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a tragar saliva.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a tragar saliva.", 
       "single": true, 
       "code": "H14.13", 
       "kind": 0, 
@@ -1488,7 +1488,7 @@
     "pk": 146, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a eructos.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a eructos.", 
       "single": true, 
       "code": "H14.14", 
       "kind": 0, 
@@ -1499,7 +1499,7 @@
     "pk": 147, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a taquicardia de reposo.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a taquicardia de reposo.", 
       "single": true, 
       "code": "H14.15", 
       "kind": 0, 
@@ -1510,7 +1510,7 @@
     "pk": 148, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a la frecuencia respiratoria mayor de 20/min.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la frecuencia respiratoria mayor de 20/min.", 
       "single": true, 
       "code": "H14.16", 
       "kind": 0, 
@@ -1521,7 +1521,7 @@
     "pk": 149, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a los reflejos tendinosos vivos.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a los reflejos tendinosos vivos.", 
       "single": true, 
       "code": "H14.17", 
       "kind": 0, 
@@ -1532,7 +1532,7 @@
     "pk": 150, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto al temblor durante la entrevista.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al temblor durante la entrevista.", 
       "single": true, 
       "code": "H14.18", 
       "kind": 0, 
@@ -1543,7 +1543,7 @@
     "pk": 151, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a la dilataci\u00f3n pupilar.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la dilataci\u00f3n pupilar.", 
       "single": true, 
       "code": "H14.19", 
       "kind": 0, 
@@ -1554,7 +1554,7 @@
     "pk": 152, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a la exoftalmia.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la exoftalmia.", 
       "single": true, 
       "code": "H14.20", 
       "kind": 0, 
@@ -1565,7 +1565,7 @@
     "pk": 153, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a la sudoraci\u00f3n.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la sudoraci\u00f3n.", 
       "single": true, 
       "code": "H14.21", 
       "kind": 0, 
@@ -1576,7 +1576,7 @@
     "pk": 154, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el/la paciente durante la entrevista respecto a las mioclonias palpebrales.", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a las mioclonias palpebrales.", 
       "single": true, 
       "code": "H14.22", 
       "kind": 0, 
@@ -1730,7 +1730,7 @@
     "pk": 168, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 el grado en que se encuentra tenso/a, inc\u00f3modo/a, agitaci\u00f3n de las manos, frota sus dedos, aprieta los pu\u00f1os, postura cambiante, temblor de las manos, ce\u00f1o arrugado, facies tensa, aumento del tono muscular, respiraci\u00f3n jadeante, palidez facial, traga saliva, tendinosos vivos, temblor durante la entrevista, dilataci\u00f3n pupilar, exoftalmia, sudoraci\u00f3n, mioclonias palpebrales.", 
+      "text": "Valore del 0 al 4 el grado en que se encuentra tenso, inc\u00f3modo, agitaci\u00f3n de las manos, frota sus dedos, aprieta los pu\u00f1os, postura cambiante, temblor de las manos, ce\u00f1o arrugado, facies tensa, aumento del tono muscular, respiraci\u00f3n jadeante, palidez facial, traga saliva, tendinosos vivos, temblor durante la entrevista, dilataci\u00f3n pupilar, exoftalmia, sudoraci\u00f3n, mioclonias palpebrales.", 
       "single": true, 
       "code": "H14", 
       "kind": 0, 
@@ -1901,16 +1901,38 @@
       "kind": 0, 
       "required": true
     }
-  },
+  }, 
   {
     "pk": 184, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfEn qu\u00e9 grado ha seguido el/la paciente las recomendaciones y/o tratamiento indicados?", 
+      "text": "\u00bfEn qu\u00e9 grado ha seguido el paciente las recomendaciones y/o tratamiento indicados?", 
       "single": true, 
       "code": "ADT", 
       "kind": 0, 
       "required": true
+    }
+  }, 
+  {
+    "pk": 185, 
+    "model": "survey.question", 
+    "fields": {
+      "text": "Indique a continuaci\u00f3n si observa alguna mejora o empeoramiento en sus s\u00edntomas desde su \u00faltima visita presencial.", 
+      "single": true, 
+      "code": "VT1", 
+      "kind": 0, 
+      "required": false
+    }
+  }, 
+  {
+    "pk": 186, 
+    "model": "survey.question", 
+    "fields": {
+      "text": "\u00bfExiste alg\u00fan hecho que crea importante rese\u00f1ar?", 
+      "single": true, 
+      "code": "VT2", 
+      "kind": 0, 
+      "required": false
     }
   }
 ]

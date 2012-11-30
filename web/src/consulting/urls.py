@@ -44,6 +44,9 @@ urlpatterns = patterns('',
     url(r'^patient_searcher/', consulting_views.patient_searcher,
         name='consulting_patient_searcher'),
 
+    url(r'^searcher_profession/', consulting_views.searcher_profession,
+        name='consulting_searcher_profession'),
+
     ############################## ROLE DOCTOR ################################
     # PATIENT_MANAGEMENT: DOCTOR ROLE
     url(r'^patient_management/$', consulting_views.patient_management,

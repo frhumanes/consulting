@@ -39,7 +39,7 @@ class Profile(TraceableModel):
     #username is the nick with you login in app
     user = models.ForeignKey(User, unique=True, related_name='profiles')
     doctor = models.ForeignKey(User, blank=True, null=True,
-                                related_name='doctor')
+                                related_name='doctor', limit_choices_to = {'profiles__role':settings.DOCTOR})
     #patients = models.ManyToManyField(User, related_name='patients_profiles',
     #                                    blank=True, null=True)
 
@@ -83,27 +83,29 @@ class Profile(TraceableModel):
     phone2 = models.CharField(_(u'Teléfono 2'), max_length=9, blank=True)
 
     email = models.EmailField(_(u'Correo Electrónico'), max_length=150,
-                                blank=True)
+                                blank=True, unique=True)
 
     profession = models.CharField(_(u'Profesión'), max_length=150, blank=True)
 
     role = models.IntegerField(_(u'Rol'), choices=ROLE, blank=True, null=True)
+
+    updated_password_at = models.DateTimeField(auto_now_add=True)
 
     def get_full_name(self, title=False):
         if title:
             pre = ''
             if self.role == settings.DOCTOR:
                 if self.sex == settings.WOMAN:
-                    pre = 'Dra.'
+                    pre = u'Dra.'
                 elif self.sex == settings.MAN:
-                    pre = 'Dr.'
+                    pre = u'Dr.'
             else:
-                if self.sex == settings.WOMAN:
-                    pre = 'D.'
-                elif self.sex == settings.MAN:
-                    pre = 'D.ª'
-            return "%s %s %s %s" % (pre, self.name, self.first_surname, self.second_surname)
-        return "%s %s %s" % (self.name, self.first_surname, self.second_surname)
+                if self.sex == settings.MAN:
+                    pre = u'D.'
+                elif self.sex == settings.WOMAN:
+                    pre = u'D.ª'
+            return u"%s %s %s %s" % (pre, self.name, self.first_surname, self.second_surname)
+        return u"%s %s %s" % (self.name, self.first_surname, self.second_surname)
 
     def is_doctor(self):
         return self.role == settings.DOCTOR
@@ -220,28 +222,32 @@ class Profile(TraceableModel):
 
 
     def get_anxiety_status(self, at_date=None, index=False, html=False):
-        filter_option = Q(patient=self.user, survey__id__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True)
+        filter_option = Q(patient=self.user, survey__code__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True, assess=False)
         if at_date:
             filter_option = filter_option & Q(end_date__lte=at_date)
         try:
             task = Task.objects.filter(filter_option).latest('end_date')
             status = task.get_anxiety_status(index)
             if html:
-                return '<span style="min-width:100px" class="label label-%s" >%s</span>' % (status[1], status[0])
+                if status[0]  != ' ':
+                    return '<span style="min-width:100px" class="label label-%s" >%s</span>' % (status[1], status[0])
+                return ''
             else:
                 return status
         except:
             return ''
 
     def get_depression_status(self, at_date=None, index=False, html=False):
-        filter_option = Q(patient=self.user, survey__id__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True)
+        filter_option = Q(patient=self.user, survey__code__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True, assess=False)
         if at_date:
             filter_option = filter_option & Q(end_date__lte=at_date)
         try:
             task = Task.objects.filter(filter_option).latest('end_date')
             status = task.get_depression_status(index)
             if html:
-                return '<span style="min-width:100px" class="label label-%s" >%s</span>' % (status[1], status[0])
+                if status[0] != ' ':
+                    return '<span style="min-width:100px" class="label label-%s" >%s</span>' % (status[1], status[0])
+                return ''
             else:
                 return status
         except:
@@ -250,3 +256,7 @@ class Profile(TraceableModel):
 
     def get_unread_messages(self):
         return Message.objects.get_pending_for_user(self.user)
+
+    class Meta:
+        verbose_name = "Perfil"
+        verbose_name_plural = "Perfiles"

@@ -1,5 +1,4 @@
 # -*- encoding: utf-8 -*-
-
 from django.db import models
 from django.db.models import Max
 from django.utils.translation import ugettext_lazy as _
@@ -22,7 +21,7 @@ class Task(TraceableModel):
         (settings.ABREVIADO, _(u'Abreviado')),
     )
 
-    patient = models.ForeignKey(User, related_name='patient_tasks')
+    patient = models.ForeignKey(User, related_name='patient_tasks',limit_choices_to = {'profiles__role':settings.PATIENT})
 
     survey = models.ForeignKey(Survey, related_name="survey_tasks")
 
@@ -30,14 +29,15 @@ class Task(TraceableModel):
 
     questions = models.ManyToManyField(Question,
                                         related_name="questions_tasks",
-                                        blank=True, null=True)
+                                        blank=True, null=True, 
+                                        help_text=u"Si no se selecciona ninguna se mostrarán las predeterminadas de la encuesta.")
 
     treated_blocks = models.ManyToManyField(Block, related_name='blocks_tasks')
 
     appointment = models.ForeignKey(Appointment,
                                     related_name="appointment_tasks", null=True)
 
-    self_administered = models.NullBooleanField(_(u'¿Tarea autoadministrada?'))
+    self_administered = models.NullBooleanField(_(u'Tarea autoadministrada'))
 
     creation_date = models.DateTimeField(_(u'Fecha de creación de la tarea'),
                                         auto_now_add=True)
@@ -49,21 +49,19 @@ class Task(TraceableModel):
                                     blank=True, null=True)
 
     previous_days = models.IntegerField(
-                    _(u'Disponibilidad para el paciente (días antes de la próxima cita'),
-                    default=settings.DAYS_BEFORE_SURVEY)
+                    _(u'Disponibilidad para el paciente'),
+                    default=settings.DAYS_BEFORE_SURVEY, help_text=u"días antes de la próxima cita")
 
 
-    assess = models.BooleanField(_(u'¿Seguir valorando la encuesta?'),
+    assess = models.BooleanField(_(u'Seguir valorando la encuesta'),
                                 default=True)
 
     completed = models.BooleanField(
-                    _(u'¿Ha contestado todas las preguntas de la encuesta?'),
+                    _(u'Tarea completada'),
                     default=False)
 
-    observations = models.CharField(max_length=5000, blank=True,
+    observations = models.TextField(max_length=5000, blank=True,
                                             null=True)
-
-    
 
     def __unicode__(self):
         return u'id: %s task: %s %s %s' \
@@ -79,9 +77,9 @@ class Task(TraceableModel):
         answers = {}
         for r in self.task_results.values('block').annotate(Max('date'),Max('id')).order_by():
             block = []
-            for qid, qtext in Answer.objects.filter(result__id=r['id__max']).values_list('option__question__id','option__question__text').distinct().order_by('option__question__id'):
+            for qid, qtext in Answer.objects.filter(result__id=r['id__max']).values_list('question__id','question__text').distinct().order_by('question__id'):
                 block.append({'question':qtext,
-                              'answers': [str(a) for a in Answer.objects.filter(result__id=r['id__max'],option__question__id=qid)]})
+                              'answers': [str(a) for a in Answer.objects.filter(result__id=r['id__max'],question__id=qid)]})
             answers[r['block']] = block
         return answers
 
@@ -95,7 +93,7 @@ class Task(TraceableModel):
 
         answers = []
         for r in self.task_results.values('block').annotate(Max('date'),Max('id')).order_by():
-            answers += Answer.objects.filter(result__id=r['id__max']).select_related().all().order_by("option__question__id")
+            answers += Answer.objects.filter(result__id=r['id__max']).select_related().all().order_by("question__id")
         self._answers = list(answers)
         return answers
 
@@ -115,7 +113,7 @@ class Task(TraceableModel):
         answer = Answer.objects.filter(result__id=result['latest'], option__code__startswith='AF').exclude(option__text='Ninguno')
         for a in answer:
             opt = a.option
-            if opt.text in dic:
+            if opt and opt.text in dic:
                 dic[opt.text].append(opt.question.get_af_illness())
             else:
                 dic[opt.text] = [opt.question.get_af_illness()]
@@ -142,7 +140,7 @@ class Task(TraceableModel):
         l = []
         for answer in answers:
             a = answer.option
-            if a.code.startswith('AVE'):
+            if a and a.code.startswith('AVE'):
                 l.append(a.id)
         return l
 
@@ -151,27 +149,30 @@ class Task(TraceableModel):
         mark = 0
         for answer in answers:
             a = answer.option
-            if a.code.startswith(code):
+            if a and a.code.startswith(code):
                 mark += a.weight
         return mark
 
     def calculate_beck_mark(self):
         answers = self.get_answers()
-        mark = 0
+        mark = None
         for answer in answers:
             a = answer.option
-            if a.code.startswith('B'):
-                mark += a.weight #* 5 / q.question_options.aggregate(Max('weight'))['weight__max']
+            if a and a.code.startswith('B'):
+                if mark is None:
+                    mark = a.weight
+                else:
+                    mark += a.weight #* 5 / q.question_options.aggregate(Max('weight'))['weight__max']
         return mark
 
     def calculate_hamilton_mark(self):
         answers = self.get_answers()
-        mark = 0
+        mark = None
         submarks = {}
         kind = self.kind
         for answer in answers:
             a = answer.option
-            if not a.code.startswith('H') or a.code.startswith('Hd'):
+            if a and (not a.code.startswith('H') or a.code.startswith('Hd')):
                 continue
             item = a.code.split('.')[0]
             if kind == settings.EXTENSO:
@@ -181,11 +182,17 @@ class Task(TraceableModel):
                     submarks[item] = a.weight
             else:
                 submarks[item] = a.weight
-                mark += a.weight
+                if mark is None:
+                    mark = a.weight
+                else:
+                    mark += a.weight
         if kind == settings.EXTENSO:
             for code, value in submarks.items():
                 submarks[code] = float(value)/Question.objects.filter(code__startswith=code+'.').count()
-                mark += submarks[code]
+                if mark is None:
+                    mark = submarks[code]
+                else:
+                    mark += submarks[code]
         return mark, submarks
 
     def get_ave_status(self):
@@ -268,15 +275,20 @@ class Task(TraceableModel):
         
         kind = self.kind
 
-        for f in Formula.objects.filter(kind=kind):
+        #for f in Formula.objects.filter(kind=kind):
+        for f in Formula.objects.filter(kind__in=(settings.GENERAL, self.kind),
+           variable__variables_categories__categories_blocks__in=self.treated_blocks.all()).distinct():
             total = None
             for item in f.polynomial.split('+'):
                 for answer in answers:
-                    a = answer.option
+                    a = answer
                     if a.question.code == item:
                         if not total:
                             total = 0
-                        total += a.weight
+                        try:
+                            total += a.option.weight
+                        except:
+                            pass
                         break
             if total != None:
                 if f.variable in marks:
@@ -307,10 +319,17 @@ class Task(TraceableModel):
                 marks[d.name] = (float(total) * float(d.factor))
         return marks
 
+    def is_scored(self):
+        return self.survey.code in [settings.ANXIETY_DEPRESSION_SURVEY, settings.ADHERENCE_TREATMENT, settings.PREVIOUS_STUDY, settings.INITIAL_ASSESSMENT]
+
+    class Meta:
+        verbose_name = "Tarea"
+        ordering = ("end_date", "created_at")
+
 
 
 class Medicine(TraceableModel):
-    patient = models.ForeignKey(User, related_name='patient_medicines')
+    patient = models.ForeignKey(User, related_name='patient_medicines',limit_choices_to = {'profiles__role':settings.PATIENT})
 
     component = models.ForeignKey(Component,
                                 related_name='component_medicines',
@@ -353,11 +372,14 @@ class Medicine(TraceableModel):
         return before_after_first_appointment
 
     def is_active(self):
-        return self.date is None 
+        return self.date is None
+
+    class Meta:
+        verbose_name = "Tratamiento"
 
 
 class Result(TraceableModel):
-    patient = models.ForeignKey(User, related_name='patient_results')
+    patient = models.ForeignKey(User, related_name='patient_results',limit_choices_to = {'profiles__role':settings.PATIENT})
 
     survey = models.ForeignKey(Survey, related_name="survey_results")
 
@@ -377,16 +399,17 @@ class Result(TraceableModel):
     def __unicode__(self):
         return u'id: %s result: %s %s %s' % (self.id, self.patient, self.survey, self.block)
 
+    class Meta:
+        verbose_name = "Resultado"
+
 
 class Conclusion(TraceableModel):
     appointment = models.ForeignKey(Appointment,
                                     related_name="appointment_conclusions")
 
-    observation = models.CharField(max_length=5000, blank=True, null=True)
+    observation = models.TextField(max_length=5000, blank=True, null=True)
 
-    recommendation = models.CharField(max_length=5000, blank=True, null=True)
-
-    task = models.ForeignKey(Task, related_name="task_conclusions", blank=True, null=True)
+    recommendation = models.TextField(max_length=5000, blank=True, null=True)
 
     date = models.DateTimeField(_(u'Fecha'), auto_now_add=True)
 
@@ -394,16 +417,27 @@ class Conclusion(TraceableModel):
         return u'id: %s conclusion: %s %s' \
                                 % (self.id, self.appointment.patient, self.appointment)
 
+    class Meta:
+        verbose_name = u"Conclusión"
+        verbose_name_plural = "Conclusiones"
+
 
 class Answer(models.Model):
     result = models.ForeignKey(Result, related_name='result_answers')
-    option = models.ForeignKey(Option, related_name='option_answers')
+    option = models.ForeignKey(Option, related_name='option_answers', null=True)
+    question = models.ForeignKey(Question, related_name='question_answers')
     value = models.CharField(max_length=50, blank=True, null=True)
 
     def __unicode__(self):
-        if self.option.text.startswith('Otr') and self.value:
-            return self.value
-        elif self.value and self.option.question.code in ['DS']:
-            return u'%s %s' % (self.value, self.option.text)
-        else:
-            return u'%s' % (self.option.text)
+        try:
+            if (not self.option or self.option.text.startswith('Otr')) and self.value:
+                return self.value
+            elif self.value and self.option.question.code in ['DS']:
+                return u'%s %s' % (self.value, self.option.text)
+            else:
+                return u'%s' % (self.option.text)
+        except:
+            return str(self.id)
+
+    class Meta:
+        verbose_name = "Respuesta"

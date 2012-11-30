@@ -3,6 +3,7 @@
 
 {% url consulting_newpatient as newpatient %}
 {% url consulting_index_pm as index_pm %}
+{% url private_messages_inbox as inbox %}
 {% url cal.index as cal %}
 
 
@@ -25,6 +26,14 @@
                 <li class="{% active_root request cal %}">
                     <a href="{% url cal.index %}">
                       {% trans 'GESTIÓN AGENDA' %}
+                    </a>
+                </li>
+                <li class="{% active_root request inbox %}">
+                    <a href="{% url private_messages_inbox %}">
+                        {% trans 'MENSAJERÍA' %}
+                        {% if user.get_profile.get_unread_messages.count %}
+                            <span id="unread_messages" class="badge badge-important"><small>{{user.get_profile.get_unread_messages.count}}</small></span>
+                        {% endif %}
                     </a>
                 </li>                                                     
             </ul>

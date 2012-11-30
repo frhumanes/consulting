@@ -1,0 +1,1 @@
+{% load consulting %}{{user.name}}, le recordamos que mañana tiene una cita en {% get_brand %}

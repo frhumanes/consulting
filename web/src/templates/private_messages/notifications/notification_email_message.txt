@@ -1,0 +1,7 @@
+{% load consulting %}
+
+Hola {{user.name}}, 
+
+tienes {{user.get_unread_messages|length}} mensaje{{user.get_unread_messages|length|pluralize}} nuevo{{user.get_unread_messages|length|pluralize}} en tu área personal de {% get_brand %}.
+
+Reciba un cordial saludo del equipo de {% get_brand %}.

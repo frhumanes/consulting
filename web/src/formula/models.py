@@ -15,6 +15,10 @@ class Dimension(models.Model):
     def __unicode__(self):
         return u'%s' % self.name
 
+    class Meta:
+        verbose_name = u"Dimensión"
+        verbose_name_plural = "Dimensiones"
+
 
 class Variable(models.Model):
     dimension = models.ForeignKey('Dimension',
@@ -26,6 +30,9 @@ class Variable(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.name
+
+    class Meta:
+        verbose_name = "Variable"
 
 
 class Formula(models.Model):
@@ -46,4 +53,15 @@ class Formula(models.Model):
     factor = models.DecimalField(u'Factor', max_digits=12, decimal_places=10)
 
     def __unicode__(self):
-        return u'%s' % self.polynomial
+        return u'%s [%s]' % (self.variable, self.get_kind())
+
+    def get_kind(self):
+        if self.kind == settings.GENERAL:
+            return 'General'
+        elif self.kind == settings.EXTENSO:
+            return 'Extenso'
+        else:
+            return 'Abreviado'
+
+    class Meta:
+        verbose_name = u"Fórmula"

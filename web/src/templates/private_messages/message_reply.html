@@ -1,6 +1,6 @@
 {% load i18n%}
 
-{% if request.user.get_profile.is_doctor and recipient.get_profile.doctor != request.user %}
+{% if recipient.get_profile.is_patient and recipient.get_profile.doctor != request.user %}
   <div class="alert alert-warning">
     {% trans 'No puede ponerse en contacto con este paciente.' %}
   </div>

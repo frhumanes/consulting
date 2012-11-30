@@ -176,6 +176,13 @@ class SelectTaskForm(SelectOtherTaskForm):
             widget=forms.TextInput(),
             required=True)
 
+class SelectVirtualTaskForm(SelectTaskForm):
+    def __init__(self, *args, **kwargs):
+        super(SelectTaskForm, self).__init__(*args, **kwargs)
+        self.fields['survey'].choices = ((settings.VIRTUAL_SURVEY, _(u'Seguimiento virtual')),)
+        del self.fields['kind']
+
+
 class SelectNotAssessedVariablesForm(forms.Form):
     def __init__(self, *args, **kwargs):
         if 'variables' in kwargs:

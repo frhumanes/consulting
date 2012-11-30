@@ -162,7 +162,7 @@
 
 {% block jquery_init %}
 
-  $('#id_date').datepicker({'format':'dd/mm/yyyy'});
+  $('#id_date').datepicker({'format':'dd/mm/yyyy', weekStart:1, language: 'es'});
   $('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.start_time.value|time:"H:i" }}' });
   $('#id_end_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.end_time.value|time:"H:i" }}' });
 

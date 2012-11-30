@@ -1,0 +1,1 @@
+{% load consulting %}[{% get_brand %}] Aviso de anulación de cita

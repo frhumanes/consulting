@@ -26,7 +26,15 @@ class AppointmentManager(Manager):
         if edit and not app_to_check is None:
             apps = apps.exclude(id=app_to_check.id).order_by('start_time')
 
-        from cal.models import Event
+        from cal.models import Event, Vacation
+        vacation = Vacation.objects\
+            .filter(
+                doctor=doctor,
+                date__year=app_date.year,
+                date__month=app_date.month,
+                date__day=app_date.day)
+        if vacation.count():
+            return (False, None)
         events = Event.objects\
             .filter(
                 doctor=doctor,

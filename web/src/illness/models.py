@@ -15,4 +15,7 @@ class Illness(TraceableModel):
     code = models.IntegerField(_(u'Código'), blank=True, null=True)
 
     def __unicode__(self):
-        return u'id: %s illness: %s' % (self.id, self.name)
+        return u'%s' % (self.name)
+
+    class Meta:
+        verbose_name = u"Diágnostico"

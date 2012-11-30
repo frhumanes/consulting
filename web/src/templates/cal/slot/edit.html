@@ -183,8 +183,12 @@
 {% block jquery_init %}
   $('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': '{% if form.start_time.value %}{{ form.start_time.value|time:"H:i" }}{% else %}08:00{% endif %}' });
   $('#id_end_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.end_time.value|time:"H:i" }}'});
-  $('#id_date').datepicker({'format':'dd/mm/yyyy'});
+  $('#id_date').datepicker({'format':'dd/mm/yyyy', weekStart:1, language: 'es'});
   $('ul').addClass("without_decorator");
+
+  $('#id_weekdays_'+parseInt($('#initial-id_weekdays').val().replace('[','').replace(']',''))).prop('checked','checked');
+  $('#id_months_'+parseInt($('#initial-id_months').val().replace('[','').replace(']',''))).prop('checked','checked');
+
 
 $('#remove-event').live('click', function(event){
     $('#modal-screen').modal({

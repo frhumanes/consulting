@@ -2,15 +2,17 @@
 # -*- encoding: utf-8 -*-
 
 from django import forms
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from private_messages.models import Message
+from django.db.models import Q
 
 
 class RecipientChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
         if obj.get_profile().is_doctor():
-            return obj.get_profile().get_full_name()
+            return obj.get_profile().get_full_name(True)
         else:
             return "%s (%s)" % (obj.get_profile().get_full_name(), obj.username)
 
@@ -33,8 +35,8 @@ class MessageForm(forms.ModelForm):
                 profile = user.get_profile()
                 queryset = None
 
-                if profile.is_doctor():
-                    queryset = User.objects.filter(profiles__doctor=user, is_active=True)
+                if not profile.is_patient():
+                    queryset = User.objects.filter(Q(is_active=True), Q(profiles__doctor=user) | Q(profiles__role__in=[settings.DOCTOR, settings.ADMINISTRATIVE])).order_by('profiles__role').exclude(id=user.id)
                 else:
                     queryset = User.objects.filter(profiles=profile.doctor.get_profile(), is_active=True)
                 self.fields['recipient'] = RecipientChoiceField(

@@ -39,7 +39,7 @@ from userprofile.forms import ProfileForm, ProfileSurveyForm
 from consulting.forms import MedicineForm, TreatmentForm
 from consulting.forms import  ConclusionForm
 from consulting.forms import  ActionSelectionForm
-from consulting.forms import SelectTaskForm
+from consulting.forms import SelectTaskForm, SelectVirtualTaskForm
 from consulting.forms import SelectOtherTaskForm
 from consulting.forms import SelectNotAssessedVariablesForm
 from consulting.forms import SymptomsWorseningForm, ParametersFilterForm
@@ -440,14 +440,16 @@ def check_task_completion(id_task):
     if task.treated_blocks.count() < task.survey.num_blocks():
         return False
     questions = task.questions.filter(required=True)
-    if task.self_administered and task.treated_blocks.count() >= 2:
-        questions = chain(questions, Question.objects.filter(required=True,kind__in=(0, task.patient.get_profile().sex), questions_categories__categories_blocks__kind__in=(settings.GENERAL, task.kind), questions_categories__categories_blocks__in=task.treated_blocks.all().exclude(code=settings.ANXIETY_DEPRESSION_BLOCK)))
+    if task.self_administered:
+        if task.treated_blocks.count() >= 2:
+            questions = chain(questions, Question.objects.filter(required=True,kind__in=(0, task.patient.get_profile().sex), questions_categories__categories_blocks__kind__in=(settings.GENERAL, task.kind), questions_categories__categories_blocks__in=task.treated_blocks.all().exclude(code=settings.ANXIETY_DEPRESSION_BLOCK)))
     if not questions:
         questions = Question.objects.filter(required=True,kind__in=(0, task.patient.get_profile().sex), questions_categories__categories_blocks__kind__in=(settings.GENERAL, task.kind), questions_categories__categories_blocks__blocks_tasks=task)
+
     for question in questions:
         found = False
         for answer in answers:
-            found = (answer.option.question == question)
+            found = (answer.question == question)
             if found:
                 break
         if not found:
@@ -575,9 +577,9 @@ def new_result_sex_status(id_logged_user, id_task, id_appointment):
         status_option = get_object_or_404(Option, code=settings.CODE_OTHER)
 
     #UPDATE RESULT
-    answer = Answer(result = result, option = sex_option)
+    answer = Answer(result = result, option = sex_option, question=sex_option.question)
     answer.save()
-    answer = Answer(result = result, option = status_option)
+    answer = Answer(result = result, option = status_option, question=status_option.question)
     answer.save()
     result.save()
 
@@ -787,11 +789,14 @@ def show_block(request, id_task, code_block=None, code_illness=None, id_appointm
                             option = Option.objects.get(pk=int(value))
                         else:
                             val = value
-                        answer = Answer(result = new_result, option = option, value = val)
+                        answer = Answer(result = new_result, option = option, value = val, question = option.question)
                         answer.save()
-                elif values:
+                elif values.isdigit():
                     option = Option.objects.get(pk=int(values))
-                    answer = Answer(result = new_result, option = option, value = val)
+                    answer = Answer(result = new_result, option = option, question = option.question)
+                    answer.save()
+                elif values:
+                    answer = Answer(result = new_result, value=values, question = Question.objects.get(code=name_field))
                     answer.save()
 
 
@@ -848,6 +853,15 @@ def next_block(task, block, code_illness, id_appointment):
                                             'code_illness':code_illness, 
                                             'id_appointment':id_appointment
                                             }))
+    elif task.self_administered and code_illness == str(settings.DEFAULT_ILLNESS):
+        task.previous_days = 0
+        task.save()
+        return HttpResponseRedirect(
+                            reverse('consulting_finished_task',
+                                    kwargs={'id_task':task.id,
+                                            'code_illness':code_illness, 
+                                            'id_appointment':id_appointment
+                                            }))
     elif task.self_administered and not block.code == settings.BEHAVIOR_BLOCK:
         task.previous_days = 0
         task.save()
@@ -893,7 +907,7 @@ def self_administered_block(request, id_task):
         for question in questions:
             options = question.question_options.all().order_by('id')
             dic[question] = [
-                            (option.id, sexify(option.text,task.patient))for option in options]
+                            (option.id, sexify(option.text,task.patient)) for option in options]
     else:
         categories = block.categories.all().order_by('id')
 
@@ -922,11 +936,14 @@ def self_administered_block(request, id_task):
                 if isinstance(values, list):
                     for value in values:
                         option = Option.objects.get(pk=int(value))
-                        answer = Answer(result = result, option = option)
+                        answer = Answer(result = result, option = option, question = option.question)
                         answer.save()
-                elif values:
+                elif values.isdigit():
                     option = Option.objects.get(pk=int(values))
-                    answer = Answer(result = result, option = option)
+                    answer = Answer(result = result, option = option, question = option.question)
+                    answer.save()
+                elif values:
+                    answer = Answer(result = result, value=values, question = Question.objects.get(code=name_field))
                     answer.save()
 
             if block not in treated_blocks:
@@ -937,7 +954,10 @@ def self_administered_block(request, id_task):
                 task.end_date = datetime.now()
                 task.save()
 
-            return HttpResponseRedirect(
+            if block.code == settings.VIRTUAL_BLOCK:
+                return HttpResponseRedirect(reverse('consulting_list_surveys'))
+            else:
+                return HttpResponseRedirect(
                     reverse('consulting_symptoms_worsening', args=[task.id]))
     else:
         form = QuestionsForm(dic=dic, selected_options=selected_options)
@@ -1038,6 +1058,7 @@ def list_incomplete_tasks(request, id_appointment, code_illness, self_administer
 def not_assess_task(request, id_task):
     task = get_object_or_404(Task, pk=int(id_task))
     task.assess = False
+    task.completed = False
     task.end_date = datetime.now()
     task.save()
 
@@ -1090,7 +1111,7 @@ def resume_task(request, id_appointment, code_illness, id_task):
                 'illness': illness,
                 'patient_user': appointment.patient},
                 context_instance=RequestContext(request))
-    elif task.survey.code == settings.PREVIOUS_STUDY:
+    elif task.survey.code == settings.PREVIOUS_STUDY or task.survey.code == settings.VIRTUAL_SURVEY:
         return render_to_response(
         'consulting/consultation/monitoring/task_details.html', {
                 'task': task,
@@ -1305,18 +1326,24 @@ def select_self_administered_survey_monitoring(request, id_appointment, code_ill
 
 
     if request.method == 'POST':
-        form = SelectTaskForm(request.POST, variables=variables)
+        if code_illness == str(settings.ANXIETY_DEPRESSION):
+            form = SelectTaskForm(request.POST, variables=variables)
+        else:
+            form = SelectVirtualTaskForm(request.POST, variables=variables)
+
         if form.is_valid():
             code_survey = form.cleaned_data['survey']
             previous_days = form.cleaned_data['previous_days']
-            kind = form.cleaned_data['kind']
+            try:
+                kind = form.cleaned_data['kind']
+            except:
+                kind = settings.GENERAL
             if code_survey == str(settings.CUSTOM):
                 survey = get_object_or_404(Survey,
                                 code=settings.ANXIETY_DEPRESSION_SURVEY)
             else:
                 survey = get_object_or_404(Survey,
                                 code=code_survey)
-            exc_block = get_object_or_404(Block,code=settings.BEHAVIOR_BLOCK, kind=kind)
 
             task = Task(created_by=request.user, patient=appointment.patient,
             appointment=None, self_administered=True, survey=survey,
@@ -1346,7 +1373,10 @@ def select_self_administered_survey_monitoring(request, id_appointment, code_ill
                                             'patient_user': appointment.patient,
                                             'appointment': appointment},
                                             context_instance=RequestContext(request))
+            elif code_survey==str(settings.VIRTUAL_SURVEY):
+                pass
             else:## HIDE DOCTOR's QUESTIONS
+                exc_block = get_object_or_404(Block,code=settings.BEHAVIOR_BLOCK, kind=kind)
                 questions_list = Question.objects.filter(questions_categories__categories_blocks__blocks_surveys=survey, questions_categories__categories_blocks__kind=kind).exclude(questions_categories__categories_blocks=exc_block)
                 for question in questions_list:
                     task.questions.add(question)
@@ -1358,7 +1388,10 @@ def select_self_administered_survey_monitoring(request, id_appointment, code_ill
                                                }))
             
     else:
-        form = SelectTaskForm(variables=variables)
+        if code_illness == str(settings.ANXIETY_DEPRESSION):
+            form = SelectTaskForm(variables=variables)
+        else:
+            form = SelectVirtualTaskForm()
 
     return render_to_response(
             'consulting/consultation/monitoring/finish/select_self_administered_survey.html',
@@ -1786,6 +1819,22 @@ def list_surveys(request):
     template_data.update({'tasks': tasks})
     return template_data
 
+@login_required()
+def searcher_profession(request):
+    logged_user_profile = request.user.get_profile()
+
+    if logged_user_profile.is_doctor() or logged_user_profile.is_administrative():
+        data = {'ok': False}
+
+        if request.method == 'POST':
+            start = request.POST.get("start", "").lower()
+
+            professions = Profile.objects.filter(profession__istartswith=start).values('profession').order_by('profession').distinct()
+
+            data = {'ok': True,
+                    'professions':professions}
+        return HttpResponse(simplejson.dumps(data))
+    return HttpResponseRedirect(reverse('consulting_index'))
 
 ################################## MEDICINE ###################################
 @login_required()
@@ -2080,7 +2129,7 @@ def list_reports(request):
     if logged_user_profile.is_doctor():
         patient_user = User.objects.get(id=patient_user_id)
 
-        reports = Task.objects.filter(patient=patient_user,survey__id__in=[settings.PREVIOUS_STUDY, settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY], completed=True).order_by('-end_date')
+        reports = Task.objects.filter(patient=patient_user, completed=True).order_by('-end_date')
 
         template_data = {}
         template_data.update({'patient_user': patient_user,

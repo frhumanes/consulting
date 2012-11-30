@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from functools import wraps
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from datetime import datetime
 
 
 def paginate(template_name=None, list_name='default', objects_per_page=10):
@@ -76,4 +77,13 @@ def only_doctor_administrative(func):
         else:
             return HttpResponseRedirect(reverse('cal.views.main'))
 
+    return _fn
+
+def update_password_date(func):
+    def _fn(request, *args, **kwargs):
+        prof = request.user.get_profile()
+        prof.updated_password_at = datetime.today()
+        prof.save()
+        return func(request, *args, **kwargs)
+        
     return _fn

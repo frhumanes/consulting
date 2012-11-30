@@ -1,0 +1,12 @@
+{% load consulting userprofile %}
+Hola {{user.name}}, 
+
+Le informamos que su cita asignada para el {{orig.date}} a las {{orig.start_time|time:"H:i"}} con {{"el/la"|sexify:orig.doctor}} {{orig.doctor.get_profile|name_with_title}} ha sido modificada.
+
+Su nueva cita asignada es el {{app.date}} a las {{app.start_time|time:"H:i"}} con {{"el/la"|sexify:app.doctor}} {{app.doctor.get_profile|name_with_title}}.
+
+Si no puede asistir le rogamos nos lo comunique lo antes posible. Otro paciente se lo agradecerá.
+
+Le rogamos disculpe las molestias.
+
+Reciba un cordial saludo del equipo de {% get_brand %}.

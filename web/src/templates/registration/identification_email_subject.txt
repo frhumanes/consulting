@@ -1,2 +1,1 @@
-{% load consulting %}
-Bienvenido a {% get_brand %}
+{% load consulting %}Bienvenido a {% get_brand %}

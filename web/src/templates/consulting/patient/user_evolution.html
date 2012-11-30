@@ -46,11 +46,11 @@
 {% endblock %}
 
 {% block jquery_init %}
-  $('#from_date').datepicker().on('changeDate',
-    function(ev){$('#from_date').datepicker('hide');
+  $('#from_date').datepicker().on('changeDate', function(ev){
+  //$('#from_date').datepicker('hide');
   });
-  $('#to_date').datepicker().on('changeDate',
-    function(ev){$('#to_date').datepicker('hide');
+  $('#to_date').datepicker().on('changeDate', function(ev){
+  //$('#to_date').datepicker('hide');
   });
   $('#myTab a').click(function (e) {
     e.preventDefault();

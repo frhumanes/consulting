@@ -26,6 +26,9 @@ urlpatterns = patterns('',
     url(r'^select_doctor/(\d+)/$', views.select_doctor,
         name='cal.select_doctor'),
 
+    url(r'^check_transfer/(\d+)/$', views.check_transfer,
+        name='cal.check_transfer'),
+
     url(r'^$', views.index),
 
     url(r'^select_month_year/(\d+)/$', views.select_month_year,

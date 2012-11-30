@@ -152,7 +152,7 @@
 {% endblock container %}
 
 {% block jquery_init %}
-  $('#id_date').datepicker({'format':'dd/mm/yyyy'});
+  $('#id_date').datepicker({'format':'dd/mm/yyyy', weekStart:1});
   $('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': '{% if  form.start_time.value %}{{ form.start_time.value|time:"H:i" }}{% else %}08:00{% endif %}' });
   $('#id_end_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.end_time.value|time:"H:i" }}'});
   var app_type_container = $('#id_app_type');

@@ -150,11 +150,11 @@ class SlotForm(forms.Form):
                     self.fields['weekdays'] = forms.ChoiceField(
                             label=_(u"Días"),required=True,
                             widget=forms.RadioSelect(attrs={'class': 'span3'}),
-                            choices=Slot.WEEKDAYS)
+                            choices=Slot.WEEKDAYS, show_hidden_initial=True)
                     self.fields['months'] = forms.ChoiceField(
                             label=_(u"Meses"),required=True,
                             widget=forms.RadioSelect(attrs={'class': 'span3'}),
-                            choices=Slot.MONTH)
+                            choices=Slot.MONTH, initial=str(slot.month), show_hidden_initial=True)
         else:
             super(SlotForm, self).__init__(*args, **kwargs)
 
@@ -202,7 +202,7 @@ class DoctorSelectionForm(forms.Form):
         if current:
             choices = []
             if patient.get_nextAppointment():
-                self.fields['confirm_app'] = forms.BooleanField(label=_(u"Anular citas futuras del paciente con su médico actual"))
+                self.fields['confirm_app'] = forms.BooleanField(label=_(u"Confirmar cambio de médico y modificar su agenda"))
         choices.extend([(doc.id, doc.get_profile().get_full_name(title=True)) for doc in queryset])
         self.fields['doctor'] = forms.ChoiceField(label=_(u"Doctor"),
                                  widget=forms.Select(

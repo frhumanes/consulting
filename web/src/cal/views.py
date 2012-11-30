@@ -836,6 +836,7 @@ def edit_slot(request, pk):
                 context_instance=RequestContext(request))
     else:
         form = SlotForm( dict(weekdays=[slot.weekday], months=[slot.month], start_time=slot.start_time, end_time=slot.end_time, slot_type=slot.slot_type), user=request.user, slot=slot)
+        
 
     return render_to_response('cal/slot/edit.html',
         {"form": form, 'slot': slot, 'year': slot.year,
@@ -1229,6 +1230,7 @@ def select_doctor(request, id_patient):
 
         if form.is_valid():
             profile = patient_user.get_profile()
+            check_transfer(request, id_patient, True)
             profile.doctor = User.objects.get(pk=int(form.cleaned_data['doctor']))
             profile.save()
             if request.is_ajax():
@@ -1243,3 +1245,43 @@ def select_doctor(request, id_patient):
     return render_to_response('cal/app/select_doctor.html', {'form': form,
         'patient_user': patient_user},
         context_instance=RequestContext(request))
+
+@login_required()
+def check_transfer(request, id_patient, doit=False):
+    if request.method == 'POST':
+        id_doctor = request.POST.get('doctor',None)
+    else:
+        return Http404
+    transferable, moves = True, 0
+    patient_user = get_object_or_404(User, pk=int(id_patient))
+    doctor = get_object_or_404(User, pk=int(id_doctor))
+    next_apps = Appointment.objects.filter(patient=patient_user,
+                            date__gt=date.today()).order_by(
+                            'date')
+    for app in next_apps:
+        available, free_intervals = Appointment.objects.availability(
+                doctor, app.date, app)
+        transferable = available
+        if not available and free_intervals:
+            for i in free_intervals:
+                if i['duration'] >= app.duration:
+                    moves += 1
+                    transferable = True
+                    if doit:
+                        app.start_time = i['start_time']
+                        app.end_time = add_minutes(i['start_time'], app.duration)
+                    break
+        if doit:
+            if transferable:
+                app.doctor = doctor
+                #app.description = "%s %s"%(app.app_type.description, app.description)
+                #app.app_type = None
+                app.save()
+            else:
+                app.delete()
+    data = {'ok': transferable,
+            'moves': moves}
+    if doit:
+        return 1
+    else:
+        return HttpResponse(simplejson.dumps(data))

@@ -14,8 +14,8 @@
 {% endblock %}
 
 {% block jquery_init %}
-  $('#dp').datepicker().on('changeDate',
-    function(ev){$('#dp').datepicker('hide');
+  $('#dp').datepicker().on('changeDate', function(ev) {
+    /*$('#dp').datepicker('hide');*/
   });
 
   jQuery.ajaxSetup({
@@ -25,11 +25,39 @@
         }
    });
 
+{% if patient_user_id %}
   $('#id_doctor').change(function(){
-    if($(this).val() != "{{doctor_form.doctor.value}}"){
+    $.ajax({
+        url: '{% url cal.check_transfer patient_user_id %}',
+        type:'POST',
+        data: { 
+            doctor: function() { return $('#id_doctor').val(); },
+            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val()
+        },
+        dataType: "json",
+        success: function(data){
+            if(data['ok']){
+              if(parseInt(data['moves'])){
+                $('#assign .alert').html('Este paciente ya tiene citas concertadas con su actual médico. Marque el siguiente campo para transpasarlas a la agenda del médico seleccionado ('+data['moves']+' de ellas serán reubicadas en algún hueco libre del mismo día)').show();
+                 $('#assign .confirm').show();
+              } else {
+                $('#assign .confirm').hide();
+                $('#assign .alert').hide();
+                $('#assign_button').fadeIn('fast');
+              }
+            } else {
+                $('#assign .alert').html('Este paciente ya tiene citas concertadas con su actual médico que generan conflictos con la agenda del médico seleccionado. Marque el siguiente campo para anular las citas del paciente que no puedan ser asignadas y proceder con el traspaso').show();
+                $('#assign .confirm').show();
+            }
+        },
+    });
+    var current = {{doctor_form.doctor.value}};
+    if($(this).val() != current){
       $('#assign').fadeIn('fast');
+      $('label[for="id_doctor"]').html("{% trans 'Asignar a ' %}:");
     } else {
       $('#assign').fadeOut('slow');
+      $('label[for="id_doctor"]').html("{% trans 'Médico asignado' %}:");
     }
   });
 
@@ -44,17 +72,40 @@
   $('#doctor_selection').on('submit',function(event){
     $('#message').css('display', 'none');
     event.preventDefault();
+    $('#assign_button').fadeOut('fast').hide();
     $(this).ajaxSubmit({target: null,
                         clearForm: false,
                         success: function(response) {
                                 $('#message').html('<div class="alert alert-success">{% trans 'Cambio realizado correctamente.' %}<button type="button" class="close" data-dismiss="alert">×</button></div>');
                                  $('#message').fadeIn('slow');
+                                current = $("id_doctor").val();
                         },
                         error: function(response) {
                                 $('#message').html('<div class="alert alert-error">{% trans 'Cambio no realizado.' %}<button type="button" class="close" data-dismiss="alert">×</button></div>');
                                  $('#message').fadeIn('slow');
                         }
                       });
+  });
+{% endif %}
+   <!-- LOOK FOR COMPONENT -->
+  $("#id_profession").autocomplete({
+    source: function(request, response){
+              $.ajax({
+                  url: '{% url consulting_searcher_profession %}',
+                  type:'POST',
+                  data: { 
+                      start: function() { return $("#id_profession").val(); },
+                      csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val()
+                  },
+                  dataType: "json",
+                  success: function(data){
+                      response(data['profession'])
+                  }
+              })
+            },
+    select: function(event, ui){
+              $("#id_profession").attr('value', ui.item.id);            
+            }    
   });
 {% endblock %}
 
@@ -141,7 +192,7 @@
                   {{form.dob.label}}
                 </label>
                 <div class="controls info">
-                  <div id="dp" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1"  data-date="{{form.dob.value|date:'d/m/Y'}}">
+                  <div id="dp" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1" data-date-language="es" data-date-viewmode="years"  data-date="{{form.dob.value|date:'d/m/Y'}}">
                     {{form.dob}}
                     <span class="add-on">
                       <i class="icon-th"></i>
@@ -284,14 +335,14 @@
 {% endblock %}
 
 {% block right %}
-  {% if user.get_profile.is_administrative and patient_user_id %}
+  {% if patient_user_id %}
   <div class="page-header">
     <h3>{% trans "Asignación de médico" %}</h3>
   </div>
 
   <section>
     <div id="message" style="display: none"></div>
-    <div class="well center">
+    <div class="well">
 
       <div class="">
         <form id="doctor_selection" class="form" method="post" action="{% url cal.select_doctor patient_user_id %}">
@@ -299,7 +350,7 @@
 
            <!-- DOCTOR -->
           <div class="control-group">
-            <label class="control-label" for="id_doctor">{% trans 'Médico asignado' %}:</label>
+            <label class="control-label" for="id_doctor">{% trans 'Médico asignado' %}: </label>
             <div class="controls">
               {{ doctor_form.doctor }}
                 {% if doctor_form.doctor.errors %}
@@ -309,10 +360,10 @@
                 {% endif %}
             </div>
           </div>
-          <div id="assign" class="hide">
+          <div id="assign" class="hide center">
             {% if doctor_form.confirm_app %}
-              <div class="alert alert-warning alert-block">Este paciente ya tiene citas concertadas con su actual médico. Marque el siguiente campo para anularlas y proseguir con el traspaso.</div>
-              <div class="">
+              <div style="text-align: justify" class="alert alert-warning alert-block"></div>
+              <div class="confirm">
                 {{ doctor_form.confirm_app }} <strong>{{ doctor_form.confirm_app.label }}</strong>
               </div>
             {% endif %}

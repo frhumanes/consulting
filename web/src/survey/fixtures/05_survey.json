@@ -41,5 +41,16 @@
       "multitype": 0,
       "created_by": 1
     }
+  },
+  {
+    "model": "survey.survey",
+    "pk": 5,
+    "fields": {
+      "name": "Seguimiento virtual",
+      "code": 5,
+      "blocks": [9],
+      "multitype": 0,
+      "created_by": 1
+    }
   }
 ]

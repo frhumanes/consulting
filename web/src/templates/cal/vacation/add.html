@@ -90,7 +90,7 @@
 
 {% block jquery_init %}
 
-  $('#id_date').datepicker({'format':'dd/mm/yyyy'});
-  $('#id_end_date').datepicker({'format':'dd/mm/yyyy'});
+  $('#id_date').datepicker({'format':'dd/mm/yyyy', weekStart:1, language: 'es'});
+  $('#id_end_date').datepicker({'format':'dd/mm/yyyy', weekStart:1, language: 'es'});
 
 {% endblock %}

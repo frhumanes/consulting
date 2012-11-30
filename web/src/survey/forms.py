@@ -146,13 +146,26 @@ class QuestionsForm(forms.Form):
             super(QuestionsForm, self).__init__(*args, **kwargs)
             pkeys = dic.keys()
             pkeys.sort(key=lambda q: q.id)
+            i = -1
             for question in pkeys:
+                i += 1
                 #question = get_object_or_404(Question, pk=int(k))
                 css = ""
                 if question.required:
                     css = 'required'
                 values = dic[question]
-                if question.single:
+                if not values:
+                    try:
+                        initial = selected_options.get(question=question).value
+                    except:
+                        initial = ''
+                    self.fields[question.code] = forms.CharField(
+                            label=question.text,
+                            widget=forms.Textarea(
+                                attrs={'cols': 60, 'rows': 4, 
+                                       'class': css +' span12'}),
+                            required=False, initial=initial)
+                elif question.single:
                     initial_option, initial_value = '', ''
                     for v in values:
                         id_option = v[0]
@@ -160,7 +173,7 @@ class QuestionsForm(forms.Form):
                             if isinstance(id_option, long) and selected_options.filter(option__id=id_option):
                                 initial_option = id_option
                                 initial_value = selected_options.get(option__id=id_option).value
-                    if values[0][0]:
+                    if isinstance(values, list) and values[0][0]:
                         values.insert(0,('',u'Marque una opción'))
                     if question.code.startswith('DS'):
                         self.fields[question.code] = forms.ChoiceField(
