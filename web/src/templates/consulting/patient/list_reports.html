@@ -44,7 +44,7 @@
           <tbody>                  
             {% for report in reports.object_list %}
               <tr id="{{report.id}}" class="report">
-                <td style="text-align:center;">{% if report.appointment %}<a class="btn btn-link" href="{% url consulting_start report.appointment.id %}">{{ report.end_date|date:"d/M/Y"|lower }}</a>{% else %}{{ report.end_date|date:"d/M/Y"|lower }}{% endif %}</td>
+                <td style="text-align:center;">{% if report.appointment %}<a class="btn btn-link" href="{% url consulting_start report.appointment.id %}" placement="top" rel="tooltip" data-original-title="Ir a resumen de la cita">{{ report.end_date|date:"d/M/Y"|lower }}</a>{% else %}{{ report.end_date|date:"d/M/Y"|lower }}{% endif %}</td>
                 <td style="text-align:left;"><a class="btn btn-link" data-target="#modal" href="{% url consulting_view_task report.id %}" role="button" data-toggle="modal">{{report.survey.name}}</a></td>
                 <td style="text-align:center;">{% get_anxiety_status_at report.patient report.end_date %}&nbsp;{% get_depression_status_at report.patient report.end_date %}</td>   
 

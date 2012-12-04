@@ -1,4 +1,4 @@
-{% load i18n consulting%}
+{% load i18n consulting %}
 
 <div class="row-fluid">
   {% if objects.paginator.num_pages > 1 %}
@@ -16,9 +16,27 @@
           {% endfor %}
         {% else %}
           {% if l %}
-          <li>
-            <a href="{{ request.path }}?page={{ l.0|add:"1" }}">...</a>
-          </li>
+            {% if forloop.counter0 = 0 %}
+              <li>
+                <a href="{{ request.path }}?page={{ objects.paginator.page_range|first }}">{{ objects.paginator.page_range|first }}</a>
+              </li>
+              {% if l|length > 1%}
+              <li>
+                <a href="{{ request.path }}?page={{ l|last }}">...</a>
+              </li>
+              {% endif %}
+            {% endif %}
+            {% if forloop.revcounter0 = 0 %}
+              {% if l|length > 1%}
+                <li>
+                  <a href="{{ request.path }}?page={{ l|first }}">...</a>
+                </li>
+              {% endif %}
+              <li>
+                <a href="{{ request.path }}?page={{ objects.paginator.page_range|last }}">{{ objects.paginator.page_range|last }}</a>
+              </li>
+            {% endif %}
+             
           {% endif %}
         {% endif %}
       {% endfor %}

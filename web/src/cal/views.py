@@ -4,6 +4,7 @@ from datetime import date, datetime, timedelta
 from datetime import time as ttime
 import time
 import json
+from itertools import chain
 
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext as _
@@ -12,6 +13,7 @@ from django.db.models import Q
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.forms.util import ErrorList
+from django.db.models.query import QuerySet
 
 
 from django.contrib.auth.models import User
@@ -283,14 +285,22 @@ def calendar_big(request, year, month, change='this', id_doctor=None):
 
         year, month = (now + mod).timetuple()[:2]
 
+    doctors = Profile.objects.filter(role=settings.DOCTOR)
     if id_doctor:
         doctor = User.objects.get(pk=int(id_doctor))
         lst = create_calendar(int(year), int(month), doctor=doctor)
     else:
         doctor = None
         lst = create_calendar(int(year), int(month), doctor=request.user)
+        for d in doctors:
+            dlst = create_calendar(int(year), int(month), doctor=d.user)
+            for i in range(len(lst)):
+                for j in range(len(lst[i])):
+                    for k in range(len(lst[i][j])):
+                        if isinstance(lst[i][j][k], list) and isinstance(dlst[i][j][k], list):
+                            lst[i][j][k] += dlst[i][j][k]
 
-    doctors = Profile.objects.filter(role=settings.DOCTOR).order_by('first_surname', 'second_surname','name')
+
 
     form = DoctorSelectionForm()
 
@@ -1209,14 +1219,11 @@ def patient_searcher(request):
                                 Q(second_surname__istartswith=start)).order_by(
                                 'name', 'first_surname', 'second_surname')
 
-            users =[]
-            [users.append(profile.user) for profile in profiles]
-
             data = {'ok': True,
                     'completed_names':
-                    [{'id': user.id,
+                    [{'id': profile.user.id,
                     'label':
-                    (user.get_profile().get_full_name())}for user in users]
+                    (profile.get_full_name()+ ' ['+profile.nif+']')}for profile in profiles]
                     }
         return HttpResponse(simplejson.dumps(data))
     return HttpResponseRedirect(reverse('consulting_index'))

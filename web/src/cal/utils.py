@@ -11,6 +11,7 @@ from cal.models import Appointment
 from cal.models import Vacation
 from cal.models import Event
 from cal.models import Slot
+import cal.settings as cal_settings
 
 
 mnames = (
@@ -25,15 +26,15 @@ def create_calendar(year, month, doctor=None):
     nyear, nmonth, nday = time.localtime()[:3]
     lst = [[]]
     week = 0
-
     for day in month_days:
+        available = cal_settings.TOTAL_HOURS.seconds / 60
         if len(lst[week]) == 7:
             lst.append([])
             week += 1
         apps = Appointment.objects.none()
         current = False
-        vacations = False
-        events = False
+        vacations = []
+        events = []
         if day:
             if doctor:
                 apps = Appointment.objects.filter(
@@ -48,8 +49,16 @@ def create_calendar(year, month, doctor=None):
 
             vacations = check_vacations(doctor, year, month, day)
             events = check_events(doctor, year, month, day)
+            if vacations:
+                available = 0
+            else:
+                for e in events:
+                    available -= e.get_duration()
+                for a in apps:
+                    available -= a.duration
+            available = max(0, available)
 
-        lst[week].append((day, apps, current, vacations, events))
+        lst[week].append([day, list(apps), current, list(vacations), list(events), available])
     return lst
 
 

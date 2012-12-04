@@ -16,6 +16,12 @@
   <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet"/>
 {% endblock %}
 
+{% block js %}
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+{% endblock %}
+
 {% block left %}
   {% if request.session.appointment and request.session.illness %}
     {% include "ui/includes/nav_bar_doctor_monitoring.html" with appointment=request.session.appointment illness=request.session.illness %}

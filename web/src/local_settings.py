@@ -41,6 +41,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     #'south', #MONGODB ISSUE
     'django_extensions',
+    'django_memcached',
+    'memcache_status',
     'userprofile',
     'survey',
     'formula',
@@ -70,3 +72,11 @@ INTERNAL_IPS = ('127.0.0.1',)
     'debug_toolbar.panels.signals.SignalDebugPanel',
     'debug_toolbar.panels.logger.LoggingPanel',
 )"""
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+DJANGO_MEMCACHED_REQUIRE_STAFF = True

@@ -27,6 +27,7 @@
             $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=doctor.id change='prev' %}');
             {% endif %} 
         }
+
 </script>
 
 {% if month_days %}
@@ -60,38 +61,38 @@
     <tbody>
         {% for week in month_days %}
             <tr class="center">
-            {% for day, entries, current, vacations, events in week %}
+            {% for day, entries, current, vacations, events, available in week %}
                 {% if day != 0 %}
+                  {% if patient_user %}
+                    {% url cal.views.day year month day patient_user.id as target %}
+                  {% else %}
+                    {% if request.user.get_profile.is_doctor %}
+                        {% url cal.views.day year month day request.user.id as target %}
+                    {% else %}
+                        {% url cal.views.day year month day doctor.id as target %}
+                    {% endif %}
+                  {% endif %}
                     <td style="text-align: right">
-                    {% if forloop.counter < 6 %}
-                        {% if patient_user %}
-                            {% url cal.views.day year month day patient_user.id as target %}
-                        {% else %}
-                            {% if request.user.get_profile.is_doctor %}
-                                {% url cal.views.day year month day request.user.id as target %}
+                      <a rel="tooltip" data-position="top" data-html="true" title="<ul class='unstyled' style='text-align: justify'>{% for e in entries %}<li>{{e.start_time|time}} {{e.app_type.title}}</li><li class='divider'></li>{% endfor %}</ul><strong>Disponible: {{available}} min</strong>" href="{{target}}" onMouseOver="$(this).children().addClass('label')" onMouseOut="$(this).children().not('.label-important, .label-info, .label-warning, .label-inverse').removeClass('label')">                
+                        <span class="{% if forloop.counter > 5 %}text-error{% endif %}
+                            {% if current %}
+                                label label-info
                             {% else %}
-                                {% url cal.views.day year month day doctor.id as target %}
-                            {% endif %}
-                        {% endif %}
-                        <a rel="tooltip" title="{{entries.count}} cita{{entries.count|pluralize}}" href="{{target}}" onMouseOver="this.className = 'label';" onMouseOut="this.className = '';">
-                            <span class="
-                                {% if current %}
-                                    label label-info
+                                {% if vacations %}
+                                    label label-important
                                 {% else %}
-                                    {% if vacations %}
-                                        label label-important
+                                    {% if events %}
+                                        label label-warning
                                     {% else %}
-                                        {% if events %}
-                                            label label-warning
+                                        {% if available = 0 %}
+                                            label label-inverse
                                         {% endif %}
                                     {% endif %}
-                                {% endif %}">
-                                {{ day }}
-                            </span>
-                        </a>
-                    {% else %}
-                        <span class="text-error">{{day}}</span>
-                    {% endif %}
+                                {% endif %}
+                            {% endif %}">
+                            {{ day }}
+                        </span>
+                      </a>
                 {% else %}
                 <td>&nbsp;
                 {% endif %}
@@ -102,6 +103,16 @@
     </tbody>
 </table>
 </div>
+<a data-content="<ul class='unstyled muted'>
+    <li><span class='label label-info'>&nbsp;&nbsp;</span> {% trans 'Hoy' %}</li>
+    <li><span class='label label-warning'>&nbsp;&nbsp;</span> {% trans 'Evento' %}</li>
+    <li><span class='label label-important'>&nbsp;&nbsp;</span> {% trans 'Ausencia' %}</li>
+    <li><span class='label label-inverse'>&nbsp;&nbsp;</span> {% trans 'Completo' %}</li>
+</ul>" data-placement="left" rel="popover" class="btn btn-link btn-block" href="#" data-html="true" data-original-title="Leyenda">{% trans 'Leyenda' %}</a>
+<script>
+    $('a[rel="popover"]').popover();
+    $('a[rel="tooltip"]').tooltip();
+</script>
 <br>
 <div id="info_day">
       {% include "cal/includes/extra_info.html" %}

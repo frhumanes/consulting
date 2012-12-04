@@ -1,6 +1,8 @@
+
+
 function init_bars(data, container) {
   /* edit these settings freely */  
-  var w = 550,
+  var w = Math.min($('#main').width(), 550),
       h = 500,
       topMargin = 15,
       labelSpace = 120,
@@ -114,7 +116,7 @@ function init_bars(data, container) {
 }
 
 function init_pie(data, container) {
-  var width = 550,
+  var width = Math.min($('#main').width(), 550),
     height = 500,
     radius = Math.min(width, height) / 2;
 
@@ -152,7 +154,7 @@ function init_pie(data, container) {
 }
 
 function init_donuts(dataset, container) {
-  var width = 550,
+  var width = Math.min($('#main').width(), 550),
       height = 450,
       radius = Math.min(width, height) / 2;
 

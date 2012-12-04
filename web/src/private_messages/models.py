@@ -31,18 +31,22 @@ class Message(models.Model):
         return Message.objects.filter(parent=self)
 
     def save(self, *args, **kwargs):
+        warn = False
+        if not self.pk:
+            warn = True
         super(Message, self).save(*args, **kwargs)
-        try:
-            subject = render_to_string('private_messages/notifications/notification_email_subject.txt', {'user': self.recipient.get_profile()})
-            # Email subject *must not* contain newlines
-            subject = ''.join(subject.splitlines())
+        if warn:
+            try:
+                subject = render_to_string('private_messages/notifications/notification_email_subject.txt', {'user': self.recipient.get_profile()})
+                # Email subject *must not* contain newlines
+                subject = ''.join(subject.splitlines())
 
-            message = render_to_string('private_messages/notifications/notification_email_message.txt', {'user': self.recipient.get_profile()})
+                message = render_to_string('private_messages/notifications/notification_email_message.txt', {'user': self.recipient.get_profile()})
 
-            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, 
-                        [self.recipient.get_profile().email])
-        except:
-            pass
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, 
+                            [self.recipient.get_profile().email])
+            except:
+                pass
 
     class Meta:
         verbose_name = "Mensaje"

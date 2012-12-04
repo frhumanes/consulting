@@ -28,6 +28,7 @@
             {% csrf_token %}
             <fieldset class="control-group">
               <legend>Login</legend>
+              <br>
               <input type="hidden" name="next" value="{{ next }}"/>
               <!-- USERNAME -->
               {% if form.username.errors %}

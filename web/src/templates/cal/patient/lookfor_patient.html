@@ -1,6 +1,6 @@
 {% extends "cal/includes/base.html" %}
 
-{% load i18n%}
+{% load i18n %}
 {% load url from future %}
 
 
@@ -17,9 +17,11 @@
 
 {% block jquery_init %}  
   $("#searcher").autocomplete({
-    source: function(request, response){
+        minLength: 3,
+        autoFocus: false,
+        source: function(request, response){
               $.ajax({
-                  url: '{% url 'cal.patient_searcher' %}',
+                  url: '{% url 'consulting_patient_searcher' %}',
                   type:'POST',
                   data: {
                       start: function() { return $("#searcher").val(); },
@@ -31,28 +33,34 @@
                   }
               })
             },
-    select: function(event, ui){
+        select: function(event, ui){ 
             {% if year and month and day %}
-            var pattern = '{% url destination year month day 1 %}';
-            window.location.href = pattern.replace('for/1', 'for/'+ui.item.id);
+              var pattern = '{% url destination year month day 1 %}';
+              window.location.href = pattern.replace('for/1', 'for/'+ui.item.id);
             {% else %}
-            var pattern = '{% url destination 1 %}';
-            window.location.href = pattern.replace('1', ui.item.id);
+              var pattern = '{% url destination 1 %}';
+              window.location.href = pattern.replace('1', ui.item.id);
             {% endif %}
-             }
-  }); 
+            }
+    }).data( "autocomplete" )._renderItem = function( ul, item ) {
+            return $( "<li style='border-bottom: 1px solid #e0e0e0'>" )
+                .data( "item.autocomplete", item )
+                .append( "<a>" + item.label.replace(new RegExp( "(" + $("#searcher").val() + ")" , 'gi' ), "<strong>"+$("#searcher").val().capitalize() + "</strong>") + "<br><small class='text-info'>" + item.nif.replace($("#searcher").val(), "<strong>"+$("#searcher").val() + "</strong>") +"</small></a>" )
+                .appendTo( ul );
+            };
+    $("#searcher").focus();
 
 {% endblock %}
 
 
 {% block container %}
 <div class="row-fluid" style="margin-top:150px;">      
-  <div style="width:50%; float:left" style="text-align:right;">
+  <div class="span6 relative" style="text-align:right;">
     <h3>{% trans 'BUSCAR PACIENTE' %}</h3>
   </div>
-  <div style="width:50%; float: right">
+  <div class="span6 relative">
     <form class="">{% csrf_token %}
-      <input type="text" id="searcher" class="input-medium search-query span12" style="margin: 13px 0">
+      <input type="text" id="searcher" class="input-medium search-query span12" style="margin: 13px 0" placeholder="nombre, apellidos, NIF...">
     </form>
   </div>     
 </div>  

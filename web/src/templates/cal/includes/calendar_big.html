@@ -72,7 +72,7 @@
         <form class="form-inline pull-right">
           {% csrf_token %}
           <strong>{% trans 'PACIENTE' %}</strong>
-          <input type="text" id="searcher" class="input-medium search-query span8">
+          <input type="text" id="searcher" class="input-medium search-query span8" placeholder="nombre, apellidos, NIF...">
         </form>
     </div>  
 </div>   
@@ -91,25 +91,26 @@
     <tbody class="table-bordered table-condensed">
         {% for week in month_days %}
             <tr class="center">
-            {% for day, entries, current, vacations, events in week %}
+            {% for day, apps, current, vacations, events, available in week %}
                 {% if day != 0 %}
-                    <td style="text-align: left; {{current|yesno:'background-color:#eeeeee;border: 1px solid #000000;,'}}{{vacations|yesno:'background-color:#f2dede; border: 1px solid #b94a48;,'}} cursor:pointer; width: 14%">
-                    {% if request.user.get_profile.is_doctor %}
-                        {% url 'cal.views.day' year month day request.user.id as target %}
-                    {% else %}
-                        {% url 'cal.views.day' year month day doctor.id as target %}
-                    {% endif %}
-                    {% if forloop.counter < 6 %}
-                        <div>
-                            {% if request.user.get_profile.is_doctor or doctor %}
-                            <a href="{{target}}" onMouseOver="this.className = 'label';" onMouseOut="this.className = '';">
-                                {{day}}
-                            </a>
-                            {% else %}
-                                {{day}}
-                            {% endif %}
-                        </div>
-                        <div id="events_list" style="min-height:50px">
+                <td style="text-align: left; {{current|yesno:'background-color:#eeeeee;border: 1px solid #000000;,'}}{% if vacations and doctor or request.user.get_profile.is_doctor %}background-color:#f2dede; border: 1px solid #b94a48;{% endif %} cursor:pointer; width: 14%">
+                {% if request.user.get_profile.is_doctor %}
+                    {% url 'cal.views.day' year month day request.user.id as target %}
+                {% else %}
+                    {% url 'cal.views.day' year month day doctor.id as target %}
+                {% endif %}
+                
+                    <div>
+                        {% if request.user.get_profile.is_doctor or doctor %}
+                        <a href="{{target}}" onMouseOver="this.className = 'label';" onMouseOut="this.className = '';">
+                            <span class="{% if forloop.counter > 5 %}text-error{% endif %}">{{day}}</span>
+                        </a>
+                        {% else %}
+                            <span class="{% if forloop.counter > 5 %}text-error{% endif %}">{{day}}</span>
+                        {% endif %}
+                    </div>
+                    <div id="events_list" style="min-height:50px">
+                    {% if request.user.get_profile.is_doctor or doctor %}
                         {% if vacations %}
                            {% for v in vacations %}
                               <div class="text-error"><small>{% trans 'AUSENCIA' %}: {{v.description}}</small></div>  
@@ -118,7 +119,7 @@
                             {% for e in events %}
                               <div class="text-warning"><small>{{e.start_time|time}}-{{e.end_time|time}} {{e.description}}</small></div>  
                             {% endfor %}
-                            {% for a in entries %}
+                            {% for a in apps %}
                               <div class="{% if not a.is_editable %}{{ a.has_activity|yesno:',muted' }}{% else %}text-info{% endif %}"><small><strong>{{a.start_time|time}}</strong>
                               {% if request.user.get_profile.is_doctor %}
                                {{a.patient.get_profile.get_full_name}}
@@ -127,19 +128,12 @@
                               {% endif %}</small></div>  
                             {% endfor %}
                         {% endif %}
-                        </div>
                     {% else %}
-                        <div>
-                            {% if request.user.get_profile.is_doctor or doctor %}
-                            <a href="{{target}}" onMouseOver="this.className = 'label';" onMouseOut="this.className = '';">
-                                <span class="text-error">{{day}}</span>
-                            </a>
-                            {% else %}
-                                <span class="text-error">{{day}}</span>
-                            {% endif %}
-                        </diV>
-                        <div id="events_list" style="min-height:50px"></div>
+                      <div style="margin: 0 10px" class="text-info">Citas: <strong class="pull-right">{{apps|length}}</strong></div>
+                      <div style="margin: 0 10px" class="text-warning">Eventos: <strong class="pull-right">{{events|length}}</strong></div>
+                      <div style="margin: 0 10px" class="text-error">Ausencias: <strong class="pull-right">{{vacations|length}}</strong></div>
                     {% endif %}
+                    </div>
                 {% else %}
                 <td>&nbsp;
                 {% endif %}
@@ -210,9 +204,11 @@
     };
 
     $("#searcher").autocomplete({
+        minLength: 3,
+        autoFocus: false,
         source: function(request, response){
               $.ajax({
-                  url: '{% url 'cal.patient_searcher' %}',
+                  url: '{% url 'consulting_patient_searcher' %}',
                   type:'POST',
                   data: {
                       start: function() { return $("#searcher").val(); },
@@ -230,7 +226,13 @@
             $('#myModal').modal('show');
             $('#myModalBody').load(pattern.replace('1', ui.item.id),capture_pager);
             }
-    });
+    }).data( "autocomplete" )._renderItem = function( ul, item ) {
+            return $( "<li style='border-bottom: 1px solid #e0e0e0'>" )
+                .data( "item.autocomplete", item )
+                .append( "<a>" + item.label.replace(new RegExp( "(" + $("#searcher").val() + ")" , 'gi' ), "<strong>"+$("#searcher").val().capitalize() + "</strong>") + "<br><small class='text-info'>" + item.nif.replace($("#searcher").val(), "<strong>"+$("#searcher").val() + "</strong>") +"</small></a>" )
+                .appendTo( ul );
+            };
+    $("#searcher").focus();
 
     $('#calendar').find('td').each(function(){
         $(this).on('click',function(){

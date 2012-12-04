@@ -35,9 +35,11 @@ $('#myfilter').on('click', function(e){
   }
 })
 
+ var base = Math.min($(window).width()-40, 390);
+
  $('#pyramid_anxiety').Pyramid({
     'height': 350,
-    'base': 390,
+    'base': base,
     'top': 100,
     'slices':{{anxiety_list|length}},
     'slice_separation': 0.1,
@@ -50,7 +52,7 @@ $('#myfilter').on('click', function(e){
 
   $('#pyramid_depression').Pyramid({
     'height': 350,
-    'base': 390,
+    'base': base,
     'top': 100,
     'slices':{{depression_list|length}},
     'slice_separation': 0.10,

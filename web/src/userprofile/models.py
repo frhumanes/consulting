@@ -37,7 +37,8 @@ class Profile(TraceableModel):
         (settings.PATIENT, _(u'Paciente')),
     )
     #username is the nick with you login in app
-    user = models.ForeignKey(User, unique=True, related_name='profiles')
+    user = models.ForeignKey(User, unique=True, related_name='profiles',
+                            help_text='Usuario asociado del sistema')
     doctor = models.ForeignKey(User, blank=True, null=True,
                                 related_name='doctor', limit_choices_to = {'profiles__role':settings.DOCTOR})
     #patients = models.ManyToManyField(User, related_name='patients_profiles',
@@ -83,13 +84,18 @@ class Profile(TraceableModel):
     phone2 = models.CharField(_(u'Teléfono 2'), max_length=9, blank=True)
 
     email = models.EmailField(_(u'Correo Electrónico'), max_length=150,
-                                null=True, unique=True)
+                                null=True, unique=True, blank=True)
 
     profession = models.CharField(_(u'Profesión'), max_length=150, blank=True)
 
     role = models.IntegerField(_(u'Rol'), choices=ROLE, blank=True, null=True)
 
-    updated_password_at = models.DateTimeField(auto_now_add=True)
+    updated_password_at = models.DateTimeField(_(u'Última vez que actualizó la contraseña'), auto_now_add=True)
+
+    def save(self, *args, **kw):
+        if self.email == '':
+            self.email = None
+        super(Profile, self).save(*args, **kw)
 
     def get_full_name(self, title=False):
         if title:
@@ -210,7 +216,7 @@ class Profile(TraceableModel):
     def get_pending_tasks(self):
         next_app = self.get_nextAppointment()
         tasks = []
-        if next_app and next_app.date >= date.today():
+        if next_app and datetime.combine(next_app.date, next_app.start_time) >= datetime.now():
             ddays = (next_app.date-date.today()).days
             tasks = Task.objects.filter(patient=self.user,
                                         self_administered=True, 
@@ -260,3 +266,4 @@ class Profile(TraceableModel):
     class Meta:
         verbose_name = "Perfil"
         verbose_name_plural = "Perfiles"
+        ordering = ['first_surname', 'second_surname', 'name', 'id']

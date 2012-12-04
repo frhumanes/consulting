@@ -1592,9 +1592,9 @@ def patient_searcher(request):
                 profiles = Profile.objects.filter(
                                 Q(role__exact=settings.PATIENT) &
                                 (Q(nif__istartswith=start)|
-                                Q(name__istartswith=start)|
-                                Q(first_surname__istartswith=start)|
-                                Q(second_surname__istartswith=start))).order_by(
+                                Q(name__icontains=start)|
+                                Q(first_surname__icontains=start)|
+                                Q(second_surname__icontains=start))).order_by(
                                 'name', 'first_surname', 'second_surname')
             else:
                 doctor_user = logged_user_profile.user
@@ -1602,19 +1602,15 @@ def patient_searcher(request):
                                 Q(doctor=doctor_user,
                                 role__exact=settings.PATIENT) &
                                 (Q(nif__istartswith=start)|
-                                 Q(name__istartswith=start)|
-                                 Q(first_surname__istartswith=start)|
-                                 Q(second_surname__istartswith=start)
+                                 Q(name__icontains=start)|
+                                 Q(first_surname__icontains=start)|
+                                 Q(second_surname__icontains=start)
                                 )).order_by('name', 'first_surname', 'second_surname')
-
-            users =[]
-            [users.append(profile.user) for profile in profiles]
-
             data = {'ok': True,
                     'completed_names':
-                    [{'id': user.id,
-                    'label':
-                    (user.get_profile().get_full_name())}for user in users]
+                    [{'id': profile.user.id,
+                    'label': profile.get_full_name(),
+                    'nif': profile.nif } for profile in profiles]
                     }
         return HttpResponse(simplejson.dumps(data))
     return HttpResponseRedirect(reverse('consulting_index'))
@@ -1700,8 +1696,9 @@ def editpatient_pm(request, patient_user_id):
 
                 profile.save()
 
-                #SEN EMAIL to warn new username
-                sendemail(user)
+                #SEND EMAIL to warn new username
+                if profile.email:
+                    sendemail(user)
                 patient_user_id = user.id
 
                 return HttpResponseRedirect(
@@ -1711,7 +1708,10 @@ def editpatient_pm(request, patient_user_id):
                     redirect_to))
             else:
                 profile.save()
-                return HttpResponseRedirect(redirect_to)
+                if redirect_to:
+                    return HttpResponseRedirect(redirect_to)
+                else:
+                    return HttpResponseRedirect(reverse('consulting_index_pm'))
         else:
             return render_to_response(
                             'consulting/patient/patient.html',
@@ -1806,6 +1806,12 @@ def patient_management(request):
 def patient_list(request, doctor_user_id):
     patients = []
     if request.user.get_profile().is_administrative():
+        if int(doctor_user_id) == request.user.id:
+            patients = Profile.objects.filter(role=settings.PATIENT)
+        else:
+            patients = Profile.objects.filter(doctor__id=int(doctor_user_id),
+                                              role=settings.PATIENT)
+    elif request.user.get_profile().is_doctor() and request.user.id == int(doctor_user_id):
         patients = Profile.objects.filter(doctor__id=int(doctor_user_id),
                                           role=settings.PATIENT)
     template_data = {}

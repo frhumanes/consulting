@@ -18,4 +18,4 @@ class Illness(TraceableModel):
         return u'%s' % (self.name)
 
     class Meta:
-        verbose_name = u"Diágnostico"
+        verbose_name = u"Diagnóstico"

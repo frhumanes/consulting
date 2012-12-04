@@ -6,7 +6,7 @@ from django.db import models
 
 from managers import SlotManager, AppointmentManager
 from log.models import TraceableModel
-from datetime import date, datetime
+from datetime import date, datetime, time
 
 from django.template.loader import render_to_string
 from django.conf import settings
@@ -44,6 +44,8 @@ class Event(TraceableModel):
                                   self.start_time, self.end_time,
                                   self.doctor)
 
+    def get_duration(self):
+        return (datetime.combine(date.today(), self.end_time) - datetime.combine(date.today(), self.start_time)).seconds / 60
 
 class SlotType(TraceableModel):
     doctor = models.ForeignKey(User, related_name='entry_type_doctor',limit_choices_to = {'profiles__role':settings.DOCTOR})
@@ -143,7 +145,7 @@ class Appointment(TraceableModel):
         return self == Appointment.objects.filter(patient=self.patient).order_by('date')[0]
 
     def is_editable(self):
-        return self.date >= date.today()
+        return datetime.combine(self.date, self.end_time) >= datetime.now()
 
     def has_activity(self):
         return bool(self.appointment_tasks.all().count() or self.appointment_conclusions.all().count())
@@ -169,16 +171,17 @@ class Appointment(TraceableModel):
             
 
     def warn_patient(self, action, app=None):
-        try:
-            subject = render_to_string('cal/app/notifications/'+action+'_email_subject.txt', {'user': self.patient.get_profile(),
-                                      'app': self})
-            # Email subject *must not* contain newlines
-            subject = ''.join(subject.splitlines())
+        if self.patient.get_profile().email:
+            try:
+                subject = render_to_string('cal/app/notifications/'+action+'_email_subject.txt', {'user': self.patient.get_profile(),
+                                          'app': self})
+                # Email subject *must not* contain newlines
+                subject = ''.join(subject.splitlines())
 
-            message = render_to_string('cal/app/notifications/'+action+'_email_message.txt', {'user': self.patient.get_profile(),
-                                    'app': self, 'orig':app})
+                message = render_to_string('cal/app/notifications/'+action+'_email_message.txt', {'user': self.patient.get_profile(),
+                                        'app': self, 'orig':app})
 
-            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, 
-                        [self.patient.get_profile().email])
-        except:
-            pass
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, 
+                            [self.patient.get_profile().email])
+            except:
+                pass

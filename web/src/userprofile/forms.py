@@ -100,8 +100,8 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         exclude = ('created_at', 'updated_at')
 
-
-class ProfileSurveyForm(forms.ModelForm):
+ProfileSurveyForm = ProfileForm 
+"""class ProfileSurveyForm(forms.ModelForm):
     ADULT = 18
     ACTIVE = (
         (settings.ACTIVE, _(u'Activado')),
@@ -184,4 +184,4 @@ class ProfileSurveyForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        exclude = ('created_at', 'updated_at')
+        exclude = ('created_at', 'updated_at')"""

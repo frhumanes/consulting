@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     (r'^messages/', include('private_messages.urls')),
     (r'^calendar/', include('cal.urls')),
     (r'^configuration/', include('conf.urls')),
+    (r'^cache/', include('django_memcached.urls')),
 )
 urlpatterns += staticfiles_urlpatterns()

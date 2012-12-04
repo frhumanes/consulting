@@ -18,7 +18,7 @@
       <td><strong>{{medicine.component}}</strong></td>
       <td>{{medicine.get_before_after_symptom}} a los síntomas</td>
       <td>{{medicine.posology}} mg/día</td>
-      <td><a href="#" id="{{medicine.id}}"  data-toggle="modal" data-target="#check_remove_medicine" class="remove_medicine"><i class="icon-remove-circle"></i></a></td>
+      <td><a href="#" id="{{medicine.id}}"  data-toggle="modal" data-target="#check_remove_medicine" class="remove_medicine"  placement="top" rel="tooltip" data-original-title="Eliminar medicamento"><i class="icon-remove-circle"></i></a></td>
     </tr>
     {% endif %}
   {% endfor %}

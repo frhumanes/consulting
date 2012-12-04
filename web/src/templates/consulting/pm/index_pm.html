@@ -13,11 +13,15 @@
 {% endblock %}
 
 {% block js %}
-
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
 {% endblock %}
 
 {% block jquery_init %}  
   $("#searcher").autocomplete({
+    minLength: 3,
+    autoFocus: false,
     source: function(request, response){
               $.ajax({
                   url: '{% url consulting_patient_searcher %}',
@@ -36,12 +40,18 @@
             var url = '/patient_management/pre_personal_data_pm/' + ui.item.id;
             $(window.location).attr('href', url);
             },
-    
-  }); 
+  }).data( "autocomplete" )._renderItem = function( ul, item ) {
+            return $( "<li style='border-bottom: 1px solid #e0e0e0'>" )
+                .data( "item.autocomplete", item )
+                .append( "<a>" + item.label.replace(new RegExp( "(" + $("#searcher").val() + ")" , 'gi' ), "<strong>"+$("#searcher").val().capitalize() + "</strong>") + "<br><small class='text-info'>" + item.nif.replace($("#searcher").val(), "<strong>"+$("#searcher").val() + "</strong>") +"</small></a>" )
+                .appendTo( ul );
+            };
+  $("#searcher").focus(); 
   $('.btn-link').on('click', function() {
     url = $(this).attr('href');
     $('#modal_patient .modal-body').load(url,'',$('#modal_patient').modal('show'));
   });
+
 {% endblock %}
 
 {% block left %}
@@ -62,16 +72,25 @@
 {% endblock %}
 
 {% block container %}
-<div class="row-fluid" style="margin-top:150px;">      
-  <div class="span6 relative" style="text-align:right;">
-    <h3>{% trans 'BUSCAR PACIENTE' %}</h3>
-  </div>
-  <div class="span6 relative">
-    <form class="">{% csrf_token %}
-      <input type="text" id="searcher" class="input-medium search-query span12" style="margin: 13px 0">
-    </form>
-  </div>     
+<div class="page-header">
+  <h1>{% trans 'Pacientes' %}
+    <div class="pull-right">
+      <form class="form form-inline">{% csrf_token %}
+          <input type="text" id="searcher" class="input-medium search-query" style="margin: 0" placeholder="nombre, apellidos, NIF...">
+      </form>
+    </div>
+  </h1>
 </div>
+
+<div id="patient_list" class="thumbnail">
+  <div class="center">
+        <img style="padding: 50px" src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+    </div>
+  <script>
+    $('#patient_list').load('{% url consulting_patient_list doctor_user_id=request.user.id %}');
+  </script>
+</div>
+
 
 <div id="modal_patient" class="modal hide fade">
   <div class="modal-header">

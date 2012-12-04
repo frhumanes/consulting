@@ -1,6 +1,6 @@
 {% extends "cal/includes/base.html" %}
 
-{% load i18n%}
+{% load i18n %}
 
 {% block js_files %}
   {{ block.super }}
@@ -12,11 +12,13 @@
   <link href="{{ STATIC_URL }}css/jquery-ui-1.9.1.custom.css" rel="stylesheet">
 {% endblock %}
 
-{% block jquery_init %}  
+{% block jquery_init %}
   $("#searcher").autocomplete({
-    source: function(request, response){
+        minLength: 3,
+        autoFocus: false,
+        source: function(request, response){
               $.ajax({
-                  url: '{% url cal.patient_searcher %}',
+                  url: '{% url 'consulting_patient_searcher' %}',
                   type:'POST',
                   data: {
                       start: function() { return $("#searcher").val(); },
@@ -28,12 +30,17 @@
                   }
               })
             },
-    select: function(event, ui){
-              var url = '/calendar/app/list/patient/' + ui.item.id;
-              $(window.location).attr('href', url);
-            },
-    
-  }); 
+        select: function(event, ui){ 
+            var url = '/calendar/app/list/patient/' + ui.item.id;
+            $(window.location).attr('href', url);
+            }
+    }).data( "autocomplete" )._renderItem = function( ul, item ) {
+            return $( "<li style='border-bottom: 1px solid #e0e0e0'>" )
+                .data( "item.autocomplete", item )
+                .append( "<a>" + item.label.replace(new RegExp( "(" + $("#searcher").val() + ")" , 'gi' ), "<strong>"+$("#searcher").val().capitalize() + "</strong>") + "<br><small class='text-info'>" + item.nif.replace($("#searcher").val(), "<strong>"+$("#searcher").val() + "</strong>") +"</small></a>" )
+                .appendTo( ul );
+            };
+    $("#searcher").focus();
 
 {% endblock %}
 
@@ -45,7 +52,7 @@
   </div>
   <div style="width:50%">
     <form class="">{% csrf_token %}
-      <input type="text" id="searcher" class="input-medium search-query span12" style="margin: 13px 0">
+      <input type="text" id="searcher" class="input-medium search-query span12" style="margin: 13px 0" placeholder="nombre, apellidos, NIF...">
     </form>
   </div>     
 </div>  

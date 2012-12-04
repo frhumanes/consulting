@@ -8,35 +8,40 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    {% block js_files %}
-      <script src="{{ STATIC_URL }}js/jquery-1.8.2.js"></script>
-      <script src="{{ STATIC_URL }}js/jquery.form.js"></script>
-      <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
-      <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/excanvas.min.js"></script><![endif]-->
-      <script src="{{ STATIC_URL }}js/bootstrap-editable.js"></script>
-    {% endblock %}
+  {% block js_files %}
+    <script src="{{ STATIC_URL }}js/jquery-1.8.2.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.form.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/excanvas.min.js"></script><![endif]-->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="{{ STATIC_URL }}js/bootstrap-editable.js"></script>
+  {% endblock %}
 
-    {% block css_files %}
-      <link href="{{ STATIC_URL }}css/app.css" rel="stylesheet"/>
-      <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet"/>      
-      <link href="{{ STATIC_URL }}css/bootstrap-editable.css" rel="stylesheet">
-      <link href="{{ STATIC_URL }}css/table-calendar.css" rel="stylesheet"/>
-    {% endblock %}
+  {% block css_files %}
+    <link href="{{ STATIC_URL }}css/app.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet"/>   
+    <link href="{{ STATIC_URL }}css/bootstrap-editable.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/table-calendar.css" rel="stylesheet"/>
+  {% endblock %}
+
+
 
     <style type="text/css">
-        @media (min-width: 768px) and (max-width: 1024px){
-          #calendar table {
-           font-size:0.8em
-          }
-          .pagination {
-            min-width: 220px
+      @media (min-width: 768px) and (max-width: 1024px){
+        #calendar table {
+         font-size:0.8em
+        }
+        .pagination {
+          min-width: 220px
+        }
+      }
+      @media(max-width:1024px){
+        h1{
+           font-size:2em 
           }
         }
-        @media(max-width:1024px){
-          h1{
-             font-size:2em 
-            }
-          }
     {% block css_inline %}
     {% endblock %}
     </style>
@@ -115,6 +120,10 @@
       });
     </script>
 
+    <!--[if IE 6]>
+    <script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/ie6.min.js"></script>
+    <link href="{{ STATIC_URL }}css/ie6.min.css" rel="stylesheet">
+    <![endif]-->
   </head>
 
   <body>

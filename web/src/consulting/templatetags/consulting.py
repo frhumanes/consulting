@@ -107,10 +107,10 @@ def sexify(value, patient):
 @register.filter
 def get_pages_list(objects):
     o = objects.paginator.page_range
-    n_min = max(0, objects.number - 1 - settings.MAX_VISIBLE_PAGES / 3)
-    n_max = min(objects.paginator.num_pages, objects.number + settings.MAX_VISIBLE_PAGES * 2/3)
+    n_min = max(0, objects.number - 2)
+    n_max = min(objects.paginator.num_pages, objects.number + settings.MAX_VISIBLE_PAGES - 2)
 
-    n_min = min(n_min, objects.paginator.num_pages - settings.MAX_VISIBLE_PAGES)
-    n_max = max(n_max, settings.MAX_VISIBLE_PAGES)
+    n_min = min(n_min, max(0, objects.paginator.num_pages - settings.MAX_VISIBLE_PAGES))
+    n_max = max(n_max, min(settings.MAX_VISIBLE_PAGES, objects.paginator.num_pages))
 
     return [o[:n_min], o[n_min:n_max], o[n_max:]]
