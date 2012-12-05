@@ -75,7 +75,7 @@ def only_doctor_administrative(func):
             request.user.get_profile().is_doctor():
             return func(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect(reverse('cal.views.main'))
+            return HttpResponseRedirect(reverse('consulting_index'))
 
     return _fn
 

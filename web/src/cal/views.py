@@ -63,6 +63,7 @@ def index(request):
 
 
 @login_required
+@only_doctor_administrative
 def main(request, year=None):
     if year:
         year = int(year)
@@ -95,6 +96,7 @@ def main(request, year=None):
 
 
 @login_required
+@only_doctor_administrative
 def select_month_year(request, year=None):
     if year:
         year = int(year)
@@ -127,6 +129,7 @@ def select_month_year(request, year=None):
 
 
 @login_required
+@only_doctor_administrative
 def scheduler(request, id_patient, year=None):
     patient = get_object_or_404(User, pk=int(id_patient))
     if patient.get_profile().is_patient() and patient.get_profile().doctor is None:
@@ -163,6 +166,7 @@ def scheduler(request, id_patient, year=None):
 
 
 @login_required
+@only_doctor_administrative
 def month(request, year, month, change=None):
     year, month = int(year), int(month)
 
@@ -189,6 +193,7 @@ def month(request, year, month, change=None):
 
 
 @login_required
+@only_doctor_administrative
 @paginate(template_name='cal/doctor/list.html', list_name='events',
     objects_per_page=settings.OBJECTS_PER_PAGE)
 def day(request, year, month, day, id_user, change=None):
@@ -231,6 +236,7 @@ def day(request, year, month, day, id_user, change=None):
     return template_data
 
 @login_required
+@only_doctor_administrative
 def calendar(request, year, month, day, id_user, change='this'):
 
     if change in ("next", "prev"):
@@ -272,6 +278,7 @@ def calendar(request, year, month, day, id_user, change='this'):
 
 
 @login_required
+@only_doctor_administrative
 def calendar_big(request, year, month, change='this', id_doctor=None):
 
     if change in ("next", "prev"):
@@ -292,13 +299,14 @@ def calendar_big(request, year, month, change='this', id_doctor=None):
     else:
         doctor = None
         lst = create_calendar(int(year), int(month), doctor=request.user)
-        for d in doctors:
-            dlst = create_calendar(int(year), int(month), doctor=d.user)
-            for i in range(len(lst)):
-                for j in range(len(lst[i])):
-                    for k in range(len(lst[i][j])):
-                        if isinstance(lst[i][j][k], list) and isinstance(dlst[i][j][k], list):
-                            lst[i][j][k] += dlst[i][j][k]
+        if request.user.get_profile().is_administrative():
+            for d in doctors:
+                dlst = create_calendar(int(year), int(month), doctor=d.user)
+                for i in range(len(lst)):
+                    for j in range(len(lst[i])):
+                        for k in range(len(lst[i][j])):
+                            if isinstance(lst[i][j][k], list) and isinstance(dlst[i][j][k], list):
+                                lst[i][j][k] += dlst[i][j][k]
 
 
 
@@ -312,6 +320,7 @@ def calendar_big(request, year, month, change='this', id_doctor=None):
 
 
 @login_required
+@only_doctor_administrative
 @paginate(template_name='cal/doctor/list_consultation.html',
     list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE)
 def day_consultation(request, year, month, day):
@@ -333,6 +342,7 @@ def day_consultation(request, year, month, day):
 
 
 @login_required
+@only_doctor_administrative
 def app_add(request, year, month, day, id_user):
     user = User.objects.get(pk=int(id_user))
     if user.get_profile().is_doctor():
@@ -467,6 +477,7 @@ def app_add(request, year, month, day, id_user):
 
 
 @login_required
+@only_doctor_administrative
 def app_edit(request, pk, id_patient=None, id_doctor=None):
     app = get_object_or_404(Appointment, pk=int(pk))
     if app.date < date.today():
@@ -608,6 +619,7 @@ def app_edit(request, pk, id_patient=None, id_doctor=None):
 
 
 @login_required
+@only_doctor_administrative
 def app_delete(request):
     if request.method == 'DELETE':
         data = json.loads(request.raw_post_data)
@@ -631,6 +643,7 @@ def app_delete(request):
 
 
 @login_required
+@only_doctor_administrative
 @paginate(template_name='cal/patient/list.html',
     list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE)
 def app_list_patient(request, id_patient):
@@ -864,6 +877,7 @@ def delete_slot(request, pk):
 
 
 @login_required
+@only_doctor_administrative
 def doctor_calendar(request):
     if request.method == 'POST':
         form = DoctorSelectionForm(request.POST)
@@ -881,6 +895,7 @@ def doctor_calendar(request):
 
 
 @login_required
+@only_doctor_administrative
 def doctor_month(request, year, month, id_doctor, change=None):
     year, month = int(year), int(month)
 
@@ -913,6 +928,7 @@ def doctor_month(request, year, month, id_doctor, change=None):
 
 
 @login_required
+@only_doctor_administrative
 @paginate(template_name='cal/app/list.html',
     list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE)
 def doctor_day(request, id_doctor, year, month, day):
@@ -1173,6 +1189,7 @@ def delete_event(request):
 
 
 @login_required()
+@only_doctor_administrative
 def lookfor_patient(request, action=None, year=None, month=None, day=None):
     if action == 'info':
         pass
@@ -1191,6 +1208,7 @@ def lookfor_patient(request, action=None, year=None, month=None, day=None):
 
 
 @login_required()
+@only_doctor_administrative
 def patient_searcher(request):
     logged_user_profile = request.user.get_profile()
 
@@ -1230,6 +1248,7 @@ def patient_searcher(request):
 
 
 @login_required()
+@only_doctor_administrative
 def select_doctor(request, id_patient):
     patient_user = get_object_or_404(User, pk=int(id_patient))
     if request.method == 'POST':
@@ -1254,6 +1273,7 @@ def select_doctor(request, id_patient):
         context_instance=RequestContext(request))
 
 @login_required()
+@only_doctor_administrative
 def check_transfer(request, id_patient, doit=False):
     if request.method == 'POST':
         id_doctor = request.POST.get('doctor',None)

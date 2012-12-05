@@ -6,7 +6,6 @@
 from fabric.api import env
 from wtdeploy import push
 
-
 def development():
     env.app_name = 'consulting'
     env.fixtures_name = {

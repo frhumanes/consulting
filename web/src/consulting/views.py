@@ -9,8 +9,7 @@ from datetime import date, timedelta, datetime
 from random import randint
 from itertools import chain
 
-from decorators import paginate
-from decorators import only_doctor_consulting, only_patient_consulting
+from decorators import *
 
 from django.middleware.csrf import get_token
 from django.conf import settings
@@ -731,6 +730,8 @@ def show_task(request, id_task):
 @only_doctor_consulting
 def show_block(request, id_task, code_block=None, code_illness=None, id_appointment=None):
     task = get_object_or_404(Task, pk=int(id_task))
+    if not task.assess:
+        return resume_task(request, id_appointment, code_illness, id_task) 
     appointment = get_object_or_404(Appointment, pk=int(id_appointment))
     request.session['patient_user_id'] = appointment.patient.id
     if code_block is None or code_block == str(0):
@@ -889,7 +890,7 @@ def next_block(task, block, code_illness, id_appointment):
 @login_required()
 @only_patient_consulting
 def self_administered_block(request, id_task):
-    task = get_object_or_404(Task, pk=int(id_task))
+    task = get_object_or_404(Task, pk=int(id_task), assess=True, completed=False, patient__id=request.user.id, self_administered=True)
 
     if task.task_results.all():
         last_result = task.task_results.latest('date')
@@ -971,7 +972,7 @@ def self_administered_block(request, id_task):
 @login_required()
 @only_patient_consulting
 def symptoms_worsening(request, id_task):
-    task = get_object_or_404(Task, pk=int(id_task))
+    task = get_object_or_404(Task, pk=int(id_task), assess=True, completed=False, patient__id=request.user.id, self_administered=True)
     if request.method == 'POST':
         form = SymptomsWorseningForm(request.POST)
         answer = int(request.POST.get("question", 0))
@@ -1122,7 +1123,7 @@ def resume_task(request, id_appointment, code_illness, id_task):
     else:
         return HttpResponseRedirect(reverse('consulting_main',kwargs={'code_illness':code_illness,'id_appointment':id_appointment}))
 
-
+@only_doctor_consulting
 def get_not_assessed_variables(id_task):
     task = get_object_or_404(Task, pk=int(id_task))
     lq = [q.code for q in task.questions.all()]
@@ -1470,6 +1471,7 @@ def sendemail(user):
 
 
 @login_required()
+@only_doctor_administrative
 def newpatient(request):
     logged_user_profile = request.user.get_profile()
 

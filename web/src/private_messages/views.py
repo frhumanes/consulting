@@ -12,9 +12,11 @@ from forms import MessageForm
 from django.contrib.auth.models import User
 
 from decorators import paginate
+from django.views.decorators.cache import never_cache
 
 
 @login_required
+@never_cache
 @paginate(template_name='private_messages/message_list.html',
     list_name='messages', objects_per_page=settings.OBJECTS_PER_PAGE)
 def outbox(request):
@@ -29,6 +31,7 @@ def outbox(request):
 
 
 @login_required
+@never_cache
 @paginate(template_name='private_messages/message_list.html',
     list_name='messages', objects_per_page=settings.OBJECTS_PER_PAGE)
 def inbox(request):

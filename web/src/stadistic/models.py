@@ -23,3 +23,4 @@ class Report(models.Model):
 
     class Meta:
         db_table = 'reports'
+        managed = False
