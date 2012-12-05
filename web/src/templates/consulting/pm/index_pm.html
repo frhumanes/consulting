@@ -18,7 +18,14 @@ String.prototype.capitalize = function() {
 }
 {% endblock %}
 
-{% block jquery_init %}  
+{% block jquery_init %}
+  jQuery.ajaxSetup({
+        beforeSend: function (xhr) {
+              xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+              return xhr;
+        }
+  });
+  $('#patient_list').load('{% url consulting_patient_list doctor_user_id=request.user.id %}');
   $("#searcher").autocomplete({
     minLength: 3,
     autoFocus: false,
@@ -84,11 +91,8 @@ String.prototype.capitalize = function() {
 
 <div id="patient_list" class="thumbnail">
   <div class="center">
-        <img style="padding: 50px" src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
-    </div>
-  <script>
-    $('#patient_list').load('{% url consulting_patient_list doctor_user_id=request.user.id %}');
-  </script>
+    <img style="padding: 50px" src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+  </div>
 </div>
 
 

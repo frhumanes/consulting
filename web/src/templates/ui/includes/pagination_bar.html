@@ -55,9 +55,9 @@
 
 <script>
   {% if request.is_ajax %}
-  $('#message-paginator').find('a').live('click', function(e){
+  $('.pagination').find('a').on('click', function(e){
     e.preventDefault();
-    $('#message-paginator').parent().parent().load($(this).attr('href'));
+    $(this).parentsUntil('.pagination').parent().parent().parent().load($(this).attr('href'));
   });
   {% endif %}
 </script>
