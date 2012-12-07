@@ -139,6 +139,12 @@ def explotation(request):
 
     if group:
       for r in reports:
+        try:
+          #Check for deleted patients
+          r.patient
+        except:
+          # Regenerate ALL the database
+          return regenerate_data(request, True)
         if r.patient in data:
           for var, mark in r.variables.items():
             if isinstance(mark, (int, long, float)):
@@ -301,9 +307,12 @@ def explotation(request):
 
 @login_required
 @only_doctor_consulting
-def regenerate_data(request):
-    generate_reports()
-    return HttpResponse('')
+def regenerate_data(request, full=False):
+    generate_reports(full)
+    if full:
+      return HttpResponseRedirect(reverse('explotation_statistic'))
+    else:
+      return HttpResponse('')
 
 @login_required
 @only_doctor_consulting

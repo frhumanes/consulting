@@ -444,9 +444,8 @@ class Answer(models.Model):
 
 class DummyReport(models.Model):
     # Required to avoid Django try to access to non-exist 'reports' table when deleting either Profile or Task objects 
-    from userprofile.models import Profile
-    task = models.ForeignKey(Task, related_name='dummy_task_reports', primary_key=True, null=True, on_delete=models.DO_NOTHING)
-    patient = models.ForeignKey(Profile, related_name='dummy_patient_reports', null=True, on_delete=models.DO_NOTHING)
+    task = models.IntegerField(null=True)
+    patient = models.IntegerField(null=True)
     date = models.DateTimeField(_(u'Fecha del Informe'), null=True)
     sex = models.IntegerField(null=True)
     profession = models.CharField(max_length=150)

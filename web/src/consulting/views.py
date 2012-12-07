@@ -10,6 +10,8 @@ from random import randint
 from itertools import chain
 
 from decorators import *
+from django.views.decorators.cache import never_cache
+
 
 from django.middleware.csrf import get_token
 from django.conf import settings
@@ -994,6 +996,7 @@ def symptoms_worsening(request, id_task):
 ################################## MONITORING #################################
 @login_required()
 @only_doctor_consulting
+@never_cache
 def monitoring(request, id_appointment, code_illness=None):
     appointment = get_object_or_404(Appointment, pk=int(id_appointment))
     temp = []
@@ -1022,6 +1025,7 @@ def monitoring(request, id_appointment, code_illness=None):
     return render_to_response(
                 'consulting/consultation/monitoring/index.html',
                 {'patient_user': appointment.patient,
+                'patient_user_id': appointment.patient.id,
                 'appointment': appointment,
                 'illness': illness,
                 'treatment': medicaments_list,
@@ -1266,6 +1270,7 @@ def prev_treatment_block(request, id_appointment, code_illness=None):
 
 @login_required
 @only_doctor_consulting
+@never_cache
 def conclusion_monitoring(request, id_appointment, code_illness):
     appointment = get_object_or_404(Appointment, pk=int(id_appointment))
     illness= get_object_or_404(Illness, code=int(code_illness))
@@ -1619,6 +1624,7 @@ def patient_searcher(request):
 
 
 @login_required()
+@only_doctor_administrative
 def editpatient_pm(request, patient_user_id):
     logged_user_profile = request.user.get_profile()
     
@@ -1760,7 +1766,7 @@ def pre_personal_data_pm(request, patient_user_id):
 
     if logged_user_profile.is_doctor():
         request.session['patient_user_id'] = patient_user_id
-        return HttpResponseRedirect(reverse('consulting_personal_data_pm'))
+        return HttpResponseRedirect(reverse('consulting_personal_data_pm', kwargs={'patient_user_id': patient_user_id}))
     elif logged_user_profile.is_administrative():
         return HttpResponseRedirect(reverse('consulting_editpatient_pm', kwargs={'patient_user_id': patient_user_id}))
 
@@ -1768,12 +1774,14 @@ def pre_personal_data_pm(request, patient_user_id):
     return HttpResponseRedirect(reverse('consulting_index'))
 
 @login_required()
-def personal_data_pm(request):
+@never_cache
+@only_doctor_consulting
+def personal_data_pm(request, patient_user_id):
     logged_user_profile = request.user.get_profile()
 
     if logged_user_profile.is_doctor():
-        patient_user_id = request.session['patient_user_id']
         try:
+            #patient_user_id = request.session['patient_user_id']
             patient_user = User.objects.get(id=patient_user_id)
             if not patient_user.get_profile().doctor == request.user:
                 return HttpResponseRedirect(reverse('consulting_index'))
@@ -1937,6 +1945,7 @@ def add_medicine(request, action, id_appointment=None):
 
 @login_required()
 @only_doctor_consulting
+@never_cache
 @paginate(template_name='consulting/patient/list_medicines.html',
     list_name='medicines', objects_per_page=settings.OBJECTS_PER_PAGE)
 def get_medicines(request, filter_option, id_patient):
@@ -1994,6 +2003,7 @@ def list_medicines(request, id_appointment=None, code_illness=None):
 
     return render_to_response('consulting/patient/list_medicines.html', 
                             {'patient_user': patient_user,
+                            'patient_user_id':patient_user.id,
                             'appointment':appointment,
                             'illness': illness,
                             'csrf_token': get_token(request)
@@ -2005,7 +2015,7 @@ def list_medicines(request, id_appointment=None, code_illness=None):
 @only_doctor_consulting
 @paginate(template_name='consulting/patient/list_appointments.html',
     list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE)
-def list_appointments(request):
+def list_appointments(request, patient_user_id):
     logged_user_profile = request.user.get_profile()
 
     patient_user_id = request.session['patient_user_id']
@@ -2129,12 +2139,13 @@ def view_report(request, id_task):
 
 
 @login_required()
+@only_doctor_consulting
 @paginate(template_name='consulting/patient/list_reports.html',
     list_name='reports', objects_per_page=settings.OBJECTS_PER_PAGE)
-def list_reports(request):
+def list_reports(request, patient_user_id):
     logged_user_profile = request.user.get_profile()
 
-    patient_user_id = request.session['patient_user_id']
+    #patient_user_id = request.session['patient_user_id']
 
     if logged_user_profile.is_doctor():
         patient_user = User.objects.get(id=patient_user_id)
@@ -2153,6 +2164,7 @@ def list_reports(request):
 @login_required()
 @paginate(template_name='consulting/patient/list_reports.html',
     list_name='reports', objects_per_page=settings.OBJECTS_PER_PAGE)
+@only_doctor_consulting
 def list_provisional_reports(request, id_appointment, code_illness):
     logged_user_profile = request.user.get_profile()
 
@@ -2176,12 +2188,13 @@ def list_provisional_reports(request, id_appointment, code_illness):
         return HttpResponseRedirect(reverse('consulting_index'))
 
 @login_required()
+@only_doctor_consulting
 @paginate(template_name='consulting/patient/list_messages.html',
     list_name='messages', objects_per_page=settings.OBJECTS_PER_PAGE)
-def list_messages(request):
+def list_messages(request, patient_user_id):
     logged_user_profile = request.user.get_profile()
 
-    patient_user_id = request.session['patient_user_id']
+    #patient_user_id = request.session['patient_user_id']
 
     if logged_user_profile.is_doctor():
         patient_user = User.objects.get(id=patient_user_id)
@@ -2199,12 +2212,13 @@ def list_messages(request):
 
 
 @login_required()
+@only_doctor_consulting
 @paginate(template_name='consulting/patient/list_recommendations.html',
     list_name='conclusions', objects_per_page=settings.OBJECTS_PER_PAGE)
-def list_recommendations(request):
+def list_recommendations(request, patient_user_id):
     logged_user_profile = request.user.get_profile()
 
-    patient_user_id = request.session['patient_user_id']
+    #patient_user_id = request.session['patient_user_id']
 
     if logged_user_profile.is_doctor():
         patient_user = User.objects.get(id=patient_user_id)
@@ -2222,10 +2236,10 @@ def list_recommendations(request):
 
 @login_required()
 @only_doctor_consulting
-def user_evolution(request, return_xls=False):
+def user_evolution(request, patient_user_id, return_xls=False):
     logged_user_profile = request.user.get_profile()
 
-    patient_user_id = request.session['patient_user_id']
+    #patient_user_id = request.session['patient_user_id']
     limit = 5
     patient_user = User.objects.get(id=patient_user_id)
     date_filter = Q(end_date__lte=datetime.now())
@@ -2248,6 +2262,7 @@ def user_evolution(request, return_xls=False):
     scales = {'beck':[],'hamilton':[]}
     vticks = []
     for t in tasks:
+        res =t.task_results.values('block').annotate(Max('id'))
         marks = t.get_variables_mark()
         dimensions = t.get_dimensions_mark(marks)
         for name, value in dimensions.items():
@@ -2321,6 +2336,7 @@ def user_evolution(request, return_xls=False):
 
     return render_to_response('consulting/patient/user_evolution.html', 
                                 {'patient_user':patient_user,
+                                 'patient_user_id':patient_user_id,
                                  'form': form,
                                  'latest_marks': latest_marks,
                                  'latest_dimensions': latest_dimensions,

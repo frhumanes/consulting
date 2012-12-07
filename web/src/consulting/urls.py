@@ -53,20 +53,19 @@ urlpatterns = patterns('',
         name='consulting_index_pm'),
 
     #See index_pm.html
-    url(r'^patient_management/pre_personal_data_pm/(?P<patient_user_id>\d+)$',
+    url(r'^patient_management/(?P<patient_user_id>\d+)/$',
         consulting_views.pre_personal_data_pm,
         name='consulting_pre_personal_data_pm'),
 
-    url(r'^patient_management/personal_data_pm/$',
+    url(r'^patient/(?P<patient_user_id>\d+)/personal_data/$',
         consulting_views.personal_data_pm,
         name='consulting_personal_data_pm'),
 
-    url(r'^editpatient_pm/(?P<patient_user_id>\d+)/$',
+    url(r'^patient/(?P<patient_user_id>\d+)/edit/$',
         consulting_views.editpatient_pm,
         name='consulting_editpatient_pm'),
 
-    url(r'^patient_management/patient_identification_pm/\
-            (?P<patient_user_id>\d+)/$',
+    url(r'^patient/(?P<patient_user_id>\d+)/identification/$',
         consulting_views.patient_identification_pm,
         name='consulting_patient_identification_pm'),
 
@@ -78,35 +77,35 @@ urlpatterns = patterns('',
     url(r'^searcher_component/', consulting_views.searcher_component,
         name='consulting_searcher_component'),
 
-    url(r'^patient_management/medicines/$',
+    url(r'^patient/(\d+)/medicines/$',
         consulting_views.list_medicines,
         name='consulting_list_medicines'),
 
-    url(r'^patient_management/recommendations/$',
+    url(r'^patient/(\d+)/recommendations/$',
         consulting_views.list_recommendations,
         name='consulting_list_recommendations'),
 
-    url(r'^patient_management/reports/$',
+    url(r'^patient/(\d+)/reports/$',
         consulting_views.list_reports,
         name='consulting_list_reports'),
 
-    url(r'^patient_management/messages/$',
+    url(r'^patient/(\d+)/messages/$',
         consulting_views.list_messages,
         name='consulting_list_messages'),
 
-    url(r'^patient_management/report/(\d+)/$',
+    url(r'^report/(\d+)/$',
         consulting_views.view_report,
         name='consulting_view_report'),
 
-    url(r'^patient_management/task/(\d+)/$',
+    url(r'^task/(\d+)/$',
         consulting_views.show_task,
         name='consulting_view_task'),
 
-    url(r'^patient_management/parameters/$',
+    url(r'^patient/(\d+)/parameters/$',
         consulting_views.user_evolution,
         name='consulting_user_evolution'),
 
-    url(r'^patient_management/appointments/$',
+    url(r'^patient/(\d+)/appointments/$',
         consulting_views.list_appointments,
         name='consulting_list_appointments'),
 

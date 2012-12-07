@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from functools import wraps
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.core.exceptions import PermissionDenied
 from datetime import datetime
 
 
@@ -52,6 +53,14 @@ def only_doctor(func):
 def only_doctor_consulting(func):
     def _fn(request, *args, **kwargs):
         if request.user.get_profile().is_doctor():
+            if 'patient_user_id' in kwargs and not request.user.doctor.filter(user__id=kwargs['patient_user_id']):
+                raise PermissionDenied
+            if 'id_patient' in kwargs and not request.user.doctor.filter(user__id=kwargs['id_patient']):
+                raise PermissionDenied
+            if 'id_task' in kwargs and not request.user.doctor.filter(user__patient_tasks__id=kwargs['id_task']):
+                raise PermissionDenied
+            if 'id_appointment' in kwargs and not request.user.doctor.filter(user__appointment_patient__id=kwargs['id_appointment']):
+                raise PermissionDenied
             return func(request, *args, **kwargs)
         else:
             return HttpResponseRedirect(reverse('consulting_index'))

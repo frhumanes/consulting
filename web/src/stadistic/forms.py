@@ -56,7 +56,7 @@ class FiltersForm(forms.Form):
 
     profession = forms.MultipleChoiceField(
                     label=_(u'Profesión'),
-                    choices=[(p['profession'], p['profession']) for p in Profile.objects.distinct().values('profession')],
+                    choices=[(p['profession'], p['profession']) for p in Profile.objects.exclude(profession='').values('profession').order_by('profession').distinct()],
                     widget=forms.CheckboxSelectMultiple())
 
     age = forms.MultiValueField(
@@ -101,7 +101,7 @@ class FiltersForm(forms.Form):
 
     aves = forms.MultipleChoiceField(
                     label=_(u'Acontecimientos Vitales Estresantes'),
-                    choices=[(op.id, op.text) for op in Option.objects.filter(code__startswith='AVE')],
+                    choices=[(op.id, op.text) for op in Option.objects.filter(code__startswith='AVE', option_answers__isnull=False).distinct().order_by('text')],
                     widget=forms.CheckboxSelectMultiple())
 
     date = forms.MultiValueField(

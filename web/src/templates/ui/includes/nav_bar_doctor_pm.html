@@ -1,50 +1,50 @@
 {% load i18n%}
 {% load consulting %}
 
-{% url consulting_personal_data_pm as personal_data %}
-{% url consulting_list_medicines as list_medicines %}
-{% url consulting_list_appointments as list_appointments %}
-{% url consulting_list_reports as list_reports %}
-{% url consulting_list_messages as list_messages %}
-{% url consulting_list_recommendations as list_recommendations %}
-{% url consulting_user_evolution as user_evolution %}
+{% url consulting_personal_data_pm patient_user_id=patient_user_id as personal_data %}
+{% url consulting_list_medicines patient_user_id as list_medicines %}
+{% url consulting_list_appointments patient_user_id as list_appointments %}
+{% url consulting_list_reports patient_user_id as list_reports %}
+{% url consulting_list_messages patient_user_id as list_messages %}
+{% url consulting_list_recommendations patient_user_id as list_recommendations %}
+{% url consulting_user_evolution patient_user_id as user_evolution %}
 
 
   <ul class="nav nav-pills nav-stacked">
-    <li class="{% active_child request personal_data %}">
-      <a href="{% url consulting_personal_data_pm %}">
+    <li class="{% active_granchild request personal_data %}">
+      <a href="{{personal_data}}">
         {% trans 'DATOS PERSONALES' %}
       </a>
     </li>    
-    <li class="{% active_child request list_reports %}">
-      <a href="{% url consulting_list_reports %}">
+    <li class="{% active_granchild request list_reports %}">
+      <a href="{{list_reports}}">
         {% trans 'INFORMES' %}
       </a>
     </li>
     <li>
-    <li class="{% active_child request list_recommendations %}">
-      <a href="{% url consulting_list_recommendations %}">
+    <li class="{% active_granchild request list_recommendations %}">
+      <a href="{{list_recommendations}}">
         {% trans 'RECOMENDACIONES' %}
       </a>
     </li>
-    <li class="{% active_child request user_evolution %}">
-      <a href="{% url consulting_user_evolution %}">
+    <li class="{% active_granchild request user_evolution %}">
+      <a href="{{user_evolution}}">
         {% trans 'PARÁMETROS' %}
       </a>
     </li>
-    <li class="{% active_child request list_medicines %}">
-      <a href="{% url consulting_list_medicines %}">
+    <li class="{% active_granchild request list_medicines %}">
+      <a href="{{list_medicines}}">
         {% trans 'FÁRMACOS' %}
       </a>      
     </li>
-    <li class="{% active_child request list_appointments %}">
-      <a href="{% url consulting_list_appointments %}">
+    <li class="{% active_granchild request list_appointments %}">
+      <a href="{{list_appointments}}">
         {% trans 'HISTORIAL CITAS' %}
       </a>
     </li>
     <li>
-    <li class="{% active_child request list_messages %}">
-      <a href="{% url consulting_list_messages %}">
+    <li class="{% active_granchild request list_messages %}">
+      <a href="{{list_messages}}">
         {% trans 'MENSAJERÍA' %}
       </a>
     </li>
