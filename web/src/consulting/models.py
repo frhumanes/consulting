@@ -203,13 +203,12 @@ class Task(TraceableModel):
                 return settings.AVE[value]
 
     def get_depression_status(self, index=False):
-        _status = cache.get('status_'+str(self.id))
-        if _status:
+        _status = cache.get('status_'+str(self.id), {})
+        if _status and 'depression' in _status:
             if index:
                 return _status['depression'][0]
             else:
                 return _status['depression'][1]
-        _status = {}
         l = settings.BECK.keys()
         l.sort()
         beck_mark = self.calculate_beck_mark()
@@ -225,13 +224,12 @@ class Task(TraceableModel):
                     return settings.BECK[value]
 
     def get_anxiety_status(self, index=False):
-        _status = cache.get('status_'+str(self.id))
-        if _status:
+        _status = cache.get('status_'+str(self.id), {})
+        if _status and 'anxiety' in _status:
             if index:
                 return _status['anxiety'][0]
             else:
                 return _status['anxiety'][1]
-        _status = {}
         l = settings.HAMILTON.keys()
         l.sort()
         hamilton_mark, hamilton_submarks = self.calculate_hamilton_mark()
