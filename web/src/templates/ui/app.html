@@ -75,7 +75,10 @@
       var reminder = 300; // seg
       function expiration_warning() {
         document.title = '{% get_brand %}';
-        $('#warning_modal').modal('show');
+        $('#warning_modal').modal({
+                                    keyboard: false,
+                                    backdrop: 'static'
+                                    });
         $('#timeout').text(reminder);
         timer = setInterval(function(){
           if (parseInt($('#timeout').text())) {

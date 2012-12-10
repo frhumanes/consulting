@@ -4,7 +4,7 @@
 
 {% block container %}
 <div class="page-header">
-    <h1>{% trans 'Encuesta autoadministrada' %}</h1>
+    <h1>{% trans 'Cuestionario autoadministrado' %}</h1>
 </div>
 <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
 <section>
@@ -55,7 +55,7 @@
         </table>
         {% if more_variables %}
         <p id="more_variables" class="alert alert-error">
-          {% trans '¿Desea valorar alguna variable no evaluada en la encuesta autoadministrada?' %}
+          {% trans '¿Desea valorar alguna variable no evaluada en el cuestionario autoadministrado?' %}
         </p>
         {% endif %}
         {% endif %}

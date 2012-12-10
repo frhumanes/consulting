@@ -3,11 +3,11 @@
 
 {% url consulting_personal_data_pm patient_user_id=patient_user_id as personal_data %}
 {% url consulting_list_medicines patient_user_id as list_medicines %}
-{% url consulting_list_appointments patient_user_id as list_appointments %}
-{% url consulting_list_reports patient_user_id as list_reports %}
-{% url consulting_list_messages patient_user_id as list_messages %}
-{% url consulting_list_recommendations patient_user_id as list_recommendations %}
-{% url consulting_user_evolution patient_user_id as user_evolution %}
+{% url consulting_list_appointments patient_user_id=patient_user_id as list_appointments %}
+{% url consulting_list_reports patient_user_id=patient_user_id as list_reports %}
+{% url consulting_list_messages patient_user_id=patient_user_id as list_messages %}
+{% url consulting_list_recommendations patient_user_id=patient_user_id as list_recommendations %}
+{% url consulting_user_evolution patient_user_id=patient_user_id as user_evolution %}
 
 
   <ul class="nav nav-pills nav-stacked">

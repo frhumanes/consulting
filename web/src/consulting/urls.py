@@ -81,15 +81,15 @@ urlpatterns = patterns('',
         consulting_views.list_medicines,
         name='consulting_list_medicines'),
 
-    url(r'^patient/(\d+)/recommendations/$',
+    url(r'^patient/(?P<patient_user_id>\d+)/recommendations/$',
         consulting_views.list_recommendations,
         name='consulting_list_recommendations'),
 
-    url(r'^patient/(\d+)/reports/$',
+    url(r'^patient/(?P<patient_user_id>\d+)/reports/$',
         consulting_views.list_reports,
         name='consulting_list_reports'),
 
-    url(r'^patient/(\d+)/messages/$',
+    url(r'^patient/(?P<patient_user_id>\d+)/messages/$',
         consulting_views.list_messages,
         name='consulting_list_messages'),
 
@@ -101,11 +101,11 @@ urlpatterns = patterns('',
         consulting_views.show_task,
         name='consulting_view_task'),
 
-    url(r'^patient/(\d+)/parameters/$',
+    url(r'^patient/(?P<patient_user_id>\d+)/parameters/$',
         consulting_views.user_evolution,
         name='consulting_user_evolution'),
 
-    url(r'^patient/(\d+)/appointments/$',
+    url(r'^patient/(?P<patient_user_id>\d+)/appointments/$',
         consulting_views.list_appointments,
         name='consulting_list_appointments'),
 

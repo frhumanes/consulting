@@ -6,7 +6,8 @@ def session(request):
     if request.user.is_authenticated():
         try:
             delta = datetime.today()-request.user.get_profile().updated_password_at
-            expired = delta.days>settings.PASSWORD_EXPIRATION_DAYS
+            expired = delta.days>(settings.PASSWORD_EXPIRATION_DAYS -
+                                  settings.PASSWORD_WARNING_DAYS)  
         except: 
             pass
     if not 'timeout' in request.session:

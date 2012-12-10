@@ -10,7 +10,8 @@ PASSWORD_MIN_LENGTH = 8
 DEFAULT_PASSWORD = '1234ABCD'
 def pwd_generator():
 	return ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(PASSWORD_MIN_LENGTH))
-PASSWORD_EXPIRATION_DAYS = 180
+PASSWORD_EXPIRATION_DAYS = 6 * 30 # According LOPD it should be 90 (3 months)
+PASSWORD_WARNING_DAYS = 15
 
 
 #CODES

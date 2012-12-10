@@ -974,7 +974,7 @@ def self_administered_block(request, id_task):
 @login_required()
 @only_patient_consulting
 def symptoms_worsening(request, id_task):
-    task = get_object_or_404(Task, pk=int(id_task), assess=True, completed=False, patient__id=request.user.id, self_administered=True)
+    task = get_object_or_404(Task, pk=int(id_task), assess=True, patient__id=request.user.id, self_administered=True)
     if request.method == 'POST':
         form = SymptomsWorseningForm(request.POST)
         answer = int(request.POST.get("question", 0))
@@ -1572,7 +1572,7 @@ def patient_identification_pm(request, patient_user_id):
         logged_user_profile.is_administrative():
         next = request.GET.get('next', '')
         try:
-            user = User.objects.get(id=patient_user_id, profiles__doctor=request.user)
+            user = User.objects.get(id=patient_user_id)
 
             return render_to_response(
                             'consulting/patient/patient_identification.html',

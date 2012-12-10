@@ -13,6 +13,8 @@ from cal.models import Appointment
 from formula.models import Formula, Dimension, Variable
 from numbers import Real
 
+from django.core.cache import cache
+
 
 class Task(TraceableModel):
     KIND = (
@@ -84,17 +86,14 @@ class Task(TraceableModel):
         return answers
 
     def get_answers(self):
-        if hasattr(self, '_answers') and self._answers:
-            return self._answers
         #Cache
-        self._answers = None
-        self._marks = None
-        self._status = {}
-
+        _answers = cache.get('answers_'+str(self.id))
+        if _answers:
+            return _answers
         answers = []
         for r in self.task_results.values('block').annotate(Max('date'),Max('id')).order_by():
             answers += Answer.objects.filter(result__id=r['id__max']).select_related().all().order_by("question__id")
-        self._answers = list(answers)
+        cache.set('answers_'+str(self.id), list(answers)) 
         return answers
 
     def is_completed(self):
@@ -204,11 +203,13 @@ class Task(TraceableModel):
                 return settings.AVE[value]
 
     def get_depression_status(self, index=False):
-        if hasattr(self, '_status') and 'depression' in self._status:
+        _status = cache.get('status_'+str(self.id))
+        if _status:
             if index:
-                return self._status['depression'][0]
+                return _status['depression'][0]
             else:
-                return self._status['depression'][1]
+                return _status['depression'][1]
+        _status = {}
         l = settings.BECK.keys()
         l.sort()
         beck_mark = self.calculate_beck_mark()
@@ -216,18 +217,21 @@ class Task(TraceableModel):
             return ''
         for value in l:
             if beck_mark < value:
-                self._status['depression'] = [l.index(value), settings.BECK[value]]
+                _status['depression'] = [l.index(value), settings.BECK[value]]
+                cache.set('status_'+str(self.id), _status)
                 if index:
                     return l.index(value)
                 else:
                     return settings.BECK[value]
 
     def get_anxiety_status(self, index=False):
-        if  hasattr(self, '_status') and 'anxiety' in self._status:
+        _status = cache.get('status_'+str(self.id))
+        if _status:
             if index:
-                return self._status['anxiety'][0]
+                return _status['anxiety'][0]
             else:
-                return self._status['anxiety'][1]
+                return _status['anxiety'][1]
+        _status = {}
         l = settings.HAMILTON.keys()
         l.sort()
         hamilton_mark, hamilton_submarks = self.calculate_hamilton_mark()
@@ -235,7 +239,8 @@ class Task(TraceableModel):
             return ''
         for value in l:
             if hamilton_mark < value:
-                self._status['anxiety'] = (l.index(value), settings.HAMILTON[value])
+                _status['anxiety'] = (l.index(value), settings.HAMILTON[value])
+                cache.set('status_'+str(self.id), _status)
                 if index:
                     return l.index(value)
                 else:
@@ -267,8 +272,9 @@ class Task(TraceableModel):
         return lv
 
     def get_variables_mark(self):
-        if hasattr(self, '_marks') and self._marks:
-            return self._marks
+        _marks = cache.get('marks_'+str(self.id))
+        if _marks:
+            return _marks
         answers = self.get_answers()
         marks = {}
         variable_tuple = None
@@ -298,7 +304,7 @@ class Task(TraceableModel):
             else:
                 marks[f.variable] = ''
         #sorted(marks.items(), key=lambda x: -x[1])
-        self._marks = marks
+        cache.set('marks_'+str(self.id), marks)
         return marks
 
     def get_dimensions_mark(self, variables_mark=None):
