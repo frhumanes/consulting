@@ -189,8 +189,9 @@ class Profile(TraceableModel):
         return lastAppointment
 
     def get_nextAppointment(self):
-        appointments = Appointment.objects.filter(patient=self.user,
-                            date__gte=date.today()).order_by(
+        appointments = Appointment.objects.filter(Q(patient=self.user),
+                            Q(date__gt=date.today()) |
+                            Q(date=date.today(), start_time__gte=datetime.time(datetime.now()))).order_by(
                             'date')
 
         if appointments.count() > 0:
