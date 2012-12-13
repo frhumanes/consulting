@@ -346,7 +346,8 @@ class Medicine(TraceableModel):
                                         default=False)
     after_symptoms = models.BooleanField(_(u'Posterior a\
                                     los síntomas'), default=True)
-    months = models.IntegerField(_(u'Número de meses de toma del fármaco'),
+    months = models.DecimalField(_(u'Número de meses de toma del fármaco'),
+                                    max_digits=5, decimal_places=2,
                                     blank=True, null=True)
     posology = models.IntegerField(_(u'Posología (mg/día)'))
     dosification = models.CharField(_(u'Modo de administración'), 

@@ -1510,7 +1510,7 @@ def newpatient(request):
                                 format_string(
                                         form.cleaned_data['second_surname'])
                     user.email = form.cleaned_data['email']
-                    user.save(commit=False)
+                    #user.save()
                     ##########################PROFILE##########################
                     try:
                         profile = form.save(commit=False)
@@ -1540,7 +1540,7 @@ def newpatient(request):
                         return HttpResponseRedirect(reverse('consulting_index'))
                     ###########################################################
                     #SEND EMAIL
-                    if self.email:
+                    if user.email:
                         sendemail(user)
 
                     return render_to_response(
@@ -2013,16 +2013,36 @@ def list_medicines(request, id_appointment=None, code_illness=None):
 
 @login_required()
 @only_doctor_consulting
-@paginate(template_name='consulting/patient/list_appointments.html',
-    list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE)
 def list_appointments(request, patient_user_id):
     logged_user_profile = request.user.get_profile()
 
-    patient_user_id = request.session['patient_user_id']
+    #patient_user_id = request.session['patient_user_id']
+
+    patient_user = User.objects.get(id=patient_user_id)
+
+    return render_to_response('consulting/patient/list_appointments.html',
+            {'patient_user': patient_user,
+             'patient_user_id': patient_user_id,
+             'csrf_token': get_token(request)}, 
+             context_instance=RequestContext(request))
+
+@login_required()
+@only_doctor_consulting
+@paginate(template_name='consulting/patient/appointments.html',
+    list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE)
+def get_appointments(request, patient_user_id, filter_option = None):
+    logged_user_profile = request.user.get_profile()
+
+    #patient_user_id = request.session['patient_user_id']
 
     patient_user = User.objects.get(id=patient_user_id)
 
     appointments = Appointment.objects.filter(patient=patient_user).order_by('-date')
+    if filter_option != 'all':
+        virtual = False
+        if filter_option == 'virtual':
+            virtual = True
+        appointments = appointments.exclude(notify=virtual)
 
     template_data = {}
     template_data.update({'patient_user': patient_user,

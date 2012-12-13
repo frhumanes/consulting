@@ -13,10 +13,15 @@
   </td>
   <td>{{ event.start_time|time:"H:i" }}</td>  
   <td>{{ event.end_time|time:"H:i" }}</td>
-  <td>{{ event.patient.get_profile.doctor.get_profile.get_full_name }}</td>
+  <td>{{ event.doctor.get_profile.get_full_name }}</td>
   <td>{{ event.app_type}}</td>
   <td><em>{{ event.description|striptags|safe|truncatewords:5 }}</em>
-    {% if not event.has_activity and not event.is_editable %}
-      <span class="badge badge-important"><i class="icon-exclamation-sign icon-white"></i> {% trans 'NO ASISTIÓ' %}</span>
-    {% endif %}</td>
+    {% if not event.has_activity and not event.is_editable%}
+      {% if event.notify %}
+        <span class="badge badge-important"><i class="icon-exclamation-sign icon-white"></i> {% trans 'NO ASISTIDA' %}</span>
+      {% else %}
+        <span class="badge badge-important"><i class="icon-exclamation-sign icon-white"></i> {% trans 'NO ASISTIÓ' %}</span>
+      {% endif %}
+    {% endif %}
+  </td>
 </tr>

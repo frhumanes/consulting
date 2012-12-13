@@ -1,6 +1,6 @@
 {% extends "consulting/patient/personal_data_pm.html" %}
 
-{% load i18n consulting %}
+{% load i18n consulting userprofile %}
 
 {% block right %}
   {% include 'consulting/patient/card.html' with mini=1 %}
@@ -34,7 +34,7 @@
             {% for conclusion in conclusions.object_list %}
               <tr id="{{conclusion.id}}" class="conclusion">
                 <td style="text-align:center;">{{conclusion.date|date:"d/M/Y"|lower}}</td>
-                <td style="text-align:justify;"><a href="#" class="muted" rel="popover" title="Dr. {{conclusion.created_by.get_profile.get_full_name}}" data-content="{{conclusion.recommendation|striptags|safe}}">{{conclusion.recommendation|striptags|safe|truncatewords:10}}</a></td>
+                <td style="text-align:justify;"><a href="#" class="muted" rel="popover" title="{{conclusion.created_by.get_profile|name_with_title}}" data-content="{{conclusion.recommendation|striptags|safe}}">{{conclusion.recommendation|striptags|safe|truncatewords:10}}</a></td>
 
                 <td style="text-align:center;">{% get_anxiety_status_at conclusion.appointment.patient conclusion.date %}&nbsp;{% get_depression_status_at conclusion.appointment.patient conclusion.date %}</td>  
               </tr>

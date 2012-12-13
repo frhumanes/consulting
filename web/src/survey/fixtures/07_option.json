@@ -2423,7 +2423,7 @@
     "pk": 243, 
     "model": "survey.option", 
     "fields": {
-      "text": "Autoexigencia e intelerancia", 
+      "text": "Autoexigencia e intolerancia", 
       "code": "RP5", 
       "question": 31, 
       "weight": null

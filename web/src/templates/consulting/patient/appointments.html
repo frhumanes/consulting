@@ -1,0 +1,24 @@
+{% load i18n %}
+{% if events.object_list.count > 0 %}
+  <table id="events_list" class="table table-striped">
+    <thead>
+        <tr>
+          <th>{% trans "Fecha" %}</th>
+          <th>{% trans "Inicio" %}</th>
+          <th>{% trans "Final" %}</th>
+          <th>{% trans "Doctor" %}</th>
+          <th>{% trans "Tipo de cita" %}</th>
+          <th>{% trans "Notas" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for event in events.object_list %}
+        {% include "cal/includes/appointment_doctor.html" %}
+      {% endfor %}
+    </tbody>
+  </table>
+  {% include 'ui/includes/pagination_bar.html' with objects=events %} 
+  <div id="preview"></div>
+{% else %}
+  <div class="alert alert-info">{% trans "No se ha encontrado ninguna cita" %}</div>
+{% endif %}

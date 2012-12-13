@@ -150,6 +150,9 @@ class Appointment(TraceableModel):
     def has_activity(self):
         return bool(self.appointment_tasks.all().count() or self.appointment_conclusions.all().count())
 
+    def is_over(self):
+         return bool(self.appointment_conclusions.all().count())
+
     def save(self, *args, **kw):
         status = None
         orig = None

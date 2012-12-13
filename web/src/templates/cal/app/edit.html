@@ -213,7 +213,7 @@
 
   $('#remove-event').live('click', function(event){
     $('#modal-screen').modal({
-      'Volverdrop':'static',
+      'backdrop':'static',
       'keyboard':false,
     });
   });
@@ -239,6 +239,9 @@
                 if(data.action){
                   back();
                 }
+              },
+      complete: function() {
+                $('#modal-screen').modal('hide');
               }
     });
 

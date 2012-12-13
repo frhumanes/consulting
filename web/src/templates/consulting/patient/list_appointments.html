@@ -6,33 +6,44 @@
   {% include 'consulting/patient/card.html' with mini=1 %}
 {% endblock %}
 
+{% block js %}
+function set_events(){
+ $('.pagination').find('a').each(function(){
+      $(this).on("click", function(e){
+                              e.preventDefault();
+                              var target = $('#tabs .active').find('a').attr('href');
+                              $(target).load($(this).attr('href'), set_events);
+                            });
+    });
+  }; 
+{% endblock %}
+
+{% block jquery_init %}
+  $('#all').load('{% url consulting_get_appointments filter_option='all' patient_user_id=patient_user.id %}', set_events);
+  $('#virtual').load('{% url consulting_get_appointments filter_option='virtual' patient_user_id=patient_user.id %}', set_events);
+  $('#face-to-face').load('{% url consulting_get_appointments filter_option='face2face' patient_user_id=patient_user.id %}', set_events);
+{% endblock %}
+
 {% block container %}  
 <div class="page-header">
   <h1>{% trans 'Historial Citas' %}</h1>
 </div>
-
-  {% if events.object_list.count > 0 %}
-   
-    <table id="events_list" class="table table-striped">
-      <thead>
-          <tr>
-            <th>{% trans "Fecha" %}</th>
-            <th>{% trans "Inicio" %}</th>
-            <th>{% trans "Final" %}</th>
-            <th>{% trans "Doctor" %}</th>
-            <th>{% trans "Tipo de cita" %}</th>
-            <th>{% trans "Notas" %}</th>
-          </tr>
-      </thead>
-      <tbody>
-        {% for event in events.object_list %}
-          {% include "cal/includes/appointment_doctor.html" %}
-        {% endfor %}
-      </tbody>
-    </table>
-    {% include 'ui/includes/pagination_bar.html' with objects=events %} 
-    <div id="preview"></div>
-  {% else %}
-    <div class="alert alert-info">{% trans "No se ha encontrado ninguna cita" %}</div>
-  {% endif %}
+<div>      
+    <ul id="tabs" class="nav nav-tabs">
+      <li class="active"><a href="#all" data-toggle="tab">{% trans 'Todas' %}</a></li>
+      <li ><a href="#face-to-face" data-toggle="tab">{% trans 'Presenciales' %}</a></li>
+      <li><a href="#virtual" data-toggle="tab">{% trans 'Virtuales' %}</a></li>
+    </ul>
+    <div class="tab-content" style="overflow-y: hidden;">
+      <div class="tab-pane active" id="all">
+        <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+      </div>
+      <div class="tab-pane" id="face-to-face">
+        <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+      </div>
+      <div class="tab-pane" id="virtual">
+        <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+      </div>
+    </div>
+  </div>
 {% endblock container %}

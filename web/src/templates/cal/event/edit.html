@@ -168,7 +168,7 @@
 
   $('#remove-event').live('click', function(event){
     $('#modal-screen').modal({
-      'Volverdrop':'static',
+      'backdrop':'static',
       'keyboard':false,
     });
   });
@@ -194,9 +194,9 @@
           if(data.action){
             window.location.href = '{% url cal.list_event %}';
           }else{
-            $('#modal-screen').hide();
+            $('#modal-screen').modal('hide');
             $('#modal-screen-error').modal({
-              'Volverdrop':'static',
+              'backdrop':'static',
               'keyboard':false,
             });
           }

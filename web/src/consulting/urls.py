@@ -108,7 +108,10 @@ urlpatterns = patterns('',
     url(r'^patient/(?P<patient_user_id>\d+)/appointments/$',
         consulting_views.list_appointments,
         name='consulting_list_appointments'),
-
+    
+    url(r'^patient/(?P<patient_user_id>\d+)/(?P<filter_option>virtual|face2face|all)_appointments/$',
+        consulting_views.get_appointments,
+        name='consulting_get_appointments'),
 
 
     # ADMINISTRATION: DOCTOR ROLE

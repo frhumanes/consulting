@@ -40,7 +40,11 @@ class ProfileForm(forms.ModelForm):
 
     dob = forms.DateField(label=_(u'Fecha de Nacimiento'),
                     input_formats=(settings.DATE_FORMAT,),
-                    widget=DateInput(attrs={'class': 'span12', 'size': '16'},
+                    widget=DateInput(attrs={'class': 'span12', 
+                                            'size': '16', 
+                                            'data-date-format':'dd/mm/yyyy', 
+                                            'data-date-weekstart': '1',
+                                            'data-date-language': 'es'},
                                     format=settings.DATE_FORMAT),
                     required=False)
     status = forms.ChoiceField(label=_(u'Estado Civil'),

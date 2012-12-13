@@ -71,7 +71,7 @@ class MedicineForm(forms.ModelForm):
                                     a los síntomas'),
                                     choices=BEFORE_AFTER_CHOICES,
                                     validators=[validate_choice])
-    months = forms.IntegerField(label=_(u'Número de meses de toma del\
+    months = forms.DecimalField(label=_(u'Número de meses de toma del\
                                          fármaco'))
     posology = forms.IntegerField(label=_(u'Posología (mg/día)'))
 

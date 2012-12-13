@@ -78,13 +78,14 @@
               </div>
             </div>
           {% endif %}
-
-
+           <div class="control-group">
+              <label class="control-label"></label>
+              <div class="controls">
+                 <span class="muted thumbnail">{{ parent_body|safe|escape|linebreaks }}</span>
+              </div>
+            </div>
 
           <!-- END BODY -->
-
-         
-
 
           <div class="form-actions">
             <button class="btn btn-large btn-primary btn-block" type="submit">{% trans 'Enviar' %}</button>
@@ -100,7 +101,7 @@
         "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
         "html": false, //Button which allows you to edit the generated HTML. Default false
         "link": false, //Button to insert a link. Default true
-        "image": false //Button to insert an image. Default true);
+        "image": false, //Button to insert an image. Default true);
       });
     </script>
   {% endif %}

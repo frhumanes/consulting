@@ -11,6 +11,7 @@ from models import Message
 from forms import MessageForm
 from django.contrib.auth.models import User
 
+from django.utils.translation import ugettext as _
 from decorators import paginate
 from django.views.decorators.cache import never_cache
 
@@ -89,11 +90,26 @@ def reply_message(request, message_id):
     Reply a mesage
     """
     message_to_reply = get_object_or_404(Message, pk=int(message_id))
-    message_to_reply.subject = 'Re: ' + message_to_reply.subject
+    
+    parent_body = '<div class="muted"><blockquote><small>%s, %s %s:</small><p>%s</p><blockquote></div>' % (message_to_reply.sent_at, 
+                        message_to_reply.author.get_profile().get_full_name(),
+                        _(u'escribió'),
+                        message_to_reply.body)
     message_to_reply.body = ''
-    form = MessageForm(user=request.user,
-        instance=message_to_reply,
-        initial={'recipient': message_to_reply.author,'parent': message_to_reply})
+    if request.user == message_to_reply.author:
+        form = MessageForm(user=request.user,
+            instance=message_to_reply,
+            initial={'parent': message_to_reply})
+        recipient = message_to_reply.recipient
+    else:
+        message_to_reply.subject = 'Re: ' + message_to_reply.subject
+        form = MessageForm(user=request.user,
+            instance=message_to_reply,
+            initial={'recipient': message_to_reply.author,'parent': message_to_reply})
+        recipient = message_to_reply.author
 
     return render_to_response("private_messages/message_reply.html",
-                {"form": form, "recipient":message_to_reply.author}, context_instance=RequestContext(request))
+                {"form": form, 
+                 "parent_body": parent_body,
+                 "recipient":recipient}, 
+                context_instance=RequestContext(request))

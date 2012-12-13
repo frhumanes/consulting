@@ -6,6 +6,15 @@
   {% comment %} {% include "cal/includes/events/calendar.html" %} {% endcomment %}
 {% endblock %}
 
+{% block css_inline %}
+  .controls li {
+    min-width: 100px;
+  }
+  ul.without_decorator{
+    margin: 0 0 9px 5px;
+  }
+{% endblock %}
+
 {% block container %}
   <div class="page-header">
     <h1>{% trans "Editar preferencia" %}
@@ -192,7 +201,7 @@
 
 $('#remove-event').live('click', function(event){
     $('#modal-screen').modal({
-      'Volverdrop':'static',
+      'backdrop':'static',
       'keyboard':false,
     });
   });
