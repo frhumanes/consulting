@@ -146,6 +146,10 @@ def explotation(request):
           # Regenerate ALL the database
           return regenerate_data(request, True)
         if r.patient in data:
+          if not data[r.patient].date or (r.date and 
+                                          data[r.patient].date and 
+                                          r.date > data[r.patient].date):
+            data[r.patient].date = r.date
           for var, mark in r.variables.items():
             if isinstance(mark, (int, long, float)):
               if var in data[r.patient].variables:
@@ -188,6 +192,7 @@ def explotation(request):
       data = {}
     #raise Exception
 
+    reports = sorted(reports, key=lambda report: -((report.status[u'Ansiedad'] and int(report.status[u'Ansiedad']) or 0) + (report.status[u'Depresión'] and int(report.status[u'Depresión']) or 0)))
   
 
     if request.GET.get('as', '') == 'xls':
@@ -205,7 +210,7 @@ def explotation(request):
                  ('dimensions',[d.name for d in Dimension.objects.all()], style_value),
                  ('variables',[v.name for v in Variable.objects.all()], style_value),
                  ('status', [u'Ansiedad',u'Depresión'], style_int),
-                 ('date',_(u'Fecha'), style_date), ]
+                 ('date',group and _(u'Episodio más reciente') or _(u'Fecha'), style_date), ]
       ws.write_merge(0, 0, 0, 2, 'Datos demográficos', style_head) 
       ws.write_merge(0, 0, 3, 4, 'Dimensiones', style_head) 
       ws.write_merge(0, 0, 5, 4+Variable.objects.all().count(), 'Variables', style_head) 
@@ -298,6 +303,7 @@ def explotation(request):
                                  'data1':data1,
                                  'data2': data2,
                                  'labels_for_data1':sorted(data1.keys()),
+                                 'group': group,
                                  'form' : form,
                                  'reports':list(reports),
                                  'variables':Variable.objects.all(),

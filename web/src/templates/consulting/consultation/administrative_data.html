@@ -14,9 +14,7 @@
 {% endblock %}
 
 {% block jquery_init %}
-  $('#dp').datepicker().on('changeDate', function(ev){
-  //$('#dp').datepicker('hide');
-  });
+  $('#id_dob').datepicker();
    <!-- LOOK FOR COMPONENT -->
   $("#id_profession").autocomplete({
     source: function(request, response){
@@ -169,20 +167,17 @@
         {{form.dob.label}}
       </label>
       <div class="controls">
-        <div id="dp" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1" data-date-language="es" data-date="{{form.dob.value}}">
-          {{form.dob}}
+        <div id="dp" class="input-prepend date" data-date-format="dd/mm/yyyy" data-date-weekstart="1" data-date-language="es" data-date-viewmode="years" data-date="{{form.dob.value|date:'d/m/Y'}}">
           <span class="add-on">
-            <i class="icon-th"></i>
+            <i class="icon-calendar"></i>
           </span>
-          <span class="help-inline">
-            {% trans 'Pacientes menores de edad sin NIF' %}
-          </span>
+          {{form.dob}}
+        </div>
           {% for error in form.dob.errors %}
             <span class="help-inline">
               {{ error|escape }}
             </span>
           {% endfor %}
-        </div>
       </div>
     </div>
     {% else %}
@@ -191,14 +186,11 @@
         {{form.dob.label}}
       </label>
       <div class="controls">
-        <div id="dp" class="input-append date" data-date-format="dd/mm/yyyy" data-date-weekstart="1" data-date="{{form.dob.value|date:'d/m/Y'}}">
-          {{form.dob}}
-          <span class="add-on">
-            <i class="icon-th"></i>
-          </span>
-          <span class="help-inline">
-            {% trans 'Pacientes menores de edad sin NIF' %}
-          </span>
+        <div id="dp" class="input-prepend date" data-date-format="dd/mm/yyyy" data-date-weekstart="1" data-date-language="es" data-date-viewmode="years" data-date="{{form.dob.value|date:'d/m/Y'}}">
+        <span class="add-on">
+          <i class="icon-calendar"></i>
+        </span>
+        {{form.dob}}
         </div>
       </div>
     </div>

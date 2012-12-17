@@ -14,6 +14,8 @@ def active_root(request, pattern):
 
     if split_path[1] == split_pattern[1] and  split_path[1] != '':
         return 'active'
+    elif request.path == pattern:
+        return 'active'
 
     return ''
 

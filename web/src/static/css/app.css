@@ -170,3 +170,13 @@ body > .navbar .brand:hover {
     min-height: 450px;
   }
 }
+
+svg.legend{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+svg.ANSIEDAD, svg.DEPRESION {
+ margin-left: 20px; 
+}

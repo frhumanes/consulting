@@ -16,9 +16,9 @@
             <span class="badge badge-warning"><i class="icon-time icon-white"></i> {% trans 'PENDIENTE' %}</span>
           {% else %}
             {% if event.notify %}
-            <span class="badge badge-important"><i class="icon-exclamation-sign icon-white"></i> {% trans 'NO ASISTIDA' %}</span>
-            {% else %}
             <span class="badge badge-important"><i class="icon-exclamation-sign icon-white"></i> {% trans 'NO ASISTIÓ' %}</span>
+            {% else %}
+            <span class="badge badge-important"><i class="icon-exclamation-sign icon-white"></i> {% trans 'NO ASISTIDA' %}</span>
             {% endif %}
           {% endif %}
         {% endif %}

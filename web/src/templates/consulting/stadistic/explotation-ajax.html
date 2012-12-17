@@ -91,7 +91,12 @@ if ($.browser.msie && $.browser.version < '9') {
             <th>Edad</th>
             <th>Sexo</th>
             <th>Profesión</th>
-            <th>Fecha</th>
+            <th>{% if group %}
+              <small>Episodio más reciente</small>
+              {% else %}
+                Fecha 
+              {% endif %}
+            </th>
           {% for d in dimensions %}
             <td><small>Dimensión {{d.name}}</small></td>
           {% endfor %}

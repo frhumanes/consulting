@@ -252,7 +252,7 @@ class Task(TraceableModel):
         else:
             return 'Abreviado'
 
-    def get_list_variables(self, num=None):
+    def get_list_variables(self, num=None, exclude=[]):
         marks = self.get_variables_mark()
         lv = []
         if num != None:
@@ -265,7 +265,7 @@ class Task(TraceableModel):
         else:
             n_mark = 0
         for var, mark in marks.items():
-            if mark >= n_mark:
+            if mark >= n_mark and not var.code in exclude:
                 lv.append((var.id, var.name))
         return lv
 

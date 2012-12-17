@@ -1326,7 +1326,8 @@ def select_self_administered_survey_monitoring(request, id_appointment, code_ill
 
     if task.count() > 0:
         task = task.latest('end_date')
-        variables = task.get_list_variables(settings.DEFAULT_NUM_VARIABLES)
+        variables = task.get_list_variables(settings.DEFAULT_NUM_VARIABLES, exclude=['V28'])
+
     else:
         variables = []
 

@@ -155,7 +155,7 @@ function init_pie(data, container) {
 
 function init_donuts(dataset, container) {
   var width = Math.min($('#main').width(), 550),
-      height = 450,
+      height = 430,
       radius = Math.min(width, height) / 2;
 
   var color = d3.scale.ordinal()
@@ -171,6 +171,27 @@ function init_donuts(dataset, container) {
   var arc = d3.svg.arc()
       .innerRadius(radius - 90)
       .outerRadius(radius - 10);
+
+  var legend = d3.select(container).append("svg")
+      .attr("class", "legend")
+      .attr("width", radius)
+      .attr("height", radius)
+    .selectAll("g")
+      .data(color_name)
+    .enter().append("g")
+      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+  legend.append("rect")
+      .attr("width", 15)
+      .attr("height", 15)
+      .attr("stroke", '#ccc')
+      .style("fill", color);
+
+  legend.append("text")
+      .attr("x", 21)
+      .attr("y", 8)
+      .attr("dy", ".35em")
+      .text(function(d, i) { return d; });
 
   $.each(dataset, function(key, data) {
 
