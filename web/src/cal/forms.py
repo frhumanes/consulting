@@ -15,6 +15,8 @@ from cal.custom_fields import SlotTypeChoiceField
 
 import cal.settings as cal_settings
 
+from datetime import datetime
+
 
 class VacationForm(forms.ModelForm):
     date = forms.DateField(label=_(u"Fecha inicial"),
@@ -79,13 +81,19 @@ class EventForm(forms.ModelForm):
 
             if end_time < cal_settings.START_TIME \
                 or end_time > cal_settings.END_TIME:
-                end_time_err = _("La hora finarl debe estar en el intervalo %s - %s")\
+                end_time_err = _("La hora final debe estar en el intervalo %s - %s")\
                     % (cal_settings.START_TIME.strftime(time_format),
                         cal_settings.END_TIME.strftime(time_format))
                 end_time_msg = _(end_time_err)
                 self._errors['end_time'] = self.error_class([end_time_msg])
                 if "end_time" in cleaned_data:
                     del cleaned_data["end_time"]
+
+            if datetime.combine(cleaned_data.get("date"), start_time) < datetime.now():
+                msg = _("La hora inicial debe ser mayor de la actual")
+                self._errors['start_time'] = self.error_class([msg])
+                del cleaned_data["start_time"]
+
 
         return cleaned_data
 
@@ -292,6 +300,11 @@ class AppointmentForm(forms.ModelForm):
                 self._errors['end_time'] = self.error_class([end_time_msg])
                 if "end_time" in cleaned_data:
                     del cleaned_data["end_time"]
+
+            if datetime.combine(cleaned_data.get("date"), start_time) < datetime.now():
+                msg = _("La hora inicial debe ser mayor de la actual")
+                self._errors['start_time'] = self.error_class([msg])
+                del cleaned_data["start_time"]
 
         if not app_type:
             if not description:

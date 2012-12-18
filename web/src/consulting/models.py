@@ -154,14 +154,13 @@ class Task(TraceableModel):
 
     def calculate_beck_mark(self):
         answers = self.get_answers()
-        mark = None
-        for answer in answers:
+        beck_answers = filter(lambda a: a.question.code.startswith('B'), answers)
+        if len(beck_answers) != Question.objects.filter(code__startswith='B').count():
+            return None
+        mark = 0
+        for answer in beck_answers:
             a = answer.option
-            if a and a.code.startswith('B'):
-                if mark is None:
-                    mark = a.weight
-                else:
-                    mark += a.weight #* 5 / q.question_options.aggregate(Max('weight'))['weight__max']
+            mark += a.weight #* 5 / q.question_options.aggregate(Max('weight'))['weight__max']
         return mark
 
     def calculate_hamilton_mark(self):
@@ -169,7 +168,15 @@ class Task(TraceableModel):
         mark = None
         submarks = {}
         kind = self.kind
-        for answer in answers:
+        ham_answers = filter(lambda a: a.question.code.startswith('H'), answers)
+        categories = self.survey.blocks.get(kind=kind).categories.filter()
+        ham_questions = 0
+        for category in categories:
+            ham_questions += category.questions.filter(kind__in=[settings.UNISEX, self.patient.get_profile().sex], code__startswith='H').count()
+        if ham_questions != len(ham_answers):
+            return mark, submarks
+        mark = 0
+        for answer in ham_answers:
             a = answer.option
             if a and (not a.code.startswith('H') or a.code.startswith('Hd')):
                 continue
@@ -181,17 +188,11 @@ class Task(TraceableModel):
                     submarks[item] = a.weight
             else:
                 submarks[item] = a.weight
-                if mark is None:
-                    mark = a.weight
-                else:
-                    mark += a.weight
+                mark += a.weight
         if kind == settings.EXTENSO:
             for code, value in submarks.items():
                 submarks[code] = float(value)/Question.objects.filter(code__startswith=code+'.').count()
-                if mark is None:
-                    mark = submarks[code]
-                else:
-                    mark += submarks[code]
+                mark += submarks[code]
         return mark, submarks
 
     def get_ave_status(self):

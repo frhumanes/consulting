@@ -109,6 +109,10 @@ class Question(models.Model):
     
     required = models.BooleanField(_(u'Respuesta requerida'), default=False)
 
+    order = models.DecimalField(_(u'Orden'), default=0,
+                                max_digits=6, decimal_places=3,
+                                blank=True, null=True)
+
     def __unicode__(self):
         return u'%s - %s' % (self.code, truncate_words(self.text, 20))
 

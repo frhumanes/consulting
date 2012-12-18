@@ -69,7 +69,16 @@
       </tr>
       <tr>            
         <td>{% trans 'PRÓXIMA CITA' %}</td>
-        <td>{{patient_user.get_profile.get_nextAppointment.date|date:'d/M/Y'}}</td>
+        <td>{{patient_user.get_profile.get_nextAppointment.date|date:'d/M/Y'}}
+          {% if patient_user.get_profile.get_pending_tasks %}
+          <br>
+          <small>
+            <em>
+              {{patient_user.get_profile.get_pending_tasks|length}} {% trans 'cuestionario' %}{{patient_user.get_profile.get_pending_tasks|length|pluralize}} {% trans 'asignado' %}{{patient_user.get_profile.get_pending_tasks|length|pluralize}}
+            </em>
+          </small>
+          {% endif %}
+        </td>
       </tr>
       {% if user.get_profile.is_doctor %}
       <tr>            

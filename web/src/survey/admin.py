@@ -115,7 +115,7 @@ class OptionInlineAdmin(admin.StackedInline):
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [(None, {'fields': ['text', 'code']}),
                 ('Ajustes', {
-                    'fields': ['required', 'single','kind']
+                    'fields': ['required', 'single', 'kind', 'order']
                     }),]
     list_display = ('code', 'text', 'required', 'single')
     list_filter = ['kind', 'required', 'single']

@@ -3,1936 +3,2112 @@
     "pk": 4, 
     "model": "survey.question", 
     "fields": {
-      "text": "Sexo", 
-      "single": false, 
-      "code": "DA4", 
       "kind": 0, 
-      "required": true
+      "code": "DA4", 
+      "text": "Sexo", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 9, 
     "model": "survey.question", 
     "fields": {
-      "text": "Estado Civil", 
-      "single": false, 
-      "code": "DA9", 
       "kind": 0, 
-      "required": true
+      "code": "DA9", 
+      "text": "Estado Civil", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 12, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa sido diagnosticado con anterioridad de alguna de las siguientes enfermedades psiqui\u00e1tricas?", 
-      "single": false, 
-      "code": "AP", 
       "kind": 0, 
-      "required": false
+      "code": "AP", 
+      "text": "\u00bfHa sido diagnosticado con anterioridad de alguna de las siguientes enfermedades psiqui\u00e1tricas?", 
+      "required": false, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 13, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCu\u00e1nto tiempo hace que presenta la sintomatolog\u00eda que le ha hecho acudir a la consulta?", 
-      "single": true, 
-      "code": "DS", 
       "kind": 0, 
-      "required": true
+      "code": "DS", 
+      "text": "\u00bfCu\u00e1nto tiempo hace que presenta la sintomatolog\u00eda que le ha hecho acudir a la consulta?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 14, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfPadece o presenta sintomatolog\u00eda compatible con alguna de las siguientes enfermedades neurol\u00f3gicas?", 
-      "single": false, 
-      "code": "AN", 
       "kind": 0, 
-      "required": false
+      "code": "AN", 
+      "text": "\u00bfPadece o presenta sintomatolog\u00eda compatible con alguna de las siguientes enfermedades neurol\u00f3gicas?", 
+      "required": false, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 15, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfPadece o presenta sintomatolog\u00eda compatible con alguna de las siguientes enfermedades endocrin\u00f3logas?", 
-      "single": false, 
-      "code": "AE", 
       "kind": 0, 
-      "required": false
+      "code": "AE", 
+      "text": "\u00bfPadece o presenta sintomatolog\u00eda compatible con alguna de las siguientes enfermedades endocrin\u00f3logas?", 
+      "required": false, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 16, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfPadece o presenta sintomatolog\u00eda compatible con alguna de las siguientes enfermedades tumorales?", 
-      "single": false, 
-      "code": "AT", 
       "kind": 0, 
-      "required": false
+      "code": "AT", 
+      "text": "\u00bfPadece o presenta sintomatolog\u00eda compatible con alguna de las siguientes enfermedades tumorales?", 
+      "required": false, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 17, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfPadece o presenta sintomatolog\u00eda compatible con alguna de las siguientes enfermedades infecciosas?", 
-      "single": false, 
-      "code": "AI", 
       "kind": 0, 
-      "required": false
+      "code": "AI", 
+      "text": "\u00bfPadece o presenta sintomatolog\u00eda compatible con alguna de las siguientes enfermedades infecciosas?", 
+      "required": false, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 18, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfPadece o presenta sintomatolog\u00eda compatible con alguna de las siguientes enfermedades de otra categor\u00eda?", 
-      "single": false, 
-      "code": "AO", 
       "kind": 0, 
-      "required": false
+      "code": "AO", 
+      "text": "\u00bfPadece o presenta sintomatolog\u00eda compatible con alguna de las siguientes enfermedades de otra categor\u00eda?", 
+      "required": false, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 20, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfTrabaja por la noche?", 
-      "single": true, 
-      "code": "L1", 
       "kind": 0, 
-      "required": true
+      "code": "L1", 
+      "text": "\u00bfTrabaja por la noche?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 21, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfReside en una vivienda luminosa?", 
-      "single": true, 
-      "code": "L2", 
       "kind": 0, 
-      "required": true
+      "code": "L2", 
+      "text": "\u00bfReside en una vivienda luminosa?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 22, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfRecibe a diario la luz natural?", 
-      "single": true, 
-      "code": "L3", 
       "kind": 0, 
-      "required": true
+      "code": "L3", 
+      "text": "\u00bfRecibe a diario la luz natural?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 23, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa sufrido alguno de los siguientes acontecimientos durante los \u00faltimos 12 meses?", 
-      "single": false, 
-      "code": "AVE", 
       "kind": 0, 
-      "required": false
+      "code": "AVE", 
+      "text": "\u00bfHa sufrido alguno de los siguientes acontecimientos durante los \u00faltimos 12 meses?", 
+      "required": false, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 24, 
     "model": "survey.question", 
     "fields": {
-      "text": "Tengo familiares y amigos que hacen cosas para hacerme feliz.", 
-      "single": true, 
-      "code": "AS1", 
       "kind": 0, 
-      "required": true
+      "code": "AS1", 
+      "text": "Tengo familiares y amigos que hacen cosas para hacerme feliz.", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 25, 
     "model": "survey.question", 
     "fields": {
-      "text": "Tengo familiares y amigos que hacen que me sienta m\u00e1s querido.", 
-      "single": true, 
-      "code": "AS2", 
       "kind": 0, 
-      "required": true
+      "code": "AS2", 
+      "text": "Tengo familiares y amigos que hacen que me sienta m\u00e1s querido.", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 26, 
     "model": "survey.question", 
     "fields": {
-      "text": "Tengo familiares y amigos con los que puedo contar pase lo que pase.", 
-      "single": true, 
-      "code": "AS3", 
       "kind": 0, 
-      "required": true
+      "code": "AS3", 
+      "text": "Tengo familiares y amigos con los que puedo contar pase lo que pase.", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 27, 
     "model": "survey.question", 
     "fields": {
-      "text": "Tengo familiares y amigos que cuidar\u00edan de mi si lo necesitara.", 
-      "single": true, 
-      "code": "AS4", 
       "kind": 0, 
-      "required": true
+      "code": "AS4", 
+      "text": "Tengo familiares y amigos que cuidar\u00edan de mi si lo necesitara.", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 28, 
     "model": "survey.question", 
     "fields": {
-      "text": "Tengo familiares y amigos que me aceptan tal y como soy.", 
-      "single": true, 
-      "code": "AS5", 
       "kind": 0, 
-      "required": true
+      "code": "AS5", 
+      "text": "Tengo familiares y amigos que me aceptan tal y como soy.", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 29, 
     "model": "survey.question", 
     "fields": {
-      "text": "Tengo familiares y amigos que me hacen sentir una parte importante de sus vidas.", 
-      "single": true, 
-      "code": "AS6", 
       "kind": 0, 
-      "required": true
+      "code": "AS6", 
+      "text": "Tengo familiares y amigos que me hacen sentir una parte importante de sus vidas.", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 30, 
     "model": "survey.question", 
     "fields": {
-      "text": "Tengo familiares y amigos que me dan \u00e1nimos.", 
-      "single": true, 
-      "code": "AS7", 
       "kind": 0, 
-      "required": true
+      "code": "AS7", 
+      "text": "Tengo familiares y amigos que me dan \u00e1nimos.", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 31, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfConsidera que alguno de los siguientes rasgos caracterizan de forma especial su personalidad?", 
-      "single": false, 
-      "code": "RP", 
       "kind": 0, 
-      "required": false
+      "code": "RP", 
+      "text": "\u00bfConsidera que alguno de los siguientes rasgos caracterizan de forma especial su personalidad?", 
+      "required": false, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 32, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B1", 
       "kind": 0, 
-      "required": true
+      "code": "B1", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 33, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 las variaciones del humor durante el d\u00eda, siendo 0 la ausencia de variaciones y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H6.3", 
       "kind": 0, 
-      "required": true
+      "code": "H6.3", 
+      "text": "Valore en escala del 0 al 4 las variaciones del humor durante el d\u00eda, siendo 0 la ausencia de variaciones y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 34, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B2", 
       "kind": 0, 
-      "required": true
+      "code": "B2", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 35, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado en el que 'espera lo peor', siendo 0 la ausencia de pensamientos al respecto y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H1.2", 
       "kind": 0, 
-      "required": true
+      "code": "H1.2", 
+      "text": "Valore en escala del 0 al 4 el grado en el que 'espera lo peor', siendo 0 la ausencia de pensamientos al respecto y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 36, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado de aprensi\u00f3n (anticipaci\u00f3n temerosa), siendo 0 la ausencia de pensamientos al respecto y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H1.3", 
       "kind": 0, 
-      "required": true
+      "code": "H1.3", 
+      "text": "Valore en escala del 0 al 4 el grado de aprensi\u00f3n (anticipaci\u00f3n temerosa), siendo 0 la ausencia de pensamientos al respecto y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 37, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B3", 
       "kind": 0, 
-      "required": true
+      "code": "B3", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 38, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B4", 
       "kind": 0, 
-      "required": true
+      "code": "B4", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 39, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado de incapacidad para disfrutar ya de sus pasatiempos, siendo 0 la ausencia de incapacidad (es decir, puede disfrutar como antes) y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H6.2", 
       "kind": 0, 
-      "required": true
+      "code": "H6.2", 
+      "text": "Valore en escala del 0 al 4 el grado de incapacidad para disfrutar ya de sus pasatiempos, siendo 0 la ausencia de incapacidad (es decir, puede disfrutar como antes) y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 40, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado de 'falta de inter\u00e9s' por las cosas, siendo 0 el mantenimiento normal del inter\u00e9s y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H6.1", 
       "kind": 0, 
-      "required": true
+      "code": "H6.1", 
+      "text": "Valore en escala del 0 al 4 el grado de 'falta de inter\u00e9s' por las cosas, siendo 0 el mantenimiento normal del inter\u00e9s y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 41, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B5", 
       "kind": 0, 
-      "required": true
+      "code": "B5", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 42, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B6", 
       "kind": 0, 
-      "required": true
+      "code": "B6", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 43, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B7", 
       "kind": 0, 
-      "required": true
+      "code": "B7", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 44, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B8", 
       "kind": 0, 
-      "required": true
+      "code": "B8", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 45, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B9", 
       "kind": 0, 
-      "required": true
+      "code": "B9", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 46, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B10", 
       "kind": 0, 
-      "required": true
+      "code": "B10", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 47, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado de 'llanto f\u00e1cil', siendo 0 la ausencia de llanto f\u00e1cil y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H2.4", 
       "kind": 0, 
-      "required": true
+      "code": "H2.4", 
+      "text": "Valore en escala del 0 al 4 el grado de 'llanto f\u00e1cil', siendo 0 la ausencia de llanto f\u00e1cil y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 48, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B11", 
       "kind": 0, 
-      "required": true
+      "code": "B11", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 49, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado de irritabilidad, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H1.1", 
       "kind": 0, 
-      "required": true
+      "code": "H1.1", 
+      "text": "Valore en escala del 0 al 4 el grado de irritabilidad, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 50, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B12", 
       "kind": 0, 
-      "required": true
+      "code": "B12", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 51, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B13", 
       "kind": 0, 
-      "required": true
+      "code": "B13", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 52, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado de miedo a la oscuridad, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H3.1", 
       "kind": 0, 
-      "required": true
+      "code": "H3.1", 
+      "text": "Valore en escala del 0 al 4 el grado de miedo a la oscuridad, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 53, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado de miedo a la gente desconocidad, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H3.2", 
       "kind": 0, 
-      "required": true
+      "code": "H3.2", 
+      "text": "Valore en escala del 0 al 4 el grado de miedo a la gente desconocidad, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 54, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado de miedo a quedarse solo, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H3.3", 
       "kind": 0, 
-      "required": true
+      "code": "H3.3", 
+      "text": "Valore en escala del 0 al 4 el grado de miedo a quedarse solo, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 55, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado de miedo a los animales grandes u otros, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H3.4", 
       "kind": 0, 
-      "required": true
+      "code": "H3.4", 
+      "text": "Valore en escala del 0 al 4 el grado de miedo a los animales grandes u otros, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 56, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado de miedo al tr\u00e1nsito callejero, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H3.5", 
       "kind": 0, 
-      "required": true
+      "code": "H3.5", 
+      "text": "Valore en escala del 0 al 4 el grado de miedo al tr\u00e1nsito callejero, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 57, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado de miedo a la multitud, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H3.6", 
       "kind": 0, 
-      "required": true
+      "code": "H3.6", 
+      "text": "Valore en escala del 0 al 4 el grado de miedo a la multitud, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 58, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado a otros miedos, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H3.7", 
       "kind": 0, 
-      "required": true
+      "code": "H3.7", 
+      "text": "Valore en escala del 0 al 4 el grado a otros miedos, siendo 0 la ausencia de miedo y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 59, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B14", 
       "kind": 0, 
-      "required": true
+      "code": "B14", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 60, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B15", 
       "kind": 0, 
-      "required": true
+      "code": "B15", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 61, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado de dificultad de conversaci\u00f3n, siendo 0 la ausencia de dificultad y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H5.1", 
       "kind": 0, 
-      "required": true
+      "code": "H5.1", 
+      "text": "Valore en escala del 0 al 4 el grado de dificultad de conversaci\u00f3n, siendo 0 la ausencia de dificultad y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 62, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 el grado de 'mala memoria', siendo 0 la ausencia de alteraciones de la memoria y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H5.2", 
       "kind": 0, 
-      "required": true
+      "code": "H5.2", 
+      "text": "Valore en escala del 0 al 4 el grado de 'mala memoria', siendo 0 la ausencia de alteraciones de la memoria y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 63, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 los problemas de atenci\u00f3n que sufre, siendo 0 la ausencia de problemas y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H5.3", 
       "kind": 0, 
-      "required": true
+      "code": "H5.3", 
+      "text": "Valore en escala del 0 al 4 los problemas de atenci\u00f3n que sufre, siendo 0 la ausencia de problemas y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 64, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sensaciones de tensi\u00f3n, siendo 0 la ausencia de tensi\u00f3n y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H2.1", 
       "kind": 0, 
-      "required": true
+      "code": "H2.1", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sensaciones de tensi\u00f3n, siendo 0 la ausencia de tensi\u00f3n y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 65, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre 'imposibilidad de relajarse', siendo 0 la ausencia de dificultad para relajarse y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H2.3", 
       "kind": 0, 
-      "required": true
+      "code": "H2.3", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre 'imposibilidad de relajarse', siendo 0 la ausencia de dificultad para relajarse y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 66, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre 'sobresaltos al responder', siendo 0 la ausencia de sobresaltos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H2.5", 
       "kind": 0, 
-      "required": true
+      "code": "H2.5", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre 'sobresaltos al responder', siendo 0 la ausencia de sobresaltos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 67, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre temblores, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H2.6", 
       "kind": 0, 
-      "required": true
+      "code": "H2.6", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre temblores, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 68, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre 'sensaciones de inquietud', siendo 0 la ausencia de inquietud y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H2.7", 
       "kind": 0, 
-      "required": true
+      "code": "H2.7", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre 'sensaciones de inquietud', siendo 0 la ausencia de inquietud y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 69, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre 'sensaci\u00f3n de no poderse quedar en el lugar', siendo 0 la ausencia de inquietud y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H2.8", 
       "kind": 0, 
-      "required": true
+      "code": "H2.8", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre 'sensaci\u00f3n de no poderse quedar en el lugar', siendo 0 la ausencia de inquietud y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 70, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B16", 
       "kind": 0, 
-      "required": true
+      "code": "B16", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 71, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 la dificultad para conciliar el sue\u00f1o, siendo 0 la ausencia de dificultad y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H4.1", 
       "kind": 0, 
-      "required": true
+      "code": "H4.1", 
+      "text": "Valore en escala del 0 al 4 la dificultad para conciliar el sue\u00f1o, siendo 0 la ausencia de dificultad y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 72, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sue\u00f1o interrumpido, siendo 0 la ausencia de sue\u00f1o interrumpido y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H4.2", 
       "kind": 0, 
-      "required": true
+      "code": "H4.2", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sue\u00f1o interrumpido, siendo 0 la ausencia de sue\u00f1o interrumpido y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 73, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sue\u00f1o no satisfactorio con cansancio al despertar, siendo 0 la ausencia de sue\u00f1os no satisfactorios con cansancio al despertar y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H4.3", 
       "kind": 0, 
-      "required": true
+      "code": "H4.3", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sue\u00f1o no satisfactorio con cansancio al despertar, siendo 0 la ausencia de sue\u00f1os no satisfactorios con cansancio al despertar y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 74, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sue\u00f1os penosos, siendo 0 la ausencia de sue\u00f1os penosos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H4.4", 
       "kind": 0, 
-      "required": true
+      "code": "H4.4", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sue\u00f1os penosos, siendo 0 la ausencia de sue\u00f1os penosos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 75, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre pesadillas, siendo 0 la ausencia de pesadillas y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H4.5", 
       "kind": 0, 
-      "required": true
+      "code": "H4.5", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre pesadillas, siendo 0 la ausencia de pesadillas y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 76, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre terrores nocturnos, siendo 0 la ausencia de terrores norcturnos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H4.6", 
       "kind": 0, 
-      "required": true
+      "code": "H4.6", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre terrores nocturnos, siendo 0 la ausencia de terrores norcturnos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 77, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre insomnio de la madrugada, siendo 0 la ausencia de insomnio de la madrugada y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H6.4", 
       "kind": 0, 
-      "required": true
+      "code": "H6.4", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre insomnio de la madrugada, siendo 0 la ausencia de insomnio de la madrugada y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 78, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B17", 
       "kind": 0, 
-      "required": true
+      "code": "B17", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 79, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre fatigabilidad, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H2.2", 
       "kind": 0, 
-      "required": true
+      "code": "H2.2", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre fatigabilidad, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 80, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre dolores musculares, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H7.1", 
       "kind": 0, 
-      "required": true
+      "code": "H7.1", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre dolores musculares, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 81, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre espasmos musculares o calambres, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H7.2", 
       "kind": 0, 
-      "required": true
+      "code": "H7.2", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre espasmos musculares o calambres, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 82, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre rigidez muscular, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H7.3", 
       "kind": 0, 
-      "required": true
+      "code": "H7.3", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre rigidez muscular, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 83, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre tics, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H7.4", 
       "kind": 0, 
-      "required": true
+      "code": "H7.4", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre tics, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 84, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre rechinar de dientes, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H7.5", 
       "kind": 0, 
-      "required": true
+      "code": "H7.5", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre rechinar de dientes, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 85, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre voz vacilante, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H7.6", 
       "kind": 0, 
-      "required": true
+      "code": "H7.6", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre voz vacilante, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 86, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre tono muscular aumentado, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H7.7", 
       "kind": 0, 
-      "required": true
+      "code": "H7.7", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre tono muscular aumentado, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 87, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre zumbido de o\u00eddos, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H8.1", 
       "kind": 0, 
-      "required": true
+      "code": "H8.1", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre zumbido de o\u00eddos, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 88, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre visi\u00f3n borrosa, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H8.2", 
       "kind": 0, 
-      "required": true
+      "code": "H8.2", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre visi\u00f3n borrosa, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 89, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre oleada de fr\u00edo y calor, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H8.3", 
       "kind": 0, 
-      "required": true
+      "code": "H8.3", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre oleada de fr\u00edo y calor, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 90, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sensaci\u00f3n de debilidad, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H8.4", 
       "kind": 0, 
-      "required": true
+      "code": "H8.4", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sensaci\u00f3n de debilidad, siendo 0 la ausencia de la misma y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 91, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sensaciones parest\u00e9sicas (pinchazos, picaz\u00f3n u hormigueos), siendo 0 la ausencia de las mismas y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H8.5", 
       "kind": 0, 
-      "required": true
+      "code": "H8.5", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sensaciones parest\u00e9sicas (pinchazos, picaz\u00f3n u hormigueos), siendo 0 la ausencia de las mismas y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 92, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre dificultad para tragar, siendo 0 la ausencia de dificultad y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H11.1", 
       "kind": 0, 
-      "required": true
+      "code": "H11.1", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre dificultad para tragar, siendo 0 la ausencia de dificultad y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 93, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre meteorismo, siendo 0 la ausencia de meteorismo y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H11.2", 
       "kind": 0, 
-      "required": true
+      "code": "H11.2", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre meteorismo, siendo 0 la ausencia de meteorismo y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 94, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre dispepsia, siendo 0 la ausencia de dispepsia y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H11.3", 
       "kind": 0, 
-      "required": true
+      "code": "H11.3", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre dispepsia, siendo 0 la ausencia de dispepsia y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 95, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre dolor antes o despu\u00e9s de comer, siendo 0 la ausencia de dolor antes o despu\u00e9s de comer y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H11.4", 
       "kind": 0, 
-      "required": true
+      "code": "H11.4", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre dolor antes o despu\u00e9s de comer, siendo 0 la ausencia de dolor antes o despu\u00e9s de comer y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 96, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sensaci\u00f3n de ardor, siendo 0 la ausencia de sensaci\u00f3n de ardor y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H11.5", 
       "kind": 0, 
-      "required": true
+      "code": "H11.5", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sensaci\u00f3n de ardor, siendo 0 la ausencia de sensaci\u00f3n de ardor y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 97, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre distensi\u00f3n abdominal, siendo 0 la ausencia de distensi\u00f3n abdominal y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H11.6", 
       "kind": 0, 
-      "required": true
+      "code": "H11.6", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre distensi\u00f3n abdominal, siendo 0 la ausencia de distensi\u00f3n abdominal y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 98, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre pirosis, siendo 0 la ausencia de pirosis y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H11.7", 
       "kind": 0, 
-      "required": true
+      "code": "H11.7", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre pirosis, siendo 0 la ausencia de pirosis y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 99, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre n\u00e1useas, siendo 0 la ausencia de n\u00e1useas y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H11.8", 
       "kind": 0, 
-      "required": true
+      "code": "H11.8", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre n\u00e1useas, siendo 0 la ausencia de n\u00e1useas y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 100, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre v\u00f3mitos, siendo 0 la ausencia de v\u00f3mitos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H11.9", 
       "kind": 0, 
-      "required": true
+      "code": "H11.9", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre v\u00f3mitos, siendo 0 la ausencia de v\u00f3mitos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 101, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sensaci\u00f3n de est\u00f3mago vac\u00edo, siendo 0 la ausencia de sensaci\u00f3n de est\u00f3mago vac\u00edo y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H11.10", 
       "kind": 0, 
-      "required": true
+      "code": "H11.10", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sensaci\u00f3n de est\u00f3mago vac\u00edo, siendo 0 la ausencia de sensaci\u00f3n de est\u00f3mago vac\u00edo y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 102, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre c\u00f3licos abdominales, siendo 0 la ausencia de c\u00f3licos abdominales y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H11.11", 
       "kind": 0, 
-      "required": true
+      "code": "H11.11", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre c\u00f3licos abdominales, siendo 0 la ausencia de c\u00f3licos abdominales y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 103, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre borborigmos, siendo 0 la ausencia de borborigmos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H11.12", 
       "kind": 0, 
-      "required": true
+      "code": "H11.12", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre borborigmos, siendo 0 la ausencia de borborigmos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 104, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre diarrea, siendo 0 la ausencia de diarrea y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H11.13", 
       "kind": 0, 
-      "required": true
+      "code": "H11.13", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre diarrea, siendo 0 la ausencia de diarrea y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 105, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre estre\u00f1imiento, siendo 0 la ausencia de estre\u00f1imiento y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H11.14", 
       "kind": 0, 
-      "required": true
+      "code": "H11.14", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre estre\u00f1imiento, siendo 0 la ausencia de estre\u00f1imiento y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 106, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B18", 
       "kind": 0, 
-      "required": true
+      "code": "B18", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 107, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B19", 
       "kind": 0, 
-      "required": true
+      "code": "B19", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 108, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B20", 
       "kind": 0, 
-      "required": true
+      "code": "B20", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 109, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
-      "single": true, 
-      "code": "B21", 
       "kind": 0, 
-      "required": true
+      "code": "B21", 
+      "text": "\u00bfCon cual de las siguientes afirmaciones se siente m\u00e1s identificado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 110, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre eyaculaci\u00f3n precoz, siendo 0 la ausencia de eyaculaci\u00f3n precoz y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H12.5", 
       "kind": 2, 
-      "required": true
+      "code": "H12.5", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre eyaculaci\u00f3n precoz, siendo 0 la ausencia de eyaculaci\u00f3n precoz y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 111, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre ausencia de erecci\u00f3n, siendo 0 la ausencia del mismo y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H12.6", 
       "kind": 2, 
-      "required": true
+      "code": "H12.6", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre ausencia de erecci\u00f3n, siendo 0 la ausencia del mismo y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 112, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre impotencia, siendo 0 la ausencia del mismo y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H12.7", 
       "kind": 2, 
-      "required": true
+      "code": "H12.7", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre impotencia, siendo 0 la ausencia del mismo y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 113, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre frigidez, siendo 0 la ausencia de frigidez y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H12.3", 
       "kind": 1, 
-      "required": true
+      "code": "H12.3", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre frigidez, siendo 0 la ausencia de frigidez y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 114, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre metrorragia, siendo 0 la ausencia de metrorragia y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H12.2", 
       "kind": 1, 
-      "required": true
+      "code": "H12.2", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre metrorragia, siendo 0 la ausencia de metrorragia y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 115, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre amenorrea, siendo 0 la ausencia de amenorrea y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H12.1", 
       "kind": 1, 
-      "required": true
+      "code": "H12.1", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre amenorrea, siendo 0 la ausencia de amenorrea y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 116, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre micciones frecuentes, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H12.4", 
       "kind": 0, 
-      "required": true
+      "code": "H12.4", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre micciones frecuentes, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 117, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre peso en el pecho o sensaci\u00f3n de opresi\u00f3n tor\u00e1cica, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H10.1", 
       "kind": 0, 
-      "required": true
+      "code": "H10.1", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre peso en el pecho o sensaci\u00f3n de opresi\u00f3n tor\u00e1cica, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 118, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sensaci\u00f3n de ahogo, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H10.2", 
       "kind": 0, 
-      "required": true
+      "code": "H10.2", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sensaci\u00f3n de ahogo, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 119, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre suspiros, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H10.3", 
       "kind": 0, 
-      "required": true
+      "code": "H10.3", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre suspiros, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 120, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre falta de aire, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H10.4", 
       "kind": 0, 
-      "required": true
+      "code": "H10.4", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre falta de aire, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 121, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre taquicardia, siendo 0 la ausencia de taquicardia y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H9.1", 
       "kind": 0, 
-      "required": true
+      "code": "H9.1", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre taquicardia, siendo 0 la ausencia de taquicardia y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 122, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre palpitaciones, siendo 0 la ausencia de palpitaciones y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H9.2", 
       "kind": 0, 
-      "required": true
+      "code": "H9.2", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre palpitaciones, siendo 0 la ausencia de palpitaciones y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 123, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre dolores en el pecho, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H9.3", 
       "kind": 0, 
-      "required": true
+      "code": "H9.3", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre dolores en el pecho, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 124, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sensaci\u00f3n de 'baja presi\u00f3n' o desmayo, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H9.4", 
       "kind": 0, 
-      "required": true
+      "code": "H9.4", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sensaci\u00f3n de 'baja presi\u00f3n' o desmayo, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 125, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sequedad de boca, siendo 0 la ausencia de sequedad de boca y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H13.1", 
       "kind": 0, 
-      "required": true
+      "code": "H13.1", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre sequedad de boca, siendo 0 la ausencia de sequedad de boca y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 126, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre accesos de rubor, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H13.2", 
       "kind": 0, 
-      "required": true
+      "code": "H13.2", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre accesos de rubor, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 127, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre palidez, siendo 0 la ausencia de palidez y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H13.3", 
       "kind": 0, 
-      "required": true
+      "code": "H13.3", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre palidez, siendo 0 la ausencia de palidez y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 128, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre transpiraci\u00f3n excesiva, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H13.4", 
       "kind": 0, 
-      "required": true
+      "code": "H13.4", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre transpiraci\u00f3n excesiva, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 129, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre v\u00e9rtigos, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H13.5", 
       "kind": 0, 
-      "required": true
+      "code": "H13.5", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre v\u00e9rtigos, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 130, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre cefalea tensional, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H13.6", 
       "kind": 0, 
-      "required": true
+      "code": "H13.6", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre cefalea tensional, siendo 0 la ausencia de los mismos y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 131, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre horripilaci\u00f3n (piel de gallina), siendo 0 la ausencia de horripilaci\u00f3n y 4 una intensidad invalidante.", 
-      "single": true, 
-      "code": "H13.7", 
       "kind": 0, 
-      "required": true
+      "code": "H13.7", 
+      "text": "Valore en escala del 0 al 4 en qu\u00e9 medida sufre horripilaci\u00f3n (piel de gallina), siendo 0 la ausencia de horripilaci\u00f3n y 4 una intensidad invalidante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 132, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en que medida observa en el paciente durante la entrevista.", 
-      "single": true, 
-      "code": "Hd17", 
       "kind": 0, 
-      "required": true
+      "code": "Hd17", 
+      "text": "Valore en que medida observa en el paciente durante la entrevista.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 133, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la tensi\u00f3n.", 
-      "single": true, 
-      "code": "H14.1", 
       "kind": 0, 
-      "required": true
+      "code": "H14.1", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la tensi\u00f3n.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 134, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a estar inc\u00f3modo.", 
-      "single": true, 
-      "code": "H14.2", 
       "kind": 0, 
-      "required": true
+      "code": "H14.2", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a estar inc\u00f3modo.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 135, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la agitaci\u00f3n de las manos.", 
-      "single": true, 
-      "code": "H14.3", 
       "kind": 0, 
-      "required": true
+      "code": "H14.3", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la agitaci\u00f3n de las manos.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 136, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto frotar sus dedos.", 
-      "single": true, 
-      "code": "H14.4", 
       "kind": 0, 
-      "required": true
+      "code": "H14.4", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto frotar sus dedos.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 137, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a apretar los pu\u00f1os.", 
-      "single": true, 
-      "code": "H14.5", 
       "kind": 0, 
-      "required": true
+      "code": "H14.5", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a apretar los pu\u00f1os.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 138, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a posturas cambiantes.", 
-      "single": true, 
-      "code": "H14.6", 
       "kind": 0, 
-      "required": true
+      "code": "H14.6", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a posturas cambiantes.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 139, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al temblor de las manos.", 
-      "single": true, 
-      "code": "H14.7", 
       "kind": 0, 
-      "required": true
+      "code": "H14.7", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al temblor de las manos.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 140, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al ce\u00f1o arrugado.", 
-      "single": true, 
-      "code": "H14.8", 
       "kind": 0, 
-      "required": true
+      "code": "H14.8", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al ce\u00f1o arrugado.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 141, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a las facies tensa.", 
-      "single": true, 
-      "code": "H14.9", 
       "kind": 0, 
-      "required": true
+      "code": "H14.9", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a las facies tensa.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 142, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al tono muscular.", 
-      "single": true, 
-      "code": "H14.10", 
       "kind": 0, 
-      "required": true
+      "code": "H14.10", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al tono muscular.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 143, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la respiraci\u00f3n jadeante.", 
-      "single": true, 
-      "code": "H14.11", 
       "kind": 0, 
-      "required": true
+      "code": "H14.11", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la respiraci\u00f3n jadeante.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 144, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la palidez facial.", 
-      "single": true, 
-      "code": "H14.12", 
       "kind": 0, 
-      "required": true
+      "code": "H14.12", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la palidez facial.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 145, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a tragar saliva.", 
-      "single": true, 
-      "code": "H14.13", 
       "kind": 0, 
-      "required": true
+      "code": "H14.13", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a tragar saliva.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 146, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a eructos.", 
-      "single": true, 
-      "code": "H14.14", 
       "kind": 0, 
-      "required": true
+      "code": "H14.14", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a eructos.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 147, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a taquicardia de reposo.", 
-      "single": true, 
-      "code": "H14.15", 
       "kind": 0, 
-      "required": true
+      "code": "H14.15", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a taquicardia de reposo.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 148, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la frecuencia respiratoria mayor de 20/min.", 
-      "single": true, 
-      "code": "H14.16", 
       "kind": 0, 
-      "required": true
+      "code": "H14.16", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la frecuencia respiratoria mayor de 20/min.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 149, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a los reflejos tendinosos vivos.", 
-      "single": true, 
-      "code": "H14.17", 
       "kind": 0, 
-      "required": true
+      "code": "H14.17", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a los reflejos tendinosos vivos.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 150, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al temblor durante la entrevista.", 
-      "single": true, 
-      "code": "H14.18", 
       "kind": 0, 
-      "required": true
+      "code": "H14.18", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto al temblor durante la entrevista.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 151, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la dilataci\u00f3n pupilar.", 
-      "single": true, 
-      "code": "H14.19", 
       "kind": 0, 
-      "required": true
+      "code": "H14.19", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la dilataci\u00f3n pupilar.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 152, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la exoftalmia.", 
-      "single": true, 
-      "code": "H14.20", 
       "kind": 0, 
-      "required": true
+      "code": "H14.20", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la exoftalmia.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 153, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la sudoraci\u00f3n.", 
-      "single": true, 
-      "code": "H14.21", 
       "kind": 0, 
-      "required": true
+      "code": "H14.21", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a la sudoraci\u00f3n.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 154, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a las mioclonias palpebrales.", 
-      "single": true, 
-      "code": "H14.22", 
       "kind": 0, 
-      "required": true
+      "code": "H14.22", 
+      "text": "Valore del 0 al 4 como se muestra el paciente durante la entrevista respecto a las mioclonias palpebrales.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 155, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 el grado en que sufre inquietud, irritabilidad, espera lo peor, aprensi\u00f3n (anticipaci\u00f3n temerosa).", 
-      "single": true, 
-      "code": "H1", 
       "kind": 0, 
-      "required": true
+      "code": "H1", 
+      "text": "Valore del 0 al 4 el grado en que sufre inquietud, irritabilidad, espera lo peor, aprensi\u00f3n (anticipaci\u00f3n temerosa).", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 156, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 el grado en que sufre sensaciones de tensi\u00f3n, fatigabilidad, imposibilidad de relajarse, llanto f\u00e1cil, sobresalto al responder, temblores, sensaci\u00f3n de inquietud, sensaci\u00f3n de no poder quedarse en el lugar.", 
-      "single": true, 
-      "code": "H2", 
       "kind": 0, 
-      "required": true
+      "code": "H2", 
+      "text": "Valore del 0 al 4 el grado en que sufre sensaciones de tensi\u00f3n, fatigabilidad, imposibilidad de relajarse, llanto f\u00e1cil, sobresalto al responder, temblores, sensaci\u00f3n de inquietud, sensaci\u00f3n de no poder quedarse en el lugar.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 157, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 el grado en que sufre miedo a la oscuridad, miedo a la gente desconocida, miedo a quedarse s\u00f3lo, miedo a los animales grandes u otros, miedo al tr\u00e1nsito callejero, miedo a la multitud, otros miedos.", 
-      "single": true, 
-      "code": "H3", 
       "kind": 0, 
-      "required": true
+      "code": "H3", 
+      "text": "Valore del 0 al 4 el grado en que sufre miedo a la oscuridad, miedo a la gente desconocida, miedo a quedarse s\u00f3lo, miedo a los animales grandes u otros, miedo al tr\u00e1nsito callejero, miedo a la multitud, otros miedos.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 158, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 el grado en que sufre dificultad para conciliar el sue\u00f1o, sue\u00f1o interrumpido, sue\u00f1o no satisfactorio con cansancio al despertar, sue\u00f1os penosos, pesadillas, terrores nocturnos.", 
-      "single": true, 
-      "code": "H4", 
       "kind": 0, 
-      "required": true
+      "code": "H4", 
+      "text": "Valore del 0 al 4 el grado en que sufre dificultad para conciliar el sue\u00f1o, sue\u00f1o interrumpido, sue\u00f1o no satisfactorio con cansancio al despertar, sue\u00f1os penosos, pesadillas, terrores nocturnos.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 159, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 el grado en que sufre dificultad de concentraci\u00f3n, mala memoria, problemas de atenci\u00f3n.", 
-      "single": true, 
-      "code": "H5", 
       "kind": 0, 
-      "required": true
+      "code": "H5", 
+      "text": "Valore del 0 al 4 el grado en que sufre dificultad de concentraci\u00f3n, mala memoria, problemas de atenci\u00f3n.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 160, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 el grado en que no disfruta ya de sus pasatiempos, falta de inter\u00e9s, variaciones del humor durante el d\u00eda, insomnio de madrugada.", 
-      "single": true, 
-      "code": "H6", 
       "kind": 0, 
-      "required": true
+      "code": "H6", 
+      "text": "Valore del 0 al 4 el grado en que no disfruta ya de sus pasatiempos, falta de inter\u00e9s, variaciones del humor durante el d\u00eda, insomnio de madrugada.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 161, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 el grado en que sufre dolores musculares, espasmos musculares o calambres, rigidez muscular, tics, rechinar de dientes, voz vacilante, tono muscular aumentado.", 
-      "single": true, 
-      "code": "H7", 
       "kind": 0, 
-      "required": true
+      "code": "H7", 
+      "text": "Valore del 0 al 4 el grado en que sufre dolores musculares, espasmos musculares o calambres, rigidez muscular, tics, rechinar de dientes, voz vacilante, tono muscular aumentado.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 162, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 el grado en que sufre zumbidos de o\u00eddos, visi\u00f3n borrosa, oleadas de fr\u00edo y calor, sensaci\u00f3n de debilidad, sensaciones parest\u00e9sicas (pinchazos, picaz\u00f3n u hormigueos).", 
-      "single": true, 
-      "code": "H8", 
       "kind": 0, 
-      "required": true
+      "code": "H8", 
+      "text": "Valore del 0 al 4 el grado en que sufre zumbidos de o\u00eddos, visi\u00f3n borrosa, oleadas de fr\u00edo y calor, sensaci\u00f3n de debilidad, sensaciones parest\u00e9sicas (pinchazos, picaz\u00f3n u hormigueos).", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 163, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 el grado en que sufre taquicardia, palpitaciones, dolores en el pecho, sensaci\u00f3n de 'baja presi\u00f3n' o desmayo.", 
-      "single": true, 
-      "code": "H9", 
       "kind": 0, 
-      "required": true
+      "code": "H9", 
+      "text": "Valore del 0 al 4 el grado en que sufre taquicardia, palpitaciones, dolores en el pecho, sensaci\u00f3n de 'baja presi\u00f3n' o desmayo.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 164, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 el grado en que sufre peso en el pecho o sensaci\u00f3n de opresi\u00f3n tor\u00e1cica, sensaci\u00f3n de ahogo, suspiros, falta de aire.", 
-      "single": true, 
-      "code": "H10", 
       "kind": 0, 
-      "required": true
+      "code": "H10", 
+      "text": "Valore del 0 al 4 el grado en que sufre peso en el pecho o sensaci\u00f3n de opresi\u00f3n tor\u00e1cica, sensaci\u00f3n de ahogo, suspiros, falta de aire.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 165, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 el grado en que sufre dificultad para tragar, meteorismo, dispepsia, dolor antes o despu\u00e9s de comer, sensaci\u00f3n de ardor, distensi\u00f3n abdominal, pirosis, n\u00e1useas, v\u00f3mitos, sensaci\u00f3n de est\u00f3mago vac\u00edo, c\u00f3licos abdominales, borborigmos, diarrea, estre\u00f1imiento.", 
-      "single": true, 
-      "code": "H11", 
       "kind": 0, 
-      "required": true
+      "code": "H11", 
+      "text": "Valore del 0 al 4 el grado en que sufre dificultad para tragar, meteorismo, dispepsia, dolor antes o despu\u00e9s de comer, sensaci\u00f3n de ardor, distensi\u00f3n abdominal, pirosis, n\u00e1useas, v\u00f3mitos, sensaci\u00f3n de est\u00f3mago vac\u00edo, c\u00f3licos abdominales, borborigmos, diarrea, estre\u00f1imiento.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 166, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 el grado en que sufre eyaculaci\u00f3n precoz, ausencia de erecci\u00f3n, impotencia, frigidez, metrorragia, amenorrea, micciones frecuentes.", 
-      "single": true, 
-      "code": "H12", 
       "kind": 0, 
-      "required": true
+      "code": "H12", 
+      "text": "Valore del 0 al 4 el grado en que sufre eyaculaci\u00f3n precoz, ausencia de erecci\u00f3n, impotencia, frigidez, metrorragia, amenorrea, micciones frecuentes.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 167, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 el grado en que sufre sequedad de boca, accesos de rubor, palidez, transpiraci\u00f3n excesiva, v\u00e9rtigos, cefalea, tensional, horripilaci\u00f3n (piel de gallina).", 
-      "single": true, 
-      "code": "H13", 
       "kind": 0, 
-      "required": true
+      "code": "H13", 
+      "text": "Valore del 0 al 4 el grado en que sufre sequedad de boca, accesos de rubor, palidez, transpiraci\u00f3n excesiva, v\u00e9rtigos, cefalea, tensional, horripilaci\u00f3n (piel de gallina).", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 168, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore del 0 al 4 el grado en que se encuentra tenso, inc\u00f3modo, agitaci\u00f3n de las manos, frota sus dedos, aprieta los pu\u00f1os, postura cambiante, temblor de las manos, ce\u00f1o arrugado, facies tensa, aumento del tono muscular, respiraci\u00f3n jadeante, palidez facial, traga saliva, tendinosos vivos, temblor durante la entrevista, dilataci\u00f3n pupilar, exoftalmia, sudoraci\u00f3n, mioclonias palpebrales.", 
-      "single": true, 
-      "code": "H14", 
       "kind": 0, 
-      "required": true
+      "code": "H14", 
+      "text": "Valore del 0 al 4 el grado en que se encuentra tenso, inc\u00f3modo, agitaci\u00f3n de las manos, frota sus dedos, aprieta los pu\u00f1os, postura cambiante, temblor de las manos, ce\u00f1o arrugado, facies tensa, aumento del tono muscular, respiraci\u00f3n jadeante, palidez facial, traga saliva, tendinosos vivos, temblor durante la entrevista, dilataci\u00f3n pupilar, exoftalmia, sudoraci\u00f3n, mioclonias palpebrales.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 169, 
     "model": "survey.question", 
     "fields": {
-      "text": "Valore en qu\u00e9 medida observa durante la entrevista.", 
-      "single": true, 
-      "code": "Hd8", 
       "kind": 0, 
-      "required": true
+      "code": "Hd8", 
+      "text": "Valore en qu\u00e9 medida observa durante la entrevista.", 
+      "required": true, 
+      "single": true, 
+      "order": "0.999"
     }
   }, 
   {
     "pk": 170, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa observado desde su \u00faltima visita, la aparici\u00f3n de nuevos s\u00edntomas o empeoramiento de alguno ya presente, a los que no se ha hecho referencia en el cuestionario?", 
-      "single": false, 
-      "code": "SE", 
       "kind": 0, 
-      "required": true
+      "code": "SE", 
+      "text": "\u00bfHa observado desde su \u00faltima visita, la aparici\u00f3n de nuevos s\u00edntomas o empeoramiento de alguno ya presente, a los que no se ha hecho referencia en el cuestionario?", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 171, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa padecido Ansiedad alguno de sus familiares?", 
-      "single": false, 
-      "code": "AF1", 
       "kind": 0, 
-      "required": true
+      "code": "AF1", 
+      "text": "\u00bfHa padecido Ansiedad alguno de sus familiares?", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 172, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa padecido S\u00edndromes f\u00f3bicos alguno de sus familiares?", 
-      "single": false, 
-      "code": "AF2", 
       "kind": 0, 
-      "required": true
+      "code": "AF2", 
+      "text": "\u00bfHa padecido S\u00edndromes f\u00f3bicos alguno de sus familiares?", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 173, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa padecido Trastornos de p\u00e1nico alguno de sus familiares?", 
-      "single": false, 
-      "code": "AF3", 
       "kind": 0, 
-      "required": true
+      "code": "AF3", 
+      "text": "\u00bfHa padecido Trastornos de p\u00e1nico alguno de sus familiares?", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 174, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa padecido Distimia alguno de sus familiares?", 
-      "single": false, 
-      "code": "AF4", 
       "kind": 0, 
-      "required": true
+      "code": "AF4", 
+      "text": "\u00bfHa padecido Distimia alguno de sus familiares?", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 175, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa padecido Trastorno depresivo alguno de sus familiares?", 
-      "single": false, 
-      "code": "AF5", 
       "kind": 0, 
-      "required": true
+      "code": "AF5", 
+      "text": "\u00bfHa padecido Trastorno depresivo alguno de sus familiares?", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 176, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa padecido Trastorno bipolar alguno de sus familiares?", 
-      "single": false, 
-      "code": "AF6", 
       "kind": 0, 
-      "required": true
+      "code": "AF6", 
+      "text": "\u00bfHa padecido Trastorno bipolar alguno de sus familiares?", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 177, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa padecido Man\u00eda alguno de sus familiares?", 
-      "single": false, 
-      "code": "AF7", 
       "kind": 0, 
-      "required": true
+      "code": "AF7", 
+      "text": "\u00bfHa padecido Man\u00eda alguno de sus familiares?", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 178, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa padecido Toxicoman\u00eda alguno de sus familiares?", 
-      "single": false, 
-      "code": "AF8", 
       "kind": 0, 
-      "required": true
+      "code": "AF8", 
+      "text": "\u00bfHa padecido Toxicoman\u00eda alguno de sus familiares?", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 179, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa padecido Abuso de Alcohol alguno de sus familiares?", 
-      "single": false, 
-      "code": "AF9", 
       "kind": 0, 
-      "required": true
+      "code": "AF9", 
+      "text": "\u00bfHa padecido Abuso de Alcohol alguno de sus familiares?", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 180, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa padecido Trastorno obsesivo-compulsivo alguno de sus familiares?", 
-      "single": false, 
-      "code": "AF10", 
       "kind": 0, 
-      "required": true
+      "code": "AF10", 
+      "text": "\u00bfHa padecido Trastorno obsesivo-compulsivo alguno de sus familiares?", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 181, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa padecido Esquizofrenia alguno de sus familiares?", 
-      "single": false, 
-      "code": "AF11", 
       "kind": 0, 
-      "required": true
+      "code": "AF11", 
+      "text": "\u00bfHa padecido Esquizofrenia alguno de sus familiares?", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 182, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa padecido Trastorno de personalidad alguno de sus familiares?", 
-      "single": false, 
-      "code": "AF12", 
       "kind": 0, 
-      "required": true
+      "code": "AF12", 
+      "text": "\u00bfHa padecido Trastorno de personalidad alguno de sus familiares?", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 183, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfHa padecido Otros Trastornos psiqui\u00e1tricos alguno de sus familiares?", 
-      "single": false, 
-      "code": "AF13", 
       "kind": 0, 
-      "required": true
+      "code": "AF13", 
+      "text": "\u00bfHa padecido Otros Trastornos psiqui\u00e1tricos alguno de sus familiares?", 
+      "required": true, 
+      "single": false, 
+      "order": null
     }
   }, 
   {
     "pk": 184, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfEn qu\u00e9 grado ha seguido el paciente las recomendaciones y/o tratamiento indicados?", 
-      "single": true, 
-      "code": "ADT", 
       "kind": 0, 
-      "required": true
+      "code": "ADT", 
+      "text": "\u00bfEn qu\u00e9 grado ha seguido el paciente las recomendaciones y/o tratamiento indicados?", 
+      "required": true, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 185, 
     "model": "survey.question", 
     "fields": {
-      "text": "Indique a continuaci\u00f3n si observa alguna mejora o empeoramiento en sus s\u00edntomas desde su \u00faltima visita presencial.", 
-      "single": true, 
-      "code": "VT1", 
       "kind": 0, 
-      "required": false
+      "code": "VT1", 
+      "text": "Indique a continuaci\u00f3n si observa alguna mejora o empeoramiento en sus s\u00edntomas desde su \u00faltima visita presencial.", 
+      "required": false, 
+      "single": true, 
+      "order": null
     }
   }, 
   {
     "pk": 186, 
     "model": "survey.question", 
     "fields": {
-      "text": "\u00bfExiste alg\u00fan hecho que crea importante rese\u00f1ar?", 
-      "single": true, 
-      "code": "VT2", 
       "kind": 0, 
-      "required": false
+      "code": "VT2", 
+      "text": "\u00bfExiste alg\u00fan hecho que crea importante rese\u00f1ar?", 
+      "required": false, 
+      "single": true, 
+      "order": null
     }
   }
 ]

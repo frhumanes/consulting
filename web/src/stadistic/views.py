@@ -192,7 +192,7 @@ def explotation(request):
       data = {}
     #raise Exception
 
-    reports = sorted(reports, key=lambda report: -((report.status[u'Ansiedad'] and int(report.status[u'Ansiedad']) or 0) + (report.status[u'Depresión'] and int(report.status[u'Depresión']) or 0)))
+    reports = sorted(reports, key=lambda report: -((report.status[u'Ansiedad'] and int(report.status[u'Ansiedad']) or -1) + (report.status[u'Depresión'] and int(report.status[u'Depresión']) or -1)))
   
 
     if request.GET.get('as', '') == 'xls':

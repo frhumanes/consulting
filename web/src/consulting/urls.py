@@ -190,4 +190,8 @@ urlpatterns = patterns('',
         consulting_views.keep_alive,
         name='consulting_keep_alive'),
 
+    url(r"^user_guide/$",
+        consulting_views.get_user_guide,
+        name='consulting_user_guide'),
+
 )

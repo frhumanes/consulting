@@ -17,7 +17,7 @@ from django.middleware.csrf import get_token
 from django.conf import settings
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.utils import simplejson
 from django.utils.translation import ugettext as _
 from django.db.models import Q, Max
@@ -796,7 +796,7 @@ def show_block(request, id_task, code_block=None, code_illness=None, id_appointm
                         answer.save()
                 elif values.isdigit():
                     option = Option.objects.get(pk=int(values))
-                    answer = Answer(result = new_result, option = option, question = option.question)
+                    answer = Answer(result = new_result, option = option, value=val, question = option.question)
                     answer.save()
                 elif values:
                     answer = Answer(result = new_result, value=values, question = Question.objects.get(code=name_field))
@@ -1235,6 +1235,12 @@ def select_successive_survey(request, id_appointment, code_illness=None):
             form = ClassForm()
         else:
             form = ClassForm(variables=variables)
+            if Task.objects.filter(survey__code=int(settings.INITIAL_ASSESSMENT),
+                                   patient=appointment.patient,
+                                   created_by=appointment.doctor 
+                                   ).count() == 0:
+                form.fields['survey'].choices.append((settings.INITIAL_ASSESSMENT, 
+                    _(u'Valoración Inicial')))
 
     return render_to_response(
             'consulting/consultation/monitoring/successive_survey/select.html',
@@ -1357,7 +1363,7 @@ def select_self_administered_survey_monitoring(request, id_appointment, code_ill
             previous_days=previous_days, kind=kind)
             task.save()
 
-
+            exc_block = get_object_or_404(Block,code=settings.BEHAVIOR_BLOCK, kind=kind)
             id_variables = form.cleaned_data['variables']
             if id_variables and code_survey==str(settings.CUSTOM):
                 variables = Variable.objects.filter(id__in=id_variables)
@@ -1383,7 +1389,6 @@ def select_self_administered_survey_monitoring(request, id_appointment, code_ill
             elif code_survey==str(settings.VIRTUAL_SURVEY):
                 pass
             else:## HIDE DOCTOR's QUESTIONS
-                exc_block = get_object_or_404(Block,code=settings.BEHAVIOR_BLOCK, kind=kind)
                 questions_list = Question.objects.filter(questions_categories__categories_blocks__blocks_surveys=survey, questions_categories__categories_blocks__kind=kind).exclude(questions_categories__categories_blocks=exc_block)
                 for question in questions_list:
                     task.questions.add(question)
@@ -1462,7 +1467,7 @@ def generate_username(form):
     return username
 
 
-def sendemail(user):
+def sendemail(user, password):
     subject = render_to_string('registration/identification_email_subject.txt',
                             {})
     # Email subject *must not* contain newlines
@@ -1471,7 +1476,7 @@ def sendemail(user):
     message = render_to_string(
                             'registration/identification_email_message.txt',
                             {'username': user.username,
-                            'password': settings.DEFAULT_PASSWORD})
+                            'password': password})
 
     send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
 
@@ -1501,8 +1506,9 @@ def newpatient(request):
                     same_username = True
                 except Profile.DoesNotExist:
                     ############################USER###########################
+                    password = pwd_generator()
                     user = User.objects.create_user(username=username,
-                        password=settings.DEFAULT_PASSWORD,
+                        password=password,
                         email=form.cleaned_data['email'])
                     user.first_name = format_string(form.cleaned_data['name'])
                     user.last_name = format_string(
@@ -1542,7 +1548,7 @@ def newpatient(request):
                     ###########################################################
                     #SEND EMAIL
                     if user.email:
-                        sendemail(user)
+                        sendemail(user, password)
 
                     return render_to_response(
                             'consulting/patient/patient_identification.html',
@@ -2299,8 +2305,10 @@ def user_evolution(request, patient_user_id, return_xls=False):
                     latest_marks[var.name] = [[t.end_date, mark]]
             if not t.end_date in vticks:
                 vticks.append(t.end_date)
-        scales['beck'].insert(0, [t.end_date, t.calculate_beck_mark()])
-        scales['hamilton'].insert(0, [t.end_date, t.calculate_hamilton_mark()[0]])
+        if not t.calculate_beck_mark() is None:
+            scales['beck'].insert(0, [t.end_date, t.calculate_beck_mark()])
+        if not t.calculate_hamilton_mark()[0] is None:
+            scales['hamilton'].insert(0, [t.end_date, t.calculate_hamilton_mark()[0]])
     yscales = {}
     pkeys = settings.BECK.keys()
     pkeys.sort()
@@ -2377,3 +2385,26 @@ def save_notes(request):
         return HttpResponse('')
     return HttpResponse('Error')
 
+@login_required()
+def get_user_guide(request):
+    import os
+    profile = request.user.get_profile()
+    if profile.is_doctor():
+        filename = 'doctor_guide.pdf'
+    elif profile.is_administrative():
+        filename = 'administrative_guide.pdf'
+    elif profile.is_patient():
+        filename = 'patient_guide.pdf'
+    else:
+        raise Http404
+    for folder in settings.STATICFILES_DIRS:
+        abspath = os.path.join(folder, 'pdf', filename)
+        if os.path.exists(abspath):
+            pdf = open(abspath,'r')
+            response = HttpResponse(content=pdf.read())
+            response['Content-Type']= 'application/pdf'
+            response['Content-Disposition'] = 'attachment; filename=%s.pdf' \
+                                            % _(u'Consulting_user_guide.pdf')
+            return response
+    
+    raise Http404

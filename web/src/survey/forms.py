@@ -145,7 +145,7 @@ class QuestionsForm(forms.Form):
             selected_options = kwargs.pop('selected_options')
             super(QuestionsForm, self).__init__(*args, **kwargs)
             pkeys = dic.keys()
-            pkeys.sort(key=lambda q: q.id)
+            pkeys.sort(key=lambda q: (q.order, q.id))
             i = -1
             for question in pkeys:
                 i += 1

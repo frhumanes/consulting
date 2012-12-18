@@ -194,8 +194,10 @@ class Profile(TraceableModel):
                             Q(date=date.today(), start_time__gte=datetime.time(datetime.now()))).order_by(
                             'date')
 
-        if appointments.count() > 0:
-            nextAppointment = appointments[0]
+        for app in appointments:
+            if not app.has_activity():
+                nextAppointment = app
+                break
         else:
             nextAppointment = ''
 
@@ -233,8 +235,10 @@ class Profile(TraceableModel):
         if at_date:
             filter_option = filter_option & Q(end_date__lte=at_date)
         try:
-            task = Task.objects.filter(filter_option).latest('end_date')
-            status = task.get_anxiety_status(index)
+            for task in Task.objects.filter(filter_option).order_by('-end_date'):
+                status = task.get_anxiety_status(index)
+                if status != '':
+                    break
             if html:
                 if status[0]  != ' ':
                     return '<span style="min-width:100px" class="label label-%s" >%s</span>' % (status[1], status[0])
@@ -249,8 +253,10 @@ class Profile(TraceableModel):
         if at_date:
             filter_option = filter_option & Q(end_date__lte=at_date)
         try:
-            task = Task.objects.filter(filter_option).latest('end_date')
-            status = task.get_depression_status(index)
+            for task in Task.objects.filter(filter_option).order_by('-end_date'):
+                status = task.get_depression_status(index)
+                if status != '':
+                    break
             if html:
                 if status[0] != ' ':
                     return '<span style="min-width:100px" class="label label-%s" >%s</span>' % (status[1], status[0])

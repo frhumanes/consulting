@@ -13,6 +13,7 @@ from consulting.validators import validate_choice
 from consulting.models import Medicine, Conclusion
 from medicament.models import Component
 from survey.models import Question
+import copy
 
 
 class AdminRadioFieldRenderer(RadioFieldRenderer):
@@ -125,32 +126,34 @@ class SelectOtherTaskForm(forms.Form):
     survey = forms.ChoiceField(label=_(u'Encuesta'),
             widget=forms.Select(
                         attrs={'class': 'input-medium search-query span12'}))
-    NEXT_SURVEY = [
-                ('', _(u'--------')),
-                (settings.ANXIETY_DEPRESSION_SURVEY,
-                    _(u'Valoración de la depresión y la ansiedad')),
-                (settings.CUSTOM, _(u'Variables más puntuadas')),
-            ]
+    NEXT_SURVEY = [('', _(u'--------'))]
 
     def __init__(self, *args, **kwargs):
+        choices = copy.copy(self.NEXT_SURVEY)
         if 'variables' in kwargs:
             variables = kwargs.pop('variables')
             super(SelectOtherTaskForm, self).__init__(*args, **kwargs)
 
+            choices.append(
+                    (settings.ANXIETY_DEPRESSION_SURVEY,
+                    _(u'Valoración de la depresión y la ansiedad'))
+                    )
             self.fields['variables'] = forms.MultipleChoiceField(
                     label=_(u'Variables'),
                     widget=forms.CheckboxSelectMultiple(),
                     choices=variables,
                     initial=[x[0] for x in variables],
                     required=False)
-            if not variables:
-                self.NEXT_SURVEY = self.NEXT_SURVEY[:-1]
-            self.fields['survey'].choices = self.NEXT_SURVEY
+            if variables:
+                choices.append(
+                    (settings.CUSTOM, _(u'Variables más puntuadas')))
         else:
             super(SelectOtherTaskForm, self).__init__(*args, **kwargs)
-            self.NEXT_SURVEY = ((settings.INITIAL_ASSESSMENT,
-                    _(u'Valoración Inicial')),)
-            self.fields['survey'].choices = self.NEXT_SURVEY[:2]
+            choices.append(
+                    (settings.INITIAL_ASSESSMENT, 
+                    _(u'Valoración Inicial'))
+                    )
+        self.fields['survey'].choices = choices
         self.fields['kind'] = forms.ChoiceField(
                     label=_(u'Tipo'),
                     widget=forms.Select(),
