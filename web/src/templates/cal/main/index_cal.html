@@ -1,10 +1,27 @@
 {% extends "cal/includes/base.html" %}
 {% load i18n%}
 
+{% block css_inline %}
+#large{
+	width: auto;
+}
+@media (max-width: 980px){
+	.container {
+		width: 100%;
+	}
+	#bigcal > div.btn-toolbar {
+		min-width: 300px;
+	}
+	#bigcal > div.pagination {
+		min-width: 200px;
+	}
+}
+{% endblock %}
+
 {% block body %}
 <div class="container">
   <div class="row-fluid">
-	<div id="large" class="span12">
+	<div id="large">
 	{% include 'cal/includes/calendar_big.html' %}
 	</div>
   </div>

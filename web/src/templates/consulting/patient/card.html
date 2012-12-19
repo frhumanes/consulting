@@ -6,7 +6,10 @@
       <tr>            
         <th colspan="2" style="text-align:center;">
           <h4>
-            <a rel="tooltip" placement="top" title="{% trans 'Ir a perfil del paciente' %}" target="_blank" href="{% url consulting_pre_personal_data_pm patient_user.id %}" >{{patient_user.get_profile.get_full_name|upper}}</a>&nbsp;
+            <a rel="tooltip" placement="top" title="{% trans 'Ir a perfil del paciente' %}" target="_blank" href="{% url consulting_pre_personal_data_pm patient_user.id %}" >{{patient_user.get_profile.get_full_name|upper}}</a> 
+            {% if not patient_user.is_active %}
+              <span class="text-error">{% trans '[INACTIVO]' %}</span>
+            {% endif %}&nbsp;
           <a href="{% url consulting_editpatient_pm patient_user.id %}?next={{request.path}}" data-dismiss="alert" class="icon-edit pull-right"></a> 
           </h4>
         </th>

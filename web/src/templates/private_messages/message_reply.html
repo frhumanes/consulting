@@ -14,7 +14,7 @@
        <div class="alert alert-warning">
           {% trans 'La cuenta de destino no está activa. Es posible que el destinatario no reciba su mensaje.' %}
        </div>
-    {% endif %}
+    {% else %}
     <form class="form-horizontal" method="post" action="{% url private_messages_new %}">{% csrf_token %}
       <fieldset>
             <!-- RECIPIENT -->
@@ -104,5 +104,6 @@
         "image": false, //Button to insert an image. Default true);
       });
     </script>
+    {% endif %}
   {% endif %}
 {% endif %}

@@ -188,8 +188,25 @@ class Profile(TraceableModel):
 
         return lastAppointment
 
+    def get_next_real_appointment(self):
+        appointments = Appointment.objects.filter(
+                            Q(patient=self.user, notify=True),
+                            Q(date__gt=date.today()) |
+                            Q(date=date.today(), start_time__gte=datetime.time(datetime.now()))).order_by(
+                            'date')
+
+        for app in appointments:
+            if not app.has_activity():
+                nextAppointment = app
+                break
+        else:
+            nextAppointment = ''
+
+        return nextAppointment
+
     def get_nextAppointment(self):
-        appointments = Appointment.objects.filter(Q(patient=self.user),
+        appointments = Appointment.objects.filter(
+                            Q(patient=self.user),
                             Q(date__gt=date.today()) |
                             Q(date=date.today(), start_time__gte=datetime.time(datetime.now()))).order_by(
                             'date')

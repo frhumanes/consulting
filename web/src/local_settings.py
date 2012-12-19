@@ -77,7 +77,7 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
-        'TIMEOUT': 5*60,
+        'TIMEOUT': 8*60*60,
         'KEY_PREFIX': 'consulting'
     }
 }

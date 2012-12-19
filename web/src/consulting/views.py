@@ -1349,6 +1349,7 @@ def select_self_administered_survey_monitoring(request, id_appointment, code_ill
             previous_days = form.cleaned_data['previous_days']
             try:
                 kind = form.cleaned_data['kind']
+                exc_block = get_object_or_404(Block,code=settings.BEHAVIOR_BLOCK, kind=kind)
             except:
                 kind = settings.GENERAL
             if code_survey == str(settings.CUSTOM):
@@ -1363,7 +1364,7 @@ def select_self_administered_survey_monitoring(request, id_appointment, code_ill
             previous_days=previous_days, kind=kind)
             task.save()
 
-            exc_block = get_object_or_404(Block,code=settings.BEHAVIOR_BLOCK, kind=kind)
+            
             id_variables = form.cleaned_data['variables']
             if id_variables and code_survey==str(settings.CUSTOM):
                 variables = Variable.objects.filter(id__in=id_variables)

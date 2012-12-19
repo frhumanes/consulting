@@ -88,7 +88,7 @@ class Task(TraceableModel):
     def get_answers(self):
         #Cache
         _answers = cache.get('answers_'+str(self.id))
-        if _answers:
+        if _answers and self.completed:
             return _answers
         answers = []
         for r in self.task_results.values('block').annotate(Max('date'),Max('id')).order_by():

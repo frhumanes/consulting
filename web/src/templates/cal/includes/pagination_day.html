@@ -13,5 +13,7 @@
         </li>
     </ul>
   </div>
-  <a class="btn btn-info pull-right {% if vacations %}disabled{% endif %}" style="margin: 5px 0" href="{% if user.get_profile.is_patient %}{% url cal.add year month day user.id %}{% else %}{% url search_patient_for_action_at 'new_app' year month day %}{% endif %}"><i class="icon-plus-sign icon-white"></i> <strong>{% trans "Cita" %}</strong></a>
+  {% if not user.get_profile.is_patient or user.is_active and not vacations%}
+  <a class="btn btn-info pull-right" style="margin: 5px 0" href="{% if user.get_profile.is_patient %}{% url cal.add year month day user.id %}{% else %}{% url search_patient_for_action_at 'new_app' year month day %}{% endif %}"><i class="icon-plus-sign icon-white"></i> <strong>{% trans "Cita" %}</strong></a>
+  {% endif %}
 </div>

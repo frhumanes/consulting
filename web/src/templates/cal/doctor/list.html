@@ -20,7 +20,12 @@
   {% endif %}
   {% if patient_user %}
   <div class="well">
-    <h4>{% trans "Paciente:" %} {{ patient_user.get_profile.get_full_name }}</h4>
+    <h4>{% trans "Paciente" %}
+      {% if not patient_user.is_active %}
+        <span class="text-error">{% trans '[INACTIVO]' %}</span>
+      {% endif %}: 
+      {{ patient_user.get_profile.get_full_name }}
+  </h4>
   </div>
   {% endif %}
 

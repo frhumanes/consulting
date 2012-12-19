@@ -19,9 +19,15 @@
     </ul>
 </div>
 <div class="well">
-  <h4>{% trans 'Paciente' %}: {{patient_user.get_profile.get_full_name}}</h4>
+  <h4>{% trans "Paciente" %}
+      {% if not patient_user.is_active %}
+        <span class="text-error">{% trans '[INACTIVO]' %}</span>
+      {% endif %}: 
+      {{ patient_user.get_profile.get_full_name }}
+  </h4>
 </div>
-<div class="row-fluid">
+<div class="row-fluid center">
+    {% if patient_user.is_active %}
     {% for year, months in years %}
         <div class="span4 well center relative">
             <h2 class="label label-info" style="width:100%">{{ year }}</h2>
@@ -36,5 +42,8 @@
             </ul>
         </div>
     {% endfor %}
+    {% else %}
+        <span class="alert alert-error alert-block">{% trans 'No puede concertar una cita con un paciente que ha sido dado de baja.' %} </span>
+    {% endif %}
 </div>
 {% endblock container %}

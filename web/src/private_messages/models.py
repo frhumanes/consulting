@@ -12,7 +12,7 @@ from django.core.mail import send_mail
 
 class Message(models.Model):
     author = models.ForeignKey(User, verbose_name=_(u'Autor'), related_name='message_author')
-    recipient = models.ForeignKey(User, verbose_name=_(u'Destinatario'), related_name='message_recipient')
+    recipient = models.ForeignKey(User, verbose_name=_(u'Destinatario'), related_name='message_recipient', limit_choices_to = {'is_active':True})
     parent = models.ForeignKey('self', null=True, blank=True)
 
     subject = models.CharField(_(u'Asunto'),max_length=256)

@@ -13,6 +13,15 @@
 {% endblock %}
 
 {% block css_inline %}
+@media (min-width: 801px) and (max-width: 1200px){
+  #right_bar, #left_bar{
+   width: 5%;
+   max-width: 75px
+  }
+  #main{
+    width:650px 
+  }
+}
 @media (max-width: 800px){
   #right_bar, #left_bar{
    visibility: hidden

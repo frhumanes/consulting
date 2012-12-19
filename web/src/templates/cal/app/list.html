@@ -12,7 +12,7 @@
   <legend>{{ day }} {% trans "de" %} {{ mname }} {% trans "de " %} {{ year }}</legend>
 
   {% if vacations %}
-    <div class="alert alert-error">
+    <div class="alert alert-error alert-block">
       <strong>Dr. {{ doctor.get_profile.name }} {{ doctor.get_profile.first_surname }}</strong> {% trans " no está disponible este día " %}
     </div>
   {% else %}
@@ -44,7 +44,7 @@
 
       <div id="preview"></div>
     {% else %}
-      <div class="alert alert-info">{% trans "No hay citas concertadas para este día" %}</div>
+      <div class="alert alert-info alert-block">{% trans "No hay citas concertadas para este día" %}</div>
     {% endif %}
 
 
