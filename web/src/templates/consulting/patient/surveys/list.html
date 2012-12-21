@@ -29,7 +29,12 @@
             <td>{{ task.patient.get_profile.doctor.get_profile.get_full_name }}</td>
             <td>{{ task.patient.get_profile.get_nextAppointment.date|date:'d/M/Y' }}</td>
              <td>{% if task.updated_at != task.created_at %}{{ task.updated_at|date:'d/M/Y H:i' }}{% endif %}</td> 
-             <td><a class="btn btn-small btn-info" href="{% url consulting_self_administered_block task.id%}">{% trans 'Continuar' %}</a></td>             
+             <td><a class="btn btn-small btn-info" href="{% url consulting_self_administered_block task.id%}">
+              {% if task.updated_at != task.created_at %}
+                {% trans 'Continuar' %}
+              {% else %}
+                {% trans 'Comenzar' %}
+              {% endif %}</a></td>             
           </tr>
         {% endfor %}
       </tbody>

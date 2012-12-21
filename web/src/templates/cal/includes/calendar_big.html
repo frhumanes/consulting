@@ -93,7 +93,7 @@
             <tr class="center">
             {% for day, apps, current, vacations, events, available in week %}
                 {% if day != 0 %}
-                <td style="text-align: left; {{current|yesno:'background-color:#eeeeee;border: 1px solid #000000;,'}}{% if vacations %}{% if doctor or request.user.get_profile.is_doctor %}background-color:#f2dede; border: 1px solid #b94a48;{% endif %}{% endif %} {% if doctor %}cursor:pointer;{% endif %} width: 14%">
+                <td style="text-align: left; {{current|yesno:'background-color:#eeeeee;border: 1px solid #000000;,'}}{% if vacations %}{% if doctor or request.user.get_profile.is_doctor %}background-color:#f2dede; border: 1px solid #b94a48;{% endif %}{% endif %} {% if doctor or request.user.get_profile.is_doctor %}cursor:pointer;{% endif %} width: 14%">
                 {% if request.user.get_profile.is_doctor %}
                     {% url 'cal.views.day' year month day request.user.id as target %}
                 {% else %}

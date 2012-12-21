@@ -86,7 +86,7 @@ class FiltersForm(forms.Form):
                                               'max':'4'}))]
     treatment =forms.MultipleChoiceField(
                     label='Tratamiento',
-                    choices=[(m['component__name'], m['component__name']) for m in Medicine.objects.values('component__name').order_by('component__name').distinct('component')],
+                    choices=[(m['component__name'], m['component__name']) for m in Medicine.objects.filter(is_previous=False).values('component__name').order_by('component__name').distinct('component')],
                     widget=forms.CheckboxSelectMultiple())
 
     anxiety = forms.MultipleChoiceField(

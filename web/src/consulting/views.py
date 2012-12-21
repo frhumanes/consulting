@@ -7,6 +7,7 @@ from datetime import time as ttime
 from datetime import date, timedelta, datetime
 
 from random import randint
+import random, string
 from itertools import chain
 
 from decorators import *
@@ -2409,3 +2410,6 @@ def get_user_guide(request):
             return response
     
     raise Http404
+
+def pwd_generator():
+    return ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(settings.PASSWORD_MIN_LENGTH))

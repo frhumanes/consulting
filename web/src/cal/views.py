@@ -464,6 +464,9 @@ def app_add(request, year, month, day, id_user):
         available, free_intervals = Appointment.objects.availability(
             doctor,
             date(int(year), int(month), int(day)))
+    if date(int(year), int(month), int(day)) < date.today():
+        form = None
+
     return render_to_response("cal/app/add.html",
                 {'form': form,
                  'year': int(year), 'month': int(month), 'day': int(day),

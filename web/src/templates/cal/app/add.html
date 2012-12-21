@@ -3,7 +3,7 @@
 {% load i18n messages userprofile %}
 
 {% block right %}
-  {% include "cal/includes/calendar.html" with doctor=doctor patient_user=patient %}
+  {% include "cal/includes/calendar.html" with doctor=doctor patient_user=patient_user %}
 {% endblock %}
 
 {% block container %}
@@ -30,6 +30,7 @@
 </div>
 {% endif %}
 
+{% if form %}
 <div class="well">
 <form class="form-horizontal" method="post" action="{{request.path}}">{% csrf_token %}
 
@@ -155,6 +156,11 @@
 </form>
 
 </div>
+{% else %}
+<div class="center">
+  <span class="alert alert-error alert-block">{% trans 'No puede asignar una cita en un día pasado.' %}</span>
+</div>
+{% endif %}
 
 {% endblock %}
 

@@ -13,7 +13,7 @@
   </td>
   <td>{{ event.start_time|time:"H:i" }}</td>  
   <td>{{ event.end_time|time:"H:i" }}</td>
-  <td>{{ event.patient.get_profile.get_full_name }}</td>
+  <td><a href="{% url consulting_pre_personal_data_pm patient_user_id=event.patient.id %}" >{{ event.patient.get_profile.get_full_name }}</a></td>
   <td>{{ event.app_type}}</td>
   <td>{{ event.description|striptags|safe|truncatewords:5 }}
     {% if not event.has_activity and not event.is_editable %}

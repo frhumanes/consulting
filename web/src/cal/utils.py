@@ -39,10 +39,10 @@ def create_calendar(year, month, doctor=None):
             if doctor:
                 apps = Appointment.objects.filter(
                     date__year=year, date__month=month,
-                    date__day=day, doctor=doctor)
+                    date__day=day, doctor=doctor).order_by('start_time')
             else:
                 apps = Appointment.objects.filter(date__year=year,
-                            date__month=month, date__day=day)
+                            date__month=month, date__day=day).order_by('start_time')
 
             if day == nday and year == nyear and month == nmonth:
                 current = True

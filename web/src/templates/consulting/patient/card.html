@@ -10,7 +10,7 @@
             {% if not patient_user.is_active %}
               <span class="text-error">{% trans '[INACTIVO]' %}</span>
             {% endif %}&nbsp;
-          <a href="{% url consulting_editpatient_pm patient_user.id %}?next={{request.path}}" data-dismiss="alert" class="icon-edit pull-right"></a> 
+          <a href="{% url consulting_editpatient_pm patient_user.id %}?next={{request.path}}" data-dismiss="alert" class="icon-edit pull-right" rel="tooltip" placement="left" title="{% trans 'Editar datos personales' %}"></a> 
           </h4>
         </th>
       </tr>
@@ -72,7 +72,11 @@
       </tr>
       <tr>            
         <td>{% trans 'PRÓXIMA CITA' %}</td>
-        <td>{{patient_user.get_profile.get_nextAppointment.date|date:'d/M/Y'}}
+        <td>{% if patient_user.get_profile.get_nextAppointment and patient_user.is_active %}
+          {{patient_user.get_profile.get_nextAppointment.date|date:'d/M/Y'}}
+          {% else %}
+          <a href="{% url cal.scheduler patient_user.id %}" class="btn btn-small btn-info btn-block"><i class='icon-plus-sign icon-white'></i> {% trans 'Dar cita' %}</a>
+          {% endif %}
           {% if patient_user.get_profile.get_pending_tasks %}
           <br>
           <small>

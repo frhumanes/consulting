@@ -45,6 +45,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="#"><i class="icon-user"></i> <strong>{{ user.get_profile.get_full_name }}</strong></a></li>
                         <li><a href="{% url password_change %}"><i class="icon-lock"></i> {% trans 'Cambiar contraseña' %}</a></li>
+                        <li><a href="{% url consulting_user_guide %}"><i class="icon-file"></i> {% trans 'Descargar manual' %} (PDF)</a></li>
                         <li class="divider"></li>
                         <li><a href="{% url registration_logout %}"><i class="icon-off"></i> {% trans 'Desconectar' %}</a></li>
                     </ul>

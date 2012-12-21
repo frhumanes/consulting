@@ -120,6 +120,8 @@
         {% block jquery_init %}
         {% endblock %}
         fix_bars();
+        //Fix dropdown issue on touchscreens
+        $('body').on('touchstart.dropdown', '.dropdown-menu', function (e) { e.stopPropagation(); });
       });
     </script>
 
@@ -148,7 +150,8 @@
       {% block subheader %}
         {% if EXPIRED_PASSWORD %}
         <div class="offset3 span6">
-          <div class="alert alert-warning center">{% trans 'Por seguridad, le recomendamos que cambie su contraseña lo antes posible.' %} <a href="{% url password_change %}">{% trans 'Cambiar ahora' %}</a></div>
+          <div class="alert alert-warning center">{% trans 'Por seguridad, le recomendamos que cambie su contraseña lo antes posible.' %} <a href="{% url password_change %}">{% trans 'Cambiar ahora' %}</a>
+          <button type="button" class="close" data-dismiss="alert">&times;</button></div>
         </div>
         {% endif %}
       {% endblock subheader %}

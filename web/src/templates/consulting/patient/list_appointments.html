@@ -26,7 +26,13 @@ function set_events(){
 
 {% block container %}  
 <div class="page-header">
-  <h1>{% trans 'Historial Citas' %}</h1>
+  <h1>{% trans 'Historial Citas' %}
+    {% if patient_user.is_active %}
+      <div class="btn-group pull-right">
+        <a href="{% url cal.scheduler patient_user.id %}" class="btn btn-info"><i class='icon-plus-sign icon-white'></i> {% trans 'Dar cita' %}</a>
+      </div>
+    {% endif %}
+  </h1>
 </div>
 <div>      
     <ul id="tabs" class="nav nav-tabs">
