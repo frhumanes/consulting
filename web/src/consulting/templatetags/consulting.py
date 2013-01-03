@@ -106,7 +106,7 @@ def sexify(value, patient):
     oa = {settings.MAN: 'o', settings.WOMAN: 'a'}
     ella = {settings.MAN: 'el', settings.WOMAN: 'la'}
     sex = patient.get_profile().sex
-    if sex:
+    if sex and sex in (settings.MAN, settings.WOMAN):
         value = value.replace('el/la', ella[sex])
         return value.replace('o/a', oa[sex])
     return value

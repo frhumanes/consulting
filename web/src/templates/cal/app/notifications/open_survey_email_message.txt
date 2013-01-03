@@ -3,7 +3,7 @@ Hola {{user.name}},
 
 Le informamos que se le ha asignado un nuevo cuestionario para rellenar en cuanto le sea posible a través del siguiente enlace.
 
-    {% get_domain %}{% url consulting_list_surveys %}
+    http://{% get_domain %}{% url consulting_list_surveys %}
 
 Le recordamos que tiene hasta el {{app.date}} a las {{app.start_time|time:"H:i"}} para completarlo.
 

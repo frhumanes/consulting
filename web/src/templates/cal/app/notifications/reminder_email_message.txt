@@ -3,6 +3,6 @@ Hola {{user.name}},
 
 Le recordamos que tiene una cita asignada para el {{app.date}} a las {{app.start_time|time:"H:i"}} con {{"el/la"|sexify:app.doctor}} {{app.doctor.get_profile|name_with_title}}.
 
-Si no puede asistir le rogamos nos lo comunique lo antes posible a través de su área personal ({% get_domain %}{% url private_messages_new %}). Otro paciente se lo agradecerá.
+Si no puede asistir le rogamos nos lo comunique lo antes posible a través de su área personal (http://{% get_domain %}{% url private_messages_new %}). Otro paciente se lo agradecerá.
 
 Reciba un cordial saludo del equipo de {% get_brand %}.
