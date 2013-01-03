@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+import os
 import time
 import operator
 import xlwt
@@ -669,13 +670,20 @@ def administrative_data(request, id_task, code_block=None, code_illness=None, id
                     task.save()
 
                 #SEN EMAIL to warn new username
-                sendemail(user)
-
+                if user.email:
+                    sendemail(user)
+                available_blocks = task.survey.blocks.filter(code__gt=code_block,kind__in=(settings.GENERAL, task.kind)).order_by('code')
+                if available_blocks:
+                    next_block = available_blocks[0].code
+                else:
+                    next_block = 9999
                 return render_to_response(
                                     'consulting/consultation/warning.html',
                                     {'patient_user': user,
-                                    'id_result': result.id,
-                                    'code_block': code_block},
+                                    'task': task,
+                                    'code_illness': code_illness,
+                                    'id_appointment': id_appointment,
+                                    'next_block': next_block},
                                     context_instance=RequestContext(request))
             else:
                 profile.save()
@@ -697,6 +705,7 @@ def administrative_data(request, id_task, code_block=None, code_illness=None, id
                             {'form': form,
                             'patient_user': user,
                             'task': task,
+                            'code_illness': code_illness,
                             'id_appointment': id_appointment,
                             'my_block': block},
                             context_instance=RequestContext(request))
@@ -2150,7 +2159,8 @@ def view_report(request, id_task):
             'blaxter_mark':blaxter_mark,
             'as_mark':task.calculate_mark_by_code('AS'),
             'treatment':medicines,
-            'prev_treatment':prev_meds
+            'prev_treatment':prev_meds,
+            'logo': os.path.join(settings.STATICFILES_DIRS[0], 'img', 'logo_final.JPG')
             }
 
     if request.GET and request.GET.get('as', '') == 'pdf':

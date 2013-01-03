@@ -4,25 +4,26 @@
 
 {% block container %}
 <div class="page-header">
-  <h1>{% trans 'Identificación Paciente' %}</h1>                
+  <h1>{% trans 'Cambio de identificación del paciente' %}</h1>                
 </div>
 <section>
-   <div class="alert alert-info">
-        {% trans 'Se le ha enviado un correo electrónico al paciente con el nombre de usuario y contraseña, la cual podrá modificar cuando lo desee.' %}
+   {% if patient_user.email %}
+    <div class="alert alert-info">
+        {% trans 'Se le ha enviado un correo electrónico al paciente con el nuevo nombre de usuario.' %}
     </div>
+    {% else %}
+     <div class="alert alert-success">
+        {% trans 'Paciente actualizado correctamente. Puede continuar al siguiente bloque.' %}
+    </div>
+    {% endif %}
     <div class="pull-right">
-      <button id="carryon" class="btn btn-info btn-large">
+      <a id="carryon" class="btn btn-info btn-large" href="{% url consulting_show_task_block id_appointment code_illness task.id next_block %}">
         {% trans 'Continuar' %}
-      </button>         
+      </a>         
     </div>                
 </section>
 {% endblock %}
+
 {% block right %}
   {% include "consulting/patient/card.html" %}
 {% endblock %} 
-
-{% block jquery_init %}
-  $('#carryon').on("click", function(){
-      window.location.href = '/consultation/survey/block/' + {{id_result}} + '/' + {{code_block}};  
-  }); 
-{% endblock %}

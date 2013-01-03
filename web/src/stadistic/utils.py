@@ -4,12 +4,13 @@ from consulting.models import Task
 from stadistic.models import Report
 
 def generate_reports(full=False):
+    i = 0
     if full:
         Report.objects.all().delete()
     for task in Task.objects.filter(completed=True):
         try:
             report = Report.objects.get(task=task)
-            if report.end_date == task.end_date:
+            if report.date == task.end_date:
                 continue
         except:
             report = Report()
@@ -33,3 +34,5 @@ def generate_reports(full=False):
                       }
         report.aves = task.get_ave_list()
         report.save()
+        i += 1
+    return i

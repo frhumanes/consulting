@@ -1,6 +1,11 @@
 from django import template
 from django.conf import settings
 from django.contrib.sites.models import Site
+import Image
+import StringIO
+import os
+import base64
+
 BRAND = Site.objects.get_current().name
 DOMAIN = Site.objects.get_current().domain
 
@@ -116,3 +121,15 @@ def get_pages_list(objects):
     n_max = max(n_max, min(settings.MAX_VISIBLE_PAGES, objects.paginator.num_pages))
 
     return [o[:n_min], o[n_min:n_max], o[n_max:]]
+
+@register.simple_tag
+def embed_image(imfile, width=None, height=None, format='PNG'):
+    if os.path.exists(imfile):
+        im = Image.open(imfile)
+        if width and height:
+            im.thumbnail((width, height), Image.ANTIALIAS)
+        buf = StringIO.StringIO()
+        im.save(buf, format=format)
+        r = buf.getvalue()
+        buf.close()
+        return base64.b64encode(r)[:-1]

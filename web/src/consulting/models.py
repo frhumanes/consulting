@@ -153,6 +153,9 @@ class Task(TraceableModel):
         return mark
 
     def calculate_beck_mark(self):
+        if not self.survey.code in [settings.ANXIETY_DEPRESSION_SURVEY,
+                                   settings.INITIAL_ASSESSMENT]:
+            return None
         answers = self.get_answers()
         beck_answers = filter(lambda a: a.question.code.startswith('B'), answers)
         if len(beck_answers) != Question.objects.filter(code__startswith='B').count():
@@ -164,6 +167,9 @@ class Task(TraceableModel):
         return mark
 
     def calculate_hamilton_mark(self):
+        if not self.survey.code in [settings.ANXIETY_DEPRESSION_SURVEY,
+                                   settings.INITIAL_ASSESSMENT]:
+            return None, {}
         answers = self.get_answers()
         mark = None
         submarks = {}

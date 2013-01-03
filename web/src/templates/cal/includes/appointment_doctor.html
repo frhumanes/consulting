@@ -18,9 +18,9 @@
   <td><em>{{ event.description|striptags|safe|truncatewords:5 }}</em>
     {% if not event.has_activity and not event.is_editable%}
       {% if event.notify %}
-        <span class="badge badge-important"><i class="icon-exclamation-sign icon-white"></i> {% trans 'NO ASISTIDA' %}</span>
-      {% else %}
         <span class="badge badge-important"><i class="icon-exclamation-sign icon-white"></i> {% trans 'NO ASISTIÓ' %}</span>
+      {% else %}
+        <span class="badge badge-important"><i class="icon-exclamation-sign icon-white"></i> {% trans 'NO ASISTIDA' %}</span>
       {% endif %}
     {% endif %}
   </td>

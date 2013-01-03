@@ -4,7 +4,7 @@
 # author: javi santana
 
 from fabric.api import env
-from wtdeploy import push
+from wtdeploy import push, upgrade_env
 
 def development():
     env.app_name = 'consulting'
@@ -14,7 +14,7 @@ def development():
     env.ip = '89.140.10.57'
     env.nginx_serves_static = True
 
-
+    env.source_folder = '.'
     env.deploy_folder = "/home/rambot/consulting"
     env.hosts = ['89.140.10.57']
     env.user = 'wtdeploy'

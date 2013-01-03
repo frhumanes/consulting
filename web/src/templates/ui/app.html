@@ -2,11 +2,11 @@
 <html lang="es">
   <head>
     {% load consulting i18n %}
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
     <title>{% get_brand %}{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="sistema de gestión personalizada de la ansiedad-depresión que se ha creado con el objetivo de proporcionar un instrumento de valoración de la fiable y útil para la toma de decisiones del clínico">
+    <meta name="author" content="Wellness Telecom S.L">
 
   {% block js_files %}
     <script src="{{ STATIC_URL }}js/jquery-1.8.2.js"></script>
@@ -109,7 +109,9 @@
       {% endblock %}
 
       $(document).ready(function(){
-        $("#notes").editable();
+        $("#notes").editable().on('shown', function(e, editable) {
+          $('.editable-popover').css('top', 0);
+        });
         $(window).resize(fix_bars);
         $('a[rel="tooltip"]').tooltip();
         $('#warning_modal').find('a.btn').on('click', function(ev) {
