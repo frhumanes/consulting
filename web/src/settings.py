@@ -147,9 +147,10 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'wkhtmltopdf'
-    'south',
+    #'south', #MONGODB ISSUE
     'django_extensions',
+    'django_memcached',
+    'memcache_status',
     'userprofile',
     'survey',
     'formula',
@@ -162,15 +163,26 @@ INSTALLED_APPS = (
     'conf',
     'illness',
     'stadistic',
+    #'debug_toolbar',
 )
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        'TIMEOUT': 8*60*60,
+        'KEY_PREFIX': 'consulting'
+    }
+}
+DJANGO_MEMCACHED_REQUIRE_STAFF = True
 
 AUTH_PROFILE_MODULE = 'userprofile.Profile'
 SESSION_SAVE_EVERY_REQUEST = True
 SESSION_COOKIE_AGE = 600 # 2 HOURS
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 try:
-   from local_settings import *
-   from app_config import *
-   DATABASE_ROUTERS = ['stadistic.StadisticRouter']
+    DATABASE_ROUTERS = ['stadistic.StadisticRouter']
+    from app_config import *
+    from local_settings import *
 except ImportError:
-   pass
+    pass

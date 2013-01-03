@@ -13,50 +13,6 @@ DATABASES = {
       'NAME' : 'consulting'
    }
 }
-"""
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', #'django.db.backends.sqlite3', Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'db_consulting',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
-
-"""
-
-
-INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
-    #'south', #MONGODB ISSUE
-    'django_extensions',
-    'django_memcached',
-    'memcache_status',
-    'userprofile',
-    'survey',
-    'formula',
-    'medicament',
-    'consulting',
-    'registration',
-    'private_messages',
-    'log',
-    'cal',
-    'conf',
-    'illness',
-    'stadistic',
-    #'debug_toolbar',
-)
 
 # Debug Toolbar
 INTERNAL_IPS = ('127.0.0.1',)
@@ -73,12 +29,3 @@ INTERNAL_IPS = ('127.0.0.1',)
     'debug_toolbar.panels.logger.LoggingPanel',
 )"""
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-        'TIMEOUT': 8*60*60,
-        'KEY_PREFIX': 'consulting'
-    }
-}
-DJANGO_MEMCACHED_REQUIRE_STAFF = True

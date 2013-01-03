@@ -17,6 +17,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         for t in Task.objects.filter(self_administered=True, assess=True, completed=False, previous_days__gt=0):
             nextApp = t.patient.get_profile().get_nextAppointment()
-            if nextApp and (datetime.combine(nextApp.date, nextApp.start_time) - datetime.now()).days == t.previous_days-1:
+            if nextApp and (datetime.combine(nextApp.date, nextApp.start_time) - datetime.now()).days == t.previous_days-1 and t.patient.get_profile().email:
                 self.stdout.write('Warning "%s"\n' % t.patient.get_profile().email)
                 nextApp.warn_patient('open_survey')
