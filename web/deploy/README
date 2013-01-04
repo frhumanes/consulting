@@ -15,3 +15,10 @@ HOW TO DEPLOY
 3.- cd project_root
 
 4.- fab development push
+
+5.- Install PDF tool at server:
+	5.1.- Download wkhtmltopdf binary (i386 version even if the OS is 64-bits)      from http://code.google.com/p/wkhtmltopdf/downloads/list 
+	5.2.- Assign permissions. 
+	      Example: chmod +x /path/to/wkhtmltopdf
+	5.3.- Set the binary path WKHTMLTOPDF_CMD at 'app_config.py'. 
+		  Default path: '/usr/local/bin/wkhtmltopdf'
