@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-
+import re
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 from django.db import models
@@ -163,9 +163,14 @@ class Appointment(TraceableModel):
                 status = 'changed'
         else:
             status = 'new'
-        super(Appointment, self).save(*args, **kw)
+
+        self.description = re.sub('\*{2}.+\*{2}', '', self.description)
         if self.notify and status:
-            self.warn_patient(status, orig)
+            if not self.warn_patient(status, orig):
+                self.description += '\n' + _(u'**ATENCIÓN: Notificación no enviada. Se ruega contactar personalmente con el paciente**')
+
+        super(Appointment, self).save(*args, **kw)
+
 
     def delete(self, *args, **kw):
         if self.notify:
@@ -187,4 +192,5 @@ class Appointment(TraceableModel):
                 send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, 
                             [self.patient.get_profile().email])
             except:
-                pass
+                return 0
+        return 1

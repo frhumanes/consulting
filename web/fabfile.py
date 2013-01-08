@@ -21,7 +21,7 @@ def development():
     env.password = 'Rp53*PF[;Zp<E@Qg;ANIICA4[Pmq?pkh'
     env.local_conf_folder = "deploy/89.140.10.57"
 
-    env.repo = "https://intranet.wtelecom.es/svn/consulting30/trunk/web/src"
+    env.repo = "https://svn.squada.com/svn/consulting30/trunk/web/src"
     env.repo_user = 'fruiz'
     env.repo_password = 'Wtelecom123'
 
