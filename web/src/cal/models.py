@@ -187,7 +187,7 @@ class Appointment(TraceableModel):
                 subject = ''.join(subject.splitlines())
 
                 message = render_to_string('cal/app/notifications/'+action+'_email_message.txt', {'user': self.patient.get_profile(),
-                                        'app': self, 'orig':app})
+                                        'app': self, 'orig':app, 'LANGUAGE_CODE':'es'})
 
                 send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, 
                             [self.patient.get_profile().email])
