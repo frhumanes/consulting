@@ -2423,3 +2423,10 @@ def get_user_guide(request):
 
 def pwd_generator():
     return ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(settings.PASSWORD_MIN_LENGTH))
+
+
+def error_page(request):
+    return render_to_response('500.html',
+                                {},
+                                context_instance=RequestContext(request))
+

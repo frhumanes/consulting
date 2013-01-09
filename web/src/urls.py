@@ -19,3 +19,5 @@ urlpatterns = patterns('',
     (r'^cache/', include('django_memcached.urls')),
 )
 urlpatterns += staticfiles_urlpatterns()
+
+handler500 = 'consulting.views.error_page'
