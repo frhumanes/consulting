@@ -97,11 +97,11 @@
       <p class="center">
         <a id="remove-event" class="btn btn-large btn-danger" >
           <i class="icon-remove-sign icon-white"></i>
-          {% trans 'Delete' %}
+          {% trans 'Borrar' %}
         </a>
         <button class="btn btn-large btn-primary" type="submit">
           <i class="icon-ok-sign icon-white"></i>
-          {% trans 'Save' %}</button>
+          {% trans 'Guardar' %}</button>
       </p>
 
   </fieldset>
@@ -110,13 +110,13 @@
 
 <div id="modal-screen" class="modal hide">
   <div class="modal-header">
-    <h3>{% trans 'Delete Event' %}</h3>
+    <h3>{% trans 'Eliminar tipo de cita' %}</h3>
   </div>
   <div class="modal-body">
-    <p>{% trans 'You are going to delete a slot type. Are you sure?' %}</p>
+    <p>{% trans 'Si existen preferencias mensuales asociadas a este tipo de cita también serán eliminadas. ¿Desea eliminar el tipo seleccionado?' %}</p>
   </div>
   <div class="modal-footer">
-    <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Yes' %}" data-loadingmsg="{% trans 'Removing ... ' %}">{% trans 'Yes' %}</a>
+    <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Yes' %}" data-loadingmsg="{% trans 'Removing ... ' %}">{% trans 'Sí' %}</a>
     <a href="#" class="btn btn-primary" data-dismiss="modal">{% trans 'No' %}</a>
   </div>
 </div>
@@ -129,7 +129,7 @@
     <p>{% trans 'You can not delete a slot type with children' %}</p>
   </div>
   <div class="modal-footer">
-    <a href="#" onclick="window.location.href = '{% url cal.list_slot_type %}';" class="btn btn-primary" data-dismiss="modal">{% trans 'Ok' %}</a>
+    <a href="#" onclick="window.location.href = '{% url cal.list_slot_type %}';" class="btn btn-primary" data-dismiss="modal">{% trans 'Cerrar' %}</a>
   </div>
 </div>
 {% endblock %}

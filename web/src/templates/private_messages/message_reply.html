@@ -100,8 +100,9 @@
         "emphasis": true, //Italics, bold, etc. Default true
         "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
         "html": false, //Button which allows you to edit the generated HTML. Default false
-        "link": false, //Button to insert a link. Default true
+        "link": {{request.user.get_profile.is_patient|yesno:'false,true'}}, //Button to insert a link. Default true
         "image": false, //Button to insert an image. Default true);
+        "stylesheets": ["{{ STATIC_URL }}css/bootstrap-wysihtml5.css"]
       });
     </script>
     {% endif %}

@@ -2,6 +2,10 @@
 
 {% load i18n%}
 
+{% block css_files %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-wysihtml5.css"></link>
+{% endblock %}
 
 {% block js_files %}
   {{ block.super }}

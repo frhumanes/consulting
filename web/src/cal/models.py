@@ -89,7 +89,7 @@ class Slot(TraceableModel):
 
     creator = models.ForeignKey(User, related_name='slot_creator')
     slot_type = models.ForeignKey(SlotType, related_name='slot_event_type',
-        on_delete=models.PROTECT)
+        on_delete=models.CASCADE)
     weekday = models.IntegerField(choices=WEEKDAYS)
     month = models.IntegerField(choices=MONTH)
     year = models.IntegerField()
@@ -118,7 +118,7 @@ class Appointment(TraceableModel):
     patient = models.ForeignKey(User, related_name='appointment_patient',limit_choices_to = {'profiles__role':settings.PATIENT})
 
     app_type = models.ForeignKey(SlotType,
-        related_name='appointment_slot_type', null=True)
+        related_name='appointment_slot_type', null=True, on_delete=models.SET_NULL)
 
     date = models.DateField(null=False, blank=False, help_text="Please use the following format: <em>DD/MM/YYYY</em>.")
 

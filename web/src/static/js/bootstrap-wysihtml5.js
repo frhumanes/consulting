@@ -12,15 +12,15 @@
                                 "<li><a data-wysihtml5-command='formatBlock' data-wysihtml5-command-value='h1'>Encabezado</a></li>" +
                             "</ul>" +
                         "</li>" +
-                        "<li class='btn-group'>" +
+                        "<li class='btn-group' data-wysihtml5-command-group='foreColor'>" +
                             "<a class='btn dropdown-toggle' data-toggle='dropdown' href='#'>" +
                                 "<i class='icon-tint'></i>&nbsp;<span class='current-color'>&nbsp;</span>&nbsp;<b class='caret'></b>" +
                             "</a>" +
                             "<ul class='dropdown-menu'>" +
-                                "<li><a data-wysihtml5-command='forecolor' data-wysihtml5-command-value='black' style='color: black'>Negro</a></li>" +
-                                "<li><a data-wysihtml5-command='forecolor' data-wysihtml5-command-value='red' style='color: red'>Rojo</a></li>" +
-                                "<li><a data-wysihtml5-command='forecolor' data-wysihtml5-command-value='green' style='color: green'>Verde</a></li>" +
-                                "<li><a data-wysihtml5-command='forecolor' data-wysihtml5-command-value='blue' style='color: blue'>Azul</a></li>" +
+                                "<li><a data-wysihtml5-command='foreColor' data-wysihtml5-command-value='black' style='color: black'>Negro</a></li>" +
+                                "<li><a data-wysihtml5-command='foreColor' data-wysihtml5-command-value='red' style='color: red'>Rojo</a></li>" +
+                                "<li><a data-wysihtml5-command='foreColor' data-wysihtml5-command-value='green' style='color: green'>Verde</a></li>" +
+                                "<li><a data-wysihtml5-command='foreColor' data-wysihtml5-command-value='blue' style='color: blue'>Azul</a></li>" +
                             "</ul>" +
                         "</li>",
         "emphasis":     "<li>" +
@@ -44,14 +44,14 @@
                         + "<div class='bootstrap-wysihtml5-insert-link-modal modal hide fade'>"
                             + "<div class='modal-header'>"
                             + "<a class='close' data-dismiss='modal'>&times;</a>"
-                              + "<h3>Insert Link</h3>"
+                              + "<h3>Insertar hiperenlace</h3>"
                             + "</div>"
                             + "<div class='modal-body'>"
                               + "<input value='http://' class='bootstrap-wysihtml5-insert-link-url input-xlarge'>"
                             + "</div>"
                             + "<div class='modal-footer'>"
-                              + "<a href='#' class='btn' data-dismiss='modal'>Cancel</a>"
-                              + "<a href='#' class='btn btn-primary' data-dismiss='modal'>Insert link</a>"
+                              + "<a href='#' class='btn' data-dismiss='modal'>Cancelar</a>"
+                              + "<a href='#' class='btn btn-primary' data-dismiss='modal'>Insertar</a>"
                             + "</div>"
                         + "</div>"
 
@@ -112,6 +112,12 @@
                 "h1": {},
                 "h2": {},
                 "u": 1,
+                "font": {
+                    "rename_tag": "span",
+                    "add_class": {
+                        "size": "size_font"
+                    }
+                },
                 "img": {
                     "check_attributes": {
                         "width": "numbers",
@@ -222,7 +228,7 @@
                 var el = $(e.srcElement);
                 self.toolbar.find('.current-font').text($(this).html())
             });
-            toolbar.find("a[data-wysihtml5-command='forecolor']").click(function(e) {
+            toolbar.find("a[data-wysihtml5-command='foreColor']").click(function(e) {
                 var el = $(e.srcElement);
                 self.toolbar.find('.current-color').css('color', $(this).css('color'))
             });

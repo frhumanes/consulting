@@ -13,17 +13,17 @@
   <div class="thumbnail">
   <dl class="dl-horizontal">
     <dt>{% trans 'Observaciones' %}</dt>
-    {% for c in conclusions %}
-      {% if c.observation %}   
-        <dd>{{c.observation}}&nbsp;</dd>
-      {% endif %}
-    {% endfor %}
+      <dd>
+      {% for c in conclusions %}
+        {% if c.observation %}{{c.observation}}<br>{% endif %}
+      {% endfor %}&nbsp;
+    </dd>    
     <dt>{% trans 'Recomendaciones' %}</dt>
-    {% for c in conclusions %}
-      {% if c.recommendation %}
-        <dd>{{c.recommendation}}&nbsp;</dd>
-      {% endif %}
-    {% endfor %}
+    <dd>
+      {% for c in conclusions %}
+        {% if c.recommendation %}{{c.recommendation}}<br>{% endif %}
+      {% endfor %}&nbsp;
+    </dd>
   </dl>
   </div>
   {% endif %}
