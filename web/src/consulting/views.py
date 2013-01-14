@@ -674,16 +674,16 @@ def administrative_data(request, id_task, code_block=None, code_illness=None, id
                     sendemail(user)
                 available_blocks = task.survey.blocks.filter(code__gt=code_block,kind__in=(settings.GENERAL, task.kind)).order_by('code')
                 if available_blocks:
-                    next_block = available_blocks[0].code
+                    n_block = available_blocks[0].code
                 else:
-                    next_block = 9999
+                    n_block = 9999
                 return render_to_response(
                                     'consulting/consultation/warning.html',
                                     {'patient_user': user,
                                     'task': task,
                                     'code_illness': code_illness,
                                     'id_appointment': id_appointment,
-                                    'next_block': next_block},
+                                    'next_block': n_block},
                                     context_instance=RequestContext(request))
             else:
                 profile.save()
