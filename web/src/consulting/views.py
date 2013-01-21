@@ -1532,6 +1532,8 @@ def newpatient(request):
                     ##########################PROFILE##########################
                     try:
                         profile = form.save(commit=False)
+                        if not profile.nif:
+                            profile.nif = None
                         #Automatic to format name, first_surname and
                         #second_surname
                         profile.name = format_string(form.cleaned_data['name'])
