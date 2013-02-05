@@ -36,7 +36,7 @@ class Illness(TraceableModel):
     def serialize(self, include=[]):
         children, css = [], ''
         if self in include:
-            children = [i.serialize(include) for i in self.cie_code.all()]
+            children = [i.serialize(include) for i in self.cie_code.all().order_by('code')]
             if not self.cie_code.all().count():
                 css = "jstree-checked" 
         return dict(data=self.__unicode__(), 
@@ -53,4 +53,4 @@ class Illness(TraceableModel):
 
     class Meta:
         verbose_name = u"Diagnóstico"
-        ordering = ("code",)
+        #ordering = ("code",)

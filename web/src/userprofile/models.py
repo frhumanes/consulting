@@ -353,7 +353,7 @@ class Profile(TraceableModel):
 
     def get_illness_set(self):
         illnesses = set()
-        for i in self.illnesses.all():
+        for i in self.illnesses.all().order_by('code'):
             parent = i
             while parent:
                 illnesses.add(parent)

@@ -1941,7 +1941,7 @@ def get_cie_tree(request, patient_user_id):
         illness = get_object_or_404(Illness, code=code_illness)
         action = request.GET.get('action', None)
         if not action:
-            illness = [i.serialize() for i in Illness.objects.filter(parent__code=code_illness)]
+            illness = [i.serialize() for i in Illness.objects.filter(parent__code=code_illness).order_by('code')]
         elif action == 'set':
             patient_user.get_profile().illnesses.add(illness)
             return HttpResponse(json.dumps({'data': _(u'Cambio realizado con éxito')}),
