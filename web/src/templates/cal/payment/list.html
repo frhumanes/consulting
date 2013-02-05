@@ -25,7 +25,22 @@ function set_events(){
       window.location.href = '/calendar/payment/' + id;
     }
   });
-}
+};
+
+function autoSubmit() {
+  $('#form').on("change", function(e) {
+      var $form = $(this);
+      $('#payment_list').fadeTo(500, 0.25);
+      $form.ajaxSubmit({  target: '#payment_list',
+                          clearForm: false,
+                          success: function(){
+                            $('#payment_list').fadeTo(750, 1);
+                            set_events();
+                        }
+                      });
+  });
+};
+
 {% endblock %}
 
 {% block right %}
@@ -69,11 +84,13 @@ function set_events(){
 {% block container %}
 
   <div class="page-header">
-    <h1>{% trans 'Registro de consultas' %}<button id="refresh" class="btn pull-right btn-large btn-primary"><i class="icon-refresh icon-white"></i></button></h1>
+    <h1>{% trans 'Registro de consultas' %}</h1>
   </div>
 
   <div id="payment_list" class="center"></div>
 {% endblock %}
+
+
 
 {% block jquery_init %}
 var load_icon = "<img src='{{STATIC_URL}}img/ajax-loader.gif' alt='loading...'/>";
@@ -82,6 +99,7 @@ $('#payment_list').load("{% url cal.list_payment %}?{% for k, v in request.GET.i
 
 $('button[type="reset"]').on('click', function(){
   var $form = $(this).parent();
+  $form.unbind('change');
   $form.find('.span3:hidden').val('');
   $(".range").each(function(){
     var min = $(this).find('input[id$="_0"]').attr('min');
@@ -91,6 +109,8 @@ $('button[type="reset"]').on('click', function(){
   });
   $form.find('.text-info').html('');
   $form.find('input').removeAttr('checked');
+  autoSubmit();
+  $form.change();
 });
 
 $('#download_xls').live("click", function(e) {
@@ -101,30 +121,7 @@ $('#download_xls').live("click", function(e) {
     $form.attr('action', orig_action);
 });
 
-$('#refresh').popover({'title':'Aviso',
-                      'html': true,
-                      'content':'Actualice los resultados cada vez que<br> modifique las opciones de filtrado',
-                      'placement':'left',
-                      'trigger':'manual'});
-
-$('#refresh').popover('show');
-$('#refresh').on('click',function(e){
-    $(this).popover('hide');
-});
-setInterval(function(){$('#refresh').popover('hide');},10000);
-
-$('#refresh').on("click", function(e) {
-    var $form = $('#form');
-    //$form.attr('action', $form.attr('action')+'?'+$form.serialize());
-    $('#payment_list').fadeTo(500, 0.25);
-    $form.ajaxSubmit({  target: '#payment_list',
-                        clearForm: false,
-                        success: function(){
-                          $('#payment_list').fadeTo(750, 1);
-                          set_events();
-                      }
-                    });
-});
+autoSubmit();
 
 $(".range").each(function(){
     var min = $(this).find('input[id$="_0"]').attr('min');
@@ -153,6 +150,9 @@ $(".range").each(function(){
           $(this).parent().find('.text-info').html(value);
           $(this).find('input[id$="_0"]').val(ui.values[0]);
           $(this).find('input[id$="_1"]').val(ui.values[1]);
+      },
+      change: function( event, ui ) {
+          $('form').change();
       }
     });
 });

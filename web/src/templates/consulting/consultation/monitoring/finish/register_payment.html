@@ -10,13 +10,13 @@
 {% block container %}
   <div class="page-header">
     <h1>{% trans 'Registrar pago' %}
-            <div class="btn-group pull-right">
-                  <a class="btn btn-info" href="{% url cal.list_payment %}">
-                     <i class="icon-arrow-left icon-white"></i>
-                    {% trans 'Volver' %}
-                  </a>
-            </div>
-        </h1>
+      <div class="btn-group pull-right">
+            <a class="btn btn-info" href="{% if illness %}{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}">
+               <i class="icon-arrow-left icon-white"></i>
+              {% trans 'Volver' %}
+            </a>
+      </div>
+    </h1>
   </div>
 
 <div class="well">

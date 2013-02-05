@@ -4,6 +4,13 @@
   <h4>{{ message.subject }}<small class="pull-right">{{ message.sent_at|date:"d M y H:i" }}</small></h4>
   <div>
       {% trans 'De' %} <strong>{{ message.author.get_profile.get_full_name }}</strong>
+      {% if request.user.get_profile.is_doctor and message.author.get_profile.is_patient %}
+        {% if message.author.get_profile.is_banned %}
+        <button id="unban" class="btn btn-success pull-right btn-small"><i class="icon-ok-circle icon-white"></i> {% trans 'Permitir mensajes de este usuario' %}</button>
+        {% else %}
+        <button id="ban" class="btn btn-danger pull-right btn-small"><i class="icon-ban-circle icon-white"></i> {% trans 'Restringir mensajes de este usuario' %}</button>
+        {% endif %}
+    {% endif %}
   </div>
   <div>
       {% trans 'Para' %} <em class="muted">{{ message.recipient.get_profile.get_full_name }}</em>
@@ -45,6 +52,16 @@ $('#reply').on('click', function(event){
      $("textarea:visible:first").focus();
   });
 
+});
+$('#ban').on('click', function(event){
+  $(this).html('<img src="{{STATIC_URL}}img/ajax-bar-loader.gif" />&nbsp;{% trans "Cargando" %}...');
+  $('#preview').load('{% url private_messages_ban message.id %}');
+});
+$('#unban').on('click', function(event){
+  $(this).html('<img src="{{STATIC_URL}}img/ajax-bar-loader.gif" />&nbsp;{% trans "Cargando" %}...');
+  $('#preview').load('{% url private_messages_unban message.id %}', function(){
+    $('#unban').hide();
+  });
 });
 
 </script>

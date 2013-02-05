@@ -65,24 +65,32 @@
       {% endif %}
 
       <!-- EVENT_TYPE -->
-      {% if form.app_type.errors %}
-        <div class="control-group error">
-          <label for="id_event_type" class="control-label">{{form.app_type.label}}</label>
-          <div class="controls">
-            {{ form.app_type }}
-            {% for error in form.app_type.errors %}
-               <span class="help-inline">{{ error|escape }}</span>
-            {% endfor %}
-          </div>
-        </div>
-      {% else %}
-        <div class="control-group">
-          <label for="id_event_type" class="control-label">{{form.app_type.label}}</label>
-          <div class="controls">
+    {% if form.app_type.errors %}
+      <div class="control-group error">
+        <label for="id_app_type" class="control-label">{{form.app_type.label}}</label>
+        <div class="controls">
+          <div class="input-prepend span9">
+            <span class="add-on"><a href="{% url cal.add_slot_type %}?next={{request.path}}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a></span>
             {{ form.app_type }}
           </div>
+          {% for error in form.app_type.errors %}
+             <span class="help-inline">{{ error|escape }}</span>
+          {% endfor %}
         </div>
-      {% endif %}
+      </div>
+    {% else %}
+      <div class="control-group">
+        <label for="id_event_type" class="control-label">{{form.app_type.label}}</label>
+        <div class="controls">
+          <div class="input-prepend span9">
+            <span class="add-on"><a href="{% url cal.add_slot_type %}?next={{request.path}}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a></span>
+            {{ form.app_type }}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+      <!-- END EVENT_TYPE -->
+      
       <div class="control-group">
         <label for="id_event_type" class="control-label">{{form.notify.label}}</label>
         <div class="controls">
@@ -90,7 +98,7 @@
           <em class="text-info" style="display: inline"> * {{  form.notify.help_text }}</em>
         </div>
       </div>
-      <!-- END EVENT_TYPE -->
+
       <!-- STATUS -->
         {% if form.status.errors %}
           <div class="control-group error">
@@ -116,8 +124,10 @@
         <div class="control-group error">
           <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
           <div class="controls">
-            {{ form.start_time }}
-            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-time"></i></span>
+              {{ form.start_time }}
+            </div>
             {% for error in form.start_time.errors %}
                <span class="help-inline">{{ error|escape }}</span>
             {% endfor %}
@@ -127,8 +137,10 @@
         <div class="control-group">
           <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
           <div class="controls">
+             <div class="input-prepend">
+              <span class="add-on"><i class="icon-time"></i></span>
               {{ form.start_time }}
-              <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+            </div>
           </div>
         </div>
       {% endif %}
@@ -139,8 +151,10 @@
         <div class="control-group error">
           <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
           <div class="controls">
-            {{ form.end_time }}
-            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-time"></i></span>
+              {{ form.end_time }}
+            </div>
             {% for error in form.end_time.errors %}
                <span class="help-inline">{{ error|escape }}</span>
             {% endfor %}
@@ -150,8 +164,10 @@
         <div class="control-group">
           <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
           <div class="controls">
-            {{ form.end_time }}
-            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+           <div class="input-prepend">
+              <span class="add-on"><i class="icon-time"></i></span>
+              {{ form.end_time }}
+            </div>
           </div>
         </div>
       {% endif %}
@@ -230,11 +246,12 @@
 
 {% block jquery_init %}
   $('#id_date').datepicker({'format':'dd/mm/yyyy', weekStart:1});
-  $('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': '{% if  form.start_time.value %}{{ form.start_time.value|time:"H:i" }}{% else %}08:00{% endif %}' });
-  $('#id_end_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.end_time.value|time:"H:i" }}'});
+  var startPicker = $('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': '{% if  form.start_time.value %}{{ form.start_time.value|time:"H:i" }}{% else %}08:00{% endif %}' });
+  var endPicker = $('#id_end_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.end_time.value|time:"H:i" }}'});
   var app_type_container = $('#id_app_type');
   $('#id_app_type').on("change", update_end_time);
   $('#id_start_time').on("change", update_end_time);
+
   function update_end_time(){
     if (app_type_container.val()){
       var matches = app_type_container.find(':selected').text().match(/(\d+)/);
@@ -250,8 +267,10 @@
     }
     else {
       $('#id_end_time').removeClass('disabled');
+      $('#id_end_time').val($('#id_start_time').val());
     }
   };
+
   $('#check_schedule').on('click', function(){
     $('#appform').attr('action', "{% if patient_user %}{% url cal.check year month day patient_user.id %}{% else %}{% url cal.check year month day doctor.id%}{% endif %}").submit();
   });

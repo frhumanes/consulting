@@ -9,7 +9,7 @@ from django.db import models
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'sex', 'email', 'doctor', 'role')
-    search_fields = ('name', 'first_surname',
+    search_fields = ('name', 'first_surname', 'medical_number'
                     'second_surname', 'address', 'town', 'postcode',
                     'dob', 'phone1', 'phone2', 'email', 'profession',
                     )
@@ -17,7 +17,7 @@ class ProfileAdmin(admin.ModelAdmin):
     list_filter = ('role', 'sex', 'doctor', 'status')
     ordering = ('first_surname', 'second_surname', 'name', 'role')
     fieldsets =((None, {
-                    'fields': ('user',)
+                    'fields': ('user', )
                 }),
                 (_(u'Datos personales'), {
                     'fields': ('name', 'first_surname', 
@@ -26,10 +26,15 @@ class ProfileAdmin(admin.ModelAdmin):
                     }),
                 (_(u'Otros datos personales'), {
                     'fields': ('address', 'town', 'postcode', 
-                                'phone1', 'phone2', 'email', 'profession')
+                                'phone1', 'phone2', 'emergency_phone', 'email',
+                                'education', 'profession', 'source')
                     }),
                 (_(u'Consulta'), {
-                    'fields': ('doctor', 'role', 'illnesses')
+                    'fields': ('medical_number', 'doctor', 'role')
+                    }),
+                (_(u'Diagnóstico'), {
+                    'classes': ('collapse',),
+                    'fields': ('illnesses',)
                     }),
                 (_(u'Registro'), {
                         'classes': ('collapse',),

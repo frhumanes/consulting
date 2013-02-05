@@ -358,7 +358,7 @@ class Medicine(TraceableModel):
     months = models.DecimalField(_(u'Número de meses de toma del fármaco'),
                                     max_digits=5, decimal_places=2,
                                     blank=True, null=True)
-    posology = models.IntegerField(_(u'Posología (mg/día)'))
+    posology = models.DecimalField(_(u'Posología (mg/día)'), max_digits=9, decimal_places=4)
     dosification = models.CharField(_(u'Modo de administración'), 
                                     max_length=255, blank=True, 
                                     null=True, default='')

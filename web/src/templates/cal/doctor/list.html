@@ -2,6 +2,13 @@
 
 {% load i18n messages userprofile %}
 
+{% block js_files %}
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  {{ block.super }}
+{% endblock %}
+
 {% block right %}
   {% include "cal/includes/calendar.html" with doctor=doctor %}
 {% endblock %}
@@ -61,9 +68,9 @@
     <div id="preview"></div>
   {% else %}
     {% if vacations %}
-    <div class="alert alert-error">{% trans "El doctor no está disponible para este día" %}</div>
+    <div class="alert alert-error alert-block">{% trans "El doctor no está disponible para este día" %}</div>
     {% else %}
-    <div class="alert alert-info">{% trans "No hay citas concertadas para este día" %}</div>
+    <div class="alert alert-info alert-block">{% trans "No hay citas concertadas para este día" %}</div>
     {% endif %}
 
   {% endif %}

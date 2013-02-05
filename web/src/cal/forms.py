@@ -24,12 +24,12 @@ from datetime import datetime, date
 
 class VacationForm(forms.ModelForm):
     date = forms.DateField(label=_(u"Fecha inicial"),
-        input_formats=(settings.DATE_FORMAT,),
-        widget=forms.DateInput(format=settings.DATE_FORMAT,
+        input_formats=(settings.DATE_INPUT_FORMAT,),
+        widget=forms.DateInput(format=settings.DATE_INPUT_FORMAT,
             attrs={'class': 'span9'}),required=True)
     end_date = forms.DateField(label=_(u"Fecha final"),
-        input_formats=(settings.DATE_FORMAT,),
-        widget=forms.DateInput(format=settings.DATE_FORMAT,
+        input_formats=(settings.DATE_INPUT_FORMAT,),
+        widget=forms.DateInput(format=settings.DATE_INPUT_FORMAT,
             attrs={'class': 'span9'}),required=False)
 
     description = forms.CharField(label=_(u"Descripción"),
@@ -42,8 +42,8 @@ class VacationForm(forms.ModelForm):
 
 
 class EventForm(forms.ModelForm):
-    date = forms.DateField(label=_(u"Fecha"),input_formats=(settings.DATE_FORMAT,),
-        widget=forms.DateInput(format=settings.DATE_FORMAT,
+    date = forms.DateField(label=_(u"Fecha"),input_formats=(settings.DATE_INPUT_FORMAT,),
+        widget=forms.DateInput(format=settings.DATE_INPUT_FORMAT,
             attrs={'class': 'span9'}))
 
     start_time = forms.TimeField(label=_(u"Hora inicial"),widget=forms.TimeInput(
@@ -155,7 +155,7 @@ class SlotForm(forms.Form):
 
                 self.fields['slot_type'] = SlotTypeChoiceField(
                     label=_(u"Tipo de cita"),
-                    queryset=queryset,
+                    queryset=queryset, required=True,
                     widget=forms.Select(attrs={'class': 'span9'}),initial=initial_slot)
 
                 if initial_slot:
@@ -171,7 +171,7 @@ class SlotForm(forms.Form):
             super(SlotForm, self).__init__(*args, **kwargs)
 
     slot_type = SlotTypeChoiceField(label=_(u"Tipo de cita"),
-        queryset=SlotType.objects.none(),
+        queryset=SlotType.objects.none(), required=True,
         widget=forms.Select(attrs={'class': 'span9'}))
 
     weekdays = forms.MultipleChoiceField(label=_(u"Días"),widget=forms.CheckboxSelectMultiple(
@@ -180,10 +180,10 @@ class SlotForm(forms.Form):
         attrs={'class': 'span3'}), choices=Slot.MONTH)
 
     start_time = forms.TimeField(label=_(u"Desde"),widget=forms.TimeInput(
-        attrs={'class': 'span9'}))
+        attrs={'class': 'span6'}))
 
     end_time = forms.TimeField(label=_(u"Hasta"),widget=forms.TimeInput(
-        attrs={'class': 'span9'}), required=False)
+        attrs={'class': 'span6'}), required=False)
 
     description = forms.CharField(label=_(u"Descripción"),widget=forms.Textarea(attrs={'cols': 60,
         'rows': 4, 'class': 'span9'}), required=False)
@@ -192,6 +192,7 @@ class SlotForm(forms.Form):
         cleaned_data = self.cleaned_data
         start_time = cleaned_data.get("start_time")
         end_time = cleaned_data.get("end_time")
+        slot_type = cleaned_data.get("slot_type")
 
         if start_time and end_time:
             if end_time < start_time:
@@ -253,8 +254,8 @@ class AppointmentForm(forms.ModelForm):
         widget=forms.Select(attrs={'class': 'span9'}),
         required=False)
 
-    date = forms.DateField(label=_(u"Fecha"),input_formats=(settings.DATE_FORMAT,),
-        widget=forms.DateInput(format=settings.DATE_FORMAT,
+    date = forms.DateField(label=_(u"Fecha"),input_formats=(settings.DATE_INPUT_FORMAT,),
+        widget=forms.DateInput(format=settings.DATE_INPUT_FORMAT,
             attrs={'class': 'span9'}))
 
     start_time = forms.TimeField(label=_(u"Hora inicial"),widget=forms.TimeInput(
@@ -350,8 +351,9 @@ class SchedulerForm(forms.Form):
 
 
 class PaymentForm(forms.ModelForm):
-    date = forms.DateField(label=_(u"Fecha de pago"),input_formats=(settings.DATE_FORMAT,),
-        widget=forms.DateInput(format=settings.DATE_FORMAT,
+    date = forms.DateField(label=_(u"Fecha de pago"), required=True,
+        input_formats=(settings.DATE_INPUT_FORMAT,), 
+        widget=forms.DateInput(format=settings.DATE_INPUT_FORMAT,
             attrs={'class': 'span9'}), initial=formats.date_format(date.today(), "SHORT_DATE_FORMAT"))
     class Meta:
         model = Payment
@@ -380,12 +382,12 @@ class PaymentFiltersForm(forms.Form):
     app_date = forms.MultiValueField(
                     label=_(u'Fecha de la consulta'),
                     widget=DateWidget(attrs={'class':'span5 datewidget'},
-                                           format=settings.DATE_FORMAT))
+                                           format=settings.DATE_INPUT_FORMAT))
 
     payment_date = forms.MultiValueField(
                     label=_(u'Fecha de pago'),
                     widget=DateWidget(attrs={'class':'span5 datewidget'},
-                                           format=settings.DATE_FORMAT))
+                                           format=settings.DATE_INPUT_FORMAT))
     method = forms.MultipleChoiceField(
                     label=_(u'Método de pago'),
                     choices=Payment.METHODS,

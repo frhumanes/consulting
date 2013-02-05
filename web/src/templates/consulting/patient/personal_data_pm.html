@@ -1,4 +1,5 @@
 {% extends "ui/app.html" %}
+{% load i18n%}
 
 {% block css_inline %}
 @media (min-width: 768px ) and (max-width: 800px){
@@ -15,7 +16,6 @@
 }
 {% endblock %}
 
-{% load i18n%}
 
 {% block left %}
 	{% if appointment %}
@@ -29,3 +29,60 @@
   {% include "consulting/patient/personal_data.html" %}
 {% endblock %}
 
+{% block right %}
+  <div class="alert alert-success" style="min-height: 22px">
+    <span class=""><strong>{% trans 'PRÓXIMA CITA' %}</strong></span>
+    {% if patient_user.get_profile.get_nextAppointment and patient_user.is_active %}
+      <span class="pull-right" >
+        <a href="{% url cal.edit patient_user.get_profile.get_nextAppointment.id %}" placement="top" rel="tooltip" class="text-success" data-original-title="Editar cita">{{patient_user.get_profile.get_nextAppointment.date|date:'d/M/Y'}}</a>
+      {% else %}
+      <span class="" >
+        &nbsp;&nbsp;<a href="{% url cal.scheduler patient_user.id %}" class="btn btn-small btn-success"><i class='icon-plus-sign icon-white'></i> {% trans 'Dar cita' %}</a>
+      {% endif %}
+      </span>
+  </div>
+  {% if patient_user.get_profile.get_lastAppointment %}
+  <div class="alert alert-info">
+      <span class=""><strong>{% trans 'ÚLTIMA CITA' %}</strong></span>
+      <span class="pull-right">
+        <a href="{% url consulting_start patient_user.get_profile.get_lastAppointment.id %}" placement="top" rel="tooltip" data-original-title="Ir a resumen de la cita">{{patient_user.get_profile.get_lastAppointment.date|date:'d/M/Y'}}</a></span>
+  </div>
+  {% endif %}
+  <div class="img-polaroid">
+    <h5 class="center text-info">{% trans 'ESTADO' %}</h5>
+    <table class="table table-condensed" style="color:grey">
+    {% if patient_user.get_profile.illnesses.all.count %}
+      <thead>
+      <tr>
+        <th>CIE-10</th>
+        <th>{% trans 'CONDICIÓN' %}</th>
+      </tr>
+      </thead>
+      <tbody style="color:grey">
+      {% for ill in patient_user.get_profile.illnesses.all %}
+        <tr>
+          <td>{{ill.code}}</td>
+          <td>{{ill.name}}</td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tbody style="color:grey">
+    {% endif %}
+    {% if user.get_profile.is_doctor %}
+      <tr>            
+        <th colspan="2">{% trans 'NIVEL ESTRATIFICACIÓN' %}<br />
+          {% if patient_user.get_profile.get_anxiety_status %}
+              <span class="label label-{{patient_user.get_profile.get_anxiety_status|last}}">{{patient_user.get_profile.get_anxiety_status|first|safe}}</span>
+          {% endif %}
+          {% if patient_user.get_profile.get_depression_status %}
+              <span class="label label-{{patient_user.get_profile.get_depression_status|last}}">{{patient_user.get_profile.get_depression_status|first|safe}}</span>
+          {% else %}
+              <span class="label">PENDIENTE DE CALCULAR</span>
+          {% endif %}
+        </th>
+      </tr>
+      {% endif %}
+    </tbody>
+    </table>
+  </div>
+{% endblock %}

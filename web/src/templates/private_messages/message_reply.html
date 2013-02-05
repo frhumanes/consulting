@@ -15,6 +15,12 @@
           {% trans 'La cuenta de destino no está activa. Es posible que el destinatario no reciba su mensaje.' %}
        </div>
     {% else %}
+      {% if request.user.get_profile.is_banned %}
+        <div class="alert alert-block alert-info">
+          <h3>{% trans 'Funciones de mensajería no disponible' %}</h3>
+          <p>{% trans 'El servicio de mensajería se encuentra temporalmente inoperativo. DIsculpe las molestias.' %}</p>
+        </div>
+      {% else %}
     <form class="form-horizontal" method="post" action="{% url private_messages_new %}" enctype="multipart/form-data">{% csrf_token %}
       <fieldset>
             <!-- RECIPIENT -->
@@ -122,6 +128,7 @@
         "stylesheets": ["{{ STATIC_URL }}css/bootstrap-wysihtml5.css"]
       });
     </script>
+      {% endif %}
     {% endif %}
   {% endif %}
 {% endif %}

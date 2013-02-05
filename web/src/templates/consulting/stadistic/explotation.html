@@ -58,10 +58,26 @@
   <script src="{{ STATIC_URL }}js/locales/bootstrap-datepicker.es.js"></script>
 {% endblock %}
 
+{% block js %}
+function autoSubmit() {
+  $('#form').on("change", function(e) {
+      var $form = $(this);
+      $('#query-data').fadeTo(500, 0.25);
+      $form.ajaxSubmit({  target: '#query-data',
+                          clearForm: false,
+                          success: function(){
+                            $('#query-data').fadeTo(750, 1);
+                        }
+                      });
+  });
+}
+{% endblock %}
+
 {% block jquery_init %}
 
 $('button[type="reset"]').on('click', function(){
   var $form = $(this).parent();
+  $form.unbind('change');
   $form.find('.span3:hidden').val('');
   $(".range").each(function(){
     var min = $(this).find('input[id$="_0"]').attr('min');
@@ -71,6 +87,8 @@ $('button[type="reset"]').on('click', function(){
   });
   $form.find('.text-info').html('');
   $form.find('input').removeAttr('checked');
+  autoSubmit();
+  $('form').change();
 });
 
 $('#download_xls').live("click", function(e) {
@@ -81,28 +99,7 @@ $('#download_xls').live("click", function(e) {
     $form.attr('action', orig_action);
 });
 
-$('#refresh').popover({'title':'Aviso',
-                      'html': true,
-                      'content':'Actualice los resultados cada vez que<br> modifique las opciones de filtrado',
-                      'placement':'right',
-                      'trigger':'manual'});
-
-$('#refresh').popover('show');
-$('#refresh').on('click',function(e){
-    $(this).popover('hide');
-});
-setInterval(function(){$('#refresh').popover('hide');},10000);
-
-$('#refresh').live("click", function(e) {
-    var $form = $('#form');
-    $('#query-data').fadeTo(500, 0.25);
-    $form.ajaxSubmit({  target: '#query-data',
-                        clearForm: false,
-                        success: function(){
-                          $('#query-data').fadeTo(750, 1);
-                      }
-                    });
-});
+autoSubmit();
 
 $(".range").each(function(){
     var min = $(this).find('input[id$="_0"]').attr('min');
@@ -131,6 +128,9 @@ $(".range").each(function(){
           $(this).parent().find('.text-info').html(value);
           $(this).find('input[id$="_0"]').val(ui.values[0]);
           $(this).find('input[id$="_1"]').val(ui.values[1]);
+      },
+      change: function( event, ui ) {
+          $('form').change();
       }
     });
 });
@@ -281,7 +281,6 @@ $('#reload_button').on('click',function(){
   <br>
   <div class="btn-group">
     <a href="#myModal" role="button" class="btn btn-large {% if not reports|length %}disabled{% endif %}" data-toggle="modal"><i class="icon-eye-open"></i> {% trans 'Previsualizar datos' %}</a>
-    <button id="refresh" class="btn btn-large"><i class="icon-refresh"></i></button>
   </div>
 </div>
 

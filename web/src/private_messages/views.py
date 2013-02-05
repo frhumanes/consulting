@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from datetime import datetime
 
-from models import Message
+from models import Message, Blacklist
 from forms import MessageForm
 from django.contrib.auth.models import User
 
@@ -59,6 +59,9 @@ def create_message(request, recipient_id=None):
             message.author = request.user
             message.sent_at = datetime.now()
             message.save()
+            for ban in message.recipient.get_profile().is_banned():
+                ban.end_time = datetime.now()
+                ban.save()
             return redirect(reverse("private_messages_inbox"))
     else:
         if recipient_id:
@@ -113,3 +116,23 @@ def reply_message(request, message_id):
                  "parent_body": parent_body,
                  "recipient":recipient}, 
                 context_instance=RequestContext(request))
+
+@login_required
+@never_cache
+def ban_user(request, message_id):
+    """
+    Ban a patient user
+    """
+    message = get_object_or_404(Message, pk=int(message_id))
+    if(message.author.get_profile().is_banned()):
+        for ban in message.author.get_profile().is_banned():
+            ban.end_time = datetime.now()
+            ban.save()
+    else:
+        ban = Blacklist()
+        ban.doctor = request.user
+        ban.patient = message.author
+        ban.save()
+    message = get_object_or_404(Message, pk=int(message_id))
+    return render_to_response("private_messages/message_view.html",
+        {"message": message}, context_instance=RequestContext(request)) 

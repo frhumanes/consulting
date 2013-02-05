@@ -5,6 +5,9 @@
 {% url search_patient_for_action action='new_app' as set_appointment  %}
 {% url search_patient_for_action action='list_app' as users_appointment %}
 {% url cal.list_slot_type as slot_type %}
+{% url cal.list_vacation as vacations %}
+{% url cal.list_event as events %}
+{% url cal.list_payment as payments %}
 
 <div class="" style="margin-top: 19px">
 <a class="btn btn-primary btn-block" href="{{set_appointment}}">
@@ -31,12 +34,14 @@
         <li>
           <a href="{% url cal.list_slot_type %}">{% trans 'TIPOS DE CITA' %}</a>
         </li>
+        {% if request.user.entry_type_doctor.all.count %}
         <li>
           <a href="{% url cal.list_slot %}">{% trans 'GESTIÓN MENSUAL' %}</a>
         </li>
+        {% endif %}
       </ul>
   </li>
-  <li class="dropdown">
+  <li class="dropdown {% active_child request vacations %}{% active_child request events %}">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
       <i class="icon-lock"></i> {% trans 'AUSENCIAS' %} <b class="caret"></b>
     </a>
@@ -50,7 +55,7 @@
     </ul>
   </li>
   {% endif %}
-  <li>
+  <li class="{% active_child request payments %}">
     <a href="{% url cal.list_payment %}">
         <i class="icon-list-alt"></i> {% trans "REGISTRO" %}
     </a> 

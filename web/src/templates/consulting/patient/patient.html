@@ -4,12 +4,14 @@
 
 {% block js_files %}
   {{ block.super }}
+  <script src="{{ STATIC_URL }}js/jquery-ui-1.9.1.custom.js"></script>
   <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
-<script src="{{ STATIC_URL }}js/locales/bootstrap-datepicker.es.js"></script>
+  <script src="{{ STATIC_URL }}js/locales/bootstrap-datepicker.es.js"></script>
 {% endblock %}
 
 {% block css_files %}
   {{ block.super }}
+  <link href="{{ STATIC_URL }}css/jquery-ui-1.9.1.custom.css" rel="stylesheet">
   <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet">
 {% endblock %}
 
@@ -22,8 +24,9 @@
               return xhr;
         }
    });
+  var load_icon = "<img class='center' src='{{STATIC_URL}}img/ajax-loader.gif' alt='loading...'/>";
 
-{% if patient_user_id %}
+
   $('#id_doctor').change(function(){
     $.ajax({
         url: '{% url cal.check_transfer patient_user_id %}',
@@ -71,12 +74,16 @@
     $('#message').css('display', 'none');
     event.preventDefault();
     $('#assign_button').fadeOut('fast').hide();
+    $('#assign .alert').html(load_icon);
+    $('#assign .alert').show();
     $(this).ajaxSubmit({target: null,
                         clearForm: false,
                         success: function(response) {
                                 $('#message').html('<div class="alert alert-success">{% trans 'Cambio realizado correctamente.' %}<button type="button" class="close" data-dismiss="alert">×</button></div>');
                                  $('#message').fadeIn('slow');
                                 current = $("id_doctor").val();
+                                $('#assign .confirm').hide();
+                                $('#assign .alert').hide();
                         },
                         error: function(response) {
                                 $('#message').html('<div class="alert alert-error">{% trans 'Cambio no realizado.' %}<button type="button" class="close" data-dismiss="alert">×</button></div>');
@@ -84,8 +91,8 @@
                         }
                       });
   });
-{% endif %}
-   <!-- LOOK FOR COMPONENT -->
+
+   <!-- LOOK FOR Profession -->
   $("#id_profession").autocomplete({
     source: function(request, response){
               $.ajax({
@@ -97,12 +104,12 @@
                   },
                   dataType: "json",
                   success: function(data){
-                      response(data['profession'])
+                      response(data['professions']);
                   }
               })
             },
     select: function(event, ui){
-              $("#id_profession").attr('value', ui.item.id);            
+              $("#id_profession").attr('value', ui.item.profession);           
             }    
   });
 {% endblock %}
@@ -116,20 +123,68 @@
   {% endif %} 
 {% endblock  %}
 
+{% block right %}
+  {% if id_appointment %}
+    {% include "consulting/patient/card-mini.html" %}
+  {% else %}
+    {% if patient_user_id %}
+    <div class="page-header">
+      <h3>{% trans "Asignación de médico" %}</h3>
+    </div>
+
+    <section>
+      <div id="message" style="display: none"></div>
+      <div class="well">
+
+        <div class="">
+          <form id="doctor_selection" class="form" method="post" action="{% url cal.select_doctor patient_user_id %}">
+            {% csrf_token %}
+
+             <!-- DOCTOR -->
+            <div class="control-group">
+              <label class="control-label" for="id_doctor">{% trans 'Médico asignado' %}: </label>
+              <div class="controls">
+                {{ doctor_form.doctor }}
+                  {% if doctor_form.doctor.errors %}
+                    {% for error in doctor_form.doctor.errors %}
+                       <span class="help-inline">{{ error|escape }}</span>
+                    {% endfor %}
+                  {% endif %}
+              </div>
+            </div>
+            <div id="assign" class="hide center">
+              {% if doctor_form.confirm_app %}
+                <div style="text-align: justify" class="alert alert-warning alert-block"></div>
+                <div class="confirm">
+                  {{ doctor_form.confirm_app }} <strong>{{ doctor_form.confirm_app.label }}</strong>
+                </div>
+              {% endif %}
+              <br>
+               <!-- END DOCTOR -->
+               <button id="assign_button" type="submit" class="btn btn-info btn-block {% if doctor_form.confirm_app %}hide{% endif %}">Traspasar paciente</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+  {% endif %}
+{% endblock %}
+
 {% block container %}
 <div class="page-header">
-    <h2>{% trans 'Datos del paciente' %}</h2>
-</div>   
+  {% if id_appointment %}
+  <h1>{% trans 'Cuestionario: ' %} {{task.survey.name}}</h1>
+  <h2>{% trans 'Bloque' %} {{my_block.code}}: {{my_block.name}}</h2>
+  {% else %}
+  <h2>{% trans 'Datos del paciente' %}</h2>
+  {% endif %}
+</div>
 <section>
-  <div class="" >
-    <div class="{% if edit %}well{% endif %}">
-      {% if not edit %}
-      <form class="form-horizontal" id="form" action="." method="post" accept-charset="utf-8">{% csrf_token %}
-      {% endif %}
-      {% if edit %}
-      <form class="form-horizontal" id="form" action="{% url consulting_editpatient_pm patient_user_id %}" method="post" accept-charset="utf-8">{% csrf_token %}
-      {% endif %} 
-      <input type="hidden" name="next" value="{{ next }}"/>             
+  <div class="{% if edit %}well{% endif %}">
+      <form class="form-horizontal" id="form" action="{% if edit %}{% url consulting_editpatient_pm patient_user_id %}{% else %}{{ request.path }}{% endif %}" method="post" accept-charset="utf-8">
+      {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}"/>             
         {% if same_username %}
           <div class="alert alert-error">
             <a class="close" data-dismiss="alert">×</a>
@@ -282,6 +337,17 @@
             {% endfor %}
           </div>
         </div>
+        <div class="control-group">
+          <label class="control-label">
+            {{form.emergency_phone.label}}
+          </label>
+          <div class="controls">
+            {{form.emergency_phone}}
+            {% for e in form.emergency_phone.errors %}
+              <span class="help-inline text-error"><strong>{{e}}</strong></span>
+            {% endfor %}
+          </div>
+        </div>
         <div class="control-group info">
           <label class="control-label">
             {{form.email.label}}
@@ -296,6 +362,17 @@
         {% if user.get_profile.is_doctor %}
         <div class="control-group">
           <label class="control-label">
+            {{form.education.label}}
+          </label>
+          <div class="controls">
+            {{form.education}}
+            {% for e in form.education.errors %}
+              <span class="help-inline text-error"><strong>{{e}}</strong></span>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">
             {{form.profession.label}}
           </label>
           <div class="controls">
@@ -306,6 +383,17 @@
           </div>
         </div>
         {% endif %}
+        <div class="control-group">
+          <label class="control-label">
+            {{form.source.label}}
+          </label>
+          <div class="controls">
+            {{form.source}}
+            {% for e in form.source.errors %}
+              <span class="help-inline text-error"><strong>{{e}}</strong></span>
+            {% endfor %}
+          </div>
+        </div>
         <hr>
         <div class="control-group">
           <label class="control-label">
@@ -325,51 +413,6 @@
           </button>
         </div>
       </form>
-    </div>  
-  </div>
-</section>
-{% endblock %}
-
-{% block right %}
-  {% if patient_user_id %}
-  <div class="page-header">
-    <h3>{% trans "Asignación de médico" %}</h3>
-  </div>
-
-  <section>
-    <div id="message" style="display: none"></div>
-    <div class="well">
-
-      <div class="">
-        <form id="doctor_selection" class="form" method="post" action="{% url cal.select_doctor patient_user_id %}">
-          {% csrf_token %}
-
-           <!-- DOCTOR -->
-          <div class="control-group">
-            <label class="control-label" for="id_doctor">{% trans 'Médico asignado' %}: </label>
-            <div class="controls">
-              {{ doctor_form.doctor }}
-                {% if doctor_form.doctor.errors %}
-                  {% for error in doctor_form.doctor.errors %}
-                     <span class="help-inline">{{ error|escape }}</span>
-                  {% endfor %}
-                {% endif %}
-            </div>
-          </div>
-          <div id="assign" class="hide center">
-            {% if doctor_form.confirm_app %}
-              <div style="text-align: justify" class="alert alert-warning alert-block"></div>
-              <div class="confirm">
-                {{ doctor_form.confirm_app }} <strong>{{ doctor_form.confirm_app.label }}</strong>
-              </div>
-            {% endif %}
-            <br>
-             <!-- END DOCTOR -->
-             <button id="assign_button" type="submit" class="btn btn-info btn-block {% if doctor_form.confirm_app %}hide{% endif %}">Traspasar paciente</button>
-          </div>
-        </form>
-      </div>
     </div>
-  </section>
-  {% endif %}
-{% endblock %}
+</section> 
+{% endblock container %}

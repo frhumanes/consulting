@@ -99,12 +99,12 @@
 	se medica con
 		{% for med in prev_treatment %}
 			{% if forloop.last and not forloop.first %}
-				 y {{med.component.name}} {{med.posology}} mg/24 horas desde hace {{med.months}} mes{{med.months|pluralize:'es'}}.
+				 y {{med.component.name}} {{med.posology|floatformat:"-4" }} mg/24 horas desde hace {{med.months}} mes{{med.months|pluralize:'es'}}.
 			{% else %}
 				{% if forloop.revcounter0 > 1 %}
-					{{med.component.name}} {{med.posology}} mg/24 horas desde hace {{med.months}} mes{{med.months|pluralize:'es'}}, 
+					{{med.component.name}} {{med.posology|floatformat:"-4"}} mg/24 horas desde hace {{med.months|floatformat:"-2"}} mes{{med.months|pluralize:'es'}}, 
 				{% else %}
-					{{med.component.name}} {{med.posology}} mg/24 horas desde hace {{med.months}} mes{{med.months|pluralize:'es'}}
+					{{med.component.name}} {{med.posology|floatformat:"-4"}} mg/24 horas desde hace {{med.months|floatformat:"-2"}} mes{{med.months|pluralize:'es'}}
 				{% endif %}
 			{% endif %}
 		
@@ -197,7 +197,7 @@
 		<dt>{% trans 'TRATAMIENTO' %}</dt>
 		{% for m in treatment %}
   		<dd>
-    		{{m.component}} [{{m.posology}} mg/día]
+    		{{m.component}} [{{m.posology|floatformat:"-4"}} mg/día]
   		</dd>
 	  	{% endfor %}
 	</dl>

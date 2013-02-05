@@ -15,7 +15,7 @@ class IllnessSelectionForm(forms.Form):
             appointment = Appointment.objects.get(id=id_appointment)
             #illnesses = appointment.patient.get_profile().illnesses.all()\
             #            .order_by('code')
-            illnesses = Illness.objects.all()
+            illnesses = Illness.objects.exclude(surveys__isnull=True)
             choices = [('', '--------')]
             choices.extend(
                     [(illness.code, illness.name) for illness in illnesses])

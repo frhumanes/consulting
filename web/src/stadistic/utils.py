@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django.conf import settings
-from consulting.models import Task
+from consulting.models import *
 from stadistic.models import Report
 
 def generate_reports(full=False):
@@ -18,9 +18,12 @@ def generate_reports(full=False):
         report.date = report.task.end_date
         report.created_by = task.created_by
         report.patient = task.patient.get_profile()
-        report.age = report.patient.get_age()
+        report.age = report.patient.age_at(report.date)
         report.sex = report.patient.sex
-        report.treatment = list(m.component.name for m in report.patient.get_treatment(report.date))
+        report.education = report.patient.education
+        report.marital = report.patient.status
+        report.illnesses = [ill.code for ill in task.patient.get_profile().illnesses.all()]
+        report.treatment = [m.component.name for m in report.patient.get_treatment(report.date)]
         report.profession = task.patient.get_profile().profession
         report.variables = dict((k.name, v) for (k, v) in task.get_variables_mark().items())
         try:

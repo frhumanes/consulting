@@ -116,13 +116,15 @@ def explotation(request):
             filters = update_filter(filters, k, int(v))
           if k.startswith('profession'):
             filters = update_filter(filters, k, request.POST.getlist(k))
-          if k.startswith('sex'):
+          if k.startswith('sex') or k.startswith('marital') or k.startswith('education'):
             filters = update_filter(filters, k, [int(v) for v in request.POST.getlist(k)])
           if k.startswith('anxiety'):
             filters = update_filter(filters, 'status.Ansiedad', [int(v) for v in request.POST.getlist('anxiety')])
           if k.startswith('depression'):
             filters = update_filter(filters, 'status.Depresión', [int(v) for v in request.POST.getlist('depression')])
           if k.startswith('treatment'):
+            filters = update_filter(filters, k, [v for v in request.POST.getlist(k)])
+          if k.startswith('illnesses'):
             filters = update_filter(filters, k, [v for v in request.POST.getlist(k)])
           if k.startswith('ave'):
             filters = update_filter(filters, k, [int(v) for v in request.POST.getlist(k)])

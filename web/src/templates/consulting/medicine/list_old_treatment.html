@@ -17,7 +17,7 @@
     <td><em>{{medicine.created_at|date:'d/M/Y'}}</em></td>
     <td><em>{{medicine.date|date:'d/M/Y'}}</em></td>
     <td><strong>{{medicine.component}}</strong></td>
-    <td>{{medicine.posology}} mg/día</td>
+    <td>{{medicine.posology|floatformat:"-4" }} mg/día</td>
     <td>{{medicine.dosification}}</td>
   </tr>
   {% endif %}

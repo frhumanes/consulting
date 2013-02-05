@@ -21,10 +21,15 @@
     width:100% 
   }
 }
+@media (min-width: 980px) and (max-width: 1200px){
+  .btn-group-label{
+    width: 150px 
+  }
+}
 {% endblock %}
 
 {% block right %}
-  {% include 'consulting/patient/card.html' with mini=1 %}
+  {% include 'consulting/patient/card-mini.html' %}
 {% endblock %}
 
 {% block container %}

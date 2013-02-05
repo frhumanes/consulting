@@ -31,25 +31,17 @@ class ProfileForm(forms.ModelForm):
     nif = ESIdentityCardNumberField(label=_(u'DNI/NIF'), required=False,
                     error_messages={'unique': _(u'Este documento ya existe')},
                     help_text=_(u"Requerido para pacientes mayores de %d años" % ADULT))
-    sex = forms.ChoiceField(label=_(u'Sexo'), choices=Profile.SEX,
-                        required=False)
-    address = forms.CharField(label=_(u'Dirección'), max_length=150,
-                            required=False)
-    town = forms.CharField(label=_(u'Municipio'), max_length=150,
-                            required=False)
     postcode = ESPostalCodeField(label=_(u'Código Postal'), required=False)
 
     dob = forms.DateField(label=_(u'Fecha de Nacimiento'),
-                    input_formats=(settings.DATE_FORMAT,),
+                    input_formats=(settings.DATE_INPUT_FORMAT,),
                     widget=DateInput(attrs={'class': 'span12', 
                                             'size': '16', 
                                             'data-date-format':'dd/mm/yyyy', 
                                             'data-date-weekstart': '1',
                                             'data-date-language': 'es'},
-                                    format=settings.DATE_FORMAT),
+                                    format=settings.DATE_INPUT_FORMAT),
                     required=False)
-    status = forms.ChoiceField(label=_(u'Estado Civil'),
-                                choices=Profile.STATUS, required=False)
     phone1 = ESPhoneNumberField(label=_(u'Teléfono 1'))
     phone2 = ESPhoneNumberField(label=_(u'Teléfono 2'), required=False)
     email = forms.EmailField(label=_(u'Correo Electrónico'), required=False)
@@ -64,6 +56,12 @@ class ProfileForm(forms.ModelForm):
             today.month == dob.month and today.day < dob.day:
             years -= 1
         return years
+
+    def clean_nif(self):
+        data = self.cleaned_data.get('nif', '')
+        if data.startswith('0'):
+            data = data[1:]
+        return data
 
     def clean(self):
         cleaned_data = super(ProfileForm, self).clean()
@@ -103,7 +101,7 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        exclude = ('created_at', 'updated_at')
+        exclude = ('created_at', 'updated_at', 'medical_number')
 
 ProfileSurveyForm = ProfileForm 
 """class ProfileSurveyForm(forms.ModelForm):
@@ -129,9 +127,9 @@ ProfileSurveyForm = ProfileForm
     postcode = ESPostalCodeField(label=_(u'Código Postal'), required=False)
 
     dob = forms.DateField(label=_(u'Fecha de Nacimiento'),
-                    input_formats=(settings.DATE_FORMAT,),
+                    input_formats=(settings.DATE_INPUT_FORMAT,),
                     widget=DateInput(attrs={'class': 'span12', 'size': '16'},
-                                    format=settings.DATE_FORMAT),
+                                    format=settings.DATE_INPUT_FORMAT),
                     required=False)
     status = forms.ChoiceField(label=_(u'Estado Civil'),
                                 choices=Profile.STATUS,

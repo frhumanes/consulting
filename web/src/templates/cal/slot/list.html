@@ -10,7 +10,7 @@
             </div>
         </h1>
   </div>
-
+  {% if slots %}
   {% regroup slots by get_month_display as slots_by_month %}
 
   <div class="accordion" id="preferences">
@@ -49,6 +49,9 @@
 
     {% endfor %}
   </div>
+  {% else %}
+  <div class="alert alert-info">{% trans "No hay ajustes configurados para este año" %}</div>
+  {% endif %}
 {% endblock %}
 
 {% block jquery_init %}

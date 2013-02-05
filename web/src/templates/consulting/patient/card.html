@@ -1,16 +1,12 @@
 {% load i18n%}
 {% load consulting %}
 <div class="img-polaroid" style="margin-top: 6px">
-  <table class="table {% if not mini %}table-condensed{% endif %}">  
+  <table class="table {% if mini %}table-condensed{% endif %}">  
     <thead>
       <tr>            
-        <th colspan="2" style="text-align:center;">
-          <h4>
-            <a rel="tooltip" placement="top" title="{% trans 'Ir a perfil del paciente' %}" target="_blank" href="{% url consulting_pre_personal_data_pm patient_user.id %}" >{{patient_user.get_profile.get_full_name|upper}}</a> 
-            {% if not patient_user.is_active %}
-              <span class="text-error">{% trans '[INACTIVO]' %}</span>
-            {% endif %}&nbsp;
-          <a href="{% url consulting_editpatient_pm patient_user.id %}?next={{request.path}}" data-dismiss="alert" class="icon-edit pull-right" rel="tooltip" placement="left" title="{% trans 'Editar datos personales' %}"></a> 
+        <th colspan="2" >
+          <h4 style="text-align:center;">
+            <a href="{% url consulting_editpatient_pm patient_user.id %}?next={{request.path}}" data-dismiss="alert" rel="tooltip" placement="left" title="{% trans 'Editar datos personales' %}">{{patient_user.get_profile.get_full_name|upper}}</a> 
           </h4>
         </th>
       </tr>
@@ -18,7 +14,7 @@
     <tbody {% if mini %}style="color:grey"{% endif %}>           
       <tr>            
         <td>{% trans 'NIF' %}</td>
-        <td>{{patient_user.get_profile.nif}}</td>
+        <td>{% if patient_user.get_profile.nif %}{{patient_user.get_profile.nif}}{% endif %}</td>
       </tr>
       {% if user.get_profile.is_doctor %}
       <tr>            
@@ -34,18 +30,26 @@
         <td>{{patient_user.get_profile.get_status}}</td>
       </tr>
       {% endif %}
+      {% if patient_user.get_profile.phone1 or not mini %}
       <tr>            
         <td>{% trans 'TELÉFONO 1' %}</td>
         <td>{{patient_user.get_profile.phone1}}</td>
       </tr>
+      {% endif %}
+      {% if patient_user.get_profile.phone2 or not mini %}
       <tr>            
         <td>{% trans 'TELÉFONO 2' %}</td>
         <td>{{patient_user.get_profile.phone2}}</td>
       </tr>
+      {% endif %}
       {% if not mini %}
       <tr>            
+        <td>{% trans 'CONTACTO' %}</td>
+        <td>{{patient_user.get_profile.emergency_phone}}</td>
+      </tr>
+      <tr>            
         <td>{% trans 'CORREO' %}</td>
-        <td><small>{{patient_user.get_profile.email}}</small></td>
+        <td>{% if mini %}<small>{% endif%}{% if patient_user.get_profile.email%}{{patient_user.get_profile.email}}{% endif %}{% if mini %}</small>{% endif%}</td>
       </tr>     
       <tr>            
         <td>{% trans 'DOMICILIO' %}</td>
@@ -59,17 +63,32 @@
         <td>{% trans 'CÓDIGO POSTAL' %}</td>
         <td>{% if patient_user.get_profile.postcode %}{{patient_user.get_profile.postcode}}{% endif %}</td>
       </tr>
+      {% if patient_user.get_profile.source %}
+      <tr>            
+        <td>{% trans 'FUENTE DE DERIVACIÓN' %}</td>
+        <td>{{patient_user.get_profile.source}}</td>
+      </tr>
+      {% endif %}
       {% endif %}
       {% if user.get_profile.is_doctor %}
+      <tr>            
+        <td>{% trans 'NIVEL DE ESTUDIOS' %}</td>
+        <td>{% if mini %}<small>{% endif%}{{patient_user.get_profile.get_education}}{% if mini %}</small>{% endif%}</td>
+      </tr>
+      {% if patient_user.get_profile.profession or not mini %}
       <tr>            
         <td>{% trans 'PROFESIÓN' %}</td>
         <td>{{patient_user.get_profile.profession|wordwrap:5}}</td>
       </tr>
       {% endif %}
+      {% endif %}
+      {% if mini %}
+      {% if patient_user.get_profile.get_lastAppointment %}
       <tr>            
         <td>{% trans 'ÚLTIMA CITA' %}</td>
         <td>{{patient_user.get_profile.get_lastAppointment.date|date:'d/M/Y'}}</td>
       </tr>
+      {% endif %}
       <tr>            
         <td>{% trans 'PRÓXIMA CITA' %}</td>
         <td>{% if patient_user.get_profile.get_nextAppointment and patient_user.is_active %}
@@ -100,7 +119,20 @@
           {% endif %}
         </td>
       </tr>
-      {% endif %}              
+      {% if patient_user.get_profile.illnesses.all.count %}
+      <tr>
+        <td  colspan="2">(CIE-10)  {% trans 'CONDICIÓN' %}</td>
+      </tr>
+      <tr>
+        <td  colspan="2">
+        {% for ill in patient_user.get_profile.illnesses.all %}
+          <p style="text-align: justify">{{ill}}</p>
+        {% endfor %}
+        </td>
+      </tr>
+      {% endif %}
+      {% endif %}  
+      {% endif %}            
     </tbody>
   </table>        
 </div>

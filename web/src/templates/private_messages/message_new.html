@@ -15,6 +15,12 @@
 {% endblock %}
 
 {% block container %}
+{% if request.user.get_profile.is_banned %}
+  <div class="alert alert-block alert-info">
+    <h3>{% trans 'Funciones de mensajería no disponible' %}</h3>
+    <p>{% trans 'El servicio de mensajería se encuentra temporalmente inoperativo. DIsculpe las molestias.' %}</p>
+  </div>
+{% else %}
 <section>
   <div class="page-header">
   {% if replying %}
@@ -126,4 +132,5 @@
   </fieldset>
 </form>
 </section>
+{% endif %}
 {% endblock %}

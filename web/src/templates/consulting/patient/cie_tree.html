@@ -1,0 +1,99 @@
+{% extends "consulting/patient/personal_data_pm.html" %}
+
+{% load i18n%}
+
+{% block right %}
+  {% include 'consulting/patient/card-mini.html' %}
+{% endblock %}
+
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/jquery.jstree.js"></script>
+{% endblock %}
+
+{% block css_inline %}
+{{ block.super }}
+#cie10 a { white-space:normal !important; height: auto; padding:1px 2px; }
+#cie10 li > ins { vertical-align:top; }
+#cie10 .jstree-hovered, #cie10 .jstree-clicked { border:0; }
+{% endblock %}
+
+{% block jquery_init %}
+  $("#cie10").bind("before.jstree", function (e, data) {
+  	if(data.func == 'check_node') {
+  		if(data.args[0].parentNode.parentNode.getAttribute('rel') === "folder" |
+        data.args[0].parentNode.getAttribute('rel') === "folder") {
+  	      e.stopImmediatePropagation();
+  	      return false;
+  	    }
+  	}
+  }).jstree({ 
+    "json_data" : {
+      "ajax" : {
+        "url" : "{% url consulting_list_illnesses patient_user_id=patient_user.id %}",
+        "data" : function (n) {
+            // the result is fed to the AJAX request `data` option
+            return {
+                "code" : n.attr ? n.attr("code") : '' 
+            };
+        }
+      }
+    },
+    "types" : {
+    	"max_children" : -2,
+        "max_depth" : -2,
+        "valid_children" : [ "folder" ],
+        "types" : {
+	        "leaf" : {
+	            "valid_children" : "none"
+	            },
+	        "folder" : {
+	            "valid_children" : [ "default", "folder" ],
+              "hover_node" : false,
+                "select_node" : function () {return false;}
+              },
+	      }
+  	},
+  	"checkbox": {
+  		"override_ui" : true,
+  	},
+    "plugins" : [ "themes", "json_data", "ui", "checkbox", "types" ],
+    "progressive_render" : false,
+    "themes" : {
+        "theme" : "classic",
+        "dots" : true,
+        "icons" : true
+	}
+  }).bind("check_node.jstree", function (e, data) {
+    $.ajax({
+        url: "{{request.path}}",
+        data: { "code": data.rslt.obj.attr('code') ,
+                "action": 'set'},
+        dataType: 'json',
+        success: function(response){
+          alert(response.data);
+        }
+      });
+  }).bind("uncheck_node.jstree", function (e, data) {
+    $.ajax({
+        url: "{{request.path}}",
+        data: { "code": data.rslt.obj.attr('code') ,
+                "action": 'unset'},
+        dataType: 'json',
+        success: function(response){
+          alert(response.data);
+        }
+      });
+  });
+
+{% endblock %}
+
+{% block container %}
+<div class="page-header">
+  <h1>{% trans 'Diagnósticos asociados' %}</h1>
+</div>
+<div class="img-polaroid">
+	<div id="cie10" style="overflow-y: auto; max-height: 600px"></div>
+</div>
+{% endblock %}
+

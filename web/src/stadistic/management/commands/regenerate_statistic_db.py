@@ -2,9 +2,9 @@
 # -*- encoding: utf-8 -*-
 #
 # author: fernando ruiz
-
+from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
-from stadistic.utils import generate_reports
+from stadistic.utils import *
 
 class Command(BaseCommand):
     args = ''

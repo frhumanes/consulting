@@ -8,7 +8,7 @@
 
 {% block container %}
   <div class="page-header">
-    <h1>{% trans 'Vacaciones' %}
+    <h1>{% trans 'Vacaciones' %} {{year}}
             <div class="btn-group pull-right">
                   <a class="btn btn-info btn" href="{% url cal.add_vacation %}"><i class="icon-plus-sign icon-white"></i> {% trans "Añadir" %}</a>
             </div>
@@ -16,7 +16,17 @@
   </div>
 
   {% if vacations.object_list.count > 0 %}
-    
+  <div class="well" style="overflow-x: auto;">
+    <div class="btn-group">
+      {% for date in years %}
+        {% if year = date.year %}
+          <strong>{{date.year}}</strong>
+        {% else %}
+          <a class="btn btn-link" href="{{request.path}}?year={{date.year}}">{{date.year}}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>  
 
     <table id="vacations_list" class="table table-hover">
       <thead>

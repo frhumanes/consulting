@@ -1,7 +1,10 @@
 {% load i18n%}
 
 <div class="page-header">
-	<h1>Datos personales
+	<h1>{% trans 'Nº HISTORIA' %}: <span class="text-success">{{patient_user.get_profile.medical_number}}</span>
+      {% if not patient_user.is_active %}
+        <small class="text-error">{% trans '[INACTIVO]' %}</small>
+      {% endif %}
         <div class="btn-group pull-right">
             <a class="btn btn-info"  href="{% url consulting_editpatient_pm patient_user.id %}?next={{request.path}}">
             <i class="icon-pencil icon-white"></i> Editar
@@ -14,4 +17,3 @@
     {% include 'consulting/patient/card.html' %}
   </div>
 </section>
-

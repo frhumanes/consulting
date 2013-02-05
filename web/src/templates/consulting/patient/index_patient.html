@@ -35,7 +35,7 @@
 					<dt>{% trans 'Medicamento' %}</dt>
 					<dd>{{m.component}}</dd>
 					<dt>{% trans 'Posología' %}</dt>
-					<dd><em>{{m.posology}}</em> {% trans 'mg/día' %} {% if m.dosification %} repartidos en {{m.dosification}}{% endif %}</dd>
+					<dd><em>{{m.posology|floatformat:"-4" }}</em> {% trans 'mg/día' %} {% if m.dosification %} {% trans 'repartidos en' %} {{m.dosification}}{% endif %}</dd>
 				</dl>
 				{% endif %}
 			{% endfor %}&nbsp;

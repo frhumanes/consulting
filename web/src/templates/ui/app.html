@@ -47,12 +47,21 @@
     </style>
 
     <script type="text/javascript">
+      var originalFontSize = 13;
+  
       function set_events(){};
 
       function fix_bars(){
         if (!$.browser.msie || $.browser.version >= '9') {
           if ($(window).width() >= 1024) {
-            $("div.fixable").affix({offset: {y: 10}});
+            $("div.fixable").each( function(){
+              if ($(this).height() < $(window).height() - 70){
+                  $(this).affix({offset: {y: 10}});
+              }
+              else {
+                $(this).removeAttr('data-spy');
+              }
+            })
           }
           else {
             $("div.fixable").removeAttr('data-spy');
@@ -71,6 +80,17 @@
             }
           }
         }
+      };
+      function fix_menu() {
+          var sectionWidth = $('#left_bar').width();
+          alert(sectionWidth);
+          $('#left_bar a').each(function(){
+            
+            var spanWidth = $(this).width();
+            alert(spanWidth);
+            var newFontSize = (sectionWidth/spanWidth) * originalFontSize;
+            $(this).css({"font-size" : newFontSize, "line-height" : newFontSize/1.2 + "px"});
+          });
       };
       {% if request.user.is_authenticated %}
       var timer;
@@ -125,6 +145,7 @@
         {% block jquery_init %}
         {% endblock %}
         fix_bars();
+        
         //Fix dropdown issue on touchscreens
         $('body').on('touchstart.dropdown', '.dropdown-menu', function (e) { e.stopPropagation(); });
       });

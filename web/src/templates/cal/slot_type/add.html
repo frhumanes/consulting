@@ -20,7 +20,7 @@
 
 <div class="well center">
 
-<form class="form-horizontal" method="post" action="{% url cal.add_slot_type %}">{% csrf_token %}
+<form class="form-horizontal" method="post" action="{% url cal.add_slot_type %}?{{request.GET.urlencode}}">{% csrf_token %}
   <fieldset>
 
       {% if  form.non_field_errors  %}

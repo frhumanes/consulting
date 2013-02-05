@@ -83,6 +83,10 @@ urlpatterns = patterns('',
         consulting_views.list_medicines,
         name='consulting_list_medicines'),
 
+    url(r'^patient/(?P<patient_user_id>\d+)/diagnostics/$',
+        consulting_views.get_cie_tree,
+        name='consulting_list_illnesses'),
+
     url(r'^patient/(?P<patient_user_id>\d+)/recommendations/$',
         consulting_views.list_recommendations,
         name='consulting_list_recommendations'),
@@ -136,57 +140,58 @@ urlpatterns = patterns('',
     url(r"^consultation/(?P<id_appointment>\d+)/$",
         consulting_views.select_illness, name='consulting_start'),
 
-    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/$",
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\w+)/$",
         consulting_views.monitoring, name='consulting_main'),
 
-    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/tasks/incomplete/$",
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\w+)/tasks/incomplete/$",
         consulting_views.list_incomplete_tasks,
         name='consulting_list_incomplete_tasks'),
 
-    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/tasks/self_administered/$",
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\w+)/tasks/self_administered/$",
         consulting_views.list_incomplete_tasks, {'self_administered': True},
         name='consulting_list_self_administered_tasks'),
 
-    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/tasks/successive/$",
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\w+)/tasks/successive/$",
         consulting_views.select_successive_survey,
         name='consulting_select_successive_survey'),
 
-    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/tasks/treatment/$",
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\w+)/tasks/treatment/$",
         consulting_views.prev_treatment_block,
         name='consulting_prev_treatment_block'),
 
-    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/task/(?P<id_task>\d+)/block/(?P<code_block>\d+)/$",
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\w+)/task/(?P<id_task>\d+)/block/(?P<code_block>\d+)/$",
         consulting_views.show_block,
         name='consulting_show_task_block'),
 
-    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/task/(?P<id_task>\d+)/finished/$",
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\w+)/task/(?P<id_task>\d+)/finished/$",
         consulting_views.resume_task,
         name='consulting_finished_task'),
 
-    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/tasks/reports/$",
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\w+)/tasks/reports/$",
         consulting_views.list_provisional_reports,
         name='consulting_list_provisional_reports'),
 
-    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/treatment/$",
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\w+)/treatment/$",
         consulting_views.list_medicines,
         name='consulting_show_prescription'),
 
-    url(r"^consultation/(?P<id_appointment>\d+)/(?P<action>\w+)_medicine/$",
+    url(r"^consultation/(?P<action>\w+)_medicine/(?P<id_appointment>\d+)/$",
         consulting_views.add_medicine,
         name='consulting_add_medicine'),
 
-    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/next_self_survey/$",
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\w+)/next_self_survey/$",
         consulting_views.select_self_administered_survey_monitoring,
         name='consulting_next_self_administered_survey'),
 
-    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/conclusions/$",
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\w+)/conclusions/$",
         consulting_views.conclusion_monitoring,
         name='consulting_set_conclusion'),
 
-    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/new_app/$",
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\w+)/new_app/$",
         consulting_views.new_app,
         name='consulting_new_app'),
-    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/payment/$",
+    
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\w+)/payment/$",
         consulting_views.register_payment,
         name='consulting_register_payment'),
 

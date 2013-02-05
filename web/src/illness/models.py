@@ -12,10 +12,45 @@ class Illness(TraceableModel):
     name = models.CharField(_(u'Nombre de la enfermedad'), max_length=255,
                                 blank=True)
 
-    code = models.IntegerField(_(u'Código'), blank=True, null=True)
+    code = models.CharField(_(u'Código'), max_length=10, unique=True)
+
+    parent = models.ForeignKey('self', related_name="cie_code", null=True)
 
     def __unicode__(self):
-        return u'%s' % (self.name)
+        if self.parent:
+            if self.code.startswith('|'):
+                children = self.cie_code.all()
+                if children.count() >= 2:
+                    return u'(%s-%s) %s' % (children[0].code,
+                                            children.latest('code').code,
+                                            self.name)
+                elif children.count() == 1:
+                    return u'(%s) %s' % (children[0].code, self.name)
+                else:
+                    return u'%s' % (self.name)
+            else:
+                return u'(%s) %s' % (self.code, self.name)
+        else:
+            return u'%s %s - %s' % (_(u'CAPÍTULO'), self.code, self.name)
+
+    def serialize(self, include=[]):
+        children, css = [], ''
+        if self in include:
+            children = [i.serialize(include) for i in self.cie_code.all()]
+            if not self.cie_code.all().count():
+                css = "jstree-checked" 
+        return dict(data=self.__unicode__(), 
+                    children= children,
+                    state="closed" if self.cie_code.all().count() else 'leaf',
+                    attr={
+                           'code': self.code, 
+                           'id': 'node_'+self.code,
+                           'class': css,
+                        'rel': "folder" if self.cie_code.all().count() else 'illness'
+                    })
+
+
 
     class Meta:
         verbose_name = u"Diagnóstico"
+        ordering = ("code",)

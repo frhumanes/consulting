@@ -9,8 +9,8 @@
         <!-- <dd><span>{{medicine.get_before_after}}</span></dd> -->
 
         <dt>{% trans 'Durante' %}</dt>
-        <dd><span>{{medicine.months}} meses</span></dd>
+        <dd><span>{{medicine.months|floatformat:"-2" }}}} meses</span></dd>
 
         <dt>{% trans 'Posología' %}</dt>
-        <dd><span>{{medicine.posology}} (mg/día)</span></dd>
+        <dd><span>{{medicine.posology|floatformat:"-4" }}}} (mg/día)</span></dd>
     </dl>

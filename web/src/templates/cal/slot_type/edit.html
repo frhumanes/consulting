@@ -99,6 +99,10 @@
           <i class="icon-remove-sign icon-white"></i>
           {% trans 'Borrar' %}
         </a>
+         <a class="btn btn-large btn-success" href="{% url cal.add_slot TODAY.year %}?type={{slot_type.id}}">
+            <i class="icon-wrench icon-white"></i>
+            {% trans 'Configurar agenda' %}
+          </a>
         <button class="btn btn-large btn-primary" type="submit">
           <i class="icon-ok-sign icon-white"></i>
           {% trans 'Guardar' %}</button>

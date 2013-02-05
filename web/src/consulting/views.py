@@ -3,6 +3,7 @@ import os
 import time
 import operator
 import xlwt
+import json
 import cStringIO
 from datetime import time as ttime
 from datetime import date, timedelta, datetime
@@ -10,6 +11,7 @@ from datetime import date, timedelta, datetime
 from random import randint
 import random, string
 from itertools import chain
+import json
 
 from decorators import *
 from django.views.decorators.cache import never_cache
@@ -701,7 +703,7 @@ def administrative_data(request, id_task, code_block=None, code_illness=None, id
                 return next_block(task, block, code_illness, id_appointment)
         else:
             return render_to_response(
-                            'consulting/consultation/administrative_data.html',
+                            'consulting/patient/patient.html',
                             {'form': form,
                             'patient_user': user,
                             'task': task,
@@ -721,7 +723,7 @@ def administrative_data(request, id_task, code_block=None, code_illness=None, id
         form = ProfileSurveyForm(instance=profile, exclude_list=exclude_list,
                             initial={'active': active})
 
-    return render_to_response('consulting/consultation/administrative_data.html',
+    return render_to_response('consulting/patient/patient.html',
                             {'form': form,
                             'patient_user': user,
                             'task': task,
@@ -1055,7 +1057,7 @@ def monitoring(request, id_appointment, code_illness=None):
     if not code_illness or appointment.date < date.today():
         illness = None
     else:
-        illness = get_object_or_404(Illness, code=int(code_illness))
+        illness = get_object_or_404(Illness, code=code_illness)
         if not tasks.count():
             tasks = []
             latest_tasks = Task.objects.filter(patient=appointment.patient,
@@ -1097,7 +1099,7 @@ def monitoring(request, id_appointment, code_illness=None):
     list_name='tasks', objects_per_page=settings.OBJECTS_PER_PAGE)
 def list_incomplete_tasks(request, id_appointment, code_illness, self_administered=False):
     appointment = get_object_or_404(Appointment, pk=int(id_appointment))
-    illness = get_object_or_404(Illness, code=int(code_illness))
+    illness = get_object_or_404(Illness, code=code_illness)
     patient = appointment.patient
     tasks = Task.objects.filter(
     Q(patient=patient, survey__surveys_illnesses__code=code_illness), 
@@ -1135,8 +1137,8 @@ def not_assess_task(request, id_task, id_appointment):
 def resume_task(request, id_appointment, code_illness, id_task):
     appointment = get_object_or_404(Appointment, pk=int(id_appointment))
     task = get_object_or_404(Task, pk=int(id_task))
-    if int(code_illness):
-        illness = get_object_or_404(Illness, pk=int(code_illness))
+    if code_illness:
+        illness = get_object_or_404(Illness,code=code_illness)
     else:
         illness = Illness.objects.none()
     if task.survey.code == settings.ANXIETY_DEPRESSION_SURVEY or task.survey.code == settings.INITIAL_ASSESSMENT:
@@ -1245,14 +1247,16 @@ def config_task_variables(request, id_task):
 @only_doctor_consulting
 def select_successive_survey(request, id_appointment, code_illness=None):
     appointment = get_object_or_404(Appointment, pk=int(id_appointment))
-    illness = get_object_or_404(Illness, code=int(code_illness))
+    illness = get_object_or_404(Illness, code=code_illness)
     variables = None
     tasks = Task.objects.filter(
     Q(patient=appointment.patient, completed=True,
-        survey__surveys_illnesses__code=code_illness))
-    if tasks.count() > 0:
-        latest_task = tasks.latest('end_date')
-        variables = latest_task.get_list_variables(settings.DEFAULT_NUM_VARIABLES)
+        survey__surveys_illnesses__code=code_illness)).order_by('-end_date')
+    for t in tasks:
+        tmp_vars = t.get_list_variables(settings.DEFAULT_NUM_VARIABLES)
+        if tmp_vars:
+            variables = tmp_vars
+            break
 
     if code_illness == str(settings.DEFAULT_ILLNESS):
         ClassForm = ActionSelectionForm
@@ -1348,7 +1352,7 @@ def prev_treatment_block(request, id_appointment, code_illness=None):
 @never_cache
 def conclusion_monitoring(request, id_appointment, code_illness):
     appointment = get_object_or_404(Appointment, pk=int(id_appointment))
-    illness= get_object_or_404(Illness, code=int(code_illness))
+    illness= get_object_or_404(Illness, code=code_illness)
     try:
         conclusion = Conclusion.objects.get(appointment=appointment)
     except:
@@ -1383,7 +1387,7 @@ def conclusion_monitoring(request, id_appointment, code_illness):
 @only_doctor_consulting
 def new_app(request, id_appointment, code_illness):
     appointment = get_object_or_404(Appointment, pk=int(id_appointment))
-    illness= get_object_or_404(Illness, code=int(code_illness))
+    illness= get_object_or_404(Illness, code=code_illness)
     request.session['appointment'] = appointment
     request.session['illness'] = illness
     patient_user = appointment.patient
@@ -1394,22 +1398,21 @@ def new_app(request, id_appointment, code_illness):
 @only_doctor_consulting
 def select_self_administered_survey_monitoring(request, id_appointment, code_illness):
     appointment = get_object_or_404(Appointment, pk=int(id_appointment))
-    illness = get_object_or_404(Illness, code=int(code_illness))
-    task = Task.objects.filter(
-            Q(patient=appointment.patient,
-            survey__surveys_illnesses__code=code_illness))
+    illness = get_object_or_404(Illness, code=code_illness)
     templates = Template.objects.all().order_by('-updated_at')
-
-    if task.count() > 0:
-        task = task.latest('end_date')
-        variables = task.get_list_variables(settings.DEFAULT_NUM_VARIABLES, exclude=['V28'])
-
-    else:
-        variables = []
+    variables = []
+    tasks = Task.objects.filter(
+    Q(patient=appointment.patient, completed=True,
+        survey__surveys_illnesses__code=code_illness)).order_by('-end_date')
+    for t in tasks:
+        tmp_vars = t.get_list_variables(settings.DEFAULT_NUM_VARIABLES, exclude=['V28'])
+        if tmp_vars:
+            variables = tmp_vars
+            break
 
 
     if request.method == 'POST':
-        if code_illness != str(settings.VIRTUAL_SURVEY):
+        if code_illness != str(settings.DEFAULT_ILLNESS):
             form = SelectTaskForm(request.POST, variables=variables)
         else:
             form = SelectVirtualTaskForm(request.POST, variables=variables)
@@ -1504,7 +1507,7 @@ def select_self_administered_survey_monitoring(request, id_appointment, code_ill
 @only_doctor_consulting
 def register_payment(request, id_appointment, code_illness):
     app = get_object_or_404(Appointment, pk=int(id_appointment))
-    illness = get_object_or_404(Illness, code=int(code_illness))
+    illness = get_object_or_404(Illness, code=code_illness)
 
     payment = None
     try:
@@ -1928,6 +1931,47 @@ def personal_data_pm(request, patient_user_id):
 
 
 @login_required()
+@only_doctor_consulting
+def get_cie_tree(request, patient_user_id):
+    logged_user_profile = request.user.get_profile()
+    patient_user = get_object_or_404(User, id=patient_user_id)
+    code_illness = request.GET.get('code', None)
+    include = patient_user.get_profile().get_illness_set()
+    if code_illness:
+        illness = get_object_or_404(Illness, code=code_illness)
+        action = request.GET.get('action', None)
+        if not action:
+            illness = [i.serialize() for i in Illness.objects.filter(parent__code=code_illness)]
+        elif action == 'set':
+            patient_user.get_profile().illnesses.add(illness)
+            return HttpResponse(json.dumps({'data': _(u'Cambio realizado con éxito')}),
+            status=200,
+            mimetype='application/json')
+        elif action == 'unset':
+            patient_user.get_profile().illnesses.remove(illness)
+            return HttpResponse(json.dumps({'data':  _(u'Cambio realizado con éxito')}),
+            status=200,
+            mimetype='application/json')
+    else:   
+        illness = [i.serialize(include) for i in Illness.objects.filter(parent__isnull=True).exclude(code=settings.DEFAULT_ILLNESS).order_by('id')]
+
+
+    if request.is_ajax():
+        return HttpResponse(json.dumps(illness),
+                status=200,
+                mimetype='application/json')
+    else:
+        return render_to_response(
+                        'consulting/patient/cie_tree.html',
+                        {'patient_user_id': patient_user.id,
+                        'patient_user': patient_user,
+                        'checked': json.dumps(['node_'+i.code for i in patient_user.get_profile().illnesses.all()]),
+                        'data': json.dumps(illness)},
+                        context_instance=RequestContext(request))
+
+
+
+@login_required()
 def patient_management(request):
     logged_user_profile = request.user.get_profile()
 
@@ -1977,11 +2021,11 @@ def searcher_profession(request):
         if request.method == 'POST':
             start = request.POST.get("start", "").lower()
 
-            professions = Profile.objects.filter(profession__istartswith=start).values('profession').order_by('profession').distinct()
+            professions = Profile.objects.filter(profession__istartswith=start).values_list('profession', flat=True).order_by('profession').distinct()
 
             data = {'ok': True,
-                    'professions':professions}
-        return HttpResponse(simplejson.dumps(data))
+                    'professions':list(professions)}
+        return HttpResponse(json.dumps(data))
     return HttpResponseRedirect(reverse('consulting_index'))
 
 ################################## MEDICINE ###################################
@@ -2009,7 +2053,7 @@ def searcher_component(request):
             data = {'ok': True,
                     'components':
                         [{'id': c.id, 'label': (c.name)} for c in components.order_by('name')]}
-        return HttpResponse(simplejson.dumps(data))
+        return HttpResponse(json.dumps(data))
     return HttpResponseRedirect(reverse('consulting_index'))
 
 
@@ -2123,7 +2167,7 @@ def list_medicines(request, id_appointment=None, code_illness=None):
         appointment = Appointment.objects.get(pk=int(id_appointment))
         request.session['appointment_id'] = appointment.id
         patient_user = appointment.patient
-        illness = Illness.objects.get(code=int(code_illness))
+        illness = Illness.objects.get(code=code_illness)
     else:
         patient_user_id = request.session['patient_user_id']
         patient_user = User.objects.get(id=patient_user_id)
@@ -2336,7 +2380,7 @@ def list_provisional_reports(request, id_appointment, code_illness):
     logged_user_profile = request.user.get_profile()
 
     appointment = get_object_or_404(Appointment, pk=int(id_appointment))
-    illness = get_object_or_404(Illness, code=int(code_illness))
+    illness = get_object_or_404(Illness, code=code_illness)
 
     if logged_user_profile.is_doctor():
         patient_user = appointment.patient

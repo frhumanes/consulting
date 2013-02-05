@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django.contrib import admin
 from django.utils.translation import ugettext as _
 from private_messages.models import *
@@ -25,3 +26,19 @@ class MessageAdmin(admin.ModelAdmin):
     ordering = ('-sent_at',)
 
 admin.site.register(Message, MessageAdmin)
+
+class BlacklistAdmin(admin.ModelAdmin):
+    fieldsets = [
+                ('Usuarios', {
+                    'fields': ['patient', 'doctor']
+                }),
+                (u'Duración', {
+                    'fields': ['end_time']
+                }), 
+                ]
+    list_display = ('patient', 'doctor', 
+                'start_time', 'end_time')
+    list_filter = ['patient', 'doctor' ]
+    ordering = ('-start_time',)
+
+admin.site.register(Blacklist, BlacklistAdmin)

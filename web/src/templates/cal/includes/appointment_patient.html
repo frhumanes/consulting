@@ -1,5 +1,5 @@
 {% load i18n %}
-<tr id={{event.patient.id}} data-msg="{{ event.id }}">
+<tr id={{event.patient.id}} data-msg="{{ event.id }}" class="{{ event.get_payment_class }}">
   <td>
     {% if event.is_reserved %}<i class="icon-question-sign"></i>{% endif %}
     {% if event.is_canceled %}<i class="icon-remove-sign"></i>{% endif %}
@@ -18,5 +18,5 @@
   <td>{{ event.patient.get_profile.get_full_name }}</td>
   <td>{{ event.app_type}}</td>
   <td>{{ event.description|striptags|safe|truncatewords:5 }}</td>
-  <td><a data-content="{{event.get_log|unordered_list}}" data-html="true" data-placement="left" rel="popover" href="#" data-original-title="{% trans 'Historial de cambios' %}"><i class="icon-list-alt"></i></a></td>
+  <td><a data-content="{{event.get_log|unordered_list}}" data-html="true" data-placement="left" rel="popover" data-trigger="hover" href="#" data-original-title="{% trans 'Historial de cambios' %}"><i class="icon-list-alt"></i></a></td>
 </tr>

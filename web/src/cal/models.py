@@ -115,7 +115,7 @@ class Slot(TraceableModel):
 class Appointment(TraceableModel):
     STATUS = (
         (0, _(u'Confirmada')),
-        (1, _(u'Sin corfimar')),
+        (1, _(u'Sin confimar')),
         (2, _(u'Cancelada por el médico')),
         (3, _(u'Anulada por el paciente')),
     )
@@ -184,6 +184,9 @@ class Appointment(TraceableModel):
                 status = 'deleted'
             elif orig.is_reserved() and self.is_confirmed():
                 status = 'new'
+            if orig.doctor != self.doctor:
+                log = AppLog(appointment=self, pre_status=orig.status, comment=_(u'Cambio de médico'))
+                log.save()
         else:
             status = 'new'
 
@@ -194,10 +197,11 @@ class Appointment(TraceableModel):
 
         super(Appointment, self).save(*args, **kw)
 
-        if status=='new':
-            log = AppLog(appointment=self, new_status=self.status)
-        else:
-            log = AppLog(appointment=self, pre_status=orig.status, new_status=self.status)
+        if status:
+            if not orig:
+                log = AppLog(appointment=self, new_status=self.status)
+            else:
+                log = AppLog(appointment=self, pre_status=orig.status, new_status=self.status)
         log.save()
 
 
@@ -316,6 +320,8 @@ class AppLog(models.Model):
         change = "Fecha/hora cambiada"
         if self.pre_status is None:
             change = _(u'Cita creada')
+        elif self.new_status is None:
+            change = self.comment
         elif self.pre_status != self.new_status:
             change = _(u'Estado cambiado: ') + AppLog.STATUS[self.pre_status][1] + ' >> ' + AppLog.STATUS[self.new_status][1]
         return u'%s %s' % (formats.date_format(self.date, "SHORT_DATETIME_FORMAT"), change)
@@ -330,7 +336,7 @@ class Payment(TraceableModel):
     appointment = models.OneToOneField(Appointment, primary_key=True, 
                                     related_name='payment_appointment')
     method = models.IntegerField(_(u'Forma de pago'), choices=METHODS)
-    date = models.DateField(_(u'Fecha de pago'), auto_now_add=True)
+    date = models.DateField(_(u'Fecha de pago'), default=date.today)
     value = models.DecimalField(_(u'Importe'), max_digits=5, decimal_places=2, null=True, blank=True)
     discount = models.IntegerField(_(u'Descuento / bonificación'), default=0)
 

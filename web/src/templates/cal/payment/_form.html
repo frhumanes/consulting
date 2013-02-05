@@ -4,7 +4,7 @@
   {% csrf_token %}
   <fieldset>
 
-      {% if  form.non_field_errors  %}
+      {% if form.non_field_errors  %}
         <div class="alert alert-error">
             {% for error in form.non_field_errors %}
                 <strong>{% trans '¡Error!' %}</strong>
@@ -93,7 +93,7 @@
         <div class="control-group error">
           <label for="id_discount" class="control-label">{{form.discount.label}}</label>
           <div class="controls">
-            <div class="input-append">
+            <div class="input-append" >
               {{ form.discount }}
               <span class="add-on">%</span>
             </div>
@@ -115,11 +115,12 @@
       {% endif %}
       <!-- END DISCOUNT -->
 
-      <p class="center">
+      <div class="center">
+        {% if app.is_editable %}<a href="{% url cal.edit app.id %}" class="btn btn-large btn-success"><i class="icon-pencil icon-white"></i> {% trans 'Editar cita' %}</a>{% endif %}
         <button class="btn btn-large btn-primary" type="submit">
           <i class="icon-ok-sign icon-white"></i>
           {% trans 'Guardar cambios' %}</button>
-      </p>
+      </div>
 
   </fieldset>
 </form>

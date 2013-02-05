@@ -41,7 +41,10 @@
       <div class="control-group error">
         <label for="id_slot_type" class="control-label">{{form.slot_type.label}}</label>
         <div class="controls">
-          {{ form.slot_type }}
+          <div class="input-prepend">
+            <span class="add-on"><a href="{% url cal.add_slot_type %}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a></span>
+            {{ form.slot_type }}
+          </div>
           {% for error in form.slot_type.errors %}
              <span class="help-inline">{{ error|escape }}</span>
           {% endfor %}
@@ -51,57 +54,68 @@
       <div class="control-group">
         <label for="id_event_type" class="control-label">{{form.slot_type.label}}</label>
         <div class="controls">
-          {{ form.slot_type }}
+          <div class="input-prepend">
+            <span class="add-on"><a href="{% url cal.add_slot_type %}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a></span>
+            {{ form.slot_type }}
+          </div>
         </div>
       </div>
     {% endif %}
     <!-- END SLOT_TYPE -->
 
     <!-- START_TIME -->
-    {% if form.start_time.errors %}
-      <div class="control-group error">
-        <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
-        <div class="controls">
-          {{ form.start_time }}
-          <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
-          {% for error in form.start_time.errors %}
-             <span class="help-inline">{{ error|escape }}</span>
-          {% endfor %}
+      {% if form.start_time.errors %}
+        <div class="control-group error">
+          <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-time"></i></span>
+              {{ form.start_time }}
+            </div>
+            {% for error in form.start_time.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
         </div>
-      </div>
-    {% else %}
-      <div class="control-group">
-        <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
-        <div class="controls">
-          {{ form.start_time }}
-          <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+      {% else %}
+        <div class="control-group">
+          <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
+          <div class="controls">
+             <div class="input-prepend">
+              <span class="add-on"><i class="icon-time"></i></span>
+              {{ form.start_time }}
+            </div>
+          </div>
         </div>
-      </div>
-    {% endif %}
-    <!-- END START_TIME -->
+      {% endif %}
+      <!-- END START_TIME -->
 
-    <!-- END_TIME -->
-    {% if form.end_time.errors %}
-      <div class="control-group error">
-        <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
-        <div class="controls">
-          {{ form.end_time }}
-          <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
-          {% for error in form.end_time.errors %}
-             <span class="help-inline">{{ error|escape }}</span>
-          {% endfor %}
+      <!-- END_TIME -->
+      {% if form.end_time.errors %}
+        <div class="control-group error">
+          <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-time"></i></span>
+              {{ form.end_time }}
+            </div>
+            {% for error in form.end_time.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
         </div>
-      </div>
-    {% else %}
-      <div class="control-group">
-        <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
-        <div class="controls">
-          {{ form.end_time }}
-          <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+      {% else %}
+        <div class="control-group">
+          <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
+          <div class="controls">
+           <div class="input-prepend">
+              <span class="add-on"><i class="icon-time"></i></span>
+              {{ form.end_time }}
+            </div>
+          </div>
         </div>
-      </div>
-    {% endif %}
-    <!-- END END_TIME -->
+      {% endif %}
+      <!-- END END_TIME -->
 
     <!-- NOTE -->
     {% if form.description.errors %}

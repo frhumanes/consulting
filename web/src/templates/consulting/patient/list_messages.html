@@ -44,12 +44,12 @@
     {% include 'ui/includes/pagination_bar.html' with objects=messages %}
     
   {% else %}
-    <div class="alert alert-info">{% trans "No hay mensajes" %}</div>
+    <div class="alert alert-info">{% trans "No hay ninguna conversación con este paciente" %}</div>
   {% endif %}
 </div>
 {% endblock %}
 
 
 {% block right %}
-  {% include 'consulting/patient/card.html' with mini=1 %}
+  {% include 'consulting/patient/card-mini.html'%}
 {% endblock %}

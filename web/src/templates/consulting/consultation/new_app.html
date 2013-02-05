@@ -23,7 +23,7 @@
 {% block container %}
     <div class="">
       <a class="btn btn-primary" href={%if id_result %}"{% url consulting_day_new_app year month day patient.id id_result %}"{% else %}"{% url consulting_day_new_app year month day patient.id %}"{% endif %}>
-        <i class="icon-arrow-left icon-white"></i>
+        <i class="icon-chevron-left icon-white"></i>
         {% trans 'Volver' %}
       </a>
       <p></p>

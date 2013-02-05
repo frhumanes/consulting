@@ -3,7 +3,7 @@
 {% load i18n consulting userprofile %}
 
 {% block right %}
-  {% include 'consulting/patient/card.html' with mini=1 %}
+  {% include 'consulting/patient/card-mini.html'%}
 {% endblock %}
 
 
@@ -16,7 +16,7 @@
     <div class="">       
       <div id="overwrite_list" class="">            
         {% if conclusions.object_list %}                     
-        <table id="list_conclusion" class="table table-bordered table-condensed">  
+        <table id="list_conclusion" class="table table-bordered">  
           <thead>
             <tr>            
               <th style="text-align:center;">
@@ -34,7 +34,7 @@
             {% for conclusion in conclusions.object_list %}
               <tr id="{{conclusion.id}}" class="conclusion">
                 <td style="text-align:center;">{{conclusion.date|date:"d/M/Y"|lower}}</td>
-                <td style="text-align:justify;"><a href="#" class="muted" rel="popover" title="{{conclusion.created_by.get_profile|name_with_title}}" data-content="{{conclusion.recommendation|striptags|safe}}">{{conclusion.recommendation|striptags|safe|truncatewords:10}}</a></td>
+                <td style="text-align:justify;"><a href="#" class="muted" rel="popover" title="{{conclusion.created_by.get_profile|name_with_title}}" data-trigger="hover" data-content="{{conclusion.recommendation|striptags|safe}}">{{conclusion.recommendation|striptags|safe|truncatewords:10}}</a></td>
 
                 <td style="text-align:center;">{% get_anxiety_status_at conclusion.appointment.patient conclusion.date %}&nbsp;{% get_depression_status_at conclusion.appointment.patient conclusion.date %}</td>  
               </tr>
@@ -44,7 +44,7 @@
         {% include 'ui/includes/pagination_bar.html' with objects=conclusions %}
         <div id="overwrite"></div>                           
         {% else %}
-            <div class="alert alert-info">{% trans "No hay Recomendaciones" %}</div>
+            <div class="alert alert-info">{% trans "No hay recomendaciones asociadas a este paciente" %}</div>
         {% endif %}
       </div>
      

@@ -37,7 +37,6 @@ urlpatterns = patterns('',
         name='cal.select_month_year'),
 
 
-
     url(r"^day/(\d+)/(\d+)/(\d+)/for/(\d+)/$", views.day, name='cal.day'),
     url(r"^appointments/(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/$", views.get_appointments, name='cal.appointments'),
     url(r"^(?P<change>next|prev)_day/(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/for/(?P<id_user>\d+)/$", views.day, name='cal.day'),
@@ -93,8 +92,6 @@ urlpatterns = patterns('',
     # -----------
     # Appointment
     # -----------
-
-
     url(r'^app/add/(\d+)/(\d+)/(\d+)/for/(\d+)/$', views.app_add, name='cal.add'),
     url(r'^app/check/(\d+)/(\d+)/(\d+)/for/(\d+)/$', views.app_add, {'check': True}, name='cal.check'),
 
@@ -109,8 +106,6 @@ urlpatterns = patterns('',
     # Doctor Views
     # ------------
     url(r"^doctor/select/$", views.doctor_calendar, name='doctors_calendar'),
-
-
     url(r"^doctor/(\d+)/(\d+)/(\d+)/(prev|next)/$", views.doctor_month),
     url(r"^doctor/(\d+)/(\d+)/(\d+)/$", views.doctor_month),
     url(r"^doctor/(\d+)/(\d+)/$", views.doctor_month),

@@ -4,7 +4,12 @@
 
 {% block container %}
 <div class="page-header">
-    <h1>{% trans 'Listado de cuestionarios sin completar' %}</h1>
+    <h1>{% trans 'Cuestionarios sin completar' %}
+      <a class="btn btn-info pull-right" href="{% if illness %}{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}">
+         <i class="icon-arrow-left icon-white"></i>
+        {% trans 'Volver' %}
+      </a>
+    </h1>
 </div>
   <section>
     {% if tasks.object_list %}
@@ -14,7 +19,7 @@
         <div class="accordion-heading">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_tasks" href="#collapse{{task.id}}">
           <h4>{{task.survey.name|upper}} <small>[{{task.get_kind}}]</small>
-          <div class="muted pull-right">{{task.updated_at|date:'d/M/y H:i'}}</div></h4>
+          <div class="muted pull-right">{{task.updated_at|date:'d/M/Y H:i'}}</div></h4>
           </a>
         </div>
         <div id="collapse{{task.id}}" class="accordion-body collapse">

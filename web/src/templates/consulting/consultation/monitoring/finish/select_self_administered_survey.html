@@ -13,9 +13,31 @@
   <link href="{{ STATIC_URL }}css/jquery.handsontable.full.css" rel="stylesheet"/>
 {% endblock %}
 
+{% block right %}
+  {{ block.super }}
+  <br>
+  {% if patient_user.get_profile.get_assigned_tasks %}
+  <div class="alert alert-info">
+    <p>{% trans 'El paciente ya tiene asignadas las siguientes tareas' %}:</p>
+    <ul class="unstyled">
+    {% for t in patient_user.get_profile.get_assigned_tasks %}
+      <li>{{t.survey.name}} <small>[{{t.created_at|date}}]</small></li>
+    {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+{% endblock %}
+
 {% block container %}
     <div class="page-header">
-      <h1>{% trans 'Cuestionario autoadministrado' %}</h1>
+      <h1>{% trans 'Cuestionario autoadministrado' %}
+        <div class="btn-group pull-right">
+            <a class="btn btn-info" href="{% if illness %}{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}">
+               <i class="icon-arrow-left icon-white"></i>
+              {% trans 'Volver' %}
+            </a>
+      </div>
+      </h1>
     </div>
   <section>
 

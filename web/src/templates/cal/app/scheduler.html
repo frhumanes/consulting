@@ -7,7 +7,16 @@
 {% endblock %}
 
 {% block container %}
-<legend class=""><h2>{% trans 'Selección de mes' %}</h2></legend>
+<div class="page-header">
+    <h1>{% trans 'Selección de mes' %}
+        <div class="btn-group pull-right">
+            <a class="btn btn-info" href="{% if illness %}{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}">
+               <i class="icon-arrow-left icon-white"></i>
+              {% trans 'Volver' %}
+            </a>
+      </div>
+  </h1>
+</div>
 <div class="hide">
     <ul class="pager">
         <li class="previous">

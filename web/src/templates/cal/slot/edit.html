@@ -61,52 +61,60 @@
       </div>
     {% endif %}
     <!-- END SLOT_TYPE -->
-
+    
     <!-- START_TIME -->
-    {% if form.start_time.errors %}
-      <div class="control-group error">
-        <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
-        <div class="controls">
-          {{ form.start_time }}
-          <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
-          {% for error in form.start_time.errors %}
-             <span class="help-inline">{{ error|escape }}</span>
-          {% endfor %}
+      {% if form.start_time.errors %}
+        <div class="control-group error">
+          <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-time"></i></span>
+              {{ form.start_time }}
+            </div>
+            {% for error in form.start_time.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
         </div>
-      </div>
-    {% else %}
-      <div class="control-group">
-        <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
-        <div class="controls">
-          {{ form.start_time }}
-          <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+      {% else %}
+        <div class="control-group">
+          <label for="id_start_time" class="control-label">{{form.start_time.label}}</label>
+          <div class="controls">
+             <div class="input-prepend">
+              <span class="add-on"><i class="icon-time"></i></span>
+              {{ form.start_time }}
+            </div>
+          </div>
         </div>
-      </div>
-    {% endif %}
-    <!-- END START_TIME -->
+      {% endif %}
+      <!-- END START_TIME -->
 
-    <!-- END_TIME -->
-    {% if form.end_time.errors %}
-      <div class="control-group error">
-        <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
-        <div class="controls">
-          {{ form.end_time }}
-          <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
-          {% for error in form.end_time.errors %}
-             <span class="help-inline">{{ error|escape }}</span>
-          {% endfor %}
+      <!-- END_TIME -->
+      {% if form.end_time.errors %}
+        <div class="control-group error">
+          <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-time"></i></span>
+              {{ form.end_time }}
+            </div>
+            {% for error in form.end_time.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
         </div>
-      </div>
-    {% else %}
-      <div class="control-group">
-        <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
-        <div class="controls">
-          {{ form.end_time }}
-          <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-time"></i>
+      {% else %}
+        <div class="control-group">
+          <label for="id_end_time" class="control-label">{{form.end_time.label}}</label>
+          <div class="controls">
+           <div class="input-prepend">
+              <span class="add-on"><i class="icon-time"></i></span>
+              {{ form.end_time }}
+            </div>
+          </div>
         </div>
-      </div>
-    {% endif %}
-    <!-- END END_TIME -->
+      {% endif %}
+      <!-- END END_TIME -->
 
     <!-- NOTE -->
     {% if form.description.errors %}
@@ -128,7 +136,6 @@
       </div>
     {% endif %}
     <!-- END NOTE -->
-    </div>
 
     <div class="well" style="float: left; max-width: 155px; margin-left: 20px">
     <!-- WEEKDAY -->

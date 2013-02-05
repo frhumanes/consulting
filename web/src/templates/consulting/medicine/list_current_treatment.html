@@ -16,7 +16,7 @@
   <tr id="{{medicine.id}}" class="medicine">
     <td><em>{{medicine.created_at|date:'d/M/Y'}}</em></td>
     <td><strong>{{medicine.component}}</strong></td>
-    <td>{{medicine.posology}} mg/día</td>
+    <td>{{medicine.posology|floatformat:"-4" }} mg/día</td>
     <td>{{medicine.dosification}}</td>
      <td><a href="#" id="{{medicine.id}}"  data-toggle="modal" data-target="#check_stop_medicine" class="stop_medicine" placement="top" rel="tooltip" data-original-title="Detener tratamiento"><i class="icon-stop"></i></a></td>
   </tr>

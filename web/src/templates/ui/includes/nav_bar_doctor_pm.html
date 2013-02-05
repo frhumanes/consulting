@@ -9,6 +9,7 @@
 {% url consulting_list_messages patient_user_id=patient_user.id as list_messages %}
 {% url consulting_list_recommendations patient_user_id=patient_user.id as list_recommendations %}
 {% url consulting_user_evolution patient_user_id=patient_user.id as user_evolution %}
+{% url consulting_list_illnesses patient_user_id=patient_user.id as list_illnesses %}
 {% else %}
 {% url consulting_personal_data_pm patient_user_id=patient_user_id as personal_data %}
 {% url consulting_list_medicines patient_user_id as list_medicines %}
@@ -17,6 +18,7 @@
 {% url consulting_list_messages patient_user_id=patient_user_id as list_messages %}
 {% url consulting_list_recommendations patient_user_id=patient_user_id as list_recommendations %}
 {% url consulting_user_evolution patient_user_id=patient_user_id as user_evolution %}
+{% url consulting_list_illnesses patient_user_id=patient_user_id as list_illnesses %}
 {% endif %}
 
   <ul class="nav nav-pills nav-stacked">
@@ -24,7 +26,12 @@
       <a href="{{personal_data}}">
         {% trans 'DATOS PERSONALES' %}
       </a>
-    </li>    
+    </li>
+    <li class="{% active_granchild request list_illnesses %}">
+      <a href="{{list_illnesses}}">
+        {% trans 'DIAGNÓSTICOS' %}
+      </a>
+    </li> 
     <li class="{% active_granchild request list_reports %}">
       <a href="{{list_reports}}">
         {% trans 'INFORMES' %}

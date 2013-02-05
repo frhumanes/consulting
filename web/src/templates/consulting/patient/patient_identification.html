@@ -9,8 +9,11 @@
           <h1>{% trans 'Identificación Paciente' %}</h1>                
         </div>
         <div class="" >
+            <div class="alert alert-success alert-block">
+                {% trans 'Datos modificados con éxito.' %}
+            </div>
             {% if patient_user.email %}
-            <div class="alert alert-info">
+            <div class="alert alert-info alert-block">
                 {% trans 'Se le ha enviado un correo electrónico al paciente con el nombre de usuario y contraseña, la cual podrá modificar cuando lo desee.' %}
             </div>
             {% endif %}

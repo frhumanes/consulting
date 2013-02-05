@@ -3,47 +3,47 @@
 {% load i18n %}
 
 {% block right %}
-  {% include "consulting/patient/card.html" %}
+  {% include "consulting/patient/card-mini.html" %}
 {% endblock %}
 
 {% block container %}
-  <section>
+<section>
   <div class="page-header">
     <h1>{% trans 'Selección de diagnóstico' %}</h1>
   </div>
-<div class="hero-unit center">
-  <form class="form-horizontal" method="post" action="{% url consulting_start id_appointment %}">{% csrf_token %}
-    <fieldset>
-        {% if form.illness.errors %}
-          <div class="control-group error">
-            <label class="control-label">
-              {{form.illness.label}}
-            </label>
-            <div class="controls">
-              {{ form.illness }}
-              
-              {% for error in form.illness.errors %}
-                <span class="help-inline">
-                  {{ error|escape }}
-                </span>
-              {% endfor %}
+  <div class="hero-unit center">
+    <form class="form-horizontal" method="post" action="{% url consulting_start id_appointment %}">{% csrf_token %}
+      <fieldset>
+          {% if form.illness.errors %}
+            <div class="control-group error">
+              <label class="control-label">
+                {{form.illness.label}}
+              </label>
+              <div class="controls">
+                {{ form.illness }}
+                
+                {% for error in form.illness.errors %}
+                  <span class="help-inline">
+                    {{ error|escape }}
+                  </span>
+                {% endfor %}
+              </div>
             </div>
-          </div>
-        {% else %}
-          <div class="control-group">
-            <label class="control-label">
-              {{form.illness.label}}
-            </label>
-            <div class="controls">
-              {{ form.illness }} 
+          {% else %}
+            <div class="control-group">
+              <label class="control-label">
+                {{form.illness.label}}
+              </label>
+              <div class="controls">
+                {{ form.illness }} 
+              </div>
             </div>
-          </div>
-        {% endif %}
-    </fieldset>
-    <button type="submit" class="btn btn-primary btn-block">
-      Continuar
-    </button>
-  </form>
-</div>
-
+          {% endif %}
+      </fieldset>
+      <button type="submit" class="btn btn-primary btn-block">
+        {% trans 'Continuar' %}
+      </button>
+    </form>
+  </div>
+</section>
 {% endblock container %}

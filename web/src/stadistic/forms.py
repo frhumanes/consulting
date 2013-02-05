@@ -5,6 +5,7 @@ from userprofile.models import Profile
 from formula.models import Variable, Dimension
 from survey.models import Option
 from consulting.models import Medicine
+from illness.models import Illness
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import strip_tags
 
@@ -54,6 +55,16 @@ class FiltersForm(forms.Form):
                     choices=Profile.SEX[1:],
                     widget=forms.CheckboxSelectMultiple())
 
+    marital = forms.MultipleChoiceField(
+                    label=_(u'Estado civil'),
+                    choices=Profile.STATUS[1:],
+                    widget=forms.CheckboxSelectMultiple())
+
+    education = forms.MultipleChoiceField(
+                    label=_(u'Nivel de estudios'),
+                    choices=Profile.EDUCATION,
+                    widget=forms.CheckboxSelectMultiple())
+
     profession = forms.MultipleChoiceField(
                     label=_(u'Profesión'),
                     choices=[(p['profession'], p['profession']) for p in Profile.objects.exclude(profession='').values('profession').order_by('profession').distinct()],
@@ -84,10 +95,16 @@ class FiltersForm(forms.Form):
                     widget=RangeWidget(attrs={'class':'span3',
                                               'min':'0', 
                                               'max':'4'}))]
-    treatment =forms.MultipleChoiceField(
-                    label='Tratamiento',
-                    choices=[(m['component__name'], m['component__name']) for m in Medicine.objects.filter(is_previous=False).values('component__name').order_by('component__name').distinct('component')],
+
+    illnesses =forms.MultipleChoiceField(
+                    label='Diagnóstico',
+                    choices=[(i['code'], '('+i['code']+') '+i['name']) for i in Illness.objects.filter(illnesses_profiles__isnull=False).values('code', 'name').order_by('code').distinct('illnesses')],
                     widget=forms.CheckboxSelectMultiple())
+
+    date = forms.MultiValueField(
+                    label=_(u'Fechas'),
+                    widget=DateWidget(attrs={'class':'span5'},
+                                           format=settings.DATE_INPUT_FORMAT))
 
     anxiety = forms.MultipleChoiceField(
                     label=_(u'Nivel de Ansiedad'),
@@ -104,10 +121,11 @@ class FiltersForm(forms.Form):
                     choices=[(op.id, op.text) for op in Option.objects.filter(code__startswith='AVE', option_answers__isnull=False).distinct().order_by('text')],
                     widget=forms.CheckboxSelectMultiple())
 
-    date = forms.MultiValueField(
-                    label=_(u'Fechas'),
-                    widget=DateWidget(attrs={'class':'span5'},
-                                           format=settings.DATE_FORMAT))
+    treatment =forms.MultipleChoiceField(
+                    label='Tratamiento',
+                    choices=[(m['component__name'], m['component__name']) for m in Medicine.objects.filter(is_previous=False).values('component__name').order_by('component__name').distinct('component')],
+                    widget=forms.CheckboxSelectMultiple())
+
 
     
 

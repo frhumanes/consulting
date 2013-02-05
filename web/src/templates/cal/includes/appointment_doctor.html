@@ -1,5 +1,5 @@
 {% load i18n %}
-<tr id={{event.patient.id}} data-msg="{{ event.id }}">
+<tr id={{event.patient.id}} data-msg="{{ event.id }}" class="{{ event.get_payment_class }}">
   <td>
     {% if event.is_reserved %}<i class="icon-question-sign"></i>{% endif %}
     {% if event.is_canceled %}<i class="icon-remove-sign"></i>{% endif %}
@@ -18,7 +18,7 @@
   <td>{{ event.doctor.get_profile.get_full_name }}</td>
   <td>{{ event.app_type}}</td>
   <td><em>{{ event.description|striptags|safe|truncatewords:5 }}</em>
-    {% if not event.has_activity and not event.is_editable%}
+    {% if not event.has_activity and not event.is_editable and event.is_confirmed %}
       {% if event.notify %}
         <span class="badge badge-important"><i class="icon-exclamation-sign icon-white"></i> {% trans 'NO ASISTIÓ' %}</span>
       {% else %}
@@ -26,5 +26,5 @@
       {% endif %}
     {% endif %}
   </td>
-  <td><a data-content="{{event.get_log|unordered_list}}" data-html="true" data-placement="left" rel="popover" href="#" data-original-title="{% trans 'Historial de cambios' %}"><i class="icon-list-alt"></i></a></td>
+  <td><a data-content="{{event.get_log|unordered_list}}" data-html="true" data-placement="left" rel="popover" data-trigger="hover" href="#" data-original-title="{% trans 'Historial de cambios' %}"><i class="icon-list-alt"></i></a></td>
 </tr>

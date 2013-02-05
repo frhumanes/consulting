@@ -56,3 +56,13 @@ class Message(models.Model):
     class Meta:
         verbose_name = "Mensaje"
         #app_label = u"Messenger"
+
+class Blacklist(models.Model):
+    doctor = models.ForeignKey(User, verbose_name=_(u'Médico'), related_name='banner_user', limit_choices_to = {'profiles__role':settings.DOCTOR})
+    patient = models.ForeignKey(User, verbose_name=_(u'Usuario bloqueado'), related_name='banned_user' ,limit_choices_to = {'profiles__role':settings.PATIENT})
+    start_time = models.DateTimeField(_(u'Hora inicial'), auto_now_add=True)
+    end_time = models.DateTimeField(_(u'Hora final'), null=True, 
+        help_text=_(u'Establezca un valor para terminar con el bloqueo'))
+
+    class Meta:
+        verbose_name = "Bloqueo"

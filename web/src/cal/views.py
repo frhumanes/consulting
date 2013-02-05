@@ -503,8 +503,9 @@ def app_add(request, year, month, day, id_user, check=False):
                 doctor,
                 date(int(year), int(month), int(day)))
     else:
+        app_type = request.GET.get('type','')
         sched_form = SchedulerForm()
-        form = AppointmentForm(user=doctor)
+        form = AppointmentForm(user=doctor, initial={'app_type': app_type})
         available, free_intervals = Appointment.objects.availability(
             doctor,
             date(int(year), int(month), int(day)))
@@ -771,8 +772,9 @@ def add_slot_type(request, template="cal/slot_type/add.html"):
         form = SlotTypeForm(request_params)
 
         if form.is_valid():
-            form.save()
-            return redirect(reverse("cal.list_slot_type"))
+            slot_type = form.save()
+            to_url = request.GET.get('next',reverse("cal.list_slot_type"))
+            return redirect(to_url+'?type='+str(slot_type.id))
         else:
             return render_to_response(template,
                 {'form': form},
@@ -864,11 +866,13 @@ def add_slot(request, year, month=1):
             'months': months,
             'weekdays': weekdays,
             })
-        slot_type = get_object_or_404(SlotType, pk=int(id_slot_type))
+        
 
-        if id_slot_type and start_time and not end_time:
-            st = time.strptime(start_time, '%H:%M')
-            end_time = add_minutes(st, slot_type.duration)
+        if id_slot_type:
+            slot_type = get_object_or_404(SlotType, pk=int(id_slot_type))
+            if start_time and not end_time:
+                st = time.strptime(start_time, '%H:%M')
+                end_time = add_minutes(st, slot_type.duration)
 
             
 
@@ -895,7 +899,9 @@ def add_slot(request, year, month=1):
                 {'form': form, 'year': year,},
                 context_instance=RequestContext(request))
     else:
-        form = SlotForm(user=request.user)
+        slot_type = request.GET.get('type','')
+        form = SlotForm(user=request.user,initial={'slot_type':slot_type})
+        #form.fields['app_type'].initial = [slot_type]
 
     return render_to_response('cal/slot/add.html', {'form': form,
         'year': year,},
@@ -1055,8 +1061,19 @@ def doctor_day(request, id_doctor, year, month, day):
     list_name='vacations', objects_per_page=settings.OBJECTS_PER_PAGE)
 def list_vacation(request):
     vacations = Vacation.objects.filter(doctor=request.user).order_by('-date')
-    template_data = dict(user=request.user, vacations=vacations,
-        context_instance=RequestContext(request))
+    years = vacations.dates('date','year',order='ASC')
+    year = request.GET.get('year', '')
+    if year:
+        vacations = vacations.filter(date__year=year)
+
+    queries_without_page = request.GET.copy()
+    if queries_without_page.has_key('page'):
+        del queries_without_page['page']
+
+
+    template_data = dict(user=request.user, vacations=vacations, year=year,
+                        queries=queries_without_page, years=years,
+                        context_instance=RequestContext(request))
 
     return template_data
 
@@ -1078,10 +1095,10 @@ def add_vacation(request, template="cal/vacation/add.html"):
         })
         form = VacationForm(request_params)
         form.is_valid()
-        start_date = datetime.strptime(start_date, settings.DATE_FORMAT)
-        end_date = datetime.strptime(end_date, settings.DATE_FORMAT)
+        start_date = datetime.strptime(start_date, settings.DATE_INPUT_FORMAT)
+        end_date = datetime.strptime(end_date, settings.DATE_INPUT_FORMAT)
         if end_date and end_date >= start_date:
-            for n in set([0]+range(int((end_date - start_date).days))):
+            for n in range(int((end_date - start_date).days)+1):
                 if Appointment.objects.filter(doctor=request.user, date=(start_date + timedelta(n))).count():
                     form._errors['__all__'] = ErrorList([u"Existen citas concertadas en el intervalo de vacaciones. Elija otro intervalo de fechas o modifique las citas concertadas."])
                     error = True
@@ -1091,9 +1108,9 @@ def add_vacation(request, template="cal/vacation/add.html"):
             error = True
 
         if not error:
-            for n in set([0]+range(int ((end_date - start_date).days))):
+            for n in range(int((end_date - start_date).days)+1):
                 request_params.update({
-                    'date': (start_date + timedelta(n)).strftime(settings.DATE_FORMAT)
+                    'date': (start_date + timedelta(n)).strftime(settings.DATE_INPUT_FORMAT)
                 })    
 
                 form = VacationForm(request_params)
@@ -1130,7 +1147,7 @@ def edit_vacation(request, pk, template="cal/vacation/edit.html"):
 
         date = request.POST.get('date', None)
         if date:
-            date = datetime.now().strptime(date, settings.DATE_FORMAT)
+            date = datetime.now().strptime(date, settings.DATE_INPUT_FORMAT)
             request_params.update({'date': date})
 
         form = VacationForm(request_params, instance=vacation)
@@ -1180,8 +1197,19 @@ def delete_vacation(request):
     list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE)
 def list_event(request):
     events = Event.objects.filter(doctor=request.user).order_by('-date')
-    template_data = dict(user=request.user, events=events,
-        context_instance=RequestContext(request))
+    years = events.dates('date','year',order='ASC')
+    year = request.GET.get('year', '')
+    if year:
+        events = events.filter(date__year=year)
+
+    queries_without_page = request.GET.copy()
+    if queries_without_page.has_key('page'):
+        del queries_without_page['page']
+
+
+    template_data = dict(user=request.user, events=events, year=year,
+                        queries=queries_without_page, years=years,
+                        context_instance=RequestContext(request))
 
     return template_data
 
@@ -1199,7 +1227,7 @@ def add_event(request, template="cal/event/add.html"):
 
         date = request.POST.get('date', None)
         if date:
-            date = datetime.now().strptime(date, settings.DATE_FORMAT)
+            date = datetime.now().strptime(date, settings.DATE_INPUT_FORMAT)
             request_params.update({'date': date})
 
         form = EventForm(request_params)
@@ -1232,7 +1260,7 @@ def edit_event(request, pk, template="cal/event/edit.html"):
 
         date = request.POST.get('date', None)
         if date:
-            date = datetime.now().strptime(date, settings.DATE_FORMAT)
+            date = datetime.now().strptime(date, settings.DATE_INPUT_FORMAT)
             request_params.update({'date': date})
 
         form = EventForm(request_params, instance=event)
@@ -1371,7 +1399,7 @@ def check_transfer(request, id_patient, doit=False):
     patient_user = get_object_or_404(User, pk=int(id_patient))
     doctor = get_object_or_404(User, pk=int(id_doctor))
     next_apps = Appointment.objects.filter(patient=patient_user,
-                            date__gt=date.today()).order_by(
+                            date__gt=date.today(), status__in=[settings.CONFIRMED, settings.RESERVED]).order_by(
                             'date')
     for app in next_apps:
         available, free_intervals = Appointment.objects.availability(
@@ -1391,9 +1419,9 @@ def check_transfer(request, id_patient, doit=False):
                 app.doctor = doctor
                 #app.description = "%s %s"%(app.app_type.description, app.description)
                 #app.app_type = None
-                app.save()
             else:
-                app.delete()
+                app.status = settings.CANCELED_BY_DOCTOR
+            app.save()
     data = {'ok': transferable,
             'moves': moves}
     if doit:
@@ -1471,7 +1499,7 @@ def payment_list(request):
                             & Q(payment_appointment__discount__lte=int(v))
             elif k.startswith('method'):
                 query_filter = query_filter \
-                    | Q(payment_appointment__method__in=request.GET.getlist(k))
+                    & Q(payment_appointment__method__in=request.GET.getlist(k))
             elif k.startswith('patient'):
                 query_filter = query_filter \
                     & Q(patient__id__in=request.GET.getlist(k))

@@ -31,8 +31,10 @@
         <div class="control-group error">
           <label for="id_date" class="control-label">{{form.date.label}}</label>
           <div class="controls">
-            {{ form.date }}
-            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-calendar"></i>
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-calendar"></i></span>
+              {{ form.date }}
+            </div>
             {% for error in form.date.errors %}
                <span class="help-inline">{{ error|escape }}</span>
             {% endfor %}
@@ -42,16 +44,20 @@
         <div class="control-group">
           <label for="id_date" class="control-label">{{form.date.label}}</label>
           <div class="controls">
-            {{ form.date }}
-            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-calendar"></i>
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-calendar"></i></span>
+              {{ form.date }}
+            </div>
           </div>
         </div>
       {% endif %}
       <div class="control-group">
           <label for="id_end_date" class="control-label">{{form.end_date.label}}</label>
           <div class="controls">
-            {{ form.end_date }}
-            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-calendar"></i>
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-calendar"></i></span>
+              {{ form.end_date }}
+            </div>
           </div>
         </div>
       <!-- END DATE -->

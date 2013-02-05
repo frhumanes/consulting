@@ -16,6 +16,12 @@ urlpatterns = patterns('',
     url(r'^view/(?P<id>\d+)/$', message_views.view_message,
         name="private_messages_view"),
 
+    url(r'^ban/(?P<message_id>\d+)/$', message_views.ban_user,
+        name="private_messages_ban"),
+
+    url(r'^unban/(?P<message_id>\d+)/$', message_views.ban_user,
+        name="private_messages_unban"),
+
     url(r'^reply/(?P<message_id>\d+)/$', message_views.reply_message,
         name="private_messages_reply"),
 )

@@ -35,15 +35,20 @@
         {% endif %}  
         {% if request.user.get_profile.is_doctor %}
         <div class="btn-group">
-          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" rel="tooltip" title="{% trans 'Configuración' %}">
             <i class="icon-wrench"></i> <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
             <li>
               <a href="{% url 'cal.list_slot_type' %}">{% trans 'TIPOS DE CITA' %}</a>
             </li>
+            {% if request.user.entry_type_doctor.all.count %}
             <li>
               <a href="{% url 'cal.list_slot' year %}">{% trans 'GESTIÓN MENSUAL' %}</a>
+            </li>
+            {% endif %}
+            <li>
+              <a href="#" id="help-button"><i class="icon-question-sign"></i> {% trans 'AYUDA' %}</a>
             </li>
           </ul>
         </div>
@@ -69,7 +74,7 @@
         <ul>
             <li class="previous">
                 <a href= "javascript:prev();">
-                    <i class="icon-arrow-left"></i>
+                    <i class="icon-chevron-left"></i>
                 </a>
             </li>
             <li >
@@ -77,7 +82,7 @@
             </li>
             <li class="next">
                 <a href= "javascript:next();" class="pull-right">
-                    <i class="icon-arrow-right"></i>
+                    <i class="icon-chevron-right"></i>
                 </a>
             </li>
         </ul>
@@ -132,7 +137,7 @@
                         {% else %}
                             {% for e in events %}
                               <div class="text-warning"><small>
-                                {% if e.duration %}
+                                {% if e.get_duration %}
                                 {{e.start_time|time}}-{{e.end_time|time}}
                                 {% else %} 
                                 <i class="icon-gift"></i>
@@ -153,10 +158,10 @@
                         <a class="applink text-info" href="{% url 'cal.appointments' year=year month=month day=day %}" title="{{day}} de {{mname}} de {{year}}">
                         {% trans 'Citas' %}: <strong class="pull-right">{{apps|length}}</strong></a></div>
                       <div style="margin: 0 10px" class="text-warning">
-                        {% if events|length %}<a class="text-warning" data-content="<ul class='unstyled'>{% for e in events %}<li>{% if e.duration %}{{e.doctor.get_profile|name_with_title}} ::</br>{{e.start_time|time}}-{{e.end_time|time}}{% else %}<i class='icon-gift'></i>{% endif %} {{e.description}}</li> {% endfor %}</ul>" data-html="true" data-placement="top" rel="popover" href="#" data-original-title="{% trans 'Eventos' %} {{day}}/{{month}}/{{year}}">{% endif %}
+                        {% if events|length %}<a class="text-warning" data-content="<ul class='unstyled'>{% for e in events %}<li>{% if e.get_duration %}{{e.doctor.get_profile|name_with_title}} ::</br>{{e.start_time|time}}-{{e.end_time|time}}{% else %}<i class='icon-gift'></i>{% endif %} {{e.description}}</li> {% endfor %}</ul>" data-html="true" data-trigger="hover" data-placement="top" rel="popover" href="#" data-original-title="{% trans 'Eventos' %} {{day}}/{{month}}/{{year}}">{% endif %}
                         {% trans 'Eventos' %}: <strong class="pull-right">{{events|length}}</strong>{% if events|length %}</a>{% endif %}</div>
                       <div style="margin: 0 10px" class="text-error">
-                        {% if vacations|length %}<a class="text-error" data-content="<ul class='unstyled'>{% for v in vacations %}<li>{{v.doctor.get_profile|name_with_title}}</li> {% endfor %}</ul>" data-html="true" data-placement="top" rel="popover" href="#" data-original-title="{% trans 'Ausencias' %} {{day}}/{{month}}/{{year}}">{% endif %}
+                        {% if vacations|length %}<a class="text-error" data-content="<ul class='unstyled'>{% for v in vacations %}<li>{{v.doctor.get_profile|name_with_title}}</li> {% endfor %}</ul>" data-trigger="hover" data-html="true" data-placement="top" rel="popover" href="#" data-original-title="{% trans 'Ausencias' %} {{day}}/{{month}}/{{year}}">{% endif %}
                         {% trans 'Ausencias' %}: <strong class="pull-right">{{vacations|length}}</strong>{% if vacations|length %}</a>{% endif %}</div>
                     {% endif %}
                     </div>
@@ -228,6 +233,11 @@
         });
 
     };
+
+    $('#help-button').on('click', function(e){
+        e.preventDefault();
+        $('#modalHelp').modal('show');
+    });
 
     $("#searcher").autocomplete({
         minLength: 3,

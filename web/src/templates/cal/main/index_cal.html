@@ -1,5 +1,5 @@
 {% extends "cal/includes/base.html" %}
-{% load i18n%}
+{% load i18n consulting %}
 
 {% block css_inline %}
 #large{
@@ -18,6 +18,12 @@
 }
 {% endblock %}
 
+{% block jquery_init %}
+	{% if request.user.get_profile.is_doctor and not request.user.slot_creator.all.count %}
+		$('#modalHelp').modal('show');
+	{% endif %}
+{% endblock %}
+
 {% block body %}
 <div class="container">
   <div class="row-fluid">
@@ -26,4 +32,92 @@
 	</div>
   </div>
 </div>
+{% if request.user.get_profile.is_doctor %}
+<div id="modalHelp" class="modal fade {% if request.user.slot_creator.all.count %}hide{% endif %}" tabindex="-1" role="dialog" aria-labelledby="modalHelpLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 id="modalHelpLabel">{% trans 'Visita guiada de Agenda' %}</h3>
+    </div>
+    <div class="modal-body">
+        <div id="firstUse" class="carousel slide" data-interval="10000">
+            <!-- Carousel items -->
+            <div class="carousel-inner" >
+                <div class="active item" style="padding: 0 75px" >
+                	<div style="width:100%; margin: 10px 0">
+                		<h4>Bienvendo a la gestión de agenda de {% get_brand %}</h4>
+                		<span>Use el botón</span> <div class="btn-group inline">
+			          <a class="btn dropdown-toggle btn-small" data-toggle="dropdown" href="#">
+			            <i class="icon-wrench"></i> <b class="caret"></b>
+			          </a>
+			          <ul class="dropdown-menu">
+			            <li>
+			              <a href="{% url cal.list_slot_type %}">{% trans 'TIPOS DE CITA' %}</a>
+			            </li>
+			            {% if request.user.entry_type_doctor.all.count %}
+			            <li>
+			              <a href="{% url cal.list_slot TODAY.year %}">{% trans 'GESTIÓN MENSUAL' %}</a>
+			            </li>
+			            {% endif %}
+			          </ul>
+			        </div>
+			        <span>para <strong>configurar su agenda</strong> personal antes de usarla</p>
+                	</div>
+                	<hr>
+                	<div style="width: 50%; float: left;">
+                		<p>Empiece creando los <strong>tipos de citas</strong> con su duración predeterminada</p>
+                		<img src="{{ STATIC_URL }}/img/help_add_type.png" alt="Nuevo tipo de cita" class="img-polaroid center" />
+                	</div>
+                	<div style="width: 50%; float: left;">
+                		<p>Despues podrá <strong>gestionar mensualmente</strong> los tipos de citas segun días y horarios</p>
+                		<img src="{{ STATIC_URL }}/img/help_add_slot.png" alt="Nuevo tipo de cita" class="img-polaroid center" />
+                	</div>
+                </div>
+                <div class="item" style="padding: 0 75px">
+            		<span>Gestione sus</span>
+            		 <div class="btn-group inline">
+			            <a class="btn dropdown-toggle btn-small" data-toggle="dropdown" href="#">
+			              <i class="icon-lock"></i> {% trans 'AUSENCIAS' %} <b class="caret"></b>
+			            </a>
+			            <ul class="dropdown-menu">
+			              <li>
+			                <a href="{% url cal.list_vacation %}"><i class="icon-plane"></i>  {% trans "VACACIONES" %}</a>
+			              </li>
+			              <li>                                                     
+			                <a href="{% url cal.list_event %}"><i class="icon-briefcase"></i>  {% trans "EVENTOS" %}</a>
+			              </li>
+			            </ul>
+			        </div>
+			        <span>, tanto sus <strong>eventos</strong> profesionales como sus <strong>vacaciones</strong> personales, para que no interfieran en su trabajo diario</span>
+			        <hr>
+            		<img src="{{ STATIC_URL }}/img/help_events.png" alt="Nuevo tipo de cita" class="center" />
+                </div>
+                <div class="item" style="padding: 0 75px">
+                	<span>Utilice el asistente para</span> 
+	                <a class="btn btn-primary btn-small"  href="{% url search_patient_for_action action='new_app' %}">
+			            <i class="icon-calendar icon-white"></i> {% trans 'DAR CITA' %}
+			        </a>
+			        <span>a sus pacientes</span>
+                	<hr>
+                	<img src="{{ STATIC_URL }}/img/help_add_app.png" alt="Nuevo tipo de cita" class="img-polaroid center" />
+                </div>
+                <div class="item" style="padding: 0 75px">
+                	<span>Podrá acceder al</span> 
+                	<a class="btn inline btn-small" href="{% url cal.list_payment %}">
+			            <i class="icon-list-alt"></i> {% trans "REGISTRO" %}
+			        </a>
+			        <span>de citas y filtrar las mismas según diversos parámetros como su estado, su fecha o el módo de pago</span>
+                	<hr>
+                	<img src="{{ STATIC_URL }}/img/help_register.png" alt="Nuevo tipo de cita" class="img-polaroid center" />
+                </div>
+            </div>
+            <!-- Carousel nav -->
+            <a class="carousel-control left" href="#firstUse" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#firstUse" data-slide="next">&rsaquo;</a>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">{% trans 'Cerrar' %}</a>
+    </div>
+</div>
+{% endif %}
 {% endblock %}

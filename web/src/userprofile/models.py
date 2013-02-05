@@ -11,7 +11,7 @@ from illness.models import Illness
 from cal.models import Appointment
 from consulting.models import Task, Conclusion, Medicine
 from private_messages.models import Message
-from datetime import date, timedelta, datetime
+from datetime import date, timedelta, datetime, time
 
 
 class Profile(TraceableModel):
@@ -36,6 +36,18 @@ class Profile(TraceableModel):
         (settings.ADMINISTRATIVE, _(u'Administrativo')),
         (settings.PATIENT, _(u'Paciente')),
     )
+
+    EDUCATION = (
+        (1, _(u'Analfabeto por problemas físicos o psíquicos')),
+        (2, _(u'Analfabeto por otras razones')),
+        (3, _(u'Sin estudios')),
+        (4, _(u'Estudios primarios o equivalentes')),
+        (5, _(u'Enseñanza general secundaria, 1er ciclo')),
+        (6, _(u'Enseñanza Profesional de 2º grado, 2º ciclo')),
+        (7, _(u'Enseñanza general secundaria, 2º ciclo')),
+        (8, _(u'Enseñanzas profesionales superiores')),
+        (9, _(u'Estudios universitarios o equivalentes'))
+    )
     #username is the nick with you login in app
     user = models.ForeignKey(User, unique=True, related_name='profiles',
                             help_text='Usuario asociado del sistema')
@@ -43,10 +55,14 @@ class Profile(TraceableModel):
                                 related_name='doctor', limit_choices_to = {'profiles__role':settings.DOCTOR})
     #patients = models.ManyToManyField(User, related_name='patients_profiles',
     #                                    blank=True, null=True)
+    medical_number = models.CharField(_(u'Historia médica'), max_length=9, unique=True, null=True, blank=True)
 
     illnesses = models.ManyToManyField(Illness,
                                     related_name='illnesses_profiles',
-                                    blank=True, null=True)
+                                    blank=True, null=True,
+            limit_choices_to={
+                'id__in':Illness.objects.filter(cie_code__isnull=True).exclude(code__startswith='|')
+            })
 
     name = models.CharField(_(u'Nombre'), max_length=150, blank=True)
 
@@ -84,10 +100,18 @@ class Profile(TraceableModel):
 
     phone2 = models.CharField(_(u'Teléfono 2'), max_length=9, blank=True)
 
+    emergency_phone = models.CharField(_(u'En caso de emergencia avisar a'), max_length=500, blank=True)
+
     email = models.EmailField(_(u'Correo Electrónico'), max_length=150,
                                 null=True, unique=True, blank=True)
 
+    education = models.IntegerField(_(u'Nivel de estudios'), choices=EDUCATION,
+                                blank=True, null=True)
+
     profession = models.CharField(_(u'Profesión'), max_length=150, blank=True)
+
+    source = models.CharField(_(u'Fuente de derivación'), max_length=255, 
+                                blank=True)
 
     role = models.IntegerField(_(u'Rol'), choices=ROLE, blank=True, null=True)
 
@@ -98,7 +122,23 @@ class Profile(TraceableModel):
             self.email = None
         if self.nif == '':
             self.nif = None
+        if self.medical_number == '':
+            self.medical_number = None
         super(Profile, self).save(*args, **kw)
+        if not self.user.is_active:
+            for app in Appointment.objects.filter(
+                            Q(patient=self.user),
+                            Q(date__gt=date.today()) |
+                            Q(date=date.today(), 
+                              start_time__gte=datetime.time(datetime.now()))
+                            ).exclude(status__in=[settings.CANCELED_BY_PATIENT,
+                                                 settings.CANCELED_BY_DOCTOR]
+                            ).order_by('date'):
+                app.status = settings.CANCELED_BY_DOCTOR
+                app.save()
+        if not self.medical_number and self.role == settings.PATIENT:
+            self.medical_number = "%s%05d" % (date.today().year, self.pk)
+            super(Profile, self).save(*args, **kw)
 
     def get_full_name(self, title=False):
         if title:
@@ -129,27 +169,29 @@ class Profile(TraceableModel):
         return u'id: %s profile: %s %s %s' \
             % (self.id, self.name, self.first_surname, self.second_surname)
 
-    def age(self, dob):
-        today = date.today()
-        years = today.year - dob.year
-        if today.month < dob.month or\
-            today.month == dob.month and today.day < dob.day:
-            years -= 1
-        return years
+    def age_at(self, at_date):
+        yo = ''
+        if not self.dob is None:
+            try:
+                delta = datetime.combine(at_date, time()) - datetime.combine(self.dob, time())
+                yo = delta.days / 365
+            except:
+                yo = self.get_age()
+        return yo
 
     def get_age(self):
-        if not self.dob is None:
-            return self.age(self.dob)
-        else:
-            return ''
+        return self.age_at(date.today())
+        
 
     def get_sex(self):
-        if self.sex == settings.WOMAN:
-            return _(u'Mujer')
-        elif self.sex == settings.MAN:
-            return _(u'Hombre')
-        else:
-            return ''
+        if self.sex:
+            return self.SEX[self.sex][1]
+        return ''
+
+    def get_education(self):
+        if self.education:
+            return self.EDUCATION[self.education-1][1]
+        return ''
 
     def get_status(self):
         if self.status == settings.MARRIED:
@@ -252,6 +294,14 @@ class Profile(TraceableModel):
                                         previous_days__gt=0).order_by('-creation_date')
         return tasks
 
+    def get_assigned_tasks(self):
+        tasks = Task.objects.filter(patient=self.user,
+                                        self_administered=True, 
+                                        completed=False,
+                                        assess=True,
+                                        previous_days__gt=0).order_by('-creation_date')
+        return tasks
+
 
     def get_anxiety_status(self, at_date=None, index=False, html=False):
         filter_option = Q(patient=self.user, survey__code__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True, assess=False)
@@ -300,6 +350,19 @@ class Profile(TraceableModel):
             return self.phone2
         else:
             return None
+
+    def get_illness_set(self):
+        illnesses = set()
+        for i in self.illnesses.all():
+            parent = i
+            while parent:
+                illnesses.add(parent)
+                parent = parent.parent
+        return illnesses
+                
+    def is_banned(self):
+        return self.user.banned_user.filter(Q(end_time__isnull=True) | 
+                                    Q(end_time__gte=datetime.now()))
 
     class Meta:
         verbose_name = "Perfil"

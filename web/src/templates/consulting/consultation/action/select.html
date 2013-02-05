@@ -3,45 +3,46 @@
 {% load i18n %}
 
 {% block right %}
-  {% include "consulting/patient/card.html" %}
+  {% include "consulting/patient/card-mini.html" %}
 {% endblock %}
 
 {% block container %}
-  <section>
+<section>
   <div class="page-header">
     <h1>{% trans 'Acción a realizar' %}</h1>
   </div>
-    <div class="hero-unit center">
-      <form class="form-horizontal" method="post" action="{% url consulting_select_action id_appointment %}">{% csrf_token %}
-        <fieldset>
-            {% if form.action.errors %}
-              <div class="control-group error">
-                <label class="control-label">
-                  {{form.action.label}}
-                </label>
-                <div class="controls">
-                  {{ form.action }}
-                  {% for error in form.action.errors %}
-                    <span class="help-inline">
-                      {{ error|escape }}
-                    </span>
-                  {% endfor %}
-                </div>
+  <div class="hero-unit center">
+    <form class="form-horizontal" method="post" action="{% url consulting_select_action id_appointment %}">{% csrf_token %}
+      <fieldset>
+          {% if form.action.errors %}
+            <div class="control-group error">
+              <label class="control-label">
+                {{form.action.label}}
+              </label>
+              <div class="controls">
+                {{ form.action }}
+                {% for error in form.action.errors %}
+                  <span class="help-inline">
+                    {{ error|escape }}
+                  </span>
+                {% endfor %}
               </div>
-            {% else %}
-              <div class="control-group">
-                <label class="control-label">
-                  {{form.action.label}}
-                </label>
-                <div class="controls">
-                  {{ form.action }} 
-                </div>
+            </div>
+          {% else %}
+            <div class="control-group">
+              <label class="control-label">
+                {{form.action.label}}
+              </label>
+              <div class="controls">
+                {{ form.action }} 
               </div>
-            {% endif %}
-        </fieldset>
-            <button type="submit" class="btn btn-primary btn-block">
-              Continuar
-            </button>
-      </form>
-    </div>
+            </div>
+          {% endif %}
+      </fieldset>
+          <button type="submit" class="btn btn-primary btn-block">
+            Continuar
+          </button>
+    </form>
+  </div>
+</section>
 {% endblock %}

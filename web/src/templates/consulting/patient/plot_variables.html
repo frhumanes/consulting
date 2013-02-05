@@ -96,7 +96,10 @@ $(function () {
         plotAccordingToChoices();
     }
 
-    function plotAccordingToChoices() {
+    function plotAccordingToChoices(event) {
+        if(event){
+            event.stopPropagation();
+        }
         var data = [];
 
         choiceContainer.find("input:checked").each(function () {

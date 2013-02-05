@@ -93,13 +93,20 @@ function set_events(){
 {% endblock %}
 
 {% block right %}
-  {% include 'consulting/patient/card.html' with mini=1 %}
+  {% include 'consulting/patient/card-mini.html'%}
 {% endblock %}
 
 
 {% block container %}
 <div class="page-header">
-    <h1>{% trans 'Tratamiento farmacológico' %}</h1>       
+    <h1>{% trans 'Tratamiento farmacológico' %}
+      <div class="btn-group pull-right">
+            <a class="btn btn-info" href="{% if illness %}{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}">
+               <i class="icon-arrow-left icon-white"></i>
+              {% trans 'Volver' %}
+            </a>
+      </div>
+    </h1>       
 </div>
 <section>
   <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">

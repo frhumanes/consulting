@@ -12,9 +12,9 @@ from django.conf import settings
 
 class Survey(TraceableModel):
     
-    blocks = models.ManyToManyField('Block', related_name='blocks_surveys', verbose_name=_(u'Bloque'))
+    blocks = models.ManyToManyField('Block', related_name='blocks_surveys', verbose_name=_(u'Bloque'), null=True, blank=True)
 
-    multitype = models.BooleanField(_(u'Encuesta configurable'), default=False, help_text=u"Necesario para seleccionar bloques Extenso o Abreviado")
+    multitype = models.BooleanField(_(u'Selector de tipo'), default=False, help_text=u"Necesario para seleccionar bloques Extenso o Abreviado")
 
     name = models.CharField(_(u'Nombre'), max_length=100)
 

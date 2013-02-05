@@ -39,7 +39,7 @@ class TreatmentForm(forms.ModelForm):
     component = forms.ModelChoiceField(
                                     queryset=Component.objects.all(),
                                     widget=forms.HiddenInput, initial='-1')
-    posology = forms.IntegerField(label=_(u'Posología (mg/día)'))
+    posology = forms.DecimalField(label=_(u'Posología (mg/día)'))
 
     dosification = forms.CharField(label=_(u'Modo de administración'),
                                     max_length=255, required=False)
@@ -74,7 +74,7 @@ class MedicineForm(forms.ModelForm):
                                     validators=[validate_choice])
     months = forms.DecimalField(label=_(u'Número de meses de toma del\
                                          fármaco'))
-    posology = forms.IntegerField(label=_(u'Posología (mg/día)'))
+    posology = forms.DecimalField(label=_(u'Posología (mg/día)'))
 
     class Meta:
         model = Medicine
@@ -130,7 +130,7 @@ class SelectOtherTaskForm(forms.Form):
             widget=forms.Select(
                         attrs={'class': 'input-medium search-query span12'}))
     table = forms.CharField(label=_(u'Plantilla'), widget=forms.HiddenInput(),
-        help_text=_(u'Rellene los campos de la tabla o cargue una plantilla ya existente. La primera fila se considerará la cabecera de la misma y no podrá ser editada por el paciente.'))
+        help_text=_(u'Rellene los campos de la tabla o cargue una plantilla ya existente. La primera fila se considerará la cabecera de la misma y no podrá ser editada por el paciente.'), required=False)
     NEXT_SURVEY = [('', _(u'--------'))]
 
     def __init__(self, *args, **kwargs):
@@ -234,8 +234,8 @@ class SymptomsWorseningForm(forms.Form):
 
 class ParametersFilterForm(forms.Form):
 
-    from_date = forms.DateField(input_formats=(settings.DATE_FORMAT,),
-        widget=forms.DateInput(attrs={'class':'span6'},format=settings.DATE_FORMAT),required=False)
+    from_date = forms.DateField(input_formats=(settings.DATE_INPUT_FORMAT,),
+        widget=forms.DateInput(attrs={'class':'span6'},format=settings.DATE_INPUT_FORMAT),required=False)
 
-    to_date = forms.DateField(input_formats=(settings.DATE_FORMAT,),
-        widget=forms.DateInput(attrs={'class':'span6'},format=settings.DATE_FORMAT),required=False)
+    to_date = forms.DateField(input_formats=(settings.DATE_INPUT_FORMAT,),
+        widget=forms.DateInput(attrs={'class':'span6'},format=settings.DATE_INPUT_FORMAT),required=False)
