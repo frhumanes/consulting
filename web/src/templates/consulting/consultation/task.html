@@ -2,6 +2,7 @@
 {% load l10n %}
 {% load consulting %}
 
+{% draw_self_register task.observations %}
 
 <ul id="tab" class="nav nav-tabs">
 	{% for block in task.treated_blocks.all %}

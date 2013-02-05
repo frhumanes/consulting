@@ -10,7 +10,7 @@ from cal.models import Event
 from cal.models import Slot
 
 from django.contrib.auth.models import User
-
+"""
 def user_unicode(self):
     try:
         return  u'%s' % (self.get_profile().get_full_name())
@@ -21,7 +21,7 @@ User.__unicode__ = user_unicode
 
 admin.site.unregister(User)
 admin.site.register(User)
-
+"""
 
 class SlotTypeAdmin(admin.ModelAdmin):
     list_display = ["doctor", "title", "duration"]

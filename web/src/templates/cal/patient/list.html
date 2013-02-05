@@ -1,5 +1,9 @@
 {% load i18n%}
 
+<script type="text/javascript">
+  $('a[rel="popover"]').popover();
+</script>
+
 {% block container %}  
   {% if events.object_list.count > 0 %}
     <table id="events_list" class="table table-striped">
@@ -11,6 +15,7 @@
             <th>{% trans "Doctor" %}</th>
             <th>{% trans "Tipo de cita" %}</th>
             <th>{% trans "Notas" %}</th>
+            <th></th>
           </tr>
       </thead>
       <tbody>

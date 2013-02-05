@@ -17,7 +17,7 @@ from models import Profile
 
 
 class ProfileForm(forms.ModelForm):
-    ADULT = 18
+    ADULT = 14
     ACTIVE = (
         (settings.ACTIVE, _(u'Activada')),
         (settings.DEACTIVATE, _(u'Desactivada')),
@@ -28,8 +28,9 @@ class ProfileForm(forms.ModelForm):
                                     max_length=150, required=True)
     second_surname = forms.CharField(label=_(u'Segundo Apellido'),
                                         max_length=150, required=False)
-    nif = ESIdentityCardNumberField(label=_(u'NIF'), required=False,
-                    error_messages={'unique': _(u'Este NIF ya existe')})
+    nif = ESIdentityCardNumberField(label=_(u'DNI/NIF'), required=False,
+                    error_messages={'unique': _(u'Este documento ya existe')},
+                    help_text=_(u"Requerido para pacientes mayores de %d años" % ADULT))
     sex = forms.ChoiceField(label=_(u'Sexo'), choices=Profile.SEX,
                         required=False)
     address = forms.CharField(label=_(u'Dirección'), max_length=150,
@@ -81,7 +82,7 @@ class ProfileForm(forms.ModelForm):
                 else:
                     age = self.age(dob)
                     if age >= ProfileForm.ADULT:
-                        msg = _(u"Este campo es obligatorio")
+                        msg = _(u"Documento no válido. Compruebe que no ha cometido ningún error y que el campo sigue el formato 01234567X")
                         self._errors["nif"] = self.error_class([msg])
         else:
             if not dob is None and dob > date.today():

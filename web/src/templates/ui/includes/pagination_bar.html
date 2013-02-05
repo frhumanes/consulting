@@ -12,28 +12,28 @@
       {% for l in objects|get_pages_list %}
         {% if forloop.counter0 and forloop.revcounter0 %}
           {% for p in l %}
-           <li {% if p = objects.number %}class="active" style="font-weight: bold;"{% endif %}><a href="{{ request.path }}?page={{ p }}">{{ p }}</a></li>
+           <li {% if p = objects.number %}class="active" style="font-weight: bold;"{% endif %}><a href="{{ request.path }}?page={{ p }}{% if queries %}&amp;{{queries.urlencode}}{% endif %}">{{ p }}</a></li>
           {% endfor %}
         {% else %}
           {% if l %}
             {% if forloop.counter0 = 0 %}
               <li>
-                <a href="{{ request.path }}?page={{ objects.paginator.page_range|first }}">{{ objects.paginator.page_range|first }}</a>
+                <a href="{{ request.path }}?page={{ objects.paginator.page_range|first }}{% if queries %}&amp;{{queries.urlencode}}{% endif %}">{{ objects.paginator.page_range|first }}</a>
               </li>
               {% if l|length > 1%}
               <li>
-                <a href="{{ request.path }}?page={{ l|last }}">...</a>
+                <a href="{{ request.path }}?page={{ l|last }}{% if queries %}&amp;{{queries.urlencode}}{% endif %}">...</a>
               </li>
               {% endif %}
             {% endif %}
             {% if forloop.revcounter0 = 0 %}
               {% if l|length > 1%}
                 <li>
-                  <a href="{{ request.path }}?page={{ l|first }}">...</a>
+                  <a href="{{ request.path }}?page={{ l|first }}{% if queries %}&amp;{{queries.urlencode}}{% endif %}">...</a>
                 </li>
               {% endif %}
               <li>
-                <a href="{{ request.path }}?page={{ objects.paginator.page_range|last }}">{{ objects.paginator.page_range|last }}</a>
+                <a href="{{ request.path }}?page={{ objects.paginator.page_range|last }}{% if queries %}&amp;{{queries.urlencode}}{% endif %}">{{ objects.paginator.page_range|last }}</a>
               </li>
             {% endif %}
              
@@ -41,7 +41,7 @@
         {% endif %}
       {% endfor %}
       {% if objects.has_next %}
-        <li><a href="{{ request.path }}?page={{ objects.next_page_number }}">→</a></li>
+        <li><a href="{{ request.path }}?page={{ objects.next_page_number }}{% if queries %}&amp;{{queries.urlencode}}{% endif %}">→</a></li>
       {% else %}
         <li class="disabled"><a>→</a></li>
       {% endif %}
@@ -57,7 +57,7 @@
   {% if request.is_ajax %}
   $('.pagination').find('a').on('click', function(e){
     e.preventDefault();
-    $(this).parentsUntil('.pagination').parent().parent().parent().load($(this).attr('href'));
+    $(this).parentsUntil('.pagination').parent().parent().parent().load($(this).attr('href'), set_events);
   });
   {% endif %}
 </script>

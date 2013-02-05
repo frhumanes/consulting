@@ -2,7 +2,9 @@
 
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
+from django.utils import formats
 from django.conf import settings
+from django.db.models import Max
 from django import forms
 
 from cal.models import SlotType
@@ -10,12 +12,14 @@ from cal.models import Slot
 from cal.models import Appointment
 from cal.models import Vacation
 from cal.models import Event
+from cal.models import Payment
 
 from cal.custom_fields import SlotTypeChoiceField
+from stadistic.forms import *
 
 import cal.settings as cal_settings
 
-from datetime import datetime
+from datetime import datetime, date
 
 
 class VacationForm(forms.ModelForm):
@@ -203,7 +207,8 @@ class DoctorSelectionForm(forms.Form):
         current = ''
         if 'patient' in kwargs:
             patient = kwargs.pop('patient')
-            current = patient.doctor.id
+            if patient.doctor:
+                current = patient.doctor.id
         super(DoctorSelectionForm, self).__init__(*args, **kwargs)
         queryset = User.objects.filter(profiles__role=settings.DOCTOR)
         choices = [('', '--------')]
@@ -315,3 +320,92 @@ class AppointmentForm(forms.ModelForm):
                     del cleaned_data["description"]
 
         return cleaned_data
+
+class SchedulerForm(forms.Form):
+    INTERVALS = (
+        (7, _(u'Semanas')),
+        (30, _(u'Meses')),
+        (365, _(u'Años')),
+    )
+
+    number = forms.IntegerField(min_value=1, required=False,
+                            widget=forms.TextInput(attrs={'style': 'width: 30px'}))
+    period = forms.IntegerField(min_value=1, required=False,
+                            widget=forms.TextInput(attrs={'style': 'width: 30px'}))
+    interval = forms.ChoiceField(choices=INTERVALS,
+                            widget=forms.Select(attrs={'style': 'width: 110px'}))
+
+    def clean(self):
+        cleaned_data = super(SchedulerForm, self).clean()
+        number = cleaned_data.get("number")
+        period = cleaned_data.get("period")
+
+        if bool(number) != bool(period):
+            msg = _("Los dos campos son obligatorios")
+            if number:
+                self._errors['period'] = self.error_class([msg])
+            else:
+                self._errors['number'] = self.error_class([msg])
+        return cleaned_data
+
+
+class PaymentForm(forms.ModelForm):
+    date = forms.DateField(label=_(u"Fecha de pago"),input_formats=(settings.DATE_FORMAT,),
+        widget=forms.DateInput(format=settings.DATE_FORMAT,
+            attrs={'class': 'span9'}), initial=formats.date_format(date.today(), "SHORT_DATE_FORMAT"))
+    class Meta:
+        model = Payment
+        exclude = ('created_at', 'updated_at', 'created_by', 'appointment')
+
+class PaymentFiltersForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        user = None
+        if 'user' in kwargs:
+            user = kwargs.pop('user')
+        super(PaymentFiltersForm, self).__init__(*args, **kwargs)
+
+        if not user is None:
+            if user.get_profile().is_doctor():
+                del self.fields['doctor']
+                self.fields['patient'].choices=[(p.user.id, p.get_full_name()) for p in Profile.objects.filter(
+                    doctor=user, role=settings.PATIENT)]
+
+
+    status = forms.MultipleChoiceField(
+                    label=_(u'Estado'),
+                    choices=[(i, Appointment.PAYMENT[i][0]) for i in range(len(Appointment.PAYMENT))],
+                    widget=forms.CheckboxSelectMultiple(),
+                    )
+
+    app_date = forms.MultiValueField(
+                    label=_(u'Fecha de la consulta'),
+                    widget=DateWidget(attrs={'class':'span5 datewidget'},
+                                           format=settings.DATE_FORMAT))
+
+    payment_date = forms.MultiValueField(
+                    label=_(u'Fecha de pago'),
+                    widget=DateWidget(attrs={'class':'span5 datewidget'},
+                                           format=settings.DATE_FORMAT))
+    method = forms.MultipleChoiceField(
+                    label=_(u'Método de pago'),
+                    choices=Payment.METHODS,
+                    widget=forms.CheckboxSelectMultiple())
+
+    value = forms.MultiValueField(
+                    label=_(u'Importe (€)'),
+                    widget=RangeWidget(attrs={'class':'span3','min':'0', 'max':Payment.objects.all().aggregate(Max('value'))['value__max']}))
+
+    discount = forms.MultiValueField(
+                    label=_(u'Descuento / Bonificación (%)'),
+                    widget=RangeWidget(attrs={'class':'span3','min':'0', 'max':'100'}))
+    
+    patient =forms.MultipleChoiceField(
+                    label='Pacientes',
+                    choices=[(p.user.id, p.get_full_name()) for p in Profile.objects.filter(role=settings.PATIENT)],
+                    widget=forms.CheckboxSelectMultiple())
+
+    doctor =forms.MultipleChoiceField(
+                    label='Médicos',
+                    choices=[(p.user.id, p.get_full_name()) for p in Profile.objects.filter(role=settings.DOCTOR)],
+                    widget=forms.CheckboxSelectMultiple())
+    

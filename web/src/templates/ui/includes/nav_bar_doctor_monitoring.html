@@ -12,6 +12,7 @@
 {% url consulting_show_prescription appointment.id illness.code as treatment %}
 {% url consulting_set_conclusion appointment.id illness.code as conclusion %}
 {% url consulting_new_app appointment.id illness.code as scheduler %}
+{% url consulting_register_payment appointment.id illness.code as payment %}
 
   <ul class="nav nav-list">
       {% if not appointment.is_first_appointment %}
@@ -59,6 +60,9 @@
       {% endif %}
       <li class="{% active_leaf request conclusion %}">
         <a href="{{conclusion}}">{% trans 'Conclusiones' %}</a>
+      </li>
+      <li class="{% active_leaf request payment %}">
+        <a href="{{payment}}">{% trans 'Registrar pago' %}</a>
       </li>                                                  
   </ul>
   {% endif %}

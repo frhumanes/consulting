@@ -169,6 +169,10 @@
 
 {% include 'consulting/consultation/report/anxiety_depression.html' %}
 
+{% if task.survey.code = 6 %}
+	{% draw_self_register task.observations %}
+{% endif %}
+
 <section>
 	<dl>
 	    <dt>{% trans 'OBSERVACIONES' %}</dt>

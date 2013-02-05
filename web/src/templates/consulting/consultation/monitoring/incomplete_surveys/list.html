@@ -1,6 +1,6 @@
 {% extends "consulting/consultation/monitoring/index.html" %}
 
-{% load i18n%}
+{% load i18n consulting %}
 
 {% block container %}
 <div class="page-header">
@@ -20,12 +20,20 @@
         <div id="collapse{{task.id}}" class="accordion-body collapse">
           <div class="accordion-inner">
             {% if task.observations %}
+              {% if task.survey.code = 6 %}
+                {% draw_self_register task.observations %}
+              {% else %}
               <h4>{% trans 'Síntomas y/o empeoramiento' %}</h4>
               <p><span>{{task.observations}}</span></p>
+              {% endif %}
             {% endif %}
             <br />
             <div class="btn-group center">
-              <a id="assess{{task.id}}" class=" btn btn-large btn-warning" data-toggle="modal" data-target="#modal" href="{% url consulting_not_assess_task task.id  %}"> <i class="icon-off icon-white"></i> {% trans 'DESCARTAR' %}</a>
+              {% if task.survey.code = 6 %}
+                <a id="assess{{task.id}}" class=" btn btn-large btn-success" data-toggle="modal" data-target="#modal" href="{% url consulting_not_assess_task task.id appointment.id %}"> <i class="icon-ok icon-white"></i> {% trans 'GUARDAR' %}</a>
+              {% else %}
+              <a id="assess{{task.id}}" class=" btn btn-large btn-warning" data-toggle="modal" data-target="#modal" href="{% url consulting_not_assess_task task.id appointment.id %}"> <i class="icon-off icon-white"></i> {% trans 'DESCARTAR' %}</a>
+              {% endif %}
               {% if task.questions.count > 0 %}
                 <a id="edit{{task.id}}" class="btn btn-large btn-info"  data-toggle="modal" data-target="#modal_var" href="{% url consulting_config_variables task.id %}"><i class="icon-th-list icon-white" ></i> {% trans 'VARIABLES' %}</a>
               {% endif %}

@@ -1,7 +1,17 @@
 {% extends "consulting/consultation/monitoring/index.html" %}
 
-{% load i18n %}
+{% load i18n consulting %}
 
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/jquery.handsontable.full.js"></script>
+
+{% endblock %}
+
+{% block css_files %}
+  {{ block.super }}
+  <link href="{{ STATIC_URL }}css/jquery.handsontable.full.css" rel="stylesheet"/>
+{% endblock %}
 
 {% block container %}
     <div class="page-header">
@@ -53,12 +63,43 @@
                 </div>
               </div>
             {% endif %}
-            <div class="control-group">
+            <div id="kind" class="control-group">
               <label class="control-label">
                 {{form.kind.label}}
               </label>
               <div class="controls">
                 {{ form.kind }}
+              </div>
+            </div>
+            <div id="self_register" class="control-group">
+              <label class="control-label">
+                {{ form.table.label }}
+              </label>
+              <div class="controls">
+                <em>{{ form.table.help_text }}</em>
+                {{ form.table }}
+              </div>
+              <div style="overflow-x: auto; overflow-y: visible;" class="row-fluid">
+                <div id="myCarousel" class="carousel slide" data-interval="">
+                  <!-- Carousel items -->
+                  <div class="carousel-inner">
+                  <div class="active item" id="editor" style="margin: 20px 65px; min-height: 150px">
+                    <div id="table" style="margin: 10px auto; "></div>
+                  </div>
+                  {% for t in templates %}
+                  <div class="item" style="margin: 20px 65px; min-height: 150px">
+                    <input type="hidden" name="template{{t.id}}" value="{{t.template}}"/>
+                    <button class="btn btn-block btn-info load">{% trans 'Cargar plantilla' %} {{t.id}}</button>
+                    <br>
+                    {% draw_self_register t.template %}
+                  </div>
+                  {% endfor %}
+                  </div>
+                  <!-- Carousel nav -->
+                  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+                </div>
+                  
               </div>
             </div>
           {% if form.variables.errors %}
@@ -93,17 +134,78 @@
 
 {% endblock container %}
 
+{% block js %}
+  function changed_survey(){
+    switch(parseInt($('#id_survey').val()))
+    {
+    case {{code_variables}}:
+      $('#kind.control-group').show();
+      $('#self_register').hide();
+      $('#variables').show();
+      $('#error_variables').show();
+      break;
+    case {{code_self_register}}:
+      $('#kind.control-group').hide();
+      $('#self_register').show();
+      break;
+    default:
+      $('#kind.control-group').show();
+      $('#self_register').hide();
+      $('#variables').hide();
+      $('#error_variables').hide();   
+    }
+  }
+{% endblock %}
 
 {% block jquery_init %}
   $('ul').addClass("without_decorator");
-
-  $("#id_survey").change(function() {
-        if($(this).val() == {{code_variables}}){
-          $('#variables').css("display", "block");
-          $('#error_variables').css("display", "block");
-        }else{
-          $('#variables').css("display", "none");
-          $('#error_variables').css("display", "none");          
+  changed_survey();
+  $("#id_survey").change(changed_survey);
+  var $container = $("#table");
+  var $parent = $container.parent();
+  $container.handsontable({
+      startRows: 8,
+      startCols: 6,
+      rowHeaders: false,
+      colHeaders: true,
+      {% if form.table.value %}
+      data: {{form.table.value|safe}},
+      {% endif %}
+      minSpareRows: 3,
+      contextMenu: {
+        items: {
+          "row_above": {name: "Insertar fila antes"},
+          "row_below": {name: "Insertar fila después"},
+          "hsep1": "-------",
+          "col_left": {name: "Insertar columna a la izquierda"},
+          "col_right": {name: "Insertar columna a la derecha"},
+          "hsep2": "-------",
+          "remove_row": {name: "Eliminar fila"
+            {% if request.user.get_profile.is_patient %}
+            , disabled: function () {
+                //if first row, disable this option
+                return ($("#table").handsontable('getSelected')[0] === 0);
+              }
+            {% endif %}
+          },
+          "remove_col": {name: "Eliminar columna"},
+          "hsep3": "-------",
+          "undo": {name: "Deshacer"},
+          "redo": {name: "Restaurar"},
         }
+      },
+      onChange: function (change, source) {
+        $('#id_table').val(JSON.stringify(handsontable.getData()));
+      }
   });
+  var handsontable = $container.data('handsontable');
+
+  $('button.load').on('click', function(ev){
+      ev.preventDefault();
+      var jtemplate = $(this).parent().find("input[type='hidden']").val()
+      handsontable.loadData(JSON.parse(jtemplate));
+      $('#id_table').val(jtemplate);
+      $('#myCarousel').carousel(0);
+  });
+
 {% endblock %}

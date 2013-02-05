@@ -37,11 +37,12 @@
             <th>{% trans "Paciente" %}</th>
             <th>{% trans "Tipo de cita" %}</th>
             <th>{% trans "Notas" %}</th>
+            <th></th>
           </tr>
       </thead>
       <tbody>
         {% for event in events.object_list %}
-          {% include "cal/app/appointment.html" %}
+          {% include "cal/includes/appointment_patient.html" %}
         {% endfor %}
       </tbody>
     </table>

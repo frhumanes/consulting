@@ -198,7 +198,7 @@ function set_events(){
         $(this).parent().parent().addClass('error');
       }
     });
-    if(pending && !confirm("{% trans 'Ha dejando '%}"+pending+"{% trans ' preguntas sin contestar. ¿Desea guardar los cambios y responderlas en otro momento?'%}")){
+    if(pending && !confirm("{% trans 'Ha dejado '%}"+pending+"{% trans ' preguntas sin contestar. ¿Desea guardar los cambios y responderlas en otro momento?'%}")){
       e.preventDefault();
       var first = $(this).find('.error,.text-error').first();
       $('html,body').animate({scrollTop: first.offset().top - 100}, 500);

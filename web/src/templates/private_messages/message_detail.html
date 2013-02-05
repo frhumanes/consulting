@@ -19,6 +19,7 @@
    <td style="font-weight: {{ message.unread|yesno:'bold,normal' }}"><span>{{ message.author.get_profile.get_full_name }}</span></td>
 {% endif %}
   <td><span {% if request.user.get_profile.is_doctor %}style="font-weight: {{ message.unread|yesno:'bold,normal' }}"{% endif %}>{{ message.subject|striptags|safe}}</span> - <span class="muted">{{ message.body|striptags|safe|truncatewords:6 }}</span></td>
+  <td>{% if message.attachment %}<i class="icon-file"></i>{% endif %}</td>
   <td>{{ message.sent_at|date:"d/M/y" }}</td>
   {% if match_inbox and request.user.get_profile.is_doctor %}
   <td style="text-align:center;">{% get_anxiety_status_at message.author message.sent_at %}&nbsp;{% get_depression_status_at message.author message.sent_at %}</td>

@@ -1,0 +1,199 @@
+{% extends "ui/app.html" %}
+
+{% load i18n consulting %}
+
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/jquery.handsontable.full.js"></script>
+
+{% endblock %}
+
+{% block css_files %}
+  {{ block.super }}
+  <link href="{{ STATIC_URL }}css/jquery.handsontable.full.css" rel="stylesheet"/>
+{% endblock %}
+
+
+{% block css_inline %}
+@media (min-width: 801px) and (max-width: 1200px){
+  #right_bar, #left_bar{
+   width: 5%;
+   max-width: 75px
+  }
+  #main{
+    width:650px 
+  }
+}
+@media (max-width: 800px){
+  #right_bar, #left_bar{
+   visibility: hidden
+  }
+  #main{
+    width:100% 
+  }
+}
+.handsontable table {
+  text-align: justify;
+}
+{% endblock %}
+
+{% block js %}
+  var show_warning = true;
+  $(window).bind('beforeunload', function() {
+    if (show_warning) {
+        return "{% trans 'Va a abandonar el cuestionario actual. Los datos no guardados se perderán. ¿Desea continuar de todos modos?' %}";
+    }
+  }); 
+  function myReadonlyRenderer(instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.TextCell.renderer.apply(this, arguments);
+    //use the built-in text cell renderer
+
+    if (cellProperties.readOnly) {
+      td.className = 'dimmed';
+      //apply "dimmed" class if cell has readOnly property
+    }
+  }
+{% endblock %}
+
+{% block jquery_init %}
+  $('input[type="checkbox"]').each(function(){
+    if($('label[for="'+this.id+'"]').text().match(/^ Otr/) && $(this).attr('checked')) {
+      $('label[for="'+this.id+'"]').parent().addClass('thumbnail');
+      $('label[for="'+this.id+'"]').after($('input[name="' + this.name + '_value"]'));
+      $('input[name="' + this.name + '_value"]').css('display','block');
+    } else {
+      if($('input[name="' + this.name + '_value"]').css('display') != 'block'){
+        $('input[name="' + this.name + '_value"]').css('display','none');
+      }
+    }
+  });
+
+  $('input[type="checkbox"]').on('change', function(){
+    if($('label[for="'+this.id+'"]').text().match(/^ Otr/)) {
+      if($(this).attr('checked')) {
+        $('label[for="'+this.id+'"]').parent().addClass('thumbnail');
+        $('label[for="'+this.id+'"]').after($('input[name="' + this.name + '_value"]'));
+        $('input[name="' + this.name + '_value"]').css('display','block');
+      } else {
+        $('label[for="'+this.id+'"]').parent().removeClass('thumbnail');
+        $('input[name="' + this.name + '_value"]').css('display','none');
+      }
+    }
+  });
+  
+  $('ul').addClass("without_decorator");
+
+  var $container = $("#table");
+  var $parent = $container.parent();
+  $container.handsontable({
+      startRows: 8,
+      startCols: 6,
+      rowHeaders: true,
+      colHeaders: true,
+      data: {{data|safe}},
+      minSpareRows: 3,
+      cells: function (row, col, prop) {
+        var cellProperties = {
+          type: {renderer: myReadonlyRenderer}
+        };
+        if (row == 0) {
+          cellProperties.readOnly = true;
+        }
+        return cellProperties;
+      },
+      contextMenu: {
+        items: {
+          "row_above": {name: "Insertar fila antes"
+            {% if request.user.get_profile.is_patient %}
+                , disabled: function () {
+                    //if first row, disable this option
+                    return ($("#table").handsontable('getSelected')[0] === 0);
+                  }
+            {% endif %}
+          },
+          "row_below": {name: "Insertar fila después"},
+          {% if request.user.get_profile.is_doctor %}
+          "hsep1": "-------",
+          "col_left": {name: "Insertar columna a la izquierda"},
+          "col_right": {name: "Insertar columna a la derecha"},
+          {% endif %}
+          "hsep2": "-------",
+          "remove_row": {name: "Eliminar fila"
+            {% if request.user.get_profile.is_patient %}
+            , disabled: function () {
+                //if first row, disable this option
+                return ($("#table").handsontable('getSelected')[0] === 0);
+              }
+            {% endif %}
+          },
+          {% if request.user.get_profile.is_patient %}
+          "remove_col": {name: "Eliminar columna"},
+          {% endif %}
+          "hsep3": "-------",
+          "undo": {name: "Deshacer"},
+          "redo": {name: "Restaurar"},
+        }
+      },
+      onChange: function (change, source) {
+        $('#id_table').val(JSON.stringify(handsontable.getData()));
+      }
+  });
+  var handsontable = $container.data('handsontable');
+
+  $('.form').on('submit', function(e){
+    var pending = 0;
+    $(this).find('div.required').each(function(){
+      var answer = $(this).find('input[type="hidden"]').val()
+      if( (typeof answer === 'undefined') || answer == '' ) {
+        pending++;
+        $(this).parent().parent().addClass('error');
+      }
+    });
+    $(this).find('label.control-label').each(function(){
+      if($('input[type="checkbox"][name="'+this.id+'"].required').length && $('input[type="checkbox"][name="'+this.id+'"].required:checked').length == 0) {
+        pending++;
+        $(this).addClass('text-error');
+      }
+    });
+    $(this).find('select.required').each(function() {
+      if( !$(this).val() ){
+        pending++;
+        $(this).parent().parent().addClass('error');
+      }
+    });
+    if(pending && !confirm("{% trans 'Ha dejado '%}"+pending+"{% trans ' preguntas sin contestar. ¿Desea guardar los cambios y responderlas en otro momento?'%}")){
+      e.preventDefault();
+      var first = $(this).find('.error,.text-error').first();
+      $('html,body').animate({scrollTop: first.offset().top - 100}, 500);
+    } else {
+      show_warning = false;
+    }
+  });
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="row-fluid">
+    <div class="page-header">
+      <h1>{% trans 'Registro personal' %} {% if request.user.get_profile.is_doctor %}{% trans 'de' %} {{task.patient.get_profile.get_full_name}}{% endif %}</h1>              
+    </div>
+    <section>
+        <form class="form" method="post" action="{{ request.path }}">
+            {% csrf_token %}
+            {{ form.table }}
+            <div style="overflow-x: auto; overflow-y: visible;" class="center row-fluid">
+              <div id="table" style="white-space: nowrap;"></div>
+            </div>
+            <br>
+            <div class="center" style="min-height:155px">
+                <button type="submit" class="btn btn-primary btn-large" data-loading-text="Guardando...">
+                  {% trans 'Guardar cambios' %}
+                </button>
+            </div>
+        </form>               
+    </section>
+  </div>
+</div>
+
+{% endblock %}

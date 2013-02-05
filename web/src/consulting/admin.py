@@ -8,7 +8,7 @@ from django.utils.translation import ugettext as _
 from consulting.models import *
 
 from django.contrib.auth.models import User
-
+"""
 def user_unicode(self):
     try:
         return  u'%s' % (self.get_profile().get_full_name())
@@ -19,7 +19,7 @@ User.__unicode__ = user_unicode
 
 admin.site.unregister(User)
 admin.site.register(User)
-
+"""
 class AnswerAdmin(admin.StackedInline):
     #fieldsets = [('Medicines', {'fields': ['patient', 'survey', 'task']})]
     model = Answer

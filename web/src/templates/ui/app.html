@@ -47,6 +47,8 @@
     </style>
 
     <script type="text/javascript">
+      function set_events(){};
+
       function fix_bars(){
         if (!$.browser.msie || $.browser.version >= '9') {
           if ($(window).width() >= 1024) {
@@ -105,8 +107,9 @@
           clearInterval(timer);});
       }
       {% endif %}
+      
       {% block js %}
-      {% endblock %}
+      {% endblock js%}
 
       $(document).ready(function(){
         $("#notes").editable().on('shown', function(e, editable) {

@@ -30,6 +30,14 @@ class Survey(TraceableModel):
     class Meta:
         verbose_name = "Cuestionario"
 
+class Template(TraceableModel):
+
+    name = models.CharField(_(u'Nombre'), max_length=100, null=True, unique=True)
+    template = models.TextField(_(u'Plantilla'), max_length=5000)
+
+    class Meta:
+        verbose_name = "Plantilla"
+
 
 class Category(TraceableModel):
     KIND = (

@@ -24,7 +24,7 @@ urlpatterns = patterns('',
         name='consulting_get_medicines'),
 
     ##MONITORING
-    url(r'^consultation/task/(\d+)/not_assess/$',
+    url(r'^consultation/task/(\d+)/not_assess/(\d+)/$',
         consulting_views.not_assess_task,
         name='consulting_not_assess_task'),
 
@@ -36,7 +36,9 @@ urlpatterns = patterns('',
     url(r'^surveys/block/(\d+)/extra_field/$',
         consulting_views.symptoms_worsening,
         name='consulting_symptoms_worsening'),
-
+    url(r'^surveys/register/(\d+)/$', consulting_views.self_register,
+        name='consulting_self_register'),
+    
     ######################## ROLE ADMINISTRATIVE/DOCTOR #######################
     url(r'^newpatient/$', consulting_views.newpatient,
         name='consulting_newpatient'),
@@ -184,6 +186,9 @@ urlpatterns = patterns('',
     url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/new_app/$",
         consulting_views.new_app,
         name='consulting_new_app'),
+    url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\d+)/payment/$",
+        consulting_views.register_payment,
+        name='consulting_register_payment'),
 
     ##########################################
     url(r"^keep_alive/(\d+)/$",

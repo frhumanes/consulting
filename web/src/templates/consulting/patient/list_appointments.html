@@ -15,13 +15,25 @@ function set_events(){
                               $(target).load($(this).attr('href'), set_events);
                             });
     });
+  $('a[rel="popover"]').popover();
   }; 
 {% endblock %}
 
 {% block jquery_init %}
-  $('#all').load('{% url consulting_get_appointments filter_option='all' patient_user_id=patient_user.id %}', set_events);
-  $('#virtual').load('{% url consulting_get_appointments filter_option='virtual' patient_user_id=patient_user.id %}', set_events);
-  $('#face-to-face').load('{% url consulting_get_appointments filter_option='face2face' patient_user_id=patient_user.id %}', set_events);
+  $('#all').load('{% url consulting_get_appointments filter_option='all' patient_user_id=patient_user.id %}?{{request.GET.urlencode}}', set_events);
+  $('#virtual').load('{% url consulting_get_appointments filter_option='virtual' patient_user_id=patient_user.id %}?{{request.GET.urlencode}}', set_events);
+  $('#face-to-face').load('{% url consulting_get_appointments filter_option='face2face' patient_user_id=patient_user.id %}?{{request.GET.urlencode}}', set_events);
+  $('a[rel="popover"]').popover();
+  $('#filter_options').find('input[type="radio"]').click(function(){
+    if($(this).attr('checked')){
+      $(this).attr('checked',true);
+    }
+    $('#filter_options').submit();
+  });
+  $('#filter_options').find('input[type="reset"]').click(function(){
+    $('#filter_options').find('input[type="radio"]').attr('checked',false);
+    $('#filter_options').submit();
+  });
 {% endblock %}
 
 {% block container %}  
@@ -40,6 +52,23 @@ function set_events(){
       <li ><a href="#face-to-face" data-toggle="tab">{% trans 'Presenciales' %}</a></li>
       <li><a href="#virtual" data-toggle="tab">{% trans 'Virtuales' %}</a></li>
     </ul>
+    <div class="">
+    <form action="." method="get" class="form-inline" id="filter_options">
+      <label for="filter_confirmed" class="radio">
+      <i class="icon-ok"></i> 
+      <input type="radio" id="filter_confirmed" name="filter" value='0' {% if request.GET.filter = '0' %}checked="checked"{% endif %}/>
+      {% trans 'Confirmadas' %}</label> | 
+      <label for="filter_reserved" class="radio">
+      <i class="icon-question-sign"></i> 
+      <input type="radio" id="filter_reserved" name="filter" value='1' {% if request.GET.filter = '1' %}checked="checked"{% endif %}/>
+      {% trans 'Reservadas' %}</label> |
+      <label for="filter_canceled" class="radio">
+      <i class="icon-remove-sign"></i> 
+      <input type="radio" id="filter_canceled" name="filter" value='2' {% if request.GET.filter = '2' %}checked="checked"{% endif %}/>
+      {% trans 'Anuladas' %}</label>
+      <input type="reset" value="LIMPIAR" class="pull-right btn btn-info btn-small"></input>
+    </form>
+    </div>
     <div class="tab-content" style="overflow-y: hidden;">
       <div class="tab-pane active" id="all">
         <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />

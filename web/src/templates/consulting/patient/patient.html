@@ -49,7 +49,7 @@
             }
         },
     });
-    var current = {{doctor_form.doctor.value}};
+    var current = {% if doctor_form.doctor.value %}{{doctor_form.doctor.value}}{% else %}0{% endif %};
     if($(this).val() != current){
       $('#assign').fadeIn('fast');
       $('label[for="id_doctor"]').html("{% trans 'Asignar a ' %}:");
@@ -177,9 +177,9 @@
           </label>
           <div class="controls info">
             {{form.nif}}
-            <span class="help-inline">
-              {% trans 'Pacientes con NIF o mayores de edad' %}
-            </span>
+            <em class="help-inline">
+              {{form.nif.help_text}}
+            </em>
             {% for e in form.nif.errors %}
               <span class="help-inline text-error"><strong>{{e}}</strong></span>
             {% endfor %}

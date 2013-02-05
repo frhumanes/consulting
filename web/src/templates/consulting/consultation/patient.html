@@ -73,9 +73,9 @@
           </label>
           <div class="controls">
             {{form.nif}}
-            <span class="help-inline">
-              {% trans 'Pacientes con NIF o mayores de edad' %}
-            </span>
+            <em class="help-inline">
+              {{form.nif.help_text}}
+            </em>
             {% if form.nif.errors %}
               {{ form.nif.errors }}
             {% endif %}

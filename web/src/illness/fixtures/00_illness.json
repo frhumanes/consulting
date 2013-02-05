@@ -5,7 +5,8 @@
     "fields": {
       "surveys": [
         1, 
-        5
+        5, 
+        6
       ], 
       "code": 1, 
       "name": "Ning\u00fan diagn\u00f3stico", 
@@ -20,7 +21,8 @@
     "fields": {
       "surveys": [
         2, 
-        3
+        3,
+        6
       ], 
       "code": 2, 
       "name": "Ansiedad/Depresi\u00f3n", 

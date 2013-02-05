@@ -5,6 +5,7 @@ from datetime import time as ttime
 import time
 import json
 from itertools import chain
+from decimal import Decimal
 
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext as _
@@ -34,6 +35,7 @@ from cal.models import SlotType
 from cal.models import Appointment
 from cal.models import Vacation
 from cal.models import Event
+from cal.models import Payment
 
 from cal.forms import SlotForm
 from cal.forms import SlotTypeForm
@@ -41,6 +43,9 @@ from cal.forms import DoctorSelectionForm
 from cal.forms import AppointmentForm
 from cal.forms import VacationForm
 from cal.forms import EventForm
+from cal.forms import SchedulerForm
+from cal.forms import PaymentForm
+from cal.forms import PaymentFiltersForm
 
 from cal.utils import create_calendar
 from cal.utils import add_minutes
@@ -48,6 +53,7 @@ from cal.utils import get_weekday
 from cal.utils import mnames
 from cal.utils import get_doctor_preferences
 from cal.utils import check_vacations
+from cal.utils import check_scheduled_apps
 
 
 @login_required
@@ -231,6 +237,7 @@ def day(request, year, month, day, id_user, change=None):
         doctor=doctor, month_days=lst, mname=mnames[int(month) - 1],
         events=events, free_intervals=free_intervals,
         patient_user=patient, doctor_preferences=doctor_preferences,
+        birthdays=Profile.objects.filter(dob__month=month, dob__day=day),
         context_instance=RequestContext(request))
 
     return template_data
@@ -336,6 +343,7 @@ def day_consultation(request, year, month, day):
     template_data = dict(year=year, month=month, day=day,
         user=request.user, month_days=lst, mname=mnames[int(month) - 1],
         events=events, free_intervals=free_intervals,
+        birthdays=Profile.objects.filter(dob__month=month, dob__day=day),
         context_instance=RequestContext(request))
 
     return template_data
@@ -343,7 +351,7 @@ def day_consultation(request, year, month, day):
 
 @login_required
 @only_doctor_administrative
-def app_add(request, year, month, day, id_user):
+def app_add(request, year, month, day, id_user, check=False):
     user = User.objects.get(pk=int(id_user))
     if user.get_profile().is_doctor():
         doctor = user
@@ -373,6 +381,7 @@ def app_add(request, year, month, day, id_user):
         day=day, doctor=doctor.id)
 
     if request.method == 'POST':
+        sched_form = SchedulerForm(request.POST)
         request_params = dict([k, v] for k, v in request.POST.items())
         request_params.update({
             'doctor': doctor.id,
@@ -424,15 +433,25 @@ def app_add(request, year, month, day, id_user):
 
         form = AppointmentForm(request_params, user=doctor)
 
-        if form.is_valid():
+        if form.is_valid() and sched_form.is_valid():
             pre_save_instance = form.save(commit=False)
             available, free_intervals = Appointment.objects.availability(
                 doctor,
                 date(int(year), int(month), int(day)),
                 pre_save_instance)
 
-            if available:
+            if available and not check:
                 form.save()
+                if sched_form.is_valid():
+                    number = sched_form.cleaned_data['number']
+                    period = sched_form.cleaned_data['period']
+                    interval = sched_form.cleaned_data['interval']
+                    if number and period:
+                        ok, conflicts = check_scheduled_apps(pre_save_instance, number, period, interval)
+                        for app in ok:
+                            app.pk = None
+                            app.status = settings.RESERVED
+                            app.save()
 
                 if 'appointment' in request.session:
                     return redirect(reverse("consulting_main",
@@ -442,24 +461,49 @@ def app_add(request, year, month, day, id_user):
                     return redirect(reverse("cal.views.day",
                         args=(int(year), int(month), int(day), doctor.id)))
             else:
+                error = False
+                success = False
+                conflicts = []
+                msg = ''
+                if not available:
+                    error = True
+                    msg = _(u'Conflicto de fecha y hora con otra cita. '\
+                        'Por favor, seleccione un intervalo libre')
+                elif sched_form.is_valid():
+                    number = sched_form.cleaned_data['number']
+                    period = sched_form.cleaned_data['period']
+                    interval = sched_form.cleaned_data['interval']
+                    if number and period:
+                        ok, conflicts = check_scheduled_apps(pre_save_instance, number, period, interval)
+                        if conflicts:
+                            error = True
+                            msg = _(u'La reserva de las siguientes citas presentan conflictos de disponibilidad en su agenda y no se crearán automáticamente' )
+                        else:
+                            msg = _(u'Es posible efectuar la reserva de las citas solicitadas' )
+                            error = False
+                            success = True
+
                 return render_to_response("cal/app/add.html",
                     {'form': form,
+                     'scheduler': sched_form,
                      'year': int(year), 'month': int(month), 'day': int(day),
                      'month_days': lst,
                      'mname': mname,
                      'doctor': doctor,
                      'patient_user': patient,
+                     'conflicts': conflicts,
                      'doctor_preferences': doctor_preferences,
                      'free_intervals': free_intervals,
-                     'not_available_error': True,
-                     'error_msg': _('Appointment can not be set. '\
-                        'Please, choose another time interval')},
+                     'not_available_error': error,
+                     'successful_check': success,
+                     'error_msg': msg},
                     context_instance=RequestContext(request))
         else:
             available, free_intervals = Appointment.objects.availability(
                 doctor,
                 date(int(year), int(month), int(day)))
     else:
+        sched_form = SchedulerForm()
         form = AppointmentForm(user=doctor)
         available, free_intervals = Appointment.objects.availability(
             doctor,
@@ -469,6 +513,7 @@ def app_add(request, year, month, day, id_user):
 
     return render_to_response("cal/app/add.html",
                 {'form': form,
+                 'scheduler': sched_form,
                  'year': int(year), 'month': int(month), 'day': int(day),
                  'month_days': lst,
                  'mname': mname,
@@ -481,7 +526,7 @@ def app_add(request, year, month, day, id_user):
 
 @login_required
 @only_doctor_administrative
-def app_edit(request, pk, id_patient=None, id_doctor=None):
+def app_edit(request, pk):
     app = get_object_or_404(Appointment, pk=int(pk))
     if app.date < date.today():
         raise Http404
@@ -498,22 +543,18 @@ def app_edit(request, pk, id_patient=None, id_doctor=None):
     lst = create_calendar(year, month, doctor=doctor)
 
     vacations = check_vacations(doctor, year, month, day)
-
-    if vacations:
-        return render_to_response("cal/app/edit.html",
-                {'vacations': vacations},
-                context_instance=RequestContext(request))
+    available, free_intervals = Appointment.objects.availability(
+            doctor,
+            date(int(year), int(month), int(day)))
 
     doctor_preferences = get_doctor_preferences(year=year, month=month,
         day=day, doctor=doctor.id)
-
 
     if request.method == 'POST':
         request_params = dict([k, v] for k, v in request.POST.items())
         request_params.update({
             'doctor': doctor.id,
             'created_by': request.user.id,
-            'date': app.date,
             'patient': patient.id # WARNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         })
 
@@ -567,6 +608,33 @@ def app_edit(request, pk, id_patient=None, id_doctor=None):
 
         if form.is_valid():
             pre_edit_instance = form.save(commit=False)
+            year = int(pre_edit_instance.date.year)
+            month = int(pre_edit_instance.date.month)
+            day = int(pre_edit_instance.date.day)
+
+            mname = mnames[int(month) - 1]
+
+            lst = create_calendar(year, month, doctor=doctor)
+
+            vacations = check_vacations(doctor, year, month, day)
+
+            doctor_preferences = get_doctor_preferences(year=year, month=month,
+                day=day, doctor=doctor.id)
+
+            if vacations:
+                return render_to_response("cal/app/edit.html",
+                        {'form': form,
+                         'event': app,
+                         'year': year, 'month': month, 'day': day,
+                         'month_days': lst,
+                         'mname': mname,
+                         'doctor': doctor,
+                         'patient_user': patient,
+                         'doctor_preferences': doctor_preferences,
+                         'free_intervals': free_intervals,
+                                'vacations': vacations},
+                        context_instance=RequestContext(request))
+
             available, free_intervals = Appointment.objects.availability(
             doctor,
             date(int(year), int(month), int(day)),
@@ -623,10 +691,13 @@ def app_edit(request, pk, id_patient=None, id_doctor=None):
 
 @login_required
 @only_doctor_administrative
-def app_delete(request):
+def app_delete(request, pk):
     if request.method == 'DELETE':
         data = json.loads(request.raw_post_data)
         app_id = data['app_id']
+        if int(app_id) != int(pk):
+            raise Exception
+
 
         event = get_object_or_404(Appointment, pk=int(app_id))
         event.delete()
@@ -659,6 +730,20 @@ def app_list_patient(request, id_patient):
 
     return template_data
 
+@login_required()
+@only_doctor_administrative
+@paginate(template_name='cal/patient/list.html',
+    list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE)
+def get_appointments(request, year, month, day):
+    logged_user_profile = request.user.get_profile()
+
+    #patient_user_id = request.session['patient_user_id']
+    
+    appointments = Appointment.objects.filter(date__year=int(year), date__month=int(month), date__day=int(day)).order_by('-start_time')
+    
+    template_data = {}
+    template_data.update({'events': appointments})
+    return template_data
 
 @login_required
 @only_doctor
@@ -1315,3 +1400,146 @@ def check_transfer(request, id_patient, doit=False):
         return 1
     else:
         return HttpResponse(simplejson.dumps(data))
+
+@login_required
+@only_doctor_administrative
+@paginate(template_name='cal/payment/list_ajax.html',
+    list_name='events', objects_per_page=settings.OBJECTS_PER_PAGE*2)
+def get_payment_list(request, query_filter=None):
+    apps = Appointment.objects.all().order_by('-date')
+    if query_filter:
+        apps = apps.filter(query_filter)
+    elif request.user.get_profile().is_doctor():
+        apps = apps.filter(doctor=request.user)
+
+    queries_without_page = request.GET.copy()
+    if queries_without_page.has_key('page'):
+        del queries_without_page['page']
+
+    template_data = dict(user=request.user, 
+                        events=apps, 
+                        queries=queries_without_page,
+                        context_instance=RequestContext(request))
+    return template_data
+
+@login_required
+@only_doctor_administrative
+def payment_list(request):
+    form = PaymentFiltersForm()
+    if request.method == "GET":
+        form = PaymentFiltersForm(request.GET, user=request.user)
+        query_filter = Q()
+        exclude_filter = Q()
+        for k, v in request.GET.items():
+            if not v:
+                continue
+            if k.startswith('app_date'):
+                day, month, year  = v.split('/')
+                if k.endswith('0'):
+                    query_filter = query_filter & Q(date__gte=date(int(year),
+                                                                int(month),
+                                                                int(day)))
+                else:
+                    query_filter = query_filter & Q(date__lte=date(int(year),
+                                                                int(month),
+                                                                int(day)))
+            elif k.startswith('payment_date'):
+                day, month, year  = v.split('/')
+                if k.endswith('0'):
+                    query_filter = query_filter \
+                            & Q(payment_appointment__date__gte=date(int(year),
+                                                                int(month),
+                                                                int(day)))
+                else:
+                    query_filter = query_filter \
+                            & Q(payment_appointment__date__lte=date(int(year),
+                                                                int(month),
+                                                                int(day)))
+            elif k.startswith('value'):
+                if k.endswith('0'):
+                    query_filter = query_filter \
+                            & Q(payment_appointment__value__gte=Decimal(v))
+                else:
+                    query_filter = query_filter \
+                            & Q(payment_appointment__value__lte=Decimal(v))
+            elif k.startswith('discount'):
+                if k.endswith('0'):
+                    query_filter = query_filter \
+                            & Q(payment_appointment__discount__gte=int(v))
+                else:
+                    query_filter = query_filter \
+                            & Q(payment_appointment__discount__lte=int(v))
+            elif k.startswith('method'):
+                query_filter = query_filter \
+                    | Q(payment_appointment__method__in=request.GET.getlist(k))
+            elif k.startswith('patient'):
+                query_filter = query_filter \
+                    & Q(patient__id__in=request.GET.getlist(k))
+            elif k.startswith('doctor'):
+                query_filter = query_filter \
+                    & Q(doctor__id__in=request.GET.getlist(k))
+            elif k.startswith('status'):
+                subquery = Q()
+                for op in request.GET.getlist(k):
+                    if int(op)==0:
+                        subquery = subquery \
+                        | Q(payment_appointment__method__gte=0)
+                    elif int(op)==1:
+                        subquery = subquery \
+                            | (Q(status=settings.CONFIRMED) \
+                            & Q(date__gte=date.today()))
+                    elif int(op)==2:
+                        subquery = subquery \
+                                    | Q(status=settings.CONFIRMED) \
+                                    & Q(appointment_conclusions__id__gt=0) \
+                                    & Q(payment_appointment__isnull=True)
+                    elif int(op)==3:
+                        subquery = subquery \
+                                    | Q(status=settings.RESERVED) \
+                                    & Q(date__gte=date.today())
+                    elif int(op)==4:
+                        subquery = subquery \
+                                    | Q(status=settings.CANCELED_BY_DOCTOR) \
+                                    | Q(status=settings.CANCELED_BY_PATIENT)
+                    elif int(op)==5:
+                        subquery = subquery \
+                                    | Q(status=settings.RESERVED) \
+                                    & Q(date__lt=date.today())
+                    elif int(op)==6:
+                        subquery = subquery \
+                                    | Q(status=settings.CONFIRMED) \
+                                    & Q(appointment_conclusions__isnull=True) \
+                                    & Q(appointment_tasks__isnull=True) \
+                                    & Q(date__lt=date.today())
+                query_filter = query_filter & subquery
+        if request.is_ajax():       
+            return get_payment_list(request, query_filter)
+
+    return render_to_response('cal/payment/list.html', {'form': form},
+        context_instance=RequestContext(request))
+
+
+@login_required
+@only_doctor_administrative
+def payment_edit(request, id_appointment):
+    app = get_object_or_404(Appointment, pk=int(id_appointment))
+    payment = None
+    try:
+        payment = Payment.objects.get(appointment=app)
+        form = PaymentForm(instance=payment)
+    except:
+        form = PaymentForm()
+    if request.method == 'POST':
+        form = PaymentForm(request.POST)
+        if payment:
+            form = PaymentForm(request.POST, instance=payment)
+        if form.is_valid():
+            payment = form.save(commit=False)
+            payment.created_by = request.user
+            payment.appointment = app
+            payment.save()
+            return HttpResponseRedirect(reverse('cal.list_payment'))
+
+    return render_to_response('cal/payment/edit.html', {'form': form,
+        'app': app},
+        context_instance=RequestContext(request))

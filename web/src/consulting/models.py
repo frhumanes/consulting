@@ -331,7 +331,9 @@ class Task(TraceableModel):
         return marks
 
     def is_scored(self):
-        return self.survey.code in [settings.ANXIETY_DEPRESSION_SURVEY, settings.ADHERENCE_TREATMENT, settings.PREVIOUS_STUDY, settings.INITIAL_ASSESSMENT]
+        return self.survey.code in [settings.ANXIETY_DEPRESSION_SURVEY, settings.ADHERENCE_TREATMENT, settings.PREVIOUS_STUDY, settings.INITIAL_ASSESSMENT, settings.SELF_REGISTER]
+
+
 
     class Meta:
         verbose_name = "Tarea"

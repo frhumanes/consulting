@@ -5,6 +5,7 @@ import Image
 import StringIO
 import os
 import base64
+import json
 
 BRAND = Site.objects.get_current().name
 DOMAIN = Site.objects.get_current().domain
@@ -133,3 +134,28 @@ def embed_image(imfile, width=None, height=None, format='PNG'):
         r = buf.getvalue()
         buf.close()
         return base64.b64encode(r)[:-1]
+
+@register.simple_tag
+def draw_self_register(jobject):
+    i = 0
+    try:
+        html = '<table class="table table-striped table-bordered" style="background-color: white">'
+        jtable = json.loads(jobject)
+        for row in jtable:
+            if not any(row):
+                continue
+            if not i:
+                html += '<thead>'
+            html += '<tr>'
+            for col in row:
+                col = '' if col is None else col
+                tag = i and 'td' or 'th'
+                html += '<%s>%s</%s>' % (tag, col, tag)
+            html += '</tr>'
+            if not i:
+                html += '</thead>'
+            i += 1
+        html += '</table>'
+    except:
+        html = ''
+    return html

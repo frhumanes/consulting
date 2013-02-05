@@ -2081,7 +2081,7 @@
     "fields": {
       "kind": 0, 
       "code": "ADT", 
-      "text": "\u00bfEn qu\u00e9 grado ha seguido el paciente las recomendaciones y/o tratamiento indicados?", 
+      "text": "\u00bfEn qu\u00e9 grado ha seguido el paciente las recomendaciones y/o tratamiento indicados, siendo 0 un grado bajo y 4 un grado alto de seguimiento?", 
       "required": true, 
       "single": true, 
       "order": null

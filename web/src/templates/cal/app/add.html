@@ -10,7 +10,7 @@
 <div class="page-header">
   <h1>{% trans 'Asignar cita' %}<small> {{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}</small>
     <div class="btn-group pull-right">
-      <a class="btn btn-info" href= "{% if patient_user %}{% url cal.views.day year month day patient_user.id %}{% else %}{% url cal.views.doctor_day doctor.id year month day %}{% endif %}">
+      <a class="btn btn-info" href="{% if patient_user %}{% url cal.views.day year month day patient_user.id %}{% else %}{% url cal.views.doctor_day doctor.id year month day %}{% endif %}">
       <i class="icon-arrow-left icon-white"></i>
       {% trans 'Volver' %}
       </a>
@@ -32,12 +32,25 @@
 
 {% if form %}
 <div class="well">
-<form class="form-horizontal" method="post" action="{{request.path}}">{% csrf_token %}
+<form id="appform" class="form-horizontal" method="post" action="{% if patient_user %}{% url cal.add year month day patient_user.id %}{% else %}{% url cal.add year month day doctor.id%}{% endif %}">{% csrf_token %}
 
   <fieldset>
       {% if not_available_error %}
         <div class="alert alert-error">
             <strong>{% trans '¡Error!' %}</strong>
+            {{ error_msg|escape }}
+            {% if conflicts %}
+              <ul>
+                {% for c in conflicts %}
+                  <li>{{c.date}} :: {{c.start_time|time}}-{{c.end_time|time}}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+        </div>
+      {% endif %}
+      {% if successful_check %}
+        <div class="alert alert-success">
+            <strong>{% trans '¡Bien!' %}</strong>
             {{ error_msg|escape }}
         </div>
       {% endif %}
@@ -78,7 +91,26 @@
         </div>
       </div>
       <!-- END EVENT_TYPE -->
-
+      <!-- STATUS -->
+        {% if form.status.errors %}
+          <div class="control-group error">
+            <label for="id_status" class="control-label">{{form.status.label}}</label>
+            <div class="controls">
+              {{ form.status }}
+              {% for error in form.status.errors %}
+                 <span class="help-inline">{{ error|escape }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <div class="control-group">
+            <label for="id_status" class="control-label">{{form.status.label}}</label>
+            <div class="controls">
+              {{ form.status }}
+            </div>
+          </div>
+        {% endif %}
+        <!-- END STATUS -->
       <!-- START_TIME -->
       {% if form.start_time.errors %}
         <div class="control-group error">
@@ -145,6 +177,38 @@
         </div>
       {% endif %}
       <!-- END DESCRIPTION -->
+      {% if scheduler %}
+        <hr>
+        <div class="center">
+          <div>
+            Rerservar 
+            {% if scheduler.number.errors %}
+              <span class="control-group error" style="display: inline-block">
+            {% endif %}
+            {{scheduler.number}}
+            {% if scheduler.number.errors %}
+              </span>
+            {% endif %}
+            citas como ésta cada
+            {% if scheduler.period.errors %}
+              <span class="control-group error" style="display: inline-block">
+            {% endif %}
+            {{scheduler.period}}
+            {% if scheduler.period.errors %}
+              </span>
+            {% endif %}
+            {{scheduler.interval}} 
+            <a class="btn btn-small btn-info" href="#" id="check_schedule">
+              {% trans 'COMPROBAR' %}
+            </a>
+          </div>
+          <div class="text-info" style="max-width:500px; margin: 0 auto; text-align: justify">
+            {% trans 'Seleccione intervalos de SEMANAS para que la cita se reserve en el mismo día de la semana. En caso contrario la cita se creará en el mismo día del mes sin diferenciar entre días hábiles y/o festivos' %}
+          </div>
+        </div>
+        <hr>
+        <br>
+      {% endif %}
 
       <div class="center">
         <button class="btn btn-large btn-primary" type="submit">
@@ -188,4 +252,7 @@
       $('#id_end_time').removeClass('disabled');
     }
   };
+  $('#check_schedule').on('click', function(){
+    $('#appform').attr('action', "{% if patient_user %}{% url cal.check year month day patient_user.id %}{% else %}{% url cal.check year month day doctor.id%}{% endif %}").submit();
+  });
 {% endblock %}

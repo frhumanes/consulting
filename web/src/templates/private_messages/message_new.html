@@ -33,7 +33,7 @@
         {% endfor %}
     </div>
 {% endif %}
-<form class="form-horizontal" method="post" action="">{% csrf_token %}
+<form class="form-horizontal" method="post" action="" enctype="multipart/form-data">{% csrf_token %}
   <fieldset>
       <!-- RECIPIENT -->
       {% if form.recipient.errors %}
@@ -97,6 +97,25 @@
         </div>
       {% endif %}
       <!-- END BODY -->
+
+      {% if form.attachment.errors %}
+        <div class="control-group error {{request.user.get_profile.is_patient|yesno:'hidden,' }}">
+          <label for="id_attachment" class="control-label">{{form.attachment.label}}</label>
+          <div class="controls">
+            {{ form.attachment }}
+            {% for error in form.attachment.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group {{request.user.get_profile.is_patient|yesno:'hidden,' }}">
+          <label for="id_attachment" class="control-label">{{form.attachment.label}}</label>
+          <div class="controls">
+            {{ form.attachment }}
+          </div>
+        </div>
+      {% endif %}
 
 
 

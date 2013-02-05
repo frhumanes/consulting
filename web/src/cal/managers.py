@@ -101,7 +101,7 @@ class AppointmentManager(Manager):
 
                 free_intervals.append(latest_)
 
-            available = True if len(free_intervals) > 0 else False
+            available = True if len(free_intervals) > 0 else False #WTF!!
 
         if not app_to_check is None and not free_intervals is None:
             matchings = []

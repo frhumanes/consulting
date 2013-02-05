@@ -23,6 +23,10 @@ ul#id_kind_component{
   margin-bottom:5.5px;
 }
 
+td.dimmed{
+  font-weight: bold;
+  text-align: center;
+}
 /* Space out sub-sections more
 -------------------------------------------------- */
 section {

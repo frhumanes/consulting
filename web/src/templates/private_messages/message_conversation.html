@@ -5,6 +5,9 @@
         <strong>{{ message.author.get_profile.get_full_name }}</strong>
     </legend>
     <div><span>{{ message.body|safe|escape|linebreaks }}</span></div>
+     {% if message.attachment %}
+    <span><i class="icon-file icon-white"></i> <a href="{{message.attachment.url}}">{{message.filename}}</a></span>
+    {% endif %}
     <em class="pull-right">{{ message.sent_at|date:"d M y H:i" }}</em>
   </div>
 </div>

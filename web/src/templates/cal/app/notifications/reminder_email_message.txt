@@ -1,8 +1,8 @@
 {% load consulting userprofile l10n i18n %}
 Hola {{user.name}}, 
 
-Le recordamos que tiene una cita asignada para el {{app.date|localize}} a las {{app.start_time|time:"H:i"}} con {{"el/la"|sexify:app.doctor}} {{app.doctor.get_profile|name_with_title}}.
+Le recordamos que tiene una cita {{app.is_confirmed|yesno:'asignada,reservada'}} para el {{app.date|localize}} a las {{app.start_time|time:"H:i"}} con {{"el/la"|sexify:app.doctor}} {{app.doctor.get_profile|name_with_title}}.
 
-Si no puede asistir le rogamos nos lo comunique lo antes posible a través de su área personal (http://{% get_domain %}{% url private_messages_new %}). Otro paciente se lo agradecerá.
+Si {{app.is_confirmed|yesno:'no,realmente'}} puede asistir le rogamos nos lo {{app.is_reserved|yesno:'confirme,comunique'}} lo antes posible a través de su área personal (http://{% get_domain %}{% url private_messages_new %}). Otro paciente se lo agradecerá.
 
 Reciba un cordial saludo del equipo de {% get_brand %}.

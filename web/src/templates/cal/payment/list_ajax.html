@@ -1,0 +1,22 @@
+{% load i18n %}
+
+{% if events.object_list.count > 0 %}
+<table id="events_list" class="table table-hover table-bordered">
+  <thead>
+    <th colspan="2" style="text-align: center">{% trans 'Fecha / Hora' %}</th>
+    <th>{% trans 'Paciente' %}</th>
+    <th>{% trans 'Tipo de cita' %}</th>
+    <th>{% trans 'Estado' %}</th>
+  </thead>
+  <tbody>
+    {% for event in events.object_list %}
+      {% include "cal/includes/appointment_payment.html" %}
+    {% endfor %}
+  </tbody>
+</table>
+{% include 'ui/includes/pagination_bar.html' with objects=events %}
+
+<div id="preview"></div>
+{% else %}
+<div class="alert alert-warning">{% trans "No se ha encontrado ninguna cita que cumpla los criterios marcados." %}</div>
+{% endif %}

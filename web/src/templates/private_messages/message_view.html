@@ -18,12 +18,19 @@
           <blockquote>
             <small>{{message.sent_at|date:"d M y H:i"}}, {{ message.author.get_profile.get_full_name }} {% trans 'escribió' %}:</small>
             <p>{{ message.body|safe|escape|linebreaks }}</p>
+             {% if message.attachment %}
+              <br>
+              <span><i class="icon-file"></i> <strong>{{message.filename}}</strong> {% widthratio message.attachment.size 1024 1 %}Kb <a href="{{message.attachment.url}}">{% trans 'Descargar' %}</a> </span>
+              {% endif %}
           </blockquote>
         {% endwith %}
         </span>
       {% endif %}
 
     </div>
+    {% if message.attachment %}
+    <span><i class="icon-file"></i> <strong>{{message.filename}}</strong> {% widthratio message.attachment.size 1024 1 %}Kb <a href="{{message.attachment.url}}">{% trans 'Descargar' %}</a> </span>
+    {% endif %}
   <!-- END BODY -->
 </div>
 

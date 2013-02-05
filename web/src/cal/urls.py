@@ -39,6 +39,7 @@ urlpatterns = patterns('',
 
 
     url(r"^day/(\d+)/(\d+)/(\d+)/for/(\d+)/$", views.day, name='cal.day'),
+    url(r"^appointments/(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/$", views.get_appointments, name='cal.appointments'),
     url(r"^(?P<change>next|prev)_day/(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/for/(?P<id_user>\d+)/$", views.day, name='cal.day'),
 
 
@@ -93,17 +94,13 @@ urlpatterns = patterns('',
     # Appointment
     # -----------
 
-    url(r'^app/add/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/$', views.app_add,
-        name='cal.add'),
+
     url(r'^app/add/(\d+)/(\d+)/(\d+)/for/(\d+)/$', views.app_add, name='cal.add'),
+    url(r'^app/check/(\d+)/(\d+)/(\d+)/for/(\d+)/$', views.app_add, {'check': True}, name='cal.check'),
 
-    url(r'^app/edit/(\d+)/(\d+)/(\d+)/$', views.app_edit, name='cal.edit'),
-    url(r'^app/edit/(\d+)/(\d+)/$', views.app_edit, name='cal.edit'),
-    url(r'^app/edit/(\d+)/$', views.app_edit, name='cal.edit'),
+    url(r'^app/(\d+)/edit/$', views.app_edit, name='cal.edit'),
 
-    url(r'^app/delete/(\d+)/(\d+)/(\d+)/(\d+)/(\d+)/$',
-        views.app_delete, name='cal.delete'),
-    url(r'^app/delete/$', views.app_delete, name='cal.delete'),
+    url(r'^app/(\d+)/delete/$', views.app_delete, name='cal.delete'),
 
     url(r'^app/list/patient/(\d+)/$', views.app_list_patient,
         name='cal.app_list_patient'),
@@ -152,4 +149,14 @@ urlpatterns = patterns('',
     url(r"^event/delete/$",
         views.delete_event,
         name='cal.delete_event'),
+
+    # -----
+    # payment
+    # -----
+    url(r"^payment/$",
+        views.payment_list,
+        name='cal.list_payment'),
+    url(r"^payment/(\d+)/$",
+        views.payment_edit,
+        name='cal.edit_payment'),
 )

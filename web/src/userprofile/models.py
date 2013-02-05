@@ -56,11 +56,12 @@ class Profile(TraceableModel):
     second_surname = models.CharField(_(u'Segundo Apellido'), max_length=150,
                                         blank=True, default='')
 
-    nif = models.CharField(_(u'NIF'), max_length=9, null=True, unique=True)
+    nif = models.CharField(_(u'DNI/NIF'), max_length=9, null=True, unique=True,
+        help_text=_(u"Requerido para pacientes mayores de 14 años"))
 
     def unique_error_message(self, model_class, unique_check):
         if unique_check == ("nif",):
-            return _(u'Ya existe un Paciente con este NIF')
+            return _(u'Ya existe un Paciente con este DNI/NIF')
         else:
             return super(Profile, self).unique_error_message(
                                                 model_class, unique_check)
@@ -95,6 +96,8 @@ class Profile(TraceableModel):
     def save(self, *args, **kw):
         if self.email == '':
             self.email = None
+        if self.nif == '':
+            self.nif = None
         super(Profile, self).save(*args, **kw)
 
     def get_full_name(self, title=False):
@@ -190,7 +193,7 @@ class Profile(TraceableModel):
 
     def get_next_real_appointment(self):
         appointments = Appointment.objects.filter(
-                            Q(patient=self.user, notify=True),
+                            Q(patient=self.user, notify=True, status=settings.CONFIRMED),
                             Q(date__gt=date.today()) |
                             Q(date=date.today(), start_time__gte=datetime.time(datetime.now()))).order_by(
                             'date')
@@ -208,8 +211,11 @@ class Profile(TraceableModel):
         appointments = Appointment.objects.filter(
                             Q(patient=self.user),
                             Q(date__gt=date.today()) |
-                            Q(date=date.today(), start_time__gte=datetime.time(datetime.now()))).order_by(
-                            'date')
+                            Q(date=date.today(), 
+                              start_time__gte=datetime.time(datetime.now()))
+                            ).exclude(status__in=[settings.CANCELED_BY_PATIENT,
+                                                 settings.CANCELED_BY_DOCTOR]
+                            ).order_by('date')
 
         for app in appointments:
             if not app.has_activity():
@@ -286,6 +292,14 @@ class Profile(TraceableModel):
 
     def get_unread_messages(self):
         return Message.objects.get_pending_for_user(self.user)
+
+    def get_mobile_phone(self):
+        if self.phone1 and int(self.phone1)/int(10e7) in (6, 7):
+            return self.phone1
+        elif self.phone2 and int(self.phone2)/int(10e7) in (6, 7):
+            return self.phone2
+        else:
+            return None
 
     class Meta:
         verbose_name = "Perfil"

@@ -80,6 +80,9 @@ class MedicineForm(forms.ModelForm):
         model = Medicine
         exclude = ('patient', 'appointment', 'is_previous', 'date', 'created_at', 'updated_at', 'dosification')
 
+class SelfRegisterForm(forms.Form):
+    table = forms.CharField(label=_(u'registro'), widget=forms.HiddenInput(),
+        help_text=_(u'Rellene los campos de la tabla. La primera fila se considerará la cabecera de la misma y no podrá ser editada por el paciente.'))
 
 class ConclusionForm(forms.ModelForm):
     observation = forms.CharField(label=_(u'Observaciones'),
@@ -126,6 +129,8 @@ class SelectOtherTaskForm(forms.Form):
     survey = forms.ChoiceField(label=_(u'Encuesta'),
             widget=forms.Select(
                         attrs={'class': 'input-medium search-query span12'}))
+    table = forms.CharField(label=_(u'Plantilla'), widget=forms.HiddenInput(),
+        help_text=_(u'Rellene los campos de la tabla o cargue una plantilla ya existente. La primera fila se considerará la cabecera de la misma y no podrá ser editada por el paciente.'))
     NEXT_SURVEY = [('', _(u'--------'))]
 
     def __init__(self, *args, **kwargs):
@@ -178,11 +183,16 @@ class SelectTaskForm(SelectOtherTaskForm):
             label=_(u'Visible'),
             widget=forms.TextInput(),
             required=True)
+    NEXT_SURVEY = [('', _(u'--------')),
+                    (settings.SELF_REGISTER, _(u'Autoregistro'))]
 
 class SelectVirtualTaskForm(SelectTaskForm):
     def __init__(self, *args, **kwargs):
         super(SelectTaskForm, self).__init__(*args, **kwargs)
-        self.fields['survey'].choices = ((settings.VIRTUAL_SURVEY, _(u'Seguimiento virtual')),)
+        self.fields['survey'].choices = (
+            ('', _(u'--------')),
+            (settings.VIRTUAL_SURVEY, _(u'Seguimiento virtual')),
+            (settings.SELF_REGISTER, _(u'Autoregistro')))
         del self.fields['kind']
 
 

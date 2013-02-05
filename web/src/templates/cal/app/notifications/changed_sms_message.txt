@@ -1,0 +1,5 @@
+{% load consulting userprofile l10n i18n %} 
+Cita {{app.is_confirmed|yesno:'asignada,reservada'}} para el {{orig.date|localize}} a las {{orig.start_time|time:"H:i"}} cambiada al {{app.date|localize}} a las {{app.start_time|time:"H:i"}}. 
+{{app.is_reserved|yesno:'Confirme su asistencia,Comunique si no puede asistir'}}.
+
+{% get_brand %}

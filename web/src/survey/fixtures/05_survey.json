@@ -78,5 +78,18 @@
       "created_by": 1, 
       "multitype": false
     }
+  }, 
+  {
+    "pk": 6, 
+    "model": "survey.survey", 
+    "fields": {
+      "code": 6, 
+      "blocks": [], 
+      "name": "Autoregistro", 
+      "created_at": null, 
+      "updated_at": null, 
+      "created_by": 1, 
+      "multitype": false
+    }
   }
 ]

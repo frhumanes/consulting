@@ -9,6 +9,7 @@ from managers import MessageManager
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.core.mail import send_mail
+import os
 
 class Message(models.Model):
     author = models.ForeignKey(User, verbose_name=_(u'Autor'), related_name='message_author')
@@ -20,12 +21,16 @@ class Message(models.Model):
     unread = models.BooleanField(_(u'No leido'), default=True)
     sent_at = models.DateTimeField(default=datetime.now(),
         verbose_name=_("Enviado"))
+    attachment = models.FileField(_(u'Archivo adjunto'),upload_to="attachments/%Y/%m/%d", blank=True, null=True)
 
     # manager
     objects = MessageManager()
 
     def __unicode__(self):
         return u'Mensaje de %s para %s [%s]' % (self.author, self.recipient, self.sent_at)
+
+    def filename(self):
+        return os.path.basename(self.attachment.name)
 
     def get_responses(self):
         return Message.objects.filter(parent=self)

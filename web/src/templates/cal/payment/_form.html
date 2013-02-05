@@ -1,0 +1,125 @@
+{% load i18n %}
+
+<form class="form-horizontal" method="post" action="{{ request.path }}">
+  {% csrf_token %}
+  <fieldset>
+
+      {% if  form.non_field_errors  %}
+        <div class="alert alert-error">
+            {% for error in form.non_field_errors %}
+                <strong>{% trans '¡Error!' %}</strong>
+                {{ error|escape }}
+            {% endfor %}
+        </div>
+      {% endif %}
+
+      <!-- METHOD -->
+      {% if form.method.errors %}
+        <div class="control-group error">
+          <label for="id_method" class="control-label">{{form.method.label}}</label>
+          <div class="controls">
+            {{ form.method }}
+            {% for error in form.method.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_method" class="control-label">{{form.method.label}}</label>
+          <div class="controls">
+            {{ form.method }}
+          </div>
+        </div>
+      {% endif %}
+      <!-- END METHOD -->
+
+      <!-- DATE -->
+      {% if form.date.errors %}
+        <div class="control-group error">
+          <label for="id_date" class="control-label">{{form.date.label}}</label>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-calendar"></i></span>
+              {{ form.date }}
+            </div>
+            {% for error in form.date.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_date" class="control-label">{{form.date.label}}</label>
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-calendar"></i></span>
+              {{ form.date }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      <!-- END DATE -->
+
+      <!-- VALUE -->
+      {% if form.value.errors %}
+        <div class="control-group error">
+          <label for="id_value" class="control-label">{{form.value.label}}</label>
+          <div class="controls">
+            <div class="input-append">
+              {{ form.value }}
+              <span class="add-on">&euro;</span>
+            </div>
+            {% for error in form.value.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_value" class="control-label">{{form.value.label}}</label>
+          <div class="controls">
+            <div class="input-append">
+              {{ form.value }}
+              <span class="add-on">&euro;</span>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      <!-- END VALUE -->
+
+      <!-- DISCOUNT -->
+      {% if form.discount.errors %}
+        <div class="control-group error">
+          <label for="id_discount" class="control-label">{{form.discount.label}}</label>
+          <div class="controls">
+            <div class="input-append">
+              {{ form.discount }}
+              <span class="add-on">%</span>
+            </div>
+            {% for error in form.discount.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_discount" class="control-label">{{form.discount.label}}</label>
+          <div class="controls">
+            <div class="input-append">
+              {{ form.discount }}
+              <span class="add-on">%</span>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      <!-- END DISCOUNT -->
+
+      <p class="center">
+        <button class="btn btn-large btn-primary" type="submit">
+          <i class="icon-ok-sign icon-white"></i>
+          {% trans 'Guardar cambios' %}</button>
+      </p>
+
+  </fieldset>
+</form>

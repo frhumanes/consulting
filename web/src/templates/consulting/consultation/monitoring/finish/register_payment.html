@@ -1,0 +1,31 @@
+{% extends "consulting/consultation/monitoring/index.html" %}
+
+{% load i18n %}
+
+
+{% block jquery_init %}
+  $('#id_date').datepicker({'format':'dd/mm/yyyy', language: 'es'});
+{% endblock %}
+
+{% block container %}
+  <div class="page-header">
+    <h1>{% trans 'Registrar pago' %}
+            <div class="btn-group pull-right">
+                  <a class="btn btn-info" href="{% url cal.list_payment %}">
+                     <i class="icon-arrow-left icon-white"></i>
+                    {% trans 'Volver' %}
+                  </a>
+            </div>
+        </h1>
+  </div>
+
+<div class="well">
+    <h3>{{appointment.app_type}} :: <span class="text-{{appointment.get_payment_class}}">{{appointment.get_payment_status|upper}}</span></h3>
+</div>
+
+<div class="well">
+{% include 'cal/payment/_form.html' %}
+</div>
+{% endblock %}
+
+

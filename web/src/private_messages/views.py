@@ -52,7 +52,7 @@ def create_message(request, recipient_id=None):
     Create a new message
     """
     if request.method == 'POST':
-        form = MessageForm(request.POST, user=request.user)
+        form = MessageForm(request.POST, request.FILES, user=request.user)
 
         if form.is_valid():
             message = form.save(commit=False)

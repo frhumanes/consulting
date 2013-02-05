@@ -1,10 +1,11 @@
 {% extends "cal/includes/base.html" %}
 
-{% load i18n messages %}
+{% load i18n messages userprofile %}
 
 {% block right %}
   {% include "cal/includes/calendar.html" with doctor=doctor patient_user=patient_user %}
 {% endblock %}
+
 
 {% block container %}
 <div class="page-header">
@@ -26,12 +27,13 @@
       {% else %}
         {% trans "El doctor no está disponible este día." %}
       {% endif %}
+      {% trans "Seleccione otro día distinto." %}
     </p>
   </div>
-{% else %}
+{% endif%}
   {% if request.user.get_profile.is_administrative %}
   <div class="well">
-    <h4>Dr. {{ doctor.get_profile.get_full_name }}</h4>
+    <h4>{{ doctor.get_profile|name_with_title }}</h4>
   </div>
   {% endif %}
   {% if patient_user %}
@@ -83,10 +85,54 @@
           <label for="id_event_type" class="control-label">{{form.notify.label}}</label>
           <div class="controls">
             {{ form.notify }}
-            <span class="help-inline">{{  form.notify.help_text }}</span>
+            <em class="text-info" style="display: inline"> * {{  form.notify.help_text }}</em>
           </div>
         </div>
         <!-- END SLOT_TYPE -->
+
+        <!-- STATUS -->
+        {% if form.status.errors %}
+          <div class="control-group error">
+            <label for="id_status" class="control-label">{{form.status.label}}</label>
+            <div class="controls">
+              {{ form.status }}
+              {% for error in form.status.errors %}
+                 <span class="help-inline">{{ error|escape }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <div class="control-group">
+            <label for="id_status" class="control-label">{{form.status.label}}</label>
+            <div class="controls">
+              {{ form.status }}
+            </div>
+          </div>
+        {% endif %}
+        <!-- END STATUS -->
+
+        <!-- DATE -->
+      {% if form.date.errors %}
+        <div class="control-group error">
+          <label for="id_date" class="control-label">{{form.date.label}}</label>
+          <div class="controls">
+            {{ form.date }}
+            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-calendar"></i>
+            {% for error in form.date.errors %}
+               <span class="help-inline">{{ error|escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="control-group">
+          <label for="id_date" class="control-label">{{form.date.label}}</label>
+          <div class="controls">
+            {{ form.date }}
+            <i style="margin: 0 0 0 -20px; pointer-events: none; position: relative;" class="icon-calendar"></i>
+          </div>
+        </div>
+      {% endif %}
+      <!-- END DATE -->
 
         <!-- START_TIME -->
         {% if form.start_time.errors %}
@@ -174,25 +220,37 @@
     <h3>{% trans 'Eliminar cita' %}</h3>
   </div>
   <div class="modal-body">
-    <p>"{% trans 'Los cambios que va a realizar no se pueden deshacer. ¿Está usted seguro de querer eliminar la cita?' %}"</p>
+    <p>{% trans 'Los cambios que va a realizar no se pueden deshacer. Si sólo desea anular la cita cambie su estado y guarde los cambios. ¿Está usted seguro de querer eliminar la cita?' %}</p>
   </div>
   <div class="modal-footer">
     <a id="confirm-delete" class="btn" data-startmsg="{% trans 'Yes' %}" data-loadingmsg="{% trans 'Removing ... ' %}">{% trans 'Sí' %}</a>
     <a href="#" class="btn btn-primary" data-dismiss="modal">{% trans 'No' %}</a>
   </div>
 </div>
-{% endif %}
+
 
 {% endblock %}
 
 
 {% block jquery_init %}
+  $('#id_date').change(function(){
+    var date = $(this).val().split("/");
+    if(date.length==3){
+    {% if patient_user %}
+      $('#right_bar').load("/calendar/widget/this/"+date[2]+"/"+date[1]+"/"+date[0]+"/for/{{patient_user.id}}/");
+    {% else %}
+      $('#right_bar').load("/calendar/widget/this/"+date[2]+"/"+date[1]+"/"+date[0]+"/for/{{doctor.id}}/");
+    {% endif %} 
+    }   
+  });
+
   $('#id_date').datepicker({'format':'dd/mm/yyyy', weekStart:1, language: 'es'});
   $('#id_start_time').timepicker({'showMeridian': false, 'defaultTime': '{% if  form.start_time.value %}{{ form.start_time.value|time:"H:i" }}{% else %}08:00{% endif %}' });
   $('#id_end_time').timepicker({'showMeridian': false, 'defaultTime': '{{ form.end_time.value|time:"H:i" }}'});
   var app_type_container = $('#id_app_type');
   $('#id_app_type').on("change", update_end_time);
   $('#id_start_time').on("change", update_end_time);
+
   function update_end_time(){
     if (app_type_container.val()){
       var matches = app_type_container.find(':selected').text().match(/(\d+)/);
@@ -229,7 +287,7 @@
     var json = { app_id: {{ event.id }} };
 
     $.ajax({
-      url: '{% url cal.delete %}',
+      url: '{% url cal.delete event.id %}',
       type: 'DELETE',
       dataType: 'json',
       contentType: "application/json",

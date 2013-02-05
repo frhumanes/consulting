@@ -1,0 +1,4 @@
+{% load consulting userprofile l10n i18n %}
+Cita {{app.is_confirmed|yesno:'asignada,reservada'}} para el {{app.date|localize}} a las {{app.start_time|time:"H:i"}} ha sido anulada.
+
+{% get_brand %}

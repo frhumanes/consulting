@@ -27,6 +27,11 @@
       {{ patient_user.get_profile.get_full_name }}
   </h4>
   </div>
+  {% else %}
+      {% for b in birthdays %}
+        <div class="alert alert-warning">
+          <i class="icon-gift"></i> {% trans 'Cumpleaños de' %} <strong>{{b.get_full_name}}</strong></div>
+      {% endfor %}
   {% endif %}
 
   {% if events.object_list.count > 0 %}
@@ -41,11 +46,12 @@
             <th>{% trans "Paciente" %}</th>
             <th>{% trans "Tipo de cita" %}</th>
             <th>{% trans "Notas" %}</th>
+            <th></th>
           </tr>
       </thead>
       <tbody>
         {% for event in events.object_list %}
-          {% include "cal/app/appointment.html" %}
+          {% include "cal/includes/appointment_patient.html" %}
         {% endfor %}
       </tbody>
     </table>
