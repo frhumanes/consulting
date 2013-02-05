@@ -6,7 +6,7 @@
       "created_at": "2013-01-21 13:34:55", 
       "template": "[[\"D\u00eda / Hora\",\"Situaci\u00f3n\",\"Pensamiento \u00bfqu\u00e9 pienso en este momento?\",\"Emoci\u00f3n \u00bfc\u00f3mo me siento?\",\"Conducta \u00bfc\u00f3mo respondo? \u00bfqu\u00e9 hago?\",\"Conclusi\u00f3n \u00bfc\u00f3mo termina la secuencia?\"],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null]]", 
       "updated_at": "2013-01-21 13:34:55", 
-      "created_by": 0, 
+      "created_by": 1, 
       "name": null
     }
   }
