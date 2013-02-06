@@ -55,7 +55,7 @@
         </div>
       {% endif %}
 
-      {% if  form.non_field_errors  %}
+      {% if form.non_field_errors  %}
         <div class="alert alert-error">
             {% for error in form.non_field_errors %}
                 <strong>{% trans '¡Error!' %}</strong>

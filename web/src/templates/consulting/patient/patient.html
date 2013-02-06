@@ -26,7 +26,7 @@
    });
   var load_icon = "<img class='center' src='{{STATIC_URL}}img/ajax-loader.gif' alt='loading...'/>";
 
-
+  {% if patient_user_id %}
   $('#id_doctor').change(function(){
     $.ajax({
         url: '{% url cal.check_transfer patient_user_id %}',
@@ -61,6 +61,7 @@
       $('label[for="id_doctor"]').html("{% trans 'Médico asignado' %}:");
     }
   });
+  
 
   $('#id_confirm_app').change(function(){
     if($(this).is(':checked')){
@@ -91,7 +92,7 @@
                         }
                       });
   });
-
+  {% endif %}
    <!-- LOOK FOR Profession -->
   $("#id_profession").autocomplete({
     source: function(request, response){

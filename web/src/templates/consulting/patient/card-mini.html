@@ -119,17 +119,17 @@
             <td>{{ill.name}}</td>
           </tr>
         {% endfor %}
-        {% if appointment %}
-        <tr>
-          <td colspan="2">
-            <button class="btn btn-small btn-info btn-block" id="change_cie">
-              <i class='icon-check icon-white'></i> {% trans 'Modificar diagnósticos' %}
-            </button>
-          </td>
-        </tr>
-        {% endif %}
       {% else %}
         <tbody style="color:grey">
+      {% endif %}
+      {% if appointment %}
+      <tr>
+        <td colspan="2">
+          <button class="btn btn-small btn-info btn-block" id="change_cie">
+            <i class='icon-check icon-white'></i> {% trans 'Modificar diagnósticos' %}
+          </button>
+        </td>
+      </tr>
       {% endif %}
       {% if user.get_profile.is_doctor %}
         <tr>            
