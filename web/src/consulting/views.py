@@ -1589,7 +1589,7 @@ def generate_username(form):
     return username
 
 
-def sendemail(user, password):
+def sendemail(user, password=None):
     subject = render_to_string('registration/identification_email_subject.txt',
                             {})
     # Email subject *must not* contain newlines

@@ -3,18 +3,8 @@
 
 {% load url from future %}
 
-<script type="text/javascript">
-    function set_events(){
-        $('.applink').on('click', function(ev){
-            ev.preventDefault();
-            $('#myModalLabel').text('{% trans "Citas del " %}'+$(this).attr('title'));
-            $('#myModal').modal('show');
-            $('#myModalBody').load($(this).attr('href'));
-        });
-    };
-</script>
-
 {% if month_days %}
+
 <div id="bigcal" class="row-fluid">
     <div class="span5 btn-toolbar" style="margin-top: 18px">
         <a class="btn btn-primary"  href="{% url 'search_patient_for_action' action='new_app' %}">
@@ -73,7 +63,7 @@
     <div class="pagination pagination-centered span3" >
         <ul>
             <li class="previous">
-                <a href= "javascript:prev();">
+                <a href="javascript:prev();">
                     <i class="icon-chevron-left"></i>
                 </a>
             </li>
@@ -81,7 +71,7 @@
                 <a id="current" href="#" data-date-minviewmode="months" data-date-viewmode="years" data-date-format="mm/yyyy" data-date="{{month}}/{{year}}"><strong>{{ mname }} {{ year }}</strong></a>
             </li>
             <li class="next">
-                <a href= "javascript:next();" class="pull-right">
+                <a href="javascript:next();" class="pull-right">
                     <i class="icon-chevron-right"></i>
                 </a>
             </li>
@@ -112,21 +102,21 @@
             <tr class="center">
             {% for day, apps, current, vacations, events, available in week %}
                 {% if day != 0 %}
-                <td style="text-align: left; {{current|yesno:'background-color:#eeeeee;border: 1px solid #000000;,'}}{% if vacations %}{% if doctor or request.user.get_profile.is_doctor %}background-color:#f2dede; border: 1px solid #b94a48;{% endif %}{% endif %} {% if doctor or request.user.get_profile.is_doctor %}cursor:pointer;{% endif %} width: 14%">
+                <td style="text-align: left; {{current|yesno:'background-color:#eeeeee;border: 1px solid #000000;,'}}{% if vacations %}{% if doctor or request.user.get_profile.is_doctor %}background-color:#f2dede; border: 1px solid #b94a48;{% endif %}{% endif %} cursor:pointer; width: 14%">
                 {% if request.user.get_profile.is_doctor %}
                     {% url 'cal.views.day' year month day request.user.id as target %}
                 {% else %}
-                    {% url 'cal.views.day' year month day doctor.id as target %}
+                    {% if doctor %}
+                        {% url 'cal.views.day' year month day doctor.id as target %}
+                    {% else %}
+                        {% url 'cal.appointments' year=year month=month day=day as target %}
+                    {% endif %}
                 {% endif %}
                 
                     <div>
-                        {% if request.user.get_profile.is_doctor or doctor %}
-                        <a class="daylink" href="{{target}}" onMouseOver="this.className = 'label';" onMouseOut="this.className = '';">
+                        <a class="daylink" href="{{target}}" onMouseOver="this.className = 'label';" onMouseOut="this.className = '';" title="{{day}} de {{mname}} de {{year}}">
                             <span class="{% if forloop.counter > 5 %}text-error{% endif %}">{{day}}</span>
                         </a>
-                        {% else %}
-                            <span class="{% if forloop.counter > 5 %}text-error{% endif %}">{{day}}</span>
-                        {% endif %}
                     </div>
                     <div id="events_list" style="min-height:50px">
                     {% if request.user.get_profile.is_doctor or doctor %}
@@ -155,14 +145,13 @@
                         {% endif %}
                     {% else %}
                       <div style="margin: 0 10px" class="text-info">
-                        <a class="applink text-info" href="{% url 'cal.appointments' year=year month=month day=day %}" title="{{day}} de {{mname}} de {{year}}">
-                        {% trans 'Citas' %}: <strong class="pull-right">{{apps|length}}</strong></a></div>
+                        {% trans 'Citas' %}: <strong class="pull-right">{{apps|length}}</strong></div>
                       <div style="margin: 0 10px" class="text-warning">
-                        {% if events|length %}<a class="text-warning" data-content="<ul class='unstyled'>{% for e in events %}<li>{% if e.get_duration %}{{e.doctor.get_profile|name_with_title}} ::</br>{{e.start_time|time}}-{{e.end_time|time}}{% else %}<i class='icon-gift'></i>{% endif %} {{e.description}}</li> {% endfor %}</ul>" data-html="true" data-trigger="hover" data-placement="top" rel="popover" href="#" data-original-title="{% trans 'Eventos' %} {{day}}/{{month}}/{{year}}">{% endif %}
-                        {% trans 'Eventos' %}: <strong class="pull-right">{{events|length}}</strong>{% if events|length %}</a>{% endif %}</div>
+                        {% if events|length %}<a class="text-warning" data-content="<ul class='unstyled'>{% for e in events %}<li>{% if e.get_duration %}{{e.doctor.get_profile|name_with_title}} ::</br>{{e.start_time|time}}-{{e.end_time|time}}{% else %}<i class='icon-gift'></i>{% endif %} {{e.description}}</li> {% endfor %}</ul>" data-html="true" data-trigger="hover" data-placement="top" rel="popover" href="#" data-original-title="{% trans 'Eventos' %} {{day}}/{{month}}/{{year}}">
+                        {% trans 'Eventos' %}: <strong class="pull-right">{{events|length}}</strong></a>{% else %}&nbsp;{% endif %}</div>
                       <div style="margin: 0 10px" class="text-error">
-                        {% if vacations|length %}<a class="text-error" data-content="<ul class='unstyled'>{% for v in vacations %}<li>{{v.doctor.get_profile|name_with_title}}</li> {% endfor %}</ul>" data-trigger="hover" data-html="true" data-placement="top" rel="popover" href="#" data-original-title="{% trans 'Ausencias' %} {{day}}/{{month}}/{{year}}">{% endif %}
-                        {% trans 'Ausencias' %}: <strong class="pull-right">{{vacations|length}}</strong>{% if vacations|length %}</a>{% endif %}</div>
+                        {% if vacations|length %}<a class="text-error" data-content="<ul class='unstyled'>{% for v in vacations %}<li>{{v.doctor.get_profile|name_with_title}}</li> {% endfor %}</ul>" data-trigger="hover" data-html="true" data-placement="top" rel="popover" href="#" data-original-title="{% trans 'Ausencias' %} {{day}}/{{month}}/{{year}}">
+                        {% trans 'Ausencias' %}: <strong class="pull-right">{{vacations|length}}</strong></a>{% else %}&nbsp;{% endif %}</div>
                     {% endif %}
                     </div>
                 {% else %}
@@ -270,16 +259,38 @@
             };
     $("#searcher").focus();
 
-    $('#calendar').find('td').each(function(){
-        $(this).on('click',function(){
-            var url = $(this).find('a.daylink').attr('href')
-            if(url){
-                window.location.href = url;
-            }  
-        })        
+    function daylinkClicked(ev){
+        var url = $(this).attr('href') ? $(this).attr('href') : $(this).find('a.daylink').attr('href');
+        var title = $(this).attr('title') ? $(this).attr('title') : $(this).find('a.daylink').attr('title');
+        if(url){
+        {% if doctor or request.user.get_profile.is_doctor %}
+            window.location.href = url;
+        {% else %}
+            ev.preventDefault();
+            $('#myModalLabel').text('{% trans "Citas del " %}'+title);
+            $('#myModal').modal('show');
+            $('#myModalBody').load(url);
+        {% endif %}
+        }
+    };
+
+    $('#calendar td').on('click',daylinkClicked);
+    $('.daylink').on('click',daylinkClicked);
+
+    $("#current").click(function(ev){
+        ev.preventDefault();
+        var loader = '<img src="{{ STATIC_URL }}/img/ajax-bar-loader.gif" alt="loading..." />';
+        var width = $('#current').width();
+        $('#current').html(loader);
+        $('#current').width(width);
+        $('#calendar').fadeTo(500, 0.25);
+        {% if doctor %}
+        $('#large').load("{% url 'doctors_calendar_big' id_doctor=doctor.id year=year month=month change='this' %}"); 
+        {% else %}
+        $('#large').load("{% url 'calendar_big' year=year month=month change='this' %}", set_events); 
+        {% endif %}
     });
 
-    $("current").datepicker();
     $('#main').remove();
     $('#right_bar').remove();
 

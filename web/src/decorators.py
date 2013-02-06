@@ -45,7 +45,7 @@ def only_doctor(func):
         if request.user.get_profile().is_doctor():
             return func(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect(reverse('cal.views.main'))
+            return HttpResponseRedirect(reverse('cal.index'))
 
     return _fn
 

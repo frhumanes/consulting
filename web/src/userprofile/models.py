@@ -6,6 +6,8 @@ from django.utils.translation import ugettext as _
 from django.conf import settings
 from django.db.models import Q
 
+from math import floor
+
 from log.models import TraceableModel
 from illness.models import Illness
 from cal.models import Appointment
@@ -174,7 +176,7 @@ class Profile(TraceableModel):
         if not self.dob is None:
             try:
                 delta = datetime.combine(at_date, time()) - datetime.combine(self.dob, time())
-                yo = delta.days / 365
+                yo = int(floor(delta.days / 365.25))
             except:
                 yo = self.get_age()
         return yo

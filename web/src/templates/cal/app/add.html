@@ -70,7 +70,11 @@
         <label for="id_app_type" class="control-label">{{form.app_type.label}}</label>
         <div class="controls">
           <div class="input-prepend span9">
-            <span class="add-on"><a href="{% url cal.add_slot_type %}?next={{request.path}}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a></span>
+            <span class="add-on">
+              {% if request.user.get_profile.is_doctor %}
+              <a href="{% url cal.add_slot_type %}?next={{request.path}}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a>
+              {% endif %}
+            </span>
             {{ form.app_type }}
           </div>
           {% for error in form.app_type.errors %}
@@ -83,7 +87,11 @@
         <label for="id_event_type" class="control-label">{{form.app_type.label}}</label>
         <div class="controls">
           <div class="input-prepend span9">
-            <span class="add-on"><a href="{% url cal.add_slot_type %}?next={{request.path}}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a></span>
+            <span class="add-on">
+            {% if request.user.get_profile.is_doctor %}
+            <a href="{% url cal.add_slot_type %}?next={{request.path}}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a>
+            {% endif %}
+            </span>
             {{ form.app_type }}
           </div>
         </div>

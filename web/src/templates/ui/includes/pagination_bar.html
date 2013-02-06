@@ -55,7 +55,7 @@
 
 <script>
   {% if request.is_ajax %}
-  $('.pagination').find('a').on('click', function(e){
+  $('#paginator.pagination').find('a').on('click', function(e){
     e.preventDefault();
     $(this).parentsUntil('.pagination').parent().parent().parent().load($(this).attr('href'), set_events);
   });
