@@ -105,32 +105,31 @@
     </div>
     <div class="item">
       <table class="table table-condensed" style="color:grey">
-      {% if patient_user.get_profile.illnesses.all.count %}
         <thead>
         <tr>
           <th>CIE-10</th>
           <th>{% trans 'CONDICIÓN' %}</th>
         </tr>
         </thead>
-        <tbody style="color:grey">
+        <tbody style="color:grey" id="cie-tbody">
         {% for ill in patient_user.get_profile.illnesses.all %}
-          <tr>
+          <tr id="cie-{{ill.code}}">
             <td>{{ill.code}}</td>
             <td>{{ill.name}}</td>
           </tr>
         {% endfor %}
-      {% else %}
-        <tbody style="color:grey">
-      {% endif %}
-      {% if appointment %}
       <tr>
         <td colspan="2">
+          {% if appointment %}
           <button class="btn btn-small btn-info btn-block" id="change_cie">
             <i class='icon-check icon-white'></i> {% trans 'Modificar diagnósticos' %}
           </button>
+          {% else %}
+          &nbsp;
+          {% endif %}
         </td>
       </tr>
-      {% endif %}
+
       {% if user.get_profile.is_doctor %}
         <tr>            
           <th colspan="2">{% trans 'NIVEL ESTRATIFICACIÓN' %}<br />

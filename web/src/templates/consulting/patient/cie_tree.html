@@ -72,6 +72,9 @@
         dataType: 'json',
         success: function(response){
           alert(response.data);
+          var code = data.rslt.obj.attr('code');
+          var name = data.rslt.obj.text();
+          $('#cie-tbody').prepend('<tr id="cie-'+code+'"><td>'+code+'</td><td>'+name+'</td></tr>');
         }
       });
   }).bind("uncheck_node.jstree", function (e, data) {
@@ -82,6 +85,8 @@
         dataType: 'json',
         success: function(response){
           alert(response.data);
+          var code = data.rslt.obj.attr('code');
+          $('tr[id="cie-'+code+'"]').remove();
         }
       });
   });
