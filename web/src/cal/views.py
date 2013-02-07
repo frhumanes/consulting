@@ -529,7 +529,7 @@ def app_add(request, year, month, day, id_user, check=False):
 @only_doctor_administrative
 def app_edit(request, pk):
     app = get_object_or_404(Appointment, pk=int(pk))
-    if app.date < date.today():
+    if not app.is_editable():
         raise Http404
 
     patient = app.patient

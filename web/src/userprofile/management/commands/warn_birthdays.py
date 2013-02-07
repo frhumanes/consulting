@@ -31,7 +31,7 @@ class Command(BaseCommand):
                 msg.recipient = doctor.user
                 msg.subject = "%s %s/%s" % (_(u'Recordatorio de cumpleaños'),
                                             today.day, today.month)
-                msg.body = ''
+                msg.body = _(u'Hoy es el cumpleaños de:<br></br>')
                 for b in birthdays:
                     msg.body += b.get_full_name()+'<br>'
                 msg.save()

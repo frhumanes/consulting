@@ -164,7 +164,7 @@ class Appointment(TraceableModel):
         return self == Appointment.objects.filter(patient=self.patient).order_by('date')[0]
 
     def is_editable(self):
-        return datetime.combine(self.date, self.end_time) >= datetime.now()
+        return not self.has_activity() and (datetime.now() - datetime.combine(self.date, self.end_time)).days <= settings.APP_EXPIRATION_DAYS
 
     def has_activity(self):
         return bool(self.appointment_tasks.all().count() or self.appointment_conclusions.all().count())

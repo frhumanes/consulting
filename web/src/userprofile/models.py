@@ -62,9 +62,7 @@ class Profile(TraceableModel):
     illnesses = models.ManyToManyField(Illness,
                                     related_name='illnesses_profiles',
                                     blank=True, null=True,
-            limit_choices_to={
-                'id__in':Illness.objects.filter(cie_code__isnull=True).exclude(code__startswith='|')
-            })
+            limit_choices_to={'cie_code__isnull':True, 'parent__isnull':False})
 
     name = models.CharField(_(u'Nombre'), max_length=150, blank=True)
 

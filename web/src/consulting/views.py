@@ -1425,6 +1425,7 @@ def select_self_administered_survey_monitoring(request, id_appointment, code_ill
                 exc_block = get_object_or_404(Block,code=settings.BEHAVIOR_BLOCK, kind=kind)
             except:
                 kind = settings.GENERAL
+                exc_block = get_object_or_404(Block,code=settings.BEHAVIOR_BLOCK, kind=settings.EXTENSO)
             if code_survey == str(settings.CUSTOM):
                 survey = get_object_or_404(Survey,
                                 code=settings.ANXIETY_DEPRESSION_SURVEY)

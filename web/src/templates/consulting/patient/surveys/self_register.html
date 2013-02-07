@@ -126,7 +126,7 @@
               }
             {% endif %}
           },
-          {% if request.user.get_profile.is_patient %}
+          {% if request.user.get_profile.is_doctor %}
           "remove_col": {name: "Eliminar columna"},
           {% endif %}
           "hsep3": "-------",

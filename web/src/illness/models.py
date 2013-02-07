@@ -19,13 +19,13 @@ class Illness(TraceableModel):
     def __unicode__(self):
         if self.parent:
             if self.code.startswith('|'):
-                children = self.cie_code.all()
-                if children.count() >= 2:
-                    return u'(%s-%s) %s' % (children[0].code,
-                                            children.latest('code').code,
+                children = list(self.cie_code.values('code').order_by('code'))
+                if len(children) >= 2:
+                    return u'(%s-%s) %s' % (children[0]['code'],
+                                            children[-1]['code'],
                                             self.name)
-                elif children.count() == 1:
-                    return u'(%s) %s' % (children[0].code, self.name)
+                elif len(children) == 1:
+                    return u'(%s) %s' % (children[0]['code'], self.name)
                 else:
                     return u'%s' % (self.name)
             else:
