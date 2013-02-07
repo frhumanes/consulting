@@ -1437,7 +1437,7 @@ def get_payment_list(request, query_filter=None):
     apps = Appointment.objects.all().order_by('-date')
     if query_filter:
         apps = apps.filter(query_filter)
-    elif request.user.get_profile().is_doctor():
+    if request.user.get_profile().is_doctor():
         apps = apps.filter(doctor=request.user)
 
     queries_without_page = request.GET.copy()

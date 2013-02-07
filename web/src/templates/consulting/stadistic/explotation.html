@@ -158,9 +158,6 @@ $('#reload_button').on('click',function(){
 {% endblock left%}
 
 {% block right %}
-<script type="text/javascript">
-  $('#right_bar').find('.fixable').removeClass('fixable');
-</script>
 <div class="page-header" style="margin-top:36px">
   <h4>{% trans 'Opciones de filtrado' %}</h4>
 </div>
@@ -269,7 +266,7 @@ $('#reload_button').on('click',function(){
 {% block container %}
 <section>
 <div class="page-header">
-  <h1>{% trans 'Explotación de datos' %}
+  <h1>{% trans 'Explotación de resultados' %}
     <div class="btn-group pull-right">
        <button id="reload_button" type="button" class="btn btn-info" data-loading-text="Cargando..."><i class="icon-repeat icon-white"></i> {% trans "Recargar datos" %}</button>
     </div>

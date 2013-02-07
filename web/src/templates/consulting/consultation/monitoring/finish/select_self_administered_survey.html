@@ -222,6 +222,22 @@
   });
   var handsontable = $container.data('handsontable');
 
+  $('form').on('submit', function(ev){
+    var jtable = handsontable.getData();
+    for (var i = 0; i < jtable.length; i++) {
+      var row = jtable[i];
+      for (var j = 0; j < row.length; j++) {
+        if(row[j] != null)
+        {
+          return true;
+        }
+      }
+    }
+    if(! confirm("{% trans '¿Desea enviar un registro vacio al usuario?' %}")){
+      ev.preventDefault();
+    }
+  });
+
   $('button.load').on('click', function(ev){
       ev.preventDefault();
       var jtemplate = $(this).parent().find("input[type='hidden']").val()

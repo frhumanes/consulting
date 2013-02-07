@@ -2,19 +2,35 @@
 
 {% load i18n userprofile %}
 
+{% block css_files %}
+  {{block.super}}
+  <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet" />
+  <link href="{{ STATIC_URL }}css/jquery-ui-1.9.1.custom.css" rel="stylesheet" />
+{% endblock %}
+
 {% block js_files %}
   {{ block.super }}
   <script src="{{ STATIC_URL }}js/jquery-ui-1.9.1.custom.js"></script>
-{% endblock %}
-
-{% block css_files %}
-  {{ block.super }}
-  <link href="{{ STATIC_URL }}css/jquery-ui-1.9.1.custom.css" rel="stylesheet">
+  <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
+  <script src="{{ STATIC_URL }}js/locales/bootstrap-datepicker.es.js"></script>
 {% endblock %}
 
 {% block js %}
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+function autoSubmit() {
+  $('#form').on("change", function(e) {
+      var $form = $(this);
+      $('#patient_list').fadeTo(500, 0.25);
+      $form.ajaxSubmit({  target: '#patient_list',
+                          clearForm: false,
+                          success: function(){
+                            $('#patient_list').fadeTo(750, 1);
+                        }
+                      });
+  });
 }
 {% endblock %}
 
@@ -59,6 +75,67 @@ String.prototype.capitalize = function() {
     $('#modal_patient .modal-body').load(url,'',$('#modal_patient').modal('show'));
   });
 
+  $('button[type="reset"]').on('click', function(){
+    var $form = $(this).parent();
+    $form.unbind('change');
+    $form.find('.span3:hidden').val('');
+    $(".range").each(function(){
+      var min = $(this).find('input[id$="_0"]').attr('min');
+      var max = $(this).find('input[id$="_0"]').attr('max');
+      $(this).slider("values", 0, min);
+      $(this).slider("values", 1, max);
+    });
+    $form.find('.text-info').html('');
+    $form.find('input').removeAttr('checked');
+    autoSubmit();
+    $('form').change();
+  });
+
+  autoSubmit();
+
+  $(".range").each(function(){
+      var min = $(this).find('input[id$="_0"]').attr('min');
+      var max = $(this).find('input[id$="_0"]').attr('max');
+      var selected_min = ($(this).find('input[id$="_0"]').val()) ? $(this).find('input[id$="_0"]').val() : min;
+      var selected_max = ($(this).find('input[id$="_1"]').val()) ? $(this).find('input[id$="_1"]').val() : max;
+
+      if ($(this).find('input[id$="_1"]').val() | $(this).find('input[id$="_0"]').val()) {
+        var value = selected_min + ' - ' + selected_max;
+        $(this).parentsUntil('div.stop').parent().find('.text-info').html(value);
+        $(this).parent().find('.text-info').html(value);
+      }
+      $(this).slider({
+        range: true,
+        min: min,
+        max: max,
+        values: [eval(selected_min), eval(selected_max)],
+        slide: function( event, ui ) {
+            if (ui.values[0] == ui.values[1]){
+              value = ui.values[0];
+            } 
+            else {
+              value = ui.values[0] + ' - ' + ui.values[1];
+            }
+            $(this).parentsUntil('div.stop').parent().find('.text-info').html(value);
+            $(this).parent().find('.text-info').html(value);
+            $(this).find('input[id$="_0"]').val(ui.values[0]);
+            $(this).find('input[id$="_1"]').val(ui.values[1]);
+        },
+        change: function( event, ui ) {
+            $('form').change();
+        }
+      });
+  });
+
+  $('#id_date_0').datepicker({format: 'dd/mm/yyyy', weekStart: 1, language: 'es'}).on('changeDate',
+      function(ev){/*$('#id_date_0').datepicker('hide');*/
+    });
+  $('#id_date_1').datepicker({format: 'dd/mm/yyyy', weekStart: 1, language: 'es'}).on('changeDate',
+      function(ev){/*$('#id_date_1').datepicker('hide');*/
+    });
+
+  $('ul').addClass("without_decorator");
+
 {% endblock %}
 
 {% block left %}
@@ -75,6 +152,35 @@ String.prototype.capitalize = function() {
       {% endfor %}
     </ul>
   </div>
+  {% endif %}
+  {% if form %}
+  <div class="page-header" style="margin-top:36px">
+  <h4>{% trans 'Opciones de filtrado' %}</h4>
+  </div>
+  <form class="form-inline" id="form" action="{{request.path}}" method="get" accept-charset="utf-8">
+    {% csrf_token %}
+    
+    <div class="accordion" id="accordion_filter">
+    {% for f in form %}
+    <div class="accordion-group stop">
+      <div class="accordion-heading">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_filter" href="#collapse_{{forloop.counter}}">
+        {{f.label}}
+        <span class="pull-right text-info"></span>
+        </a>
+      </div>
+      <div id="collapse_{{forloop.counter}}" class="accordion-body collapse">
+        <div class="accordion-inner">
+          {{f}}
+          {% if f.help_text %}
+            <em class="muted">{{f.help_text}}</em>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+  </form>
   {% endif %}
 {% endblock %}
 

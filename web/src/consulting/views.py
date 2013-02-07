@@ -41,6 +41,7 @@ from formula.models import Variable, Formula, Dimension
 from private_messages.models import Message
 
 from userprofile.forms import ProfileForm, ProfileSurveyForm
+from userprofile.forms import ProfileFiltersForm
 from consulting.forms import MedicineForm, TreatmentForm
 from consulting.forms import  ConclusionForm
 from consulting.forms import  ActionSelectionForm
@@ -1976,19 +1977,58 @@ def get_cie_tree(request, patient_user_id):
 def patient_management(request):
     logged_user_profile = request.user.get_profile()
 
-    if logged_user_profile.is_doctor() or logged_user_profile.is_administrative():
-        doctors = []
-        if logged_user_profile.is_administrative():
-            doctors = Profile.objects.filter(role=settings.DOCTOR)
-        return render_to_response('consulting/pm/index_pm.html', {'doctors': doctors},
-                            context_instance=RequestContext(request))
+    if logged_user_profile.is_administrative():
+        doctors = Profile.objects.filter(role=settings.DOCTOR)
+        return render_to_response('consulting/pm/index_pm.html', {'doctors': doctors}, context_instance=RequestContext(request))
+    elif logged_user_profile.is_doctor():
+        form = ProfileFiltersForm()
+        if request.method == "GET":
+            form = ProfileFiltersForm(request.GET)
+            query_filter = Q()
+            exclude_filter = Q()
+            for k, v in request.GET.items():
+                if not v:
+                    continue
+                if k.startswith('date'):
+                    day, month, year  = v.split('/')
+                    if k.endswith('0'):
+                        query_filter = query_filter & Q(created_at__gte=date(                                        int(year),
+                                                                    int(month),
+                                                                    int(day)))
+                    else:
+                        query_filter = query_filter & Q(created_at__lte=date(int(year),
+                                                                    int(month),
+                                                                    int(day)))
+                elif k.startswith('age'):
+                    if k.endswith('0'):
+                        query_filter = query_filter & Q(dob__lte=datetime.now()-timedelta(days=int(v)*365.25))
+                    else:
+                         query_filter = query_filter & Q(dob__gte=datetime.now()-timedelta(days=int(v)*365.25))
+                elif k.startswith('profession'):
+                    query_filter = query_filter \
+                        & Q(profession__in=request.GET.getlist(k))
+                elif k.startswith('illnesses'):
+                    query_filter = query_filter \
+                        & Q(illnesses__code__in=request.GET.getlist(k))
+                elif k.startswith('marital'):
+                    query_filter = query_filter \
+                        & Q(status__in=request.GET.getlist(k))
+                elif k.startswith('sex'):
+                    query_filter = query_filter \
+                        & Q(sex__in=request.GET.getlist(k))
+                elif k.startswith('education'):
+                    query_filter = query_filter \
+                        & Q(education__in=request.GET.getlist(k))
+            if request.is_ajax():       
+                return patient_list(request, request.user.id, query_filter)
+        return render_to_response('consulting/pm/index_pm.html', {'form': form}, context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect(reverse('consulting_index'))
 
 @login_required()
 @paginate(template_name='consulting/patient/list.html',
     list_name='patients', objects_per_page=settings.OBJECTS_PER_PAGE)
-def patient_list(request, doctor_user_id):
+def patient_list(request, doctor_user_id, query_filter=None):
     patients = []
     if request.user.get_profile().is_administrative():
         if int(doctor_user_id) == request.user.id:
@@ -1999,8 +2039,17 @@ def patient_list(request, doctor_user_id):
     elif request.user.get_profile().is_doctor() and request.user.id == int(doctor_user_id):
         patients = Profile.objects.filter(doctor__id=int(doctor_user_id),
                                           role=settings.PATIENT)
+
+    if query_filter:
+        patients = patients.filter(query_filter)
+
+    queries_without_page = request.GET.copy()
+    if queries_without_page.has_key('page'):
+        del queries_without_page['page']
+    
     template_data = {}
-    template_data.update({'patients': patients})
+    template_data.update({'patients': patients, 
+                          'queries':queries_without_page})
     return template_data
 
 @login_required()
