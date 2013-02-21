@@ -180,7 +180,7 @@ class Appointment(TraceableModel):
             orig = Appointment.objects.get(pk=self.pk)
             if orig.date != self.date or orig.start_time != self.start_time or orig.end_time != self.end_time:
                 status = 'changed'
-            if self.is_canceled():
+            if not orig.is_canceled() and self.is_canceled():
                 status = 'deleted'
             elif orig.is_reserved() and self.is_confirmed():
                 status = 'new'
@@ -202,7 +202,7 @@ class Appointment(TraceableModel):
                 log = AppLog(appointment=self, new_status=self.status)
             else:
                 log = AppLog(appointment=self, pre_status=orig.status, new_status=self.status)
-        log.save()
+            log.save()
 
 
     def delete(self, *args, **kw):
