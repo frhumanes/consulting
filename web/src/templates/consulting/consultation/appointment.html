@@ -28,7 +28,7 @@
       {% if event.patient.get_profile.get_medical_status|length %}
         <strong>{% trans 'Estado' %}</strong>: 
         {% for status in event.patient.get_profile.get_medical_status %}
-          {% status|last != 'success' %}
+          {% if status|last != 'success' %}
           <span class="label label-{{status|last}}">{{status|first|striptags|safe}}</span>
           {% endif %}
         {% endfor %}
