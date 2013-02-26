@@ -25,7 +25,7 @@
             {% for free_interval in free_intervals %}
               {% if free_interval.duration %}
                 <tr>
-                  <td>{% if form %}<a href="#" class="start_time" rel="tooltip" data-position="top" title="{% trans 'Establecer como hora inicial' %}">{% endif %}{{ free_interval.start_time|time:"H:i" }}{% if form %}</a>{% endif %}</td>
+                  <td>{% if form or request.is_ajax %}<a href="#" class="start_time" rel="tooltip" data-position="top" title="{% trans 'Establecer como hora inicial' %}">{% endif %}{{ free_interval.start_time|time:"H:i" }}{% if form %}</a>{% endif %}</td>
                   <td>{{ free_interval.end_time|time:"H:i" }}</td>
                   <td>{{ free_interval.duration }} min</td>
                 </tr>

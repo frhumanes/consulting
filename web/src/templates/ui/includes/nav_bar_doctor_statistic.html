@@ -1,6 +1,6 @@
-{% load i18n%}
+{% load i18n %}
+{% load stadistic %}
 {% load consulting %}
-
 
 {% url stratification_statistic as stratification %}
 {% url explotation_statistic as explotation %}
@@ -11,10 +11,17 @@
       {% trans 'NIVELES DE ESTRATIFICACIÓN' %}
     </a>
   </li>
- <li class="{% active_child request explotation %}">
-    <a href="{% url explotation_statistic %}">
-      {% trans 'EXPLOTACIÓN DE RESULTADOS' %}
+ <li class="dropdown {% active_child request explotation %}">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url explotation_statistic %}">
+        {% trans 'EXPLOTACIÓN DE RESULTADOS' %} <b class="caret"></b>
     </a>
+	  <ul class="dropdown-menu">
+	    {% for b in request.user|get_available_options %}
+	    <li>
+	      <a href="{% url explotation_statistic block_code=b.code %}">{{b.name}}</a>
+	    </li>
+	    {% endfor %}
+	  </ul>
   </li> 
 </ul>
 

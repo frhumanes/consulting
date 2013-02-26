@@ -1,5 +1,7 @@
 # -*- encoding: utf-8 -*-
 from datetime import date
+from datetime import datetime
+from datetime import time
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
@@ -13,7 +15,7 @@ from illness.models import Illness
 from cal.models import Appointment
 from consulting.models import Task, Conclusion, Medicine
 from private_messages.models import Message
-from datetime import date, timedelta, datetime, time
+from survey.models import Block
 
 
 class Profile(TraceableModel):
@@ -52,38 +54,53 @@ class Profile(TraceableModel):
     )
     #username is the nick with you login in app
     user = models.ForeignKey(User, unique=True, related_name='profiles',
-                            help_text='Usuario asociado del sistema')
+                             help_text='Usuario asociado del sistema')
     doctor = models.ForeignKey(User, blank=True, null=True,
-                                related_name='doctor', limit_choices_to = {'profiles__role':settings.DOCTOR})
+                               related_name='doctor',
+                               limit_choices_to={
+                               'profiles__role': settings.DOCTOR
+                               })
     #patients = models.ManyToManyField(User, related_name='patients_profiles',
     #                                    blank=True, null=True)
-    medical_number = models.CharField(_(u'Historia médica'), max_length=9, unique=True, null=True, blank=True)
+    medical_number = models.CharField(_(u'Historia médica'),
+                                      max_length=9,
+                                      unique=True,
+                                      null=True,
+                                      blank=True)
 
-    illnesses = models.ManyToManyField(Illness,
-                                    related_name='illnesses_profiles',
-                                    blank=True, null=True,
-            limit_choices_to={'cie_code__isnull':True, 'parent__isnull':False})
+    illnesses = models.ManyToManyField(
+        Illness,
+        related_name='illnesses_profiles',
+        blank=True,
+        null=True,
+        limit_choices_to={'cie_code__isnull': True, 'parent__isnull': False}
+    )
 
     name = models.CharField(_(u'Nombre'), max_length=150, blank=True)
 
     first_surname = models.CharField(_(u'Primer Apellido'), max_length=150,
-                                    blank=True)
+                                     blank=True)
 
     second_surname = models.CharField(_(u'Segundo Apellido'), max_length=150,
-                                        blank=True, default='')
+                                      blank=True, default='')
 
-    nif = models.CharField(_(u'DNI/NIF'), max_length=9, null=True, unique=True,
-        help_text=_(u"Requerido para pacientes mayores de 14 años"))
+    nif = models.CharField(
+        _(u'DNI/NIF'),
+        max_length=9,
+        null=True,
+        unique=True,
+        help_text=_(u"Requerido para pacientes mayores de 14 años")
+    )
 
     def unique_error_message(self, model_class, unique_check):
         if unique_check == ("nif",):
             return _(u'Ya existe un Paciente con este DNI/NIF')
         else:
-            return super(Profile, self).unique_error_message(
-                                                model_class, unique_check)
+            return super(Profile, self).unique_error_message(model_class,
+                                                             unique_check)
 
     sex = models.IntegerField(_(u'Sexo'), choices=SEX,
-                            default=SEX[0][0], blank=True, null=True)
+                              default=SEX[0][0], blank=True, null=True)
 
     address = models.CharField(_(u'Dirección'), max_length=150, blank=True)
 
@@ -94,28 +111,35 @@ class Profile(TraceableModel):
     dob = models.DateField(_(u'Fecha de Nacimiento'), blank=True, null=True)
 
     status = models.IntegerField(_(u'Estado Civil'), choices=STATUS,
-                                default=STATUS[0][0], blank=True, null=True)
+                                 default=STATUS[0][0], blank=True, null=True)
 
     phone1 = models.CharField(_(u'Teléfono 1'), max_length=9, blank=True)
 
     phone2 = models.CharField(_(u'Teléfono 2'), max_length=9, blank=True)
 
-    emergency_phone = models.CharField(_(u'En caso de emergencia avisar a'), max_length=500, blank=True)
+    emergency_phone = models.CharField(
+        _(u'En caso de emergencia avisar a'),
+        max_length=500,
+        blank=True
+    )
 
     email = models.EmailField(_(u'Correo Electrónico'), max_length=150,
-                                null=True, unique=True, blank=True)
+                              null=True, unique=True, blank=True)
 
     education = models.IntegerField(_(u'Nivel de estudios'), choices=EDUCATION,
-                                blank=True, null=True)
+                                    blank=True, null=True)
 
     profession = models.CharField(_(u'Profesión'), max_length=150, blank=True)
 
-    source = models.CharField(_(u'Fuente de derivación'), max_length=255, 
-                                blank=True)
+    source = models.CharField(_(u'Fuente de derivación'), max_length=255,
+                              blank=True)
 
     role = models.IntegerField(_(u'Rol'), choices=ROLE, blank=True, null=True)
 
-    updated_password_at = models.DateTimeField(_(u'Última vez que actualizó la contraseña'), auto_now_add=True)
+    updated_password_at = models.DateTimeField(
+        _(u'Última vez que actualizó la contraseña'),
+        auto_now_add=True
+    )
 
     def save(self, *args, **kw):
         if self.email == '':
@@ -127,13 +151,13 @@ class Profile(TraceableModel):
         super(Profile, self).save(*args, **kw)
         if not self.user.is_active:
             for app in Appointment.objects.filter(
-                            Q(patient=self.user),
-                            Q(date__gt=date.today()) |
-                            Q(date=date.today(), 
-                              start_time__gte=datetime.time(datetime.now()))
-                            ).exclude(status__in=[settings.CANCELED_BY_PATIENT,
-                                                 settings.CANCELED_BY_DOCTOR]
-                            ).order_by('date'):
+                Q(patient=self.user),
+                Q(date__gt=date.today()) |
+                Q(date=date.today(),
+                  start_time__gte=datetime.time(datetime.now()))
+            ).exclude(
+                status__in=[settings.CANCELED_BY_PATIENT,
+                            settings.CANCELED_BY_DOCTOR]).order_by('date'):
                 app.status = settings.CANCELED_BY_DOCTOR
                 app.save()
         if not self.medical_number and self.role == settings.PATIENT:
@@ -153,8 +177,12 @@ class Profile(TraceableModel):
                     pre = u'D.'
                 elif self.sex == settings.WOMAN:
                     pre = u'D.ª'
-            return u"%s %s %s %s" % (pre, self.name, self.first_surname, self.second_surname)
-        return u"%s %s %s" % (self.name, self.first_surname, self.second_surname)
+            return u"%s %s %s %s" % (pre, self.name,
+                                     self.first_surname,
+                                     self.second_surname)
+        return u"%s %s %s" % (self.name,
+                              self.first_surname,
+                              self.second_surname)
 
     def is_doctor(self):
         return self.role == settings.DOCTOR
@@ -173,7 +201,8 @@ class Profile(TraceableModel):
         yo = ''
         if not self.dob is None:
             try:
-                delta = datetime.combine(at_date, time()) - datetime.combine(self.dob, time())
+                delta = datetime.combine(
+                    at_date, time()) - datetime.combine(self.dob, time())
                 yo = int(floor(delta.days / 365.25))
             except:
                 yo = self.get_age()
@@ -181,7 +210,6 @@ class Profile(TraceableModel):
 
     def get_age(self):
         return self.age_at(date.today())
-        
 
     def get_sex(self):
         if self.sex:
@@ -190,7 +218,7 @@ class Profile(TraceableModel):
 
     def get_education(self):
         if self.education:
-            return self.EDUCATION[self.education-1][1]
+            return self.EDUCATION[self.education - 1][1]
         return ''
 
     def get_status(self):
@@ -222,9 +250,9 @@ class Profile(TraceableModel):
         return status
 
     def get_lastAppointment(self):
-        appointments = Appointment.objects.filter(patient=self.user,
-                        date__lt=date.today()).order_by(
-                        '-date')
+        appointments = Appointment.objects.filter(
+            patient=self.user,
+            date__lt=date.today()).order_by('-date')
 
         if appointments.count() > 0:
             lastAppointment = appointments[0]
@@ -235,10 +263,11 @@ class Profile(TraceableModel):
 
     def get_next_real_appointment(self):
         appointments = Appointment.objects.filter(
-                            Q(patient=self.user, notify=True, status=settings.CONFIRMED),
-                            Q(date__gt=date.today()) |
-                            Q(date=date.today(), start_time__gte=datetime.time(datetime.now()))).order_by(
-                            'date')
+            Q(patient=self.user, notify=True, status=settings.CONFIRMED),
+            Q(date__gt=date.today()) |
+            Q(date=date.today(),
+              start_time__gte=datetime.time(datetime.now()))
+        ).order_by('date')
 
         for app in appointments:
             if not app.has_activity():
@@ -251,13 +280,12 @@ class Profile(TraceableModel):
 
     def get_nextAppointment(self):
         appointments = Appointment.objects.filter(
-                            Q(patient=self.user),
-                            Q(date__gt=date.today()) |
-                            Q(date=date.today(), 
-                              start_time__gte=datetime.time(datetime.now()))
-                            ).exclude(status__in=[settings.CANCELED_BY_PATIENT,
-                                                 settings.CANCELED_BY_DOCTOR]
-                            ).order_by('date')
+            Q(patient=self.user),
+            Q(date__gt=date.today()) |
+            Q(date=date.today(),
+              start_time__gte=datetime.time(datetime.now()))
+        ).exclude(status__in=[settings.CANCELED_BY_PATIENT,
+                              settings.CANCELED_BY_DOCTOR]).order_by('date')
 
         for app in appointments:
             if not app.has_activity():
@@ -269,7 +297,8 @@ class Profile(TraceableModel):
         return nextAppointment
 
     def get_conclusions(self):
-        return Conclusion.objects.filter(appointment__patient=self.user).latest('date')
+        return Conclusion.objects.filter(
+            appointment__patient=self.user).latest('date')
 
     def get_treatment(self, at_date=None):
         if at_date:
@@ -279,32 +308,42 @@ class Profile(TraceableModel):
                                            Q(date__isnull=True) |
                                            Q(date__gte=at_date)).order_by('id')
         else:
-            return Medicine.objects.filter(patient=self.user,date__isnull=True, is_previous=False).order_by('component')
+            return Medicine.objects.filter(
+                patient=self.user,
+                date__isnull=True,
+                is_previous=False).order_by('component')
 
     def get_pending_tasks(self):
         next_app = self.get_nextAppointment()
         tasks = []
         if next_app and datetime.combine(next_app.date, next_app.start_time) >= datetime.now():
-            ddays = (next_app.date-date.today()).days
-            tasks = Task.objects.filter(patient=self.user,
-                                        self_administered=True, 
-                                        completed=False,
-                                        assess=True,
-                                        previous_days__gte=ddays,
-                                        previous_days__gt=0).order_by('-creation_date')
+            ddays = (next_app.date - date.today()).days
+            tasks = Task.objects.filter(
+                patient=self.user,
+                self_administered=True,
+                completed=False,
+                assess=True,
+                previous_days__gte=ddays,
+                previous_days__gt=0).order_by('-creation_date')
         return tasks
 
     def get_assigned_tasks(self):
-        tasks = Task.objects.filter(patient=self.user,
-                                        self_administered=True, 
-                                        completed=False,
-                                        assess=True,
-                                        previous_days__gt=0).order_by('-creation_date')
+        tasks = Task.objects.filter(
+            patient=self.user,
+            self_administered=True,
+            completed=False,
+            assess=True,
+            previous_days__gt=0).order_by('-creation_date')
         return tasks
 
-
     def get_anxiety_status(self, at_date=None, index=False, html=False):
-        filter_option = Q(patient=self.user, survey__code__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True, assess=False)
+        filter_option = Q(patient=self.user,
+                          survey__code__in=(
+                          settings.INITIAL_ASSESSMENT,
+                          settings.ANXIETY_DEPRESSION_SURVEY
+                          ),
+                          completed=True,
+                          assess=False)
         if at_date:
             filter_option = filter_option & Q(end_date__lte=at_date)
         try:
@@ -313,8 +352,9 @@ class Profile(TraceableModel):
                 if status != '':
                     break
             if html:
-                if status[0]  != ' ':
-                    return '<span style="min-width:100px" class="label label-%s" >%s</span>' % (status[1], status[0])
+                if status[1] != 'success':
+                    return '<span style="min-width:100px" class="label \
+                        label-%s" >%s</span>' % (status[1], status[0])
                 return ''
             else:
                 return status
@@ -322,7 +362,13 @@ class Profile(TraceableModel):
             return ''
 
     def get_depression_status(self, at_date=None, index=False, html=False):
-        filter_option = Q(patient=self.user, survey__code__in=(settings.INITIAL_ASSESSMENT, settings.ANXIETY_DEPRESSION_SURVEY), completed=True, assess=False)
+        filter_option = Q(patient=self.user,
+                          survey__code__in=(
+                          settings.INITIAL_ASSESSMENT,
+                          settings.ANXIETY_DEPRESSION_SURVEY
+                          ),
+                          completed=True,
+                          assess=False)
         if at_date:
             filter_option = filter_option & Q(end_date__lte=at_date)
         try:
@@ -331,22 +377,96 @@ class Profile(TraceableModel):
                 if status != '':
                     break
             if html:
-                if status[0] != ' ':
-                    return '<span style="min-width:100px" class="label label-%s" >%s</span>' % (status[1], status[0])
+                if status[1] != 'success':
+                    return '<span style="min-width:100px" class="label \
+                        label-%s" >%s</span>' % (status[1], status[0])
                 return ''
             else:
                 return status
         except:
             return ''
 
+    def get_unhope_status(self, at_date=None, index=False, html=False):
+        filter_option = Q(patient=self.user,
+                          survey__code=settings.UNHOPE_SURVEY,
+                          completed=True,
+                          assess=False)
+        if at_date:
+            filter_option = filter_option & Q(end_date__lte=at_date)
+        try:
+            for task in Task.objects.filter(filter_option).order_by('-end_date'):
+                status = task.get_unhope_status(index)
+                if status != '':
+                    break
+            if html:
+                if status[1] != 'success':
+                    return '<span style="min-width:100px" class="label \
+                        label-%s" >%s</span>' % (status[1], status[0])
+                return ''
+            else:
+                return status
+        except:
+            return ''
+
+    def get_ybocs_status(self, at_date=None, index=False, html=False):
+        filter_option = Q(patient=self.user,
+                          survey__code=settings.YBOCS_SURVEY,
+                          completed=True,
+                          assess=False)
+        if at_date:
+            filter_option = filter_option & Q(end_date__lte=at_date)
+        try:
+            for task in Task.objects.filter(filter_option).order_by('-end_date'):
+                status = task.get_ybocs_status(index)
+                if status != '':
+                    break
+            if html:
+                if status[1] != 'success':
+                    return '<span style="min-width:100px" class="label \
+                        label-%s" >%s</span>' % (status[1], status[0])
+                return ''
+            else:
+                return status
+        except:
+            return ''
+
+    def get_suicide_status(self, at_date=None, index=False, html=False):
+        filter_option = Q(patient=self.user,
+                          survey__code=settings.UNHOPE_SURVEY,
+                          completed=True,
+                          assess=False)
+        if at_date:
+            filter_option = filter_option & Q(end_date__lte=at_date)
+        try:
+            for task in Task.objects.filter(filter_option).order_by('-end_date'):
+                status = task.get_suicide_status(index)
+                if status != '':
+                    break
+            if html:
+                if status[1] != 'success':
+                    return '<span style="min-width:100px" class="label \
+                        label-%s" >%s</span>' % (status[1], status[0])
+                return ''
+            else:
+                return status
+        except:
+            return ''
+
+    def get_medical_status(self, at_date=None, index=False, html=False):
+        statuses = [self.get_anxiety_status(at_date, index, html),
+                    self.get_depression_status(at_date, index, html),
+                    self.get_unhope_status(at_date, index, html),
+                    self.get_suicide_status(at_date, index, html),
+                    self.get_ybocs_status(at_date, index, html)]
+        return filter(None, statuses)
 
     def get_unread_messages(self):
         return Message.objects.get_pending_for_user(self.user)
 
     def get_mobile_phone(self):
-        if self.phone1 and int(self.phone1)/int(10e7) in (6, 7):
+        if self.phone1 and int(self.phone1) / int(10e7) in (6, 7):
             return self.phone1
-        elif self.phone2 and int(self.phone2)/int(10e7) in (6, 7):
+        elif self.phone2 and int(self.phone2) / int(10e7) in (6, 7):
             return self.phone2
         else:
             return None
@@ -359,10 +479,24 @@ class Profile(TraceableModel):
                 illnesses.add(parent)
                 parent = parent.parent
         return illnesses
-                
+
     def is_banned(self):
-        return self.user.banned_user.filter(Q(end_time__isnull=True) | 
-                                    Q(end_time__gte=datetime.now()))
+        return self.user.banned_user.filter(Q(end_time__isnull=True) |
+                                            Q(end_time__gte=datetime.now()))
+
+    def get_scored_blocks(self, statistic=False):
+        if self.is_doctor():
+            if statistic:
+                return Block.objects.filter(
+                    is_scored=True).values('code', 'name').distinct()
+            else:
+                return Block.objects.filter(
+                    locks_tasks__patient__profiles__doctor=self.user,
+                    is_scored=True).values('code', 'name').distinct()
+        else:
+            return Block.objects.filter(
+                blocks_tasks__patient=self.user,
+                is_scored=True).values('code', 'name').distinct()
 
     class Meta:
         verbose_name = "Perfil"
