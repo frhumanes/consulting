@@ -8,7 +8,7 @@ class IllnessAdmin(admin.ModelAdmin):
     fieldsets = [(None, {'fields': ['code', 'name', 'surveys']})]
     list_display = ('code', 'name')
     search_fields = ('code', 'name')
-    ordering = ('code', )
+    ordering = ('id', )
     formfield_overrides = {
         models.ManyToManyField: {'widget': forms.CheckboxSelectMultiple},
     }

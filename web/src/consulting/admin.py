@@ -108,7 +108,7 @@ admin.site.register(Result, ResultAdmin)
 
 
 class ConclusionAdmin(admin.ModelAdmin):
-    fieldsets = [(None, {'fields': ['appointment', 'observation', 'recommendation']}),
+    fieldsets = [(None, {'fields': ['appointment', 'observation', 'recommendation', 'extra']}),
         (_(u'Registro'), {
             'classes': ('collapse',),
             'fields': ('created_by',)
@@ -116,10 +116,10 @@ class ConclusionAdmin(admin.ModelAdmin):
     list_filter = ('appointment__patient', 
                    'appointment__patient__profiles__doctor',
                    'date')
-    list_display = ('appointment', 'observation',
-                    'recommendation', 'date')
+    list_display = ('appointment', 'date')
     search_fields = ('observation',
-                    'recommendation')
+                    'recommendation',
+                    'extra')
     ordering = ('appointment',)
 
 admin.site.register(Conclusion, ConclusionAdmin)

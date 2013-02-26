@@ -38,7 +38,13 @@
 					<dd><em>{{m.posology|floatformat:"-4" }}</em> {% trans 'mg/día' %} {% if m.dosification %} {% trans 'repartidos en' %} {{m.dosification}}{% endif %}</dd>
 				</dl>
 				{% endif %}
-			{% endfor %}&nbsp;
+			{% endfor %}
+			{% if patient_user.get_conclusions.extra %}
+				<dl class="dl-horizontal">
+					<dt>{% trans 'Otros' %}</dt>
+					<dd>{{patient_user.get_conclusions.extra}}</dd>
+				</dl>
+			{% endif %}&nbsp;
 			</div>
 		</div>
 	</div>

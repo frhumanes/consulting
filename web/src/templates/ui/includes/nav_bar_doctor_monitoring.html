@@ -14,6 +14,7 @@
 {% url consulting_new_app appointment.id illness.code as scheduler %}
 {% url consulting_register_payment appointment.id illness.code as payment %}
 
+
   <ul class="nav nav-list">
       {% if not appointment.is_first_appointment %}
       <li class="nav-header">{% trans 'COMPLETAR' %}</li>
@@ -34,13 +35,6 @@
             {% trans 'Cuestionario<br>Heteroadministrado' %}
           </a>
       </li>
-      {% if not appointment.is_first_appointment %}
-      <li>
-          <a href="{{treatment_survey}}">
-            {% trans 'Cuestionario de<br>Adherencia al tratamiento' %}
-          </a>
-      </li>
-      {% endif %}
       <li class="divider"></li>
       <li class="{% active_leaf request provisional_reports %}">
         <a href="{{provisional_reports}}">{% trans 'INFORMES' %}</a>

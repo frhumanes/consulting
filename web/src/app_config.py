@@ -8,7 +8,8 @@ DATE_INPUT_FORMAT = "%d/%m/%Y"
 #PASSWORD
 PASSWORD_MIN_LENGTH = 8
 DEFAULT_PASSWORD = '1234ABCD'
-PASSWORD_EXPIRATION_DAYS = 6 * 30 # According LOPD it should be 90 (3 months)
+# According LOPD it should be 90 (3 months)
+PASSWORD_EXPIRATION_DAYS = 6 * 30
 PASSWORD_WARNING_DAYS = 15
 
 
@@ -41,7 +42,7 @@ OTHER = 6
 
 
 #SEX
-UNISEX =0
+UNISEX = 0
 WOMAN = 1
 MAN = 2
 
@@ -69,14 +70,24 @@ ANXIETY_DEPRESSION_SURVEY = 3
 ADHERENCE_TREATMENT = 4
 VIRTUAL_SURVEY = 5
 SELF_REGISTER = 6
-CUSTOM = 9
+EPQR_SURVEY = 7
+UNHOPE_SURVEY = 8
+YBOCS_SURVEY = 9
+OCIR_SURVEY = 10
+CUSTOM = 999
+
 
 #BLOCK
 ADMINISTRATIVE_DATA = 1
 PRECEDENT_RISK_FACTOR = 2
 ANXIETY_DEPRESSION_BLOCK = 3
 BEHAVIOR_BLOCK = 4
+ADHERENCE_TREATMENT_BLOCK = 6
 VIRTUAL_BLOCK = 7
+EPQR_BLOCK = 8
+UNHOPE_BLOCK = 9
+YBOCS_BLOCK = 10
+OCIR_BLOCK = 11
 
 
 #KIND SURVEY
@@ -123,29 +134,45 @@ EMAIL_USE_TLS = True
 
 #SMS Settings
 EMAIL2SMS = False
-PHONE_PREFIX = '+34' # Spain
-SMS_GATEWAY='@echoemail.net'
+PHONE_PREFIX = '+34'
+SMS_GATEWAY = '@echoemail.net'
 
 #RANGES
-AVE = {140:'', 200:u'importante', 300:u'bastante alto',9999:u'muy alto'}
-BECK = {10:[u' ', 'success'], 
-		13:[u'Leve perturbación <br>del estado de ánimo', 'info'],
-		19:[u'Depresión leve', 'default'],
-		30:[u'Depresión moderada', 'warning'],
-		40:[u'Depresión grave', 'important'],
-		63:[u'Depresión muy grave', 'inverse']}
-HAMILTON = {18:[u' ', 'success'],
-			28:[u'Ansiedad leve', 'default'],
-			38:[u'Ansiedad moderada', 'warning'],
-			48:[u'Ansiedad grave', 'important'],
-			56:[u'Ansiedad muy grave', 'inverse']}
+AVE = {140: '', 200: u'importante', 300: u'bastante alto', 9999: u'muy alto'}
+BECK = {10: [u'Depresión ausente', 'success'],
+        13: [u'Leve perturbación <br>del estado de ánimo', 'info'],
+        19: [u'Depresión leve', 'default'],
+        30: [u'Depresión moderada', 'warning'],
+        40: [u'Depresión grave', 'important'],
+        63: [u'Depresión muy grave', 'inverse']}
+HAMILTON = {18: [u'Ansiedad ausente', 'success'],
+            28: [u'Ansiedad leve', 'default'],
+            38: [u'Ansiedad moderada', 'warning'],
+            48: [u'Ansiedad grave', 'important'],
+            56: [u'Ansiedad muy grave', 'inverse']}
+EPQR_A = {'N': {MAN: 3.70, WOMAN: 3.77},
+          'E': {MAN: 2.70, WOMAN: 3.17},
+          'S': {MAN: 3.75, WOMAN: 3.01},
+          'P': {MAN: 1.71, WOMAN: 1.55}}
+UNHOPE = {8: [u'Grado de desesperanza bajo <br>o ausente', 'success'],
+          21: [u'Grado de desesperanza alto', 'important']}
+SUICIDE = {4: [u'Riesgo de suicidio mínimo <br>o nulo', 'success'],
+           9: [u'Riesgo leve de suicidio', 'default'],
+           15: [u'Riesgo moderado de suicidio', 'warning'],
+           21: [u'Riesgo alto de suicidio', 'important']}
+Y_BOCS = {8: [u'Obsesión-compulsión ausente', 'success'],
+          15: [u'Obsesión-compulsión leve', 'default'],
+          24: [u'Obsesión-compulsión moderada ', 'warning'],
+          32: [u'Obsesión-compulsión grave', 'important'],
+          41: [u'Obsesión-compulsión muy grave ', 'inverse']}
+OCIR = {}
 
 #WKHTMLTOPDF
 WKHTMLTOPDF_CMD = '/usr/local/bin/wkhtmltopdf'
-WKHTMLTOPDF_CMD_OPTIONS = {'encoding': 'utf8', 
-							'quiet': True,
-							'margin-bottom':20,
-							'margin-right':20,
-							'margin-left':20,
-							'margin-top':30,
-							'header-spacing':10,}
+WKHTMLTOPDF_CMD_OPTIONS = {'encoding': 'utf8',
+                           'quiet': True,
+                           'margin-bottom': 20,
+                           'margin-right': 20,
+                           'margin-left': 20,
+                           'margin-top': 30,
+                           'header-spacing': 10}

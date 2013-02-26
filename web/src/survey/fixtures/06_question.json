@@ -2081,7 +2081,7 @@
     "fields": {
       "kind": 0, 
       "code": "ADT", 
-      "text": "\u00bfEn qu\u00e9 grado ha seguido el paciente las recomendaciones y/o tratamiento indicados, siendo 0 un grado bajo y 4 un grado alto de seguimiento?", 
+      "text": "\u00bfEn qu\u00e9 grado ha seguido el paciente las recomendaciones y/o tratamiento indicados?", 
       "required": true, 
       "single": true, 
       "order": null
@@ -2109,6 +2109,978 @@
       "required": false, 
       "single": true, 
       "order": null
+    }
+  }, 
+  {
+    "pk": 187, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR1", 
+      "text": "\u00bfTiene con frecuencia subidas y bajadas de su estado de \u00e1nimo?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 188, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR2", 
+      "text": "\u00bfEs Vd. una persona habladora?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 189, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR3", 
+      "text": "\u00bfLo pasar\u00eda muy mal si viese sufrir a un ni\u00f1o o a un animal?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 190, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR4", 
+      "text": "\u00bfEs Vd. m\u00e1s bien animado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 191, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR5", 
+      "text": " \u00bfAlguna vez ha deseado m\u00e1s ayudarse a s\u00ed mismo/a que compartir con otros?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 192, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR6", 
+      "text": " \u00bfTomar\u00eda drogas que pudieran tener efectos desconocidos o peligrosos?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 193, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR7", 
+      "text": "\u00bfHa acusado a alguien alguna vez de hacer algo sabiendo que la culpa era de Vd.?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 194, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR8", 
+      "text": " \u00bfPrefiere actuar a su modo en lugar de comportarse seg\u00fan las normas?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 195, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR9", 
+      "text": "\u00bfSe siente con frecuencia harto/a (\u00abhasta la coronilla\u00bb)?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 196, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR10", 
+      "text": "\u00bfHa cogido alguna vez algo que perteneciese a otra persona (aunque sea un broche o un bol\u00edgrafo)?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 197, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR11", 
+      "text": "\u00bfSe considera una persona nerviosa?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 198, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR12", 
+      "text": "\u00bfPiensa que el matrimonio est\u00e1 pasado de moda y que se deber\u00eda suprimir?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 199, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR13", 
+      "text": "\u00bfPodr\u00eda animar f\u00e1cilmente una fiesta o reuni\u00f3n social aburrida?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 200, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR14", 
+      "text": " \u00bfEs Vd. una persona demasiado preocupada?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 201, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR15", 
+      "text": "\u00bfTiende a mantenerse callado/a (o en un 2\u00b0 plano) en las reuniones o encuentros sociales?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 202, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR16", 
+      "text": " \u00bfCree que la gente dedica demasiado tiempo para asegurarse el futuro mediante ahorros o seguros?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 203, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR17", 
+      "text": "\u00bfAlguna vez ha hecho trampas en el juego?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 204, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR18", 
+      "text": "\u00bfSufre Vd. de los nervios?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 205, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR19", 
+      "text": "\u00bfSe ha aprovechado alguna vez de otra persona?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 206, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR20", 
+      "text": "Cuando est\u00e1 con otras personas, \u00bfes Vd. m\u00e1s bien callado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 207, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR21", 
+      "text": "\u00bfSe siente muy solo/a con frecuencia?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 208, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR22", 
+      "text": "\u00bfCree que es mejor seguir las normas de la sociedad que las suyas propias?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 209, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR23", 
+      "text": "\u00bfLas dem\u00e1s personas le consideran muy animado/a?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 210, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "EPQR24", 
+      "text": "\u00bfPone en pr\u00e1ctica siempre lo que dice?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 211, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U1", 
+      "text": "Espero el futuro con esperanza y entusiasmo", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 212, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U2", 
+      "text": "Puedo darme por vencido, renunciar, ya que no puedo hacer mejor las cosas por m\u00ed mismo", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 213, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U3", 
+      "text": "Cuando las cosas van mal me alivia saber que las cosas no pueden permanecer tiempo as\u00ed", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 214, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U4", 
+      "text": "No puedo imaginar como ser\u00e1 mi vida dentro de 10 a\u00f1os", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 215, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U5", 
+      "text": "Tengo bastante tiempo para llevar a cabo las cosas que quisiera poder hacer", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 216, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U6", 
+      "text": "En el futuro, espero conseguir lo que me pueda interesar ", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 217, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U7", 
+      "text": "Mi futuro me parece oscuro", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 218, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U8", 
+      "text": "Espero m\u00e1s cosas buenas de la vida que lo que la gente suele conseguir por t\u00e9rmino medio", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 219, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U9", 
+      "text": "No logro hacer que las cosas cambien, y no existen razones para creer que pueda en el futuro", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 220, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U10", 
+      "text": "Mis pasadas experiencias me han preparado bien para mi futuro ", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 221, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U11", 
+      "text": "Todo lo que puedo ver por delante de m\u00ed es m\u00e1s  desagradable que agradable", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 222, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U12", 
+      "text": "No espero conseguir lo que realmente deseo", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 223, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U13", 
+      "text": "Cuando miro hacia el futuro, espero que ser\u00e9 m\u00e1s feliz de lo que soy ahora", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 224, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U14", 
+      "text": "Las cosas no marchan como yo quisiera", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 225, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U15", 
+      "text": "Tengo una gran confianza en el futuro", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 226, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U16", 
+      "text": "Nunca consigo lo que deseo, por lo que es absurdo desear cualquier cosa", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 227, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U17", 
+      "text": "Es muy improbable que pueda lograr una satisfacci\u00f3n real en el futuro", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 228, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U18", 
+      "text": "El futuro me parece vago e incierto", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 229, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U19", 
+      "text": "Espero m\u00e1s bien \u00e9pocas buenas que malas", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 230, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "U20", 
+      "text": "No merece la pena que intente conseguir algo que desee, porque probablemente no lo lograr\u00e9", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 231, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB1", 
+      "text": "\u00bfQu\u00e9 proporci\u00f3n de su tiempo se ve ocupado por pensamientos obsesivos?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 232, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB2", 
+      "text": "\u00bfHasta que grado interfieren sus pensamientos obsesivos con su funcionamiento laboral, escolar, social, o alg\u00fan otro aspecto importante? \u00bfHay algo que usted no haga a causa de ellos?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 233, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB3", 
+      "text": "\u00bfQu\u00e9 tanto malestar le ocasionan sus pensamientos obsesivos?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 234, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB4", 
+      "text": "\u00bfQu\u00e9 cantidad de esfuerzo hace para resistirse a los pensamientos obsesivos? \u00bfQu\u00e9 tan frecuente trata de ignorarlos o de no prestarles atenci\u00f3n cuando surgen en su mente?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 235, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB5", 
+      "text": "\u00bfQu\u00e9 nivel de control tiene sobre sus pensamientos obsesivos? \u00bfQu\u00e9 \u00e9xito tiene para detener o distraer sus pensamientos obsesivos? \u00bfPuede desecharlos?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 236, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB6", 
+      "text": "\u00bfCu\u00e1nto tiempo dedica a llevar a cabo comportamientos compulsivos? \u00bfCu\u00e1nto m\u00e1s que a otras personas le lleva concluir actividades rutinarias debido a sus rituales? \u00bfCon que frecuencia lleva a cabo rituales?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 237, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB7", 
+      "text": "\u00bfHasta que grado interfieren sus comportamientos compulsivos con su funcionamiento laboral, escolar, social, o alg\u00fan otro aspecto importante? \u00bfHay algo que usted no haga a causa de ellos?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 238, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB8", 
+      "text": "\u00bfC\u00f3mo se sentir\u00eda si se viera impedido para llevar a cabo su(s) compulsi\u00f3n(es)? \u00bfC\u00f3mo de ansioso se sentir\u00eda?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 239, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB9", 
+      "text": "\u00bfQu\u00e9 tanto esfuerzo hace por resistirse a las compulsiones?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 240, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB10", 
+      "text": "\u00bfC\u00f3mo de fuerte es el impulso por llevar a cabo el comportamiento compulsivo? \u00bfQu\u00e9 nivel control tiene usted sobre las compulsiones?", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 241, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB11", 
+      "text": "Conocimiento de los s\u00edntomas", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 242, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB12", 
+      "text": "Evitaci\u00f3n", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 243, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB13", 
+      "text": "Indecisi\u00f3n", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 244, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB14", 
+      "text": "Sentido de la responsabilidad excesivo", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 245, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB15", 
+      "text": "Lentitud", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 246, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB16", 
+      "text": "Duda patol\u00f3gica", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 247, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB17", 
+      "text": "Gravedad global", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 248, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB18", 
+      "text": "Mejor\u00eda global", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 249, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "YB19", 
+      "text": "Fiabilidad", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 250, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI1", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido acumular cosas hasta el punto de que le estorban durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 251, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI2", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido comprobar las cosas m\u00e1s a menudo de lo necesario durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 252, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI3", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido que las cosas no est\u00e9n bien ordenadas durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 253, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI4", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido sentir la necesidad de contar mientras est\u00e1 haciendo cosas durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 254, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI5", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido tocar un objeto cuando sabe que lo han tocado desconocidos o ciertas personas durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 255, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI6", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido no poder controlar sus propios pensamientos durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 256, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI7", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido acumular cosas que no necesita durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 257, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI8", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido comprobar repetidamente puertas, ventanas, cajones, etc. durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 258, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI9", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido que los dem\u00e1s cambien la manera en que ha ordenado las cosas durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 259, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI10", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido tener necesidad de repetir ciertos n\u00fameros durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 260, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI11", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido tener a veces que asearse o lavarse por el mero hecho de sentirse contaminado/a durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 261, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI12", 
+      "text": " Describa cu\u00e1nto malestar o molestia le ha producido tener pensamientos desagradables en contra de su voluntad durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 262, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI13", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido sentirse incapaz de tirar cosas por temor a necesitarlas despu\u00e9s durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 263, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI14", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido comprobar repetidamente el gas, el agua y la luz despu\u00e9s de haberlos cerrado/apagado durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 264, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI15", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido tener la necesidad de que las cosas est\u00e9n ordenadas de una determinada manera durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 265, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI16", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido sentir que existen n\u00fameros buenos y malos durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 266, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI17", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido lavarse las manos m\u00e1s a menudo y durante m\u00e1s tiempo de lo necesario durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
+    }
+  }, 
+  {
+    "pk": 267, 
+    "model": "survey.question", 
+    "fields": {
+      "kind": 0, 
+      "code": "OCI18", 
+      "text": "Describa cu\u00e1nto malestar o molestia le ha producido tener con frecuencia pensamientos repugnantes y que le cuesta librarse de ellos durante el \u00faltimo mes", 
+      "required": true, 
+      "single": true, 
+      "order": "0.000"
     }
   }
 ]

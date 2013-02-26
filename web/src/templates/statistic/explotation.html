@@ -39,10 +39,8 @@
     stroke: #fff;
   }
 
-  thead { display:block }
-  thead th { width: 100px; }
-  tbody { display:block; overflow-y:auto; overflow-x:hidden; height:200px; }
-  tbody tr {height: 20px}
+  #data tbody { overflow-y:auto; overflow-x:hidden; max-height:200px; }
+  #data tbody tr {height: 20px}
 {% endblock %}
 
 {% block css_files %}
@@ -56,6 +54,10 @@
   <script src="{{ STATIC_URL }}js/jquery-ui-1.9.1.custom.js"></script>
   <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
   <script src="{{ STATIC_URL }}js/locales/bootstrap-datepicker.es.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.flot.js"></script>
+  <script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/jquery.flot.resize.js"></script>
+  <script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/jquery.flot.JUMlib.js"></script>
+  <script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/jquery.flot.spider.js"></script>
 {% endblock %}
 
 {% block js %}
@@ -74,6 +76,7 @@ function autoSubmit() {
 {% endblock %}
 
 {% block jquery_init %}
+$('#right_bar').find('.fixable').removeClass('fixable');
 
 $('button[type="reset"]').on('click', function(){
   var $form = $(this).parent();
@@ -184,6 +187,7 @@ $('#reload_button').on('click',function(){
   </div>
   {% endfor %}
   
+  {% if form.variables %}
   <div class="accordion-group">
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_filter" href="#collapse_variables">
@@ -201,7 +205,9 @@ $('#reload_button').on('click',function(){
       </div>
     </div>
   </div>
+  {% endif %}
 
+  {% if form.dimensions %}
   <div class="accordion-group">
     <div class="accordion-heading">
       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_filter" href="#collapse_dimensions">
@@ -219,41 +225,8 @@ $('#reload_button').on('click',function(){
       </div>
     </div>
   </div>
-
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_filter" href="#collapse_treatment">
-      {% trans 'Tratamiento' %}
-      </a>
-    </div>
-    <div id="collapse_treatment" class="accordion-body collapse">
-      <div class="accordion-inner">
-        {% for f in form.adherence %}
-        {% if forloop.counter = 1 %}
-          <div class="stop">
-            <div>{{f.label|cut:"variables."}}<span class="pull-right text-info"></span></div>
-            {{f.draw}}
-          </div>
-          <hr />
-          <h5>{% trans 'Fármaco' %}<small class="text-info pull-right">[mg/día]</small></h5>
-           <em class="muted">
-            <p>{% trans 'Sólo se muestran los recetados en alguna ocasión' %}</p>
-          </em>
-        {% else %}
-          <div class="stop">
-            <div>{{f.label|cut:"treatment."}}<span class="pull-right text-info"></span></div>
-            {{f.draw}}
-          </div>
-          <br>
-        {% endif %}
-        {% endfor %}
-        <div>
-          {{form.treatment}}
-        </div>
-      </div>
-    </div>
-  </div>
-  
+  {% endif %}
+ 
   </div>
   <hr>
   <button type="reset" class="btn btn-small btn-block">
@@ -270,6 +243,7 @@ $('#reload_button').on('click',function(){
     <div class="btn-group pull-right">
        <button id="reload_button" type="button" class="btn btn-info" data-loading-text="Cargando..."><i class="icon-repeat icon-white"></i> {% trans "Recargar datos" %}</button>
     </div>
+    <small style="display: block">{{survey_block.name}}</small>
   </h1>
 </div>
 
@@ -285,7 +259,7 @@ $('#reload_button').on('click',function(){
 <script src="{{ STATIC_URL }}js/explotation-data.plot.js"></script>
 
 <div id="query-data">
-{% include 'consulting/stadistic/explotation-ajax.html' %}
+{% include 'statistic/explotation-ajax.html' %}
 &nbsp;
 </div>
 </section>

@@ -1,0 +1,27 @@
+{% load i18n %}
+
+{% if appointment.payment_appointment %}
+<hr>
+<section>
+  <h4>{% trans 'Registro de pago' %}</h4>
+  <div class="thumbnail">
+  <dl class="dl-horizontal">
+    <dt>{% trans 'Fecha' %}</dt>
+      <dd>
+      {{appointment.payment_appointment.date|date}}<br>&nbsp;
+    </dd>    
+    <dt>{% trans 'Importe' %}</dt>
+    <dd>
+        {{appointment.payment_appointment.value}}€{% if appointment.payment_appointment.discount %} (-{{appointment.payment_appointment.discount}}%){% endif %}
+    </dd>
+  </dl>
+  </div>
+</section>
+{% else %}
+  {% if not illness %}
+  <hr>
+  <a class="btn btn-block btn-success" href="{% url cal.edit_payment appointment.id %}">
+    <i class="icon-shopping-cart icon-white"></i> {% trans 'Registrar pago' %}
+  </a>
+  {% endif %}
+{% endif %}

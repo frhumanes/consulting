@@ -3,11 +3,10 @@
 #
 # author: fernando ruiz
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from private_messages.models import Message
 from userprofile.models import Profile
-from datetime import date, timedelta
-from django.template.loader import render_to_string
+from datetime import date
 from django.conf import settings
 from django.utils import translation
 from django.utils.translation import ugettext as _
@@ -33,7 +32,7 @@ class Command(BaseCommand):
                                             today.day, today.month)
                 msg.body = _(u'Hoy es el cumpleaños de:<br></br>')
                 for b in birthdays:
-                    msg.body += b.get_full_name()+'<br>'
+                    msg.body += b.get_full_name() + '<br>'
                 msg.save()
                 i += 1
         self.stdout.write('Sended %s birthday reminders\n' % i)

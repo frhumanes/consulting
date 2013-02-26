@@ -11,15 +11,24 @@ from django.conf import settings
 
 
 class Survey(TraceableModel):
-    
-    blocks = models.ManyToManyField('Block', related_name='blocks_surveys', verbose_name=_(u'Bloque'), null=True, blank=True)
+    blocks = models.ManyToManyField(
+        'Block',
+        related_name='blocks_surveys',
+        verbose_name=_(u'Bloque'),
+        null=True,
+        blank=True)
 
-    multitype = models.BooleanField(_(u'Selector de tipo'), default=False, help_text=u"Necesario para seleccionar bloques Extenso o Abreviado")
+    multitype = models.BooleanField(
+        _(u'Disponible para pacientes'),
+        default=False,
+        help_text=_(u"Permite al paciente realizar el cuestionario"))
 
     name = models.CharField(_(u'Nombre'), max_length=100)
 
-    code = models.IntegerField(_(u'Código'), blank=True, null=True, db_index=True)
+    code = models.IntegerField(_(u'Código'), blank=True, null=True,
+                               db_index=True)
 
+    is_reportable = models.BooleanField(_(u'¿Tiene informe?'), default=False)
 
     def __unicode__(self):
         return u'%s' % (self.name)
@@ -27,12 +36,22 @@ class Survey(TraceableModel):
     def num_blocks(self):
         return self.blocks.values('code').distinct().count()
 
+    def get_available_kinds(self, flat=True):
+        kinds = list(self.blocks.values_list('kind', flat=flat).distinct())
+        if len(kinds) > 1 and settings.GENERAL in kinds:
+            kinds.remove(settings.GENERAL)
+        elif len(kinds) == 0:
+            kinds = [settings.GENERAL]
+        return kinds
+
     class Meta:
         verbose_name = "Cuestionario"
 
+
 class Template(TraceableModel):
 
-    name = models.CharField(_(u'Nombre'), max_length=100, null=True, unique=True)
+    name = models.CharField(_(u'Nombre'), max_length=100, null=True,
+                            unique=True)
     template = models.TextField(_(u'Plantilla'), max_length=5000)
 
     class Meta:
@@ -45,14 +64,22 @@ class Category(TraceableModel):
         (settings.EXTENSO, _(u'Extenso')),
         (settings.ABREVIADO, _(u'Abreviado')),
     )
-    
+
     questions = models.ManyToManyField('Question',
-                                        related_name='questions_categories', verbose_name=_(u'Preguntas'))
+                                       related_name='questions_categories',
+                                       verbose_name=_(u'Preguntas'))
+
     name = models.CharField(_(u'Nombre'), max_length=100)
 
-    code = models.IntegerField(_(u'Código'), blank=True, null=True, db_index=True)
+    code = models.IntegerField(_(u'Código'), blank=True, null=True,
+                               db_index=True)
 
-    variables = models.ManyToManyField(Variable, related_name='variables_categories', verbose_name=_(u'Variables asociadas'))
+    variables = models.ManyToManyField(
+        Variable,
+        related_name='variables_categories',
+        verbose_name=_(u'Variables asociadas'),
+        blank=True,
+        null=True)
 
     kind = models.IntegerField(_(u'Tipo'), choices=KIND)
 
@@ -70,6 +97,7 @@ class Category(TraceableModel):
     class Meta:
         verbose_name = u"Categoría"
 
+
 class Block(TraceableModel):
     KIND = (
         (settings.GENERAL, _(u'General')),
@@ -77,14 +105,21 @@ class Block(TraceableModel):
         (settings.ABREVIADO, _(u'Abreviado')),
     )
 
-    categories = models.ManyToManyField('Category',
-                                        related_name='categories_blocks', verbose_name=_(u'Categorías'))
+    categories = models.ManyToManyField(
+        'Category',
+        related_name='categories_blocks',
+        verbose_name=_(u'Categorías'))
 
     kind = models.IntegerField(_(u'Tipo'), choices=KIND)
 
     name = models.CharField(_(u'Nombre'), max_length=100)
 
     code = models.IntegerField(_(u'Código'), db_index=True)
+
+    is_scored = models.BooleanField(
+        _(u'¿Es puntuable?'),
+        default=False, 
+        help_text=_(u'Se deberán crear las formulas asociadas'))
 
     def __unicode__(self):
         return u'%s [%s]' % (self.name, self.get_kind())
@@ -100,6 +135,7 @@ class Block(TraceableModel):
     class Meta:
         verbose_name = "Bloque"
 
+
 class Question(models.Model):
     KIND = (
         (settings.UNISEX, _(u'Ambos sexos')),
@@ -109,12 +145,17 @@ class Question(models.Model):
 
     text = models.TextField(_(u'Text'), max_length=500)
 
-    code = models.CharField(_(u'Código'), max_length=10, db_index=True, unique=True)
+    code = models.CharField(_(u'Código'), max_length=10, db_index=True,
+                            unique=True)
 
     single = models.BooleanField(_(u'Respuesta única'), default=False)
 
-    kind = models.IntegerField(_(u'Sexo'), choices=KIND, default=settings.UNISEX, help_text="Pregunta disponible sólo para el sexo seleccionado")
-    
+    kind = models.IntegerField(
+        _(u'Sexo'),
+        choices=KIND,
+        default=settings.UNISEX,
+        help_text="Pregunta disponible sólo para el sexo seleccionado")
+
     required = models.BooleanField(_(u'Respuesta requerida'), default=False)
 
     order = models.DecimalField(_(u'Orden'), default=0,
@@ -133,21 +174,24 @@ class Question(models.Model):
             return 'Ambos'
 
     def get_af_illness(self):
-        return self.text[self.text.find('padecido')+9:self.text.find(' alguno')]
+        return self.text[self.text.find('padecido') + 9:self.text.find(' alguno')]
 
     class Meta:
-        ordering = ['id','code']
+        ordering = ['id', 'code']
         verbose_name = "Pregunta"
 
 
 class Option(models.Model):
 
-    question = models.ForeignKey('Question', related_name="question_options", verbose_name=_(u'Pregunta'))
+    question = models.ForeignKey('Question',
+                                 related_name="question_options",
+                                 verbose_name=_(u'Pregunta'))
 
-    code = models.CharField(_(u'Código'), max_length=10, db_index=True, unique=True)
+    code = models.CharField(_(u'Código'), max_length=10, db_index=True,
+                            unique=True)
 
     weight = models.DecimalField(_(u'Peso'), max_digits=5, decimal_places=2,
-        blank=True, null=True)
+                                 blank=True, null=True)
 
     text = models.CharField(_(u'Texto'), max_length=255)
 
@@ -157,5 +201,3 @@ class Option(models.Model):
     class Meta:
         verbose_name = u"Opción"
         verbose_name_plural = "Opciones"
-
-

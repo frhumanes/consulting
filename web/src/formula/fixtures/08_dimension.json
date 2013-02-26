@@ -1,20 +1,29 @@
 [
   {
-    "model": "formula.dimension",
-    "pk": 1,
+    "pk": 0, 
+    "model": "formula.dimension", 
     "fields": {
-      "name": "Cognitiva",
-      "polynomial": "V1+V2+V3+V4+V5+V6+V7+V8+V9+V10+V11+V12+V13+V14",
-      "factor": "0.142857143"
+      "polynomial": "", 
+      "name": "", 
+      "factor": "1.00000000"
     }
-  },
+  }, 
   {
-    "model": "formula.dimension",
-    "pk": 2,
+    "pk": 1, 
+    "model": "formula.dimension", 
     "fields": {
-      "name": "Somática",
-      "polynomial": "V15+V16+V17+V18+V19+V20+V21+V22+V23+V24+V25",
-      "factor": "0.181818182"
+      "polynomial": "V1+V2+V3+V4+V5+V6+V7+V8+V9+V10+V11+V12+V13+V14", 
+      "name": "Cognitiva", 
+      "factor": "0.14285714"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "formula.dimension", 
+    "fields": {
+      "polynomial": "V15+V16+V17+V18+V19+V20+V21+V22+V23+V24+V25", 
+      "name": "Som\u00e1tica", 
+      "factor": "0.18181818"
     }
   }
 ]

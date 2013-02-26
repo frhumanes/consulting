@@ -8,27 +8,27 @@
 <section >
   <legend>{% trans 'Valores' %}</legend>
   <table class="table table-stripped table-bordered">
-      {% for label, marks in latest_dimensions.items %}
+      {% for dim, marks in latest_dimensions.items %}
       {% if forloop.counter0 = 0 %}
       <thead>
-          <tr>
+          <tr style="background-color: #F5F5F5;">
               <th></th>
-              {% for date, mark in marks %}
-              <th>{{date|date:'d/m/y'}}</th>
+              {% for t, mark in marks %}
+              <th style="text-align:center">{{t.end_date|date:'d/m/y'}}</th>
               {% endfor %}
           </tr>
       </thead>
       <tbody>                
           <tr>
-              <th>{{label}}</th>
-              {% for date, mark in marks %}
+              <th>{{dim.name}}</th>
+              {% for t, mark in marks %}
               <td style="text-align:right">{{mark|floatformat:1}}</td>
               {% endfor %}
           </tr>
       {% else %}
           <tr>
-              <th>{{label}}</th>
-              {% for date, mark in marks %}
+              <th>{{dim.name}}</th>
+              {% for t, mark in marks %}
               <td style="text-align:right">{{mark|floatformat:1}}</td>
               {% endfor %}
           </tr>
@@ -40,7 +40,7 @@
   
 <script type="text/javascript">
 function plotDimensions() {
-    var dataD = [{% for label, item in latest_dimensions.items %}{label: "{{label|upper}}", yaxis: {% if forloop.counter|divisibleby:2 %}2{% else %}1{% endif %}, data: [{% for date, val in item %}[(Date.UTC({{date|date:'Y, m-1, j'}})), {{val|unlocalize}}]{% if not forloop.last %},{% endif %}{% endfor %}]}{% if not forloop.last %},{% endif %}{% endfor %}];
+    var dataD = [{% for dim, item in latest_dimensions.items %}{label: "{{dim.name|upper}}", yaxis: {% if forloop.counter|divisibleby:2 %}2{% else %}1{% endif %}, data: [{% for t, val in item %}[(Date.UTC({{t.end_date|date:'Y, m-1, j'}})), {{val|unlocalize}}]{% if not forloop.last %},{% endif %}{% endfor %}]}{% if not forloop.last %},{% endif %}{% endfor %}];
 
     // hard-code color indices to prevent them from shifting as
     // countries are turned on/off
@@ -59,7 +59,13 @@ function plotDimensions() {
         xaxis: { mode: "time", 
                  minTickSize: [1, "day"], 
                  min: (Date.UTC({{ticks|first|date:'Y, m-1, j'}})),
-                 max: (Date.UTC({{ticks|last|date:'Y, m-1, j'}}))
+                 max: (Date.UTC({{ticks|last|date:'Y, m-1, j'}})),
+                 monthNames: ['{% trans "jan" %}', '{% trans "feb" %}', 
+                              '{% trans "mar" %}', '{% trans "apr" %}', 
+                              '{% trans "may" %}', '{% trans "jun" %}', 
+                              '{% trans "jul" %}', '{% trans "aug" %}', 
+                              '{% trans "sep" %}', '{% trans "oct" %}', 
+                              '{% trans "nov" %}', '{% trans "dec" %}']
                }
       });
   };

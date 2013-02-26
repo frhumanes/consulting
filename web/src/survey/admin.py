@@ -9,17 +9,17 @@ from survey.models import *
 
 class SurveyAdmin(admin.ModelAdmin):
     fieldsets = [
-                (None, {
-                    'fields': ['name', 'code']
-                }),
-                ('Ajustes', {
-                    'fields':('multitype','blocks')
-                    }),
-                (_(u'Registro'), {
-                    'classes': ('collapse',),
-                    'fields': ('created_by', 'created_at', 'updated_at')
-                })
-                ]
+        (None, {
+            'fields': ['name', 'code']
+        }),
+        ('Ajustes', {
+            'fields': ('multitype', 'blocks')
+        }),
+        (_(u'Registro'), {
+            'classes': ('collapse',),
+            'fields': ('created_by', 'created_at', 'updated_at')
+        })
+    ]
     list_display = ('name', 'code', 'multitype')
     search_fields = ('code', 'name')
     list_filter = ['multitype']
@@ -33,22 +33,23 @@ admin.site.register(Survey, SurveyAdmin)
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    fieldsets = [(None, {
-                    'fields': ['name', 'code', 'kind']
-                    }),
-                 ('Preguntas', {
-                    'classes':['collapse'], 
-                    'fields': ['questions']
-                    }),
-                 (u'Variables', {
-                    'classes': ('collapse',),
-                    'fields': ['variables']
-                    }),
-                (_(u'Registro'), {
-                    'classes': ('collapse',),
-                    'fields': ('created_by', 'created_at', 'updated_at')
-                })
-                ]
+    fieldsets = [
+        (None, {
+            'fields': ['name', 'code', 'kind']
+        }),
+        (u'Preguntas', {
+            'classes': ['collapse'],
+            'fields': ['questions']
+        }),
+        (u'Variables', {
+            'classes': ('collapse',),
+            'fields': ['variables']
+        }),
+        (_(u'Registro'), {
+            'classes': ('collapse',),
+            'fields': ('created_by', 'created_at', 'updated_at')
+        })
+    ]
     list_display = ('name', 'code', 'kind')
     list_filter = ['kind']
     search_fields = ('code', 'name')
@@ -63,25 +64,21 @@ admin.site.register(Category, CategoryAdmin)
 
 class BlockAdmin(admin.ModelAdmin):
     fieldsets = [
-                (None, {
-                    'fields': ['name', 'code']
-                }),
-                ('Ajustes', {
-                    'fields':('kind',)
-                }),
-                (u'Categorías', {
-                    'classes': ('collapse',),
-                    'fields': ['categories']
-                    }),
-                #(u'Fórmulas', {
-                #    'classes': ('collapse',),
-                #    'fields': ['formulas']
-                #    })
-                (_(u'Registro'), {
-                    'classes': ('collapse',),
-                    'fields': ('created_by', 'created_at', 'updated_at')
-                })
-                ]
+        (None, {
+            'fields': ['name', 'code']
+        }),
+        ('Ajustes', {
+            'fields':('kind', 'is_scored')
+        }),
+        (u'Categorías', {
+            'classes': ('collapse',),
+            'fields': ['categories']
+        }),
+        (_(u'Registro'), {
+            'classes': ('collapse',),
+            'fields': ('created_by', 'created_at', 'updated_at')
+        })
+    ]
     list_display = ('name', 'code', 'kind')
     list_filter = ['kind']
     search_fields = ('code', 'name')
@@ -95,11 +92,12 @@ admin.site.register(Block, BlockAdmin)
 
 
 class OptionAdmin(admin.ModelAdmin):
-    fieldsets = [(None, {'fields': ['text', 'code', 'weight',
-                ]}),
-                ('Pregunta', {
-                    'fields': ['question']
-                    }),]
+    fieldsets = [
+        (None, {'fields': ['text', 'code', 'weight']}),
+        ('Pregunta', {
+            'fields': ['question']
+        })
+    ]
     list_filter = ['question__code']
     list_display = ('code', 'text', 'weight', 'question')
     search_fields = ('code', 'text', 'weight')
@@ -107,16 +105,19 @@ class OptionAdmin(admin.ModelAdmin):
 
 admin.site.register(Option, OptionAdmin)
 
+
 class OptionInlineAdmin(admin.StackedInline):
     fieldsets = [(None, {'fields': ['text', 'code', 'weight']})]
     model = Option
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    fieldsets = [(None, {'fields': ['text', 'code']}),
-                ('Ajustes', {
-                    'fields': ['required', 'single', 'kind', 'order']
-                    }),]
+    fieldsets = [
+        (None, {'fields': ['text', 'code']}),
+        ('Ajustes', {
+            'fields': ['required', 'single', 'kind', 'order']
+        })
+    ]
     list_display = ('code', 'text', 'required', 'single')
     list_filter = ['kind', 'required', 'single']
     search_fields = ('code', 'text')

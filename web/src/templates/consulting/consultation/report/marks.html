@@ -1,0 +1,98 @@
+{% load i18n consulting stadistic %}
+
+{% if task.get_scales|length > 0 %}
+<table class="table table-stripped table-bordered">
+  <thead>
+      <tr style="background-color: #F5F5F5;">
+          <th>{% trans 'ESCALAS' %}</th>
+          <th></th>
+          <th class="span2" style="text-align:center;">{{task.end_date|date:'d/m/y'}}
+            {% if task.kind %}
+            <br><span class="label label-info">{{task.get_kind}}</span>
+            {% endif %}
+          </th>
+      </tr>
+  </thead>
+  <tbody>
+  {% for scale in task.get_scales %}
+    <tr>
+      <th>{{scale.name}}</th>
+      <td style="text-align: center"><span class="label label-{{scale.status.1}}">{{scale.status.0}}</span></td>
+      <td style="text-align:right">{{scale.mark|floatformat:1}}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% if task.get_dimensions_mark|length > 0 %}
+<table class="table table-stripped table-bordered">
+  <thead>
+      <tr style="background-color: #F5F5F5;">
+          <th>{% trans 'DIMENSIONES' %}</th>
+          <th class="span2" style="text-align:center">{{task.end_date|date:'d/m/y'}}
+            {% if task.kind %}
+            <br><span class="label label-info">{{task.get_kind}}</span>
+            {% endif %}
+          </th>
+      </tr>
+  </thead>
+  <tbody>
+  {% for d, mark in task.get_dimensions_mark.items %}
+    <tr>
+      <th>{{d.name}}</th>
+      <td style="text-align:right">{{mark|floatformat:1}}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+<table class="table table-stripped table-bordered">
+  {% for var, marks in values.items %}
+  {% if forloop.counter0 = 0 %}
+  <thead>
+      <tr style="background-color: #F5F5F5;">
+          <th>{% trans 'VARIABLES' %}</th>
+          {% for t, mark in marks %}
+          <th class="span1" style="text-align:center">{{t.end_date|date:'d/m/y'}}
+            {% if t.kind %}
+            <br><span class="label label-info">{{t.get_kind}}</span>
+            {% endif %}
+          </th>
+          {% endfor %}
+          {% if task.get_average_marks %}
+            <th class="span1" style="text-align:center">x&#772;
+              <br><span class="label label-info">{{task.patient.get_profile.get_sex}}</span>
+            </th>
+          {% endif %}
+      </tr>
+  </thead>
+  <tbody>                
+      <tr>
+          <th>{{var.name}} <small class="muted">{% trans 'sobre' %} {{var.vmax}}</small></th>
+          {% for t, mark in marks %}
+          <td style="text-align:right; {% if t = task %}background-color: #FBFBFB; font-size:1.1em;{% endif %}">{{mark|floatformat:1}}</td>
+            {% if not forloop.revcounter0 and task.get_average_marks %}
+              <td style="text-align:right;">{{task.get_average_marks|get_item:var|get_item:t.patient.get_profile.sex|floatformat:2}}</td>
+            {% endif %}
+          {% endfor %}
+      </tr>
+  {% else %}
+      <tr>
+          <th>{{var.name}} <small class="muted">{% trans 'sobre' %} {{var.vmax}}</small></th>
+          {% for t, mark in marks %}
+          <td style="text-align:right; {% if t = task %}background-color: #FBFBFB; font-size:1.1em;{% endif %}">{{mark|floatformat:1}}</td>
+            {% if not forloop.revcounter0 and task.get_average_marks %}
+              <td style="text-align:right;">{{task.get_average_marks|get_item:var|get_item:t.patient.get_profile.sex|floatformat:2}}</td>
+            {% endif %}
+          {% endfor %}
+      </tr>
+  {% endif %}
+  {% endfor %}
+  </tbody>
+</table>
+
+{% if extra_info %}
+{% include extra_info %}
+{% endif %}

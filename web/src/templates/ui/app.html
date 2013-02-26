@@ -59,12 +59,12 @@
                   $(this).affix({offset: {y: 10}});
               }
               else {
-                $(this).removeAttr('data-spy');
+                $(this).removeClass('affix');
               }
             })
           }
           else {
-            $("div.fixable").removeAttr('data-spy');
+            $(".fixable").removeClass('affix');
           }
         } else {
           if ($(window).width() > 1170) {
@@ -200,7 +200,7 @@
           {% endblock container %}
         </div>
         <div id="right_bar" class="span3">
-          <div class="fixable" style="max-width:270px">
+          <div class="fixable" style="max-width:270px;">
           {% block right %}
           <!--Right Sidebar content-->
           {% endblock right %}

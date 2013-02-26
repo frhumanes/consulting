@@ -41,117 +41,117 @@
     </div>
   <section>
 
-        <div class="well">
-          <form class="form-horizontal" method="post" action="{{request.path}}">{% csrf_token %}
-            {% if form.previous_days.errors %}
-              <div class="control-group error">
-                <label for="id_previous_days" class="control-label">{{form.previous_days.label}}</label>
-                <div class="controls">
-                    {{ form.previous_days }} {% trans 'días antes de la próxima cita' %}           
-                    {% for error in form.previous_days.errors %}
-                       <span class="help-inline">{{ error|escape }}</span>
-                    {% endfor %}
-                </div>              
-              </div>
-            {% else %}
-              <div class="control-group">
-                <label for="previous_days" class="control-label">{{form.previous_days.label}}</label>
-                <div class="controls">
-                    {{ form.previous_days }} {% trans 'días antes de la próxima cita' %}
-                </div>
-              </div>
-            {% endif %}
-            {% if form.survey.errors %}
-              <div class="control-group error">
-                <label class="control-label">
-                  {{form.survey.label}}
-                </label>
-                <div class="controls">
-                  {{ form.survey }}
-                  {% for error in form.survey.errors %}
-                    <span class="help-inline">
-                      {{ error|escape }}
-                    </span>
-                  {% endfor %}
-                </div>
-              </div>
-            {% else %}
-              <div class="control-group">
-                <label class="control-label">
-                  {{form.survey.label}}
-                </label>
-                <div class="controls">
-                  {{ form.survey }}
-                </div>
-              </div>
-            {% endif %}
-            <div id="kind" class="control-group">
-              <label class="control-label">
-                {{form.kind.label}}
-              </label>
-              <div class="controls">
-                {{ form.kind }}
-              </div>
-            </div>
-            <div id="self_register" class="control-group">
-              <label class="control-label">
-                {{ form.table.label }}
-              </label>
-              <div class="controls">
-                <em>{{ form.table.help_text }}</em>
-                {{ form.table }}
-              </div>
-              <div style="overflow-x: auto; overflow-y: visible;" class="row-fluid">
-                <div id="myCarousel" class="carousel slide" data-interval="">
-                  <!-- Carousel items -->
-                  <div class="carousel-inner">
-                  <div class="active item" id="editor" style="margin: 20px 65px; min-height: 150px">
-                    <div id="table" style="margin: 10px auto; "></div>
-                  </div>
-                  {% for t in templates %}
-                  <div class="item" style="margin: 20px 65px; min-height: 150px">
-                    <input type="hidden" name="template{{t.id}}" value="{{t.template}}"/>
-                    <button class="btn btn-block btn-info load">{% trans 'Cargar plantilla' %} {{t.id}}</button>
-                    <br>
-                    {% draw_self_register t.template %}
-                  </div>
-                  {% endfor %}
-                  </div>
-                  <!-- Carousel nav -->
-                  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-                </div>
-                  
-              </div>
-            </div>
-          {% if form.variables.errors %}
-            <div id="error_variables" class="control-group error">
-              <div class="">
-                {{ form.variables }}
-                {% for error in form.variables.errors %}
-                  <span class="help-inline">
-                    {{ error|escape }}
-                  </span>
+    <div class="well">
+      <form class="form-horizontal" method="post" action="{{request.path}}">{% csrf_token %}
+        {% if form.previous_days.errors %}
+          <div class="control-group error">
+            <label for="id_previous_days" class="control-label">{{form.previous_days.label}}</label>
+            <div class="controls">
+                {{ form.previous_days }} {% trans 'días antes de la próxima cita' %}           
+                {% for error in form.previous_days.errors %}
+                   <span class="help-inline">{{ error|escape }}</span>
                 {% endfor %}
-              </div>
+            </div>              
+          </div>
+        {% else %}
+          <div class="control-group">
+            <label for="previous_days" class="control-label">{{form.previous_days.label}}</label>
+            <div class="controls">
+                {{ form.previous_days }} {% trans 'días antes de la próxima cita' %}
             </div>
-          {% else %}
-            <div id="variables" class="control-group" style="display: none;">
-              <label class="control-label">
-                Variables
-              </label>
-              <div class="controls">
-                {{ form.variables }}
-              </div>
+          </div>
+        {% endif %}
+        {% if form.survey.errors %}
+          <div class="control-group error">
+            <label class="control-label">
+              {{form.survey.label}}
+            </label>
+            <div class="controls">
+              {{ form.survey }}
+              {% for error in form.survey.errors %}
+                <span class="help-inline">
+                  {{ error|escape }}
+                </span>
+              {% endfor %}
             </div>
-          {% endif %}
-            <div class="center">
-              <button type="submit" class="btn btn-primary btn-large">
-                Guardar
-              </button>
+          </div>
+        {% else %}
+          <div class="control-group">
+            <label class="control-label">
+              {{form.survey.label}}
+            </label>
+            <div class="controls">
+              {{ form.survey }}
             </div>
-          </form>
+          </div>
+        {% endif %}
+        <div id="kind" class="control-group">
+          <label class="control-label">
+            {{form.kind.label}}
+          </label>
+          <div class="controls">
+            {{ form.kind }}
+          </div>
         </div>
+        <div id="self_register" class="control-group">
+          <label class="control-label">
+            {{ form.table.label }}
+          </label>
+          <div class="controls">
+            <em>{{ form.table.help_text }}</em>
+            {{ form.table }}
+          </div>
+          <div style="overflow-x: auto; overflow-y: visible;" class="row-fluid">
+            <div id="myCarousel" class="carousel slide" data-interval="">
+              <!-- Carousel items -->
+              <div class="carousel-inner">
+              <div class="active item" id="editor" style="margin: 20px 65px; min-height: 150px">
+                <div id="table" style="margin: 10px auto; "></div>
+              </div>
+              {% for t in templates %}
+              <div class="item" style="margin: 20px 65px; min-height: 150px">
+                <input type="hidden" name="template{{t.id}}" value="{{t.template}}"/>
+                <button class="btn btn-block btn-info load">{% trans 'Cargar plantilla' %} {{t.id}}</button>
+                <br>
+                {% draw_self_register t.template %}
+              </div>
+              {% endfor %}
+              </div>
+              <!-- Carousel nav -->
+              <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+              <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+            </div>
+              
+          </div>
+        </div>
+      {% if form.variables.errors %}
+        <div id="error_variables" class="control-group error">
+          <div class="">
+            {{ form.variables }}
+            {% for error in form.variables.errors %}
+              <span class="help-inline">
+                {{ error|escape }}
+              </span>
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div id="variables" class="control-group" style="display: none;">
+          <label class="control-label">
+            Variables
+          </label>
+          <div class="controls">
+            {{ form.variables }}
+          </div>
+        </div>
+      {% endif %}
+        <div class="center">
+          <button type="submit" class="btn btn-primary btn-large">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
   </section>
 
 {% endblock container %}

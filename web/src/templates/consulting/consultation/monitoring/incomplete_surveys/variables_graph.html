@@ -1,0 +1,120 @@
+{% load i18n %}
+{% load l10n %}
+{% load stadistic %}
+
+<div class="well center" style="min-height: 300px">
+  {% if task.get_variables_mark|length > 2 %}
+  <div class="pull-left" style="width:50%; height:300px;">
+    <div id="placeholder_graph" style="width:100%; height:285px;"></div>
+    <span class="center">{% trans 'Comparativo' %}</span>
+  </div>
+  <div  class="pull-right" style="width:50%; height:300px;">
+    <div id="placeholder_evolution" style="width:100%; height:285px;"></div>
+    <span class="center">
+      <a href="#" class="pull-left changevar"><i class="icon-chevron-left"></i></a>
+      {% trans 'Evolución' %}
+      <a href="#" class="pull-right changevar"><i class="icon-chevron-right"></i></a></span>
+  </div>
+  {% else %}
+    <div id="placeholder_evolution" style="width:100%; height:285px;"></div>
+    <span class="center">
+      <a href="#" class="pull-left changevar"><i class="icon-chevron-left"></i></a>
+      {% trans 'Evolución' %}
+      <a href="#" class="pull-right changevar"><i class="icon-chevron-right"></i></a></span>
+  {% endif %}
+</div>
+
+<div id="legend"></div>
+
+<section style="overflow-x: auto">
+  <legend>{% trans 'Valores' %}</legend>
+  {% include 'consulting/consultation/report/marks.html' %}
+</section>
+  
+<script type="text/javascript">
+function plotEvolution() {
+    var dataset = [{% for variable, item in values.items %}{label: "{{variable.code}} - {{variable.name|upper}}", data: [{% for t, val in item %}{% if not val = '' %}[(Date.UTC({{t.end_date|date:'Y, m-1, j'}})), {{val|unlocalize}}],{% endif %}{% endfor %}]}{% if not forloop.last %},{% endif %}{% endfor %}];
+
+    // hard-code color indices to prevent them from shifting as
+    // countries are turned on/off
+    var i = 0;
+    $.each(dataset, function(val) {
+        val.color = i;
+        ++i;
+    });
+    var legendContainer = $("#legend");
+    var options = {
+        lines: { show: true },
+        points: { show: true },
+        yaxis: { min: 0, ticks: 5, position: "right"},
+        xaxis: { mode: "time", 
+                 minTickSize: [1, "day"], 
+                 min: (Date.UTC({{ticks|first|date:'Y, m-1, j'}})),
+                 max: (Date.UTC({{ticks|last|date:'Y, m-1, j'}})),
+                 monthNames: ['{% trans "jan" %}', '{% trans "feb" %}', 
+                          '{% trans "mar" %}', '{% trans "apr" %}', 
+                          '{% trans "may" %}', '{% trans "jun" %}', 
+                          '{% trans "jul" %}', '{% trans "aug" %}', 
+                          '{% trans "sep" %}', '{% trans "oct" %}', 
+                          '{% trans "nov" %}', '{% trans "dec" %}']
+               },
+        legend: { position: "sw"}
+      };
+
+    $.plot($("#placeholder_evolution"), [dataset[0]], options);
+    $('a.changevar').on('click', function(event) {
+        event.preventDefault();
+        if(event){
+            event.stopPropagation();
+        }
+        if($(this).hasClass('pull-left')) {
+          i-- ;
+        }
+        else {
+          i++ ;
+        }
+        var data = [];
+        dataset[i % dataset.length].color = i % dataset.length;
+        data.push(dataset[i % dataset.length]);
+
+        if (data.length > 0)
+            var plot = $.plot($("#placeholder_evolution"), data, options);
+    });
+  };
+
+  function graphToday() {
+    var data = [
+      { label: "{% trans 'PACIENTE' %}", data: [ {% for variable, mark in task.get_variables_mark.items %}{% if not mark = '' %}[ {{forloop.counter0}},{% if mark %}{{mark|unlocalize}}{% else %}0{% endif %} ]{% if not forloop.last %}, {% endif %}{% endif %}{% endfor %} ],"spider":{"show":true }, "color":"#F9A52E" },
+      {% with avg_data=task.get_average_marks %}
+      { label: "x&#772; {{task.patient.get_profile.get_sex|upper}}", data: [ {% for variable, mark in task.get_variables_mark.items %}{% if not mark = '' %}[ {{forloop.counter0}},{{avg_data|get_item:variable|get_item:task.patient.get_profile.sex}} ], {% endif %}{% endfor %} ],"spider":{show:true, fill:true }, "color":"#0088CC" }
+      {% endwith %}
+    ];
+
+    var options = {
+      series:{
+        spider:{
+          active: true,
+          highlight: {mode: "lines"},
+          legs: { 
+            font: "10px Arial",
+            data: [ {% for variable, mark in task.get_variables_mark.items %}{% if not mark = '' %}{ label: "{{variable.code}}" }{% if not forloop.last %}, {% endif %}{% endif %}{% endfor %} ],
+            legStartAngle: 0,
+            legScaleMin: 0
+          },
+          spiderSize: 0.70,
+          pointSize: 3,
+          lineWidth: 20,
+          lineStyle: "rgba(0,0,0,0.25)",
+          scaleMode: 'others',
+          debug:{ active:false}       
+        }
+      },
+      grid:{ hoverable: true, clickable: true, tickColor: "rgba(0,0,0,0.15)",mode: "radar"},
+      legend: { position: "ne"}
+    };
+
+    $.plot($("#placeholder_graph"), data , options);
+
+  };
+
+</script>

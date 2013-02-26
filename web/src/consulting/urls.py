@@ -5,8 +5,8 @@ from django.conf.urls.defaults import url
 from consulting import views as consulting_views
 # from cal import views as cal_views
 
-urlpatterns = patterns('',
-    # MAIN
+urlpatterns = patterns(
+    '',
     url(r'^$', consulting_views.index, name='consulting_index'),
 
     ############################## CONSULTATION ###############################
@@ -38,7 +38,7 @@ urlpatterns = patterns('',
         name='consulting_symptoms_worsening'),
     url(r'^surveys/register/(\d+)/$', consulting_views.self_register,
         name='consulting_self_register'),
-    
+
     ######################## ROLE ADMINISTRATIVE/DOCTOR #######################
     url(r'^newpatient/$', consulting_views.newpatient,
         name='consulting_newpatient'),
@@ -107,14 +107,14 @@ urlpatterns = patterns('',
         consulting_views.show_task,
         name='consulting_view_task'),
 
-    url(r'^patient/(?P<patient_user_id>\d+)/parameters/$',
+    url(r'^patient/(?P<patient_user_id>\d+)/parameters/(?P<block_code>\d+)/$',
         consulting_views.user_evolution,
         name='consulting_user_evolution'),
 
     url(r'^patient/(?P<patient_user_id>\d+)/appointments/$',
         consulting_views.list_appointments,
         name='consulting_list_appointments'),
-    
+
     url(r'^patient/(?P<patient_user_id>\d+)/(?P<filter_option>virtual|face2face|all)_appointments/$',
         consulting_views.get_appointments,
         name='consulting_get_appointments'),
@@ -190,12 +190,16 @@ urlpatterns = patterns('',
     url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\w+)/new_app/$",
         consulting_views.new_app,
         name='consulting_new_app'),
-    
+
     url(r"^consultation/(?P<id_appointment>\d+)/(?P<code_illness>\w+)/payment/$",
         consulting_views.register_payment,
         name='consulting_register_payment'),
 
     ##########################################
+    url(r"^survey/kinds/$",
+        consulting_views.survey_kinds,
+        name='consulting_survey_kinds'),
+
     url(r"^keep_alive/(\d+)/$",
         consulting_views.keep_alive,
         name='consulting_keep_alive'),

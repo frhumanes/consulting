@@ -12,7 +12,7 @@ from consulting.validators import validate_choice
 
 from consulting.models import Medicine, Conclusion
 from medicament.models import Component
-from survey.models import Question
+from survey.models import Question, Survey
 import copy
 
 
@@ -93,6 +93,10 @@ class ConclusionForm(forms.ModelForm):
                                                 'rows': 4, 'class': 'span12'}),
                                     required=False)
 
+    extra = forms.CharField(label=_(u'Tratamiento no farmacológico'),
+                                    widget=forms.Textarea(attrs={'cols': 60,
+                                                'rows': 4, 'class': 'span12'}),
+                                    required=False)
     class Meta:
         model = Conclusion
         exclude = ('created_at', 'updated_at', 'patient', 'result',
@@ -109,91 +113,85 @@ class ConclusionForm(forms.ModelForm):
         return cleaned_data
 
 
-class ActionSelectionForm(forms.Form):
-    ACTION = (
-        ('', _(u'--------')),
-        (settings.PREVIOUS_STUDY, _(u'Estudio Previo')),
-    )
-
-    survey = forms.ChoiceField(label=_(u'Realizar'), choices=ACTION,
-        widget=forms.Select(
-                        attrs={'class': 'input-medium search-query span12'}))
-
-    def __init__(self, *args, **kwargs):
-        if 'variables' in kwargs:
-            variables = kwargs.pop('variables')
-        super(ActionSelectionForm, self).__init__(*args, **kwargs)
-
-
-class SelectOtherTaskForm(forms.Form):
-    survey = forms.ChoiceField(label=_(u'Encuesta'),
-            widget=forms.Select(
-                        attrs={'class': 'input-medium search-query span12'}))
+class SelectSurveyForm(forms.Form):
+    survey = forms.ChoiceField(label=_(u'Realizar cuestionario'), choices=[],
+            widget=forms.Select(attrs={'class': 'input-medium search-query span12'}))
     table = forms.CharField(label=_(u'Plantilla'), widget=forms.HiddenInput(),
         help_text=_(u'Rellene los campos de la tabla o cargue una plantilla ya existente. La primera fila se considerará la cabecera de la misma y no podrá ser editada por el paciente.'), required=False)
-    NEXT_SURVEY = [('', _(u'--------'))]
 
     def __init__(self, *args, **kwargs):
-        choices = copy.copy(self.NEXT_SURVEY)
+        survey_choices = []
+        self.variables = None
         if 'variables' in kwargs:
-            variables = kwargs.pop('variables')
-            super(SelectOtherTaskForm, self).__init__(*args, **kwargs)
+            self.variables = kwargs.pop('variables')
+        if 'illness' in kwargs:
+            illness = kwargs.pop('illness')
+            survey_choices = list(Survey.objects.filter(surveys_illnesses=illness).values_list('id','name'))
+        super(SelectSurveyForm, self).__init__(*args, **kwargs)
 
-            choices.append(
-                    (settings.ANXIETY_DEPRESSION_SURVEY,
-                    _(u'Valoración de la depresión y la ansiedad'))
-                    )
+        if self.variables:
             self.fields['variables'] = forms.MultipleChoiceField(
                     label=_(u'Variables'),
                     widget=forms.CheckboxSelectMultiple(),
-                    choices=variables,
-                    initial=[x[0] for x in variables],
+                    choices=self.variables,
+                    initial=[x[0] for x in self.variables],
                     required=False)
-            if variables:
-                choices.append(
+            survey_choices.append(
                     (settings.CUSTOM, _(u'Variables más puntuadas')))
-        else:
-            super(SelectOtherTaskForm, self).__init__(*args, **kwargs)
-            choices.append(
-                    (settings.INITIAL_ASSESSMENT, 
-                    _(u'Valoración Inicial'))
-                    )
-        self.fields['survey'].choices = choices
+
+        self.fields['survey'].choices = survey_choices
         self.fields['kind'] = forms.ChoiceField(
                     label=_(u'Tipo'),
                     widget=forms.Select(),
-                    choices=((settings.ABREVIADO, u'Abreviado'),
-                             (settings.EXTENSO, u'Extendido')),
+                    choices=((settings.GENERAL, "-------"),
+                             (settings.ABREVIADO,  _(u'Abreviado')),
+                             (settings.EXTENSO,  _(u'Extendido'))),
                     required=True)
 
     def clean(self):
-        cleaned_data = self.cleaned_data
+        cleaned_data = super(SelectSurveyForm, self).clean()
         survey = cleaned_data.get("survey")
-        
+        kind = cleaned_data.get("kind")
 
         if survey == str(settings.CUSTOM):
             if not cleaned_data.get("variables"):
                 msg = _(u"Este campo es obligatorio")
                 self._errors['variables'] = self.error_class([msg])
 
+        if survey == str(settings.CUSTOM):
+            survey = settings.ANXIETY_DEPRESSION_SURVEY
+        selected_survey = get_object_or_404(Survey, code=str(survey))
+        kinds = selected_survey.get_available_kinds()
+        if len(kinds) == 1:
+            cleaned_data['kind'] = kinds[0]
+        elif not long(kind) in kinds:
+            msg = _(u"Este campo es obligatorio")
+            self._errors['kind'] = self.error_class([msg])
+
+
+
         return cleaned_data
 
-class SelectTaskForm(SelectOtherTaskForm):
+
+class SelectSurveyTaskForm(SelectSurveyForm):
     previous_days = forms.CharField(
             label=_(u'Visible'),
             widget=forms.TextInput(),
             required=True)
-    NEXT_SURVEY = [('', _(u'--------')),
-                    (settings.SELF_REGISTER, _(u'Autoregistro'))]
 
-class SelectVirtualTaskForm(SelectTaskForm):
     def __init__(self, *args, **kwargs):
-        super(SelectTaskForm, self).__init__(*args, **kwargs)
-        self.fields['survey'].choices = (
-            ('', _(u'--------')),
-            (settings.VIRTUAL_SURVEY, _(u'Seguimiento virtual')),
-            (settings.SELF_REGISTER, _(u'Autoregistro')))
-        del self.fields['kind']
+        survey_choices = []
+        if 'illness' in kwargs:
+            illness = kwargs.pop('illness')
+            survey_choices = list(Survey.objects.filter(surveys_illnesses=illness, multitype=True).values_list('id','name'))
+        else:
+            survey_choices = list(Survey.objects.filter(multitype=True).values_list('id','name'))
+        super(SelectSurveyTaskForm, self).__init__(*args, **kwargs)
+        if self.variables:
+            survey_choices.append((settings.CUSTOM, _(u'Variables más puntuadas')))
+        self.fields['survey'].choices = survey_choices
+        self.fields['survey'].label = _(u'Asignar cuestionario')
+
 
 
 class SelectNotAssessedVariablesForm(forms.Form):

@@ -6,6 +6,7 @@
       "kind": 0, 
       "code": 1, 
       "name": "Datos Administrativos", 
+      "is_scored": false, 
       "created_at": "2012-10-05 11:53:20", 
       "updated_at": "2012-10-05 11:53:20", 
       "created_by": 1, 
@@ -21,6 +22,7 @@
       "kind": 0, 
       "code": 2, 
       "name": "Antecedentes y factores de riesgo", 
+      "is_scored": false, 
       "created_at": "2012-10-05 11:53:20", 
       "updated_at": "2012-10-05 11:53:20", 
       "created_by": 1, 
@@ -42,6 +44,7 @@
       "kind": 1, 
       "code": 3, 
       "name": "Valoraci\u00f3n de la depresi\u00f3n y la ansiedad", 
+      "is_scored": true, 
       "created_at": "2012-10-05 11:53:20", 
       "updated_at": "2012-10-05 11:53:20", 
       "created_by": 1, 
@@ -88,6 +91,7 @@
       "kind": 2, 
       "code": 3, 
       "name": "Valoraci\u00f3n de la depresi\u00f3n y la ansiedad", 
+      "is_scored": true, 
       "created_at": "2012-10-05 11:53:20", 
       "updated_at": "2012-10-05 11:53:20", 
       "created_by": 1, 
@@ -138,6 +142,7 @@
       "kind": 1, 
       "code": 4, 
       "name": "Comportamiento durante la entrevista", 
+      "is_scored": false, 
       "created_at": "2012-10-05 11:53:20", 
       "updated_at": "2012-10-05 11:53:20", 
       "created_by": 1, 
@@ -155,6 +160,7 @@
       "kind": 2, 
       "code": 4, 
       "name": "Comportamiento durante la entrevista", 
+      "is_scored": false, 
       "created_at": "2012-10-05 11:53:20", 
       "updated_at": "2012-10-05 11:53:20", 
       "created_by": 1, 
@@ -172,6 +178,7 @@
       "kind": 0, 
       "code": 5, 
       "name": "S\u00edntomas o Empeoramiento", 
+      "is_scored": false, 
       "created_at": "2012-10-05 11:53:20", 
       "updated_at": "2012-10-05 11:53:20", 
       "created_by": 1, 
@@ -187,6 +194,7 @@
       "kind": 0, 
       "code": 6, 
       "name": "Adherencia al Tratamiento", 
+      "is_scored": true, 
       "created_at": "2012-10-05 11:53:20", 
       "updated_at": "2012-10-05 11:53:20", 
       "created_by": 1, 
@@ -201,12 +209,92 @@
     "fields": {
       "kind": 0, 
       "code": 7, 
-      "name": "Seguimiento virtual", 
+      "name": "Seguimiento gen\u00e9rico", 
+      "is_scored": false, 
       "created_at": "2012-10-05 11:42:03", 
       "updated_at": "2012-10-05 11:42:03", 
       "created_by": 1, 
       "categories": [
         81
+      ]
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "survey.block", 
+    "fields": {
+      "kind": 2, 
+      "code": 8, 
+      "name": "Personalidad de Eysenck", 
+      "is_scored": true, 
+      "created_at": "2013-02-11 16:24:29", 
+      "updated_at": "2013-02-11 16:24:29", 
+      "created_by": 1, 
+      "categories": [
+        82, 
+        83, 
+        84, 
+        85
+      ]
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "survey.block", 
+    "fields": {
+      "kind": 0, 
+      "code": 9, 
+      "name": "Desesperanza", 
+      "is_scored": true, 
+      "created_at": "2013-02-18 10:32:09", 
+      "updated_at": "2013-02-18 10:32:09", 
+      "created_by": 1, 
+      "categories": [
+        86, 
+        87, 
+        88
+      ]
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "survey.block", 
+    "fields": {
+      "kind": 2, 
+      "code": 10, 
+      "name": "Obsesion-Compulsi\u00f3n [Y-BOCKS]", 
+      "is_scored": true, 
+      "created_at": "2013-02-19 10:09:34", 
+      "updated_at": "2013-02-19 10:09:34", 
+      "created_by": 1, 
+      "categories": [
+        89, 
+        90, 
+        91, 
+        92, 
+        93, 
+        94, 
+        95, 
+        96, 
+        97, 
+        98, 
+        99
+      ]
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "survey.block", 
+    "fields": {
+      "kind": 0, 
+      "code": 11, 
+      "name": "Obsesi\u00f3n-Compulsi\u00f3n [OCI-R]", 
+      "is_scored": true, 
+      "created_at": "2013-02-19 11:09:59", 
+      "updated_at": "2013-02-19 11:09:59", 
+      "created_by": 1, 
+      "categories": [
+        100
       ]
     }
   }

@@ -22,6 +22,6 @@
   <td>{% if message.attachment %}<i class="icon-file"></i>{% endif %}</td>
   <td>{{ message.sent_at|date:"d/M/y" }}</td>
   {% if match_inbox and request.user.get_profile.is_doctor %}
-  <td style="text-align:center;">{% get_anxiety_status_at message.author message.sent_at %}&nbsp;{% get_depression_status_at message.author message.sent_at %}</td>
+  <td style="text-align:center;">{% get_anxiety_status_at message.author message.sent_at %}&nbsp;{% get_depression_status_at message.author message.sent_at %}&nbsp;{% get_unhope_status_at message.author message.sent_at %}&nbsp;{% get_suicide_status_at message.author message.sent_at %}</td>
 {% endif %}
 </tr>

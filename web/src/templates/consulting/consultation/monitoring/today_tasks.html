@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <section>
-  <h4>{% trans 'Cuestionarios' %}</h4>
+  <h4>{% trans 'Cuestionarios' %} {% if previous %}{% trans ' de anteriores consultas' %}{% endif %} </h4>
   <div class="thumbnail">
   <table class="table table-condensed">  
     <thead>
@@ -12,7 +12,7 @@
         <th style="text-align:center;">
           {% trans 'Tipo' %}
         </th> 
-        <th colspan="3" style="text-align:center;">Acciones</th>     
+        <th colspan="2" style="text-align:center;">Acciones</th>     
       </tr>
     </thead>        
     <tbody>                
@@ -20,9 +20,11 @@
       <tr>
         <td style="text-align:left;"><a class="btn btn-link" data-target="#modal" href="{% url consulting_view_task t.id %}" role="button" data-toggle="modal">{{t.survey.name}}</a></td>
         <td style="text-align:center;">{{t.get_kind}}</td>
-        <td style="text-align:center;"><a class="btn btn-link" href="{% if illness %}{% if not t.completed %}{% url consulting_show_task_block appointment.id illness.code t.id 0%}{% else %}{% url consulting_finished_task appointment.id illness.code t.id %}{% endif %}{% else %}{% if t.completed %}{% url consulting_finished_task appointment.id 0 t.id %}{% endif %}{% endif %}">{{t.completed|yesno:'Resumen,Completar'}}</a></td>
-        <td style="text-align:center;">{% if t.completed and t.is_scored %}<a class="btn btn-link" data-target="#modal" href="{% url consulting_view_report t.id %}" role="button" data-toggle="modal">Informe</a>{% endif %}</td>
-        <td style="text-align:center;">{% if t.completed and t.is_scored %}<a class="btn btn-link" href="{% url consulting_view_report t.id %}?as=pdf" role="button">PDF</a>{% endif %}</td>
+        <td style="text-align:center;"><a class="btn btn-link" href="{% if illness %}{% if not t.completed %}{% url consulting_show_task_block appointment.id illness.code t.id 0 %}{% else %}{% url consulting_finished_task appointment.id illness.code t.id %}{% endif %}{% else %}{% if t.completed %}{% url consulting_finished_task appointment.id 0 t.id %}{% else %}{% url consulting_show_task_block appointment.id 0 t.id 0 %}{% endif %}{% endif %}">{{t.completed|yesno:'Resultados,Completar'}}</a></td>
+        {% comment %}
+        <td style="text-align:center;">{% if t.completed and t.survey.is_reportable %}<a class="btn btn-link" data-target="#modal" href="{% url consulting_view_report t.id %}" role="button" data-toggle="modal">Informe</a>{% endif %}</td>
+        {% endcomment %}
+        <td style="text-align:center;">{% if t.completed and t.survey.is_reportable %}<a class="btn btn-link" href="{% url consulting_view_report t.id %}?as=pdf" role="button">Informe (PDF)</a>{% endif %}</td>
       </tr>
       {% endfor %}
     </tbody>

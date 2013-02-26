@@ -73,28 +73,6 @@ class FiltersForm(forms.Form):
     age = forms.MultiValueField(
     				label=_(u'Edad'),
     				widget=RangeWidget(attrs={'class':'span3','min':'0', 'max':'100'}))
-    variables = []
-    for v in Variable.objects.all():
-    	#vars()['group_'+v.code] = forms.MultiValueField(
-    	#			label=_(v.name),
-    	#			widget=RangeWidget(attrs={'class':'span3','min':'0', 'max':'5'}))
-        variables.append(MultipleValueField(
-                    label='variables.'+v.name,
-                    widget=RangeWidget(attrs={'class':'span3',
-                                              'min':'0', 
-                                              'max':'5'})))
-
-    dimensions = []
-    for d in Dimension.objects.all():
-        dimensions.append(MultipleValueField(
-                    label='dimensions.'+d.name,
-                    widget=RangeWidget(attrs={'class':'span3','min':'0', 'max':'10'})))
-
-    adherence = [MultipleValueField(
-                    label='variables.Adherencia',
-                    widget=RangeWidget(attrs={'class':'span3',
-                                              'min':'0', 
-                                              'max':'4'}))]
 
     illnesses =forms.MultipleChoiceField(
                     label='Diagnóstico',
@@ -116,6 +94,21 @@ class FiltersForm(forms.Form):
                     choices=[(c, strip_tags(settings.BECK[v][0])) for c, v in enumerate(sorted(settings.BECK))],
                     widget=forms.CheckboxSelectMultiple())
 
+    unhope = forms.MultipleChoiceField(
+                    label=_(u'Nivel de Desesperanza'),
+                    choices=[(c, strip_tags(settings.UNHOPE[v][0])) for c, v in enumerate(sorted(settings.UNHOPE))],
+                    widget=forms.CheckboxSelectMultiple())
+    
+    suicide = forms.MultipleChoiceField(
+                    label=_(u'Nivel de Riesgo'),
+                    choices=[(c, strip_tags(settings.SUICIDE[v][0])) for c, v in enumerate(sorted(settings.SUICIDE))],
+                    widget=forms.CheckboxSelectMultiple())
+
+    ybocs = forms.MultipleChoiceField(
+                    label=_(u'Nivel de Obsesión-compulsión'),
+                    choices=[(c, strip_tags(settings.Y_BOCS[v][0])) for c, v in enumerate(sorted(settings.Y_BOCS))],
+                    widget=forms.CheckboxSelectMultiple())
+
     aves = forms.MultipleChoiceField(
                     label=_(u'Acontecimientos Vitales Estresantes'),
                     choices=[(op.id, op.text) for op in Option.objects.filter(code__startswith='AVE', option_answers__isnull=False).distinct().order_by('text')],
@@ -125,6 +118,29 @@ class FiltersForm(forms.Form):
                     label='Tratamiento',
                     choices=[(m['component__name'], m['component__name']) for m in Medicine.objects.filter(is_previous=False).values('component__name').order_by('component__name').distinct('component')],
                     widget=forms.CheckboxSelectMultiple())
+
+    def __init__(self, *args, **kwargs):
+        block = None
+        if 'block' in kwargs:
+            block = kwargs.pop('block')
+        super(forms.Form, self).__init__(*args, **kwargs)
+        if block:
+            self.variables = []
+            for v in Variable.objects.filter(variables_categories__categories_blocks=block).distinct():
+                #vars()['group_'+v.code] = forms.MultiValueField(
+                #           label=_(v.name),
+                #           widget=RangeWidget(attrs={'class':'span3','min':'0', 'max':'5'}))
+                self.variables.append(MultipleValueField(
+                            label='variables.'+v.name,
+                            widget=RangeWidget(attrs={'class':'span3',
+                                                      'min':v.vmin, 
+                                                      'max':v.vmax})))
+
+            self.dimensions = []
+            for d in Dimension.objects.exclude(name=''):
+                self.dimensions.append(MultipleValueField(
+                            label='dimensions.'+d.name,
+                            widget=RangeWidget(attrs={'class':'span3','min':'0', 'max':'10'})))
 
 
     

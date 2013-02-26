@@ -88,8 +88,8 @@
       "kind": 0, 
       "code": null, 
       "name": "Dummy", 
-      "created_at": "2012-10-05 11:53:20", 
-      "updated_at": "2012-10-05 11:53:20", 
+      "created_at": null, 
+      "updated_at": null, 
       "created_by": 1, 
       "questions": [], 
       "variables": []
@@ -1568,7 +1568,9 @@
       "questions": [
         184
       ], 
-      "variables": []
+      "variables": [
+        29
+      ]
     }
   }, 
   {
@@ -1586,6 +1588,411 @@
         186
       ], 
       "variables": []
+    }
+  }, 
+  {
+    "pk": 82, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 2, 
+      "code": 83, 
+      "name": "Neuroticismo", 
+      "created_at": "2013-02-11 16:16:51", 
+      "updated_at": "2013-02-18 10:25:52", 
+      "created_by": 1, 
+      "questions": [
+        187, 
+        195, 
+        197, 
+        200, 
+        204, 
+        207
+      ], 
+      "variables": [
+        30
+      ]
+    }
+  }, 
+  {
+    "pk": 83, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 2, 
+      "code": 84, 
+      "name": "Extraversi\u00f3n", 
+      "created_at": "2013-02-11 16:19:08", 
+      "updated_at": "2013-02-18 10:25:59", 
+      "created_by": 1, 
+      "questions": [
+        188, 
+        190, 
+        199, 
+        201, 
+        206, 
+        209
+      ], 
+      "variables": [
+        31
+      ]
+    }
+  }, 
+  {
+    "pk": 84, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 2, 
+      "code": 85, 
+      "name": "Psicoticismo", 
+      "created_at": "2013-02-11 16:20:51", 
+      "updated_at": "2013-02-18 10:26:06", 
+      "created_by": 1, 
+      "questions": [
+        189, 
+        192, 
+        194, 
+        198, 
+        202, 
+        208
+      ], 
+      "variables": [
+        32
+      ]
+    }
+  }, 
+  {
+    "pk": 85, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 2, 
+      "code": 82, 
+      "name": "Sinceridad", 
+      "created_at": "2013-02-11 16:22:03", 
+      "updated_at": "2013-02-18 10:25:44", 
+      "created_by": 1, 
+      "questions": [
+        191, 
+        193, 
+        196, 
+        203, 
+        205, 
+        210
+      ], 
+      "variables": [
+        33
+      ]
+    }
+  }, 
+  {
+    "pk": 86, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 0, 
+      "code": 86, 
+      "name": "Factor Afectivo", 
+      "created_at": "2013-02-18 10:27:44", 
+      "updated_at": "2013-02-18 11:34:34", 
+      "created_by": 1, 
+      "questions": [
+        211, 
+        216, 
+        223, 
+        225, 
+        229
+      ], 
+      "variables": [
+        34
+      ]
+    }
+  }, 
+  {
+    "pk": 87, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 0, 
+      "code": 87, 
+      "name": "Factor Motivacional", 
+      "created_at": "2013-02-18 10:28:36", 
+      "updated_at": "2013-02-18 11:34:46", 
+      "created_by": 1, 
+      "questions": [
+        212, 
+        213, 
+        219, 
+        221, 
+        222, 
+        226, 
+        227, 
+        230
+      ], 
+      "variables": [
+        35
+      ]
+    }
+  }, 
+  {
+    "pk": 88, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 0, 
+      "code": 88, 
+      "name": "Factor Cognitivo", 
+      "created_at": "2013-02-18 10:29:15", 
+      "updated_at": "2013-02-18 11:34:59", 
+      "created_by": 1, 
+      "questions": [
+        214, 
+        217, 
+        218, 
+        224, 
+        228
+      ], 
+      "variables": [
+        36
+      ]
+    }
+  }, 
+  {
+    "pk": 89, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 2, 
+      "code": 89, 
+      "name": "TIEMPO OCUPADO POR PENSAMIENTOS OBSESIVOS", 
+      "created_at": "2013-02-19 10:00:52", 
+      "updated_at": "2013-02-19 10:01:39", 
+      "created_by": 1, 
+      "questions": [
+        231
+      ], 
+      "variables": [
+        38
+      ]
+    }
+  }, 
+  {
+    "pk": 90, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 2, 
+      "code": 90, 
+      "name": "INTERFERENCIA DEBIDO A PENSAMIENTOS OBSESIVOS", 
+      "created_at": "2013-02-19 10:01:24", 
+      "updated_at": "2013-02-19 10:01:46", 
+      "created_by": 1, 
+      "questions": [
+        232
+      ], 
+      "variables": [
+        38
+      ]
+    }
+  }, 
+  {
+    "pk": 91, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 2, 
+      "code": 91, 
+      "name": "MALESTAR ASOCIADOS CON PENSAMIENTOS OBSESIVOS", 
+      "created_at": "2013-02-19 10:02:21", 
+      "updated_at": "2013-02-19 10:02:21", 
+      "created_by": 1, 
+      "questions": [
+        233
+      ], 
+      "variables": [
+        38
+      ]
+    }
+  }, 
+  {
+    "pk": 92, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 2, 
+      "code": 92, 
+      "name": "RESISTENCIA CONTRA LAS OBSESIONES", 
+      "created_at": "2013-02-19 10:02:45", 
+      "updated_at": "2013-02-19 10:02:45", 
+      "created_by": 1, 
+      "questions": [
+        234
+      ], 
+      "variables": [
+        38
+      ]
+    }
+  }, 
+  {
+    "pk": 93, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 2, 
+      "code": 93, 
+      "name": "GRADO DE CONTROL SOBRE LOS PENSAMIENTOS OBSESIVOS", 
+      "created_at": "2013-02-19 10:03:10", 
+      "updated_at": "2013-02-19 10:03:10", 
+      "created_by": 1, 
+      "questions": [
+        235
+      ], 
+      "variables": [
+        38
+      ]
+    }
+  }, 
+  {
+    "pk": 94, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 2, 
+      "code": 94, 
+      "name": "TIEMPO DEDICADO ALLEVAR AL CABO COMPORTAMIENTOS COMPULSIVOS", 
+      "created_at": "2013-02-19 10:03:42", 
+      "updated_at": "2013-02-19 10:06:26", 
+      "created_by": 1, 
+      "questions": [
+        236
+      ], 
+      "variables": [
+        39
+      ]
+    }
+  }, 
+  {
+    "pk": 95, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 2, 
+      "code": 95, 
+      "name": "INTERFERENCIA DEBIDO A COMPORTAMIENTOS COMPULSIVOS", 
+      "created_at": "2013-02-19 10:04:18", 
+      "updated_at": "2013-02-19 10:04:18", 
+      "created_by": 1, 
+      "questions": [
+        237
+      ], 
+      "variables": [
+        39
+      ]
+    }
+  }, 
+  {
+    "pk": 96, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 2, 
+      "code": 96, 
+      "name": "MALESTAR ASOCIADO CON EL COMPORTAMIENTO COMPULSIVO", 
+      "created_at": "2013-02-19 10:04:55", 
+      "updated_at": "2013-02-19 10:04:55", 
+      "created_by": 1, 
+      "questions": [
+        238
+      ], 
+      "variables": [
+        39
+      ]
+    }
+  }, 
+  {
+    "pk": 97, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 2, 
+      "code": 97, 
+      "name": "RESISTENCIA CONTRA LAS COMPULSIONES", 
+      "created_at": "2013-02-19 10:05:26", 
+      "updated_at": "2013-02-19 10:05:26", 
+      "created_by": 1, 
+      "questions": [
+        239
+      ], 
+      "variables": [
+        39
+      ]
+    }
+  }, 
+  {
+    "pk": 98, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 2, 
+      "code": 98, 
+      "name": "GRADO DE CONTROL SOBRE EL COMPORTAMIENTO COMPULSIVO", 
+      "created_at": "2013-02-19 10:05:56", 
+      "updated_at": "2013-02-19 10:05:56", 
+      "created_by": 1, 
+      "questions": [
+        240
+      ], 
+      "variables": [
+        39
+      ]
+    }
+  }, 
+  {
+    "pk": 99, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 0, 
+      "code": 99, 
+      "name": "Otras valoraciones TOC", 
+      "created_at": "2013-02-19 10:08:49", 
+      "updated_at": "2013-02-19 10:08:49", 
+      "created_by": 1, 
+      "questions": [
+        241, 
+        242, 
+        243, 
+        244, 
+        245, 
+        246, 
+        247, 
+        248, 
+        249
+      ], 
+      "variables": []
+    }
+  }, 
+  {
+    "pk": 100, 
+    "model": "survey.category", 
+    "fields": {
+      "kind": 0, 
+      "code": 100, 
+      "name": "Obsesi\u00f3n-Compulsi\u00f3n", 
+      "created_at": "2013-02-19 11:06:36", 
+      "updated_at": "2013-02-19 11:08:06", 
+      "created_by": 1, 
+      "questions": [
+        250, 
+        251, 
+        252, 
+        253, 
+        254, 
+        255, 
+        256, 
+        257, 
+        258, 
+        259, 
+        260, 
+        261, 
+        262, 
+        263, 
+        264, 
+        265, 
+        266, 
+        267
+      ], 
+      "variables": [
+        41, 
+        42, 
+        43, 
+        44, 
+        45, 
+        46
+      ]
     }
   }
 ]

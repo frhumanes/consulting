@@ -10,3 +10,14 @@ def dictvalue(d, key):
         else:
             return d[key]
     return "&mdash;"
+
+@register.filter
+def get_available_options(user):
+    return user.get_profile().get_scored_blocks(statistic=True)
+
+@register.filter
+def get_item(dictionary, key):
+    if isinstance(dictionary, dict):
+        return dictionary.get(key)
+    else:
+        return ''

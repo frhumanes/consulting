@@ -13,7 +13,8 @@ admin.site.register(Dimension, DimensionAdmin)
 
 
 class VariableAdmin(admin.ModelAdmin):
-    fieldsets = [(None, {'fields': ['dimension', 'name', 'code']})]
+    fieldsets = [(None, {'fields': ['dimension', 'name', 'code']}),
+                 (u'Rango', {'fields': ['vmin', 'vmax']})]
     list_filter = ["dimension"]
     list_display = ('code', 'name', 'dimension')
     search_fields = ('code', 'name', 'dimension')
@@ -24,7 +25,7 @@ admin.site.register(Variable, VariableAdmin)
 
 class FormulaAdmin(admin.ModelAdmin):
     fieldsets = [(None, {'fields': ['variable', 'polynomial',
-                'factor', 'sibling']})]
+                'factor', 'kind', 'sibling']})]
     list_filter = ["variable", "kind"]
     list_display = ('variable', 'kind')
     search_fields = ('variable__name', 'polynomial', 'factor')

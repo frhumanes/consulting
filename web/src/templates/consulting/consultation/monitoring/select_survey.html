@@ -1,0 +1,293 @@
+{% extends "consulting/consultation/monitoring/index.html" %}
+
+{% load i18n consulting %}
+
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/jquery.handsontable.full.js"></script>
+
+{% endblock %}
+
+{% block css_files %}
+  {{ block.super }}
+  <link href="{{ STATIC_URL }}css/jquery.handsontable.full.css" rel="stylesheet"/>
+{% endblock %}
+
+
+{% block right %}
+  {{ block.super }}
+  {% if form.previous_days %}
+    <br>
+    {% if patient_user.get_profile.get_assigned_tasks %}
+    <div class="alert alert-info">
+      <p>{% trans 'El paciente ya tiene asignadas las siguientes tareas' %}:</p>
+      <ul class="unstyled">
+      {% for t in patient_user.get_profile.get_assigned_tasks %}
+        <li>{{t.survey.name}} <small>[{{t.created_at|date}}]</small></li>
+      {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  {% endif %}
+{% endblock %}
+
+
+{% block container %}
+  <div class="page-header">
+    <h1>
+      {% if form.previous_days %}
+        {% trans 'Cuestionario autoadministrado' %}
+      {% else %}
+        {% trans 'Cuestionario heteroadministrado' %}
+      {% endif %}
+      <div class="btn-group pull-right">
+            <a class="btn btn-info" href="{% if illness %}{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}">
+               <i class="icon-arrow-left icon-white"></i>
+              {% trans 'Volver' %}
+            </a>
+      </div>
+    </h1>
+  </div>
+  <section>
+
+    <div class="well">
+      <form class="form-horizontal" method="post" action="{{ request.path }}">{% csrf_token %}
+        {% if form.previous_days %}
+          {% if form.previous_days.errors %}
+            <div class="control-group error">
+              <label for="id_previous_days" class="control-label">{{form.previous_days.label}}</label>
+              <div class="controls">
+                  {{ form.previous_days }} {% trans 'días antes de la próxima cita' %}           
+                  {% for error in form.previous_days.errors %}
+                     <span class="help-inline">{{ error|escape }}</span>
+                  {% endfor %}
+              </div>              
+            </div>
+          {% else %}
+            <div class="control-group">
+              <label for="previous_days" class="control-label">{{form.previous_days.label}}</label>
+              <div class="controls">
+                  {{ form.previous_days }} {% trans 'días antes de la próxima cita' %}
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+        {% if form.survey.errors %}
+          <div class="control-group error">
+            <label class="control-label">
+              {{form.survey.label}}
+            </label>
+            <div class="controls">
+              {{ form.survey }}
+              {% for error in form.survey.errors %}
+                <span class="help-inline">
+                  {{ error|escape }}
+                </span>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <div class="control-group">
+            <label class="control-label">
+              {{form.survey.label}}
+            </label>
+            <div class="controls">
+              {{ form.survey }}
+            </div>
+          </div>
+        {% endif %}
+        {% if form.kind.errors %}
+          <div id="kind" class="control-group error">
+            <label class="control-label">
+              {{form.kind.label}}
+            </label>
+            <div class="controls">
+              {{ form.kind }}
+              {% for error in form.kind.errors %}
+                <span class="help-inline">
+                  {{ error|escape }}
+                </span>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <div id="kind" class="control-group">
+            <label class="control-label">
+              {{form.kind.label}}
+            </label>
+            <div class="controls">
+              {{ form.kind }}
+            </div>
+          </div>
+        {% endif %}
+        <div id="self_register" class="control-group">
+          <label class="control-label">
+            {{ form.table.label }}
+          </label>
+          <div class="controls">
+            <em>{{ form.table.help_text }}</em>
+            {{ form.table }}
+          </div>
+          <div style="overflow-x: auto; overflow-y: visible;" class="row-fluid">
+            <div id="myCarousel" class="carousel slide" data-interval="">
+              <!-- Carousel items -->
+              <div class="carousel-inner">
+              <div class="active item" id="editor" style="margin: 20px 65px; min-height: 150px">
+                <div id="table" style="margin: 10px auto; "></div>
+              </div>
+              {% for t in templates %}
+              <div class="item" style="margin: 20px 65px; min-height: 150px">
+                <input type="hidden" name="template{{t.id}}" value="{{t.template}}"/>
+                <button class="btn btn-block btn-info load">{% trans 'Cargar plantilla' %} {{t.id}}</button>
+                <br>
+                {% draw_self_register t.template %}
+              </div>
+              {% endfor %}
+              </div>
+              <!-- Carousel nav -->
+              <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+              <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+            </div>
+          </div>
+        </div>
+
+        {% if form.variables.errors %}
+          <div id="error_variables" class="control-group error">
+            <div class="">
+              {{ form.variables }}
+              {% for error in form.variables.errors %}
+                <span class="help-inline">
+                  {{ error|escape }}
+                </span>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <div id="variables" class="control-group" style="display: none;">
+            <label class="control-label">
+              Variables
+            </label>
+            <div class="controls">
+              {{ form.variables }}
+            </div>
+          </div>
+        {% endif %}
+        <div class="center">
+          <button type="submit" class="btn btn-primary btn-large">
+            Continuar
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </section>
+{% endblock container %}
+
+
+{% block js %}
+  function changed_survey(){
+    $.ajax({
+          url: '{% url consulting_survey_kinds %}',
+          data: {'code_survey': $('#id_survey').val(),
+          'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()},
+          type: 'POST',
+          dataType: "json",
+          success: function(response){
+              $('#id_kind option').hide();
+              for( var i=0; i < response.kinds.length; i++) {
+                $('#id_kind').find('option[value="'+response.kinds[i]+'"]').show();
+              };
+              if(response.kinds.length > 1){
+                $('#kind.control-group').show();
+              }
+              else {
+                $('#kind.control-group').hide();
+              }
+          }
+        });
+    switch(parseInt($('#id_survey').val()))
+    {
+    case {{code_variables}}:
+      $('#self_register').hide();
+      $('#variables').show();
+      $('#error_variables').show();
+      break;
+    case {{code_self_register}}:
+      $('#self_register').show();
+      break;
+    default:
+      $('#self_register').hide();
+      $('#variables').hide();
+      $('#error_variables').hide();   
+    }
+  }
+{% endblock %}
+
+{% block jquery_init %}
+  $('ul').addClass("without_decorator");
+  changed_survey();
+  $("#id_survey").change(changed_survey);
+  var $container = $("#table");
+  var $parent = $container.parent();
+  $container.handsontable({
+      startRows: 8,
+      startCols: 6,
+      rowHeaders: false,
+      colHeaders: true,
+      {% if form.table.value %}
+      data: {{form.table.value|safe}},
+      {% endif %}
+      minSpareRows: 3,
+      contextMenu: {
+        items: {
+          "row_above": {name: "Insertar fila antes"},
+          "row_below": {name: "Insertar fila después"},
+          "hsep1": "-------",
+          "col_left": {name: "Insertar columna a la izquierda"},
+          "col_right": {name: "Insertar columna a la derecha"},
+          "hsep2": "-------",
+          "remove_row": {name: "Eliminar fila"
+            {% if request.user.get_profile.is_patient %}
+            , disabled: function () {
+                //if first row, disable this option
+                return ($("#table").handsontable('getSelected')[0] === 0);
+              }
+            {% endif %}
+          },
+          "remove_col": {name: "Eliminar columna"},
+          "hsep3": "-------",
+          "undo": {name: "Deshacer"},
+          "redo": {name: "Restaurar"},
+        }
+      },
+      onChange: function (change, source) {
+        $('#id_table').val(JSON.stringify(handsontable.getData()));
+      }
+  });
+  var handsontable = $container.data('handsontable');
+
+  $('form').on('submit', function(ev){
+    var jtable = handsontable.getData();
+    for (var i = 0; i < jtable.length; i++) {
+      var row = jtable[i];
+      for (var j = 0; j < row.length; j++) {
+        if(row[j] != null)
+        {
+          return true;
+        }
+      }
+    }
+    if($('#id_survey').val() = '{{code_self_register}}' && ! confirm("{% trans '¿Desea enviar un registro vacio al usuario?' %}")){
+      ev.preventDefault();
+    }
+  });
+
+  $('button.load').on('click', function(ev){
+      ev.preventDefault();
+      var jtemplate = $(this).parent().find("input[type='hidden']").val()
+      handsontable.loadData(JSON.parse(jtemplate));
+      $('#id_table').val(jtemplate);
+      $('#myCarousel').carousel(0);
+  });
+
+{% endblock %}

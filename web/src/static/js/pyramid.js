@@ -31,9 +31,9 @@
     // Create the defaults once
     var pluginName = 'Pyramid',
         defaults = {
-            base: 400,
+            base: 360,
             top: 0,
-            height: 400,
+            height: 360,
             slices: 4,
             slice_separation: 0.15,
             colours: ['red', 'yellow', 'green', 'blue'],
@@ -44,7 +44,7 @@
         template =  ''+
                        ' <svg id="svg_root"'+
                             'width="360" height="360"'+
-                            'viewBox="-10 -10 400 400"'+
+                            'viewBox="0 0 400 400"'+
                             'preserveAspectRatio="xMidYMid slice"'+
                             'xmlns="' +svgns+ '" version="1.1">'+
                         '</svg>'+

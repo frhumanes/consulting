@@ -3,7 +3,11 @@
 {% load i18n consulting userprofile %}
 
 {% block container %}
-<h2>INFORME RESUMEN DE {{task.survey.name|upper}}</h2>
+<h2 style="text-align: center">INFORME RESUMEN</h2>
+<br>
+<h3>CUESTIONARIO: {{task.survey.name|upper}}</h3>
+<hr>
+<br>
 {% if task.survey.id < 3 %}
 <p>{{patient.name}} {{patient.first_surname}} {{patient.second_surname}} de {{patient.get_age}} años de edad presenta desde hace {{task.get_time_interval|lower}} los síntomas que le han hecho acudir a consulta.
 	{% if task.get_ap_list %}
@@ -99,7 +103,7 @@
 	se medica con
 		{% for med in prev_treatment %}
 			{% if forloop.last and not forloop.first %}
-				 y {{med.component.name}} {{med.posology|floatformat:"-4" }} mg/24 horas desde hace {{med.months}} mes{{med.months|pluralize:'es'}}.
+				 y {{med.component.name}} {{med.posology|floatformat:"-4" }} mg/24 horas desde hace {{med.months|floatformat:"-2"}} mes{{med.months|pluralize:'es'}}.
 			{% else %}
 				{% if forloop.revcounter0 > 1 %}
 					{{med.component.name}} {{med.posology|floatformat:"-4"}} mg/24 horas desde hace {{med.months|floatformat:"-2"}} mes{{med.months|pluralize:'es'}}, 
@@ -168,6 +172,9 @@
 
 
 {% include 'consulting/consultation/report/anxiety_depression.html' %}
+{% if task.survey.id > 2 %}
+{% include 'consulting/consultation/report/marks.html' %}
+{% endif %}
 
 {% if task.survey.code = 6 %}
 	{% draw_self_register task.observations %}
@@ -175,23 +182,15 @@
 
 <section>
 	<dl>
-	    <dt>{% trans 'OBSERVACIONES' %}</dt>
-	    {% for c in conclusions %}
-	      {% if c.observation %}   
-	        <dd>{{c.observation}}</dd>
-	      {% endif %}
-	    {% endfor %}
+	    <dt>{% trans 'OBSERVACIONES' %}</dt>   
+	    <dd>{{conclusions.observation}}</dd>
 	    <br>
 	    <dt>{% trans 'RECOMENDACIONES' %}</dt>
-	    {% for c in conclusions %}
-	      {% if c.recommendation %}
-	        <dd>{{c.recommendation}}</dd>
-	      {% endif %}
-	    {% endfor %}
+	   	<dd>{{conclusions.recommendation}}</dd>
 	 </dl>
 </section>
 
-{% if treatment.count > 0 %}
+{% if treatment.count > 0  or conclusions.extra %}
 <section>
 	<dl>
 		<dt>{% trans 'TRATAMIENTO' %}</dt>
@@ -200,6 +199,7 @@
     		{{m.component}} [{{m.posology|floatformat:"-4"}} mg/día]
   		</dd>
 	  	{% endfor %}
+	  	<dd>{{conclusions.extra}}</dd>
 	</dl>
 </section>
 {% endif %}

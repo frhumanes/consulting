@@ -8,21 +8,21 @@
 <div id="myCarousel" class="carousel slide hide" data-interval="">
   <div class="carousel-inner" style="min-height: 500px">
     <div class="item">
-      <div id="vis" class="center"></div>
+      <div id="vis" class="center" style="min-height: 500px"></div>
       <div class="carousel-caption">
         <h4>{% trans 'Valor medio de las variables' %}</h4>
         <p>Pase el ratón por cada variable para comparar sus valores.</p>
       </div>
     </div>
     <div class="active item">
-      <div id="pie" class="center"></div>
+      <div id="pie" class="center" style="min-height: 500px"></div>
       <div class="carousel-caption">
         <h4>{% trans 'Distribución por edades' %}</h4>
         <p></p>
       </div>
     </div>
     <div class="item">
-      <div id="donuts" class="center">
+      <div id="donuts" class="center" style="min-height: 500px">
       </div>
       <div class="carousel-caption">
         <h4>{% trans 'Estratificación de pacientes' %}</h4>
@@ -40,6 +40,12 @@ if ($.browser.msie && $.browser.version < '9') {
 } else {
   $('#myCarousel').on('slid',function(){
     $(this).find('.active').find('.carousel-caption').fadeIn('slow').delay(5000).fadeOut('slow');
+    {% if data|length > 2 %}
+    if($(this).find('.active').id = 'donuts') {
+      //$(this).find('.active').empty();
+      graphToday();
+    }
+    {% endif %}
   });
   $('#myCarousel').fadeIn('slow');
   var data = [
@@ -62,11 +68,50 @@ if ($.browser.msie && $.browser.version < '9') {
   init_pie(data, '#pie');
   
 
-  var dataset = {
-    ANSIEDAD: {{data2.hamilton}},
-    DEPRESION: {{data2.beck}}
-  };  
-  init_donuts(dataset, '#donuts');
+  {% if data2|length  and data2|length < 3 %}
+    var dataset = {
+      {% for k, v in data2.items %}
+      '{{k|upper}}': {{v}},
+      {% endfor %}
+    };
+ 
+    init_donuts(dataset, '#donuts');
+  {% else %}
+    {% if data|length > 2 %}
+    function graphToday() {
+      var data = [
+        { label: "{% trans 'MUJERES' %}", data: [ {% for labelname, values in data.items %}[{{forloop.counter0}},{% if values.1 %}{{values.1|unlocalize}}{% else %}0{% endif %} ],{% endfor %} ],"spider":{show:true, fill:true }, "color":"#F9A52E" },
+        { label: "{% trans 'HOMBRES' %}", data: [ {% for labelname, values in data.items %}[{{forloop.counter0}},{% if values.2 %}{{values.2|unlocalize}}{% else %}0{% endif %} ],{% endfor %} ],"spider":{show:true, fill:true }, "color":"#0088CC" }
+        ];
+
+      var options = {
+        series:{
+          spider:{
+            active: true,
+            highlight: {mode: "area"},
+            legs: { 
+              font: "12px Arial",
+              data: [{% for labelname, values in data.items %}{ label: "{{labelname}}" }{% if not forloop.last %}, {% endif %}{% endfor %}],
+              legStartAngle: 0,
+              legScaleMin: 0
+            },
+            spiderSize: 0.64,
+            pointSize: 4,
+            scaleMode: 'others',
+            debug:{ active:false}       
+          }
+        },
+        grid:{ hoverable: true, clickable: true, tickColor: "rgba(0,0,0,0.15)",mode: "radar"},
+      };
+
+      $.plot($("#donuts"), data , options);
+
+    };
+    {% else %}
+      $('#donuts').parent().remove();
+    {% endif %}
+
+  {% endif %}
 };
 </script>
 
@@ -117,33 +162,35 @@ if ($.browser.msie && $.browser.version < '9') {
             <td>{{r.profession}}</td>
             <td>{{r.task.end_date|date:"j/m/Y"}}</td>
             {% for d in dimensions %}
-              <td>{% dictvalue r.dimensions d.name %}</td>
+              <td title="{{d.name}}">{% dictvalue r.dimensions d.name %}</td>
             {% endfor %}
             {% for v in variables %}
-              <td>{% dictvalue r.variables v.name %}</td>
+              <td title="{{v.name}}">{% dictvalue r.variables v.name %}</td>
             {% endfor %}
             {% for s in status %}
-              <td>{% dictvalue r.status s %}</td>
+              <td title="{{s}}">{% dictvalue r.status s %}</td>
             {% endfor %}
           </tr>
         {% endfor %}
-          <tr>
-            <th>#</th>
-            <th>Edad</th>
-            <th>Sexo</th>
-            <th>Profesión</th>
-            <th>Fecha</th>
-          {% for d in dimensions %}
-            <td><small>Dimensión {{d.name}}</small></td>
-          {% endfor %}
-          {% for v in variables %}
-            <td><small>{{v.name}}</small></td>
-          {% endfor %}
-          {% for s in status %}
-            <td><small>{{s}}</small></td>
-          {% endfor %}
-          </tr>
-        </tbody>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>#</th>
+              <th>Edad</th>
+              <th>Sexo</th>
+              <th>Profesión</th>
+              <th>Fecha</th>
+            {% for d in dimensions %}
+              <td><small>Dimensión {{d.name}}</small></td>
+            {% endfor %}
+            {% for v in variables %}
+              <td><small>{{v.name}}</small></td>
+            {% endfor %}
+            {% for s in status %}
+              <td><small>{{s}}</small></td>
+            {% endfor %}
+            </tr>
+          </tfoot>
       </table>
     </div>
   </div>

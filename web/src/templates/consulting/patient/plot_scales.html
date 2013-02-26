@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n stadistic %}
 
 <div class="well center">
   <div id="placeholder_scales" style="width:100%;height:300px;"></div>
@@ -10,24 +10,24 @@
       {% for label, marks in values.items %}
       {% if forloop.counter0 = 0 %}
       <thead>
-          <tr>
+          <tr style="background-color: #F5F5F5;">
               <th></th>
-              {% for date, mark in marks %}
-              <th>{{date|date:'d/m/y'}}</th>
+              {% for t, mark in marks %}
+              <th style="text-align:center">{{t.end_date|date:'d/m/y'}}</th>
               {% endfor %}
           </tr>
       </thead>
       <tbody>                
           <tr>
               <th>{{label}}</th>
-              {% for date, mark in marks %}
+              {% for t, mark in marks %}
               <td style="text-align:right">{{mark|floatformat:1}}</td>
               {% endfor %}
           </tr>
       {% else %}
           <tr>
               <th>{{label}}</th>
-              {% for date, mark in marks %}
+              {% for t, mark in marks %}
               <td style="text-align:right">{{mark|floatformat:1}}</td>
               {% endfor %}
           </tr>
@@ -39,7 +39,7 @@
   
 <script type="text/javascript">
 function plotStatus() {
-    var dataS = [{% for label, item in values.items %}{label: "{{label|upper}}",yaxis: {{forloop.counter}},data: [{% for date, val in item %}[(Date.UTC({{date|date:'Y, m-1, j'}})), {{val|floatformat:0}}]{% if not forloop.last %},{% endif %}{% endfor %}]}{% if not forloop.last %},{% endif %}{% endfor %}];
+    var dataS = [{% for scale, item in values.items %}{label: "{{scale|upper}}", yaxis: {{forloop.counter}}, xaxis: 1,  data: [{% for t, val in item %}[(Date.UTC({{t.end_date|date:'Y, m-1, j'}})), {{val|floatformat:0}}]{% if not forloop.last %},{% endif %}{% endfor %}]}{% if not forloop.last %},{% endif %}{% endfor %}];
 
     // hard-code color indices to prevent them from shifting as
     // countries are turned on/off
@@ -53,23 +53,27 @@ function plotStatus() {
     $.plot($("#placeholder_scales"), dataS, {
       lines: { show: true },
       points: { show: true },
-      yaxes: [{ min: 0, max: {{yscales.beck|last}}, ticks: {{yscales.beck}}, position: "right"}, {min: 0, max: {{yscales.hamilton|last}}, ticks: {{yscales.hamilton}}, position:"left"}],
       grid: { hoverable: true},
       xaxis: { mode: "time", 
                minTickSize: [1, "day"], 
                min: (Date.UTC({{ticks|first|date:'Y, m-1, j'}})),
-               max: (Date.UTC({{ticks|last|date:'Y, m-1, j'}}))
-             }
+               max: (Date.UTC({{ticks|last|date:'Y, m-1, j'}})),
+               monthNames: ['{% trans "jan" %}', '{% trans "feb" %}', 
+                          '{% trans "mar" %}', '{% trans "apr" %}', 
+                          '{% trans "may" %}', '{% trans "jun" %}', 
+                          '{% trans "jul" %}', '{% trans "aug" %}', 
+                          '{% trans "sep" %}', '{% trans "oct" %}', 
+                          '{% trans "nov" %}', '{% trans "dec" %}']
+             },
+      yaxes: [{% for scale in values.keys %}{
+              position: '{{forloop.counter0|yesno:"left,right"}}',
+              axisLabel: '{% trans "Escala de " %} {{scale}}',
+              axisLabelUseCanvas: true,
+              min: 0,
+              ticks: {% dictvalue yscales scale %}
+              }{% if forloop.revcounter0 %},{% endif %}
+             {% endfor %}]
     });
-
-    var yaxisLabel = $("<div class='axisLabel yaxisLabelLeft'></div>")
-    .text("Escala de Hamilton")
-    .appendTo($("#placeholder_scales"));
-    yaxisLabel.css("margin-top", yaxisLabel.width() / 2 - 20);
-    var yaxisLabel2 = $("<div class='axisLabel yaxisLabelRight'></div>")
-    .text("Escala de Beck")
-    .appendTo($("#placeholder_scales"));
-    yaxisLabel2.css("margin-top", -yaxisLabel2.width() / 2 - 20);
 
     function showTooltip(x, y, contents) {
       $('<div id="tooltip" class="tooltip-inner tooltip.in">' + contents + '</div>').css( {

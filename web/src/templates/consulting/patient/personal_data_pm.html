@@ -71,11 +71,10 @@
     {% if user.get_profile.is_doctor %}
       <tr>            
         <th colspan="2">{% trans 'NIVEL ESTRATIFICACIÓN' %}<br />
-          {% if patient_user.get_profile.get_anxiety_status %}
-              <span class="label label-{{patient_user.get_profile.get_anxiety_status|last}}">{{patient_user.get_profile.get_anxiety_status|first|safe}}</span>
-          {% endif %}
-          {% if patient_user.get_profile.get_depression_status %}
-              <span class="label label-{{patient_user.get_profile.get_depression_status|last}}">{{patient_user.get_profile.get_depression_status|first|safe}}</span>
+          {% if patient_user.get_profile.get_medical_status|length %}
+            {% for status in patient_user.get_profile.get_medical_status %}
+              <span class="label label-{{status|last}}">{{status|first|safe}}</span>
+            {% endfor %}
           {% else %}
               <span class="label">PENDIENTE DE CALCULAR</span>
           {% endif %}

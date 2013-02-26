@@ -71,7 +71,16 @@
                 "action": 'set'},
         dataType: 'json',
         success: function(response){
-          alert(response.data);
+          if(response.data){
+            //alert(response.data);
+            var code = data.rslt.obj.attr('code');
+            var name = data.rslt.obj.text();
+            $('#cie-tbody').prepend('<tr id="cie-'+code+'"><td>'+code+'</td><td>'+name+'</td></tr>');
+          }
+        },
+        error: function(response){
+          data.rslt.obj.removeClass('jstree-checked').addClass('jstree-unchecked');
+          alert("{% trans 'Hubo un error al realizar el cambio. Inténtelo de nuevo pasados unos minutos' %}");
           var code = data.rslt.obj.attr('code');
           var name = data.rslt.obj.text();
           $('#cie-tbody').prepend('<tr id="cie-'+code+'"><td>'+code+'</td><td>'+name+'</td></tr>');
@@ -84,7 +93,15 @@
                 "action": 'unset'},
         dataType: 'json',
         success: function(response){
-          alert(response.data);
+          if(response.data){
+            //alert(response.data);
+            var code = data.rslt.obj.attr('code');
+            $('tr[id="cie-'+code+'"]').remove();
+          }
+        },
+        error: function(response){
+          data.rslt.obj.removeClass('jstree-unchecked').addClass('jstree-checked');
+          alert("{% trans 'Hubo un error al realizar el cambio. Inténtelo de nuevo pasados unos minutos' %}");
           var code = data.rslt.obj.attr('code');
           $('tr[id="cie-'+code+'"]').remove();
         }

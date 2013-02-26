@@ -12,6 +12,7 @@
       "created_at": "2012-10-05 11:54:38", 
       "updated_at": "2012-10-05 11:54:38", 
       "created_by": 1, 
+      "is_reportable": true, 
       "multitype": false
     }
   }, 
@@ -26,11 +27,12 @@
         3, 
         4
       ], 
-      "name": "Valoraci\u00f3n Inicial", 
+      "name": "Valoraci\u00f3n Inicial [Hamilton/Beck]", 
       "created_at": "2012-10-05 11:54:39", 
       "updated_at": "2012-10-05 11:54:39", 
       "created_by": 1, 
-      "multitype": true
+      "is_reportable": true, 
+      "multitype": false
     }
   }, 
   {
@@ -46,6 +48,7 @@
       "created_at": "2012-10-05 11:54:39", 
       "updated_at": "2013-01-31 15:58:16", 
       "created_by": 1, 
+      "is_reportable": true, 
       "multitype": true
     }
   }, 
@@ -61,7 +64,8 @@
       "created_at": "2012-10-05 11:54:39", 
       "updated_at": "2012-10-05 11:54:39", 
       "created_by": 1, 
-      "multitype": false
+      "is_reportable": false, 
+      "multitype": true
     }
   }, 
   {
@@ -72,11 +76,12 @@
       "blocks": [
         9
       ], 
-      "name": "Seguimiento virtual", 
+      "name": "Seguimiento gen\u00e9rico", 
       "created_at": "2012-11-26 09:02:49", 
       "updated_at": "2012-11-26 09:02:49", 
       "created_by": 1, 
-      "multitype": false
+      "is_reportable": false, 
+      "multitype": true
     }
   }, 
   {
@@ -89,7 +94,72 @@
       "created_at": "2012-11-26 09:02:49", 
       "updated_at": "2013-01-31 15:57:10", 
       "created_by": 1, 
+      "is_reportable": true, 
+      "multitype": true
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "survey.survey", 
+    "fields": {
+      "code": 7, 
+      "blocks": [
+        10
+      ], 
+      "name": "Personalidad de Eysenck (Revisado)", 
+      "created_at": "2013-02-11 15:50:15", 
+      "updated_at": "2013-02-11 15:50:15", 
+      "created_by": 1, 
+      "is_reportable": true, 
+      "multitype": true
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "survey.survey", 
+    "fields": {
+      "code": 8, 
+      "blocks": [
+        11
+      ], 
+      "name": "Desesperanza de Becks", 
+      "created_at": "2013-02-18 10:33:38", 
+      "updated_at": "2013-02-18 10:33:38", 
+      "created_by": 1, 
+      "is_reportable": true, 
+      "multitype": true
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "survey.survey", 
+    "fields": {
+      "code": 9, 
+      "blocks": [
+        12
+      ], 
+      "name": "Inventario de Obsesiones-Compulsiones de Yale-Brown", 
+      "created_at": "2013-02-19 10:10:44", 
+      "updated_at": "2013-02-19 10:10:44", 
+      "created_by": 1, 
+      "is_reportable": true, 
       "multitype": false
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "survey.survey", 
+    "fields": {
+      "code": 10, 
+      "blocks": [
+        13
+      ], 
+      "name": "Inventario de Obsesiones-Compulsiones (Revisado)", 
+      "created_at": "2013-02-19 11:10:33", 
+      "updated_at": "2013-02-19 11:10:33", 
+      "created_by": 1, 
+      "is_reportable": true, 
+      "multitype": true
     }
   }
 ]

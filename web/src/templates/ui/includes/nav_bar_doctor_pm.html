@@ -1,7 +1,6 @@
-{% load i18n%}
+{% load i18n %}
 {% load consulting %}
 
-{% if patient_user %}
 {% url consulting_personal_data_pm patient_user_id=patient_user.id as personal_data %}
 {% url consulting_list_medicines patient_user.id as list_medicines %}
 {% url consulting_list_appointments patient_user_id=patient_user.id as list_appointments %}
@@ -10,16 +9,8 @@
 {% url consulting_list_recommendations patient_user_id=patient_user.id as list_recommendations %}
 {% url consulting_user_evolution patient_user_id=patient_user.id as user_evolution %}
 {% url consulting_list_illnesses patient_user_id=patient_user.id as list_illnesses %}
-{% else %}
-{% url consulting_personal_data_pm patient_user_id=patient_user_id as personal_data %}
-{% url consulting_list_medicines patient_user_id as list_medicines %}
-{% url consulting_list_appointments patient_user_id=patient_user_id as list_appointments %}
-{% url consulting_list_reports patient_user_id=patient_user_id as list_reports %}
-{% url consulting_list_messages patient_user_id=patient_user_id as list_messages %}
-{% url consulting_list_recommendations patient_user_id=patient_user_id as list_recommendations %}
-{% url consulting_user_evolution patient_user_id=patient_user_id as user_evolution %}
-{% url consulting_list_illnesses patient_user_id=patient_user_id as list_illnesses %}
-{% endif %}
+{% url consulting_user_evolution patient_user_id=patient_user.id block_code=survey_block.code as user_evolution %}
+
 
   <ul class="nav nav-pills nav-stacked">
     <li class="{% active_granchild request personal_data %}">
@@ -43,11 +34,20 @@
         {% trans 'RECOMENDACIONES' %}
       </a>
     </li>
-    <li class="{% active_granchild request user_evolution %}">
-      <a href="{{user_evolution}}">
-        {% trans 'PARÁMETROS' %}
+    {% if patient_user.get_profile.get_scored_blocks|length %}
+    <li class="dropdown {% if survey_block %}active{% endif %}">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        {% trans 'PARÁMETROS' %} <b class="caret"></b>
       </a>
+      <ul class="dropdown-menu">
+        {% for b in patient_user.get_profile.get_scored_blocks %}
+        <li>
+          <a href="{% url consulting_user_evolution patient_user_id=patient_user.id block_code=b.code %}">{{b.name}}</a>
+        </li>
+        {% endfor %}
+      </ul>
     </li>
+    {% endif %}
     <li class="{% active_granchild request list_medicines %}">
       <a href="{{list_medicines}}">
         {% trans 'FÁRMACOS' %}

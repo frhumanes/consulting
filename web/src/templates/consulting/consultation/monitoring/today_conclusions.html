@@ -2,7 +2,7 @@
 
 <section>
   <h4>{% trans 'Conclusiones' %}</h4>
-  {% if conclusions.count = 0 %}
+  {% if not conclusions %}
     {% if illness %}
     <div class="alert alert-warning">{% trans 'Pendiente.' %} <a href="{% url consulting_set_conclusion appointment.id illness.code %}"><strong class="warning">{% trans 'Rellenar ahora' %}</strong></a></div>
     {% else %}
@@ -14,15 +14,11 @@
   <dl class="dl-horizontal">
     <dt>{% trans 'Observaciones' %}</dt>
       <dd>
-      {% for c in conclusions %}
-        {% if c.observation %}{{c.observation}}<br>{% endif %}
-      {% endfor %}&nbsp;
+      {{conclusions.observation}}<br>&nbsp;
     </dd>    
     <dt>{% trans 'Recomendaciones' %}</dt>
     <dd>
-      {% for c in conclusions %}
-        {% if c.recommendation %}{{c.recommendation}}<br>{% endif %}
-      {% endfor %}&nbsp;
+        {{conclusions.recommendation}}&nbsp;
     </dd>
   </dl>
   </div>

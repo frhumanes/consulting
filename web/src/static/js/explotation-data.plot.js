@@ -3,7 +3,7 @@
 function init_bars(data, container) {
   /* edit these settings freely */  
   var w = Math.min($('#main').width(), 550),
-      h = 500,
+      h = Math.min(500, data.length * 40),
       topMargin = 15,
       labelSpace = 120,
       innerMargin = w/2+labelSpace,
@@ -15,7 +15,7 @@ function init_bars(data, container) {
 
   /* edit with care */
   var chartWidth = w - innerMargin - outerMargin,
-      barWidth = h / data.length,
+      barWidth = Math.min(h / data.length, 30),
       yScale = d3.scale.linear().domain([0, data.length]).range([0, h-topMargin]),
       total = d3.scale.linear().domain([0, dataRange]).range([0, chartWidth - labelSpace/2]),
       commas = d3.format(",.3f");

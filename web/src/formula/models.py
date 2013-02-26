@@ -21,12 +21,16 @@ class Dimension(models.Model):
 
 
 class Variable(models.Model):
-    dimension = models.ForeignKey('Dimension',
-                                    related_name='dimension_variables')
+    dimension = models.ForeignKey('Dimension', on_delete=models.SET_NULL,
+                                    related_name='dimension_variables', 
+                                    null=True, blank=True)
 
     name = models.CharField(_(u'Nombre'), max_length=40, blank=True)
 
     code = models.CharField(_(u'Código'), max_length=40, blank=True)
+
+    vmin = models.IntegerField(_(u'Valor mínimo'), default=0)
+    vmax = models.IntegerField(_(u'Valor máximo'))
 
     def __unicode__(self):
         return u'%s' % self.name
@@ -50,7 +54,10 @@ class Formula(models.Model):
 
     polynomial = models.CharField(_(u'Polinomio'), max_length=250)
 
-    factor = models.DecimalField(u'Factor', max_digits=12, decimal_places=10)
+    factor = models.DecimalField(u'Factor', 
+                                max_digits=12, 
+                                decimal_places=10, 
+                                default=1)
 
     def __unicode__(self):
         return u'%s [%s]' % (self.variable, self.get_kind())

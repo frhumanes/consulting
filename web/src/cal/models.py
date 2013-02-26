@@ -6,7 +6,7 @@ from django.db import models
 
 from managers import SlotManager, AppointmentManager
 from log.models import TraceableModel
-from datetime import date, datetime, time
+from datetime import date, datetime
 from django.utils import formats
 
 from django.template.loader import render_to_string
@@ -15,9 +15,13 @@ from django.core.mail import send_mail
 
 
 class Vacation(TraceableModel):
-    doctor = models.ForeignKey(User, related_name='vacation_doctor',limit_choices_to = {'profiles__role':settings.DOCTOR})
-    date = models.DateField(null=False, blank=False, help_text="Please use the following format: <em>DD/MM/YYYY</em>.")
-    description = models.TextField(max_length=5000, blank=True, null=True)
+    doctor = models.ForeignKey(
+        User, related_name='vacation_doctor',
+        limit_choices_to={'profiles__role': settings.DOCTOR})
+    date = models.DateField(
+        null=False, blank=False,
+        help_text="Please use the following format: <em>DD/MM/YYYY</em>.")
+    description = models.TextField(blank=True, null=True)
 
     class Meta:
         unique_together = ('doctor', 'date')
@@ -28,31 +32,45 @@ class Vacation(TraceableModel):
 
 
 class Event(TraceableModel):
-    doctor = models.ForeignKey(User, 
-                    related_name='event_doctor', 
-                    limit_choices_to = {'profiles__role':settings.DOCTOR})
-    date = models.DateField(null=False, blank=False, help_text="Please use the following format: <em>DD/MM/YYYY</em>.")
-    start_time = models.TimeField(null=False, blank=False, help_text="Please use the following format: <em>HH:mm</em>.")
-    end_time = models.TimeField(null=False, blank=False, help_text="Please use the following format: <em>HH:mm</em>.")
-    description = models.TextField(max_length=5000, blank=True, null=True)
+    doctor = models.ForeignKey(
+        User,
+        related_name='event_doctor',
+        limit_choices_to={'profiles__role': settings.DOCTOR})
+    date = models.DateField(
+        null=False, blank=False,
+        help_text="Please use the following format: <em>DD/MM/YYYY</em>.")
+    start_time = models.TimeField(
+        null=False, blank=False,
+        help_text="Please use the following format: <em>HH:mm</em>.")
+    end_time = models.TimeField(
+        null=False, blank=False,
+        help_text="Please use the following format: <em>HH:mm</em>.")
+    description = models.TextField(blank=True, null=True)
 
     class Meta:
         unique_together = ('doctor', 'date', 'start_time', 'end_time')
         verbose_name = "Evento"
 
     def __unicode__(self):
-       return u'%s [%s-%s], %s' % (self.date, 
-                                  self.start_time, self.end_time,
-                                  self.doctor)
+       return u'%s [%s-%s], %s' % (self.date,
+                                   self.start_time, self.end_time,
+                                   self.doctor)
 
     def get_duration(self):
         return (datetime.combine(date.today(), self.end_time) - datetime.combine(date.today(), self.start_time)).seconds / 60
 
+
 class SlotType(TraceableModel):
-    doctor = models.ForeignKey(User, related_name='entry_type_doctor',limit_choices_to = {'profiles__role':settings.DOCTOR})
+    doctor = models.ForeignKey(
+        User,
+        related_name='entry_type_doctor',
+        limit_choices_to={'profiles__role': settings.DOCTOR})
     title = models.CharField(max_length=255)
-    duration = models.IntegerField(null=False, blank=False, help_text="En minutos")
-    description = models.TextField(max_length=5000, blank=True, null=True)
+    duration = models.IntegerField(
+        null=False,
+        blank=False,
+        help_text="En minutos")
+    description = models.TextField(blank=True, null=True)
 
     class Meta:
         verbose_name = "Tipo de cita"
@@ -89,14 +107,19 @@ class Slot(TraceableModel):
     )
 
     creator = models.ForeignKey(User, related_name='slot_creator')
-    slot_type = models.ForeignKey(SlotType, related_name='slot_event_type',
-        on_delete=models.CASCADE)
+    slot_type = models.ForeignKey(SlotType,
+                                  related_name='slot_event_type',
+                                  on_delete=models.CASCADE)
     weekday = models.IntegerField(choices=WEEKDAYS)
     month = models.IntegerField(choices=MONTH)
     year = models.IntegerField()
-    start_time = models.TimeField(null=False, blank=False, help_text="Please use the following format: <em>HH:mm</em>.")
-    end_time = models.TimeField(null=False, blank=False, help_text="Please use the following format: <em>HH:mm</em>.")
-    description = models.TextField(max_length=5000, blank=True, null=True)
+    start_time = models.TimeField(
+        null=False, blank=False,
+        help_text="Please use the following format: <em>HH:mm</em>.")
+    end_time = models.TimeField(
+        null=False, blank=False,
+        help_text="Please use the following format: <em>HH:mm</em>.")
+    description = models.TextField(blank=True, null=True)
 
     #reserved = models.BooleanField(default=False)
 
@@ -104,8 +127,10 @@ class Slot(TraceableModel):
     objects = SlotManager()
 
     def __unicode__(self):
-        return u'%s [%s-%s], %s' \
-            % (self.slot_type.title, self.start_time, self.end_time, self.creator)
+        return u'%s [%s-%s], %s' % (self.slot_type.title,
+                                    self.start_time,
+                                    self.end_time,
+                                    self.creator)
 
     class Meta:
         ordering = ["month", "weekday", "start_time"]
@@ -121,34 +146,55 @@ class Appointment(TraceableModel):
     )
 
     PAYMENT = (
-          (_(u'Pagada'), 'success'),
-          (_(u'Confirmada'), 'warning'),
-          (_(u'Pendiente de pago'), 'error'),
-          (_(u'Sin confirmar'), 'info'),
-          (_(u'Cancelada'), ''),
-          (_(u'No confirmada'), ''),
-          (_(u'No asistió'), ''),
-         )
+        (_(u'Pagada'), 'success'),
+        (_(u'Confirmada'), 'warning'),
+        (_(u'Pendiente de pago'), 'error'),
+        (_(u'Sin confirmar'), 'info'),
+        (_(u'Cancelada'), ''),
+        (_(u'No confirmada'), ''),
+        (_(u'No asistió'), ''),
+    )
 
-    doctor = models.ForeignKey(User, related_name='appointment_doctor',limit_choices_to = {'profiles__role':settings.DOCTOR})
+    doctor = models.ForeignKey(
+        User,
+        related_name='appointment_doctor',
+        limit_choices_to={'profiles__role': settings.DOCTOR})
 
-    patient = models.ForeignKey(User, related_name='appointment_patient',limit_choices_to = {'profiles__role':settings.PATIENT})
+    patient = models.ForeignKey(
+        User,
+        related_name='appointment_patient',
+        limit_choices_to={'profiles__role': settings.PATIENT})
 
-    app_type = models.ForeignKey(SlotType,
-        related_name='appointment_slot_type', null=True, on_delete=models.SET_NULL)
+    app_type = models.ForeignKey(
+        SlotType,
+        related_name='appointment_slot_type',
+        null=True,
+        on_delete=models.SET_NULL)
 
-    date = models.DateField(null=False, blank=False, help_text="Please use the following format: <em>DD/MM/YYYY</em>.")
+    date = models.DateField(
+        null=False, blank=False,
+        help_text="Please use the following format: <em>DD/MM/YYYY</em>.")
 
-    start_time = models.TimeField(null=False, blank=False, help_text="Please use the following format: <em>HH:mm</em>.")
+    start_time = models.TimeField(
+        null=False, blank=False,
+        help_text="Please use the following format: <em>HH:mm</em>.")
 
-    end_time = models.TimeField(null=False, blank=False, help_text="Please use the following format: <em>HH:mm</em>.")
+    end_time = models.TimeField(
+        null=False, blank=False,
+        help_text="Please use the following format: <em>HH:mm</em>.")
 
-    duration = models.IntegerField(null=False, blank=False, help_text="En minutos")
-    description = models.TextField(max_length=5000, blank=True, null=True)
+    duration = models.IntegerField(null=False,
+                                   blank=False,
+                                   help_text="En minutos")
+    description = models.TextField(blank=True, null=True)
 
     objects = AppointmentManager()
 
-    notify = models.BooleanField(_(u'Notificar cita'), default=True, help_text=_(u'Desmarcar para asignar citas virtuales que no requiren la presencia del paciente.'))
+    notify = models.BooleanField(
+        _(u'Notificar cita'),
+        default=True,
+        help_text=_(u'Desmarcar para asignar citas virtuales que no \
+                    requiren la presencia del paciente.'))
 
     status = models.IntegerField(_(u'Estado'), choices=STATUS, default=0)
 
@@ -170,7 +216,7 @@ class Appointment(TraceableModel):
         return bool(self.appointment_tasks.all().count() or self.appointment_conclusions.all().count())
 
     def is_over(self):
-         return bool(self.appointment_conclusions.all().count())
+        return bool(self.appointment_conclusions.all().count())
 
     def save(self, *args, **kw):
         status = None
@@ -185,7 +231,9 @@ class Appointment(TraceableModel):
             elif orig.is_reserved() and self.is_confirmed():
                 status = 'new'
             if orig.doctor != self.doctor:
-                log = AppLog(appointment=self, pre_status=orig.status, comment=_(u'Cambio de médico'))
+                log = AppLog(appointment=self,
+                             pre_status=orig.status,
+                             comment=_(u'Cambio de médico'))
                 log.save()
         else:
             status = 'new'
@@ -201,31 +249,33 @@ class Appointment(TraceableModel):
             if not orig:
                 log = AppLog(appointment=self, new_status=self.status)
             else:
-                log = AppLog(appointment=self, pre_status=orig.status, new_status=self.status)
+                log = AppLog(appointment=self,
+                             pre_status=orig.status,
+                             new_status=self.status)
             log.save()
-
 
     def delete(self, *args, **kw):
         if self.notify and self.is_confirmed:
             self.warn_patient('deleted')
         super(Appointment, self).delete(*args, **kw)
-            
 
     def warn_patient(self, action, app=None):
-        subject = render_to_string('cal/app/notifications/'+action+'_email_subject.txt', {'user': self.patient.get_profile(),
-                                          'app': self})
+        subject = render_to_string(
+            'cal/app/notifications/' + action + '_email_subject.txt',
+            {'user': self.patient.get_profile(),
+             'app': self})
         # Email subject *must not* contain newlines
         subject = ''.join(subject.splitlines())
         if self.patient.get_profile().email:
             try:
                 message = render_to_string(
-                    'cal/app/notifications/'+action+'_email_message.txt', 
+                    'cal/app/notifications/' + action + '_email_message.txt',
                     {'user': self.patient.get_profile(),
-                     'app': self, 
-                     'orig':app, 
-                     'LANGUAGE_CODE':'es'})
-                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, 
-                        [self.patient.get_profile().email])
+                     'app': self,
+                     'orig': app,
+                     'LANGUAGE_CODE': 'es'})
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
+                          [self.patient.get_profile().email])
             except:
                 return 0
         if settings.EMAIL2SMS:
@@ -235,12 +285,13 @@ class Appointment(TraceableModel):
                                          mobile,
                                          settings.SMS_GATEWAY)
                 message = render_to_string(
-                        'cal/app/notifications/'+action+'_sms_message.txt', 
-                        {'user': self.patient.get_profile(),
-                         'app': self, 
-                         'orig':app, 
-                         'LANGUAGE_CODE':'es'})
-                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [phone_mail])
+                    'cal/app/notifications/' + action + '_sms_message.txt',
+                    {'user': self.patient.get_profile(),
+                     'app': self,
+                     'orig': app,
+                     'LANGUAGE_CODE': 'es'})
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
+                          [phone_mail])
         return 1
 
     def is_confirmed(self):
@@ -266,7 +317,7 @@ class Appointment(TraceableModel):
 
     def get_payment_status(self, css=False):
         i = css and 1 or 0
-        
+
         if Payment.objects.filter(appointment=self).count():
             return self.PAYMENT[0][i]
         else:
@@ -290,7 +341,6 @@ class Appointment(TraceableModel):
     def get_payment_class(self):
         return self.get_payment_status(True)
 
-
     def get_styles(self):
         styles = ""
         if self.is_canceled():
@@ -301,7 +351,6 @@ class Appointment(TraceableModel):
         return list(self.applog_appointment.all().order_by('-date'))
 
 
-
 class AppLog(models.Model):
     STATUS = (
         (0, _(u'Confirmada')),
@@ -309,12 +358,12 @@ class AppLog(models.Model):
         (2, _(u'Cancelada por el médico')),
         (3, _(u'Anulada por el paciente')),
     )
-    appointment = models.ForeignKey(Appointment, 
+    appointment = models.ForeignKey(Appointment,
                                     related_name='applog_appointment')
     date = models.DateTimeField(auto_now_add=True)
     pre_status = models.IntegerField(choices=STATUS, null=True)
     new_status = models.IntegerField(choices=STATUS, null=True)
-    comment = models.TextField(max_length=5000, blank=True, null=True)
+    comment = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
         change = "Fecha/hora cambiada"
@@ -323,8 +372,12 @@ class AppLog(models.Model):
         elif self.new_status is None:
             change = self.comment
         elif self.pre_status != self.new_status:
-            change = _(u'Estado cambiado: ') + AppLog.STATUS[self.pre_status][1] + ' >> ' + AppLog.STATUS[self.new_status][1]
-        return u'%s %s' % (formats.date_format(self.date, "SHORT_DATETIME_FORMAT"), change)
+            change = "%s: %s >> %s" % (_(u'Estado cambiado'),
+                                       AppLog.STATUS[self.pre_status][1],
+                                       AppLog.STATUS[self.new_status][1])
+        return u'%s %s' % (formats.date_format(self.date,
+                           "SHORT_DATETIME_FORMAT"), change)
+
 
 class Payment(TraceableModel):
     METHODS = (
@@ -332,19 +385,26 @@ class Payment(TraceableModel):
         (2, _(u'Tarjeta')),
         (3, _(u'Aseguradora')),
         (4, _(u'Otros')),
-        )
-    appointment = models.OneToOneField(Appointment, primary_key=True, 
-                                    related_name='payment_appointment')
+    )
+    appointment = models.OneToOneField(Appointment,
+                                       primary_key=True,
+                                       related_name='payment_appointment')
     method = models.IntegerField(_(u'Forma de pago'), choices=METHODS)
     date = models.DateField(_(u'Fecha de pago'), default=date.today)
-    value = models.DecimalField(_(u'Importe'), max_digits=5, decimal_places=2, null=True, blank=True)
+    value = models.DecimalField(_(u'Importe'), max_digits=5,
+                                decimal_places=2, null=True, blank=True)
     discount = models.IntegerField(_(u'Descuento / bonificación'), default=0)
 
     def __unicode__(self):
         if self.value:
-            return u'%s %s (%d€)' % (formats.date_format(self.date, "SHORT_DATE_FORMAT"), self.appointment.get_payment_status(), self.value)
+            return u'%s %s (%d€)' % (formats.date_format(self.date,
+                                     "SHORT_DATE_FORMAT"),
+                                     self.appointment.get_payment_status(),
+                                     self.value)
         else:
-            return u'%s %s' % (formats.date_format(self.date, "SHORT_DATE_FORMAT"), self.appointment.get_payment_status())
+            return u'%s %s' % (formats.date_format(self.date,
+                                "SHORT_DATE_FORMAT"),
+                               self.appointment.get_payment_status())
 
     class Meta:
         verbose_name = "Registro de pago"

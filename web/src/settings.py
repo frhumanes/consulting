@@ -16,20 +16,18 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', #'django.db.backends.sqlite3', Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'consulting',                      # Or path to database file if using sqlite3.
-        'USER': 'consulting',                      # Not used with sqlite3.
-        'PASSWORD': 'consulting',                  # Not used with sqlite3.
-        'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'consulting',
+        'USER': 'consulting',
+        'PASSWORD': 'consulting',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     },
-    'nonrel' : {
-      'ENGINE' : 'django_mongodb_engine',
-      'NAME' : 'consulting'
-   }
+    'nonrel': {
+        'ENGINE': 'django_mongodb_engine',
+        'NAME': 'consulting'
+    }
 }
-
-
 
 # The absolute path to the directory where collectstatic will collect static
 # files for deployment.
@@ -78,8 +76,8 @@ LANGUAGE_CODE = 'es'
 
 gettext = lambda s: s
 LANGUAGES = (
-  ('es', gettext('Spanish')),
-  ('en', gettext('English')),
+    ('es', gettext('Spanish')),
+    ('en', gettext('English')),
 )
 
 LOGIN_URL = '/accounts/login/'
@@ -174,7 +172,7 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
-        'TIMEOUT': 8*60*60,
+        'TIMEOUT': 8 * 60 * 60,
         'KEY_PREFIX': 'consulting'
     }
 }

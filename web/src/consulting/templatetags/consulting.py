@@ -95,6 +95,26 @@ def get_depression_status_at(patient, date, i=None):
         return ' '
 
 @register.simple_tag
+def get_suicide_status_at(patient, date, i=None):
+    try:
+        if isinstance(i, int):
+            return patient.get_profile().get_suicide_status(at_date=date)[i]
+        else:
+            return patient.get_profile().get_suicide_status(at_date=date, html=True)
+    except:
+        return ' '
+
+@register.simple_tag
+def get_unhope_status_at(patient, date, i=None):
+    try:
+        if isinstance(i, int):
+            return patient.get_profile().get_unhope_status(at_date=date)[i]
+        else:
+            return patient.get_profile().get_unhope_status(at_date=date, html=True)
+    except:
+        return ' '
+
+@register.simple_tag
 def get_brand():
     return BRAND
 

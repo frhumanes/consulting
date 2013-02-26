@@ -65,6 +65,7 @@ class SelectWidgetBootstrap(forms.Select):
                 setBtnGroupVal(elem);
                 
             }
+            btngroup.find('.slider').slider('value', selected_a.parent().index());
             btngroup.find('input[type=hidden]').val(val);
             btngroup.find('.btn-group-label').val(label);
             btngroup.attr('init', '1');
@@ -72,14 +73,36 @@ class SelectWidgetBootstrap(forms.Select):
 
         $(document).ready(function() {
             $('div[init="0"].btn-group-form').each(function() {
+                if($(this).attr('name').substring(0,1) == 'H' && $(this).attr('name').substring(0,2) != 'Hd' || $(this).attr('name').substring(0,2) == 'YB' || $(this).attr('name').substring(0,3) == 'OCI') {
+                    slider = $(this).find('.slider').slider({
+                            min: 3,
+                            max: $(this).find('.dropdown-menu a').length+1 ,
+                            range: "min",
+                            value: 0,
+                            start: function( event, ui ) {
+                                $(this).parent().find('ul.dropdown-menu li:nth-child('+ui.value+') a').click();
+
+                            },
+                            slide: function( event, ui ) {
+                                $(this).parent().find('ul.dropdown-menu li:nth-child('+ui.value+') a').click();
+
+                            }
+                    });
+                    $(this).find('button').hide();
+                } 
+                else {
+                    $(this).find('.slider').remove();
+                };
                 setBtnGroupVal(this);
-                $(this).find('a').click(function(ev) {
+                $(this).find('.dropdown-menu a').click(function(ev) {
                     ev.preventDefault();
                     $(this).parent().siblings().find('a').attr('selected', false);
-                    $(this).attr('selected', true);
+                    var opt = $(this).attr('selected', true);
                     var $btngroup = $(this).parentsUntil('.btn-group-form').parent();
                     setBtnGroupVal($btngroup);
-                    $('html,body').animate({scrollTop: $btngroup.parentsUntil('.control-group').parent().offset().top - 50 }, 500);
+                    if (ev.originalEvent !== undefined) {
+                        $('html,body').animate({scrollTop: $btngroup.parentsUntil('.control-group').parent().offset().top - 50 }, 500);
+                    }
                 });
             });
 
@@ -100,12 +123,13 @@ class SelectWidgetBootstrap(forms.Select):
         final_attrs = self.build_attrs(attrs, name=name)
         output = ["""<div%(attrs)s init="0">"""
                   """    <input class="btn-group-label" type="text" readonly="readonly" value="%(label)s" />"""
-                  """    <button class="btn btn-info dropdown-toggle" type="button" style="position:relative; top: -5px; left: -2px" data-toggle="dropdown">"""
+                  """    <button class="btn btn-info dropdown-toggle" type="button" style="position:absolute; right: 0px" data-toggle="dropdown">"""
                   """        <b class="caret"></b>"""
                   """    </button>"""
-                  """    <ul class="dropdown-menu">"""
+                  """    <ul class="dropdown-menu pull-right">"""
                   """        %(options)s"""
                   """    </ul>"""
+                  """    <div class="slider"></div>"""
                   """    <input type="hidden" name="%(name)s" value="" class="btn-group-value" />"""
                   """</div>"""
                   """%(js)s"""
@@ -185,7 +209,7 @@ class QuestionsForm(forms.Form):
                         values.insert(1,('',[]))
                         self.fields[question.code] = forms.ChoiceField(
                             label=question.text,
-                            widget=SelectWidgetBootstrap(attrs={'class': css + ' btn-group pull-right btn-group-form'}), choices=values,
+                            widget=SelectWidgetBootstrap(attrs={'class': css + ' btn-group btn-group-form'}), choices=values,
                             required=False, initial=initial_option)
                     
 

@@ -2,7 +2,7 @@
 
 <section>
   <h4>{% trans 'Tratamiento' %}</h4>
-    {% if treatment.count = 0%}
+    {% if treatment.count = 0 and not conclusions.extra %}
 	  <div class="alert alert-info">{% trans 'No hay tratamiento farmacológico asociado a esta cita' %}</div>
 	{% else %}
 	  <div class="thumbnail">
@@ -11,9 +11,15 @@
 		<dt>{% trans 'Medicamento' %}</dt>
 		<dd>{{m.component}}</dd>
 		<dt>{% trans 'Posología' %}</dt>
-		<dd><em>{{m.posology}}</em> {% trans 'mg/día' %} {% if m.dosification %} repartidos en {{m.dosification}}.{% endif %}</dd>
+		<dd><em>{{m.posology|floatformat:"-4" }}</em> {% trans 'mg/día' %} {% if m.dosification %}: {{m.dosification}}.{% endif %}</dd>
 	  </dl>
 	  {% endfor %}
+	  {% if conclusions.extra %}
+		<dl class="dl-horizontal">
+			<dt>{% trans 'Otros' %}</dt>
+			<dd>{{conclusions.extra}}</dd>
+		</dl>
+	  {% endif %}
 	</div>
 	{% endif %}
 </section>

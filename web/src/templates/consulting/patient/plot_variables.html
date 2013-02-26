@@ -22,26 +22,29 @@
 <section style="overflow-x: auto">
     <legend>{% trans 'Valores' %}</legend>
     <table class="table table-stripped table-bordered">
-        {% for label, marks in latest_marks.items %}
+        {% for var, marks in latest_marks.items %}
         {% if forloop.counter0 = 0 %}
         <thead>
-            <tr>
+            <tr style="background-color: #F5F5F5;">
                 <th></th>
-                {% for date, mark in marks %}
-                <th>{{date|date:'d/m/y'}}</th>
+                {% for t, mark in marks %}
+                <th style="text-align:center">{{t.end_date|date:'d/m/y'}}
+                    {% if t.kind %}
+                <br><span class="label label-info">{{t.get_kind}}</span>
+                {% endif %}</th>
                 {% endfor %}
             </tr>
         </thead>
         <tbody>                
             <tr>
-                <th>{{label}}</th>
-                {% for date, mark in marks %}
+                <th>{{var.name}} <small class="muted">{% trans 'sobre' %} {{var.vmax}}</small></th>
+                {% for t, mark in marks %}
                 <td style="text-align:right">{{mark|floatformat:1}}</td>
                 {% endfor %}
             </tr>
         {% else %}
             <tr>
-                <th>{{label}}</th>
+                <th>{{var.name}} <small class="muted">{% trans 'sobre' %} {{var.vmax}}</small></th>
                 {% for date, mark in marks %}
                 <td style="text-align:right">{{mark|floatformat:1}}</td>
                 {% endfor %}
@@ -58,7 +61,7 @@ $(function () {
         "{{label}}": {
             label: "{{label|upper}}",
             yaxis: {% if forloop.counter|divisibleby:2 %}2{% else %}1{% endif %},
-            data: [{% for date, mark in marks %}{% if mark or mark = 0 %}[(Date.UTC({{date|date:'Y, m-1, j'}})),{{mark|unlocalize}}],{% endif %}{% endfor %}]
+            data: [{% for t, mark in marks %}{% if mark or mark = 0 %}[(Date.UTC({{t.end_date|date:'Y, m-1, j'}})),{{mark|unlocalize}}],{% endif %}{% endfor %}]
         }{% if forloop.revcounter0 %},{% endif %}       
        {% endfor %}
     };
@@ -109,14 +112,21 @@ $(function () {
         });
 
         if (data.length > 0)
-            $.plot($("#placeholder_variables"), data, {
+            var plot = $.plot($("#placeholder_variables"), data, {
             	lines: { show: true },
             	points: { show: true },
-                yaxes: [{ min: 0, max: 5, ticks: 10, position: "right"},
-                        { min: 0, max: 5, ticks: 10, position: "left"}],
+                yaxes: [{ min: {{vmin|unlocalize}}, max: {{vmax|unlocalize}}, ticks: 10, position: "right"},
+                        { min: {{vmin|unlocalize}}, max: {{vmax|unlocalize}}, ticks: 10, position: "left"}],
                 xaxis: { mode: "time",  minTickSize: [1, "day"], min: (Date.UTC({{ticks|first|date:'Y, m-1, j'}})),
-                grid: { hoverable: true},
-                max: (Date.UTC({{ticks|last|date:'Y, m-1, j'}}))},
+                    grid: { hoverable: true},
+                    max: (Date.UTC({{ticks|last|date:'Y, m-1, j'}})),
+                    monthNames: ['{% trans "jan" %}', '{% trans "feb" %}', 
+                                '{% trans "mar" %}', '{% trans "apr" %}', 
+                                '{% trans "may" %}', '{% trans "jun" %}', 
+                                '{% trans "jul" %}', '{% trans "aug" %}', 
+                                '{% trans "sep" %}', '{% trans "oct" %}', 
+                                '{% trans "nov" %}', '{% trans "dec" %}']
+                },
                 legend: { container: legendContainer, noColumns: 3 }
             });
 
@@ -154,7 +164,11 @@ $(function () {
       }).appendTo("body").fadeIn('slow');
     }
 
-    plotAccordingToChoices();
+    {% if latest_marks|length < 6 %}
+        setAll();
+    {% else %}
+        plotAccordingToChoices();
+    {% endif %}
 
     $('#variables_selector').popover({'title':'Aviso',
                                       'content':'Seleccione aquí las variables disponibles',

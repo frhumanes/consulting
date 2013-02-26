@@ -1,0 +1,204 @@
+{% extends "ui/app.html" %}
+
+{% load i18n stadistic %}
+
+{% block css_inline %}
+section {
+  padding-top: 30px
+}
+.bs-docs-sidenav {
+    background-color: #FFFFFF;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+    margin: 10px 0 0 0;
+    padding: 0;
+}
+@media (min-width: 1200px){
+  .bs-docs-sidenav {
+    width: 270px
+  }
+}
+.bs-docs-sidenav > li {
+    line-height: 20px
+}
+.bs-docs-sidenav > li > a {
+    border: 1px solid #E5E5E5;
+    display: block;
+    margin: 0 0 -1px;
+    padding: 8px 14px;
+    text-align: right; 
+}
+.bs-docs-sidenav > li:first-child > a {
+    border-radius: 6px 6px 0 0;
+}
+.bs-docs-sidenav > li:last-child > a {
+    border-radius: 0 0 6px 6px;
+}
+.bs-docs-sidenav > .active > a {
+    border: 0 none;
+    box-shadow: 1px 0 0 rgba(0, 0, 0, 0.1) inset, -1px 0 0 rgba(0, 0, 0, 0.1) inset;
+    padding: 9px 15px;
+    position: relative;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+.bs-docs-sidenav .icon-chevron-right {
+    float: right;
+    margin-right: -6px;
+    margin-top: 2px;
+    opacity: 0.25;
+}
+.bs-docs-sidenav .icon-chevron-left {
+    float: left;
+    margin-left: -6px;
+    margin-top: 2px;
+    opacity: 0.25;
+}
+.bs-docs-sidenav > li > a:hover {
+    background-color: #F5F5F5;
+}
+.bs-docs-sidenav a:hover .icon-chevron-right, .bs-docs-sidenav a:hover .icon-chevron-left {
+    opacity: 0.5;
+}
+.bs-docs-sidenav .active .icon-chevron-right, .bs-docs-sidenav .active a:hover .icon-chevron-right {
+    background-image: url("{{ STATIC_URL }}/img/glyphicons-halflings-white.png");
+    opacity: 1;
+}
+.bs-docs-sidenav .active .icon-chevron-left, .bs-docs-sidenav .active a:hover .icon-chevron-left {
+    background-image: url("{{ STATIC_URL }}/img/glyphicons-halflings-white.png");
+    opacity: 1;
+}
+.bs-docs-sidenav.affix {
+    top: 50px;
+}
+.bs-docs-sidenav.affix-bottom {
+    bottom: 10px;
+    position: absolute;
+    top: auto;
+}
+{% endblock %}
+
+{% block js_files %}
+  {{ block.super }}
+  <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/svgweb/svg-uncompressed.js"></script><![endif]-->
+  <script src="{{ STATIC_URL }}js/pyramid.js"></script>
+{% endblock %}
+
+{% block js %}
+function show_patient_list(illness, level) {
+  
+  url = {
+        {% for sc in scales %}{{sc.hash}}: '{% url stratification_list sc.hash 0 %}'{% if forloop.revcounter0 %},{% endif %}{% endfor %}
+        };
+
+  
+  if($('#myfilter').hasClass('active')){
+    url[illness] += '?filter=mine';
+  }
+  $('#modal-title').load('/statistic/stratification/level/' + illness + '/' + level + '/');
+  $('#modal_patient .modal-body').html('<div class="center"><img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="cargando..." /></div>');
+  $('#modal_patient .modal-body').load(url[illness].replace('0', level),'',$('#modal_patient').modal('show'));
+}
+{% endblock %}
+
+{% block jquery_init %}
+$('body').attr('data-spy', 'scroll');
+$('#navbar').scrollspy();
+
+$('#myfilter').on('click', function(e){
+  $(this).html('<img src="{{ STATIC_URL }}/img/ajax-bar-loader.gif" alt="cargando..." />');
+  if($(this).hasClass('active')){
+    window.location = '{{request.path}}';
+  }
+  else {
+    window.location = '{{request.path}}?filter=mine';
+  }
+})
+
+ var base = Math.min($(window).width()-40, 400);
+
+ {% for sc in scales %}
+
+ $('#pyramid_{{sc.hash}}').Pyramid({
+    'height': Math.max(base, 320),
+    'base': base,
+    'top': 100,
+    'slices':{{piramid_list|get_item:sc.name|length}},
+    'slice_separation': 0.1,
+    'colours':
+    {% if piramid_list|get_item:sc.name|length_is:'7' %}
+      ['#FFFFFF', '#468847', '#0088CC', '#999999', '#F89406', '#B94A48', '#202020'],
+    {% else %} 
+      {% if piramid_list|get_item:sc.name|length_is:'3' %}
+        ['#FFFFFF', '#468847', '#B94A48'],
+      {% else %}
+        ['#FFFFFF', '#468847', '#999999', '#F89406', '#B94A48', '#202020'],
+      {% endif %}
+    {% endif %}
+    'text': [{% for l in piramid_list|get_item:sc.name %}'{% if forloop.counter = 1 %}{% trans 'No diagnosticados: '%}{% endif %}{{l|length}} ({% widthratio l|length num_patient 100 %}%)',{% endfor %}]
+ })
+ .on('click', function(event){ 
+    console.log(event);
+    show_patient_list('{{sc.hash}}', event.id-2);
+  });
+ {% endfor %}
+
+{% endblock %}
+
+
+{% block left %}
+  {% include "ui/includes/nav_bar_doctor_statistic.html" %}
+{% endblock left%}
+
+{% block right %}
+  <ul id="navbar" class="nav nav-list affix bs-docs-sidenav fixable">
+    {% for sc in scales %}
+      <li><a href="#{{sc.hash}}"><i class="icon-chevron-left"></i> {{sc.name}}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+{% block container %}
+<div class="page-header">
+  <h1>{% trans 'Pirámides de estratificación' %}
+    <button id="myfilter" type="button" class="pull-right btn {% if filtered %}active btn-info{% endif %}" data-toggle="button">{% if filtered %}{% trans 'Ver todos' %}{% else %}{% trans 'Ver mis pacientes' %}{% endif %}</button>
+  </h1>
+</div>
+{% for sc in scales %}
+<section id="{{sc.hash}}">
+  <h3>{{sc.name}}</h3>
+  <div class="img-polaroid row-fluid">
+    <div class="pull-left">
+      <div id="pyramid_{{sc.hash}}" style="width: 380px; height:380px; margin: 20px 0 0 20px;">
+        <!--[if lte IE 8]><script type="image/svg+xml">{% with "statistic/ie8/"|add:sc.hash|add:".svg" as template %}
+          {% include template with illness=sc.hash plist=piramid_list|get_item:sc.name %}{% endwith %}</script>
+        <![endif]-->
+      </div>
+    </div>
+    <div class="pull-right" style="max-width:250px; margin: 20px 20px 20px 0;">
+      <div class="well center">
+        <legend>Escala</legend>
+        {% for mark, level in sc.scale.items %}
+          <p><span style="width: 100%" class="label label-{{level.1}}">{{level.0|safe}}</span></p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endfor %}
+  
+
+<div id="modal_patient" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="modal-title">{% trans 'Pacientes' %}</h3>
+  </div>
+  <div class="modal-body">
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary" data-dismiss="modal">{% trans 'Cerrar' %}</a>
+  </div>
+</div>
+{% endblock %}
+
+

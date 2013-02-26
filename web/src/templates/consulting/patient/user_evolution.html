@@ -7,40 +7,11 @@
     <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet">
 {% endblock %}
 
-{% block css_inline %}
-    {{ block.super }}
-.yaxisLabelLeft {
-    left: -18px;
-    top: 50%;
-    transform: rotate(-90deg);
-    transform-origin: 0 0;
-    -webkit-transform: rotate(-90deg);
-    -webkit-transform-origin: 0 0;
-    -moz-transform: rotate(-90deg);
-    /* for ie */
-    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-}
-.yaxisLabelRight {
-    float: right;
-    right: -102px;
-    top: 50%;
-    transform: rotate(90deg);
-    transform-origin: 0 0;
-    -webkit-transform: rotate(90deg);
-    -webkit-transform-origin: 0 0;
-    -moz-transform: rotate(90deg);
-}
-.axisLabel {
-    font-size: 12px;
-    position: absolute;
-    text-align: center;
-}
-{% endblock %}
-
 {% block js_files %}
     {{ block.super }}
     <script src="{{ STATIC_URL }}js/jquery.flot.js"></script>
     <script src="{{ STATIC_URL }}js/jquery.flot.resize.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.flot.axislabels.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
     <script src="{{ STATIC_URL }}js/locales/bootstrap-datepicker.es.js"></script>
 {% endblock %}
@@ -120,6 +91,7 @@
           </ul>
         </div>
       </div>
+      <small style="display: block">{{survey_block.name}}</small>
     </h1>
 	</div>
     <div id="filter_options" class="alert alert-info hide fade in">
@@ -155,26 +127,30 @@
 
     <ul class="nav nav-tabs" id="myTab">
         <li{% if not active_tab or active_tab = 'active' %} class="active"{%endif%}>
-            <a href="#variables" data-toggle="tab">Variables</a>
+            <a href="#variables" data-toggle="tab">{% trans 'Variables' %}</a>
         </li>
-        <li {% if active_tab = 'dimensions' %} class="active"{%endif%}><a href="#dimensions" data-toggle="tab" id="dimensions_tab">Dimensiones</a></li>
-        <li {% if active_tab = 'status' %} class="active"{%endif%}><a href="#status" data-toggle="tab" id="status_tab">Estado</a></li>
-        <li {% if active_tab = 'treatment' %} class="active"{%endif%}><a href="#treatment" data-toggle="tab" id="treatment_tab">Tratamiento</a></li>
+        {% if latest_dimensions %}
+        <li {% if active_tab = 'dimensions' %} class="active"{%endif%}><a href="#dimensions" data-toggle="tab" id="dimensions_tab">{% trans 'Dimensiones' %}</a></li>
+        {% endif %}
+        {% if scales %}
+        <li {% if active_tab = 'status' %} class="active"{%endif%}><a href="#status" data-toggle="tab" id="status_tab">{% trans 'Escalas' %}</a></li>
+        {% endif %}
     </ul>
 	
     <div class="tab-content">
-        <div class="tab-pane {% if not active_tab or active_tab = 'variables' %}active{% endif %}" id="variables">
+        <div class="tab-pane {% if not active_tab or active_tab = 'variables' %}active{% endif %}" id="variables" style="overflow-x: hidden">
             {% include 'consulting/patient/plot_variables.html' with ticks=ticks_variables %}
         </div>
-        <div class="tab-pane {% if active_tab = 'dimensions' %}active{% endif %}" id="dimensions" >
+        {% if latest_dimensions %}
+        <div class="tab-pane {% if active_tab = 'dimensions' %}active{% endif %}" id="dimensions" style="overflow-x: hidden">
             {% include 'consulting/patient/plot_dimensions.html' with ticks=ticks_variables %}
         </div>
-        <div class="tab-pane {% if active_tab = 'status' %}active{% endif %}" id="status">
+        {% endif %}
+        {% if scales %}
+        <div class="tab-pane {% if active_tab = 'status' %}active{% endif %}" id="status" style="overflow-x: hidden">
             {% include 'consulting/patient/plot_scales.html' with ticks=ticks_variables values=scales %}
         </div>
-        <div class="tab-pane {% if active_tab = 'treatment' %}active{% endif %}" id="treatment">
-            {% include 'consulting/patient/plot_treatment.html' with ticks=ticks_treatment %}
-        </div>
+        {% endif %}
     </div>
 
 
