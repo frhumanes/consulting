@@ -177,10 +177,6 @@
     </div>
 </div>
 
-<script src="{{ STATIC_URL }}js/jquery-ui-1.9.1.custom.min.js"></script>
-
-<link href="{{ STATIC_URL }}css/jquery-ui-1.9.1.custom.css" rel="stylesheet">
-
 <script type="text/javascript">
     function next(){
         var loader = '<img src="{{ STATIC_URL }}/img/ajax-bar-loader.gif" alt="loading..." />';
@@ -299,6 +295,11 @@
     <div class="center">
         <img style="padding-top: 100px" src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
     </div>
+
+    <script src="{{ STATIC_URL }}js/jquery-ui-1.9.1.custom.min.js"></script>
+
+    <link href="{{ STATIC_URL }}css/jquery-ui-1.9.1.custom.css" rel="stylesheet">
+
     <script type="text/javascript">
         $(document).ready(function(){
             $('#large').load('{% url 'calendar_big' year=year month=month change='this' %}', set_events);

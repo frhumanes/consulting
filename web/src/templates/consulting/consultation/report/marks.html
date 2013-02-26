@@ -17,7 +17,7 @@
   {% for scale in task.get_scales %}
     <tr>
       <th>{{scale.name}}</th>
-      <td style="text-align: center"><span class="label label-{{scale.status.1}}">{{scale.status.0}}</span></td>
+      <td style="text-align: center"><span class="label label-{{scale.status.1}}">{{scale.status.0|safe}}</span></td>
       <td style="text-align:right">{{scale.mark|floatformat:1}}</td>
     </tr>
   {% endfor %}

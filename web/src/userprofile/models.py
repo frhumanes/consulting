@@ -21,12 +21,10 @@ from survey.models import Block
 class Profile(TraceableModel):
 
     SEX = (
-        (-1, ''),
         (1, _(u'Mujer')),
         (2, _(u'Hombre')),
     )
     STATUS = (
-        (-1, ''),
         (settings.MARRIED, _(u'Casado/a')),
         (settings.STABLE_PARTNER, _(u'Pareja Estable')),
         (settings.DIVORCED, _(u'Divorciado/a')),
@@ -100,7 +98,7 @@ class Profile(TraceableModel):
                                                              unique_check)
 
     sex = models.IntegerField(_(u'Sexo'), choices=SEX,
-                              default=SEX[0][0], blank=True, null=True)
+                              blank=True, null=True)
 
     address = models.CharField(_(u'Dirección'), max_length=150, blank=True)
 
@@ -146,6 +144,8 @@ class Profile(TraceableModel):
             self.email = None
         if self.nif == '':
             self.nif = None
+        if not self.sex:
+            self.sex = None
         if self.medical_number == '':
             self.medical_number = None
         super(Profile, self).save(*args, **kw)
@@ -213,7 +213,7 @@ class Profile(TraceableModel):
 
     def get_sex(self):
         if self.sex:
-            return self.SEX[self.sex][1]
+            return self.SEX[self.sex - 1][1]
         return ''
 
     def get_education(self):

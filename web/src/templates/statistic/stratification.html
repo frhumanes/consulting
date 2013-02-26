@@ -102,6 +102,14 @@ function show_patient_list(illness, level) {
 {% endblock %}
 
 {% block jquery_init %}
+//Prevent scrollpsy affects to others nav list
+$('.permanentbar li').on('DOMAttrModified', function(event){
+  console.log(event);
+  if (event.relatedNode.nodeValue == '') {
+    $(this).addClass('active');
+  }
+})
+
 $('body').attr('data-spy', 'scroll');
 $('#spybar').scrollspy();
 
