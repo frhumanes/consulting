@@ -103,7 +103,7 @@ function show_patient_list(illness, level) {
 
 {% block jquery_init %}
 $('body').attr('data-spy', 'scroll');
-$('#navbar').scrollspy();
+$('#spybar').scrollspy();
 
 $('#myfilter').on('click', function(e){
   $(this).html('<img src="{{ STATIC_URL }}/img/ajax-bar-loader.gif" alt="cargando..." />');
@@ -151,7 +151,7 @@ $('#myfilter').on('click', function(e){
 {% endblock left%}
 
 {% block right %}
-  <ul id="navbar" class="nav nav-list affix bs-docs-sidenav fixable">
+  <ul id="spybar" class="nav nav-list affix bs-docs-sidenav fixable">
     {% for sc in scales %}
       <li><a href="#{{sc.hash}}"><i class="icon-chevron-left"></i> {{sc.name}}</a></li>
     {% endfor %}
