@@ -1,6 +1,6 @@
 {% load i18n consulting %}
 <tr id={{event.patient.id}} data-msg="{{ event.id }}" style="cursor:pointer">
-  <td>
+  <td style="vertical-align: middle">
     {% if event.is_first_appointment %}
       <span class="label label-info">Nuevo</span>
     {% endif %}

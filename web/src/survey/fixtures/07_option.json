@@ -10073,7 +10073,7 @@
     "pk": 1090, 
     "model": "survey.option", 
     "fields": {
-      "text": "0 - Nada", 
+      "text": "Nada", 
       "code": "YB1.0", 
       "question": 231, 
       "weight": "0.00"
@@ -10083,7 +10083,7 @@
     "pk": 1091, 
     "model": "survey.option", 
     "fields": {
-      "text": "1 - Menos de 1h/d\u00eda o presentaci\u00f3n ocasional.", 
+      "text": "Menos de 1h/d\u00eda o presentaci\u00f3n ocasional.", 
       "code": "YB1.1", 
       "question": 231, 
       "weight": "1.00"
@@ -10093,7 +10093,7 @@
     "pk": 1092, 
     "model": "survey.option", 
     "fields": {
-      "text": "2 - De 1 a 3 h/d\u00eda o frecuentes.", 
+      "text": "De 1 a 3 h/d\u00eda o frecuentes.", 
       "code": "YB1.2", 
       "question": 231, 
       "weight": "2.00"
@@ -10103,7 +10103,7 @@
     "pk": 1093, 
     "model": "survey.option", 
     "fields": {
-      "text": "3 - Mas de 3 y hasta 8 h/d\u00eda o presentaci\u00f3n sumamente frecuente.", 
+      "text": "Mas de 3 y hasta 8 h/d\u00eda o presentaci\u00f3n sumamente frecuente.", 
       "code": "YB1.3", 
       "question": 231, 
       "weight": "3.00"
@@ -10113,7 +10113,7 @@
     "pk": 1094, 
     "model": "survey.option", 
     "fields": {
-      "text": "4 - Mas de 8 h/d\u00eda o presentaci\u00f3n casi constante.", 
+      "text": "Mas de 8 h/d\u00eda o presentaci\u00f3n casi constante.", 
       "code": "YB1.4", 
       "question": 231, 
       "weight": "4.00"
@@ -10123,7 +10123,7 @@
     "pk": 1095, 
     "model": "survey.option", 
     "fields": {
-      "text": "0 - Nada", 
+      "text": "Nada", 
       "code": "YB2.0", 
       "question": 232, 
       "weight": "0.00"
@@ -10133,7 +10133,7 @@
     "pk": 1096, 
     "model": "survey.option", 
     "fields": {
-      "text": "1 - Ligera interferencia con actividades sociales o de otro tipo, pero el desempe\u00f1o global no se ve alterado.", 
+      "text": "Ligera interferencia con actividades sociales o de otro tipo, pero el desempe\u00f1o global no se ve alterado.", 
       "code": "YB2.1", 
       "question": 232, 
       "weight": "1.00"
@@ -10143,7 +10143,7 @@
     "pk": 1097, 
     "model": "survey.option", 
     "fields": {
-      "text": "2 - Interferencia definitiva con el desempe\u00f1o social u ocupacional, pero sigue siendo manejable.", 
+      "text": "Interferencia definitiva con el desempe\u00f1o social u ocupacional, pero sigue siendo manejable.", 
       "code": "YB2.2", 
       "question": 232, 
       "weight": "2.00"
@@ -10153,7 +10153,7 @@
     "pk": 1098, 
     "model": "survey.option", 
     "fields": {
-      "text": "3 - Provoca deterioro sustancial en el desempe\u00f1o social u ocupacional.", 
+      "text": "Provoca deterioro sustancial en el desempe\u00f1o social u ocupacional.", 
       "code": "YB2.3", 
       "question": 232, 
       "weight": "3.00"
@@ -10163,7 +10163,7 @@
     "pk": 1099, 
     "model": "survey.option", 
     "fields": {
-      "text": "4 - Incapacitante.", 
+      "text": "Incapacitante.", 
       "code": "YB2.4", 
       "question": 232, 
       "weight": "4.00"
@@ -10173,7 +10173,7 @@
     "pk": 1100, 
     "model": "survey.option", 
     "fields": {
-      "text": "0 - Nada", 
+      "text": "Nada", 
       "code": "YB3.0", 
       "question": 233, 
       "weight": "0.00"
@@ -10183,7 +10183,7 @@
     "pk": 1101, 
     "model": "survey.option", 
     "fields": {
-      "text": "1 - No son demasiado inquietantes", 
+      "text": "No son demasiado inquietantes", 
       "code": "YB3.1", 
       "question": 233, 
       "weight": "1.00"
@@ -10193,7 +10193,7 @@
     "pk": 1102, 
     "model": "survey.option", 
     "fields": {
-      "text": "2 - Son Inquietantes, pero siguen siendo manejables", 
+      "text": "Son Inquietantes, pero siguen siendo manejables", 
       "code": "YB3.2", 
       "question": 233, 
       "weight": "2.00"
@@ -10203,7 +10203,7 @@
     "pk": 1103, 
     "model": "survey.option", 
     "fields": {
-      "text": "3 - Sumamente inquietantes", 
+      "text": "Sumamente inquietantes", 
       "code": "YB3.3", 
       "question": 233, 
       "weight": "3.00"
@@ -10213,7 +10213,7 @@
     "pk": 1104, 
     "model": "survey.option", 
     "fields": {
-      "text": "4 - Inquietud casi constante e incapacitante", 
+      "text": "Inquietud casi constante e incapacitante", 
       "code": "YB3.4", 
       "question": 233, 
       "weight": "4.00"
@@ -10223,7 +10223,7 @@
     "pk": 1105, 
     "model": "survey.option", 
     "fields": {
-      "text": "0 - Trato de resistirme todo el tiempo", 
+      "text": "Trato de resistirme todo el tiempo", 
       "code": "YB4.0", 
       "question": 234, 
       "weight": "0.00"
@@ -10233,7 +10233,7 @@
     "pk": 1106, 
     "model": "survey.option", 
     "fields": {
-      "text": "1 - Trato de resistirme la mayor parte del tiempo", 
+      "text": "Trato de resistirme la mayor parte del tiempo", 
       "code": "YB4.1", 
       "question": 234, 
       "weight": "1.00"
@@ -10243,7 +10243,7 @@
     "pk": 1107, 
     "model": "survey.option", 
     "fields": {
-      "text": "2 - Hago cierto esfuerzo por resistirme", 
+      "text": "Hago cierto esfuerzo por resistirme", 
       "code": "YB4.2", 
       "question": 234, 
       "weight": "2.00"
@@ -10253,7 +10253,7 @@
     "pk": 1108, 
     "model": "survey.option", 
     "fields": {
-      "text": "3 - Me rindo ante todas las obsesiones sin tratar de controlarlas, aunque con cierta renuncia.", 
+      "text": "Me rindo ante todas las obsesiones sin tratar de controlarlas, aunque con cierta renuncia.", 
       "code": "YB4.3", 
       "question": 234, 
       "weight": "3.00"
@@ -10263,7 +10263,7 @@
     "pk": 1109, 
     "model": "survey.option", 
     "fields": {
-      "text": "4 - Me rindo completa y gustosamente a todas las obsesiones", 
+      "text": "Me rindo completa y gustosamente a todas las obsesiones", 
       "code": "YB4.4", 
       "question": 234, 
       "weight": "4.00"
@@ -10273,7 +10273,7 @@
     "pk": 1110, 
     "model": "survey.option", 
     "fields": {
-      "text": "0 - Control Absoluto", 
+      "text": "Control Absoluto", 
       "code": "YB5.0", 
       "question": 235, 
       "weight": "0.00"
@@ -10283,7 +10283,7 @@
     "pk": 1111, 
     "model": "survey.option", 
     "fields": {
-      "text": "1 - Usualmente logro detener o distraer las obsesiones con algo de esfuerzo y concentraci\u00f3n", 
+      "text": "Usualmente logro detener o distraer las obsesiones con algo de esfuerzo y concentraci\u00f3n", 
       "code": "YB5.1", 
       "question": 235, 
       "weight": "1.00"
@@ -10293,7 +10293,7 @@
     "pk": 1112, 
     "model": "survey.option", 
     "fields": {
-      "text": "2 - En ocasiones logro detener o distraer las obsesiones", 
+      "text": "En ocasiones logro detener o distraer las obsesiones", 
       "code": "YB5.2", 
       "question": 235, 
       "weight": "2.00"
@@ -10303,7 +10303,7 @@
     "pk": 1113, 
     "model": "survey.option", 
     "fields": {
-      "text": "3 - Raras veces tengo \u00e9xito para detener o distraer las obsesiones, \u00fanicamente logro distraer mi atenci\u00f3n con dificultad", 
+      "text": "Raras veces tengo \u00e9xito para detener o distraer las obsesiones, \u00fanicamente logro distraer mi atenci\u00f3n con dificultad", 
       "code": "YB5.3", 
       "question": 235, 
       "weight": "3.00"
@@ -10313,7 +10313,7 @@
     "pk": 1114, 
     "model": "survey.option", 
     "fields": {
-      "text": "4 - Las obsesiones son completamente involuntarias, raras veces logro alterar, aunque sea moment\u00e1neamente, los pensamientos obsesivos", 
+      "text": "Las obsesiones son completamente involuntarias, raras veces logro alterar, aunque sea moment\u00e1neamente, los pensamientos obsesivos", 
       "code": "YB5.4", 
       "question": 235, 
       "weight": "4.00"
@@ -10323,7 +10323,7 @@
     "pk": 1115, 
     "model": "survey.option", 
     "fields": {
-      "text": "0 - Nada", 
+      "text": "Nada", 
       "code": "YB6.0", 
       "question": 236, 
       "weight": "0.00"
@@ -10333,7 +10333,7 @@
     "pk": 1116, 
     "model": "survey.option", 
     "fields": {
-      "text": "1 - Menos de 1 h/d\u00eda, o desempe\u00f1o ocasional de comportamientos compulsivos", 
+      "text": "Menos de 1 h/d\u00eda, o desempe\u00f1o ocasional de comportamientos compulsivos", 
       "code": "YB6.1", 
       "question": 236, 
       "weight": "1.00"
@@ -10343,7 +10343,7 @@
     "pk": 1117, 
     "model": "survey.option", 
     "fields": {
-      "text": "2 - De 1 a 3 h/d\u00eda, o desempe\u00f1o frecuente de comportamientos compulsivos", 
+      "text": "De 1 a 3 h/d\u00eda, o desempe\u00f1o frecuente de comportamientos compulsivos", 
       "code": "YB6.2", 
       "question": 236, 
       "weight": "2.00"
@@ -10353,7 +10353,7 @@
     "pk": 1118, 
     "model": "survey.option", 
     "fields": {
-      "text": "3 - M\u00e1s de 3 y hasta 8 h/d\u00eda, o desempe\u00f1o muy frecuente de comportamientos compulsivos", 
+      "text": "M\u00e1s de 3 y hasta 8 h/d\u00eda, o desempe\u00f1o muy frecuente de comportamientos compulsivos", 
       "code": "YB6.3", 
       "question": 236, 
       "weight": "3.00"
@@ -10363,7 +10363,7 @@
     "pk": 1119, 
     "model": "survey.option", 
     "fields": {
-      "text": "4 - M\u00e1s de 8 h/d\u00eda, o desempe\u00f1o casi constante de comportamientos compulsivos", 
+      "text": "M\u00e1s de 8 h/d\u00eda, o desempe\u00f1o casi constante de comportamientos compulsivos", 
       "code": "YB6.4", 
       "question": 236, 
       "weight": "4.00"
@@ -10373,7 +10373,7 @@
     "pk": 1120, 
     "model": "survey.option", 
     "fields": {
-      "text": "0 - Nada", 
+      "text": "Nada", 
       "code": "YB7.0", 
       "question": 237, 
       "weight": "0.00"
@@ -10383,7 +10383,7 @@
     "pk": 1121, 
     "model": "survey.option", 
     "fields": {
-      "text": "1 - Ligera interferencia con actividades sociales o de otro tipo, pero el desempe\u00f1o global no se ve alterado", 
+      "text": "Ligera interferencia con actividades sociales o de otro tipo, pero el desempe\u00f1o global no se ve alterado", 
       "code": "YB7.1", 
       "question": 237, 
       "weight": "1.00"
@@ -10393,7 +10393,7 @@
     "pk": 1122, 
     "model": "survey.option", 
     "fields": {
-      "text": "2 - Interferencia definitiva con el desempe\u00f1o global no se ve alterado", 
+      "text": "Interferencia definitiva con el desempe\u00f1o global no se ve alterado", 
       "code": "YB7.2", 
       "question": 237, 
       "weight": "2.00"
@@ -10403,7 +10403,7 @@
     "pk": 1123, 
     "model": "survey.option", 
     "fields": {
-      "text": "3 - Provoca deterioro sustancial en el desempe\u00f1o social u ocupacional", 
+      "text": "Provoca deterioro sustancial en el desempe\u00f1o social u ocupacional", 
       "code": "YB7.3", 
       "question": 237, 
       "weight": "3.00"
@@ -10413,7 +10413,7 @@
     "pk": 1124, 
     "model": "survey.option", 
     "fields": {
-      "text": "4 - Incapacitante", 
+      "text": "Incapacitante", 
       "code": "YB7.4", 
       "question": 237, 
       "weight": "4.00"
@@ -10423,7 +10423,7 @@
     "pk": 1125, 
     "model": "survey.option", 
     "fields": {
-      "text": "0 - Nada", 
+      "text": "Nada", 
       "code": "YB8.0", 
       "question": 238, 
       "weight": "0.00"
@@ -10433,7 +10433,7 @@
     "pk": 1126, 
     "model": "survey.option", 
     "fields": {
-      "text": "1 - Tan solo ligeramente ansioso si me impiden mis compulsiones", 
+      "text": "Tan solo ligeramente ansioso si me impiden mis compulsiones", 
       "code": "YB8.1", 
       "question": 238, 
       "weight": "1.00"
@@ -10443,7 +10443,7 @@
     "pk": 1127, 
     "model": "survey.option", 
     "fields": {
-      "text": "2 - La ansiedad se agudizar\u00eda, pero seguir\u00eda siendo manejable si me impidieran mis compulsiones", 
+      "text": "La ansiedad se agudizar\u00eda, pero seguir\u00eda siendo manejable si me impidieran mis compulsiones", 
       "code": "YB8.2", 
       "question": 238, 
       "weight": "2.00"
@@ -10453,7 +10453,7 @@
     "pk": 1128, 
     "model": "survey.option", 
     "fields": {
-      "text": "3 - Aumento notorio y sumamente inquietante de la ansiedad si mis compulsiones son interrumpidas", 
+      "text": "Aumento notorio y sumamente inquietante de la ansiedad si mis compulsiones son interrumpidas", 
       "code": "YB8.3", 
       "question": 238, 
       "weight": "3.00"
@@ -10463,7 +10463,7 @@
     "pk": 1129, 
     "model": "survey.option", 
     "fields": {
-      "text": "4 - Ansiedad incapacitante a causa de cualquier intervenci\u00f3n tendiente a modificar la actividad", 
+      "text": "Ansiedad incapacitante a causa de cualquier intervenci\u00f3n tendiente a modificar la actividad", 
       "code": "YB8.4", 
       "question": 238, 
       "weight": "4.00"
@@ -10473,7 +10473,7 @@
     "pk": 1130, 
     "model": "survey.option", 
     "fields": {
-      "text": "0 - Trato de resistirme todo el tiempo", 
+      "text": "Trato de resistirme todo el tiempo", 
       "code": "YB9.0", 
       "question": 239, 
       "weight": "0.00"
@@ -10483,7 +10483,7 @@
     "pk": 1131, 
     "model": "survey.option", 
     "fields": {
-      "text": "1 - Trato de resistirme la mayor parte del tiempo", 
+      "text": "Trato de resistirme la mayor parte del tiempo", 
       "code": "YB9.1", 
       "question": 239, 
       "weight": "1.00"
@@ -10493,7 +10493,7 @@
     "pk": 1132, 
     "model": "survey.option", 
     "fields": {
-      "text": "2 - Hago cierto esfuerzo por resistirme", 
+      "text": "Hago cierto esfuerzo por resistirme", 
       "code": "YB9.2", 
       "question": 239, 
       "weight": "2.00"
@@ -10503,7 +10503,7 @@
     "pk": 1133, 
     "model": "survey.option", 
     "fields": {
-      "text": "3 - Me rindo ante todas las compulsiones sin tratar de controlarlas, aunque con cierta renuncia", 
+      "text": "Me rindo ante todas las compulsiones sin tratar de controlarlas, aunque con cierta renuncia", 
       "code": "YB9.3", 
       "question": 239, 
       "weight": "3.00"
@@ -10513,7 +10513,7 @@
     "pk": 1134, 
     "model": "survey.option", 
     "fields": {
-      "text": "4 - Me rindo completa y gustosamente a todas las compulsiones", 
+      "text": "Me rindo completa y gustosamente a todas las compulsiones", 
       "code": "YB9.4", 
       "question": 239, 
       "weight": "4.00"
@@ -10523,7 +10523,7 @@
     "pk": 1135, 
     "model": "survey.option", 
     "fields": {
-      "text": "0 - Control absoluto", 
+      "text": "Control absoluto", 
       "code": "YB10.0", 
       "question": 240, 
       "weight": "0.00"
@@ -10533,7 +10533,7 @@
     "pk": 1136, 
     "model": "survey.option", 
     "fields": {
-      "text": "1 - Presi\u00f3n para llevar al cabo el comportamiento, pero suelo ser capaz de ejercer un control voluntario sobre este", 
+      "text": "Presi\u00f3n para llevar al cabo el comportamiento, pero suelo ser capaz de ejercer un control voluntario sobre este", 
       "code": "YB10.1", 
       "question": 240, 
       "weight": "1.00"
@@ -10543,7 +10543,7 @@
     "pk": 1137, 
     "model": "survey.option", 
     "fields": {
-      "text": "2 - Presi\u00f3n intensa por llevar al cabo el comportamiento, lo puedo controlar con dificultad", 
+      "text": "Presi\u00f3n intensa por llevar al cabo el comportamiento, lo puedo controlar con dificultad", 
       "code": "YB10.2", 
       "question": 240, 
       "weight": "2.00"
@@ -10553,7 +10553,7 @@
     "pk": 1138, 
     "model": "survey.option", 
     "fields": {
-      "text": "3 - Impulso muy intenso por llevar al cabo el comportamiento, debo efectuarlo hasta su conclusi\u00f3n, solo lo puedo retardar con dificultad", 
+      "text": "Impulso muy intenso por llevar al cabo el comportamiento, debo efectuarlo hasta su conclusi\u00f3n, solo lo puedo retardar con dificultad", 
       "code": "YB10.3", 
       "question": 240, 
       "weight": "3.00"
@@ -10563,7 +10563,7 @@
     "pk": 1139, 
     "model": "survey.option", 
     "fields": {
-      "text": "4 - El impulso por llevar al cabo el comportamiento se experimenta como algo  completamente involuntario e irresistible, raras veces soy capaz de retardar, aunque sea moment\u00e1neamente, la actividad", 
+      "text": "El impulso por llevar al cabo el comportamiento se experimenta como algo  completamente involuntario e irresistible, raras veces soy capaz de retardar, aunque sea moment\u00e1neamente, la actividad", 
       "code": "YB10.4", 
       "question": 240, 
       "weight": "4.00"

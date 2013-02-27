@@ -73,20 +73,26 @@ class SelectWidgetBootstrap(forms.Select):
 
         $(document).ready(function() {
             $('div[init="0"].btn-group-form').each(function() {
-                if($(this).attr('name').substring(0,1) == 'H' && $(this).attr('name').substring(0,2) != 'Hd' || $(this).attr('name').substring(0,2) == 'YB' || $(this).attr('name').substring(0,3) == 'OCI') {
+                var scalable = false;
+                $(this).find('.dropdown-menu a').each(function() {
+                    if( !isNaN( $(this).text().substring(0,1) ) ) {
+                        scalable = true;
+                        return false;
+                    }
+                });
+                if(scalable) {
                     slider = $(this).find('.slider').slider({
-                            min: 3,
-                            max: $(this).find('.dropdown-menu a').length+1 ,
-                            range: "min",
-                            value: 0,
-                            start: function( event, ui ) {
-                                $(this).parent().find('ul.dropdown-menu li:nth-child('+ui.value+') a').click();
+                        min: 3,
+                        max: $(this).find('.dropdown-menu a').length+1 ,
+                        range: "min",
+                        value: 0,
+                        start: function( event, ui ) {
+                            $(this).parent().find('ul.dropdown-menu li:nth-child('+ui.value+') a').click();
 
-                            },
-                            slide: function( event, ui ) {
-                                $(this).parent().find('ul.dropdown-menu li:nth-child('+ui.value+') a').click();
-
-                            }
+                        },
+                        slide: function( event, ui ) {
+                            $(this).parent().find('ul.dropdown-menu li:nth-child('+ui.value+') a').click();
+                        }
                     });
                     $(this).find('button').hide();
                 } 
@@ -126,7 +132,7 @@ class SelectWidgetBootstrap(forms.Select):
                   """    <button class="btn btn-info dropdown-toggle" type="button" style="position:absolute; right: 0px" data-toggle="dropdown">"""
                   """        <b class="caret"></b>"""
                   """    </button>"""
-                  """    <ul class="dropdown-menu pull-right">"""
+                  """    <ul class="dropdown-menu pull-right" style="max-width: 600px; overflow-x: auto">"""
                   """        %(options)s"""
                   """    </ul>"""
                   """    <div class="slider"></div>"""
