@@ -1,6 +1,11 @@
 {% extends "cal/includes/base.html" %}
 {% load i18n consulting %}
 
+{% block css_files %}
+	{{ block.super }}
+    <link href="{{ STATIC_URL }}css/jquery-ui-1.9.1.custom.css" rel="stylesheet">
+{% endblock %}
+
 {% block css_inline %}
 #large{
 	width: auto;
@@ -60,7 +65,7 @@
 			            {% endif %}
 			          </ul>
 			        </div>
-			        <span>para <strong>configurar su agenda</strong> personal antes de usarla</p>
+			        <span>para <strong>configurar su agenda</strong> personal antes de usarla
                 	</div>
                 	<hr>
                 	<div style="width: 50%; float: left;">

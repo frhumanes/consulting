@@ -52,12 +52,12 @@ class FiltersForm(forms.Form):
 
     sex = forms.MultipleChoiceField(
                     label=_(u'Sexo'),
-                    choices=Profile.SEX[1:],
+                    choices=Profile.SEX,
                     widget=forms.CheckboxSelectMultiple())
 
     marital = forms.MultipleChoiceField(
                     label=_(u'Estado civil'),
-                    choices=Profile.STATUS[1:],
+                    choices=Profile.STATUS,
                     widget=forms.CheckboxSelectMultiple())
 
     education = forms.MultipleChoiceField(
