@@ -1,19 +1,19 @@
 {% load i18n %}<svg version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 400 400" height="360" width="360" name="mySVG">
   <g id="myGroup">
 	<polygon points="0 350,390 350,362.45 283.5,27.55 283.5" fill="#FFFFFF" stroke="black"/>
-	<text x="195" y="323.4166666666667" font-size="20" text-anchor="middle" fill="black" onclick="show_patient_list({{illness}}, -1);">{% trans 'No diagnosticado' %}: {{plist.0|length}} ({% widthratio plist.0|length num_patient 100 %}%)</text>
+	<text x="195" y="323.4166666666667" font-size="20" text-anchor="middle" fill="black" onclick="show_patient_list('{{illness}}', -1);">{% trans 'No diagnosticado' %}: {{plist.0|length}} ({% widthratio plist.0|length num_patient 100 %}%)</text>
 	<id>1</id>
 	<polygon points="30.450000000000003 276.5,359.55 276.5,333.45 213.5,56.550000000000004 213.5" fill="#468847" stroke="black"/>
-	<text x="195" y="251.66666666666666" font-size="20" text-anchor="middle" fill="white" onclick="show_patient_list({{illness}}, 0);">{{plist.1|length}} ({% widthratio plist.1|length num_patient 100 %}%)</text>
+	<text x="195" y="251.66666666666666" font-size="20" text-anchor="middle" fill="white" onclick="show_patient_list('{{illness}}', 0);">{{plist.1|length}} ({% widthratio plist.1|length num_patient 100 %}%)</text>
 	<id>2</id>
 	<polygon points="59.45 206.5,330.55 206.5,304.45 143.5,85.55000000000001 143.5" fill="#999999" stroke="black"/>
-	<text x="195" y="181.66666666666666" font-size="20" text-anchor="middle" fill="white" onclick="show_patient_list({{illness}}, 1);">{{plist.2|length}} ({% widthratio plist.2|length num_patient 100 %}%)</text>
+	<text x="195" y="181.66666666666666" font-size="20" text-anchor="middle" fill="white" onclick="show_patient_list('{{illness}}', 1);">{{plist.2|length}} ({% widthratio plist.2|length num_patient 100 %}%)</text>
 	<id>3</id>
 	<polygon points="88.45 136.5,301.55 136.5,275.45 73.5,114.55000000000001 73.5" fill="#F89406" stroke="black"/>
-	<text x="195" y="111.66666666666667" font-size="20" text-anchor="middle" fill="white" onclick="show_patient_list({{illness}}, 2);">{{plist.3|length}} ({% widthratio plist.3|length num_patient 100 %}%)</text>
+	<text x="195" y="111.66666666666667" font-size="20" text-anchor="middle" fill="white" onclick="show_patient_list('{{illness}}', 2);">{{plist.3|length}} ({% widthratio plist.3|length num_patient 100 %}%)</text>
 	<id>4</id>
 	<polygon points="117.45 66.5,272.55 66.5,245 0,145 0" fill="#B94A48" stroke="black"/>
-	<text x="195" y="39.916666666666664" font-size="20" text-anchor="middle" fill="white" onclick="show_patient_list({{illness}}, 3);">{{plist.4|length}} ({% widthratio plist.4|length num_patient 100 %}%)</text>
+	<text x="195" y="39.916666666666664" font-size="20" text-anchor="middle" fill="white" onclick="show_patient_list('{{illness}}', 3);">{{plist.4|length}} ({% widthratio plist.4|length num_patient 100 %}%)</text>
 	<id>5</id>
   </g>
 </svg>
