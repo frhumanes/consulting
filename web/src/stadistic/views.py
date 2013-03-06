@@ -106,7 +106,7 @@ def update_filter(dict_filters, key, value):
 @only_doctor_consulting
 def explotation(request, block_code=None):
     data, data2 = {}, {}
-    data1 = {12: 0, 18: 0, 25: 0, 32: 0, 40: 0, 50: 0, 65: 0, '>65': 0}
+    data1 = {0: 0, 12: 0, 18: 0, 25: 0, 32: 0, 40: 0, 50: 0, 65: 0, '>65': 0}
     exclude = []
     marks = {}
     form = FiltersForm()

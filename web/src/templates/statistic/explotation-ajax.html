@@ -60,7 +60,7 @@ if ($.browser.msie && $.browser.version < '9') {
     {% for labelname, value in data1|sorteditems %}
       {% if value %}
       {
-      "age":"{% if labelname = labels_for_data1|first %}≤{% endif %}{{labelname|safe}} [{{value}}]", "population":{{value}}
+      "age":"{% if labelname %}{% if labelname = labels_for_data1|first %}≤{% endif %}{{labelname|safe}}{% else %}?{% endif %} [{{value}}]", "population":{{value}}
       }, 
       {% endif %}
     {% endfor %}
@@ -157,7 +157,7 @@ if ($.browser.msie && $.browser.version < '9') {
         {% for r in reports %}
           <tr>
             <td>{{r.patient.id}}</td>
-            <td>{{r.age}}</td>
+            <td>{% if r.age %}{{r.age}}{% endif %}</td>
             <td>{{r.patient.get_sex}}</td>
             <td>{{r.profession}}</td>
             <td>{{r.task.end_date|date:"j/m/Y"}}</td>
