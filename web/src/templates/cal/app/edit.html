@@ -67,7 +67,7 @@
           <div class="control-group error">
             <label for="id_app_type" class="control-label">{{form.app_type.label}}</label>
             <div class="controls">
-              <div class="input-prepend span9">
+              <div class="input-prepend span9 relative">
                 <span class="add-on">
                   {% if request.user.get_profile.is_doctor %}
                   <a href="{% url cal.add_slot_type %}?next={{request.path}}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a>

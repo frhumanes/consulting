@@ -131,8 +131,8 @@ def explotation(request, block_code=None):
     if block_code == str(settings.ANXIETY_DEPRESSION_BLOCK):
         status = [u'Ansiedad', u'Depresión']
         data2 = {
-            u'Ansiedad': [0 for i in range(len(settings.HAMILTON.keys()) + 1)],
-            u'Depresión': [0 for i in range(len(settings.BECK.keys()) + 2)]
+            u'Ansiedad': [0 for i in range(len(settings.HAMILTON.keys()) + 2)],
+            u'Depresión': [0 for i in range(len(settings.BECK.keys()) + 1)]
         }
         exclude = ('suicide', 'unhope', 'ybocs')
     elif block_code == str(settings.UNHOPE_BLOCK):
