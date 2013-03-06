@@ -19,7 +19,7 @@
 	<text x="195" y="81.66666666666667" font-size="20" text-anchor="middle" fill="white" onclick="show_patient_list('{{illness}}', 4);">{{plist.5|length}} ({% widthratio plist.5|length num_patient 100 %}%)</text>
 	<id>6</id>
 	<polygon points="125.32142857142858 47.5,264.67857142857144 47.5,245 0,145 0" fill="#202020" stroke="black"/>
-	<text x="195" y="30.416666666666668" font-size="20" text-anchor="middle" fill="white" onclick="show_patient_list('{{illness}}', 6);">{{plist.6|length}} ({% widthratio plist.6|length num_patient 100 %}%)</text>
+	<text x="195" y="30.416666666666668" font-size="20" text-anchor="middle" fill="white" onclick="show_patient_list('{{illness}}', 5);">{{plist.6|length}} ({% widthratio plist.6|length num_patient 100 %}%)</text>
 	<id>7</id>
   </g>
 </svg>
