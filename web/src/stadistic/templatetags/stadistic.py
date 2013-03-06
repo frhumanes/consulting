@@ -23,7 +23,7 @@ def get_item(dictionary, key):
         return ''
 
 @register.filter
-def sorted(dictionary):
+def sorteditems(dictionary):
     keys = dictionary.keys()
     keys.sort(reverse=True)
-    return [dictionary[k] for k in keys]  
+    return [(k, dictionary[k]) for k in keys]  

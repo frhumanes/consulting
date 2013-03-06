@@ -57,7 +57,7 @@ if ($.browser.msie && $.browser.version < '9') {
   ];
   init_bars(data, '#vis');
   data = [
-    {% for labelname, value in data1.items %}
+    {% for labelname, value in data1|sorteditems %}
       {% if value %}
       {
       "age":"{% if labelname = labels_for_data1|first %}≤{% endif %}{{labelname|safe}} [{{value}}]", "population":{{value}}
