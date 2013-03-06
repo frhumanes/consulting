@@ -186,7 +186,7 @@ $('#myfilter').on('click', function(e){
     <div class="pull-right" style="max-width:250px; margin: 20px 20px 20px 0;">
       <div class="well center">
         <legend>Escala</legend>
-        {% for mark, level in sc.scale.items %}
+        {% for level in sc.scale|sorted %}
           <p><span style="width: 100%" class="label label-{{level.1}}">{{level.0|safe}}</span></p>
         {% endfor %}
       </div>

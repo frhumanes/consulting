@@ -1,6 +1,6 @@
 {% load i18n %}<svg version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 400 400" height="360" width="360" name="mySVG">
   <g id="myGroup">
-	<polygon points="0 400,400 400,376.25 336.66666666666663,23.750000000000014 336.66666666666663" fill="#FFFFFF" stroke="black"/>
+	<polygon points="0 390,400 390,376.25 336.66666666666663,23.750000000000014 336.66666666666663" fill="#FFFFFF" stroke="black"/>
 	<text x="200" y="375" font-size="20" text-anchor="middle" fill="black" onclick="show_patient_list({{illness}}, -1);">{% trans 'No diagnosticados' %}: {{plist.0|length}} ({% widthratio plist.0|length num_patient 100 %}%)</text>
 	<id>1</id>
 	<polygon points="26.25 330,373.75 330,351.25 269.99999999999994,48.75000000000002 269.99999999999994" fill="#468847" stroke="black"/>

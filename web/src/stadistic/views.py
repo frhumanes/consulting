@@ -12,6 +12,7 @@ from django.utils.translation import ugettext as _
 from django.utils.html import strip_tags
 
 from datetime import datetime
+from copy import copy
 
 from decorators import paginate
 from decorators import only_doctor_consulting
@@ -507,15 +508,15 @@ def stratification_list(request, illness, level):
 @only_doctor_consulting
 def stratification_label(request, illness, level):
     if illness == 'anxiety':
-        scale = settings.HAMILTON
+        scale = copy(settings.HAMILTON)
     elif illness == 'depression':
-        scale = settings.BECK
+        scale = copy(settings.BECK)
     elif illness == 'unhope':
-        scale = settings.UNHOPE
+        scale = copy(settings.UNHOPE)
     elif illness == 'suicide':
-        scale = settings.SUICIDE
+        scale = copy(settings.SUICIDE)
     elif illness == 'ybocs':
-        scale = settings.Y_BOCS
+        scale = copy(settings.Y_BOCS)
 
     try:
         scale[0] = (_(u'No diagnosticados'), '')

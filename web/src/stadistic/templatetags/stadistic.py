@@ -21,3 +21,9 @@ def get_item(dictionary, key):
         return dictionary.get(key)
     else:
         return ''
+
+@register.filter
+def sorted(dictionary):
+    keys = dictionary.keys()
+    keys.sort(reverse=True)
+    return [dictionary[k] for k in keys]  
