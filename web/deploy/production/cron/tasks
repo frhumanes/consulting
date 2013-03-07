@@ -1,0 +1,13 @@
+# /etc/cron.d/anacron: crontab entries for the anacron package
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+APP_PATH=%(deploy_folder)s
+PYTHONPATH=%(deploy_folder)s
+DJANGO_SETTINGS_MODULE=app.settings
+MAILTO=""
+
+0 8 * * *      rambot source %(deploy_folder)s/env/bin/activate && cd %(deploy_folder)s/app && python manage.py warn_birthdays >> /tmp/consulting_scheduled_messages.log 
+0 9 * * *      rambot source %(deploy_folder)s/env/bin/activate && cd %(deploy_folder)s/app && python manage.py warn_appointments >> /tmp/consulting_scheduled_messages.log 
+0 10 * * *      rambot source %(deploy_folder)s/env/bin/activate && cd %(deploy_folder)s/app && python manage.py warn_open_surveys >> /tmp/consulting_scheduled_messages.log 

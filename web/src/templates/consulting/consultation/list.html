@@ -2,6 +2,11 @@
 
 {% load i18n %}
 
+{% block css_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/jquery.marquee.js"></script>
+{% endblock %}
+
 {% block right %}
   {% include "cal/includes/calendar.html" with doctor=request.user %}
 {% endblock right %}
