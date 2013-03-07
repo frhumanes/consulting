@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     url(r'^stratification/$', views.stratification,
         name='stratification_statistic'),
 
-    url(r'^stratification/list_(\w+)/(-?\d+)/$', views.stratification_list,
+    url(r'^stratification/list/(\w+)/(-?\d+)/$', views.stratification_list,
         name='stratification_list'),
     url(r'^stratification/level/(\w+)/(-?\d+)/$', views.stratification_label,
         name='stratification_label'),

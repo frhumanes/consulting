@@ -11,10 +11,10 @@ from cal import views
 urlpatterns = patterns('',
     url(r'^$', views.index, name='cal.index'),
 
-    url(r'^search_patient_for_(?P<action>(\w+))/$', views.lookfor_patient,
+    url(r'^search/patient/for/(?P<action>(\w+))/$', views.lookfor_patient,
         name='search_patient_for_action'),
 
-    url(r'^search_patient_for_(?P<action>(\w+))/(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/$', views.lookfor_patient,
+    url(r'^search/patient/for/(?P<action>(\w+))/(?P<year>\d+)/(?P<month>\d+)/(?P<day>\d+)/$', views.lookfor_patient,
         name='search_patient_for_action_at'),
 
     url(r'^patient_searcher/$', views.patient_searcher,
@@ -23,17 +23,17 @@ urlpatterns = patterns('',
     url(r'^schedule/(\d+)/$', views.scheduler,
         name='cal.scheduler'),
 
-    url(r'^select_doctor/(\d+)/$', views.select_doctor,
+    url(r'^select/doctor/(\d+)/$', views.select_doctor,
         name='cal.select_doctor'),
 
-    url(r'^check_transfer/(\d+)/$', views.check_transfer,
+    url(r'^check/transfer/(\d+)/$', views.check_transfer,
         name='cal.check_transfer'),
 
     url(r'^$', views.index),
 
-    url(r'^select_month_year/(\d+)/$', views.select_month_year,
+    url(r'^select/month/year/(\d+)/$', views.select_month_year,
         name='cal.select_month_year'),
-    url(r'^select_month_year/$', views.select_month_year,
+    url(r'^select/month/year/$', views.select_month_year,
         name='cal.select_month_year'),
 
 

@@ -60,7 +60,7 @@ if ($.browser.msie && $.browser.version < '9') {
     {% for labelname, value in data1|sorteditems %}
       {% if value %}
       {
-      "age":"{% if labelname %}{% if labelname = labels_for_data1|first %}≤{% endif %}{{labelname|safe}}{% else %}?{% endif %} [{{value}}]", "population":{{value}}
+      "age":"{% if labelname %}{% if labelname = labels_for_data1.1 %}≤{% endif %}{{labelname|safe}}{% else %}?{% endif %} [{{value}}]", "population":{{value}}
       }, 
       {% endif %}
     {% endfor %}

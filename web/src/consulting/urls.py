@@ -15,11 +15,11 @@ urlpatterns = patterns(
     url(r"^consultation/day/(\d+)/(\d+)/(\d+)/$", consulting_views.day,
         name='consulting_day'),
 
-    url(r'^treatment/(?P<action>\w+)_medicine/$',
+    url(r'^treatment/(?P<action>\w+)/medicine/$',
         consulting_views.add_medicine,
         name='consulting_add_medicine'),
 
-    url(r'^treatment/list_(?P<filter_option>\w+)/(?P<id_patient>\d+)/$',
+    url(r'^treatment/list/(?P<filter_option>\w+)/(?P<id_patient>\d+)/$',
         consulting_views.get_medicines,
         name='consulting_get_medicines'),
 
@@ -33,7 +33,7 @@ urlpatterns = patterns(
         name='consulting_list_surveys'),
     url(r'^surveys/block/(\d+)/$', consulting_views.self_administered_block,
         name='consulting_self_administered_block'),
-    url(r'^surveys/block/(\d+)/extra_field/$',
+    url(r'^surveys/block/(\d+)/extra/$',
         consulting_views.symptoms_worsening,
         name='consulting_symptoms_worsening'),
     url(r'^surveys/register/(\d+)/$', consulting_views.self_register,
@@ -43,23 +43,23 @@ urlpatterns = patterns(
     url(r'^newpatient/$', consulting_views.newpatient,
         name='consulting_newpatient'),
 
-    url(r'^patient_searcher/', consulting_views.patient_searcher,
+    url(r'^patient/searcher/', consulting_views.patient_searcher,
         name='consulting_patient_searcher'),
 
-    url(r'^searcher_profession/', consulting_views.searcher_profession,
+    url(r'^profession/searcher/', consulting_views.searcher_profession,
         name='consulting_searcher_profession'),
 
     ############################## ROLE DOCTOR ################################
     # PATIENT_MANAGEMENT: DOCTOR ROLE
-    url(r'^patient_management/$', consulting_views.patient_management,
+    url(r'^patient/management/$', consulting_views.patient_management,
         name='consulting_index_pm'),
 
     #See index_pm.html
-    url(r'^patient_management/(?P<patient_user_id>\d+)/$',
+    url(r'^patient/management/(?P<patient_user_id>\d+)/$',
         consulting_views.pre_personal_data_pm,
         name='consulting_pre_personal_data_pm'),
 
-    url(r'^patient/(?P<patient_user_id>\d+)/personal_data/$',
+    url(r'^patient/(?P<patient_user_id>\d+)/$',
         consulting_views.personal_data_pm,
         name='consulting_personal_data_pm'),
 
@@ -71,12 +71,12 @@ urlpatterns = patterns(
         consulting_views.patient_identification_pm,
         name='consulting_patient_identification_pm'),
 
-    url(r'^patient_management/list_by_doctor/(?P<doctor_user_id>\d+)/$',
+    url(r'^patient/management/list_by_doctor/(?P<doctor_user_id>\d+)/$',
         consulting_views.patient_list,
         name='consulting_patient_list'),
 
     # MEDICINES
-    url(r'^searcher_component/', consulting_views.searcher_component,
+    url(r'^component/searcher/', consulting_views.searcher_component,
         name='consulting_searcher_component'),
 
     url(r'^patient/(\d+)/medicines/$',
