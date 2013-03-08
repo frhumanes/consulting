@@ -97,6 +97,14 @@
         {% endif %}
         <!-- END SLOT_TYPE -->
 
+        <div class="control-group">
+          <label for="id_event_type" class="control-label">{{form.notify.label}}</label>
+          <div class="controls">
+            {{ form.notify }}
+            <em class="text-info" style="display: inline"> * {{  form.notify.help_text }}</em>
+          </div>
+        </div>
+
         <!-- STATUS -->
         {% if form.status.errors %}
           <div class="control-group error">
