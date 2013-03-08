@@ -32,10 +32,6 @@ class ProfileAdmin(admin.ModelAdmin):
         (_(u'Consulta'), {
             'fields': ('medical_number', 'doctor', 'role')
         }),
-        (_(u'Diagnóstico'), {
-            'classes': ('collapse',),
-            'fields': ('illnesses',)
-        }),
         (_(u'Registro'), {
             'classes': ('collapse',),
             'fields': ('created_by', 'updated_password_at')

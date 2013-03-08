@@ -161,7 +161,9 @@ $('#myfilter').on('click', function(e){
 {% block right %}
   <ul id="spybar" class="nav nav-list affix bs-docs-sidenav fixable">
     {% for sc in scales %}
-      <li><a href="#{{sc.hash}}"><i class="icon-chevron-left"></i> {{sc.name}}</a></li>
+        {% if sc.scale %}
+        <li><a href="#{{sc.hash}}"><i class="icon-chevron-left"></i> {{sc.name}}</a></li>
+        {% endif %}
     {% endfor %}
   </ul>
 {% endblock %}
@@ -173,6 +175,7 @@ $('#myfilter').on('click', function(e){
   </h1>
 </div>
 {% for sc in scales %}
+{% if sc.scale %}
 <section id="{{sc.hash}}">
   <h3>{{sc.name}}</h3>
   <div class="img-polaroid row-fluid">
@@ -193,6 +196,7 @@ $('#myfilter').on('click', function(e){
     </div>
   </div>
 </section>
+{% endif %}
 {% endfor %}
   
 

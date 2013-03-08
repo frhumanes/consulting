@@ -1,0 +1,70 @@
+upstream consulting_web  {
+    server 127.0.0.1:8100 fail_timeout=0;
+}
+
+server {
+    server_name %(host)s;
+    listen %(ip)s:80;
+    root /home/rambot/consulting/app/;
+
+    access_log /var/log/nginx/%(host)s.access.log;
+    error_log /var/log/nginx/%(host)s.error.log;
+
+    # deny access to .htaccess and .svn
+    location ~ /\.ht {
+        deny  all;
+    }
+    location ~ /\.svn {
+        deny  all;
+    }
+
+    location ^~ /media/CACHE/ {
+        expires max;
+        access_log   off;
+    }
+
+    location /media/ {
+        proxy_cache cache;
+        proxy_cache_valid 200 302 60m;
+        proxy_cache_valid 404 1m;
+        if ($query_string != "")  {
+            expires max;
+        }
+        alias   %(deploy_folder)s/app/media/;
+    }
+
+    location /static/ {
+        proxy_cache cache;
+        proxy_cache_valid 200 302 60m;
+        proxy_cache_valid 404 1m;
+        expires max;
+        alias   %(deploy_folder)s/app/static/;
+    }
+
+    location /static/admin/ {
+        proxy_cache cache;
+        proxy_cache_valid 200 302 60m;
+        proxy_cache_valid 404 1m;
+        expires max;
+        alias %(deploy_folder)s/env/lib/python2.6/site-packages/django/contrib/admin/media/;
+        access_log   off;
+    }
+
+    error_page  404 403     /media/404.html;
+    error_page  500 502 504 /media/500.html;
+    error_page 503 @maintenance;
+
+    location @maintenance {
+       rewrite ^(.*)$ /media/maintenance.html break;
+    }
+
+    location / {
+        if (-f $document_root/media/maintenance.html) {
+                return 503;
+        }
+        #auth_basic                  "Restricted";
+        #auth_basic_user_file        htpasswd;
+        proxy_pass http://consulting_web;
+        include /etc/nginx/proxy.conf;
+    }
+}

@@ -507,7 +507,7 @@ class Task(TraceableModel):
                 scales.append({'name': u'OCI-TOTAL',
                                'mark': self.calculate_ocir_mark(),
                                'status': self.get_ocir_status(),
-                               'hash': 'ybocs',
+                               'hash': 'ocir',
                                'scale': settings.OCIR})
         return scales
 

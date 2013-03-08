@@ -1,0 +1,10 @@
+[program:%(app_name)s]
+command=%(deploy_folder)s/env/bin/gunicorn_django -b 127.0.0.1:8100 --workers 2 --worker-connections 1000
+directory=%(deploy_folder)s/app
+user=rambot
+autostart=true
+autorestart=true
+redirect_stderr=true
+stdout_logfile=%(deploy_folder)s/logs/app.log        ; stdout log path, NONE for none; default AUTO
+stdout_logfile_maxbytes=1MB   ; max # logfile bytes b4 rotation (default 50MB)
+stdout_logfile_backups=10     ; # of stdout logfile backups (default 10)
