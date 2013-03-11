@@ -2453,7 +2453,7 @@ def get_user_guide(request):
             pdf = open(abspath,'r')
             response = HttpResponse(content=pdf.read())
             response['Content-Type']= 'application/pdf'
-            response['Content-Disposition'] = 'attachment; filename=%s.pdf' \
+            response['Content-Disposition'] = 'attachment; filename=%s' \
                                             % _(u'Consulting_user_guide.pdf')
             return response
     

@@ -8,9 +8,9 @@
 
 {% block body %}
   <div class="container">
-    <div class="row" style="margin-top:150px;">
+    <div class="row">
       <div id="main" class="center">
-        <img src="{{ STATIC_URL }}/img/logo_final.JPG" alt="Consulting 3.0" />
+        <img src="{{ STATIC_URL }}img/logo_final.JPG" alt="Consulting 3.0" />
         {% if request.user.is_staff %}
         <div style="padding: 25px">
 	        <a class="btn bnt-large btn-info" href="/admin/" target="_blank">{% trans 'ADMINISTRAR APLICACIÓN' %}</a>
