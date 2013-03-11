@@ -1597,6 +1597,8 @@ def editpatient_pm(request, patient_user_id):
             first_surname_form = form.cleaned_data['first_surname']
             nif_form = form.cleaned_data['nif']
             dob_form = form.cleaned_data['dob']
+            email = form.cleaned_data['email']
+            user.email = email
 
             if (name != name_form or\
                 first_surname != first_surname_form or\
@@ -1610,7 +1612,7 @@ def editpatient_pm(request, patient_user_id):
                 profile.save()
 
                 #SEND EMAIL to warn new username
-                if profile.email:
+                if user.email:
                     sendemail(user)
                 patient_user_id = user.id
 
