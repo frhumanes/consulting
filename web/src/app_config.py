@@ -129,7 +129,7 @@ EMAIL_PORT = 587
 # EMAIL_HOST_PASSWORD = 'password'
 EMAIL_HOST_USER = 'consulting3.development@gmail.com'
 EMAIL_HOST_PASSWORD = 'prueba123'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = 'Consulting 3.0' #EMAIL_HOST_USER
 EMAIL_USE_TLS = True
 
 #SMS Settings
