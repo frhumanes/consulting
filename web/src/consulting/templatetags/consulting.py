@@ -150,7 +150,7 @@ def embed_image(imfile, width=None, height=None, format='PNG'):
         if width and height:
             im.thumbnail((width, height), Image.ANTIALIAS)
         buf = StringIO.StringIO()
-        im.save(buf, format=format)
+        im.save(buf, format=format, quality=100)
         r = buf.getvalue()
         buf.close()
         return base64.b64encode(r)[:-1]

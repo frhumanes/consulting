@@ -2172,7 +2172,7 @@ def view_report(request, id_task):
             'as_mark':task.calculate_mark_by_code('AS'),
             'treatment':medicines,
             'prev_treatment':prev_meds,
-            'logo': os.path.join(settings.STATICFILES_DIRS[0], 'img', 'logo_final.JPG')
+            'logo': os.path.join(settings.STATICFILES_DIRS[0], 'img', 'logo_report.JPG')
             }
 
     if request.GET and request.GET.get('as', '') == 'pdf':
