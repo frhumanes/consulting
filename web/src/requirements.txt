@@ -1,4 +1,4 @@
-django==1.3.6
+django==1.3.7
 PIL
 south
 MySQL-python
@@ -7,7 +7,7 @@ xlwt
 django-extensions
 django-wkhtmltopdf
 python-memcached
-django-memcached2
+django-memcached2==0.1
 django-memcache-status
 hg+https://bitbucket.org/wkornewald/django-nonrel
 hg+https://bitbucket.org/wkornewald/djangotoolbox

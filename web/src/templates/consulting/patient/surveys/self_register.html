@@ -182,7 +182,7 @@
         <form class="form" method="post" action="{{ request.path }}">
             {% csrf_token %}
             {{ form.table }}
-            <div style="overflow-x: auto; overflow-y: visible;" class="center row-fluid">
+            <div class="center row-fluid">
               <div id="table" style="white-space: nowrap;"></div>
             </div>
             <br>
