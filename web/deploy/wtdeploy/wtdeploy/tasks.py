@@ -22,11 +22,11 @@ def create_user():
 
 
 def reqs_install():
+    sudo("apt-get update && apt-get -y install libmysqlclient-dev python-dev mercurial git-core subversion libjpeg62 libjpeg62-dev libssl-dev %s" % env.extra_packages)
     if env.nginx_serves_static:
         fab_nginx.install(env.local_conf_folder)
     else: 
         fab_apache.install(env.local_conf_folder)
-    sudo("apt-get update && apt-get -y install libmysqlclient-dev python-dev mercurial git-core subversion libjpeg62 libjpeg62-dev libssl-dev %s" % env.extra_packages)
     fab_python.install(env.local_conf_folder)
     fab_mysql.install(env.local_conf_folder)
     fab_supervisor.install(env.local_conf_folder)

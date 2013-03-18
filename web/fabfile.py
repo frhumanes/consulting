@@ -55,7 +55,7 @@ def production():
 
     env.source_folder = 'src'
     
-    env.deploy_folder = "/home/wtelecom/consulting"
+    env.deploy_folder = "/opt/consulting"
     env.hosts = ['192.168.56.101']
     env.user = 'wtelecom'
     env.password = 'wtelecom'
@@ -68,7 +68,7 @@ def production():
     env.repo_password = ''
 
     env.database_admin = 'root'
-    env.database_admin_pass = 'cmglpa'
+    env.database_admin_pass = 'cambiameporunacontrasenasegura'
 
     env.database_name = 'consulting'
     env.database_user = 'consulting'
