@@ -14,15 +14,15 @@ def install_mysql():
         warn('MySQL is already installed')
         return
     mysql_password = env.database_admin_pass
-    sudo('echo "mysql-server-5.0 mysql-server/root_password password ' \
+    sudo('echo "mysql-server-5.5 mysql-server/root_password password ' \
                               '%s" | debconf-set-selections' % mysql_password)
-    sudo('echo "mysql-server-5.0 mysql-server/root_password_again password ' \
+    sudo('echo "mysql-server-5.5 mysql-server/root_password_again password ' \
                               '%s" | debconf-set-selections' % mysql_password)
     sudo('apt-get install -y  mysql-server')
 
 def install(conf_folder):
    install_mysql()
-   sudo("apt-get -y install mysql-client libmysqlclient15-dev") # dev libraries for compile python bindings
+   sudo("apt-get -y install mysql-client libmysqlclient-dev") # dev libraries for compile python bindings
 
 def copy_conf_files(conf_folder):
     pass

@@ -14,7 +14,7 @@ def add_python_path():
           sys.path.insert(0, path)
 
   # add virtualenv
-  site.addsitedir(os.path.join(root, "env/lib/python2.6/site-packages/"))
+  site.addsitedir(os.path.join(root, "env/lib/python2.7/site-packages/"))
 
 
 add_python_path()

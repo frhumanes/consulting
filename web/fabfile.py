@@ -11,7 +11,7 @@ def development():
     env.admin_password = 'admin'
     
     env.fixtures_name = {
-        None: [ '01_group', '02_component', '06_question',  '07_option', '03_category', '08_dimension', '09_variable', '10_formula', '04_block', '05_survey', '05_template', '00_illness']
+        None: [ '01_group', '02_component', '06_question',  '07_option', '08_dimension', '09_variable', '10_formula', '03_category', '04_block', '05_survey', '05_template', '00_illness']
     }
     env.ip = '89.140.10.57'
     env.nginx_serves_static = True
