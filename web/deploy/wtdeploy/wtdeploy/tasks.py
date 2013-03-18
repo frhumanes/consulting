@@ -12,7 +12,7 @@ from wtdeploy.modules import cron
 
 
 def remove():
-    run("rm -rf %s" % env.deploy_folder)
+    sudo("rm -rf %s" % env.deploy_folder)
 
 
 #@hosts('vagrant@127.0.0.1:2222')
@@ -42,12 +42,13 @@ def system_install():
     fab_mysql.create_database(env.database_name)
     fab_mysql.drop_user(env.database_user)
     fab_mysql.create_user(env.database_user, env.database_pass)
-    fab_mysql.user_perms(env.database_user, env.database_name)
+    fab_mysql.user_perms(env.database_user, env.database_name, env.database_pass)
 
 
 def install_app():
     """ install django app """
-    run("mkdir -p %s" % env.deploy_folder)
+    sudo("mkdir -p %s" % env.deploy_folder)
+    sudo("chown -R %s %s" % (env.user, env.deploy_folder))
     fab_django.prepare_env(env.local_conf_folder, env.deploy_folder)
     update_conf()
     fab_django.copy_conf_files(env.local_conf_folder, \
@@ -57,7 +58,7 @@ def install_app():
         fab_django.syncdb()
         fab_django.create_admin()
         fab_django.load_data(env.fixtures_name)
-    
+    fab_supervisor.reload()
     fab_django.restart_app(env.app_name)
     if env.nginx_serves_static:
         fab_nginx.restart()

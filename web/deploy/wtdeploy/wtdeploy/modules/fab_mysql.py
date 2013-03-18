@@ -41,8 +41,8 @@ def drop_user(user):
     with settings(warn_only=True):
         run_mysql_sudo("DROP USER %s" % (user))
 
-def user_perms(user, database):
-    run_mysql_sudo("grant all on %s.* to %s@'%%'" % (database, user))
+def user_perms(user, database, password):
+    run_mysql_sudo("GRANT ALL ON %s.* TO %s@'localhost' IDENTIFIED BY '%s'" % (database, user, password))
 
 def run_mysql_sudo(cmd):
     run('echo "' + cmd + '" | mysql -u%(database_admin)s -p%(database_admin_pass)s' % env)

@@ -8,6 +8,7 @@ from fabric.contrib.files import upload_template
 from fabric.contrib.files import exists
 
 import os.path
+import tempfile
 
 import fab_python
 
@@ -43,8 +44,9 @@ def prepare_env(conf_folder, project_dir):
         if env.from_repo:
             svn_checkout("app")
         else:
-            local("cd %s && tar -czf /tmp/%s.tar.gz ." % (env.source_folder, env.app_name))
-            put('/tmp/%s.tar.gz' % env.app_name, '/tmp')
+            tmpfile = tempfile.mktemp()
+            local("cd %s && tar -czf %s.tar.gz ." % (env.source_folder, tmpfile))
+            put('%s.tar.gz' % tmpfile , '/tmp/%s.tar.gz' % env.app_name)
             run("mkdir -p app")
             run('tar -xzf /tmp/%s.tar.gz -C app' % env.app_name)
         run("mkdir -p logs")
@@ -66,8 +68,10 @@ def deploy():
         cmd = "svn up --username %(repo_user)s --password %(repo_password)s app" % env
         run(cmd)
     else:
-        local("cd %s && tar -czf /tmp/%s.tar.gz ." % (env.source_folder, env.app_name))
-        put('/tmp/%s.tar.gz' % env.app_name, '/tmp')
+        tmpfile = tempfile.mktemp()
+        local("cd %s && tar -czf %s.tar.gz ." % (env.source_folder, tmpfile))
+        put('%s.tar.gz' % tmpfile , '/tmp/%s.tar.gz' % env.app_name)
+        run("mkdir -p app")
         run('tar -xzf /tmp/%s.tar.gz -C app' % env.app_name)
     
 

@@ -16,5 +16,7 @@ def copy_conf_files(conf_folder, deploy_folder):
 
         upload_template('%s/supervisor/supervisor' % conf_folder, 'supervisor', context=env)
         sudo('cp supervisor/supervisor /etc/supervisor/conf.d/%(host)s.conf' % env)
-        sudo('supervisorctl reload')
+        
+def reload():
+	sudo('supervisorctl reload')
 

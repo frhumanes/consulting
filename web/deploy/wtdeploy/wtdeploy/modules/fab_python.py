@@ -18,5 +18,5 @@ def create_virtualenv(requirements_file, name, dest_dir):
         if pip_version <= "1.0.2":
             run("pip install -E %s -r %s" % (name, requirements_file))
         else:
-            run('virtualenv --no-site-packages %s' % name)
+            run('virtualenv --clear --no-site-packages %s' % name)
             run("%s/bin/pip install -r %s" % (name, requirements_file))
