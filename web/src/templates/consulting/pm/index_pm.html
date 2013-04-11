@@ -60,7 +60,7 @@ function autoSubmit() {
               })
             },
     select: function(event, ui){
-            var url = '/patient_management/' + ui.item.id + '/';
+            var url = '/patient/management/' + ui.item.id + '/';
             $(window.location).attr('href', url);
             },
   }).data( "autocomplete" )._renderItem = function( ul, item ) {

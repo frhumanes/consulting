@@ -31,4 +31,7 @@ def post_save_handler(sender, instance, created, using, **kwargs):
 @receiver(post_delete)
 def post_delete_handler(sender, instance, using, **kwargs):
     if isinstance(instance, TraceableModel):
-        log_deletion(instance)
+        try:
+            log_deletion(instance)
+        except:
+            pass  # Catch exception when deleting users

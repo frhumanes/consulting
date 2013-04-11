@@ -687,8 +687,8 @@ class Answer(models.Model):
 class DummyReport(models.Model):
     # Required to avoid Django try to access to non-exist 'reports' table
     # when deleting either Profile or Task objects
-    task = models.IntegerField(null=True)
-    patient = models.IntegerField(null=True)
+    task_id = models.IntegerField(null=True)
+    patient_id = models.IntegerField(null=True)
     date = models.DateTimeField(_(u'Fecha del Informe'), null=True)
     blocks = models.IntegerField(null=True)
     illnesses = models.IntegerField(null=True)
