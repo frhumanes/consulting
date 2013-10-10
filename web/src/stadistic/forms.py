@@ -76,7 +76,7 @@ class FiltersForm(forms.Form):
 
     illnesses =forms.MultipleChoiceField(
                     label='Diagnóstico',
-                    choices=[(i['code'], '('+i['code']+') '+i['name']) for i in Illness.objects.filter(illnesses_profiles__isnull=False).values('code', 'name').order_by('code').distinct('illnesses')],
+                    choices=[(i['code'], '('+i['code']+') '+i['name']) for i in Illness.objects.filter(illnesses_profiles__isnull=False).values('code', 'name').order_by('code').distinct()],
                     widget=forms.CheckboxSelectMultiple())
 
     date = forms.MultiValueField(
@@ -116,7 +116,7 @@ class FiltersForm(forms.Form):
 
     treatment =forms.MultipleChoiceField(
                     label='Tratamiento',
-                    choices=[(m['component__name'], m['component__name']) for m in Medicine.objects.filter(is_previous=False).values('component__name').order_by('component__name').distinct('component')],
+                    choices=[(m['component__name'], m['component__name']) for m in Medicine.objects.filter(is_previous=False).values('component__name').order_by('component__name').distinct()],
                     widget=forms.CheckboxSelectMultiple())
 
     def __init__(self, *args, **kwargs):

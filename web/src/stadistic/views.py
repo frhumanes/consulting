@@ -261,7 +261,7 @@ def explotation(request, block_code=None):
         for r in reports:
             try:
                 #Check for deleted patients
-                r.patient
+                p = Profile.objects.get(id=r.patient)
             except:
                 # Regenerate ALL the database
                 return regenerate_data(request, True)
@@ -296,8 +296,8 @@ def explotation(request, block_code=None):
                     else:
                         data[r.patient].dimensions[dim] = []
                 if block_code == str(settings.ANXIETY_DEPRESSION_BLOCK):
-                    data[r.patient].status[u'Ansiedad'] = r.patient.get_anxiety_status(index=True)
-                    data[r.patient].status[u'Depresión'] = r.patient.get_depression_status(index=True)
+                    data[r.patient].status[u'Ansiedad'] = p.get_anxiety_status(index=True)
+                    data[r.patient].status[u'Depresión'] = p.get_depression_status(index=True)
 
         for p in data.keys():
             for key, l in data[p].variables.items():
@@ -402,7 +402,7 @@ def explotation(request, block_code=None):
     else:
         #### Pyramids ####
         for r in reports:
-            p = r.patient
+            p = Profile.objects.get(id=r.patient)
             for var, mark in r.variables.items():
                 if mark >= 0 and mark:
                     if var in data.keys() and p.sex in data[var].keys():

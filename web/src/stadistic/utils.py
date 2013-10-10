@@ -14,26 +14,27 @@ def generate_reports(full=False):
                 continue
         except:
             report = Report()
-        report.task = task
+        profile = task.patient.get_profile()
+        report.task = task.id
         report.blocks = [block.code for block in task.treated_blocks.all()]
-        report.date = report.task.end_date
+        report.date = task.end_date
         report.created_by = task.created_by
-        report.patient = task.patient.get_profile()
-        age = report.patient.age_at(report.date)
+        report.patient = profile.id
+        age = profile.age_at(report.date)
         report.age = age and age or None
-        report.sex = report.patient.sex
-        report.education = report.patient.education
-        report.marital = report.patient.status
-        report.illnesses = [ill.code for ill in task.patient.get_profile().illnesses.all()]
-        report.treatment = [m.component.name for m in report.patient.get_treatment(report.date)]
-        report.profession = task.patient.get_profile().profession
+        report.sex = profile.sex
+        report.education = profile.education
+        report.marital = profile.status
+        report.illnesses = [ill.code for ill in profile.illnesses.all()]
+        report.treatment = [m.component.name for m in profile.get_treatment(report.date)]
+        report.profession = profile.profession
         report.variables = dict((k.name, v) for (k, v) in task.get_variables_mark().items())
         report.dimensions = dict((k.name, v) for (k, v) in task.get_dimensions_mark().items())
-        report.status={u'Depresión': report.patient.get_depression_status(task.end_date, True),
-                       u'Ansiedad': report.patient.get_anxiety_status(task.end_date, True),
-                       u'Suicidio': report.patient.get_suicide_status(task.end_date, True),
-                       u'Desesperanza': report.patient.get_unhope_status(task.end_date, True),
-                       u'Obsesión/Compulsión': report.patient.get_ybocs_status(task.end_date, True)
+        report.status={u'Depresión': profile.get_depression_status(task.end_date, True),
+                       u'Ansiedad': profile.get_anxiety_status(task.end_date, True),
+                       u'Suicidio': profile.get_suicide_status(task.end_date, True),
+                       u'Desesperanza': profile.get_unhope_status(task.end_date, True),
+                       u'Obsesión/Compulsión': profile.get_ybocs_status(task.end_date, True)
                       }
         report.aves = task.get_ave_list()
         report.save()

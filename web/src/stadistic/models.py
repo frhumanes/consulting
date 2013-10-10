@@ -8,17 +8,17 @@ from django_mongodb_engine.contrib import MongoDBManager
 
 
 class Report(models.Model):
-    task = models.ForeignKey(
+    """task = models.ForeignKey(
         Task,
         related_name='task_reports',
         primary_key=True,
-        null=True,
         on_delete=models.DO_NOTHING)
     patient = models.ForeignKey(
         Profile,
         related_name='patient_reports',
-        null=True,
-        on_delete=models.DO_NOTHING)
+        on_delete=models.DO_NOTHING)"""
+    task = models.IntegerField(null=False)
+    patient = models.IntegerField(null=False)
     date = models.DateTimeField(_(u'Fecha del Informe'), null=True)
     sex = models.IntegerField(null=True)
     blocks = ListField()
