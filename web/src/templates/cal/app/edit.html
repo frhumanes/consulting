@@ -317,7 +317,7 @@
     $(this).siblings().attr('disabled', true);
     $(this).siblings().attr('data-dismiss', 'static');
 
-    var json = { app_id: {{ event.id }} };
+    var json = { app_id: {{ event.id }}, csrfmiddlewaretoken: '{{ csrf_token }}' };
 
     $.ajax({
       url: '{% url cal.delete event.id %}',
@@ -325,6 +325,9 @@
       dataType: 'json',
       contentType: "application/json",
       data: JSON.stringify(json),
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+      },
       processData: false,
       success:function(data) {
                 if(data.action){

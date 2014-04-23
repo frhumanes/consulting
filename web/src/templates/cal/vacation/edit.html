@@ -145,6 +145,9 @@
     $.ajax({
       url: '{% url cal.delete_vacation %}',
       type: 'DELETE',
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+      },
       dataType: 'json',
       contentType: "application/json",
       data: JSON.stringify(json),

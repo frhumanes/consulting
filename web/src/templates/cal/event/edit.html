@@ -202,6 +202,9 @@
       contentType: "application/json",
       data: JSON.stringify(json),
       processData: false,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+      },
       success:function(data) {
           if(data.action){
             window.location.href = '{% url cal.list_event %}';

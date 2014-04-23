@@ -163,6 +163,9 @@
       dataType: 'json',
       contentType: "application/json",
       data: JSON.stringify(json),
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+      },
       processData: false,
       success:function(data) {
           console.log(data.action);
