@@ -1927,7 +1927,8 @@ def add_medicine(request, action, id_appointment=None):
                 medicine.patient = patient_user
                 medicine.save()
 
-                return HttpResponseRedirect(reverse('consulting_get_medicines', kwargs={'filter_option':filter_option, 'id_patient':patient_user.id}))
+                return get_medicines(request, filter_option, patient_user.id)
+                #return HttpResponseRedirect(reverse('consulting_get_medicines', kwargs={'filter_option':filter_option, 'id_patient':patient_user.id}))
         else:
             form = ClassForm()
 

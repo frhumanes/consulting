@@ -2,6 +2,10 @@
 
 {% load i18n messages %}
 
+{% block css_inline %}
+<meta http-equiv="pragma" content="no-cache" />
+{% endblock %}
+
 {% block right %}
   {% include "cal/includes/calendar.html" %}
 {% endblock %}
