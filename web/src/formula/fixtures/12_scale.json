@@ -1,0 +1,262 @@
+[
+{
+    "pk": 1, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 2, 
+        "name": "Nivel de estr\u00e9s", 
+        "inverted": true, 
+        "action": "", 
+        "key": "stress", 
+        "factor": "1.0000000000", 
+        "polynomial": "AVE*"
+    }
+},
+{
+    "pk": 2, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 2, 
+        "name": "Depresi\u00f3n de Beck", 
+        "inverted": true, 
+        "action": "", 
+        "key": "depression", 
+        "factor": "1.0000000000", 
+        "polynomial": "B*"
+    }
+},
+{
+    "pk": 3, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 2, 
+        "name": "Desesperanza de Beck", 
+        "inverted": true, 
+        "action": "", 
+        "key": "unhope", 
+        "factor": "1.0000000000", 
+        "polynomial": "U*"
+    }
+},
+{
+    "pk": 4, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 2, 
+        "name": "Riesgo de suicidio", 
+        "inverted": true, 
+        "action": "", 
+        "key": "suicide", 
+        "factor": "1.0000000000", 
+        "polynomial": "U*"
+    }
+},
+{
+    "pk": 5, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 1, 
+        "name": "Y-BOCS", 
+        "inverted": true, 
+        "action": "", 
+        "key": "ybocs", 
+        "factor": "1.0000000000", 
+        "polynomial": "Yb+1Yb2+Yb3+Yb4+Yb5+Yb6+Yb7+Yb8+Yb9+Yb10+Yb11"
+    }
+},
+{
+    "pk": 6, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 2, 
+        "name": "OCI-TOTAL", 
+        "inverted": true, 
+        "action": null, 
+        "key": "ocir", 
+        "factor": "1.0000000000", 
+        "polynomial": "OCI*"
+    }
+},
+{
+    "pk": 7, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 1, 
+        "name": "Ansiedad de Hamilton", 
+        "inverted": true, 
+        "action": "calculate_hamilton_mark", 
+        "key": "anxiety", 
+        "factor": "1.0000000000", 
+        "polynomial": ""
+    }
+},
+{
+    "pk": 8, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 2, 
+        "name": "CAT", 
+        "inverted": true, 
+        "action": "", 
+        "key": "cat", 
+        "factor": "1.0000000000", 
+        "polynomial": "CAT*"
+    }
+},
+{
+    "pk": 9, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 1, 
+        "name": "Ansiedad (HAD)", 
+        "inverted": true, 
+        "action": "", 
+        "key": "hadanxiety", 
+        "factor": "1.0000000000", 
+        "polynomial": "HAD1+HAD3+HAD5+HAD7+HAD9+HAD11+HAD13"
+    }
+},
+{
+    "pk": 10, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 1, 
+        "name": "Depresi\u00f3n (HAD)", 
+        "inverted": true, 
+        "action": "", 
+        "key": "haddepression", 
+        "factor": "1.0000000000", 
+        "polynomial": "HAD2+HAD4+HAD6+HAD8+HAD10+HAD12+HAD14"
+    }
+},
+{
+    "pk": 11, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 2, 
+        "name": "Hospital Ansiedad y Depresi\u00f3n", 
+        "inverted": true, 
+        "action": "", 
+        "key": "had", 
+        "factor": "1.0000000000", 
+        "polynomial": "HAD*"
+    }
+},
+{
+    "pk": 12, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 2, 
+        "name": "Control del asma (ACT)", 
+        "inverted": false, 
+        "action": "", 
+        "key": "act", 
+        "factor": "1.0000000000", 
+        "polynomial": "ACT*"
+    }
+},
+{
+    "pk": 13, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 1, 
+        "name": "\u00cdndice BODE", 
+        "inverted": true, 
+        "action": "", 
+        "key": "bode", 
+        "factor": "1.0000000000", 
+        "polynomial": "BODE*"
+    }
+},
+{
+    "pk": 14, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 1, 
+        "name": "EuroQol-5D", 
+        "inverted": true, 
+        "action": "calculate_euroqol_mark", 
+        "key": "euroqol", 
+        "factor": "1.0000000000", 
+        "polynomial": ""
+    }
+},
+{
+    "pk": 15, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 1, 
+        "name": "Disnea mMRC", 
+        "inverted": true, 
+        "action": "", 
+        "key": "dyspnea", 
+        "factor": "1.0000000000", 
+        "polynomial": "BODE3"
+    }
+},
+{
+    "pk": 16, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 1, 
+        "name": "Asma", 
+        "inverted": true, 
+        "action": "calculate_asthma_mark", 
+        "key": "asthma", 
+        "factor": "1.0000000000", 
+        "polynomial": ""
+    }
+},
+{
+    "pk": 17, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 2, 
+        "name": "Control del asma (ACQ)", 
+        "inverted": true, 
+        "action": "", 
+        "key": "acq", 
+        "factor": "0.2000000000", 
+        "polynomial": "ACQ*"
+    }
+},
+{
+    "pk": 18, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 1, 
+        "name": "Grado de control del asma", 
+        "inverted": true, 
+        "action": "calculate_asthma_cronos_mark", 
+        "key": "asthma_cronos", 
+        "factor": "1.0000000000", 
+        "polynomial": ""
+    }
+},
+{
+    "pk": 19, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 2, 
+        "name": "\u00cdndice de Barthel", 
+        "inverted": false, 
+        "action": "", 
+        "key": "barthel", 
+        "factor": "1.0000000000", 
+        "polynomial": "BA*"
+    }
+},
+{
+    "pk": 20, 
+    "model": "formula.scale", 
+    "fields": {
+        "kind": 1, 
+        "name": "Comorbilidad [corregida]", 
+        "inverted": true, 
+        "action": "fix_comorbility_mark", 
+        "key": "charlson", 
+        "factor": "1.0000000000", 
+        "polynomial": "CH1"
+    }
+}
+]

@@ -9,9 +9,9 @@
             $('#calendar').fadeTo(500, 0.25);
 
             {% if patient_user %}
-            $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=patient_user.id change='next' %}');
+            $('#right_bar').load('{% url 'calendar_widget' year=year month=month day=0 id_user=patient_user.id change='next' %}');
             {% else %}
-            $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=doctor.id change='next' %}');
+            $('#right_bar').load('{% url 'calendar_widget' year=year month=month day=0 id_user=doctor.id change='next' %}');
             {% endif %}    
         }
 
@@ -22,9 +22,9 @@
             $('#current').width(width);
             $('#calendar').fadeTo(500, 0.25);
             {% if patient_user %}
-            $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=patient_user.id change='prev' %}');
+            $('#right_bar').load('{% url 'calendar_widget' year=year month=month day=0 id_user=patient_user.id change='prev' %}');
             {% else %}
-            $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=doctor.id change='prev' %}');
+            $('#right_bar').load('{% url 'calendar_widget' year=year month=month day=0 id_user=doctor.id change='prev' %}');
             {% endif %} 
         }
 
@@ -64,12 +64,12 @@
             {% for day, entries, current, vacations, events, available in week %}
                 {% if day != 0 %}
                   {% if patient_user %}
-                    {% url cal.views.day year month day patient_user.id as target %}
+                    {% url 'cal.views.day' year month day patient_user.id as target %}
                   {% else %}
                     {% if request.user.get_profile.is_doctor %}
-                        {% url cal.views.day year month day request.user.id as target %}
+                        {% url 'cal.views.day' year month day request.user.id as target %}
                     {% else %}
-                        {% url cal.views.day year month day doctor.id as target %}
+                        {% url 'cal.views.day' year month day doctor.id as target %}
                     {% endif %}
                   {% endif %}
                     <td style="text-align: right">
@@ -121,14 +121,14 @@
 
 {% else %}
     <div class="center">
-        <img style="padding-top: 100px" src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+        <img style="padding-top: 100px" src="{{ STATIC_URL }}img/ajax-loader.gif" alt="loading..." />
     </div>
     <script type="text/javascript">
         $(document).ready(function(){
             {% if patient_user %}
-            $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=patient_user.id change='this' %}');
+            $('#right_bar').load('{% url 'calendar_widget' year=year month=month day=0 id_user=patient_user.id change='this' %}');
             {% else %}
-            $('#right_bar').load('{% url calendar_widget year=year month=month day=0 id_user=doctor.id change='this' %}');
+            $('#right_bar').load('{% url 'calendar_widget' year=year month=month day=0 id_user=doctor.id change='this' %}');
             {% endif %}
         })
     </script>

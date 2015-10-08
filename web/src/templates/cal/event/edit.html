@@ -10,7 +10,7 @@
   <div class="page-header">
     <h1>{% trans 'Editar evento' %}
             <div class="btn-group pull-right">
-                  <a class="btn btn-info btn" href="{% url cal.list_event %}"><i class="icon-arrow-left icon-white"></i> {% trans "Volver" %}</a>
+                  <a class="btn btn-info btn" href="{% url 'cal.list_event' %}"><i class="icon-arrow-left icon-white"></i> {% trans "Volver" %}</a>
             </div>
         </h1>
   </div>
@@ -18,7 +18,7 @@
 
 <div class="well">
 
-<form class="form-horizontal" method="post" action="{% url cal.edit_event event.id%}">{% csrf_token %}
+<form class="form-horizontal" method="post" action="{% url 'cal.edit_event' event.id%}">{% csrf_token %}
   <fieldset>
 
       {% if  form.non_field_errors  %}
@@ -167,7 +167,7 @@
     <p>{% trans 'You can not delete this event' %}</p>
   </div>
   <div class="modal-footer">
-    <a href="#" onclick="window.location.href = '{% url cal.list_event %}';" class="btn btn-primary" data-dismiss="modal">{% trans 'Ok' %}</a>
+    <a href="#" onclick="window.location.href = '{% url 'cal.list_event' %}';" class="btn btn-primary" data-dismiss="modal">{% trans 'Ok' %}</a>
   </div>
 </div>
 {% endblock %}
@@ -196,18 +196,15 @@
     var json = { pk: {{ event.id }} };
 
     $.ajax({
-      url: '{% url cal.delete_event %}',
+      url: '{% url 'cal.delete_event' %}',
       type: 'DELETE',
       dataType: 'json',
       contentType: "application/json",
       data: JSON.stringify(json),
       processData: false,
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
-      },
       success:function(data) {
           if(data.action){
-            window.location.href = '{% url cal.list_event %}';
+            window.location.href = '{% url 'cal.list_event' %}';
           }else{
             $('#modal-screen').modal('hide');
             $('#modal-screen-error').modal({

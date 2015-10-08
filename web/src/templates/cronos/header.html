@@ -1,0 +1,103 @@
+{% load i18n%}
+{% load consulting %}
+{% load stadistic %}
+{% load cache %}
+
+{% url 'cronos_tasks' as tasks %}
+{% url 'cronos_recommendations' as recommendations %}
+{% url 'cronos_videoconferences' as videos %}
+
+{% url 'stratification_statistic' as stratification %}
+{% url 'explotation_statistic' as explotation %}
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="{% url 'cronos_start_point' %}">{% get_brand %}</a>
+        <div class="nav-collapse collapse">
+            <ul class="nav">
+                <li>
+                    <div id="notes" style="display:none; width: 0; height: 0;" data-pk="1" data-params="{'csrfmiddlewaretoken':'{{ csrf_token }}'}" data-toggle="#edit_notes" data-type="textarea" data-url="{% url 'consulting_save_notes' %}" data-original-title="Notas" data-placement="bottom">{{request.session.notes}}</div>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="nav-collapse collapse navbar-responsive-collapse">
+            <ul class="nav permanentbar">
+                <li class="{% active_child request tasks %}">
+                    <a href="{% url 'cronos_tasks' %}">
+                      {% trans 'SEGUIMIENTO' %}
+                    </a>
+                </li>
+                {% if request.user.get_profile.is_doctor %}
+                <li class="{% active_child request recommendations %}">
+                    <a href="{% url 'cronos_recommendations' %}">
+                      {% trans 'CONSEJOS' %}
+                    </a>
+                </li>
+                <li class="{% active_child request videos %}">
+                    <a href="{% url 'cronos_videoconferences' %}">
+                      {% trans 'REGISTRO' %}
+                    </a>
+                </li>
+                <li class="{% active_child request stratification %}">
+                    <a href="{% url 'stratification_statistic' %}">{% trans 'ESTRATIFICACIÓN' %}</a>
+                </li>
+                <li class="dropdown {% active_child request explotation %}">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'explotation_statistic' %}">
+                        {% trans 'RESULTADOS' %} <b class="caret"></b>
+                    </a>
+                    {% cache 600 header request.user.username %}
+                      <ul class="dropdown-menu">
+                        {% for b in request.user|get_available_options %}
+                        <li>
+                          <a href="{% url 'explotation_statistic' block_code=b.code %}">[{% for s in b.get_surveys %}{{s.name}}{% if forloop.revcounter0 %}|{% endif %}{% endfor %}] {{b.name}}</a>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    {% endcache %}
+                  </li> 
+                {% endif %}
+            </ul>
+            <ul class="nav pull-right">
+                <li class="vertical-divider"></li>
+                 {% if request.user.get_profile.is_doctor %}
+                <li>
+                    <a class="btn-warning" href="#" id="edit_notes"  style="color: #ffffff" title="{% trans 'NOTAS' %}"><i class="icon-comment icon-white"></i> <span>{% trans 'NOTAS' %}</span></a>
+                </li>
+                {% endif %}
+                <li class="dropdown">
+                    <a class="dropdown-toggle btn-inverse" data-toggle="dropdown" href="#">
+                    <i class="icon-user icon-white"></i> {{user.username}}
+                    <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="icon-user"></i> <strong>{{ user.get_profile.get_role }}</strong></a></li>
+                        {% comment %}
+                        <li><a href="{% url 'password_change' %}"><i class="icon-lock"></i> {% trans 'Cambiar contraseña' %}</a></li>
+                        <li><a href="{% url 'consulting_user_guide' %}"><i class="icon-file"></i> {% trans 'Descargar manual' %} (PDF)</a></li>
+                        {% if request.user.is_staff %}
+                        <li class="divider"></li>
+                        <li><a href="/admin/" target="_blank"><i class="icon-wrench"></i> {% trans 'PANEL ADMINISTRATIVO' %}</a></li>
+                        {% endif %}
+                        {% endcomment %}
+                        <li class="divider"></li>
+                        <li><a target="_blank" href="{{ STATIC_URL }}pdf/Documento Consentimiento Informado.pdf"><i class="icon-list-alt"></i> {% trans 'Consentimiento Paciente' %}</a></li>
+                        <li><a target="_blank" href="{{ STATIC_URL }}pdf/Documento Consentimiento Informado - Grupo de Control.pdf"><i class="icon-list-alt"></i> {% trans 'Consentimiento Grupo de Control' %}</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{% url 'cronos_logout' %}"><i class="icon-off"></i> {% trans 'Desconectar' %}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+

@@ -20,7 +20,7 @@
 {% else %}
   {% if not illness %}
   <hr>
-  <a class="btn btn-block btn-success" href="{% url cal.edit_payment appointment.id %}">
+  <a class="btn btn-block btn-success" href="{% url 'cal.edit_payment' appointment.id %}">
     <i class="icon-shopping-cart icon-white"></i> {% trans 'Registrar pago' %}
   </a>
   {% endif %}

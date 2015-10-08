@@ -14,7 +14,7 @@
           <tr>
             <td>
               {% if p.doctor.id = request.user.id or request.user.get_profile.is_administrative %}
-              <a href="{% url consulting_pre_personal_data_pm p.user.id %}" {% if not p.user.is_active %}style="text-decoration:line-through;"{% endif %}>{{p.get_full_name}}</a>
+              <a href="{% url 'consulting_pre_personal_data_pm' p.user.id %}" {% if not p.user.is_active %}style="text-decoration:line-through;"{% endif %}>{{p.get_full_name}}</a>
               {% else %}
                 XXXXX XXXXXX XXXXXX
               {% endif %}

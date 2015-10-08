@@ -22,7 +22,7 @@ a.editable-changed {
 }
                  
 .editable-loading {
-  background: url('../img/ajax-loader.gif') center center no-repeat;  
+  background: url('..img/ajax-loader.gif') center center no-repeat;  
   height: 20px;  
 }
 

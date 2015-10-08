@@ -18,6 +18,10 @@ def active_root(request, pattern):
     split_path = request.path.split('/')
     split_pattern = pattern.split('/')
 
+    if settings.FORCE_SCRIPT_NAME:
+        split_path.pop(0)
+        split_pattern.pop(0)
+
     if split_path[1] == split_pattern[1] and  split_path[1] != '':
         return 'active'
     elif request.path == pattern:
@@ -30,6 +34,10 @@ def active_leaf(request, pattern):
     split_path = request.path.split('/')
     split_pattern = pattern.split('/')
 
+    if settings.FORCE_SCRIPT_NAME:
+        split_path.pop(0)
+        split_pattern.pop(0)
+
     if split_path[-2] == split_pattern[-2] and  split_path[-2] != '':
         return 'active'
 
@@ -41,6 +49,10 @@ def active_child(request, pattern):
     split_path = request.path.split('/')
     split_pattern = pattern.split('/')
 
+    if settings.FORCE_SCRIPT_NAME:
+        split_path.pop(0)
+        split_pattern.pop(0)
+
     if split_path[1] == split_pattern[1] and split_path[2] == split_pattern[2]:
         return 'active'
 
@@ -51,6 +63,10 @@ def active_child(request, pattern):
 def active_granchild(request, pattern):
     split_path = request.path.split('/')
     split_pattern = pattern.split('/')
+
+    if settings.FORCE_SCRIPT_NAME:
+        split_path.pop(0)
+        split_pattern.pop(0)
 
     if split_path[1] == split_pattern[1] and\
         split_path[2] == split_pattern[2] and\
@@ -65,6 +81,10 @@ def active_greatgranchild(request, pattern):
     split_path = request.path.split('/')
     split_pattern = pattern.split('/')
 
+    if settings.FORCE_SCRIPT_NAME:
+        split_path.pop(0)
+        split_pattern.pop(0)
+
     if split_path[1] == split_pattern[1] and\
         split_path[2] == split_pattern[2] and\
         split_path[3] == split_pattern[3] and\
@@ -74,45 +94,10 @@ def active_greatgranchild(request, pattern):
     return ''
 
 
-@register.simple_tag
-def get_anxiety_status_at(patient, date, i=None):
-    try:
-        if isinstance(i, int):
-            return patient.get_profile().get_anxiety_status(at_date=date)[i]
-        else:
-            return patient.get_profile().get_anxiety_status(at_date=date, html=True)
-    except:
-        return ' '
+@register.filter
+def get_medical_status_at(patient, date):
+    return patient.get_profile().get_medical_status(at_date=date)
 
-@register.simple_tag
-def get_depression_status_at(patient, date, i=None):
-    try:
-        if isinstance(i, int):
-            return patient.get_profile().get_depression_status(at_date=date)[i]
-        else:
-            return patient.get_profile().get_depression_status(at_date=date, html=True)
-    except:
-        return ' '
-
-@register.simple_tag
-def get_suicide_status_at(patient, date, i=None):
-    try:
-        if isinstance(i, int):
-            return patient.get_profile().get_suicide_status(at_date=date)[i]
-        else:
-            return patient.get_profile().get_suicide_status(at_date=date, html=True)
-    except:
-        return ' '
-
-@register.simple_tag
-def get_unhope_status_at(patient, date, i=None):
-    try:
-        if isinstance(i, int):
-            return patient.get_profile().get_unhope_status(at_date=date)[i]
-        else:
-            return patient.get_profile().get_unhope_status(at_date=date, html=True)
-    except:
-        return ' '
 
 @register.simple_tag
 def get_brand():
@@ -179,3 +164,15 @@ def draw_self_register(jobject):
     except:
         html = ''
     return html
+
+@register.filter
+def has_recommendation(scales):
+    has = False
+    for sc in scales:
+        try:
+           if sc['status'].recommendation:
+               has = True
+               break
+        except:
+            pass
+    return has

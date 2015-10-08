@@ -4,10 +4,10 @@
     {% if event.is_reserved %}<i class="icon-question-sign"></i>{% endif %}
     {% if event.is_canceled %}<i class="icon-remove-sign"></i>{% endif %}
   	{% if event.is_editable %}
-  	<a href="{% url cal.edit event.id %}">{{ event.date|date:"d/M/Y" }}</a>
+  	<a href="{% url 'cal.edit' event.id %}">{{ event.date|date:"d/M/Y" }}</a>
   	{% else %}
 	  	{% if request.user.get_profile.is_doctor %}
-	  		<a href="{% url consulting_start event.id %}">{{ event.date|date:"d/M/Y" }}</a>
+	  		<a href="{% url 'consulting_start' event.id %}">{{ event.date|date:"d/M/Y" }}</a>
 	  	{% else %}
 	  		{{ event.date|date:"d/M/Y" }}
 	  	{% endif %}
@@ -15,7 +15,7 @@
   </td>
   <td style="{{event.get_styles}}">{{ event.start_time|time:"H:i" }}</td>  
   <td style="{{event.get_styles}}">{{ event.end_time|time:"H:i" }}</td>
-  <td><a href="{% url consulting_pre_personal_data_pm patient_user_id=event.patient.id %}" >{{ event.patient.get_profile.get_full_name }}</a></td>
+  <td><a href="{% url 'consulting_pre_personal_data_pm' patient_user_id=event.patient.id %}" >{{ event.patient.get_profile.get_full_name }}</a></td>
   <td>{{ event.app_type}}</td>
   <td>{{ event.description|striptags|safe|truncatewords:5 }}
     {% if not event.has_activity and not event.is_editable %}

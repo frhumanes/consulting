@@ -17,7 +17,7 @@
     </div>
     {% endif %}
     <div class="pull-right">
-      <a id="carryon" class="btn btn-info btn-large" href="{% url consulting_show_task_block id_appointment code_illness task.id next_block %}">
+      <a id="carryon" class="btn btn-info btn-large" href="{% url 'consulting_show_task_block' id_appointment code_illness task.id next_block %}">
         {% trans 'Continuar' %}
       </a>         
     </div>                

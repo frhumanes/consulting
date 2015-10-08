@@ -46,7 +46,7 @@
 
 $('#reply').on('click', function(event){
   $('#myModal').modal('hide');
-  $('#mail_area').load('{% url private_messages_reply  message.id %}', function() {
+  $('#mail_area').load('{% url 'private_messages_reply'  message.id %}', function() {
      sp.stop();
      $('#message').show();
      $("textarea:visible:first").focus();
@@ -55,11 +55,11 @@ $('#reply').on('click', function(event){
 });
 $('#ban').on('click', function(event){
   $(this).html('<img src="{{STATIC_URL}}img/ajax-bar-loader.gif" />&nbsp;{% trans "Cargando" %}...');
-  $('#preview').load('{% url private_messages_ban message.id %}');
+  $('#preview').load('{% url 'private_messages_ban' message.id %}');
 });
 $('#unban').on('click', function(event){
   $(this).html('<img src="{{STATIC_URL}}img/ajax-bar-loader.gif" />&nbsp;{% trans "Cargando" %}...');
-  $('#preview').load('{% url private_messages_unban message.id %}', function(){
+  $('#preview').load('{% url 'private_messages_unban' message.id %}', function(){
     $('#unban').hide();
   });
 });

@@ -1,0 +1,136 @@
+{% extends "ui/app.html" %}
+
+{% load i18n %}
+{% load l10n %}
+
+{% block css_inline %}
+{% endblock %}
+
+{% block css_files %}
+  {{block.super}}
+  <link href="{{ STATIC_URL }}css/datepicker.css" rel="stylesheet" />
+  <link href="{{ STATIC_URL }}css/jquery-ui-1.9.1.custom.css" rel="stylesheet" />
+{% endblock %}
+
+{% block js_files %}
+  {{ block.super }}
+  <script src="{{ STATIC_URL }}js/jquery-ui-1.9.1.custom.js"></script>
+  <script src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>
+  <script src="{{ STATIC_URL }}js/locales/bootstrap-datepicker.es.js"></script>
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}
+
+{% block jquery_init %}
+
+$('ul').addClass("without_decorator");
+
+{% endblock %}
+
+{% block left %}
+    <ul class="nav nav-list">
+      <li class="nav-header">{% trans 'BLOQUES' %}</li>
+      {% for b in survey.blocks.all %}
+        <li><a href="#{{b.code}}" data-toggle="tab">{{b.name}} <small>[{{b.get_kind}}]</small></a></li>
+      {% endfor %}
+      {% if survey.scales.all.count %}
+      <li class="nav-header">{% trans 'ESTRATIFICACIÓN' %}</li>
+         {% for s in survey.scales.all %}
+          <li><a href="#scales_{{s.id}}" data-toggle="tab">{{s.name}}</a></li>
+        {% endfor %}
+      {% endif %}                 
+  </ul>
+{% endblock left%}
+
+{% block right %}
+
+{% endblock %}
+
+
+{% block container %}
+<section>
+<div class="page-header">
+  <h1>{% trans 'Cuestionario' %}: {{survey.name}}
+  </h1>
+</div>
+
+<div class="thumbnail">
+  <dl class="dl-horizontal">
+    <dt>{% trans 'Creado por' %}</dt>
+    <dd>{{survey.created_by}}</dd>
+  </dl>
+  <dl class="dl-horizontal">
+    <dt>{% trans '¿Visible para pacientes?' %}</dt>
+    <dd>{{survey.multitype}}</dd>
+  </dl>
+</div>
+<hr/>
+<div class="tab-content">
+  {% for b in survey.blocks.all %}
+    <div class="tab-pane {% if forloop.counter0 = 0 %}active{% endif %}" id="{{b.code}}">
+       <div class="accordion" id="accordion_filter">
+      {% for c in b.categories.all %}
+        <div class="accordion-group stop">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_filter" href="#collapse_{{b.code}}_{{forloop.counter}}">
+              {{c.name}} 
+            <span class="pull-right text-info"></span>
+            </a>
+          </div>
+          <div id="collapse_{{b.code}}_{{forloop.counter}}" class="accordion-body collapse">
+            <div class="accordion-inner">
+             {% for q in c.questions.all %}
+              <dl>
+                <dt>{{q}}</dt>
+                <dd>
+                  <ul>
+                  {% for o in q.question_options.all %}
+                    <li>{{o}}</li>
+                  {% endfor %}
+                  </ul>
+                </dd>
+              </dl>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+     
+      </div>
+    </div>
+  {% endfor %}
+  {% for s in survey.scales.all %}
+    <div class="tab-pane" id="scales_{{s.id}}">
+      <div class="accordion" id="accordion_filter">
+     
+        <div class="accordion-group stop">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_filter" href="#collapse_{{s.id}}">
+              {{s.name|striptags}} 
+            <span class="pull-right text-info"></span>
+            </a>
+          </div>
+          <div id="collapse_{{s.id}}" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <div class="progress">
+                {% for l in s.levels.all %}
+                  <div class="bar bar-{{l.css}}" {%if l.color%}}style="background-color: #{{l.color}}"{% endif %} style="width: {% widthratio 1 s.levels.all.count 100 %}%;">{{l.name|striptags}}</div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        
+     
+      </div>
+    </div>
+  {% endfor %}
+</div>
+</section>
+
+{% endblock %}
+
+
+

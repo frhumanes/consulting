@@ -11,7 +11,7 @@
   <div class="page-header">
     <h1>{% trans 'Editar día de vacaciones' %}
             <div class="btn-group pull-right">
-                  <a class="btn btn-info" href="{% url cal.list_vacation %}">
+                  <a class="btn btn-info" href="{% url 'cal.list_vacation' %}">
                      <i class="icon-arrow-left icon-white"></i>
                     {% trans 'Volver' %}
                   </a>
@@ -21,7 +21,7 @@
 
 <div class="well">
 
-<form class="form-horizontal" method="post" action="{% url cal.edit_vacation vacation.id%}">{% csrf_token %}
+<form class="form-horizontal" method="post" action="{% url 'cal.edit_vacation' vacation.id%}">{% csrf_token %}
   <fieldset>
 
       {% if  form.non_field_errors  %}
@@ -116,7 +116,7 @@
     <p>{% trans 'You can not delete a slot type with children' %}</p>
   </div>
   <div class="modal-footer">
-    <a href="#" onclick="window.location.href = '{% url cal.list_vacation %}';" class="btn btn-primary" data-dismiss="modal">{% trans 'Cerrar' %}</a>
+    <a href="#" onclick="window.location.href = '{% url 'cal.list_vacation' %}';" class="btn btn-primary" data-dismiss="modal">{% trans 'Cerrar' %}</a>
   </div>
 </div>
 {% endblock %}
@@ -143,18 +143,15 @@
     var json = { pk: {{ vacation.id }} };
 
     $.ajax({
-      url: '{% url cal.delete_vacation %}',
+      url: '{% url 'cal.delete_vacation' %}',
       type: 'DELETE',
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
-      },
       dataType: 'json',
       contentType: "application/json",
       data: JSON.stringify(json),
       processData: false,
       success:function(data) {
           if(data.action){
-            window.location.href = '{% url cal.list_vacation %}';
+            window.location.href = '{% url 'cal.list_vacation' %}';
           }else{
             $('#modal-screen').modal('hide');
             $('#modal-screen-error').modal({

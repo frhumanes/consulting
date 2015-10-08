@@ -34,7 +34,7 @@
             {% for conclusion in conclusions.object_list %}
               <tr id="{{conclusion.id}}" class="conclusion">
                 <td style="text-align:center;">{{conclusion.date|date:"d/M/Y"|lower}}</td>
-                <td style="text-align:justify;"><a href="#" class="muted" rel="popover" title="{{conclusion.created_by.get_profile|name_with_title}}" data-trigger="hover" data-content="{{conclusion.recommendation|striptags|safe}}">{{conclusion.recommendation|striptags|safe|truncatewords:10}}</a></td>
+                <td style="text-align:justify;">{{conclusion.recommendation|striptags|safe|linebreaksbr }}</td>
 
                 <td style="text-align:center;">
                   {% if report.end_date %}

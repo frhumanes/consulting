@@ -56,11 +56,11 @@
 			          </a>
 			          <ul class="dropdown-menu">
 			            <li>
-			              <a href="{% url cal.list_slot_type %}">{% trans 'TIPOS DE CITA' %}</a>
+			              <a href="{% url 'cal.list_slot_type' %}">{% trans 'TIPOS DE CITA' %}</a>
 			            </li>
 			            {% if request.user.entry_type_doctor.all.count %}
 			            <li>
-			              <a href="{% url cal.list_slot TODAY.year %}">{% trans 'GESTIÓN MENSUAL' %}</a>
+			              <a href="{% url 'cal.list_slot' TODAY.year %}">{% trans 'GESTIÓN MENSUAL' %}</a>
 			            </li>
 			            {% endif %}
 			          </ul>
@@ -85,10 +85,10 @@
 			            </a>
 			            <ul class="dropdown-menu">
 			              <li>
-			                <a href="{% url cal.list_vacation %}"><i class="icon-plane"></i>  {% trans "VACACIONES" %}</a>
+			                <a href="{% url 'cal.list_vacation' %}"><i class="icon-plane"></i>  {% trans "VACACIONES" %}</a>
 			              </li>
 			              <li>                                                     
-			                <a href="{% url cal.list_event %}"><i class="icon-briefcase"></i>  {% trans "EVENTOS" %}</a>
+			                <a href="{% url 'cal.list_event' %}"><i class="icon-briefcase"></i>  {% trans "EVENTOS" %}</a>
 			              </li>
 			            </ul>
 			        </div>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="item" style="padding: 0 75px">
                 	<span>Utilice el asistente para</span> 
-	                <a class="btn btn-primary btn-small"  href="{% url search_patient_for_action action='new_app' %}">
+	                <a class="btn btn-primary btn-small"  href="{% url 'search_patient_for_action' action='new_app' %}">
 			            <i class="icon-calendar icon-white"></i> {% trans 'DAR CITA' %}
 			        </a>
 			        <span>a sus pacientes</span>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="item" style="padding: 0 75px">
                 	<span>Podrá acceder al</span> 
-                	<a class="btn inline btn-small" href="{% url cal.list_payment %}">
+                	<a class="btn inline btn-small" href="{% url 'cal.list_payment' %}">
 			            <i class="icon-list-alt"></i> {% trans "REGISTRO" %}
 			        </a>
 			        <span>de citas y filtrar las mismas según diversos parámetros como su estado, su fecha o el módo de pago</span>

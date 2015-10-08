@@ -4,6 +4,6 @@
 {% match_url "private_messages_inbox" as match_inbox %}
 
 <ul class="nav nav-pills nav-stacked">
-    <li class="{{ match_inbox|yesno:'active,' }}"><a href="{% url private_messages_inbox %}" >{% trans "RECIBIDOS" %} </a></li>
-    <li class="{{ match_outbox|yesno:'active,' }}"><a href="{% url private_messages_outbox %}">{% trans "ENVIADOS" %}</a></li>
+    <li class="{{ match_inbox|yesno:'active,' }}"><a href="{% url 'private_messages_inbox' %}" >{% trans "RECIBIDOS" %} </a></li>
+    <li class="{{ match_outbox|yesno:'active,' }}"><a href="{% url 'private_messages_outbox' %}">{% trans "ENVIADOS" %}</a></li>
 </ul>

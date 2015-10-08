@@ -17,7 +17,7 @@
   {% for scale in task.get_scales %}
     <tr>
       <th>{{scale.name}}</th>
-      <td style="text-align: center"><span class="label label-{{scale.status.1}}">{{scale.status.0|safe}}</span></td>
+      <td style="text-align: center"><span class="label label-{{scale.status.css}}">{{scale.status.name|safe}}</span></td>
       <td style="text-align:right">{{scale.mark|floatformat:1}}</td>
     </tr>
   {% endfor %}
@@ -72,9 +72,21 @@
       <tr>
           <th>{{var.name}} <small class="muted">{% trans 'sobre' %} {{var.vmax}}</small></th>
           {% for t, mark in marks %}
-          <td style="text-align:right; {% if t = task %}background-color: #FBFBFB; font-size:1.1em;{% endif %}">{{mark|floatformat:1}}</td>
+          <td style="text-align:right; {% if t = task %}background-color: #FBFBFB; font-size:1.1em;{% endif %}">
+            {% if var.vmax <= 1 %}
+            {{mark|floatformat:4}}
+            {% else %}
+            {{mark|floatformat:1}}
+            {% endif %}
+          </td>
             {% if not forloop.revcounter0 and task.get_average_marks %}
-              <td style="text-align:right;">{{task.get_average_marks|get_item:var|get_item:t.patient.get_profile.sex|floatformat:2}}</td>
+              <td style="text-align:right;">
+                {% if var.vmax <= 1 %}
+                 {{task.get_average_marks|get_item:var|get_item:t.patient.get_profile.sex|floatformat:4}}
+                {% else %}
+                {{task.get_average_marks|get_item:var|get_item:t.patient.get_profile.sex|floatformat:2}}
+                {% endif %}
+              </td>
             {% endif %}
           {% endfor %}
       </tr>
@@ -82,9 +94,19 @@
       <tr>
           <th>{{var.name}} <small class="muted">{% trans 'sobre' %} {{var.vmax}}</small></th>
           {% for t, mark in marks %}
-          <td style="text-align:right; {% if t = task %}background-color: #FBFBFB; font-size:1.1em;{% endif %}">{{mark|floatformat:1}}</td>
+          <td style="text-align:right; {% if t = task %}background-color: #FBFBFB; font-size:1.1em;{% endif %}"> {% if var.vmax <= 1 %}
+            {{mark|floatformat:4}}
+            {% else %}
+            {{mark|floatformat:1}}
+            {% endif %}</td>
             {% if not forloop.revcounter0 and task.get_average_marks %}
-              <td style="text-align:right;">{{task.get_average_marks|get_item:var|get_item:t.patient.get_profile.sex|floatformat:2}}</td>
+              <td style="text-align:right;">
+                {% if var.vmax <= 1 %}
+                 {{task.get_average_marks|get_item:var|get_item:t.patient.get_profile.sex|floatformat:4}}
+                {% else %}
+                {{task.get_average_marks|get_item:var|get_item:t.patient.get_profile.sex|floatformat:2}}
+                {% endif %}
+              </td>
             {% endif %}
           {% endfor %}
       </tr>

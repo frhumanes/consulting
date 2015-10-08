@@ -1,0 +1,90 @@
+[
+{
+    "pk": 1, 
+    "model": "cronos.recommendation", 
+    "fields": {
+        "tests": "Espirometr\u00eda anual\r\nRx t\u00f3rax: al inicio\r\nAnal\u00edtica: al inicio\r\n", 
+        "tracking": "Sensorizaci\u00f3n diaria\r\nCuestionario de s\u00edntomas: diario.\r\nPresencial: inicio y final\r\nVideovisita trimestral", 
+        "recommendation": "Abandono de tabaco\r\nEjercicio diario\r\nInformaci\u00f3n EPOC\r\nFormaci\u00f3n uso inhaladores\r\nTratamiento farmacol\u00f3gico correcto\r\n", 
+        "surveys": "CAT: Inicio, cada mes\r\nEQ-5d: Inicio, 6 meses y final\r\n\u00cdndice BODE: Inicio y final\r\nEscala de disnea mMRC: Inicio, cada mes\r\nHAD: Inicio, cada 3 meses\r\n", 
+        "level": 41
+    }
+},
+{
+    "pk": 2, 
+    "model": "cronos.recommendation", 
+    "fields": {
+        "tests": "Espirometr\u00eda anual\r\nRx t\u00f3rax: al inicio\r\nAnalitica: al inicio\r\n", 
+        "tracking": "Sensorizaci\u00f3n diaria\r\nCuestionario de s\u00edntomas: diario.\r\nPresencial: inicio y final\r\nVideovisita trimestral\r\n", 
+        "recommendation": "Abandono de tabaco\r\nEjercicio diario\r\nInformaci\u00f3n EPOC\r\nFormaci\u00f3n uso inhaladores\r\nTratamiento farmacol\u00f3gico correcto\r\n", 
+        "surveys": "CAT: Inicio, cada mes\r\nEQ-5d: Inicio, 6 meses y final\r\n\u00cdndice BODE: Inicio y final\r\nEscala de disnea mMRC: Inicio, cada mes\r\nHAD: Inicio, cada 3 meses", 
+        "level": 42
+    }
+},
+{
+    "pk": 3, 
+    "model": "cronos.recommendation", 
+    "fields": {
+        "tests": "Espirometr\u00eda semestral\r\nGasometr\u00eda semestral\r\nRx t\u00f3rax: anual\r\nAnal\u00edtica: anual\r\nConsiderar TAC, alfa 1 ANT\r\n", 
+        "tracking": "Sensorizaci\u00f3n diaria\r\nCuestionario de s\u00edntomas: diario.\r\nPresencial: inicio y final\r\nVideovisita mensual\r\n", 
+        "recommendation": "Abandono de tabaco\r\nEjercicio diario\r\nInformaci\u00f3n EPOC\r\nFormaci\u00f3n uso inhaladores\r\nTratamiento farmacol\u00f3gico correcto\r\n", 
+        "surveys": "CAT: Inicio, cada mes\r\nEQ-5d: Inicio, 6 meses y final\r\n\u00cdndice BODE: Inicio y final\r\nEscala de disnea mMRC: Inicio, cada mes\r\nHAD: Inicio, cada 3 meses", 
+        "level": 43
+    }
+},
+{
+    "pk": 4, 
+    "model": "cronos.recommendation", 
+    "fields": {
+        "tests": "Espirometr\u00eda semestral\r\nGasometr\u00eda semestral\r\nRx t\u00f3rax: anual\r\nAnal\u00edtica: anual\r\n", 
+        "tracking": "Sensorizaci\u00f3n diaria\r\nCuestionario de s\u00edntomas: diario.\r\nPresencial: inicio y final\r\nVideovisita trimestral\r\n", 
+        "recommendation": "", 
+        "surveys": "CAT: Inicio, cada mes\r\nEQ-5d: Inicio, 6 meses y final\r\n\u00cdndice BODE: Inicio y final\r\nEscala de disnea mMRC: Inicio, cada mes\r\nHAD: Inicio, cada 3 meses", 
+        "level": 44
+    }
+},
+{
+    "pk": 5, 
+    "model": "cronos.recommendation", 
+    "fields": {
+        "tests": "Fuera del \u00e1mbito de CRONOS", 
+        "tracking": "Fuera del \u00e1mbito de CRONOS", 
+        "recommendation": "Fuera del \u00e1mbito de CRONOS", 
+        "surveys": "Fuera del \u00e1mbito de CRONOS", 
+        "level": 50
+    }
+},
+{
+    "pk": 6, 
+    "model": "cronos.recommendation", 
+    "fields": {
+        "tests": "Fuera del \u00e1mbito de CRONOS", 
+        "tracking": "Fuera del \u00e1mbito de CRONOS", 
+        "recommendation": "Fuera del \u00e1mbito de CRONOS", 
+        "surveys": "Fuera del \u00e1mbito de CRONOS", 
+        "level": 51
+    }
+},
+{
+    "pk": 7, 
+    "model": "cronos.recommendation", 
+    "fields": {
+        "tests": "Espirometr\u00eda semestral\r\nAnal\u00edtica, test de alergia: inicial\r\n", 
+        "tracking": "Sensorizaci\u00f3n diaria\r\nCuestionario de s\u00edntomas: diario.\r\nPresencial: inicio y final\r\nVideovisita trimestral\r\n", 
+        "recommendation": "Tabaquismo\r\nEvitar desencadenantes\r\nInformaci\u00f3n asma\r\nFormaci\u00f3n inhaladores\r\nTratamiento correcto\r\n", 
+        "surveys": "ACT\r\nEQ-5d\r\nHAD", 
+        "level": 52
+    }
+},
+{
+    "pk": 8, 
+    "model": "cronos.recommendation", 
+    "fields": {
+        "tests": "Espirometr\u00eda semestral\r\nAnal\u00edtica y test alergia: inicial.\r\nRx t\u00f3rax: inicial\r\n", 
+        "tracking": "Sensorizaci\u00f3n diaria\r\nCuestionario de s\u00edntomas: diario.\r\nVisita Presencial: inicio y final\r\nVideovisita mensual\r\n", 
+        "recommendation": "Tabaquismo\r\nEvitar desencadenantes\r\nInformaci\u00f3n asma\r\nFormaci\u00f3n inhaladores\r\nTratamiento correcto\r\n", 
+        "surveys": "ACT\r\nEQ-5d\r\nHAD", 
+        "level": 53
+    }
+}
+]

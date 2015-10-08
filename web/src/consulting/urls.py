@@ -196,6 +196,10 @@ urlpatterns = patterns(
         name='consulting_register_payment'),
 
     ##########################################
+    url(r"^alert/dismiss/$",
+        consulting_views.dismiss_alert,
+        name='consulting_dismiss_alert'),
+
     url(r"^survey/kinds/$",
         consulting_views.survey_kinds,
         name='consulting_survey_kinds'),

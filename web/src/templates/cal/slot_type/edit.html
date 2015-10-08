@@ -10,7 +10,7 @@
   <div class="page-header">
     <h1>{% trans 'Modificar tipo de cita' %}
             <div class="btn-group pull-right">
-                  <a class="btn btn-info" href="{% url cal.list_slot_type %}">
+                  <a class="btn btn-info" href="{% url 'cal.list_slot_type' %}">
                      <i class="icon-arrow-left icon-white"></i>
                     {% trans 'Volver' %}
                   </a>
@@ -19,7 +19,7 @@
   </div>
 <div class="well cener">
 
-<form class="form-horizontal" method="post" action="{% url cal.edit_entry_type slot_type.id%}">{% csrf_token %}
+<form class="form-horizontal" method="post" action="{% url 'cal.edit_entry_type' slot_type.id%}">{% csrf_token %}
   <fieldset>
 
       {% if  form.non_field_errors  %}
@@ -99,7 +99,7 @@
           <i class="icon-remove-sign icon-white"></i>
           {% trans 'Borrar' %}
         </a>
-         <a class="btn btn-large btn-success" href="{% url cal.add_slot TODAY.year %}?type={{slot_type.id}}">
+         <a class="btn btn-large btn-success" href="{% url 'cal.add_slot' TODAY.year %}?type={{slot_type.id}}">
             <i class="icon-wrench icon-white"></i>
             {% trans 'Configurar agenda' %}
           </a>
@@ -133,7 +133,7 @@
     <p>{% trans 'You can not delete a slot type with children' %}</p>
   </div>
   <div class="modal-footer">
-    <a href="#" onclick="window.location.href = '{% url cal.list_slot_type %}';" class="btn btn-primary" data-dismiss="modal">{% trans 'Cerrar' %}</a>
+    <a href="#" onclick="window.location.href = '{% url 'cal.list_slot_type' %}';" class="btn btn-primary" data-dismiss="modal">{% trans 'Cerrar' %}</a>
   </div>
 </div>
 {% endblock %}
@@ -158,19 +158,16 @@
     var json = { pk: {{ slot_type.id }} };
 
     $.ajax({
-      url: '{% url cal.delete_slot_type %}',
+      url: '{% url 'cal.delete_slot_type' %}',
       type: 'DELETE',
       dataType: 'json',
       contentType: "application/json",
       data: JSON.stringify(json),
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
-      },
       processData: false,
       success:function(data) {
           console.log(data.action);
           if(data.action){
-            window.location.href = '{% url cal.list_slot_type %}';
+            window.location.href = '{% url 'cal.list_slot_type' %}';
           }else{
             $('#modal-screen').modal('hide');
             $('#modal-screen-error').modal({

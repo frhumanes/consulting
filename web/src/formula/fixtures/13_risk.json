@@ -1,0 +1,46 @@
+[
+{
+    "pk": 1, 
+    "model": "formula.risk", 
+    "fields": {
+        "color": "red", 
+        "criticity": 100, 
+        "message": "[CALL CENTER] Valoraci\u00f3n inmediata de se\u00f1ales y estado cl\u00ednico por comprobaci\u00f3n telef\u00f3nica.\r\n[M\u00c9DICO] Comunicaci\u00f3n inmediata de refuerzo de la actitud de solicitar valoraci\u00f3n m\u00e9dica urgente.\r\n[VIDEOVISITA] en las pr\u00f3ximas 24H (salvo festivos)\r\n", 
+        "coincidences": 2, 
+        "name": "Alto"
+    }
+},
+{
+    "pk": 2, 
+    "model": "formula.risk", 
+    "fields": {
+        "color": "orange", 
+        "criticity": 75, 
+        "message": "[CALL CENTER] Valoraci\u00f3n en el mismo d\u00eda de se\u00f1ales y estado cl\u00ednico por comprobaci\u00f3n telef\u00f3nica.\r\n[M\u00c9DICO] Comunicaci\u00f3n en el d\u00eda de refuerzo de la actitud de solicitar valoraci\u00f3n m\u00e9dica urgente en caso de empeoramiento.\r\n[VIDEOVISITA] en las pr\u00f3ximas 24H (salvo festivos)", 
+        "coincidences": 2, 
+        "name": "Moderado"
+    }
+},
+{
+    "pk": 3, 
+    "model": "formula.risk", 
+    "fields": {
+        "color": "green", 
+        "criticity": 0, 
+        "message": "El paciente se encuentra en situaci\u00f3n habitual", 
+        "coincidences": 2, 
+        "name": "Normal"
+    }
+},
+{
+    "pk": 4, 
+    "model": "formula.risk", 
+    "fields": {
+        "color": "gold", 
+        "criticity": 25, 
+        "message": "[CALL CENTER] Valoraci\u00f3n en 24-48H de se\u00f1ales y estado cl\u00ednico por comprobaci\u00f3n telef\u00f3nica.\r\n[M\u00c9DICO] Comunicaci\u00f3n en 24-48H de refuerzo de la actitud de solicitar valoraci\u00f3n m\u00e9dica urgente.\r\n[VIDEOVISITA] en las pr\u00f3ximas 24-48H (salvo festivos)", 
+        "coincidences": 2, 
+        "name": "Bajo"
+    }
+}
+]

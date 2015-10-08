@@ -106,7 +106,7 @@
   <h1>{% trans 'Cuestionario programado ' %}</h1>              
 </div>
     <section>
-        <form class="form" method="post" action="{% url consulting_self_administered_block task.id %}">{% csrf_token %}
+        <form class="form" method="post" action="{% url 'consulting_self_administered_block' task.id %}">{% csrf_token %}
             {% for field in form %}
             <div class="control-group row-fluid">
               <label id="{{field.html_name}}" class="control-label span7 relative" style="text-align: justify">

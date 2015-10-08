@@ -24,7 +24,7 @@
   <h1>{% trans 'Datos del paciente' %}</h1>
 </div>  
 <section>
-  <form class="form-horizontal" id="form" action="{% url consulting_editpatient_consultation id_patient %}" method="post" accept-charset="utf-8">{% csrf_token %}
+  <form class="form-horizontal" id="form" action="{% url 'consulting_editpatient_consultation' id_patient %}" method="post" accept-charset="utf-8">{% csrf_token %}
       <input type="hidden" name="next" value="{{ next }}"/>             
         {% if same_username %}
           <div class="alert alert-error">

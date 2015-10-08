@@ -13,7 +13,8 @@ def dictvalue(d, key):
 
 @register.filter
 def get_available_options(user):
-    return user.get_profile().get_scored_blocks(statistic=True)
+    blocks = user.get_profile().get_scored_blocks(statistic=True)
+    return blocks
 
 @register.filter
 def get_item(dictionary, key):

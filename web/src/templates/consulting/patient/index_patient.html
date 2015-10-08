@@ -12,7 +12,7 @@
 	<div class="alert alert-info" style="text-align: justify">
 		<span>Tiene <strong>{{patient_user.get_pending_tasks.count}}</strong> cuestionario{{ patient_user.get_pending_tasks.count|pluralize:",s" }}
  pendiente{{ patient_user.get_pending_tasks.count|pluralize:",s" }}.</span>
-		<a href="{% url consulting_list_surveys %}" class="btn btn-large btn-block btn-info" type="button">Realizar ahora</a>
+		<a href="{% url 'consulting_list_surveys' %}" class="btn btn-large btn-block btn-info" type="button">Realizar ahora</a>
 	</div>
 	{% endif %}
 {% endblock %}
@@ -20,13 +20,24 @@
 {% block container %}
 	
 	<div class="hero-unit" style="font-size: 1em">
-		<h2>{% trans 'Resumen de la última consulta' %}</h2>
+		<h2>{% trans 'Resumen de telemedicina' %} <a target="_blank" href="{{STATIC_URL}}pdf/report.pdf"><img width="48px" height="48px" src="{{STATIC_URL}}img/icon-pdf.png" / alt="PDF"></a></h2>
 		<hr>
 		<div>
-			<h3>Recomendaciones</h3>
-			<div class="img-polaroid">
-				<p>{{patient_user.get_conclusions.recommendation}}&nbsp;</p>
+			<h3>Consejos y Recomendaciones</h3>
+			<div class="img-polaroid" style="max-height: 360px; overflow-y: auto">
+				{% for c in patient_user.get_conclusions %}
+					<blockquote>
+					    <p>{{c.recommendation|safe|linebreaksbr }}</p>
+					    <small>
+					    	{% if c.extra %}
+							<a target="_blank" href="{{MEDIA_URL}}{{c.extra}}">{% trans 'Ver/descargar documento adjunto' %}</a>
+							{% endif %} 
+							<em>{{c.date}}</em></small>
+    				</blockquote>
+    				<hr>
+				{% endfor %}
 			</div>
+			{% if patient_user.get_treatment %}
 			<h3>Tratamiento</h3>
 			<div class="img-polaroid">
 			{% for m in patient_user.get_treatment %}
@@ -46,6 +57,7 @@
 				</dl>
 			{% endif %}&nbsp;
 			</div>
+			{% endif %}
 		</div>
 	</div>
 

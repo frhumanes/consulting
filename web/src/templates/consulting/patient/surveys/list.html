@@ -27,9 +27,10 @@
         {% for task in tasks.object_list %}
           <tr data-msg="{{ task.id }}" style="cursor:pointer">
             <td>{{ task.patient.get_profile.doctor.get_profile.get_full_name }}</td>
-            <td>{{ task.patient.get_profile.get_nextAppointment.date|date:'d/M/Y' }}</td>
+            <td>{% if task.patient.get_profile.get_nextAppointment %}{{ task.patient.get_profile.get_nextAppointment.date|date:'d/M/Y' }}{% else %}{{task.to_date|date:'d/M/Y' }}
+              {% endif %}</td>
              <td>{% if task.updated_at != task.created_at %}{{ task.updated_at|date:'d/M/Y H:i' }}{% endif %}</td> 
-             <td><a class="btn btn-small btn-info" href="{% url consulting_self_administered_block task.id%}">
+             <td><a class="btn btn-small btn-info" href="{% url 'consulting_self_administered_block' task.id%}">
               {% if task.updated_at != task.created_at %}
                 {% trans 'Continuar' %}
               {% else %}
@@ -53,7 +54,7 @@
 
 $('table tbody tr').on('click', function(event){
   var id = $(this).attr('data-msg');
-  window.location.href = '/surveys/block/' + id; 
+  window.location.href = '{%url "consulting_index" %}surveys/block/' + id; 
 });
 
 {% endblock %}

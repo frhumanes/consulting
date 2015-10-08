@@ -1,486 +1,981 @@
 [
-  {
+{
     "pk": 1, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V1", 
-      "dimension": 1, 
-      "vmin": 0, 
-      "name": "Tristeza"
+        "vmax": 5, 
+        "code": "V1", 
+        "dimension": 1, 
+        "vmin": 0, 
+        "name": "Tristeza"
     }
-  }, 
-  {
+},
+{
     "pk": 2, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V2", 
-      "dimension": 1, 
-      "vmin": 0, 
-      "name": "Pesimismo"
+        "vmax": 5, 
+        "code": "V2", 
+        "dimension": 1, 
+        "vmin": 0, 
+        "name": "Pesimismo"
     }
-  }, 
-  {
+},
+{
     "pk": 3, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V3", 
-      "dimension": 1, 
-      "vmin": 0, 
-      "name": "Cogniciones autorreferenciadas negativas"
+        "vmax": 5, 
+        "code": "V3", 
+        "dimension": 1, 
+        "vmin": 0, 
+        "name": "Cogniciones autorreferenciadas negativas"
     }
-  }, 
-  {
+},
+{
     "pk": 4, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V4", 
-      "dimension": 1, 
-      "vmin": 0, 
-      "name": "Preocupaciones som\u00e1ticas"
+        "vmax": 5, 
+        "code": "V4", 
+        "dimension": 1, 
+        "vmin": 0, 
+        "name": "Preocupaciones som\u00e1ticas"
     }
-  }, 
-  {
+},
+{
     "pk": 5, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V5", 
-      "dimension": 1, 
-      "vmin": 0, 
-      "name": "Insatisfacci\u00f3n"
+        "vmax": 5, 
+        "code": "V5", 
+        "dimension": 1, 
+        "vmin": 0, 
+        "name": "Insatisfacci\u00f3n"
     }
-  }, 
-  {
+},
+{
     "pk": 6, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V6", 
-      "dimension": 1, 
-      "vmin": 0, 
-      "name": "Ideas suicidas"
+        "vmax": 5, 
+        "code": "V6", 
+        "dimension": 1, 
+        "vmin": 0, 
+        "name": "Ideas suicidas"
     }
-  }, 
-  {
+},
+{
     "pk": 7, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V7", 
-      "dimension": 1, 
-      "vmin": 0, 
-      "name": "Llanto"
+        "vmax": 5, 
+        "code": "V7", 
+        "dimension": 1, 
+        "vmin": 0, 
+        "name": "Llanto"
     }
-  }, 
-  {
+},
+{
     "pk": 8, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V8", 
-      "dimension": 1, 
-      "vmin": 0, 
-      "name": "Irritabilidad"
+        "vmax": 5, 
+        "code": "V8", 
+        "dimension": 1, 
+        "vmin": 0, 
+        "name": "Irritabilidad"
     }
-  }, 
-  {
+},
+{
     "pk": 9, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V9", 
-      "dimension": 1, 
-      "vmin": 0, 
-      "name": "Retirada social"
+        "vmax": 5, 
+        "code": "V9", 
+        "dimension": 1, 
+        "vmin": 0, 
+        "name": "Retirada social"
     }
-  }, 
-  {
+},
+{
     "pk": 10, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V10", 
-      "dimension": 1, 
-      "vmin": 0, 
-      "name": "Indecisi\u00f3n"
+        "vmax": 5, 
+        "code": "V10", 
+        "dimension": 1, 
+        "vmin": 0, 
+        "name": "Indecisi\u00f3n"
     }
-  }, 
-  {
+},
+{
     "pk": 11, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V11", 
-      "dimension": 1, 
-      "vmin": 0, 
-      "name": "Concentraci\u00f3n"
+        "vmax": 5, 
+        "code": "V11", 
+        "dimension": 1, 
+        "vmin": 0, 
+        "name": "Concentraci\u00f3n"
     }
-  }, 
-  {
+},
+{
     "pk": 12, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V12", 
-      "dimension": 1, 
-      "vmin": 0, 
-      "name": "Miedo"
+        "vmax": 5, 
+        "code": "V12", 
+        "dimension": 1, 
+        "vmin": 0, 
+        "name": "Miedo"
     }
-  }, 
-  {
+},
+{
     "pk": 13, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V13", 
-      "dimension": 1, 
-      "vmin": 0, 
-      "name": "Tensi\u00f3n"
+        "vmax": 5, 
+        "code": "V13", 
+        "dimension": 1, 
+        "vmin": 0, 
+        "name": "Tensi\u00f3n"
     }
-  }, 
-  {
+},
+{
     "pk": 14, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V14", 
-      "dimension": 1, 
-      "vmin": 0, 
-      "name": "Ralentizaci\u00f3n"
+        "vmax": 5, 
+        "code": "V14", 
+        "dimension": 1, 
+        "vmin": 0, 
+        "name": "Ralentizaci\u00f3n"
     }
-  }, 
-  {
+},
+{
     "pk": 15, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V15", 
-      "dimension": 2, 
-      "vmin": 0, 
-      "name": "Fatigabilidad"
+        "vmax": 5, 
+        "code": "V15", 
+        "dimension": 2, 
+        "vmin": 0, 
+        "name": "Fatigabilidad"
     }
-  }, 
-  {
+},
+{
     "pk": 16, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V16", 
-      "dimension": 2, 
-      "vmin": 0, 
-      "name": "Insomnio"
+        "vmax": 5, 
+        "code": "V16", 
+        "dimension": 2, 
+        "vmin": 0, 
+        "name": "Insomnio"
     }
-  }, 
-  {
+},
+{
     "pk": 17, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V17", 
-      "dimension": 2, 
-      "vmin": 0, 
-      "name": "S\u00edntomas musculares"
+        "vmax": 5, 
+        "code": "V17", 
+        "dimension": 2, 
+        "vmin": 0, 
+        "name": "S\u00edntomas musculares"
     }
-  }, 
-  {
+},
+{
     "pk": 18, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V18", 
-      "dimension": 2, 
-      "vmin": 0, 
-      "name": "P\u00e9rdida de peso"
+        "vmax": 5, 
+        "code": "V18", 
+        "dimension": 2, 
+        "vmin": 0, 
+        "name": "P\u00e9rdida de peso"
     }
-  }, 
-  {
+},
+{
     "pk": 19, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V19", 
-      "dimension": 2, 
-      "vmin": 0, 
-      "name": "P\u00e9rdida de apetito"
+        "vmax": 5, 
+        "code": "V19", 
+        "dimension": 2, 
+        "vmin": 0, 
+        "name": "P\u00e9rdida de apetito"
     }
-  }, 
-  {
+},
+{
     "pk": 20, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V20", 
-      "dimension": 2, 
-      "vmin": 0, 
-      "name": "S\u00edntomas gastrointestinales"
+        "vmax": 5, 
+        "code": "V20", 
+        "dimension": 2, 
+        "vmin": 0, 
+        "name": "S\u00edntomas gastrointestinales"
     }
-  }, 
-  {
+},
+{
     "pk": 21, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V21", 
-      "dimension": 2, 
-      "vmin": 0, 
-      "name": "S\u00edntomas respiratorios"
+        "vmax": 5, 
+        "code": "V21", 
+        "dimension": 2, 
+        "vmin": 0, 
+        "name": "S\u00edntomas respiratorios"
     }
-  }, 
-  {
+},
+{
     "pk": 22, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V22", 
-      "dimension": 2, 
-      "vmin": 0, 
-      "name": "S\u00edntomas cardiovasculares"
+        "vmax": 5, 
+        "code": "V22", 
+        "dimension": 2, 
+        "vmin": 0, 
+        "name": "S\u00edntomas cardiovasculares"
     }
-  }, 
-  {
+},
+{
     "pk": 23, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V23", 
-      "dimension": 2, 
-      "vmin": 0, 
-      "name": "S\u00edntomas genitourinarios"
+        "vmax": 5, 
+        "code": "V23", 
+        "dimension": 2, 
+        "vmin": 0, 
+        "name": "S\u00edntomas genitourinarios"
     }
-  }, 
-  {
+},
+{
     "pk": 24, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V24", 
-      "dimension": 2, 
-      "vmin": 0, 
-      "name": "S\u00edntomas sensoriales"
+        "vmax": 5, 
+        "code": "V24", 
+        "dimension": 2, 
+        "vmin": 0, 
+        "name": "S\u00edntomas sensoriales"
     }
-  }, 
-  {
+},
+{
     "pk": 25, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V25", 
-      "dimension": 2, 
-      "vmin": 0, 
-      "name": "S\u00edntomas vegetativos"
+        "vmax": 5, 
+        "code": "V25", 
+        "dimension": 2, 
+        "vmin": 0, 
+        "name": "S\u00edntomas vegetativos"
     }
-  }, 
-  {
+},
+{
     "pk": 26, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V26", 
-      "dimension": 2, 
-      "vmin": 0, 
-      "name": "Inhibici\u00f3n ps\u00edquica"
+        "vmax": 5, 
+        "code": "V26", 
+        "dimension": 2, 
+        "vmin": 0, 
+        "name": "Inhibici\u00f3n ps\u00edquica"
     }
-  }, 
-  {
+},
+{
     "pk": 27, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V27", 
-      "dimension": 2, 
-      "vmin": 0, 
-      "name": "Conciencia de la enfermedad"
+        "vmax": 5, 
+        "code": "V27", 
+        "dimension": 2, 
+        "vmin": 0, 
+        "name": "Conciencia de la enfermedad"
     }
-  }, 
-  {
+},
+{
     "pk": 28, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "V28", 
-      "dimension": 2, 
-      "vmin": 0, 
-      "name": "Ansiedad durante la entrevista"
+        "vmax": 5, 
+        "code": "V28", 
+        "dimension": 2, 
+        "vmin": 0, 
+        "name": "Ansiedad durante la entrevista"
     }
-  }, 
-  {
+},
+{
     "pk": 29, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "ADT", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Adherencia al tratamiento"
+        "vmax": 5, 
+        "code": "ADT", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Adherencia al tratamiento"
     }
-  }, 
-  {
+},
+{
     "pk": 30, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 6, 
-      "code": "N", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Neuroticismo"
+        "vmax": 6, 
+        "code": "N", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Neuroticismo"
     }
-  }, 
-  {
+},
+{
     "pk": 31, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 6, 
-      "code": "E", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Extraversi\u00f3n"
+        "vmax": 6, 
+        "code": "E", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Extraversi\u00f3n"
     }
-  }, 
-  {
+},
+{
     "pk": 32, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 6, 
-      "code": "P", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Psicoticismo"
+        "vmax": 6, 
+        "code": "P", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Psicoticismo"
     }
-  }, 
-  {
+},
+{
     "pk": 33, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 6, 
-      "code": "S", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Sinceridad"
+        "vmax": 6, 
+        "code": "S", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Sinceridad"
     }
-  }, 
-  {
+},
+{
     "pk": 34, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "FA", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Factor Afectivo"
+        "vmax": 5, 
+        "code": "FAF", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Factor Afectivo"
     }
-  }, 
-  {
+},
+{
     "pk": 35, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 8, 
-      "code": "FM", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Factor Motivacional"
+        "vmax": 8, 
+        "code": "FMO", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Factor Motivacional"
     }
-  }, 
-  {
+},
+{
     "pk": 36, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 5, 
-      "code": "FC", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Factor Cognitivo"
+        "vmax": 5, 
+        "code": "FCO", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Factor Cognitivo"
     }
-  }, 
-  {
+},
+{
     "pk": 38, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 20, 
-      "code": "SSO", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Obsesi\u00f3n"
+        "vmax": 20, 
+        "code": "SSO", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Obsesi\u00f3n"
     }
-  }, 
-  {
+},
+{
     "pk": 39, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 20, 
-      "code": "SSC", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Compulsi\u00f3n"
+        "vmax": 20, 
+        "code": "SSC", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Compulsi\u00f3n"
     }
-  }, 
-  {
+},
+{
     "pk": 41, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 12, 
-      "code": "AC", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Acumulaci\u00f3n"
+        "vmax": 12, 
+        "code": "AC", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Acumulaci\u00f3n"
     }
-  }, 
-  {
+},
+{
     "pk": 42, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 12, 
-      "code": "CO", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Comprobaci\u00f3n"
+        "vmax": 12, 
+        "code": "CO", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Comprobaci\u00f3n"
     }
-  }, 
-  {
+},
+{
     "pk": 43, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 12, 
-      "code": "OR", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Orden"
+        "vmax": 12, 
+        "code": "OR", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Orden"
     }
-  }, 
-  {
+},
+{
     "pk": 44, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 12, 
-      "code": "NE", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Neutralizaci\u00f3n"
+        "vmax": 12, 
+        "code": "NE", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Neutralizaci\u00f3n"
     }
-  }, 
-  {
+},
+{
     "pk": 45, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 12, 
-      "code": "LA", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Lavado"
+        "vmax": 12, 
+        "code": "LA", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Lavado"
     }
-  }, 
-  {
+},
+{
     "pk": 46, 
     "model": "formula.variable", 
     "fields": {
-      "vmax": 12, 
-      "code": "OB", 
-      "dimension": null, 
-      "vmin": 0, 
-      "name": "Obsesi\u00f3n"
+        "vmax": 12, 
+        "code": "OB", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Obsesi\u00f3n"
     }
-  }
+},
+{
+    "pk": 47, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 40, 
+        "code": "CAT", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "CAT"
+    }
+},
+{
+    "pk": 48, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "PF", 
+        "dimension": 3, 
+        "vmin": 0, 
+        "name": "Actividad f\u00edsica"
+    }
+},
+{
+    "pk": 49, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "QL", 
+        "dimension": 4, 
+        "vmin": 0, 
+        "name": "Calidad de vida global"
+    }
+},
+{
+    "pk": 50, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 3, 
+        "code": "FEV", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "FEV1"
+    }
+},
+{
+    "pk": 51, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 3, 
+        "code": "WT", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Walking Test"
+    }
+},
+{
+    "pk": 52, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 3, 
+        "code": "MMRC", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "mMRC"
+    }
+},
+{
+    "pk": 53, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 1, 
+        "code": "IMC", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "IMC"
+    }
+},
+{
+    "pk": 54, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "RF", 
+        "dimension": 3, 
+        "vmin": 0, 
+        "name": "Actividad cotidiana"
+    }
+},
+{
+    "pk": 55, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "EF", 
+        "dimension": 3, 
+        "vmin": 0, 
+        "name": "Estado emocional"
+    }
+},
+{
+    "pk": 56, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "CF", 
+        "dimension": 3, 
+        "vmin": 0, 
+        "name": "Funci\u00f3n cognitiva"
+    }
+},
+{
+    "pk": 57, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "SF", 
+        "dimension": 3, 
+        "vmin": 0, 
+        "name": "Actividad social"
+    }
+},
+{
+    "pk": 58, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "FA", 
+        "dimension": 5, 
+        "vmin": 0, 
+        "name": "Fatiga"
+    }
+},
+{
+    "pk": 59, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "NV", 
+        "dimension": 5, 
+        "vmin": 0, 
+        "name": "Na\u00faseas y v\u00f3mitos"
+    }
+},
+{
+    "pk": 60, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "PA", 
+        "dimension": 5, 
+        "vmin": 0, 
+        "name": "Dolor"
+    }
+},
+{
+    "pk": 61, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "DY", 
+        "dimension": 5, 
+        "vmin": 0, 
+        "name": "Disnea"
+    }
+},
+{
+    "pk": 62, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "SL", 
+        "dimension": 5, 
+        "vmin": 0, 
+        "name": "Insomnio"
+    }
+},
+{
+    "pk": 63, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "AP", 
+        "dimension": 5, 
+        "vmin": 0, 
+        "name": "P\u00e9rdida de apetito"
+    }
+},
+{
+    "pk": 64, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "CO", 
+        "dimension": 5, 
+        "vmin": 0, 
+        "name": "Estrenimiento"
+    }
+},
+{
+    "pk": 65, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "DI", 
+        "dimension": 5, 
+        "vmin": 0, 
+        "name": "Diarrea"
+    }
+},
+{
+    "pk": 66, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "FI", 
+        "dimension": 5, 
+        "vmin": 0, 
+        "name": "Dificultades econ\u00f3micas"
+    }
+},
+{
+    "pk": 67, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 1, 
+        "code": "MO", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Movilidad"
+    }
+},
+{
+    "pk": 68, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 1, 
+        "code": "CP", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Cuidado personal"
+    }
+},
+{
+    "pk": 69, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 1, 
+        "code": "ACO", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Actividades cotidianas"
+    }
+},
+{
+    "pk": 70, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 1, 
+        "code": "DM", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Dolor/Malestar"
+    }
+},
+{
+    "pk": 71, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 1, 
+        "code": "AD", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Ansiedad/depresi\u00f3n"
+    }
+},
+{
+    "pk": 72, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "AES", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "AUTOVALORACI\u00d3N DEL ESTADO DE SALUD"
+    }
+},
+{
+    "pk": 73, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 3, 
+        "code": "NH", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Hospitalizaciones"
+    }
+},
+{
+    "pk": 74, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 25, 
+        "code": "ACT", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "ACT"
+    }
+},
+{
+    "pk": 75, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 6, 
+        "code": "ACQ", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "ACQ"
+    }
+},
+{
+    "pk": 76, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 4, 
+        "code": "TOS", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Tos"
+    }
+},
+{
+    "pk": 77, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 4, 
+        "code": "EX", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Expectoraci\u00f3n"
+    }
+},
+{
+    "pk": 78, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 4, 
+        "code": "CEX", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Color de expectoraci\u00f3n"
+    }
+},
+{
+    "pk": 79, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 4, 
+        "code": "DIS", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Disnea"
+    }
+},
+{
+    "pk": 80, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 4, 
+        "code": "DT", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Dolor Tor\u00e1cico"
+    }
+},
+{
+    "pk": 81, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 4, 
+        "code": "SN", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "S\u00edntomas nocturnos"
+    }
+},
+{
+    "pk": 82, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 4, 
+        "code": "SIB", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Sibilantes"
+    }
+},
+{
+    "pk": 83, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 42, 
+        "code": "CCH", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Comorbilidad"
+    }
+},
+{
+    "pk": 84, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "PF_T", 
+        "dimension": 6, 
+        "vmin": 0, 
+        "name": "Actividad f\u00edsica"
+    }
+},
+{
+    "pk": 85, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "RP_T", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Limitaciones de las labores f\u00edsicas"
+    }
+},
+{
+    "pk": 86, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "BP_T", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Dolor corporal"
+    }
+},
+{
+    "pk": 87, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "GH_T", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Salud General"
+    }
+},
+{
+    "pk": 88, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "VT_T", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Vitalidad"
+    }
+},
+{
+    "pk": 89, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "RE_T", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Limitaciones emocionales"
+    }
+},
+{
+    "pk": 90, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "SF_T", 
+        "dimension": null, 
+        "vmin": 0, 
+        "name": "Actividad social"
+    }
+},
+{
+    "pk": 91, 
+    "model": "formula.variable", 
+    "fields": {
+        "vmax": 100, 
+        "code": "MH_T", 
+        "dimension": 7, 
+        "vmin": 0, 
+        "name": "Salud mental"
+    }
+}
 ]

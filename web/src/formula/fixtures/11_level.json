@@ -1,0 +1,739 @@
+[
+{
+    "pk": 1, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "140.000", 
+        "scale": 1, 
+        "name": " ", 
+        "css": "success"
+    }
+},
+{
+    "pk": 2, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#F89406", 
+        "score": "200.000", 
+        "scale": 1, 
+        "name": "importante", 
+        "css": "warning"
+    }
+},
+{
+    "pk": 3, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "300.000", 
+        "scale": 1, 
+        "name": "bastante alto", 
+        "css": "important"
+    }
+},
+{
+    "pk": 4, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#202020", 
+        "score": "9999.000", 
+        "scale": 1, 
+        "name": "muy alto", 
+        "css": "inverse"
+    }
+},
+{
+    "pk": 5, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "10.000", 
+        "scale": 2, 
+        "name": "Depresi\u00f3n ausente", 
+        "css": "success"
+    }
+},
+{
+    "pk": 6, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#0088CC", 
+        "score": "13.000", 
+        "scale": 2, 
+        "name": "Leve perturbaci\u00f3n <br>del estado de \u00e1nimo", 
+        "css": "info"
+    }
+},
+{
+    "pk": 7, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "gold", 
+        "score": "19.000", 
+        "scale": 2, 
+        "name": "Depresi\u00f3n leve", 
+        "css": "default"
+    }
+},
+{
+    "pk": 8, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#F89406", 
+        "score": "30.000", 
+        "scale": 2, 
+        "name": "Depresi\u00f3n moderada", 
+        "css": "warning"
+    }
+},
+{
+    "pk": 9, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "40.000", 
+        "scale": 2, 
+        "name": "Depresi\u00f3n grave", 
+        "css": "important"
+    }
+},
+{
+    "pk": 10, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#202020", 
+        "score": "63.000", 
+        "scale": 2, 
+        "name": "Depresi\u00f3n muy grave", 
+        "css": "inverse"
+    }
+},
+{
+    "pk": 11, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "8.000", 
+        "scale": 3, 
+        "name": "Grado de desesperanza bajo <br>o ausente", 
+        "css": "success"
+    }
+},
+{
+    "pk": 12, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "21.000", 
+        "scale": 3, 
+        "name": "Grado de desesperanza alto", 
+        "css": "important"
+    }
+},
+{
+    "pk": 13, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "4.000", 
+        "scale": 4, 
+        "name": "Riesgo de suicidio m\u00ednimo <br>o nulo", 
+        "css": "success"
+    }
+},
+{
+    "pk": 14, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "gold", 
+        "score": "9.000", 
+        "scale": 4, 
+        "name": "Riesgo leve de suicidio", 
+        "css": "default"
+    }
+},
+{
+    "pk": 15, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#F89406", 
+        "score": "15.000", 
+        "scale": 4, 
+        "name": "Riesgo moderado de suicidio", 
+        "css": "warning"
+    }
+},
+{
+    "pk": 16, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "21.000", 
+        "scale": 4, 
+        "name": "Riesgo alto de suicidio", 
+        "css": "important"
+    }
+},
+{
+    "pk": 17, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "8.000", 
+        "scale": 5, 
+        "name": "Obsesi\u00f3n-compulsi\u00f3n ausente", 
+        "css": "success"
+    }
+},
+{
+    "pk": 18, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "gold", 
+        "score": "15.000", 
+        "scale": 5, 
+        "name": "Obsesi\u00f3n-compulsi\u00f3n leve", 
+        "css": "default"
+    }
+},
+{
+    "pk": 19, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#F89406", 
+        "score": "24.000", 
+        "scale": 5, 
+        "name": "Obsesi\u00f3n-compulsi\u00f3n moderada", 
+        "css": "warning"
+    }
+},
+{
+    "pk": 20, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "32.000", 
+        "scale": 5, 
+        "name": "Obsesi\u00f3n-compulsi\u00f3n grave", 
+        "css": "important"
+    }
+},
+{
+    "pk": 21, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#202020", 
+        "score": "41.000", 
+        "scale": 5, 
+        "name": "Obsesi\u00f3n-compulsi\u00f3n muy grave", 
+        "css": "inverse"
+    }
+},
+{
+    "pk": 22, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "10.000", 
+        "scale": 7, 
+        "name": "Ansiedad ausente", 
+        "css": "success"
+    }
+},
+{
+    "pk": 23, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "gold", 
+        "score": "28.000", 
+        "scale": 7, 
+        "name": "Ansiedad leve", 
+        "css": "default"
+    }
+},
+{
+    "pk": 24, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#F89406", 
+        "score": "38.000", 
+        "scale": 7, 
+        "name": "Ansiedad moderada", 
+        "css": "warning"
+    }
+},
+{
+    "pk": 25, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "48.000", 
+        "scale": 7, 
+        "name": "Anisedad grave", 
+        "css": "important"
+    }
+},
+{
+    "pk": 26, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#202020", 
+        "score": "56.000", 
+        "scale": 7, 
+        "name": "Ansiedad muy grave", 
+        "css": "inverse"
+    }
+},
+{
+    "pk": 27, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "5.000", 
+        "scale": 8, 
+        "name": "", 
+        "css": "success"
+    }
+},
+{
+    "pk": 28, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#0088CC", 
+        "score": "10.000", 
+        "scale": 8, 
+        "name": "CAT Bajo", 
+        "css": "info"
+    }
+},
+{
+    "pk": 29, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "gold", 
+        "score": "20.000", 
+        "scale": 8, 
+        "name": "CAT Medio", 
+        "css": "default"
+    }
+},
+{
+    "pk": 30, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#F89406", 
+        "score": "30.000", 
+        "scale": 8, 
+        "name": "CAT Alto", 
+        "css": "warning"
+    }
+},
+{
+    "pk": 31, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "40.000", 
+        "scale": 8, 
+        "name": "CAT Muy alto", 
+        "css": "important"
+    }
+},
+{
+    "pk": 32, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "7.000", 
+        "scale": 9, 
+        "name": "", 
+        "css": "success"
+    }
+},
+{
+    "pk": 33, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "gold", 
+        "score": "10.000", 
+        "scale": 9, 
+        "name": "Posible estado de ansiedad", 
+        "css": "default"
+    }
+},
+{
+    "pk": 34, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "21.000", 
+        "scale": 9, 
+        "name": "Problema cl\u00ednico de ansiedad", 
+        "css": "important"
+    }
+},
+{
+    "pk": 35, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "8.000", 
+        "scale": 10, 
+        "name": "", 
+        "css": "success"
+    }
+},
+{
+    "pk": 36, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#F89406", 
+        "score": "11.000", 
+        "scale": 10, 
+        "name": "Posible estado depresivo", 
+        "css": "warning"
+    }
+},
+{
+    "pk": 37, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "21.000", 
+        "scale": 10, 
+        "name": "Problema cl\u00ednico de depresi\u00f3n", 
+        "css": "important"
+    }
+},
+{
+    "pk": 38, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "20.000", 
+        "scale": 12, 
+        "name": "Asma no controlada", 
+        "css": "important"
+    }
+},
+{
+    "pk": 39, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#0088CC", 
+        "score": "24.000", 
+        "scale": 12, 
+        "name": "Buen control del asma", 
+        "css": "info"
+    }
+},
+{
+    "pk": 40, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "25.000", 
+        "scale": 12, 
+        "name": "Asma totalmente controlada", 
+        "css": "success"
+    }
+},
+{
+    "pk": 41, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "3.000", 
+        "scale": 13, 
+        "name": "EPOC leve", 
+        "css": "success"
+    }
+},
+{
+    "pk": 42, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "gold", 
+        "score": "5.000", 
+        "scale": 13, 
+        "name": "EPOC moderado", 
+        "css": "default"
+    }
+},
+{
+    "pk": 43, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#F89406", 
+        "score": "7.000", 
+        "scale": 13, 
+        "name": "EPOC grave", 
+        "css": "warning"
+    }
+},
+{
+    "pk": 44, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "10.000", 
+        "scale": 13, 
+        "name": "EPOC muy grave", 
+        "css": "important"
+    }
+},
+{
+    "pk": 45, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "0.999", 
+        "scale": 15, 
+        "name": "mMRC Grado 0", 
+        "css": "success"
+    }
+},
+{
+    "pk": 46, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "gold", 
+        "score": "1.999", 
+        "scale": 15, 
+        "name": "mMRC Grado 1", 
+        "css": "default"
+    }
+},
+{
+    "pk": 47, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#F89406", 
+        "score": "2.999", 
+        "scale": 15, 
+        "name": "mMRC Grado 2", 
+        "css": "warning"
+    }
+},
+{
+    "pk": 48, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "3.999", 
+        "scale": 15, 
+        "name": "mMRC Grado 3", 
+        "css": "important"
+    }
+},
+{
+    "pk": 49, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#202020", 
+        "score": "4.999", 
+        "scale": 15, 
+        "name": "mMRC Grado 4", 
+        "css": "inverse"
+    }
+},
+{
+    "pk": 50, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "1.000", 
+        "scale": 16, 
+        "name": "Asma Intermitente", 
+        "css": "success"
+    }
+},
+{
+    "pk": 51, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "gold", 
+        "score": "2.000", 
+        "scale": 16, 
+        "name": "Asma persistente leve", 
+        "css": "default"
+    }
+},
+{
+    "pk": 52, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#F89406", 
+        "score": "3.000", 
+        "scale": 16, 
+        "name": "Asma persistente moderada", 
+        "css": "warning"
+    }
+},
+{
+    "pk": 53, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "4.000", 
+        "scale": 16, 
+        "name": "Asma persistente grave", 
+        "css": "important"
+    }
+},
+{
+    "pk": 54, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "0.750", 
+        "scale": 17, 
+        "name": "Control adecuado del asma", 
+        "css": "success"
+    }
+},
+{
+    "pk": 55, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#F89406", 
+        "score": "1.500", 
+        "scale": 17, 
+        "name": "Asma parcialmente controlada", 
+        "css": "warning"
+    }
+},
+{
+    "pk": 56, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "6.000", 
+        "scale": 17, 
+        "name": "Control inadecuado del asma", 
+        "css": "important"
+    }
+},
+{
+    "pk": 57, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "0.000", 
+        "scale": 18, 
+        "name": "Asma bien controlada", 
+        "css": "success"
+    }
+},
+{
+    "pk": 58, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#F89406", 
+        "score": "1.000", 
+        "scale": 18, 
+        "name": "Asma parcialmente controlada", 
+        "css": "warning"
+    }
+},
+{
+    "pk": 59, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "2.000", 
+        "scale": 18, 
+        "name": "Asma mal controlada", 
+        "css": "important"
+    }
+},
+{
+    "pk": 60, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "100.000", 
+        "scale": 19, 
+        "name": "Total independencia", 
+        "css": "success"
+    }
+},
+{
+    "pk": 61, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#0088CC", 
+        "score": "99.000", 
+        "scale": 19, 
+        "name": "Dependencia escasa", 
+        "css": "info"
+    }
+},
+{
+    "pk": 62, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "gold", 
+        "score": "90.000", 
+        "scale": 19, 
+        "name": "Dependencia moderada", 
+        "css": "default"
+    }
+},
+{
+    "pk": 63, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#F89406", 
+        "score": "60.000", 
+        "scale": 19, 
+        "name": "Dependencia grave", 
+        "css": "warning"
+    }
+},
+{
+    "pk": 64, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "20.000", 
+        "scale": 19, 
+        "name": "Dependencia severa", 
+        "css": "important"
+    }
+},
+{
+    "pk": 65, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#468847", 
+        "score": "1.000", 
+        "scale": 20, 
+        "name": "Ausencia de comorbilidad", 
+        "css": "success"
+    }
+},
+{
+    "pk": 66, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#F89406", 
+        "score": "2.000", 
+        "scale": 20, 
+        "name": "Comorbilidad baja", 
+        "css": "warning"
+    }
+},
+{
+    "pk": 67, 
+    "model": "formula.level", 
+    "fields": {
+        "color": "#B94A48", 
+        "score": "42.000", 
+        "scale": 20, 
+        "name": "Comorbilidad alta", 
+        "css": "important"
+    }
+}
+]

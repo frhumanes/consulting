@@ -1,0 +1,14 @@
+{% extends "ui/app.html" %}
+{% load i18n %}
+
+{% block container %}
+	<div class="hero-unit center">
+		<h1>CRONOS</h1>
+		<p>{% trans 'Fin de sesión' %}</p>
+		{% if error %}
+		<div class="alert alert-block alert-info">
+			{{error}}
+		</div>
+		{% endif %}
+	</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 from django.contrib import admin
 
 admin.autodiscover()
@@ -18,6 +18,8 @@ urlpatterns = patterns(
     (r'^calendar/', include('cal.urls')),
     (r'^configuration/', include('conf.urls')),
     (r'^cache/', include('django_memcached.urls')),
+    (r'^portal/', include('cronos.urls')),
+    (r'^survey/', include('survey.urls')),
 )
 urlpatterns += staticfiles_urlpatterns()
 

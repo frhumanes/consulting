@@ -29,7 +29,7 @@
   {% if patient_user_id %}
   $('#id_doctor').change(function(){
     $.ajax({
-        url: '{% url cal.check_transfer patient_user_id %}',
+        url: '{% url 'cal.check_transfer' patient_user_id %}',
         type:'POST',
         data: { 
             doctor: function() { return $('#id_doctor').val(); },
@@ -97,7 +97,7 @@
   $("#id_profession").autocomplete({
     source: function(request, response){
               $.ajax({
-                  url: '{% url consulting_searcher_profession %}',
+                  url: '{% url 'consulting_searcher_profession' %}',
                   type:'POST',
                   data: { 
                       start: function() { return $("#id_profession").val(); },
@@ -138,7 +138,7 @@
       <div class="well">
 
         <div class="">
-          <form id="doctor_selection" class="form" method="post" action="{% url cal.select_doctor patient_user_id %}">
+          <form id="doctor_selection" class="form" method="post" action="{% url 'cal.select_doctor' patient_user_id %}">
             {% csrf_token %}
 
              <!-- DOCTOR -->
@@ -183,7 +183,7 @@
 </div>
 <section>
   <div class="{% if edit %}well{% endif %}">
-      <form class="form-horizontal" id="form" action="{% if edit %}{% url consulting_editpatient_pm patient_user_id %}{% else %}{{ request.path }}{% endif %}" method="post" accept-charset="utf-8">
+      <form class="form-horizontal" id="form" action="{% if edit %}{% url 'consulting_editpatient_pm' patient_user_id %}{% else %}{{ request.path }}{% endif %}" method="post" accept-charset="utf-8">
       {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}"/>             
         {% if same_username %}

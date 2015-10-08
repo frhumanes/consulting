@@ -26,7 +26,7 @@ function set_events(){
   $("#yes_remove").click(function(){
                     medicine_id = $('#medicine_id').val();
                     var jqxhr = $.post(
-                                  '{% url consulting_add_medicine action='remove' %}',
+                                  '{% url 'consulting_add_medicine' action='remove' %}',
                                   {'medicine_id': medicine_id,
                                   'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()}, 
                                   function() {
@@ -45,12 +45,12 @@ function set_events(){
   $("#yes_stop").click(function(){
                     medicine_id = $('#medicine_id').val();
                     var jqxhr = $.post(
-                                  '{% url consulting_add_medicine action='stop' %}',
+                                  '{% url 'consulting_add_medicine' action='stop' %}',
                                   {'medicine_id': medicine_id,
                                   'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()}, 
                                   function() {
                                     $('#'+medicine_id).remove();
-                                    $('#log').load('{% url consulting_get_medicines filter_option='old' id_patient=patient_user.id %}', set_events);
+                                    $('#log').load('{% url 'consulting_get_medicines' filter_option='old' id_patient=patient_user.id %}', set_events);
                                   });
   });
 
@@ -86,9 +86,9 @@ function set_events(){
       $(this).removeData();
     })
 
-  $('#active').load('{% url consulting_get_medicines filter_option='current' id_patient=patient_user.id %}', set_events);
-  $('#log').load('{% url consulting_get_medicines filter_option='old' id_patient=patient_user.id %}', set_events);
-  $('#previous').load('{% url consulting_get_medicines filter_option='previous' id_patient=patient_user.id %}', set_events);
+  $('#active').load('{% url 'consulting_get_medicines' filter_option='current' id_patient=patient_user.id %}', set_events);
+  $('#log').load('{% url 'consulting_get_medicines' filter_option='old' id_patient=patient_user.id %}', set_events);
+  $('#previous').load('{% url 'consulting_get_medicines' filter_option='previous' id_patient=patient_user.id %}', set_events);
    
 {% endblock %}
 
@@ -101,7 +101,7 @@ function set_events(){
 <div class="page-header">
     <h1>{% trans 'Tratamiento farmacológico' %}
       <div class="btn-group pull-right">
-            <a class="btn btn-info" href="{% if illness %}{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}">
+            <a class="btn btn-info" href="{% if illness %}{% url 'consulting_main' id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}">
                <i class="icon-arrow-left icon-white"></i>
               {% trans 'Volver' %}
             </a>
@@ -118,13 +118,13 @@ function set_events(){
     </ul>
     <div class="tab-content" style="overflow-y: hidden;">
       <div class="tab-pane active" id="active">
-        <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+        <img src="{{ STATIC_URL }}img/ajax-loader.gif" alt="loading..." />
       </div>
       <div class="tab-pane" id="log">
-        <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+        <img src="{{ STATIC_URL }}img/ajax-loader.gif" alt="loading..." />
       </div>
       <div class="tab-pane" id="previous">
-        <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+        <img src="{{ STATIC_URL }}img/ajax-loader.gif" alt="loading..." />
       </div>
     </div>
   </div>

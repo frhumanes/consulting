@@ -51,6 +51,7 @@ function autoSubmit() {
 <div class="page-header" style="margin-top:36px">
   <h4>{% trans 'Opciones de filtrado' %}</h4>
 </div>
+<section>
 <form class="form-inline" id="form" action="{{request.path}}" method="get" accept-charset="utf-8">
   
   <div class="accordion" id="accordion_filter">
@@ -79,15 +80,17 @@ function autoSubmit() {
     {% trans 'Limpiar filtros' %}
   </button>
 </form>
+</section>
 {% endblock %}
 
 {% block container %}
 
-  <div class="page-header">
+<div class="page-header">
     <h1>{% trans 'Registro de consultas' %}</h1>
-  </div>
-
+</div>
+<section>
   <div id="payment_list" class="center"></div>
+</section>
 {% endblock %}
 
 
@@ -95,7 +98,7 @@ function autoSubmit() {
 {% block jquery_init %}
 var load_icon = "<img src='{{STATIC_URL}}img/ajax-loader.gif' alt='loading...'/>";
 $('#payment_list').html(load_icon);
-$('#payment_list').load("{% url cal.list_payment %}?{% for k, v in request.GET.items %}{{k}}={{v}}{% if forloop.revcounter0 %}&{% endif %}{% endfor %}", set_events);
+$('#payment_list').load("{% url 'cal.list_payment' %}?{% for k, v in request.GET.items %}{{k}}={{v}}{% if forloop.revcounter0 %}&{% endif %}{% endfor %}", set_events);
 
 $('button[type="reset"]').on('click', function(){
   var $form = $(this).parent();

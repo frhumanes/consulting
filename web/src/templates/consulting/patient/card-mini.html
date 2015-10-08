@@ -1,13 +1,20 @@
 {% load i18n%}
+{% load cache %}
 {% load consulting %}
 
+{% cache 500 card patient_user %}
+{% with statuses=patient_user.get_profile.get_medical_status %}
 <div class="img-polaroid" style="margin-top: 6px;">
   <div id="caRdcarousel" class="carousel slide" data-interval="">
     <!-- Carousel items -->
     <div>
       <span>
-      <h5>{% trans 'Nº HISTORIA' %}:
-        <a rel="tooltip" placement="bottom" title="{% trans 'Ir a perfil del paciente' %}" {% if appointment %}target="_blank"{% endif %} href="{% url consulting_pre_personal_data_pm patient_user.id %}" class="text-success" >{{patient_user.get_profile.medical_number}}</a> 
+      <h5>{% trans 'NUHSA' %}:
+        {% if not request.session.cronos %}
+        <a rel="tooltip" placement="bottom" title="{% trans 'Ir a perfil del paciente' %}" {% if appointment %}target="_blank"{% endif %} href="{% url 'consulting_pre_personal_data_pm' patient_user.id %}" class="text-success" >{{patient_user.get_profile.medical_number}}</a> 
+        {% else %}
+          {{patient_user.get_profile.medical_number}}
+        {% endif %}
         {% if not patient_user.is_active %}
           <span class="text-error">{% trans '[INACTIVO]' %}</span>
         {% endif %}
@@ -26,7 +33,7 @@
       <h4 style="text-align:center;">
         <!-- Carousel nav -->
         
-        <a href="{% url consulting_editpatient_pm patient_user.id %}?next={{request.path}}" data-dismiss="alert" rel="tooltip" placement="left" title="{% trans 'Editar datos personales' %}">{{patient_user.get_profile.get_full_name|upper}}</a>
+        <a href="{% url 'consulting_editpatient_pm' patient_user.id %}?next={{request.path}}" data-dismiss="alert" rel="tooltip" placement="left" title="{% trans 'Editar datos personales' %}">{{patient_user.get_profile.get_full_name|upper}}</a>
       </h4>
       </span>
       
@@ -34,12 +41,13 @@
     <div class="carousel-inner">
     <div class="active item">
       <table class="table table-condensed">         
-        <tbody style="color:grey">           
+        <tbody style="color:grey">
+          {% if not request.session.cronos %}
           <tr>            
             <td>{% trans 'NIF' %}</td>
             <td>{% if patient_user.get_profile.nif %}{{patient_user.get_profile.nif}}{% endif %}</td>
           </tr>
-          {% if user.get_profile.is_doctor %}
+          {% if user.get_profile.is_doctor or user.get_profile.is_nurse %}
           <tr>            
             <td>{% trans 'EDAD' %}</td>
             <td>{{patient_user.get_profile.get_age}} {% trans 'años' %}</td>
@@ -88,7 +96,7 @@
           <td>{% if patient_user.get_profile.get_nextAppointment and patient_user.is_active %}
             {{patient_user.get_profile.get_nextAppointment.date|date:'d/M/Y'}}
             {% else %}
-            <a href="{% url cal.scheduler patient_user.id %}" class="btn btn-small btn-info btn-block"><i class='icon-plus-sign icon-white'></i> {% trans 'Dar cita' %}</a>
+            <a href="{% url 'cal.scheduler' patient_user.id %}" class="btn btn-small btn-info btn-block"><i class='icon-plus-sign icon-white'></i> {% trans 'Dar cita' %}</a>
             {% endif %}
             {% if patient_user.get_profile.get_pending_tasks %}
             <br>
@@ -100,9 +108,37 @@
             {% endif %}
           </td>
         </tr>
+        {% else %}
+          {% if user.get_profile.is_doctor or user.get_profile.is_nurse %}
+          <tr>            
+            <td>{% trans 'EDAD' %}</td>
+            <td>{{patient_user.get_profile.get_age}} {% trans 'años' %}</td>
+          </tr>
+          <tr>            
+            <td>{% trans 'SEXO' %}</td>
+            <td>{{patient_user.get_profile.get_sex}}</td>
+          </tr> 
+          <tr>            
+            <th colspan="2">{% trans 'NIVEL ESTRATIFICACIÓN' %}<br />
+              
+              {% if statuses|length %}
+                {% for status in statuses %}
+                  {% if status.name %}
+                  <span class="label label-{{status.css}}" {%if status.color%}style="background-color: {{status.color}}"{% endif %}>{{status.name|safe}}</span>
+                  {% endif %}
+                {% endfor %}
+              {% else %}
+                  <span class="label">PENDIENTE DE CALCULAR</span>
+              {% endif %}
+              
+            </th>
+          </tr>
+          {% endif %}
+        {% endif %}
         </tbody>
       </table>
     </div>
+    {% if not request.session.cronos %}
     <div class="item">
       <table class="table table-condensed" style="color:grey">
         <thead>
@@ -120,7 +156,7 @@
         {% endfor %}
       <tr>
         <td colspan="2">
-          {% if appointment %}
+          {% if appointment and user.get_profile.is_doctor %}
           <button class="btn btn-small btn-info btn-block" id="change_cie">
             <i class='icon-check icon-white'></i> {% trans 'Modificar diagnósticos' %}
           </button>
@@ -130,12 +166,12 @@
         </td>
       </tr>
 
-      {% if user.get_profile.is_doctor %}
+      {% if user.get_profile.is_doctor or user.get_profile.is_nurse %}
         <tr>            
           <th colspan="2">{% trans 'NIVEL ESTRATIFICACIÓN' %}<br />
-            {% if patient_user.get_profile.get_medical_status|length %}
-              {% for status in patient_user.get_profile.get_medical_status %}
-                <span class="label label-{{status|last}}">{{status|first|safe}}</span>
+            {% if statuses|length %}
+              {% for status in statuses %}
+                <span class="label label-{{status.css}}" {%if status.color%}style="background-color: {{status.color}}"{% endif %}>{{status.name|safe}}</span>
               {% endfor %}
             {% else %}
                 <span class="label">PENDIENTE DE CALCULAR</span>
@@ -146,14 +182,50 @@
       </tbody>
       </table>
     </div>
+    {% else %}
+      <div class="item">
+        <dl>
+          <dt>{% trans 'Pruebas complementarias' %}</dt>
+          {% for status in statuses %}
+          <dd>{{status.recommendation.tests|linebreaks}}</dd>
+          {% endfor %}
+        </dl>
+      </div>
+      <div class="item">
+        <dl>
+          <dt>{% trans 'Cuestionarios específicos' %}</dt>
+          {% for status in statuses %}
+          <dd>{{status.recommendation.surveys|linebreaks}}</dd>
+          {% endfor %}
+        </dl>
+      </div>
+      <div class="item">
+        <dl>
+          <dt>{% trans 'Tipo de seguimiento' %}</dt>
+          {% for status in statuses %}
+          <dd>{{status.recommendation.tracking|linebreaks}}</dd>
+          {% endfor %}
+        </dl>
+      </div>
+      <div class="item">
+        <dl>
+          <dt>{% trans 'Medidas recomendadas' %}</dt>
+          {% for status in statuses %}
+          <dd>{{status.recommendation.recommendation|linebreaks}}</dd>
+          {% endfor %}
+        </dl>
+      </div>
+    {% endif %}
     </div>
   </div>
 </div>
+{% endwith %}
+{% endcache %}
 
 {% if appointment %}
 <script type="text/javascript">
   $('#change_cie').on('click', function() {
-    window.open("{% url consulting_list_illnesses patient_user_id=appointment.patient.id %}",'CIE-10','height=600,width=800,left=200,top=200,scrollbars=yes'); 
+    window.open("{% url 'consulting_list_illnesses' patient_user_id=appointment.patient.id %}",'CIE-10','height=600,width=800,left=200,top=200,scrollbars=yes'); 
     return false;
   });
 </script>

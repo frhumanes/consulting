@@ -1,0 +1,57 @@
+{% extends "cronos/base.html" %}
+
+{% load i18n consulting userprofile %}
+
+{% block right %}
+  {% include 'consulting/patient/card-mini.html'%}
+{% endblock %}
+
+
+{% block container %}
+  <div class="page-header">
+    <h1>{% trans 'Listado de Videconferencias' %}</h1>
+  </div>
+  <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
+  <section>
+    <div class="">       
+      <div id="overwrite_list" class="">            
+        {% if videos.object_list %}                     
+        <table id="list_video" class="table table-bordered">  
+          <thead>
+            <tr>            
+              <th style="text-align:center;">
+                {% trans 'INICIO' %}
+              </th>
+              <th style="text-align:center;">
+                {% trans 'FIN' %}
+              </th>
+              <th style="text-align:center;">
+                {% trans 'NOTAS' %}
+              </th>
+            </tr>
+          </thead>        
+          <tbody>                  
+            {% for video in videos.object_list %}
+              <tr id="{{video.id}}" class="video">
+                <td style="text-align:center;">{{video.iniTimeStamp}}</td>
+                <td style="text-align:center;">{{video.endTimeStamp}}</td>
+                <td style="text-align:justify;"><a href="#" class="muted" rel="popover" title="{{video.username}}" data-trigger="hover" data-content="{{video.notas|striptags|safe}}">{{video.notas|striptags|safe|truncatewords:10}}</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% include 'ui/includes/pagination_bar.html' with objects=videos %}
+        <div id="overwrite"></div>                           
+        {% else %}
+            <div class="alert alert-info">{% trans "No hay videconferencias asociadas a este paciente" %}</div>
+        {% endif %}
+      </div>
+     
+    </div>
+             
+  </section>
+{% endblock container %}
+
+{% block jquery_init %}
+    $('a[rel="popover"]').popover();
+{% endblock %}

@@ -105,7 +105,7 @@ function set_events(){
   $("#yes_remove").click(function(){
                     medicine_id = $('#medicine_id').val();
                     var jqxhr = $.post(
-                                  '{% url consulting_add_medicine action='remove' %}',
+                                  '{% url 'consulting_add_medicine' action='remove' %}',
                                   {'medicine_id': medicine_id,
                                   'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()}, 
                                   function() {
@@ -173,7 +173,7 @@ function set_events(){
 
   $('ul').addClass("without_decorator");
 
-  $('#medicament_container').load('{% url consulting_get_medicines filter_option='previous' id_patient=patient_user.id %}', set_events);
+  $('#medicament_container').load('{% url 'consulting_get_medicines' filter_option='previous' id_patient=patient_user.id %}', set_events);
 
   $('.form').on('submit', function(e){
     var pending = 0;

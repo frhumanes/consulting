@@ -10,7 +10,7 @@
   <div class="page-header">
     <h1>{% trans 'Nuevo tipo de cita' %}
             <div class="btn-group pull-right">
-                  <a class="btn btn-info" href="{% url cal.list_slot_type %}">
+                  <a class="btn btn-info" href="{% url 'cal.list_slot_type' %}">
                      <i class="icon-arrow-left icon-white"></i>
                     {% trans 'Volver' %}
                   </a>
@@ -20,7 +20,7 @@
 
 <div class="well center">
 
-<form class="form-horizontal" method="post" action="{% url cal.add_slot_type %}?{{request.GET.urlencode}}">{% csrf_token %}
+<form class="form-horizontal" method="post" action="{% url 'cal.add_slot_type' %}?{{request.GET.urlencode}}">{% csrf_token %}
   <fieldset>
 
       {% if  form.non_field_errors  %}

@@ -30,7 +30,7 @@
   }).jstree({ 
     "json_data" : {
       "ajax" : {
-        "url" : "{% url consulting_list_illnesses patient_user_id=patient_user.id %}",
+        "url" : "{% url 'consulting_list_illnesses' patient_user_id=patient_user.id %}",
         "data" : function (n) {
             // the result is fed to the AJAX request `data` option
             return {

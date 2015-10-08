@@ -1,0 +1,30 @@
+{% load i18n %}
+{% if surveys.object_list.count > 0 %}
+    <table id="patient_list" class="table table-striped">
+      <thead>
+          <tr>
+            <th>{% trans "Nombre" %}</th>
+            <th>{% trans "¿Autoadministrado?" %}</th>
+            <th>{% trans "Codigo" %}</th>
+            <th>{% trans "Autor" %}</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for p in surveys.object_list %}
+          <tr>
+            <td>
+              {{p.name}}
+            </td>
+            <td>{{p.multitype}}</td>
+            <td>{{p.code}}</td>
+            <td>{{p.created_by}}</span></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% include 'ui/includes/pagination_bar.html' with objects=surveys %}
+{% else %}
+  <div class="alert alert-info">
+    {% trans 'No hay cuestionarios que mostrar' %}
+  </div>
+{% endif %}

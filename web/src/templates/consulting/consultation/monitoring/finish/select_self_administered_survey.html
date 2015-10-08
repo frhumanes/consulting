@@ -21,7 +21,7 @@
     <p>{% trans 'El paciente ya tiene asignadas las siguientes tareas' %}:</p>
     <ul class="unstyled">
     {% for t in patient_user.get_profile.get_assigned_tasks %}
-      <li>{{t.survey.name}} <small>[{{t.created_at|date}}]</small></li>
+      <li>{{t.survey.name}} <small>[{{t.from_date|date}}-{{t.to_date|date}}]</small></li>
     {% endfor %}
     </ul>
   </div>
@@ -32,7 +32,7 @@
     <div class="page-header">
       <h1>{% trans 'Cuestionario autoadministrado' %}
         <div class="btn-group pull-right">
-            <a class="btn btn-info" href="{% if illness %}{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}">
+            <a class="btn btn-info" href="{% if illness %}{% url 'consulting_main' id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}">
                <i class="icon-arrow-left icon-white"></i>
               {% trans 'Volver' %}
             </a>
@@ -43,24 +43,6 @@
 
     <div class="well">
       <form class="form-horizontal" method="post" action="{{request.path}}">{% csrf_token %}
-        {% if form.previous_days.errors %}
-          <div class="control-group error">
-            <label for="id_previous_days" class="control-label">{{form.previous_days.label}}</label>
-            <div class="controls">
-                {{ form.previous_days }} {% trans 'días antes de la próxima cita' %}           
-                {% for error in form.previous_days.errors %}
-                   <span class="help-inline">{{ error|escape }}</span>
-                {% endfor %}
-            </div>              
-          </div>
-        {% else %}
-          <div class="control-group">
-            <label for="previous_days" class="control-label">{{form.previous_days.label}}</label>
-            <div class="controls">
-                {{ form.previous_days }} {% trans 'días antes de la próxima cita' %}
-            </div>
-          </div>
-        {% endif %}
         {% if form.survey.errors %}
           <div class="control-group error">
             <label class="control-label">
@@ -85,6 +67,29 @@
             </div>
           </div>
         {% endif %}
+        <div class="row-fluid">
+          <div class="span4">
+            {% if form.previous_days.errors %}
+          <div class="control-group error">
+            <label for="id_previous_days" class="control-label">{{form.previous_days.label}}</label>
+            <div class="controls">
+                {{ form.previous_days }} {% trans 'días antes de la próxima cita' %}           
+                {% for error in form.previous_days.errors %}
+                   <span class="help-inline">{{ error|escape }}</span>
+                {% endfor %}
+            </div>              
+          </div>
+        {% else %}
+          <div class="control-group">
+            <label for="previous_days" class="control-label">{{form.previous_days.label}}</label>
+            <div class="controls">
+                {{ form.previous_days }} {% trans 'días antes de la próxima cita' %}
+            </div>
+          </div>
+        {% endif %}
+          </div>
+
+        </div>
         <div id="kind" class="control-group">
           <label class="control-label">
             {{form.kind.label}}

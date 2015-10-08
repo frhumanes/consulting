@@ -1,15 +1,15 @@
 {% load i18n %}
 {% load consulting %}
 
-{% url consulting_personal_data_pm patient_user_id=patient_user.id as personal_data %}
-{% url consulting_list_medicines patient_user.id as list_medicines %}
-{% url consulting_list_appointments patient_user_id=patient_user.id as list_appointments %}
-{% url consulting_list_reports patient_user_id=patient_user.id as list_reports %}
-{% url consulting_list_messages patient_user_id=patient_user.id as list_messages %}
-{% url consulting_list_recommendations patient_user_id=patient_user.id as list_recommendations %}
-{% url consulting_user_evolution patient_user_id=patient_user.id as user_evolution %}
-{% url consulting_list_illnesses patient_user_id=patient_user.id as list_illnesses %}
-{% url consulting_user_evolution patient_user_id=patient_user.id block_code=survey_block.code as user_evolution %}
+{% url 'consulting_personal_data_pm' patient_user_id=patient_user.id as personal_data %}
+{% url 'consulting_list_medicines' patient_user.id as list_medicines %}
+{% url 'consulting_list_appointments' patient_user_id=patient_user.id as list_appointments %}
+{% url 'consulting_list_reports' patient_user_id=patient_user.id as list_reports %}
+{% url 'consulting_list_messages' patient_user_id=patient_user.id as list_messages %}
+{% url 'consulting_list_recommendations' patient_user_id=patient_user.id as list_recommendations %}
+{% url 'consulting_user_evolution' patient_user_id=patient_user.id as user_evolution %}
+{% url 'consulting_list_illnesses' patient_user_id=patient_user.id as list_illnesses %}
+{% url 'consulting_user_evolution' patient_user_id=patient_user.id block_code=survey_block.code as user_evolution %}
 
 
   <ul class="nav nav-pills nav-stacked">
@@ -42,7 +42,7 @@
       <ul class="dropdown-menu">
         {% for b in patient_user.get_profile.get_scored_blocks %}
         <li>
-          <a href="{% url consulting_user_evolution patient_user_id=patient_user.id block_code=b.code %}">{{b.name}}</a>
+          <a href="{% url 'consulting_user_evolution' patient_user_id=patient_user.id block_code=b.code %}">{{b.name}}</a>
         </li>
         {% endfor %}
       </ul>

@@ -73,7 +73,7 @@
 
 {% block container %}
 	<div class="page-header">
-		<h1>Parámetros
+		<h1>{% trans 'Parámetros' %}
       <div class="btn-toolbar pull-right">
         <div class="btn-group">
           <button class="btn btn-info" onClick="$('#filter_options').show()"><i class="icon-filter icon-white"></i> {% trans "Filtrar" %}</button>
@@ -124,34 +124,38 @@
             </button>
         </form>
     </div>
-
+    <section>
     <ul class="nav nav-tabs" id="myTab">
+        {% if latest_marks %}
         <li{% if not active_tab or active_tab = 'active' %} class="active"{%endif%}>
             <a href="#variables" data-toggle="tab">{% trans 'Variables' %}</a>
         </li>
+        {% endif %}
         {% if latest_dimensions %}
-        <li {% if active_tab = 'dimensions' %} class="active"{%endif%}><a href="#dimensions" data-toggle="tab" id="dimensions_tab">{% trans 'Dimensiones' %}</a></li>
+        <li {% if not latest_marks or active_tab = 'dimensions' %} class="active"{%endif%}><a href="#dimensions" data-toggle="tab" id="dimensions_tab">{% trans 'Dimensiones' %}</a></li>
         {% endif %}
         {% if scales %}
-        <li {% if active_tab = 'status' %} class="active"{%endif%}><a href="#status" data-toggle="tab" id="status_tab">{% trans 'Escalas' %}</a></li>
+        <li {% if not latest_marks or active_tab = 'status' %} class="active"{%endif%}><a href="#status" data-toggle="tab" id="status_tab">{% trans 'Escalas' %}</a></li>
         {% endif %}
     </ul>
 	
     <div class="tab-content">
+        {% if latest_marks %}
         <div class="tab-pane {% if not active_tab or active_tab = 'variables' %}active{% endif %}" id="variables" style="overflow-x: hidden">
             {% include 'consulting/patient/plot_variables.html' with ticks=ticks_variables %}
         </div>
+        {% endif %}
         {% if latest_dimensions %}
-        <div class="tab-pane {% if active_tab = 'dimensions' %}active{% endif %}" id="dimensions" style="overflow-x: hidden">
+        <div class="tab-pane {% if not latest_marks or active_tab = 'dimensions' %}active{% endif %}" id="dimensions" style="overflow-x: hidden">
             {% include 'consulting/patient/plot_dimensions.html' with ticks=ticks_variables %}
         </div>
         {% endif %}
         {% if scales %}
-        <div class="tab-pane {% if active_tab = 'status' %}active{% endif %}" id="status" style="overflow-x: hidden">
+        <div class="tab-pane {% if not latest_marks or active_tab = 'status' %}active{% endif %}" id="status" style="overflow-x: hidden">
             {% include 'consulting/patient/plot_scales.html' with ticks=ticks_variables values=scales %}
         </div>
         {% endif %}
     </div>
-
+    </section>
 
 {% endblock %}

@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 
-# Django settings for consulting30 project.
+# Django settings for cronos30 project.
 import os
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = False
 
 PROJECT_ROOT = os.path.dirname(__file__)
 
@@ -17,15 +17,15 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'consulting',
-        'USER': 'consulting',
-        'PASSWORD': 'consulting',
+        'NAME': 'cronos',
+        'USER': 'cronos',
+        'PASSWORD': 'cronos',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     },
     'nonrel': {
         'ENGINE': 'django_mongodb_engine',
-        'NAME': 'consulting'
+        'NAME': 'cronos'
     }
 }
 
@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
+    'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -166,21 +167,24 @@ INSTALLED_APPS = (
     'illness',
     'stadistic',
     #'debug_toolbar',
+    'cronos'
 )
 
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
-        'TIMEOUT': 8 * 60 * 60,
-        'KEY_PREFIX': 'consulting'
+        'TIMEOUT': 7 * 24 * 60 * 60,
+        'KEY_PREFIX': 'cronos'
     }
 }
 DJANGO_MEMCACHED_REQUIRE_STAFF = True
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 AUTH_PROFILE_MODULE = 'userprofile.Profile'
 SESSION_SAVE_EVERY_REQUEST = True
-SESSION_COOKIE_AGE = 600 # 2 HOURS
+SESSION_COOKIE_AGE = 30*60 # in seconds
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 try:
     DATABASE_ROUTERS = ['stadistic.StadisticRouter']
@@ -188,3 +192,19 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+if 'cronos' in INSTALLED_APPS:
+    FORCE_SCRIPT_NAME = ""
+    _prefix = (FORCE_SCRIPT_NAME or "")
+    LOGIN_URL = '/portal/login'
+    LOGIN_URL = _prefix + LOGIN_URL
+    LOGIN_URL_REDIRECT = _prefix + LOGIN_URL
+    LOGOUT_REDIRECT = '/portal/logout'
+    LOGOUT_URL = _prefix + LOGOUT_REDIRECT
+    MEDIA_URL = _prefix + MEDIA_URL
+    STATIC_URL = _prefix + STATIC_URL
+    #AT4_SERVER = "http://localhost:8000"
+    AT4_SERVER = "https://195.57.0.149:20000"
+    #AUTH_RESOURCE = "/portal/utilUserController.at4"
+    AUTH_RESOURCE = "/Cronos/utilUserController.at4"
+    VIDEOCONFERENCE_SERVER = 'https://89.140.10.39'

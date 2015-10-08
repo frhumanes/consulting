@@ -1,0 +1,14 @@
+{% extends "ui/app.html" %}
+{% load i18n %}
+
+{% block container %}
+	<div class="hero-unit center">
+		<h1>400</h1>
+		<p>{% trans 'Petición incorrecta' %}</p>
+		{% if error %}
+		<div class="alert alert-block alert-error">
+			{{error}}
+		</div>
+		{% endif %}
+	</div>
+{% endblock %}

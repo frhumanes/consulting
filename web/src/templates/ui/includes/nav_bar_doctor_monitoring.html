@@ -3,16 +3,16 @@
 
 {% if illness %}
 
-{% url consulting_list_incomplete_tasks appointment.id illness.code as incomplete_tasks %}
-{% url consulting_list_self_administered_tasks appointment.id illness.code as self_administered_tasks %}
-{% url consulting_select_successive_survey appointment.id illness.code as successive_tasks %}
-{% url consulting_list_provisional_reports appointment.id illness.code as provisional_reports %}
-{% url consulting_next_self_administered_survey appointment.id illness.code as next_self_survey %}
-{% url consulting_prev_treatment_block appointment.id illness.code as treatment_survey %}
-{% url consulting_show_prescription appointment.id illness.code as treatment %}
-{% url consulting_set_conclusion appointment.id illness.code as conclusion %}
-{% url consulting_new_app appointment.id illness.code as scheduler %}
-{% url consulting_register_payment appointment.id illness.code as payment %}
+{% url 'consulting_list_incomplete_tasks' appointment.id illness.code as incomplete_tasks %}
+{% url 'consulting_list_self_administered_tasks' appointment.id illness.code as self_administered_tasks %}
+{% url 'consulting_select_successive_survey' appointment.id illness.code as successive_tasks %}
+{% url 'consulting_list_provisional_reports' appointment.id illness.code as provisional_reports %}
+{% url 'consulting_next_self_administered_survey' appointment.id illness.code as next_self_survey %}
+{% url 'consulting_prev_treatment_block' appointment.id illness.code as treatment_survey %}
+{% url 'consulting_show_prescription' appointment.id illness.code as treatment %}
+{% url 'consulting_set_conclusion' appointment.id illness.code as conclusion %}
+{% url 'consulting_new_app' appointment.id illness.code as scheduler %}
+{% url 'consulting_register_payment' appointment.id illness.code as payment %}
 
 
   <ul class="nav nav-list">

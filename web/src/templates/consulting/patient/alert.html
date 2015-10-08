@@ -1,0 +1,12 @@
+{% load i18n %}
+{% load l10n %}
+
+{% with alert=patient_user.get_profile.get_latest_alert %}
+  {% if alert %}
+      <div class="alert alert-block cronos-alert" style="background-color: {{alert.risk.color}}" data-id="{{alert.id}}">
+         <button type="button" class="close" data-dismiss="alert" data-id="{{alert.id}}">&times;</button>
+        <h4>{% trans 'RIESGO' %} {{alert.risk.name|upper}}</h4>
+        {{alert.risk.message|linebreaks}}
+      </div>
+  {% endif %}
+ {% endwith %}

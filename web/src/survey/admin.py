@@ -13,16 +13,16 @@ class SurveyAdmin(admin.ModelAdmin):
             'fields': ['name', 'code']
         }),
         ('Ajustes', {
-            'fields': ('multitype', 'blocks')
+            'fields': ('enabled', 'multitype', 'is_reportable', 'blocks', 'scales')
         }),
         (_(u'Registro'), {
             'classes': ('collapse',),
             'fields': ('created_by', 'created_at', 'updated_at')
         })
     ]
-    list_display = ('name', 'code', 'multitype')
+    list_display = ('name', 'code', 'multitype', 'is_reportable', 'enabled')
     search_fields = ('code', 'name')
-    list_filter = ['multitype']
+    list_filter = ['multitype', 'enabled']
     ordering = ('code', 'name', 'multitype')
     readonly_fields = ('created_at', 'updated_at')
     formfield_overrides = {

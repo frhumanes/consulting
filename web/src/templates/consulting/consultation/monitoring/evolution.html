@@ -1,6 +1,7 @@
 {% extends "consulting/consultation/monitoring/index.html" %}
 
-{% load i18n%}
+{% load i18n %}
+{% load consulting %}
 
 {% block js_files %}
   {{ block.super }}
@@ -21,11 +22,67 @@
         <small>{% trans 'Cuestionario de' %} {{task.survey.name}}</small>
       </h1>
   </div>
-  {% include 'consulting/consultation/monitoring/incomplete_surveys/variables_graph.html' %}
-<div class="pull-right">
-  <a id="goback" href="{% if illness %}{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}" class="btn btn-info btn-large">
-    {% trans 'Volver' %}
-  </a>         
-</div>                             
+
+   {% include 'consulting/consultation/monitoring/incomplete_surveys/variables_graph.html' %}
+  <br>
+  <div class="pull-right">
+  {% if request.session.cronos %}
+  <a id="goback" href="{% url 'cronos_tasks' %}" class="btn btn-info btn-large">
+        {% trans 'Volver' %}
+      </a> 
+  {% else %}
+    <a id="goback" href="{% if illness %}{% url 'consulting_main' id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}" class="btn btn-info btn-large">
+      {% trans 'Volver' %}
+    </a>         
+  {% endif %}      
+  </div>                   
 {% endblock container %}
 
+{% block right %}
+{{ block.super }}
+{% if request.session.cronos and request.user.get_profile.is_doctor %}
+  {% with scales=task.get_scales %}
+  {% if scales|has_recommendation %}
+  <br/>
+  <div class="alert alert-success alert-block">
+    <div class="thumbnail">
+      <p>En base a los resultados obtenidos se recomienda seguir las siguientes indicaciones
+         </p>
+      <div class="item">
+        <dl>
+          <dt>{% trans 'Pruebas complementarias' %}</dt>
+          {% for scale in scales %}
+          <dd>{{scale.status.recommendation.tests|linebreaks}}</dd>
+          {% endfor %}
+        </dl>
+      </div>
+      <div class="item">
+        <dl>
+          <dt>{% trans 'Cuestionarios específicos' %}</dt>
+          {% for scale in scales %}
+          <dd>{{scale.status.recommendation.surveys|linebreaks}}</dd>
+          {% endfor %}
+        </dl>
+      </div>
+      <div class="item">
+        <dl>
+          <dt>{% trans 'Tipo de seguimiento' %}</dt>
+          {% for scale in scales %}
+          <dd>{{scale.status.recommendation.tracking|linebreaks}}</dd>
+          {% endfor %}
+        </dl>
+      </div>
+      <div class="item">
+        <dl>
+          <dt>{% trans 'Medidas recomendadas' %}</dt>
+          {% for scale in scales %}
+          <dd>{{scale.status.recommendation.recommendation|linebreaks}}</dd>
+          {% endfor %}
+        </dl>
+      </div>  
+    </div>
+  </div>
+  {% endif %}
+  {% endwith %}
+  {% endif %}
+{% endblock %}

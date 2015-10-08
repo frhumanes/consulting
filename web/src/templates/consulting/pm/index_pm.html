@@ -41,13 +41,13 @@ function autoSubmit() {
               return xhr;
         }
   });
-  $('#patient_list').load('{% url consulting_patient_list doctor_user_id=request.user.id %}');
+  $('#patient_list').load('{% url 'consulting_patient_list' doctor_user_id=request.user.id %}');
   $("#searcher").autocomplete({
     minLength: 3,
     autoFocus: false,
     source: function(request, response){
               $.ajax({
-                  url: '{% url consulting_patient_searcher %}',
+                  url: '{% url 'consulting_patient_searcher' %}',
                   type:'POST',
                   data: {
                       start: function() { return $("#searcher").val(); },
@@ -139,7 +139,7 @@ function autoSubmit() {
 {% endblock %}
 
 {% block left %}
-  <a class="btn btn-large btn-primary" href="{% url consulting_newpatient %}"><i class="icon-plus-sign icon-white"></i> {% trans 'Nuevo Paciente' %}</a>
+  <a class="btn btn-large btn-primary" href="{% url 'consulting_newpatient' %}"><i class="icon-plus-sign icon-white"></i> {% trans 'Nuevo Paciente' %}</a>
 {% endblock %}
 
 {% block right %}
@@ -148,7 +148,7 @@ function autoSubmit() {
     <ul class="nav nav-list" >
       <li class="nav-header">{% trans 'Filtrar por doctores' %}</li>
       {% for d in doctors %}
-      <li><button class="btn btn-link" style="text-align: right" href="{% url consulting_patient_list d.user.id %}">{{d|name_with_title}}</button></li>
+      <li><button class="btn btn-link" style="text-align: right" href="{% url 'consulting_patient_list' d.user.id %}">{{d|name_with_title}}</button></li>
       {% endfor %}
     </ul>
   </div>
@@ -201,7 +201,7 @@ function autoSubmit() {
 
 <div id="patient_list" class="thumbnail">
   <div class="center">
-    <img style="padding: 50px" src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+    <img style="padding: 50px" src="{{ STATIC_URL }}img/ajax-loader.gif" alt="loading..." />
   </div>
 </div>
 

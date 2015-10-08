@@ -21,7 +21,7 @@
           <p>{% trans 'El servicio de mensajería se encuentra temporalmente inoperativo. DIsculpe las molestias.' %}</p>
         </div>
       {% else %}
-    <form class="form-horizontal" method="post" action="{% url private_messages_new %}" enctype="multipart/form-data">{% csrf_token %}
+    <form class="form-horizontal" method="post" action="{% url 'private_messages_new' %}" enctype="multipart/form-data">{% csrf_token %}
       <fieldset>
             <!-- RECIPIENT -->
           {% if form.recipient.errors %}

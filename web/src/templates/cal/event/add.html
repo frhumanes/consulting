@@ -7,14 +7,14 @@
   <div class="page-header">
     <h1>{% trans 'Nuevo evento' %}
             <div class="btn-group pull-right">
-                  <a class="btn btn-info btn" href="{% url cal.list_event %}"><i class="icon-arrow-left icon-white"></i> {% trans "Volver" %}</a>
+                  <a class="btn btn-info btn" href="{% url 'cal.list_event' %}"><i class="icon-arrow-left icon-white"></i> {% trans "Volver" %}</a>
             </div>
         </h1>
   </div>
 
 
 <div class="well">
-  <form class="form-horizontal" method="post" action="{% url cal.add_event %}">{% csrf_token %}
+  <form class="form-horizontal" method="post" action="{% url 'cal.add_event' %}">{% csrf_token %}
   <fieldset>
 
       {% if  form.non_field_errors  %}

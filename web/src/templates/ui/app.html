@@ -24,9 +24,8 @@
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet"/>   
     <link href="{{ STATIC_URL }}css/bootstrap-editable.css" rel="stylesheet"/>
     <link href="{{ STATIC_URL }}css/table-calendar.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL }}css/cronos.css" rel="stylesheet"/>
   {% endblock %}
-
-
 
     <style type="text/css">
       @media (min-width: 768px) and (max-width: 1024px){
@@ -98,6 +97,13 @@
           });
       };
       {% if request.user.is_authenticated %}
+      function inIframe () {
+          try {
+              return window.self !== window.top;
+          } catch (e) {
+              return true;
+          }
+      }
       var timer;
       var reminder = 300; // seg
       function expiration_warning() {
@@ -123,7 +129,7 @@
         }, 1000);
       }
       function postpone_session(val) {
-        $.ajax( '/keep_alive/'+val+'/' )
+        $.ajax( '{% url "consulting_index" %}keep_alive/'+val+'/' )
         .done( setTimeout(expiration_warning, (val - reminder ) * 1000) )
         .fail(function() { alert("error"); })
         .always(function() { 
@@ -146,7 +152,13 @@
           ev.preventDefault();
           postpone_session($(this).attr('value'));
         });
-        setTimeout(expiration_warning,({{request.session.timeout}} - reminder) * 1000);
+        {% if request.user.is_authenticated %}
+        if (inIframe()) {
+          postpone_session(60*60);
+        } else {
+          setTimeout(expiration_warning,({{request.session.timeout}} - reminder) * 1000);
+        }
+        {% endif %}
         {% block jquery_init %}
         {% endblock %}
         fix_bars();
@@ -164,16 +176,16 @@
 
   <body>
     {% block header%}
-      {% if request.user.get_profile.is_doctor %}
-        {% include "ui/includes/header_doctor.html" with user=request.user %}
-      {% else %}
-        {% if request.user.get_profile.is_administrative %}
-          {% include "ui/includes/header_administrative.html" with user=request.user %}
+      {% if request.user.get_profile.is_doctor or request.user.get_profile.is_nurse %}
+        {% if request.session.cronos %}
+          {% include "cronos/header.html" with user=request.user %}
         {% else %}
-          {% if request.user.get_profile.is_patient %}
-            {% include "ui/includes/header_patient.html" with user=request.user %}
-          {% endif%}
-        {% endif%}
+          {% include "ui/includes/header_doctor.html" with user=request.user %}
+        {% endif %}
+      {% elif request.user.get_profile.is_administrative %}
+        {% include "ui/includes/header_administrative.html" with user=request.user %}
+      {% elif request.user.get_profile.is_patient %}
+        {% include "ui/includes/header_patient.html" with user=request.user %}
       {% endif%}
     {% endblock  %}
     <div class="row-fluid">
@@ -181,7 +193,7 @@
       {% block subheader %}
         {% if EXPIRED_PASSWORD %}
         <div class="offset3 span6">
-          <div class="alert alert-warning center">{% trans 'Por seguridad, le recomendamos que cambie su contraseña lo antes posible.' %} <a href="{% url password_change %}">{% trans 'Cambiar ahora' %}</a>
+          <div class="alert alert-warning center">{% trans 'Por seguridad, le recomendamos que cambie su contraseña lo antes posible.' %} <a href="{% url 'password_change' %}">{% trans 'Cambiar ahora' %}</a>
           <button type="button" class="close" data-dismiss="alert">&times;</button></div>
         </div>
         {% endif %}
@@ -192,18 +204,21 @@
     {% block body %}
     <div class="container">
       <div class="row-fluid">
+        {% if not request.session.cronos %}
         <div id="left_bar" class="span2">
           <div class="fixable" style="max-width:180px">
           {% block left %}
           <!--Left Sidebar content-->&nbsp;
           {% endblock left%}
           </div>
-        </div>    
-        <div id="main" class="span7">
+        </div> 
+        {% endif %}   
+        <div id="main" class="{% if not request.session.cronos %}span7 {% else %}span9{% endif %}">
           {% block container %}
            <!--Body content-->
           {% endblock container %}
         </div>
+        
         <div id="right_bar" class="span3">
           <div class="fixable" style="max-width:270px;">
           {% block right %}
@@ -211,10 +226,12 @@
           {% endblock right %}
           </div>
         </div>
+        {% if not request.session.cronos %}
         <div id="large" class="span10">
           {% block large %}
           {% endblock %} 
         </div>
+        {% endif %}
       </div>
     </div>
     {% endblock body %}

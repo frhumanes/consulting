@@ -4,7 +4,7 @@ Hola {{user.name}},
 Le informamos que se le ha {{app.is_confirmed|yesno:'asignado,reservado'}} una cita para el {{app.date}} a las {{app.start_time|time:"H:i"}} con {{"el/la"|sexify:app.doctor}} {{app.doctor.get_profile|name_with_title}}.
 
 {% if app.is_confirmed %}
-Si no puede asistir le rogamos nos lo comunique lo antes posible a través de su área personal (http://{% get_domain %}{% url private_messages_new %}). Otro paciente se lo agradecerá.
+Si no puede asistir le rogamos nos lo comunique lo antes posible a través de su área personal (http://{% get_domain %}{% url 'private_messages_new' %}). Otro paciente se lo agradecerá.
 {% endif %}
 
 Reciba un cordial saludo del equipo de {% get_brand %}.

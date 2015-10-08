@@ -10,7 +10,7 @@
           $(this).css("background", "#D9EDF7").siblings().removeAttr("style")
 
           $('#overwrite').load(
-                '{% url consulting_detail_medicine_pm %}',
+                '{% url 'consulting_detail_medicine_pm' %}',
                 {'medicine_id': medicine_id,
                 'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()});
           });
@@ -27,7 +27,7 @@
   $("#yes").click(function(){
                     medicine_id = $('#medicine_id').val()
                     $('#overwrite_list').load(
-                                  '{% url consulting_remove_medicine_pm %}',
+                                  '{% url 'consulting_remove_medicine_pm' %}',
                                   {'medicine_id': medicine_id,
                                   'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()});
   });

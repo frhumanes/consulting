@@ -3,7 +3,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import get_object_or_404
 from django.conf import settings
-from django.forms.util import flatatt, StrAndUnicode
+from django.forms.util import flatatt
 from itertools import chain
 from django.template.defaultfilters import escape
 from django.utils.html import conditional_escape, mark_safe
@@ -53,7 +53,7 @@ class SelectWidgetBootstrap(forms.Select):
             selected_a = btngroup.find('a[selected]');
             if (selected_a.length > 0) {
                 val = selected_a.attr('data-value');
-                label = selected_a.html();
+                label = selected_a.text();
                 if(val) {
                     btngroup.find('.btn-group-label').css('background-color','#ffffff');
                     btngroup.parent().parent().removeClass('error');

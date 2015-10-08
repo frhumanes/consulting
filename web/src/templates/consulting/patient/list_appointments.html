@@ -20,9 +20,9 @@ function set_events(){
 {% endblock %}
 
 {% block jquery_init %}
-  $('#all').load('{% url consulting_get_appointments filter_option='all' patient_user_id=patient_user.id %}?{{request.GET.urlencode}}', set_events);
-  $('#virtual').load('{% url consulting_get_appointments filter_option='virtual' patient_user_id=patient_user.id %}?{{request.GET.urlencode}}', set_events);
-  $('#face-to-face').load('{% url consulting_get_appointments filter_option='face2face' patient_user_id=patient_user.id %}?{{request.GET.urlencode}}', set_events);
+  $('#all').load('{% url 'consulting_get_appointments' filter_option='all' patient_user_id=patient_user.id %}?{{request.GET.urlencode}}', set_events);
+  $('#virtual').load('{% url 'consulting_get_appointments' filter_option='virtual' patient_user_id=patient_user.id %}?{{request.GET.urlencode}}', set_events);
+  $('#face-to-face').load('{% url 'consulting_get_appointments' filter_option='face2face' patient_user_id=patient_user.id %}?{{request.GET.urlencode}}', set_events);
   $('a[rel="popover"]').popover();
   $('#filter_options').find('input[type="radio"]').click(function(){
     if($(this).attr('checked')){
@@ -41,7 +41,7 @@ function set_events(){
   <h1>{% trans 'Historial Citas' %}
     {% if patient_user.is_active %}
       <div class="btn-group pull-right">
-        <a href="{% url cal.scheduler patient_user.id %}" class="btn btn-info"><i class='icon-plus-sign icon-white'></i> {% trans 'Dar cita' %}</a>
+        <a href="{% url 'cal.scheduler' patient_user.id %}" class="btn btn-info"><i class='icon-plus-sign icon-white'></i> {% trans 'Dar cita' %}</a>
       </div>
     {% endif %}
   </h1>
@@ -71,13 +71,13 @@ function set_events(){
     </div>
     <div class="tab-content" style="overflow-y: hidden;">
       <div class="tab-pane active" id="all">
-        <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+        <img src="{{ STATIC_URL }}img/ajax-loader.gif" alt="loading..." />
       </div>
       <div class="tab-pane" id="face-to-face">
-        <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+        <img src="{{ STATIC_URL }}img/ajax-loader.gif" alt="loading..." />
       </div>
       <div class="tab-pane" id="virtual">
-        <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+        <img src="{{ STATIC_URL }}img/ajax-loader.gif" alt="loading..." />
       </div>
     </div>
   </div>

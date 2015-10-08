@@ -35,10 +35,10 @@
             },
         select: function(event, ui){ 
             {% if year and month and day %}
-              var pattern = '{% url destination year month day 1 %}';
+              var pattern = '{% url 'destination' year month day 1 %}';
               window.location.href = pattern.replace('for/1', 'for/'+ui.item.id);
             {% else %}
-              var pattern = '{% url destination 1 %}';
+              var pattern = '{% url 'destination' 1 %}';
               window.location.href = pattern.replace('1', ui.item.id);
             {% endif %}
             }

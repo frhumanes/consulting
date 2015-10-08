@@ -30,12 +30,7 @@ def generate_reports(full=False):
         report.profession = profile.profession
         report.variables = dict((k.name, v) for (k, v) in task.get_variables_mark().items())
         report.dimensions = dict((k.name, v) for (k, v) in task.get_dimensions_mark().items())
-        report.status={u'Depresión': profile.get_depression_status(task.end_date, True),
-                       u'Ansiedad': profile.get_anxiety_status(task.end_date, True),
-                       u'Suicidio': profile.get_suicide_status(task.end_date, True),
-                       u'Desesperanza': profile.get_unhope_status(task.end_date, True),
-                       u'Obsesión/Compulsión': profile.get_ybocs_status(task.end_date, True)
-                      }
+        report.status = dict((level.scale.key, level.index()) for level in profile.get_medical_status(task.end_date))
         report.aves = task.get_ave_list()
         report.save()
         i += 1

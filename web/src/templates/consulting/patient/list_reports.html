@@ -45,24 +45,23 @@
           <tbody>                  
             {% for report in reports.object_list %}
               <tr id="{{report.id}}" class="report">
-                <td style="text-align:center;">{% if report.appointment and not appointment %}<a class="btn btn-link" href="{% url consulting_start report.appointment.id %}" placement="top" rel="tooltip" data-original-title="Ir a resumen de la cita">{{ report.end_date|date:"d/M/Y"|lower }}</a>{% else %}{{ report.updated_at|date:"d/M/Y"|lower }}{% endif %}</td>
-                <td style="text-align:left;"><a class="btn btn-link" data-target="#modal" href="{% url consulting_view_task report.id %}" role="button" data-toggle="modal">{{report.survey.name}}</a></td>
+                <td style="text-align:center;">{% if report.appointment and not appointment %}<a class="btn btn-link" href="{% url 'consulting_start' report.appointment.id %}" placement="top" rel="tooltip" data-original-title="Ir a resumen de la cita">{{ report.end_date|date:"d/M/Y"|lower }}</a>{% else %}{{ report.updated_at|date:"d/M/Y"|lower }}{% endif %}</td>
+                <td style="text-align:left;"><a class="btn btn-link" data-target="#modal" href="{% url 'consulting_view_task' report.id %}" role="button" data-toggle="modal">{{report.survey.name}}</a></td>
                 <td style="text-align:center;">
                   <i class="icon-{{report.self_administered|yesno:'home,user'}}"></i>
                 </td>
                 <td style="text-align:center;">
                   {% if report.end_date %}
-                  {% get_anxiety_status_at report.patient report.end_date %}
-                  &nbsp;{% get_depression_status_at report.patient report.end_date %}
-                  &nbsp;{% get_unhope_status_at report.patient report.end_date %}
-                  &nbsp;{% get_suicide_status_at report.patient report.end_date %}
+                   {% for l in report.patient|get_medical_status_at:report.end_date %}
+                      <span class="label label-{{l.css}}">{{l.name|safe}}</span>
+                    {% endfor %}
                   {% endif %}
                 </td>   
 
                 <td style="text-align:center;">
                   {% if report.survey.is_reportable %}
-                  <a class="btn btn-small btn-link" data-target="#modal" href="{% url consulting_view_report report.id %}" role="button" data-toggle="modal">HTML</a>|
-                  <a class="btn btn-small btn-link" href="{% url consulting_view_report report.id%}?as=pdf" >PDF</i></a> 
+                  <a class="btn btn-small btn-link" data-target="#modal" href="{% url 'consulting_view_report' report.id %}" role="button" data-toggle="modal">HTML</a>|
+                  <a class="btn btn-small btn-link" href="{% url 'consulting_view_report' report.id%}?as=pdf" >PDF</i></a> 
                   {% endif %}
                 </td>
               </tr>
@@ -87,7 +86,7 @@
     <h3 id="myModalLabel">Previsualización de cuestionario/informe</h3>
   </div>
   <div class="modal-body">
-    <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+    <img src="{{ STATIC_URL }}img/ajax-loader.gif" alt="loading..." />
   </div>
   <div class="modal-footer">
     <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>

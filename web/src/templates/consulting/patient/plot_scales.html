@@ -4,7 +4,7 @@
   <div id="placeholder_scales" style="width:100%;height:300px;"></div>
 </div>
 
-<section style="overflow-x: auto">
+<div style="overflow-x: auto">
   <legend>{% trans 'Valores' %}</legend>
   <table class="table table-stripped table-bordered">
       {% for label, marks in values.items %}
@@ -35,7 +35,7 @@
       {% endfor %}
       </tbody>
   </table>
-</section>
+</div>
   
 <script type="text/javascript">
 function plotStatus() {
@@ -70,7 +70,9 @@ function plotStatus() {
               axisLabel: '{% trans "Escala de " %} {{scale}}',
               axisLabelUseCanvas: true,
               min: 0,
-              ticks: {% dictvalue yscales scale %}
+              {% if scale.scale_levels.all.count %}
+              ticks: [{% for level in scale.scale_levels.all %}{{level.score}},{% endfor %}]
+              {% endif %}
               }{% if forloop.revcounter0 %},{% endif %}
              {% endfor %}]
     });

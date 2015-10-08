@@ -12,7 +12,7 @@
     <h1>{% trans 'Asignar enfermedad/es' %}</h1>
   </div>
       <div class="hero-unit center">      
-        <form class="form-horizontal" method="post" action="{% url consulting_add_illness conclusion.id %}">{% csrf_token %}      
+        <form class="form-horizontal" method="post" action="{% url 'consulting_add_illness' conclusion.id %}">{% csrf_token %}      
           <fieldset>
             {% if form.illnesses.errors %}
               <div class="control-group error">

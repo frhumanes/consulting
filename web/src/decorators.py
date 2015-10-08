@@ -49,9 +49,15 @@ def only_doctor(func):
 
     return _fn
 
-
 def only_doctor_consulting(func):
     def _fn(request, *args, **kwargs):
+        # I hate myself for this piece of sh...
+        if 'cronos' in request.session and request.session['cronos']:
+            if request.user.get_profile().is_nurse() or request.user.get_profile().is_doctor():
+                return func(request, *args, **kwargs)
+            else:
+                return HttpResponseRedirect(reverse('consulting_index'))
+
         if request.user.get_profile().is_doctor():
             if 'patient_user_id' in kwargs and not request.user.doctor.filter(user__id=kwargs['patient_user_id']):
                 raise PermissionDenied
@@ -67,6 +73,21 @@ def only_doctor_consulting(func):
 
     return _fn
 
+def only_nurse_consulting(func):
+    def _fn(request, *args, **kwargs):
+        if request.user.get_profile().is_nurse():
+            return func(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('consulting_index'))
+    return _fn
+
+def only_cronos(func):
+    def _fn(request, *args, **kwargs):
+        if request.user.get_profile().is_nurse() or request.user.get_profile().is_doctor():
+            return func(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('consulting_index'))
+    return _fn
 
 def only_patient_consulting(func):
     def _fn(request, *args, **kwargs):

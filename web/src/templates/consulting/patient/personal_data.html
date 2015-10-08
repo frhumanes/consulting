@@ -6,7 +6,7 @@
         <small class="text-error">{% trans '[INACTIVO]' %}</small>
       {% endif %}
         <div class="btn-group pull-right">
-            <a class="btn btn-info"  href="{% url consulting_editpatient_pm patient_user.id %}?next={{request.path}}">
+            <a class="btn btn-info"  href="{% url 'consulting_editpatient_pm' patient_user.id %}?next={{request.path}}">
             <i class="icon-pencil icon-white"></i> Editar
             </a>
         </div>

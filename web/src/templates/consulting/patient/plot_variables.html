@@ -19,7 +19,7 @@
     
 <div id="legend"></div>
 
-<section style="overflow-x: auto">
+<div style="overflow-x: auto">
     <legend>{% trans 'Valores' %}</legend>
     <table class="table table-stripped table-bordered">
         {% for var, marks in latest_marks.items %}
@@ -53,7 +53,7 @@
         {% endfor %}
         </tbody>
     </table>
- </section>
+ </div>
 <script type="text/javascript">
 $(function () {
     var datasets = {

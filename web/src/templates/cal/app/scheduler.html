@@ -10,7 +10,7 @@
 <div class="page-header">
     <h1>{% trans 'Selección de mes' %}
         <div class="btn-group pull-right">
-            <a class="btn btn-info" href="{% if illness %}{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}">
+            <a class="btn btn-info" href="{% if illness %}{% url 'consulting_main' id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}">
                <i class="icon-arrow-left icon-white"></i>
               {% trans 'Volver' %}
             </a>
@@ -20,10 +20,10 @@
 <div class="hide">
     <ul class="pager">
         <li class="previous">
-            <a href="{% url cal.select_month_year year|add:'-3' %}">&larr; Prev</a>
+            <a href="{% url 'cal.select_month_year' year|add:'-3' %}">&larr; Prev</a>
         </li>
         <li class="next">
-            <a href="{% url cal.select_month_year year|add:'3' %}">Next &rarr;</a>
+            <a href="{% url 'cal.select_month_year' year|add:'3' %}">Next &rarr;</a>
         </li>
     </ul>
 </div>
@@ -45,7 +45,7 @@
                     {% if month.entry %}<b>{% endif %}
                     <li>
                         <a class={% if month.current %}"label label-info"{% else %}""{% endif %}
-                        href="{% if patient_user %}{% url cal.day year month.n today patient_user.id %}{% else %}{% url cal.day year month.n today doctor.id %}{% endif %}">{{ month.name }}</a>        
+                        href="{% if patient_user %}{% url 'cal.day' year month.n today patient_user.id %}{% else %}{% url 'cal.day' year month.n today doctor.id %}{% endif %}">{{ month.name }}</a>        
                     </li>
                 {% endfor %}
             </ul>

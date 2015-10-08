@@ -88,7 +88,7 @@ section {
 function show_patient_list(illness, level) {
   
   url = {
-        {% for sc in scales %}{{sc.hash}}: '{% url stratification_list sc.hash 0 %}'{% if forloop.revcounter0 %},{% endif %}{% endfor %}
+        {% for sc in scales %}{{sc.key}}: '{% url 'stratification_list' sc.key 0 %}'{% if forloop.revcounter0 %},{% endif %}{% endfor %}
         };
 
   
@@ -96,7 +96,7 @@ function show_patient_list(illness, level) {
     url[illness] += '?filter=mine';
   }
   $('#modal-title').load('/statistic/stratification/level/' + illness + '/' + level + '/');
-  $('#modal_patient .modal-body').html('<div class="center"><img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="cargando..." /></div>');
+  $('#modal_patient .modal-body').html('<div class="center"><img src="{{ STATIC_URL }}img/ajax-loader.gif" alt="cargando..." /></div>');
   $('#modal_patient .modal-body').load(url[illness].replace('0', level),'',$('#modal_patient').modal('show'));
 }
 {% endblock %}
@@ -127,27 +127,18 @@ $('#myfilter').on('click', function(e){
 
  {% for sc in scales %}
 
- $('#pyramid_{{sc.hash}}').Pyramid({
+ $('#pyramid_{{sc.key}}').Pyramid({
     'height': Math.max(base, 320),
     'base': base,
     'top': 100,
-    'slices':{{piramid_list|get_item:sc.name|length}},
+    'slices':{{piramid_list|get_item:sc.key|length}},
     'slice_separation': 0.1,
-    'colours':
-    {% if piramid_list|get_item:sc.name|length_is:'7' %}
-      ['#FFFFFF', '#468847', '#0088CC', '#999999', '#F89406', '#B94A48', '#202020'],
-    {% else %} 
-      {% if piramid_list|get_item:sc.name|length_is:'3' %}
-        ['#FFFFFF', '#468847', '#B94A48'],
-      {% else %}
-        ['#FFFFFF', '#468847', '#999999', '#F89406', '#B94A48', '#202020'],
-      {% endif %}
-    {% endif %}
-    'text': [{% for l in piramid_list|get_item:sc.name %}'{% if forloop.counter = 1 %}{% trans 'No diagnosticados: '%}{% endif %}{{l|length}} ({% widthratio l|length num_patient 100 %}%)',{% endfor %}]
+    'colours':['#FFFFFF', {% for l in sc.levels reversed %}'{{l.color}}'{% if forloop.revcounter0 %},{% endif %}{% endfor %}],
+    'text': [{% for l in piramid_list|get_item:sc.key %}'{% if forloop.counter = 1 %}{% trans 'No diagnosticados: '%}{% endif %}{{l|length}} ({% widthratio l|length num_patient 100 %}%)',{% endfor %}]
  })
  .on('click', function(event){ 
     console.log(event);
-    show_patient_list('{{sc.hash}}', event.id-2);
+    show_patient_list('{{sc.key}}', event.id-2);
   });
  {% endfor %}
 
@@ -161,8 +152,8 @@ $('#myfilter').on('click', function(e){
 {% block right %}
   <ul id="spybar" class="nav nav-list affix bs-docs-sidenav fixable">
     {% for sc in scales %}
-        {% if sc.scale %}
-        <li><a href="#{{sc.hash}}"><i class="icon-chevron-left"></i> {{sc.name}}</a></li>
+        {% if sc.scale_levels.all %}
+        <li><a href="#{{sc.key}}"><i class="icon-chevron-left"></i> {{sc.name}}</a></li>
         {% endif %}
     {% endfor %}
   </ul>
@@ -175,22 +166,22 @@ $('#myfilter').on('click', function(e){
   </h1>
 </div>
 {% for sc in scales %}
-{% if sc.scale %}
-<section id="{{sc.hash}}">
+{% if sc.scale_levels.all %}
+<section id="{{sc.key}}">
   <h3>{{sc.name}}</h3>
   <div class="img-polaroid row-fluid">
     <div class="pull-left">
-      <div id="pyramid_{{sc.hash}}" style="width: 380px; height:380px; margin: 20px 0 0 20px;">
-        <!--[if lte IE 8]><script type="image/svg+xml">{% with "statistic/ie8/"|add:sc.hash|add:".svg" as template %}
-          {% include template with illness=sc.hash plist=piramid_list|get_item:sc.name %}{% endwith %}</script>
+      <div id="pyramid_{{sc.key}}" style="width: 380px; height:380px; margin: 20px 0 0 20px;">
+        <!--[if lte IE 8]><script type="image/svg+xml">{% with "statistic/ie8/"|add:sc.key|add:".svg" as template %}
+          {% include template with illness=sc.key plist=piramid_list|get_item:sc.name %}{% endwith %}</script>
         <![endif]-->
       </div>
     </div>
     <div class="pull-right" style="max-width:250px; margin: 20px 20px 20px 0;">
       <div class="well center">
         <legend>Escala</legend>
-        {% for key, level in sc.scale|sorteditems %}
-          <p><span style="width: 100%" class="label label-{{level.1}}">{{level.0|safe}}</span></p>
+        {% for level in sc.levels %}
+          <p><span style="width: 100%; {% if level.color %}background-color: {{level.color}}{% endif %}" class="label label-{{level.css}}" >{{level.name|safe}}</span></p>
         {% endfor %}
       </div>
     </div>

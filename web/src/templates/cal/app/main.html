@@ -10,10 +10,10 @@
 <div class="">
     <ul class="pager">
         <li class="previous">
-            <a href="{% url cal.views.main year|add:'-3' %}">&larr; Prev</a>
+            <a href="{% url 'cal.views.main' year|add:'-3' %}">&larr; Prev</a>
         </li>
         <li class="next">
-            <a href="{% url cal.views.main year|add:'3' %}">Next &rarr;</a>
+            <a href="{% url 'cal.views.main' year|add:'3' %}">Next &rarr;</a>
         </li>
     </ul>
 <div>
@@ -27,12 +27,12 @@
                 <li>
                     <a class={% if month.current %}"label label-info"{% else %}""{% endif %}
                     href={% if request.user.get_profile.is_doctor %}
-                            "{% url cal.views.day year month.n today %}"
+                            "{% url 'cal.views.day' year month.n today %}"
                          {% else %}
-                            "{% url cal.views.doctor_calendar %}"
+                            "{% url 'cal.views.doctor_calendar' %}"
                          {% endif %}>{{ month.name }}</a>
                     {% if request.user.get_profile.is_doctor %}
-                        <a href="{% url cal.list_slot year month.n %}"><i class="icon-cog"></i></a>
+                        <a href="{% url 'cal.list_slot' year month.n %}"><i class="icon-cog"></i></a>
                     {% endif %}
                 </li>
             {% endfor %}

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    {% load consulting i18n %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <title>{% get_brand %}{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="sistema de gestión personalizada de la ansiedad-depresión que se ha creado con el objetivo de proporcionar un instrumento de valoración de la fiable y útil para la toma de decisiones del clínico">
+    <meta name="author" content="Wellness Telecom S.L">
+
+  {% block js_files %}
+    <script src="{{ STATIC_URL }}js/jquery-1.8.2.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.form.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/excanvas.min.js"></script><![endif]-->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="{{ STATIC_URL }}js/bootstrap-editable.js"></script>
+  {% endblock %}
+
+  {% block css_files %}
+    <link href="{{ STATIC_URL }}css/app.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet"/>   
+    <link href="{{ STATIC_URL }}css/bootstrap-editable.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL }}css/table-calendar.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL }}css/cronos.css" rel="stylesheet"/>
+  {% endblock %}
+
+
+
+    <style type="text/css">
+      @media (min-width: 768px) and (max-width: 1024px){
+        #calendar table {
+         font-size:0.8em
+        }
+        .pagination {
+          min-width: 220px
+        }
+      }
+      @media(max-width:1024px){
+        h1{
+           font-size:2em 
+          }
+      }
+      @media (min-width: 980px) and (max-width: 1200px){
+        #edit_notes span {
+          display: none
+        }
+      }
+    {% block css_inline %}
+    {% endblock %}
+    </style>
+
+    <script type="text/javascript">
+      var originalFontSize = 13;
+  
+      function set_events(){};
+
+      function fix_bars(){
+        if (!$.browser.msie || $.browser.version >= '9') {
+          if ($(window).width() >= 1024) {
+            $("div.fixable").each( function(){
+              if ($(this).height() < $(window).height() - 70){
+                  $(this).affix({offset: {y: 10}});
+              }
+              else {
+                $(this).removeClass('affix');
+              }
+            })
+          }
+          else {
+            $(".fixable").removeClass('affix');
+          }
+        } else {
+          if ($(window).width() > 1170) {
+            $("div.container").css('width', 1170);
+            for (var i=1; i<=12; i++) {
+              $("div.span"+i).not(".relative").css('width', (i-1)*100+70);
+            }
+          }
+          else {
+            $("div.container").not(".relative").css('width', 940);
+            for (var i=1; i<=12; i++) {
+              $("div.span"+i).not(".relative").css('width', (i*80)-20);
+            }
+          }
+        }
+      };
+      function fix_menu() {
+          var sectionWidth = $('#left_bar').width();
+          alert(sectionWidth);
+          $('#left_bar a').each(function(){
+            
+            var spanWidth = $(this).width();
+            alert(spanWidth);
+            var newFontSize = (sectionWidth/spanWidth) * originalFontSize;
+            $(this).css({"font-size" : newFontSize, "line-height" : newFontSize/1.2 + "px"});
+          });
+      };
+      {% if request.user.is_authenticated %}
+      var timer;
+      var reminder = 300; // seg
+      function expiration_warning() {
+        document.title = '{% get_brand %}';
+        $('#warning_modal').modal({
+                                    keyboard: false,
+                                    backdrop: 'static'
+                                    });
+        $('#timeout').text(reminder);
+        timer = setInterval(function(){
+          if (parseInt($('#timeout').text())) {
+            $('#timeout').text(parseInt($('#timeout').text()) - 1)
+            if (parseInt($('#timeout').text()) % 2) {
+              document.title = '{% get_brand %}';
+            } else {
+              document.title = 'Aviso';
+            }
+          } else {
+            $('#warning_modal').modal('hide');
+            document.title = '{% get_brand %}';
+            clearInterval(timer);
+          }
+        }, 1000);
+      }
+      function postpone_session(val) {
+        $.ajax( '/keep_alive/'+val+'/' )
+        .done( setTimeout(expiration_warning, (val - reminder ) * 1000) )
+        .fail(function() { alert("error"); })
+        .always(function() { 
+          $('#warning_modal').modal('hide');
+          document.title = '{% get_brand %}'; 
+          clearInterval(timer);});
+      }
+      {% endif %}
+      
+      {% block js %}
+      {% endblock js%}
+
+      $(document).ready(function(){
+        $("#notes").editable().on('shown', function(e, editable) {
+          $('.editable-popover').css('top', 0);
+        });
+        $(window).resize(fix_bars);
+        $('a[rel="tooltip"]').tooltip();
+        $('#warning_modal').find('a.btn').on('click', function(ev) {
+          ev.preventDefault();
+          postpone_session($(this).attr('value'));
+        });
+        setTimeout(expiration_warning,({{request.session.timeout}} - reminder) * 1000);
+        {% block jquery_init %}
+        {% endblock %}
+        fix_bars();
+        
+        //Fix dropdown issue on touchscreens
+        $('body').on('touchstart.dropdown', '.dropdown-menu', function (e) { e.stopPropagation(); });
+      });
+    </script>
+
+    <!--[if IE 6]>
+    <script language="javascript" type="text/javascript" src="{{ STATIC_URL }}js/ie6.min.js"></script>
+    <link href="{{ STATIC_URL }}css/ie6.min.css" rel="stylesheet">
+    <![endif]-->
+  </head>
+
+  <body>
+    {% block header%}
+      {% if request.session.cronos %}
+        {% include "cronos/header.html" with user=request.user %}
+      {% elif request.user.get_profile.is_doctor %}
+        {% include "ui/includes/header_doctor.html" with user=request.user %}
+      {% elif request.user.get_profile.is_administrative %}
+        {% include "ui/includes/header_administrative.html" with user=request.user %}
+      {% elif request.user.get_profile.is_patient %}
+        {% include "ui/includes/header_patient.html" with user=request.user %}
+      {% endif%}
+    {% endblock  %}
+    <div class="row-fluid">
+      {% block nav-bar%}{% endblock  %}
+      {% block subheader %}
+        {% if EXPIRED_PASSWORD %}
+        <div class="offset3 span6">
+          <div class="alert alert-warning center">{% trans 'Por seguridad, le recomendamos que cambie su contraseña lo antes posible.' %} <a href="{% url 'password_change' %}">{% trans 'Cambiar ahora' %}</a>
+          <button type="button" class="close" data-dismiss="alert">&times;</button></div>
+        </div>
+        {% endif %}
+      {% endblock subheader %}
+
+    </div>
+
+    {% block body %}
+    <div class="container">
+      <div class="row-fluid">
+        {% comment %}
+        <div id="left_bar" class="span2">
+          <div class="fixable" style="max-width:180px">
+          {% block left %}
+          <!--Left Sidebar content-->&nbsp;
+          {% endblock left%}
+          </div>
+        </div>
+        {% endcomment %}  
+        <div id="main" class="span9">
+          {% block container %}
+           <!--Body content-->
+          {% endblock container %}
+        </div>
+        
+        <div id="right_bar" class="span3">
+          <div class="fixable" style="width:270px;">
+          {% block right %}
+          <!--Right Sidebar content-->
+          {% endblock right %}
+          </div>
+        </div>
+        {% comment %}
+        <div id="large" class="span10">
+          {% block large %}
+          {% endblock %} 
+        </div>
+        {% endcomment %}
+      </div>
+    </div>
+    {% endblock body %}
+
+    <div id="warning_modal" class="modal hide fade">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>{% trans 'Aviso de fin de sesión programado' %}</h3>
+      </div>
+      <div class="modal-body">
+       <p id="warning_msg">Su sesión expirará en <strong id="timeout">60</strong> segundos.</p>
+       <p>{% trans 'Mantener la sesión abierta y no volver a recordarlo durante... ' %}</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" value="1800" class="btn btn-info">{% trans '30 minutos' %}</a>
+        <a href="#" value="3600" class="btn btn-info">{% trans '1 hora' %}</a>
+        <a href="#" value="7200" class="btn btn-info">{% trans '2 horas' %}</a>
+        <a href="#" value="{{SESSION_TIMEOUT}}" class="btn btn-primary">{% trans 'Predeterminado del sistema' %}</a>
+      </div>
+    </div>
+
+    {% block footer%}
+      {% include 'cronos/footer.html' %}
+    {% endblock %}
+  </body>
+</html>

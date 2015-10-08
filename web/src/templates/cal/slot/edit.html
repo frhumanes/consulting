@@ -19,7 +19,7 @@
   <div class="page-header">
     <h1>{% trans "Editar preferencia" %}
             <div class="btn-group pull-right">
-              <a class="btn btn-info" href="{% url cal.list_slot year %}">
+              <a class="btn btn-info" href="{% url 'cal.list_slot' year %}">
                 <i class="icon-arrow-left icon-white"></i>
                 {% trans 'Volver' %}
               </a>
@@ -221,8 +221,8 @@ $('#remove-event').live('click', function(event){
     $(this).siblings().attr('disabled', true);
     $(this).siblings().attr('data-dismiss', 'static');
 
-  $.get('{% url cal.delete_slot slot.id %}', function(data) {
-      window.location.href = '{% url cal.list_slot year %}';
+  $.get('{% url 'cal.delete_slot' slot.id %}', function(data) {
+      window.location.href = '{% url 'cal.list_slot' year %}';
   });
 
 });

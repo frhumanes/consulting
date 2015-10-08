@@ -5,5 +5,10 @@
 	<div class="hero-unit center">
 		<h1>500</h1>
 		<p>{% trans 'Error interno' %}</p>
+		{% if error %}
+		<div class="alert alert-block alert-error">
+			{{error}}
+		</div>
+		{% endif %}
 	</div>
 {% endblock %}

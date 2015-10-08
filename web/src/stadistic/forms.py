@@ -114,10 +114,10 @@ class FiltersForm(forms.Form):
                     choices=[(op.id, op.text) for op in Option.objects.filter(code__startswith='AVE', option_answers__isnull=False).distinct().order_by('text')],
                     widget=forms.CheckboxSelectMultiple())
 
-    treatment =forms.MultipleChoiceField(
+    """treatment =forms.MultipleChoiceField(
                     label='Tratamiento',
                     choices=[(m['component__name'], m['component__name']) for m in Medicine.objects.filter(is_previous=False).values('component__name').order_by('component__name').distinct()],
-                    widget=forms.CheckboxSelectMultiple())
+                    widget=forms.CheckboxSelectMultiple())"""
 
     def __init__(self, *args, **kwargs):
         block = None

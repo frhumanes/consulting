@@ -9,10 +9,12 @@ from log.models import TraceableModel
 from survey.models import Survey, Block, Question, Option
 from medicament.models import Component
 from cal.models import Appointment
-from formula.models import Formula, Dimension, Variable
+from formula.models import Formula, Dimension, Variable, Scale, Risk
 from numbers import Real
 
 from django.core.cache import cache
+import re
+pattern = re.compile('[a-zA-Z]+\w*')
 
 
 class Task(TraceableModel):
@@ -57,6 +59,12 @@ class Task(TraceableModel):
     end_date = models.DateTimeField(_(u'Fecha de finalización de la encuesta'),
                                     blank=True, null=True)
 
+    from_date = models.DateTimeField(_(u'Fecha de apertura de la encuesta'),
+                                      blank=True, null=True)
+
+    to_date = models.DateTimeField(_(u'Fecha de cierre de la encuesta'),
+                                    blank=True, null=True)
+
     previous_days = models.IntegerField(
         _(u'Disponibilidad para el paciente'),
         default=settings.DAYS_BEFORE_SURVEY,
@@ -81,7 +89,7 @@ class Task(TraceableModel):
 
     def get_answers_by_block(self):
         answers = {}
-        for r in self.task_results.values('block').annotate(Max('date'),Max('id')).order_by():
+        for r in self.task_results.values('block').annotate(Max('date'),Max('id')).order_by('block__code'):
             block = []
             for qid, qtext in Answer.objects.filter(result__id=r['id__max']).values_list('question__id','question__text').distinct().order_by('question__id'):
                 block.append({
@@ -90,7 +98,7 @@ class Task(TraceableModel):
                         str(a) for a in Answer.objects.filter(
                             result__id=r['id__max'], question__id=qid)]})
             answers[r['block']] = block
-        return answers
+        return sorted(answers.iteritems(), key=lambda block: -block[0])
 
     def get_answers(self):
         #Cache
@@ -106,7 +114,7 @@ class Task(TraceableModel):
         return answers
 
     def is_completed(self):
-        if self.treated_blocks.count() == self.survey.num_blocks:
+        if self.treated_blocks.count() == self.survey.num_blocks(self.kind):
             return self.completed
         else:
             return False
@@ -185,28 +193,13 @@ class Task(TraceableModel):
                 mark += a.weight
         return mark
 
-    def calculate_unhope_mark(self):
+    def calculate_unhope_mark(self, preresult=None):
         if not self.survey or self.survey.code != settings.UNHOPE_SURVEY:
             return None
         return self.calculate_mark_by_code('U')
 
-    def calculate_ybocs_mark(self):
-        if not self.survey or self.survey.code != settings.YBOCS_SURVEY:
-            return None
-        mark = 0
-        code_questions = [('YB%d' % i) for i in range(1, 11)]
-        yb_answers = self.get_answers()
-        for answer in yb_answers:
-            if answer.question.code in code_questions:
-                mark += answer.option.weight
-        return mark
 
-    def calculate_ocir_mark(self):
-        if not self.survey or self.survey.code != settings.OCIR_SURVEY:
-            return None
-        return self.calculate_mark_by_code('OCI')
-
-    def calculate_beck_mark(self):
+    def calculate_beck_mark(self, preresult=None):
         if not self.survey or not self.survey.code in [settings.ANXIETY_DEPRESSION_SURVEY, settings.INITIAL_ASSESSMENT]:
             return None
         answers = self.get_answers()
@@ -220,7 +213,7 @@ class Task(TraceableModel):
             mark += a.weight
         return mark
 
-    def calculate_hamilton_mark(self):
+    def calculate_hamilton_mark(self, preresult=None):
         if not self.survey or not self.survey.code in [settings.ANXIETY_DEPRESSION_SURVEY, settings.INITIAL_ASSESSMENT]:
             return None, {}
         answers = self.get_answers()
@@ -258,139 +251,98 @@ class Task(TraceableModel):
                 mark += submarks[code]
         return mark, submarks
 
-    def get_ave_status(self):
-        l = settings.AVE.keys()
-        l.sort()
-        ave_mark = self.calculate_mark_by_code('AVE')
-        for value in l:
-            if ave_mark < value:
-                return settings.AVE[value]
+    def calculate_euroqol_mark(self, preresult=None):
+        if not self.survey or not self.survey.code == settings.EUROQOL_5D:
+            return None
+        answers = self.get_answers()
+        mark = None
+        submarks = self.get_variables_mark()
+        kind = self.kind
+        eq_answers = filter(
+            lambda a: a.question.code.startswith('EQ'), answers)
+        categories = self.survey.blocks.get(kind=kind).categories.filter()
+        eq_questions = 0
+        for category in categories:
+            eq_questions += category.questions.filter(
+                kind__in=[settings.UNISEX, self.patient.get_profile().sex],
+                code__startswith='EQ').count()
+        if eq_questions != len(eq_answers):
+            return mark, submarks
+        constant, N3 = 0, 0
+        for a in eq_answers:
+            if a.question.code == 'EQ6':
+                continue
+            if a.option.weight > 0:
+                constant = 0.1502
+            if a.option.weight == 2:
+                N3 = 0.2119
+        mark = 1 - constant - N3 - sum(submarks.values()[:5])
+        return mark, submarks
 
-    def get_depression_status(self, index=False):
-        _status = cache.get('status_' + str(self.id), {})
-        if _status and 'depression' in _status:
-            if index:
-                return _status['depression'][0]
-            else:
-                return _status['depression'][1]
-        l = settings.BECK.keys()
-        l.sort()
-        beck_mark = self.calculate_beck_mark()
-        if beck_mark is None:
-            return ''
-        for value in l:
-            if beck_mark < value:
-                _status['depression'] = [l.index(value), settings.BECK[value]]
-                cache.set('status_' + str(self.id), _status)
-                if index:
-                    return l.index(value)
-                else:
-                    return settings.BECK[value]
+    def calculate_asthma_mark(self, preresult=None):
+        if not self.survey or not self.survey.code == settings.ASTHMA:
+            return None
+        answers = self.get_answers()
+        highest = 0
+        for a in answers:
+            highest = max(highest, a.option.weight)
+        return highest
 
-    def get_anxiety_status(self, index=False):
-        _status = cache.get('status_' + str(self.id), {})
-        if _status and 'anxiety' in _status:
-            if index:
-                return _status['anxiety'][0]
-            else:
-                return _status['anxiety'][1]
-        l = settings.HAMILTON.keys()
-        l.sort()
-        hamilton_mark, hamilton_submarks = self.calculate_hamilton_mark()
-        if hamilton_mark is None:
-            return ''
-        for value in l:
-            if hamilton_mark < value:
-                _status['anxiety'] = (l.index(value), settings.HAMILTON[value])
-                cache.set('status_' + str(self.id), _status)
-                if index:
-                    return l.index(value)
-                else:
-                    return settings.HAMILTON[value]
+    def calculate_asthma_cronos_mark(self, preresult=None):
+        answers = self.get_answers()
+        submarks, fev_mark, exa_mark = [], 0, 0
+        result = 0
+        
+        for answer in answers:
+            a = answer.option
+            if a:
+                if a.code.startswith('ASMA') and a.code <= 'ASMA4':
+                    submarks.append(a.weight)
+                elif a.code == 'ASMA5': #FEV or PEF
+                    fev_mark = a.weight
+                elif a.code == 'ASMA6': #Exacerbations
+                    exa_mark = a.weight
 
-    def get_unhope_status(self, index=False):
-        _status = cache.get('status_' + str(self.id), {})
-        if _status and 'unhope' in _status:
-            if index:
-                return _status['unhope'][0]
-            else:
-                return _status['unhope'][1]
-        l = settings.UNHOPE.keys()
-        l.sort()
-        unhope_mark = self.calculate_unhope_mark()
-        if unhope_mark is None:
-            return ''
-        for value in l:
-            if unhope_mark < value:
-                _status['unhope'] = (l.index(value), settings.UNHOPE[value])
-                cache.set('status_' + str(self.id), _status)
-                if index:
-                    return l.index(value)
-                else:
-                    return settings.UNHOPE[value]
 
-    def get_ocir_status(self, index=False):
-        _status = cache.get('status_' + str(self.id), {})
-        if _status and 'ocir' in _status:
-            if index:
-                return _status['ocir'][0]
-            else:
-                return _status['ocir'][1]
-        l = settings.OCIR.keys()
-        l.sort()
-        oc_mark = self.calculate_ocir_mark()
-        if oc_mark is None:
-            return ''
-        for value in l:
-            if oc_mark < value:
-                _status['ocir'] = (l.index(value), settings.OCIR[value])
-                cache.set('status_' + str(self.id), _status)
-                if index:
-                    return l.index(value)
-                else:
-                    return settings.OCIR[value]
+        # First step
+        items = sum(i > 1 for i in submarks)
 
-    def get_ybocs_status(self, index=False):
-        _status = cache.get('status_' + str(self.id), {})
-        if _status and 'ybocs' in _status:
-            if index:
-                return _status['ybocs'][0]
-            else:
-                return _status['ybocs'][1]
-        l = settings.Y_BOCS.keys()
-        l.sort()
-        oc_mark = self.calculate_ybocs_mark()
-        if oc_mark is None:
-            return ''
-        for value in l:
-            if oc_mark < value:
-                _status['ybocs'] = (l.index(value), settings.Y_BOCS[value])
-                cache.set('status_' + str(self.id), _status)
-                if index:
-                    return l.index(value)
-                else:
-                    return settings.Y_BOCS[value]
+        if 0 < items < 3:
+            result = 1 #Partialy controled
+        elif items > 2:
+            result = 2 #Bad controled
+            return result #2 is the highest value
 
-    def get_suicide_status(self, index=False):
-        _status = cache.get('status_' + str(self.id), {})
-        if _status and 'suicide' in _status:
-            if index:
-                return _status['suicide'][0]
-            else:
-                return _status['suicide'][1]
-        l = settings.SUICIDE.keys()
-        l.sort()
-        suicide_mark = self.calculate_unhope_mark()
-        if suicide_mark is None:
-            return ''
-        for value in l:
-            if suicide_mark < value:
-                _status['suicide'] = (l.index(value), settings.SUICIDE[value])
-                cache.set('status_' + str(self.id), _status)
-                if index:
-                    return l.index(value)
-                else:
-                    return settings.SUICIDE[value]
+        #Second step
+        if fev_mark > 1:
+            result = 1
+        if exa_mark > 1:
+            result = 1
+        elif exa_mark > 2:
+            result = 2 #Bad controled
+            return result #2 is the highest value
+
+        #Third step (result is 0 or 1)
+        acq_mark = self.calculate_scale(Scale.objects.get(key='acq'))
+        if acq_mark >= 1.5:
+            result = 1
+
+        act_mark = self.calculate_scale(Scale.objects.get(key='act'))
+        if 15 < act_mark < 20:
+            result = 1
+        elif act_mark <= 15:
+            result = 2
+
+        return result
+
+
+    def fix_comorbility_mark(self, preresult=None):
+        age = self.patient.get_profile().age_at(self.end_date)
+        result = preresult
+        if age and age > 50:
+            result += (age - 50) / 10 + 1
+        return result
+
 
     def get_kind(self):
         if self.kind == settings.GENERAL:
@@ -427,19 +379,29 @@ class Task(TraceableModel):
         for f in Formula.objects.filter(kind__in=(settings.GENERAL, self.kind),
            variable__variables_categories__categories_blocks__in=self.treated_blocks.all()).distinct():
 
-            total = None
-            for item in f.polynomial.split('+'):
+            polynomial = f.polynomial
+            total = polynomial.isdigit() and int(polynomial) or None
+            for item in reversed(sorted(pattern.findall(polynomial), key=len)):
+                value = 0
                 for answer in answers:
                     a = answer
                     if a.question.code == item:
                         if not total:
                             total = 0
                         try:
-                            total += a.option.weight
+                            value += a.option.weight
                         except:
-                            pass
-                        break
+                            print f
+                        #break
+                polynomial = polynomial.replace(item, str(value))
+                if not total is None:
+                    total += value
 
+            try:
+                total = eval(polynomial)
+            except:
+                print "P(x):%s; %s" % (f.polynomial, polynomial)
+                
             if not total is None:
                 if f.variable in marks:
                     marks[f.variable] += (float(total) * float(f.factor))
@@ -457,59 +419,78 @@ class Task(TraceableModel):
             variables_mark = self.get_variables_mark()
         for d in Dimension.objects.filter(dimension_variables__variables_categories__categories_blocks__in=self.treated_blocks.all()).distinct():
             total = 0
-            for item in d.polynomial.split('+'):
+            polynomial = d.polynomial
+            for item in reversed(sorted(pattern.findall(polynomial), key=len)):
                 if not item:
                     continue
-                variable = Variable.objects.get(code=item)
-                if variable in variables_mark and isinstance(variables_mark[variable], Real) and variables_mark[variable] >= 0:
-                        total += variables_mark[variable]
-                else:
+                variables = Variable.objects.filter(code=item)
+                found = False
+                for variable in variables:
+                    if variable in variables_mark and isinstance(variables_mark[variable], Real):
+                            value = variables_mark[variable]
+                            found = True
+                            polynomial = polynomial.replace(item, str(value))
+                if not found:
                     return {}
+            try:
+                total = eval(polynomial)
+            except:
+                print "P(x):%s; %s" % (d.polynomial, polynomial)
             if d in marks:
                 marks[d] += (float(total) * float(d.factor))
             else:
                 marks[d] = (float(total) * float(d.factor))
         return marks
 
+    def calculate_scale(self, scale):
+        _scale = cache.get('task_' + str(self.id) + '_' + scale.key)
+        if _scale:
+            return _scale
+        result = 0
+        if scale.polynomial:
+            if scale.polynomial == settings.EXTENSO:
+                code_questions = scale.polynomial.split('+')
+                answers = self.get_answers()
+                for answer in answers:
+                    if answer.question.code in code_questions:
+                        result += answer.option.weight
+            else:
+                result = self.calculate_mark_by_code(scale.polynomial.replace('*',''))
+            result = result * scale.factor
+        else:
+            result = None
+
+        if scale.action:
+            try:
+                result = getattr(self, scale.action)(result)
+            except:
+                return None
+            if isinstance(result, (list, tuple)):
+                result = result[0]
+
+
+        cache.set('task_' + str(self.id) + '_' + scale.key, result)
+        
+        return result
+
     def get_scales(self, exclude=None):
         scales = []
-        if self.treated_blocks.filter(is_scored=True).exists() or not exclude is None:
-            if not self.calculate_hamilton_mark()[0] is exclude:
-                scales.append({'name': u'Ansiedad de Hamilton',
-                               'mark': self.calculate_hamilton_mark()[0],
-                               'status': self.get_anxiety_status(),
-                               'hash': 'anxiety',
-                               'scale': settings.HAMILTON})
-            if not self.calculate_beck_mark() is exclude:
-                scales.append({'name': u'Depresión de Beck',
-                               'mark': self.calculate_beck_mark(),
-                               'status': self.get_depression_status(),
-                               'hash': 'depression',
-                               'scale': settings.BECK})
-            if not self.calculate_unhope_mark() is exclude:
-                scales.append({'name': u'Desesperanza de Beck',
-                               'mark': self.calculate_unhope_mark(),
-                               'status': self.get_unhope_status(),
-                               'hash': 'unhope',
-                               'scale': settings.UNHOPE})
-                scales.append({'name': u'Riesgo de suicidio',
-                               'mark': self.calculate_unhope_mark(),
-                               'status': self.get_suicide_status(),
-                               'hash': 'suicide',
-                               'scale': settings.SUICIDE})
-            if not self.calculate_ybocs_mark() is exclude:
-                scales.append({'name': u'Y-BOCS',
-                               'mark': self.calculate_ybocs_mark(),
-                               'status': self.get_ybocs_status(),
-                               'hash': 'ybocs',
-                               'scale': settings.Y_BOCS})
-            if not self.calculate_ocir_mark() is exclude:
-                scales.append({'name': u'OCI-TOTAL',
-                               'mark': self.calculate_ocir_mark(),
-                               'status': self.get_ocir_status(),
-                               'hash': 'ocir',
-                               'scale': settings.OCIR})
+        if not self.survey:
+            return None
+        for scale in self.survey.scales.all():
+            score = self.calculate_scale(scale)
+            if not score is exclude:
+                scales.append({'name': scale.name,
+                               'mark': score,
+                               'status': scale.get_level(score),
+                               'hash': scale.key,
+                               'scale': scale})
+            
         return scales
+
+    def get_level(self, scale):
+        return scale.get_level(self.calculate_scale(scale))
+
 
     def is_scored(self):
         for block in self.treated_blocks:
@@ -546,6 +527,28 @@ class Task(TraceableModel):
                         avg_data[var][key] = 0
         cache.set('avg_' + str(self.survey.code), avg_data)
         return avg_data
+
+    def clear_cache(self):
+        from django.core.cache import get_cache
+        cache = get_cache('default')
+        cache.clear()
+
+    def check_risks(self):
+        variables = self.get_variables_mark()
+        risks = []
+        for v, mark in variables.iteritems():
+            cond = v.get_active_condition(mark)
+            if cond:
+                risks.append(cond.risk)
+
+        try:
+            from collections import Counter
+            risks = sorted(Counter(risks).items(), key=lambda x: -x[0].criticity)
+            for r, n in risks:
+                if n >= r.coincidences:
+                    return r
+        except:
+            pass
 
     class Meta:
         verbose_name = "Tarea"
@@ -642,14 +645,14 @@ class Result(TraceableModel):
 
 
 class Conclusion(TraceableModel):
-    appointment = models.ForeignKey(Appointment, unique=True,
+    appointment = models.ForeignKey(Appointment, unique=False,
                                     related_name="appointment_conclusions")
 
     observation = models.TextField(blank=True, null=True)
 
     recommendation = models.TextField(blank=True, null=True)
 
-    extra = models.TextField(blank=True, null=True)
+    extra = models.FileField(blank=True, null=True, upload_to="documents/%Y/%m/%d")
 
     date = models.DateTimeField(_(u'Fecha'), auto_now_add=True)
 
@@ -682,6 +685,19 @@ class Answer(models.Model):
 
     class Meta:
         verbose_name = "Respuesta"
+
+class Alert(models.Model):
+    task = models.ForeignKey(Task)
+    risk = models.ForeignKey(Risk)
+    creation_date = models.DateTimeField(_(u'Fecha de creación de la alerta'),
+                                         auto_now_add=True)
+    revised_date = models.DateTimeField(_(u'Fecha de revisión'), null=True)
+
+    class Meta:
+        ordering = ['-creation_date']
+
+    def __unicode__(self):
+        return u"%s - %s" % (self.task, self.risk.name)
 
 
 class DummyReport(models.Model):

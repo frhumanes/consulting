@@ -98,7 +98,7 @@
   $("#id_searcher_component").autocomplete({
     source: function(request, response){
               $.ajax({
-                  url: '{% url consulting_searcher_component %}',
+                  url: '{% url 'consulting_searcher_component' %}',
                   type:'POST',
                   data: { 
                       kind_component: $("input[type='radio']:checked").val(),

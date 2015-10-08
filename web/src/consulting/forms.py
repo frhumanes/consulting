@@ -88,14 +88,12 @@ class ConclusionForm(forms.ModelForm):
     observation = forms.CharField(label=_(u'Observaciones'),
                                     widget=forms.Textarea(attrs={'cols': 60,
                                                 'rows': 4, 'class': 'span12'}), required=False)
-    recommendation = forms.CharField(label=_(u'Recomendaciones'),
+    recommendation = forms.CharField(label=_(u'Recomendaciones y consejos para el paciente'),
                                     widget=forms.Textarea(attrs={'cols': 60,
                                                 'rows': 4, 'class': 'span12'}),
                                     required=False)
 
-    extra = forms.CharField(label=_(u'Tratamiento no farmacológico'),
-                                    widget=forms.Textarea(attrs={'cols': 60,
-                                                'rows': 4, 'class': 'span12'}),
+    extra = forms.FileField(label=_(u'Adjuntar archivo para paciente'),
                                     required=False)
     class Meta:
         model = Conclusion
@@ -126,7 +124,7 @@ class SelectSurveyForm(forms.Form):
             self.variables = kwargs.pop('variables')
         if 'illness' in kwargs:
             illness = kwargs.pop('illness')
-            survey_choices = list(Survey.objects.filter(surveys_illnesses=illness).values_list('id','name'))
+            survey_choices = list(Survey.objects.filter(surveys_illnesses=illness, enabled=True).values_list('id','name'))
         super(SelectSurveyForm, self).__init__(*args, **kwargs)
 
         if self.variables:
@@ -174,24 +172,50 @@ class SelectSurveyForm(forms.Form):
 
 
 class SelectSurveyTaskForm(SelectSurveyForm):
-    previous_days = forms.CharField(
+    previous_days = forms.IntegerField(
             label=_(u'Visible'),
-            widget=forms.TextInput(),
-            required=True)
+            widget=forms.TextInput(attrs={'class': 'span3'}),
+            required=False, min_value=0, max_value=365)
+
+    from_date = forms.DateField(label = _(u'Desde'), input_formats=(settings.DATE_INPUT_FORMAT,),
+        widget=forms.DateInput(attrs={'class':'span6'},format=settings.DATE_INPUT_FORMAT),required=False)
+
+    to_date = forms.DateField(input_formats=(settings.DATE_INPUT_FORMAT,),
+        label = _(u'hasta'),
+        widget=forms.DateInput(attrs={'class':'span6'},format=settings.DATE_INPUT_FORMAT),required=False)  
+
+    repeat = forms.IntegerField(
+            label=_(u'Repetir cada'),
+            widget=forms.TextInput(attrs={'class': 'span3'}),
+            required=False, min_value=0, max_value=56)
 
     def __init__(self, *args, **kwargs):
         survey_choices = []
         if 'illness' in kwargs:
             illness = kwargs.pop('illness')
-            survey_choices = list(Survey.objects.filter(surveys_illnesses=illness, multitype=True).values_list('id','name'))
+            survey_choices = list(Survey.objects.filter(surveys_illnesses=illness, multitype=True, enabled=True).values_list('id','name'))
         else:
-            survey_choices = list(Survey.objects.filter(multitype=True).values_list('id','name'))
+            survey_choices = list(Survey.objects.filter(multitype=True, enabled=True).values_list('id','name'))
         super(SelectSurveyTaskForm, self).__init__(*args, **kwargs)
         if self.variables:
             survey_choices.append((settings.CUSTOM, _(u'Variables más puntuadas')))
         self.fields['survey'].choices = survey_choices
         self.fields['survey'].label = _(u'Asignar cuestionario')
 
+    def clean(self):
+        cleaned_data = super(SelectSurveyForm, self).clean()
+        pd = cleaned_data.get("previous_days")
+        from_date = cleaned_data.get("from_date")
+        to_date = cleaned_data.get("to_date")
+        
+        if pd is None and from_date is None:
+             raise forms.ValidationError(_(u"Algun tipo de programación es requerida."))
+        else:
+            if from_date and to_date and to_date < from_date:
+                 raise forms.ValidationError(_(u"La fecha de cierre no puede ser anterior a la de apertura"))       
+
+
+        return cleaned_data
 
 
 class SelectNotAssessedVariablesForm(forms.Form):

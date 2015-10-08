@@ -18,7 +18,7 @@
     <h1>{% trans 'Mensajes' %} 
       {% if patient_user.is_active %}
         <div class="btn-group pull-right">
-           <a class="btn btn-info" href="{% url private_messages_new_for patient_user.id %}"><i class="icon-pencil icon-white"></i> {% trans "Redactar" %}</a>
+           <a class="btn btn-info" href="{% url 'private_messages_new_for' patient_user.id %}"><i class="icon-pencil icon-white"></i> {% trans "Redactar" %}</a>
         </div>
       {% endif %}
     </h1>

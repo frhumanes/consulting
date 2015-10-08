@@ -123,3 +123,5 @@ class ConclusionAdmin(admin.ModelAdmin):
     ordering = ('appointment',)
 
 admin.site.register(Conclusion, ConclusionAdmin)
+
+admin.site.register(Alert)

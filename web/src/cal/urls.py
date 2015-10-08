@@ -3,8 +3,6 @@
 from django.conf.urls.defaults import patterns
 from django.conf.urls.defaults import url
 
-from django.views.generic.simple import direct_to_template
-
 from cal import views
 
 

@@ -4,7 +4,7 @@ import cStringIO
 
 from django.conf import settings
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,  get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -19,7 +19,7 @@ from decorators import only_doctor_consulting
 
 from stadistic.models import Report
 from survey.models import Block, Survey
-from formula.models import Variable, Dimension
+from formula.models import Variable, Dimension, Scale
 from userprofile.models import Profile
 from consulting.models import Task
 from stadistic.utils import generate_reports
@@ -33,31 +33,31 @@ from stadistic.forms import FiltersForm
 @only_doctor_consulting
 def stratification(request, option="AD"):
     piramid_list = {}
-    task = Task()
-    task.id = 1
-    task.survey = Survey()
-    scales = task.get_scales(exclude='')
+   
+    scales = Scale.objects.filter(scale_surveys__enabled=True).distinct()
     for scale in scales:
-        piramid_list[scale['name']] = [
-            [] for i in range(len(scale['scale']) + 1)
+        piramid_list[scale.key] = [
+            [] for i in range(scale.levels().count() + 1)
         ]
 
     filtered = request.GET.get('filter', '')
     if filtered == 'mine':
-        patient_list = Profile.objects.filter(role=settings.PATIENT,
+        if 'cronos' in request.session:
+            patient_list = Profile.objects.filter(role=settings.PATIENT,
+                                              user__appointment_patient__doctor=request.user)
+        else:
+            patient_list = Profile.objects.filter(role=settings.PATIENT,
                                               doctor=request.user)
     else:
         patient_list = Profile.objects.filter(role=settings.PATIENT)
     for p in patient_list:
-        for scale in scales:
-            if not scale['scale']:
-                scales.remove(scale)
-                continue
-            val = getattr(p, 'get_' + scale['hash'] + '_status')(index=True)
-            if isinstance(val, int):
-                piramid_list[scale['name']][val + 1].append(p)
-            else:
-                piramid_list[scale['name']][0].append(p)
+        for level in p.get_medical_status(datetime.now(), scales=scales):
+
+            try:
+                piramid_list[level.scale.key][level.index() + 1].append(p)
+            except:
+                piramid_list[level.scale.key][0].append(p)
+
     return render_to_response('statistic/stratification.html',
                               {'piramid_list': piramid_list,
                                'scales': scales,
@@ -129,17 +129,17 @@ def explotation(request, block_code=None):
     form = FiltersForm(block=block)
 
     if block_code == str(settings.ANXIETY_DEPRESSION_BLOCK):
-        status = [u'Ansiedad', u'Depresión']
+        status = [u'anxiety', u'depression']
         data2 = {
-            u'Ansiedad': [0 for i in range(len(settings.HAMILTON.keys()) + 2)],
-            u'Depresión': [0 for i in range(len(settings.BECK.keys()) + 1)]
+            u'anxiety': [0 for i in range(len(settings.HAMILTON.keys()) + 2)],
+            u'depression': [0 for i in range(len(settings.BECK.keys()) + 1)]
         }
         exclude = ('suicide', 'unhope', 'ybocs')
     elif block_code == str(settings.UNHOPE_BLOCK):
-        status = [u'Desesperanza', u'Suicidio']
+        status = [u'unhope', u'suicide']
         data2 = {
-            u'Suicidio': [0 for i in range(len(settings.SUICIDE.keys()) + 2)],
-            u'Desesperanza': [
+            u'suicide': [0 for i in range(len(settings.SUICIDE.keys()) + 2)],
+            u'unhope': [
                 0 for i in range(len(settings.UNHOPE.keys()) + 4)
             ],
         }
@@ -147,9 +147,9 @@ def explotation(request, block_code=None):
         dimensions = Dimension.objects.none()
         delattr(form, 'dimensions')
     elif block_code == str(settings.YBOCS_BLOCK):
-        status = [u'Obsesión/Compulsión']
+        status = [u'ybocs']
         data2 = {
-            u'Obsesión/Compulsión': [
+            u'ybocs': [
                 0 for i in range(len(settings.Y_BOCS.keys()) + 2)
             ]
         }
@@ -201,31 +201,31 @@ def explotation(request, block_code=None):
                 if k.startswith('anxiety'):
                     filters = update_filter(
                         filters,
-                        'status.Ansiedad',
+                        'status.anxiety',
                         [int(v) for v in request.POST.getlist('anxiety')]
                     )
                 if k.startswith('depression'):
                     filters = update_filter(
                         filters,
-                        'status.Depresión',
+                        'status.depression',
                         [int(v) for v in request.POST.getlist('depression')]
                     )
                 if k.startswith('unhope'):
                     filters = update_filter(
                         filters,
-                        'status.Desesperanza',
+                        'status.unhope',
                         [int(v) for v in request.POST.getlist('unhope')]
                     )
                 if k.startswith('suicide'):
                     filters = update_filter(
                         filters,
-                        'status.Suicidio',
+                        'status.suicide',
                         [int(v) for v in request.POST.getlist('suicide')]
                     )
                 if k.startswith('ybocs'):
                     filters = update_filter(
                         filters,
-                        'status.Obsesión/Compulsión',
+                        'status.ybocs',
                         [int(v) for v in request.POST.getlist('ybocs')]
                     )
                 if k.startswith('treatment'):
@@ -296,8 +296,8 @@ def explotation(request, block_code=None):
                     else:
                         data[r.patient].dimensions[dim] = []
                 if block_code == str(settings.ANXIETY_DEPRESSION_BLOCK):
-                    data[r.patient].status[u'Ansiedad'] = p.get_anxiety_status(index=True)
-                    data[r.patient].status[u'Depresión'] = p.get_depression_status(index=True)
+                    data[r.patient].status[u'anxiety'] = p.get_anxiety_status(index=True)
+                    data[r.patient].status[u'depression'] = p.get_depression_status(index=True)
 
         for p in data.keys():
             for key, l in data[p].variables.items():
@@ -315,7 +315,10 @@ def explotation(request, block_code=None):
 
 
     if status:
-        reports = sorted(reports, key=lambda report: -((report.status[u'Ansiedad'] and int(report.status[u'Ansiedad']) or -1) + (report.status[u'Depresión'] and int(report.status[u'Depresión']) or -1)))
+        try:
+            reports = sorted(reports, key=lambda report: -((report.status[u'anxiety'] and int(report.status[u'anxiety']) or -1) + (report.status[u'depression'] and int(report.status[u'depression']) or -1)))
+        except: 
+            pass
     else:
         reports = sorted(reports, key=lambda report: report.date)
 
@@ -345,8 +348,11 @@ def explotation(request, block_code=None):
         if dimensions.count():
             offset += dimensions.count()
             ws.write_merge(0, 0, 4, offset - 1, _(u'Dimensiones'), style_head)
-        ws.write_merge(0, 0, offset, offset + variables.count() - 1,
-                       _(u'Variables'), style_head)
+
+        if variables.count() > 0 :        
+            ws.write_merge(0, 0, offset, offset + variables.count() - 1,
+                           _(u'Variables'), style_head)
+        
         offset += variables.count()
         if len(status):
             ws.write_merge(0, 0, offset, offset + len(status),
@@ -361,16 +367,7 @@ def explotation(request, block_code=None):
                             if key == 'status':
                                 st = ''
                                 nst = getattr(report, key)[n]
-                                if n == u'Ansiedad':
-                                    st = [settings.HAMILTON[k][0] for k in sorted(settings.HAMILTON.keys())][nst]
-                                elif n == u'Depresión':
-                                    st = [settings.BECK[k][0] for k in sorted(settings.BECK.keys())][nst]
-                                elif n == u'Desesperanza':
-                                    st = [settings.UNHOPE[k][0] for k in sorted(settings.UNHOPE.keys())][nst]
-                                elif n == u'Obsesión/Compulsión':
-                                    st = [settings.Y_BOCS[k][0] for k in sorted(settings.Y_BOCS.keys())][nst]
-                                elif n == u'Suicidio':
-                                    st = [settings.SUICIDE[k][0] for k in sorted(settings.SUICIDE.keys())][nst]
+                                st = Scale.objects.get(key=n).scale_levels.all()[nst].name
                                 values.append((n, strip_tags(st)))
                             else:
                                 values.append((n, getattr(report, key)[n]))
@@ -378,9 +375,20 @@ def explotation(request, block_code=None):
                             values.append((n, ''))
                 else:
                     if key == 'sex':
-                        values = [(name, report.patient.get_sex()), ]
+                        if type(report.patient) == int:
+                            data = '';
+                            if report.sex == settings.MAN:
+                                data = 'M'
+                            elif report.sex == settings.WOMAN:
+                                data = 'F'
+                            values = [(name, data), ]
+                        else:
+                            values = [(name, report.patient.get_sex()), ]
                     elif key == 'education':
-                        values = [(name, report.patient.get_education()), ]
+                        if type(report.patient) == int :
+                            values = [(name, report.education), ]
+                        else:
+                            values = [(name, report.patient.get_education()), ]
                     else:
                         values = [(name, getattr(report, key)), ]
                 for n, v in values:
@@ -427,11 +435,11 @@ def explotation(request, block_code=None):
                     else:
                         if v > 0:
                             #Fix Offsets for scales shorter than Beck
-                            if k == u"Desesperanza":
+                            if k == u"unhope":
                                 v += 3
-                            elif k in [u"Ansiedad",
-                                       u"Suicidio",
-                                       u"Obsesión/Compulsión"]:
+                            elif k in [u"anxiety",
+                                       u"suicide",
+                                       u"ybocs"]:
                                 v += 1
                         v += 1
                     data2[k][v] += 1
@@ -492,11 +500,10 @@ def stratification_list(request, illness, level):
                                               doctor=request.user)
     else:
         patient_list = Profile.objects.filter(role=settings.PATIENT)
-    if callable(getattr(request.user.get_profile(),
-                        'get_' + illness + '_status')):
-        for p in patient_list:
-            if getattr(p, 'get_' + illness + '_status')(index=True) == level:
-                patients.append(p)
+    for p in patient_list:
+        status = p.get_medical_status(scale_key=illness)
+        if status and status[0].index() == level:
+            patients.append(p)
 
     template_data = dict(patients=patients,
                          context_instance=RequestContext(request))
@@ -507,21 +514,14 @@ def stratification_list(request, illness, level):
 @login_required
 @only_doctor_consulting
 def stratification_label(request, illness, level):
-    if illness == 'anxiety':
-        scale = copy(settings.HAMILTON)
-    elif illness == 'depression':
-        scale = copy(settings.BECK)
-    elif illness == 'unhope':
-        scale = copy(settings.UNHOPE)
-    elif illness == 'suicide':
-        scale = copy(settings.SUICIDE)
-    elif illness == 'ybocs':
-        scale = copy(settings.Y_BOCS)
+    scale = get_object_or_404(Scale, key=illness)
+    label = ''
+    if int(level) < 0:
+        label = _(u'No diagnosticados')
+    else:
+        try:
+            label = scale.scale_levels.all()[int(level)].name
+        except:
+            pass
 
-    try:
-        scale[0] = (_(u'No diagnosticados'), '')
-        pkeys = scale.keys()
-        pkeys.sort()
-        return HttpResponse(strip_tags(scale[pkeys[int(level) + 1]][0]))
-    except:
-        return HttpResponse('')
+    return HttpResponse(strip_tags(label))

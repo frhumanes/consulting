@@ -5,7 +5,7 @@
 {% block container %}
 <div class="page-header">
     <h1>{% trans 'Cuestionarios sin completar' %}
-      <a class="btn btn-info pull-right" href="{% if illness %}{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}">
+      <a class="btn btn-info pull-right" href="{% if illness %}{% url 'consulting_main' id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}">
          <i class="icon-arrow-left icon-white"></i>
         {% trans 'Volver' %}
       </a>
@@ -35,14 +35,14 @@
             <br />
             <div class="btn-group center">
               {% if task.survey.code = 6 %}
-                <a id="assess{{task.id}}" class=" btn btn-large btn-success" data-toggle="modal" data-target="#modal" href="{% url consulting_not_assess_task task.id appointment.id %}"> <i class="icon-ok icon-white"></i> {% trans 'GUARDAR' %}</a>
+                <a id="assess{{task.id}}" class=" btn btn-large btn-success" data-toggle="modal" data-target="#modal" href="{% url 'consulting_not_assess_task' task.id appointment.id %}"> <i class="icon-ok icon-white"></i> {% trans 'GUARDAR' %}</a>
               {% else %}
-              <a id="assess{{task.id}}" class=" btn btn-large btn-warning" data-toggle="modal" data-target="#modal" href="{% url consulting_not_assess_task task.id appointment.id %}"> <i class="icon-off icon-white"></i> {% trans 'DESCARTAR' %}</a>
+              <a id="assess{{task.id}}" class=" btn btn-large btn-warning" data-toggle="modal" data-target="#modal" href="{% url 'consulting_not_assess_task' task.id appointment.id %}"> <i class="icon-off icon-white"></i> {% trans 'DESCARTAR' %}</a>
               {% endif %}
               {% if task.questions.count > 0 %}
-                <a id="edit{{task.id}}" class="btn btn-large btn-info"  data-toggle="modal" data-target="#modal_var" href="{% url consulting_config_variables task.id %}"><i class="icon-th-list icon-white" ></i> {% trans 'VARIABLES' %}</a>
+                <a id="edit{{task.id}}" class="btn btn-large btn-info"  data-toggle="modal" data-target="#modal_var" href="{% url 'consulting_config_variables' task.id %}"><i class="icon-th-list icon-white" ></i> {% trans 'VARIABLES' %}</a>
               {% endif %}
-              <a id="complete{{task.id}}" class="btn btn-large btn-primary" href="{% url consulting_show_task_block appointment.id illness.code task.id 0 %}"><i class="icon-edit icon-white"></i> {% trans 'COMPLETAR' %}</a>
+              <a id="complete{{task.id}}" class="btn btn-large btn-primary" href="{% url 'consulting_show_task_block' appointment.id illness.code task.id 0 %}"><i class="icon-edit icon-white"></i> {% trans 'COMPLETAR' %}</a>
             </div> 
             <br />
           </div>
@@ -90,6 +90,9 @@
 {% endblock container %}
 
 {% block jquery_init %} 
+    {% if request.session.cronos %}
+      window.location= "{% url 'cronos_tasks' id_appointment=appointment.id %}";
+    {% endif  %}
     $('#modal').on('hidden', function () {
       location.reload(true);
     });

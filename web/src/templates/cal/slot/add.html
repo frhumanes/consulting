@@ -15,7 +15,7 @@
 <div class="page-header">
   <h1>{% trans 'Nueva preferencia' %}
     <div class="btn-group pull-right">
-      <a class="btn btn-info" href="{% url cal.list_slot year %}">
+      <a class="btn btn-info" href="{% url 'cal.list_slot' year %}">
         <i class="icon-arrow-left icon-white"></i>
         {% trans 'Volver' %}
       </a>
@@ -24,7 +24,7 @@
 </div>
 
 <div class="center">
-<form class="form" method="post" action="{% url cal.add_slot year  %}">
+<form class="form" method="post" action="{% url 'cal.add_slot' year  %}">
   {% csrf_token %}
     {% if form.non_field_errors %}
       <div class="alert alert-error">
@@ -42,7 +42,7 @@
         <label for="id_slot_type" class="control-label">{{form.slot_type.label}}</label>
         <div class="controls">
           <div class="input-prepend">
-            <span class="add-on"><a href="{% url cal.add_slot_type %}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a></span>
+            <span class="add-on"><a href="{% url 'cal.add_slot_type' %}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a></span>
             {{ form.slot_type }}
           </div>
           {% for error in form.slot_type.errors %}
@@ -55,7 +55,7 @@
         <label for="id_event_type" class="control-label">{{form.slot_type.label}}</label>
         <div class="controls">
           <div class="input-prepend">
-            <span class="add-on"><a href="{% url cal.add_slot_type %}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a></span>
+            <span class="add-on"><a href="{% url 'cal.add_slot_type' %}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a></span>
             {{ form.slot_type }}
           </div>
         </div>

@@ -3,23 +3,23 @@
   <div class="pagination" style="display: inline">
     <ul>
         <li class="previous">
-            <a href="{% url cal.views.day 'prev' year month day user.id %}"><i class="icon-chevron-left"></i></a>
+            <a href="{% url 'cal.views.day' 'prev' year month day user.id %}"><i class="icon-chevron-left"></i></a>
         </li>
         <li>
           <a href="#"><h5 style="display: inline">{{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}</h5></a>
         </li>
         <li class="next">
-            <a href="{% url cal.views.day 'next' year month day user.id %}" class="pull-right"><i class="icon-chevron-right"></i></a>
+            <a href="{% url 'cal.views.day' 'next' year month day user.id %}" class="pull-right"><i class="icon-chevron-right"></i></a>
         </li>
     </ul>
   </div>
   {% if vacations %}
       {% if request.user.get_profile.is_doctor %}
-      <a class="btn btn-danger pull-right" href="{% url cal.edit_vacation vacations.0.id %}"><i class="icon-pencil icon-white"></i> {% trans 'Editar' %}</a>
+      <a class="btn btn-danger pull-right" href="{% url 'cal.edit_vacation' vacations.0.id %}"><i class="icon-pencil icon-white"></i> {% trans 'Editar' %}</a>
       {% endif %}
   {% else %}
     {% if not user.get_profile.is_patient or user.is_active %}
-      <a class="btn btn-info pull-right" style="margin: 5px 0" href="{% if user.get_profile.is_patient %}{% url cal.add year month day user.id %}{% else %}{% url search_patient_for_action_at 'new_app' year month day %}{% endif %}"><i class="icon-plus-sign icon-white"></i> <strong>{% trans "Cita" %}</strong></a>
+      <a class="btn btn-info pull-right" style="margin: 5px 0" href="{% if user.get_profile.is_patient %}{% url 'cal.add' year month day user.id %}{% else %}{% url 'search_patient_for_action_at' 'new_app' year month day %}{% endif %}"><i class="icon-plus-sign icon-white"></i> <strong>{% trans "Cita" %}</strong></a>
     {% endif %}
   {% endif %}
 </div>

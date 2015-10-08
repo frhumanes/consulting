@@ -6,7 +6,7 @@
   <div class="page-header">
       <h1>{% trans 'Respuestas' %}
         <div class="btn-group pull-right">
-            <a class="btn btn-info" href="{% if illness %}{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}">
+            <a class="btn btn-info" href="{% if request.session.cronos %}{% url 'cronos_tasks' %}{% else %}{% if illness %}{% url 'consulting_main' id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}{%endif%}">
                <i class="icon-arrow-left icon-white"></i>
               {% trans 'Volver' %}
             </a>
@@ -17,7 +17,7 @@
       {% include 'consulting/consultation/task.html' %}
       <hr>
       <div class="pull-right">
-        <a id="goback" href="{% if illness %}{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}" class="btn btn-info btn-large">
+        <a id="goback" href="{% if request.session.cronos %}{% url 'cronos_tasks' %}{% else %}{% if illness %}{% url 'consulting_main' id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}{%endif%}" class="btn btn-info btn-large">
           {% trans 'Volver' %}
         </a>      
       </div>                             

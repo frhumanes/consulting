@@ -1,301 +1,724 @@
 [
-  {
+{
     "pk": 1, 
     "model": "survey.block", 
     "fields": {
-      "kind": 0, 
-      "code": 1, 
-      "name": "Datos Administrativos", 
-      "is_scored": false, 
-      "created_at": "2012-10-05 11:53:20", 
-      "updated_at": "2012-10-05 11:53:20", 
-      "created_by": 1, 
-      "categories": [
-        1
-      ]
+        "kind": 0, 
+        "code": 1, 
+        "name": "Datos Administrativos", 
+        "is_scored": false, 
+        "created_at": "2012-10-05T11:53:20", 
+        "updated_at": "2012-10-05T11:53:20", 
+        "created_by": 1, 
+        "categories": [
+            1
+        ]
     }
-  }, 
-  {
+},
+{
     "pk": 2, 
     "model": "survey.block", 
     "fields": {
-      "kind": 0, 
-      "code": 2, 
-      "name": "Antecedentes y factores de riesgo", 
-      "is_scored": false, 
-      "created_at": "2012-10-05 11:53:20", 
-      "updated_at": "2012-10-05 11:53:20", 
-      "created_by": 1, 
-      "categories": [
-        2, 
-        3, 
-        4, 
-        6, 
-        7, 
-        8, 
-        9
-      ]
+        "kind": 0, 
+        "code": 2, 
+        "name": "Antecedentes y factores de riesgo", 
+        "is_scored": false, 
+        "created_at": "2012-10-05T11:53:20", 
+        "updated_at": "2012-10-05T11:53:20", 
+        "created_by": 1, 
+        "categories": [
+            2, 
+            3, 
+            4, 
+            6, 
+            7, 
+            8, 
+            9
+        ]
     }
-  }, 
-  {
+},
+{
     "pk": 3, 
     "model": "survey.block", 
     "fields": {
-      "kind": 1, 
-      "code": 3, 
-      "name": "Valoraci\u00f3n de la depresi\u00f3n y la ansiedad", 
-      "is_scored": true, 
-      "created_at": "2012-10-05 11:53:20", 
-      "updated_at": "2012-10-05 11:53:20", 
-      "created_by": 1, 
-      "categories": [
-        10, 
-        12, 
-        14, 
-        16, 
-        18, 
-        20, 
-        22, 
-        24, 
-        26, 
-        28, 
-        30, 
-        32, 
-        34, 
-        36, 
-        38, 
-        40, 
-        42, 
-        43, 
-        45, 
-        47, 
-        49, 
-        51, 
-        52, 
-        54, 
-        56, 
-        58, 
-        60, 
-        62, 
-        64, 
-        66, 
-        67, 
-        69
-      ]
+        "kind": 1, 
+        "code": 3, 
+        "name": "Valoraci\u00f3n de la depresi\u00f3n y la ansiedad", 
+        "is_scored": true, 
+        "created_at": "2012-10-05T11:53:20", 
+        "updated_at": "2012-10-05T11:53:20", 
+        "created_by": 1, 
+        "categories": [
+            10, 
+            12, 
+            14, 
+            16, 
+            18, 
+            20, 
+            22, 
+            24, 
+            26, 
+            28, 
+            30, 
+            32, 
+            34, 
+            36, 
+            38, 
+            40, 
+            42, 
+            43, 
+            45, 
+            47, 
+            49, 
+            51, 
+            52, 
+            54, 
+            56, 
+            58, 
+            60, 
+            62, 
+            64, 
+            66, 
+            67, 
+            69
+        ]
     }
-  }, 
-  {
+},
+{
     "pk": 4, 
     "model": "survey.block", 
     "fields": {
-      "kind": 2, 
-      "code": 3, 
-      "name": "Valoraci\u00f3n de la depresi\u00f3n y la ansiedad", 
-      "is_scored": true, 
-      "created_at": "2012-10-05 11:53:20", 
-      "updated_at": "2012-10-05 11:53:20", 
-      "created_by": 1, 
-      "categories": [
-        11, 
-        13, 
-        15, 
-        17, 
-        19, 
-        21, 
-        23, 
-        25, 
-        27, 
-        29, 
-        31, 
-        33, 
-        35, 
-        37, 
-        39, 
-        41, 
-        44, 
-        46, 
-        48, 
-        50, 
-        53, 
-        55, 
-        57, 
-        59, 
-        61, 
-        63, 
-        65, 
-        68, 
-        70, 
-        71, 
-        72, 
-        73, 
-        74, 
-        75, 
-        76, 
-        77
-      ]
+        "kind": 2, 
+        "code": 3, 
+        "name": "Valoraci\u00f3n de la depresi\u00f3n y la ansiedad", 
+        "is_scored": true, 
+        "created_at": "2012-10-05T11:53:20", 
+        "updated_at": "2012-10-05T11:53:20", 
+        "created_by": 1, 
+        "categories": [
+            11, 
+            13, 
+            15, 
+            17, 
+            19, 
+            21, 
+            23, 
+            25, 
+            27, 
+            29, 
+            31, 
+            33, 
+            35, 
+            37, 
+            39, 
+            41, 
+            44, 
+            46, 
+            48, 
+            50, 
+            53, 
+            55, 
+            57, 
+            59, 
+            61, 
+            63, 
+            65, 
+            68, 
+            70, 
+            71, 
+            72, 
+            73, 
+            74, 
+            75, 
+            76, 
+            77
+        ]
     }
-  }, 
-  {
+},
+{
     "pk": 5, 
     "model": "survey.block", 
     "fields": {
-      "kind": 1, 
-      "code": 4, 
-      "name": "Comportamiento durante la entrevista", 
-      "is_scored": false, 
-      "created_at": "2012-10-05 11:53:20", 
-      "updated_at": "2012-10-05 11:53:20", 
-      "created_by": 1, 
-      "categories": [
-        67, 
-        69, 
-        77
-      ]
+        "kind": 1, 
+        "code": 4, 
+        "name": "Comportamiento durante la entrevista", 
+        "is_scored": false, 
+        "created_at": "2012-10-05T11:53:20", 
+        "updated_at": "2012-10-05T11:53:20", 
+        "created_by": 1, 
+        "categories": [
+            67, 
+            69, 
+            77
+        ]
     }
-  }, 
-  {
+},
+{
     "pk": 6, 
     "model": "survey.block", 
     "fields": {
-      "kind": 2, 
-      "code": 4, 
-      "name": "Comportamiento durante la entrevista", 
-      "is_scored": false, 
-      "created_at": "2012-10-05 11:53:20", 
-      "updated_at": "2012-10-05 11:53:20", 
-      "created_by": 1, 
-      "categories": [
-        68, 
-        70, 
-        77
-      ]
+        "kind": 2, 
+        "code": 4, 
+        "name": "Comportamiento durante la entrevista", 
+        "is_scored": false, 
+        "created_at": "2012-10-05T11:53:20", 
+        "updated_at": "2012-10-05T11:53:20", 
+        "created_by": 1, 
+        "categories": [
+            68, 
+            70, 
+            77
+        ]
     }
-  }, 
-  {
+},
+{
     "pk": 7, 
     "model": "survey.block", 
     "fields": {
-      "kind": 0, 
-      "code": 5, 
-      "name": "S\u00edntomas o Empeoramiento", 
-      "is_scored": false, 
-      "created_at": "2012-10-05 11:53:20", 
-      "updated_at": "2012-10-05 11:53:20", 
-      "created_by": 1, 
-      "categories": [
-        79
-      ]
+        "kind": 0, 
+        "code": 5, 
+        "name": "S\u00edntomas o Empeoramiento", 
+        "is_scored": false, 
+        "created_at": "2012-10-05T11:53:20", 
+        "updated_at": "2012-10-05T11:53:20", 
+        "created_by": 1, 
+        "categories": [
+            79
+        ]
     }
-  }, 
-  {
+},
+{
     "pk": 8, 
     "model": "survey.block", 
     "fields": {
-      "kind": 0, 
-      "code": 6, 
-      "name": "Adherencia al Tratamiento", 
-      "is_scored": true, 
-      "created_at": "2012-10-05 11:53:20", 
-      "updated_at": "2012-10-05 11:53:20", 
-      "created_by": 1, 
-      "categories": [
-        80
-      ]
+        "kind": 0, 
+        "code": 6, 
+        "name": "Adherencia al Tratamiento", 
+        "is_scored": true, 
+        "created_at": "2012-10-05T11:53:20", 
+        "updated_at": "2012-10-05T11:53:20", 
+        "created_by": 1, 
+        "categories": [
+            80
+        ]
     }
-  }, 
-  {
+},
+{
     "pk": 9, 
     "model": "survey.block", 
     "fields": {
-      "kind": 0, 
-      "code": 7, 
-      "name": "Seguimiento gen\u00e9rico", 
-      "is_scored": false, 
-      "created_at": "2012-10-05 11:42:03", 
-      "updated_at": "2012-10-05 11:42:03", 
-      "created_by": 1, 
-      "categories": [
-        81
-      ]
+        "kind": 0, 
+        "code": 7, 
+        "name": "Seguimiento gen\u00e9rico", 
+        "is_scored": false, 
+        "created_at": "2012-10-05T11:42:03", 
+        "updated_at": "2012-10-05T11:42:03", 
+        "created_by": 1, 
+        "categories": [
+            81
+        ]
     }
-  }, 
-  {
+},
+{
     "pk": 10, 
     "model": "survey.block", 
     "fields": {
-      "kind": 2, 
-      "code": 8, 
-      "name": "Personalidad de Eysenck", 
-      "is_scored": true, 
-      "created_at": "2013-02-11 16:24:29", 
-      "updated_at": "2013-02-11 16:24:29", 
-      "created_by": 1, 
-      "categories": [
-        82, 
-        83, 
-        84, 
-        85
-      ]
+        "kind": 2, 
+        "code": 8, 
+        "name": "Personalidad de Eysenck", 
+        "is_scored": true, 
+        "created_at": "2013-02-11T16:24:29", 
+        "updated_at": "2013-02-11T16:24:29", 
+        "created_by": 1, 
+        "categories": [
+            82, 
+            83, 
+            84, 
+            85
+        ]
     }
-  }, 
-  {
+},
+{
     "pk": 11, 
     "model": "survey.block", 
     "fields": {
-      "kind": 0, 
-      "code": 9, 
-      "name": "Desesperanza", 
-      "is_scored": true, 
-      "created_at": "2013-02-18 10:32:09", 
-      "updated_at": "2013-02-18 10:32:09", 
-      "created_by": 1, 
-      "categories": [
-        86, 
-        87, 
-        88
-      ]
+        "kind": 0, 
+        "code": 9, 
+        "name": "Desesperanza", 
+        "is_scored": true, 
+        "created_at": "2013-02-18T10:32:09", 
+        "updated_at": "2013-02-18T10:32:09", 
+        "created_by": 1, 
+        "categories": [
+            86, 
+            87, 
+            88
+        ]
     }
-  }, 
-  {
+},
+{
     "pk": 12, 
     "model": "survey.block", 
     "fields": {
-      "kind": 2, 
-      "code": 10, 
-      "name": "Obsesion-Compulsi\u00f3n [Y-BOCKS]", 
-      "is_scored": true, 
-      "created_at": "2013-02-19 10:09:34", 
-      "updated_at": "2013-02-19 10:09:34", 
-      "created_by": 1, 
-      "categories": [
-        89, 
-        90, 
-        91, 
-        92, 
-        93, 
-        94, 
-        95, 
-        96, 
-        97, 
-        98, 
-        99
-      ]
+        "kind": 2, 
+        "code": 10, 
+        "name": "Obsesion-Compulsi\u00f3n [Y-BOCKS]", 
+        "is_scored": true, 
+        "created_at": "2013-02-19T10:09:34", 
+        "updated_at": "2013-02-19T10:09:34", 
+        "created_by": 1, 
+        "categories": [
+            89, 
+            90, 
+            91, 
+            92, 
+            93, 
+            94, 
+            95, 
+            96, 
+            97, 
+            98, 
+            99
+        ]
     }
-  }, 
-  {
+},
+{
     "pk": 13, 
     "model": "survey.block", 
     "fields": {
-      "kind": 0, 
-      "code": 11, 
-      "name": "Obsesi\u00f3n-Compulsi\u00f3n [OCI-R]", 
-      "is_scored": true, 
-      "created_at": "2013-02-19 11:09:59", 
-      "updated_at": "2013-02-19 11:09:59", 
-      "created_by": 1, 
-      "categories": [
-        100
-      ]
+        "kind": 0, 
+        "code": 11, 
+        "name": "Obsesi\u00f3n-Compulsi\u00f3n [OCI-R]", 
+        "is_scored": true, 
+        "created_at": "2013-02-19T11:09:59", 
+        "updated_at": "2013-02-19T11:09:59", 
+        "created_by": 1, 
+        "categories": [
+            100
+        ]
     }
-  }
+},
+{
+    "pk": 14, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 27, 
+        "name": "COPD Assessment Test", 
+        "is_scored": true, 
+        "created_at": "2014-02-10T14:47:20", 
+        "updated_at": "2014-05-20T16:48:00", 
+        "created_by": 1, 
+        "categories": [
+            101
+        ]
+    }
+},
+{
+    "pk": 15, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 13, 
+        "name": "Calidad de vida del paciente", 
+        "is_scored": true, 
+        "created_at": "2014-02-10T19:47:45", 
+        "updated_at": "2014-02-12T10:18:20", 
+        "created_by": 1, 
+        "categories": [
+            102, 
+            103, 
+            104, 
+            105, 
+            106, 
+            107
+        ]
+    }
+},
+{
+    "pk": 16, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 14, 
+        "name": "Ansiedad y depresi\u00f3n", 
+        "is_scored": true, 
+        "created_at": "2014-02-11T10:42:23", 
+        "updated_at": "2014-02-12T10:17:03", 
+        "created_by": 1, 
+        "categories": [
+            108
+        ]
+    }
+},
+{
+    "pk": 17, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 31, 
+        "name": "Control del asma [ACT]", 
+        "is_scored": true, 
+        "created_at": "2014-02-11T11:58:51", 
+        "updated_at": "2014-05-23T10:33:31", 
+        "created_by": 1, 
+        "categories": [
+            109
+        ]
+    }
+},
+{
+    "pk": 18, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 16, 
+        "name": "Calidad de vida del paciente", 
+        "is_scored": true, 
+        "created_at": "2014-02-11T14:50:55", 
+        "updated_at": "2014-02-11T14:50:55", 
+        "created_by": 1, 
+        "categories": [
+            110
+        ]
+    }
+},
+{
+    "pk": 19, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 17, 
+        "name": "Bienestar f\u00edsico", 
+        "is_scored": false, 
+        "created_at": "2014-02-12T12:41:21", 
+        "updated_at": "2014-02-12T12:41:21", 
+        "created_by": 1, 
+        "categories": [
+            111
+        ]
+    }
+},
+{
+    "pk": 20, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 18, 
+        "name": "Bienestar social y familiar", 
+        "is_scored": false, 
+        "created_at": "2014-02-12T12:41:38", 
+        "updated_at": "2014-02-12T12:41:38", 
+        "created_by": 1, 
+        "categories": [
+            112
+        ]
+    }
+},
+{
+    "pk": 21, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 19, 
+        "name": "Relaci\u00f3n con el m\u00e9dico", 
+        "is_scored": false, 
+        "created_at": "2014-02-12T12:41:59", 
+        "updated_at": "2014-02-12T12:41:59", 
+        "created_by": 1, 
+        "categories": [
+            113
+        ]
+    }
+},
+{
+    "pk": 22, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 20, 
+        "name": "Bienestar emocional", 
+        "is_scored": false, 
+        "created_at": "2014-02-12T12:42:13", 
+        "updated_at": "2014-02-12T12:42:13", 
+        "created_by": 1, 
+        "categories": [
+            114
+        ]
+    }
+},
+{
+    "pk": 23, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 21, 
+        "name": "Capacidad de realizar tareas", 
+        "is_scored": false, 
+        "created_at": "2014-02-12T12:42:37", 
+        "updated_at": "2014-02-12T12:42:37", 
+        "created_by": 1, 
+        "categories": [
+            115
+        ]
+    }
+},
+{
+    "pk": 24, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 22, 
+        "name": "Calidad de vida", 
+        "is_scored": true, 
+        "created_at": "2014-02-12T13:43:59", 
+        "updated_at": "2014-02-12T13:43:59", 
+        "created_by": 1, 
+        "categories": [
+            116
+        ]
+    }
+},
+{
+    "pk": 25, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 12, 
+        "name": "Valoraci\u00f3n pron\u00f3stica de la EPOC", 
+        "is_scored": true, 
+        "created_at": "2014-02-17T11:35:13", 
+        "updated_at": "2014-05-20T16:48:14", 
+        "created_by": 1, 
+        "categories": [
+            117
+        ]
+    }
+},
+{
+    "pk": 26, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 26, 
+        "name": "Satisfacci\u00f3n de telemonitorizaci\u00f3n domiciliaria", 
+        "is_scored": false, 
+        "created_at": "2014-05-20T11:26:28", 
+        "updated_at": "2014-05-20T11:40:54", 
+        "created_by": 1, 
+        "categories": [
+            119
+        ]
+    }
+},
+{
+    "pk": 27, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 25, 
+        "name": "Satisfacci\u00f3n del sistema de telemonitorizaci\u00f3n domiciliaria", 
+        "is_scored": false, 
+        "created_at": "2014-05-20T11:27:38", 
+        "updated_at": "2014-05-20T11:27:38", 
+        "created_by": 1, 
+        "categories": [
+            118
+        ]
+    }
+},
+{
+    "pk": 28, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 24, 
+        "name": "Datos del encuestado", 
+        "is_scored": false, 
+        "created_at": "2014-05-20T11:40:14", 
+        "updated_at": "2014-05-20T11:41:03", 
+        "created_by": 1, 
+        "categories": [
+            120
+        ]
+    }
+},
+{
+    "pk": 30, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 28, 
+        "name": "Seguimiento diario EPOC/Asma", 
+        "is_scored": true, 
+        "created_at": "2014-05-20T17:27:16", 
+        "updated_at": "2014-05-22T16:33:41", 
+        "created_by": 1, 
+        "categories": [
+            122
+        ]
+    }
+},
+{
+    "pk": 31, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 29, 
+        "name": "Disnea mMRC", 
+        "is_scored": true, 
+        "created_at": "2014-05-21T13:20:40", 
+        "updated_at": "2014-05-21T13:20:50", 
+        "created_by": 1, 
+        "categories": [
+            123
+        ]
+    }
+},
+{
+    "pk": 32, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 2, 
+        "code": 30, 
+        "name": "Gravedad de la enfermedad", 
+        "is_scored": true, 
+        "created_at": "2014-05-21T17:02:04", 
+        "updated_at": "2014-05-21T17:02:04", 
+        "created_by": 1, 
+        "categories": [
+            124
+        ]
+    }
+},
+{
+    "pk": 33, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 1, 
+        "code": 30, 
+        "name": "Gravedad de la enfermedad", 
+        "is_scored": true, 
+        "created_at": "2014-05-21T17:02:19", 
+        "updated_at": "2014-05-22T09:40:13", 
+        "created_by": 1, 
+        "categories": [
+            125
+        ]
+    }
+},
+{
+    "pk": 34, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 15, 
+        "name": "Control del asma", 
+        "is_scored": true, 
+        "created_at": "2014-05-22T09:41:55", 
+        "updated_at": "2014-05-23T11:52:44", 
+        "created_by": 1, 
+        "categories": [
+            126
+        ]
+    }
+},
+{
+    "pk": 35, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 32, 
+        "name": "Control del asma [ACQ]", 
+        "is_scored": false, 
+        "created_at": "2014-05-22T10:56:37", 
+        "updated_at": "2014-05-22T16:02:27", 
+        "created_by": 1, 
+        "categories": [
+            127
+        ]
+    }
+},
+{
+    "pk": 36, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 33, 
+        "name": "\u00cdndice de comorbilidad de Charlson", 
+        "is_scored": true, 
+        "created_at": "2014-05-27T09:01:13", 
+        "updated_at": "2014-05-27T09:01:13", 
+        "created_by": 1, 
+        "categories": [
+            128
+        ]
+    }
+},
+{
+    "pk": 37, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 34, 
+        "name": "Salud y Bienestar", 
+        "is_scored": true, 
+        "created_at": "2014-05-27T10:38:28", 
+        "updated_at": "2014-05-27T17:26:53", 
+        "created_by": 1, 
+        "categories": [
+            129
+        ]
+    }
+},
+{
+    "pk": 38, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 35, 
+        "name": "Autonom\u00eda para las actividades de la vida diaria", 
+        "is_scored": false, 
+        "created_at": "2014-05-27T12:40:07", 
+        "updated_at": "2014-05-27T12:40:07", 
+        "created_by": 1, 
+        "categories": [
+            130
+        ]
+    }
+},
+{
+    "pk": 39, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 36, 
+        "name": "HOSPITALIZACION DOMICILIARIA ICC", 
+        "is_scored": false, 
+        "created_at": "2014-09-02T16:30:30", 
+        "updated_at": "2014-09-02T16:30:30", 
+        "created_by": 1, 
+        "categories": [
+            131, 
+            132
+        ]
+    }
+},
+{
+    "pk": 40, 
+    "model": "survey.block", 
+    "fields": {
+        "kind": 0, 
+        "code": 37, 
+        "name": "HOSPITALIZACION DOMICILIARIA EPOC", 
+        "is_scored": false, 
+        "created_at": "2014-09-02T16:31:39", 
+        "updated_at": "2014-09-02T16:31:39", 
+        "created_by": 1, 
+        "categories": [
+            131, 
+            133
+        ]
+    }
+}
 ]

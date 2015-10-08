@@ -8,10 +8,13 @@
 	{% for block in task.treated_blocks.all %}
     <li {% if forloop.counter = 1 %}class="active"{% endif %}><a data-toggle="tab" href="#block{{block.id}}">{% trans 'Bloque' %} {{block.code}}: <br><small>{{block.name}}</small></a></li>
     {% endfor %}
+    {% if task.observations %}
+    <li><a data-toggle="tab" href="#block-observations">{% trans 'Bloque Adiccional' %}<br><small>{% trans 'Observaciones y comentarios ' %}</small></a></li>
+    {% endif %}
 </ul>
 
 <div id="tabContent" class="tab-content" style="max-height: 275px; overflow-y: auto">
-{% for block, answer_list in task.get_answers_by_block.items %}
+{% for block, answer_list in task.get_answers_by_block %}
 	<div id="block{{block}}" class="tab-pane fade in {% if forloop.counter = 1 %}active{% endif %}">
 		{% for a in answer_list %}
 		<div class="row-fluid">
@@ -23,4 +26,13 @@
 	   	{% endfor %}
 	</div>
 	{% endfor %}
+{% if task.observations %}
+<div id="block-observations" class="tab-pane fade in">
+		<div class="row-fluid">
+			<span class="span5" style="text-align: right"><strong>{% trans 'Observaciones y/o comentarios del paciente' %}</strong></span>
+			<span class="span7">{{task.observations}}</span>
+		 </div>
+		 <br>
+	</div>
+{% endif %}
 </div>

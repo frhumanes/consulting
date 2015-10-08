@@ -7,22 +7,54 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.conf import settings
 from django.db.models import Q
+from django.db import transaction
 
 from math import floor
 
 from log.models import TraceableModel
 from illness.models import Illness
 from cal.models import Appointment
-from consulting.models import Task, Conclusion, Medicine
+from consulting.models import Task, Conclusion, Medicine, Alert
 from private_messages.models import Message
 from survey.models import Block
+from formula.models import Scale
+
+from django.core.cache import cache
+import re
+
+pattern = re.compile('[\W_]+', re.UNICODE)
+
+
+@transaction.commit_on_success
+def get_or_create_CRONOS_user(cronos_id, role, doctor=None):
+    try:
+        p = Profile.objects.get(medical_number=cronos_id)
+        p.role = role
+        if doctor:
+            p.doctor = doctor
+        p.save()
+        return p
+    except:
+        pass
+    django_user = User.objects.create_user(
+        username=cronos_id,
+        password=settings.SECRET_KEY)
+    django_user.save()
+    consulting_user = Profile()
+    consulting_user.user = django_user
+    consulting_user.medical_number=cronos_id
+    consulting_user.role = role
+    if doctor:
+        consulting_user.doctor = doctor
+    consulting_user.save()
+    return consulting_user
 
 
 class Profile(TraceableModel):
 
     SEX = (
-        (1, _(u'Mujer')),
-        (2, _(u'Hombre')),
+        (settings.WOMAN, _(u'Mujer')),
+        (settings.MAN, _(u'Hombre')),
     )
     STATUS = (
         (settings.MARRIED, _(u'Casado/a')),
@@ -37,6 +69,7 @@ class Profile(TraceableModel):
         (settings.DOCTOR, _(u'Médico')),
         (settings.ADMINISTRATIVE, _(u'Administrativo')),
         (settings.PATIENT, _(u'Paciente')),
+        (settings.NURSE, _(u'Enfermero'))
     )
 
     EDUCATION = (
@@ -61,7 +94,7 @@ class Profile(TraceableModel):
     #patients = models.ManyToManyField(User, related_name='patients_profiles',
     #                                    blank=True, null=True)
     medical_number = models.CharField(_(u'Historia médica'),
-                                      max_length=9,
+                                      max_length=15,
                                       unique=True,
                                       null=True,
                                       blank=True)
@@ -193,6 +226,9 @@ class Profile(TraceableModel):
     def is_patient(self):
         return self.role == settings.PATIENT
 
+    def is_nurse(self):
+        return self.role == settings.NURSE
+
     def __unicode__(self):
         return u'id: %s profile: %s %s %s' \
             % (self.id, self.name, self.first_surname, self.second_surname)
@@ -298,6 +334,10 @@ class Profile(TraceableModel):
 
     def get_conclusions(self):
         return Conclusion.objects.filter(
+            appointment__patient=self.user).order_by('-date')
+
+    def get_last_conclusions(self):
+        return Conclusion.objects.filter(
             appointment__patient=self.user).latest('date')
 
     def get_treatment(self, at_date=None):
@@ -318,13 +358,17 @@ class Profile(TraceableModel):
         tasks = []
         if next_app and datetime.combine(next_app.date, next_app.start_time) >= datetime.now():
             ddays = (next_app.date - date.today()).days
-            tasks = Task.objects.filter(
-                patient=self.user,
-                self_administered=True,
-                completed=False,
-                assess=True,
-                previous_days__gte=ddays,
-                previous_days__gt=0).order_by('-creation_date')
+        else:
+            ddays=100000
+        tasks = Task.objects.filter(
+            Q(patient=self.user,
+            self_administered=True,
+            completed=False,
+            assess=True),
+            Q(previous_days__gte=ddays, previous_days__gt=0) | (
+            Q(from_date__lte=date.today()) &
+                (Q(to_date__isnull=True) | Q(to_date__gte=date.today())))
+            ).order_by('-from_date')
         return tasks
 
     def get_assigned_tasks(self):
@@ -333,132 +377,40 @@ class Profile(TraceableModel):
             self_administered=True,
             completed=False,
             assess=True,
-            previous_days__gt=0).order_by('-creation_date')
+            previous_days__gt=0).order_by('-from_date')
         return tasks
 
-    def get_anxiety_status(self, at_date=None, index=False, html=False):
-        filter_option = Q(patient=self.user,
-                          survey__code__in=(
-                          settings.INITIAL_ASSESSMENT,
-                          settings.ANXIETY_DEPRESSION_SURVEY
-                          ),
-                          completed=True,
-                          assess=False)
-        if at_date:
-            filter_option = filter_option & Q(end_date__lte=at_date)
-        try:
-            for task in Task.objects.filter(filter_option).order_by('-end_date'):
-                status = task.get_anxiety_status(index)
-                if status != '':
-                    break
-            if html:
-                if status[1] != 'success':
-                    return '<span style="min-width:100px" class="label \
-                        label-%s" >%s</span>' % (status[1], status[0])
-                return ''
-            else:
-                return status
-        except:
-            return ''
 
-    def get_depression_status(self, at_date=None, index=False, html=False):
-        filter_option = Q(patient=self.user,
-                          survey__code__in=(
-                          settings.INITIAL_ASSESSMENT,
-                          settings.ANXIETY_DEPRESSION_SURVEY
-                          ),
-                          completed=True,
-                          assess=False)
-        if at_date:
-            filter_option = filter_option & Q(end_date__lte=at_date)
-        try:
-            for task in Task.objects.filter(filter_option).order_by('-end_date'):
-                status = task.get_depression_status(index)
-                if status != '':
-                    break
-            if html:
-                if status[1] != 'success':
-                    return '<span style="min-width:100px" class="label \
-                        label-%s" >%s</span>' % (status[1], status[0])
-                return ''
-            else:
-                return status
-        except:
-            return ''
-
-    def get_unhope_status(self, at_date=None, index=False, html=False):
-        filter_option = Q(patient=self.user,
-                          survey__code=settings.UNHOPE_SURVEY,
-                          completed=True,
-                          assess=False)
-        if at_date:
-            filter_option = filter_option & Q(end_date__lte=at_date)
-        try:
-            for task in Task.objects.filter(filter_option).order_by('-end_date'):
-                status = task.get_unhope_status(index)
-                if status != '':
-                    break
-            if html:
-                if status[1] != 'success':
-                    return '<span style="min-width:100px" class="label \
-                        label-%s" >%s</span>' % (status[1], status[0])
-                return ''
-            else:
-                return status
-        except:
-            return ''
-
-    def get_ybocs_status(self, at_date=None, index=False, html=False):
-        filter_option = Q(patient=self.user,
-                          survey__code=settings.YBOCS_SURVEY,
-                          completed=True,
-                          assess=False)
-        if at_date:
-            filter_option = filter_option & Q(end_date__lte=at_date)
-        try:
-            for task in Task.objects.filter(filter_option).order_by('-end_date'):
-                status = task.get_ybocs_status(index)
-                if status != '':
-                    break
-            if html:
-                if status[1] != 'success':
-                    return '<span style="min-width:100px" class="label \
-                        label-%s" >%s</span>' % (status[1], status[0])
-                return ''
-            else:
-                return status
-        except:
-            return ''
-
-    def get_suicide_status(self, at_date=None, index=False, html=False):
-        filter_option = Q(patient=self.user,
-                          survey__code=settings.UNHOPE_SURVEY,
-                          completed=True,
-                          assess=False)
-        if at_date:
-            filter_option = filter_option & Q(end_date__lte=at_date)
-        try:
-            for task in Task.objects.filter(filter_option).order_by('-end_date'):
-                status = task.get_suicide_status(index)
-                if status != '':
-                    break
-            if html:
-                if status[1] != 'success':
-                    return '<span style="min-width:100px" class="label \
-                        label-%s" >%s</span>' % (status[1], status[0])
-                return ''
-            else:
-                return status
-        except:
-            return ''
-
-    def get_medical_status(self, at_date=None, index=False, html=False):
-        statuses = [self.get_anxiety_status(at_date, index, html),
-                    self.get_depression_status(at_date, index, html),
-                    self.get_unhope_status(at_date, index, html),
-                    self.get_suicide_status(at_date, index, html),
-                    self.get_ybocs_status(at_date, index, html)]
-        return filter(None, statuses)
+    def get_medical_status(self, at_date=None, scale_key=None, scales=None):
+        key = pattern.sub('', 'status_' + str(self.id) + '_' + str(at_date) + '_' + str(scale_key))
+        _status = cache.get(key)
+        if _status and not scales:
+            return _status
+        statuses = []
+        if not scales:
+            scales = Scale.objects.all()
+        if scale_key:
+            scales = scales.filter(key=scale_key)
+        for scale in scales:
+            filter_option = Q(patient=self.user,
+                              survey__scales=scale,
+                              completed=True,
+                              assess=False)
+            if at_date:
+                filter_option = filter_option & Q(end_date__lte=at_date)
+            try:
+                for task in Task.objects.filter(filter_option).order_by('-end_date'):
+                    status = task.get_level(scale)
+                    if status:
+                        statuses.append(status)
+                        break
+                
+            except:
+                pass
+            status = filter(None, statuses)
+            if not scales:
+                cache.set(key, status)
+        return status
 
     def get_unread_messages(self):
         return Message.objects.get_pending_for_user(self.user)
@@ -487,8 +439,8 @@ class Profile(TraceableModel):
     def get_scored_blocks(self, statistic=False):
         if self.is_doctor():
             if statistic:
-                return Block.objects.filter(
-                    is_scored=True).values('code', 'name').distinct()
+                return Block.objects.filter(blocks_surveys__enabled=True,
+                    is_scored=True).distinct()
             else:
                 return Block.objects.filter(
                     locks_tasks__patient__profiles__doctor=self.user,
@@ -497,6 +449,44 @@ class Profile(TraceableModel):
             return Block.objects.filter(
                 blocks_tasks__patient=self.user,
                 is_scored=True).values('code', 'name').distinct()
+
+    def get_role(self):
+        return self.ROLE[self.role-1][1]
+
+    def get_latest_alert(self, pending=True):
+        return Alert.objects.filter(task__patient=self.user, revised_date__isnull=pending).latest('creation_date')
+
+    def get_variables_mark(self, timestamp=None):
+        vmarks = {}
+        if not timestamp:
+            timestamp = datetime.today()
+        for t in Task.objects.filter(completed=True, patient=self.user, survey__blocks__is_scored=True, end_date__lte=timestamp).order_by('-end_date'):
+            marks = t.get_variables_mark()
+            for var, mark in marks.iteritems():
+                if not var in vmarks.keys():
+                    vmarks[var] = mark
+        return vmarks
+
+    def check_risks(self):
+        variables = self.get_variables_mark()
+        risks = []
+        for v, mark in variables.iteritems():
+            try:
+                cond = v.get_active_condition(mark)
+                if cond:
+                    print v, mark, cond.risk
+                    risks.append(cond.risk)
+            except:
+                pass
+
+        try:
+            from collections import Counter
+            risks = sorted(Counter(risks).items(), key=lambda x: -x[0].criticity)
+            for r, n in risks:
+                if n >= r.coincidences:
+                    return r
+        except:
+            pass
 
     class Meta:
         verbose_name = "Perfil"

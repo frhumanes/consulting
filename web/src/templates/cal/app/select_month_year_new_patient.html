@@ -10,10 +10,10 @@
 <div class="">
     <ul class="pager">
         <li class="previous">
-            <a href="{% url cal.select_month_year year|add:'-3' %}">&larr; Prev</a>
+            <a href="{% url 'cal.select_month_year' year|add:'-3' %}">&larr; Prev</a>
         </li>
         <li class="next">
-            <a href="{% url cal.select_month_year year|add:'3' %}">Next &rarr;</a>
+            <a href="{% url 'cal.select_month_year' year|add:'3' %}">Next &rarr;</a>
         </li>
     </ul>
 </div>
@@ -26,7 +26,7 @@
                     {% if month.entry %}<b>{% endif %}
                     <li>
                         <a class={% if month.current %}"label label-info"{% else %}""{% endif %}
-                        href={% if request.user.get_profile.is_doctor %}"{% url cal.doctor_day_new_app_admin year month.n today request.user.id patient.id %}"{% else %}"{% url cal.check_patient year month.n today patient.id %}"{% endif %}>{{ month.name }}</a>        
+                        href={% if request.user.get_profile.is_doctor %}"{% url 'cal.doctor_day_new_app_admin' year month.n today request.user.id patient.id %}"{% else %}"{% url 'cal.check_patient' year month.n today patient.id %}"{% endif %}>{{ month.name }}</a>        
                     </li>
                 {% endfor %}
             </ul>

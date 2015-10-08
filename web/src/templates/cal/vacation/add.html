@@ -6,7 +6,7 @@
   <div class="page-header">
     <h1>{% trans 'Nuevo periodo de vacaciones' %}
             <div class="btn-group pull-right">
-                  <a class="btn btn-info" href="{% url cal.list_vacation %}">
+                  <a class="btn btn-info" href="{% url 'cal.list_vacation' %}">
                      <i class="icon-arrow-left icon-white"></i>
                     {% trans 'Volver' %}
                   </a>
@@ -16,7 +16,7 @@
 
 <div class="well">
 
-<form class="form-horizontal" method="post" action="{% url cal.add_vacation %}">{% csrf_token %}
+<form class="form-horizontal" method="post" action="{% url 'cal.add_vacation' %}">{% csrf_token %}
       {% if  form.non_field_errors  %}
         <div class="alert alert-error">
             {% for error in form.non_field_errors %}

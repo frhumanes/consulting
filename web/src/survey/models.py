@@ -28,16 +28,23 @@ class Survey(TraceableModel):
     code = models.IntegerField(_(u'Código'), blank=True, null=True,
                                db_index=True)
 
+    enabled = models.BooleanField(_(u'Habilitado'), default=True)
+
     is_reportable = models.BooleanField(_(u'¿Tiene informe?'), default=False)
+
+    scales = models.ManyToManyField('formula.Scale', related_name='scale_surveys', blank=True)
 
     def __unicode__(self):
         return u'%s' % (self.name)
 
-    def num_blocks(self):
-        return self.blocks.values('code').distinct().count()
+    def num_blocks(self, kind = None):
+        if kind:
+            return self.blocks.filter(kind__in=[settings.GENERAL, kind]).values('code').distinct().count()
+        else:
+            return self.blocks.values('code').distinct().count()
 
     def get_available_kinds(self, flat=True):
-        kinds = list(self.blocks.values_list('kind', flat=flat).distinct())
+        kinds = list(set(list(self.blocks.values_list('kind', flat=flat))))
         if len(kinds) > 1 and settings.GENERAL in kinds:
             kinds.remove(settings.GENERAL)
         elif len(kinds) == 0:
@@ -132,8 +139,13 @@ class Block(TraceableModel):
         else:
             return 'Abreviado'
 
+    def get_surveys(self):
+        surveys = self.blocks_surveys.filter(enabled=True)
+        return surveys
+
     class Meta:
         verbose_name = "Bloque"
+        ordering = ('code', 'id')
 
 
 class Question(models.Model):

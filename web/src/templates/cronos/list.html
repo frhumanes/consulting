@@ -1,0 +1,181 @@
+{% extends "cronos/base.html" %}
+
+{% load i18n consulting %}
+
+
+{% block jquery_init %}
+    $('#modal').on('hidden', function () {
+      $(this).removeData();
+      $('.modal-body').html('');
+    })
+    $('#id_illness').change(function(){ 
+      var loader = '<img src="{{ STATIC_URL }}img/ajax-bar-loader.gif" alt="loading..." />';
+      //$('#initbtn').html(loader);
+      $('#initbtn').attr('disabled','disabled');
+      $('#loader').show();
+      $('#overwrite_list').fadeTo(500, 0.25);
+      $('#selector').submit()
+    });
+
+    $('.cronos-alert').on('close', function  () 
+    {
+        var id = $(this).data('id'); 
+        $.ajax({
+          url:'{% url 'consulting_dismiss_alert' %}', 
+          data: {id:id},
+        });
+    });
+{% endblock %}
+
+
+{% block container %}
+<div class="page-header">
+    <h1>{% trans 'Listado de Tareas' %} </h1>                
+</div>
+  <section>
+    <div class="alert alert-success center">
+      <form id="selector" class="form-horizontal" method="post" action="">
+        {% csrf_token %}
+        <fieldset>
+            {% if form.illness.errors %}
+              <div class="control-group error">
+                <label class="control-label">
+                  {% trans 'Seleccionar categoría '%}
+                </label>
+                <div class="controls">
+                  {{ form.illness }}
+                  
+                  {% for error in form.illness.errors %}
+                    <span class="help-inline">
+                      {{ error|escape }}
+                    </span>
+                  {% endfor %}
+                </div>
+              </div>
+            {% else %}
+              <div class="control-group">
+                <label class="control-label">
+                  {% trans 'Seleccionar categoría '%}
+                </label>
+                <div class="controls">
+                  {{ form.illness }} 
+                </div>
+              </div>
+            {% endif %}
+            
+            <div class="btn-group">
+              {% if link %}
+              <a id="initbtn" class="btn btn-success " href="{{link}}">{% trans "Realizar seguimiento"%}</a>
+              {% endif %}
+              {% if code_illness %}
+              <a class="btn btn-primary" href="{% url 'cronos_home_tasks' code_illness=code_illness id_appointment=appointment.id %}">{% trans 'Programar cuestionario' %}</a>
+              {% endif %}
+            </div>
+            
+        </fieldset>
+      </form>
+    </div>
+
+      <div class="">
+       
+      <div id="overwrite_list" class="">            
+        {% if reports.object_list %}                     
+        <table id="list_report" class="table table-bordered table-condensed">  
+          <thead>
+            <tr>            
+              <th style="text-align:center;">
+                {% trans 'FECHA' %}
+              </th>
+              <th style="text-align:center;">
+                {% trans 'CUESTIONARIO' %}
+              </th>
+              <th>&nbsp;</th>
+              <th style="text-align:center;">
+                {% trans 'ESTADO' %}
+              </th>
+              <th style="text-align:center;">
+                {% trans 'INFORME' %}
+              </th>               
+            </tr>
+          </thead>        
+          <tbody>                  
+            {% for report in reports.object_list %}
+              <tr id="{{report.id}}" class="report">
+                <td style="text-align:center;">{{ report.start_date|date:"d/M/Y H:m"|lower }}
+                {% with risk=report.alert_set.all.0.risk %}
+                  {% if risk %}
+                    <span class="label" style="background-color: {{risk.color}}">
+                      {% trans 'Riesgo' %} {{risk.name|upper}}
+                    </span>
+                  {% endif %}
+                {% endwith %}
+                </td>
+                <td style="text-align:left;">
+                  {% if report.completed %}
+                  <a class="btn btn-link" data-target="#modal" href="{% url 'consulting_view_task' report.id %}" role="button" data-toggle="modal" rel="tooltip" data-original-title="{% trans 'ver' %}">{{report.survey.name}}</a>
+                  {% else %}
+                  <a class="btn btn-link" href="{% url 'consulting_show_task_block' appointment.id 'O' report.id 0 %}" role="button" rel="tooltip" data-original-title="{% trans 'completar' %}">{{report.survey.name}}</a>
+                  {% endif %}
+                </td>
+                <td style="text-align:center;">
+                  {% if report.created_by.get_profile.is_nurse %}
+                    <i class="icon-user"></i><i class="icon-home"></i>
+                  {% else %}
+                    <i class="icon-{{report.self_administered|yesno:'home,user'}}"></i>
+                  {% endif %}
+                </td>
+                <td style="text-align:center;">
+                    {% for block in report.treated_blocks.all %}
+                      {% if block.is_scored %}
+                      <a class="btn btn-small btn-info" href="{% url 'consulting_user_evolution' report.patient.id block.code %}">{% trans 'Evolución de' %} {{block.name}}</a>
+                      {% endif %}
+                    {% endfor %}
+                </td>   
+
+                <td style="text-align:center;">
+                  {% if report.survey.is_reportable and report.completed %}
+                  <a class="btn btn-small btn-link" data-target="#modal" href="{% url 'consulting_view_report' report.id %}" role="button" data-toggle="modal">HTML</a>|
+                  <a class="btn btn-small btn-link" href="{% url 'consulting_view_report' report.id%}?as=pdf" >PDF</a> 
+                  {% endif %}
+                  {% if not report.completed %}
+                    <a class="btn btn-small btn-block btn-warning" href="{% url 'consulting_show_task_block' appointment.id 'O' report.id 0 %}" ><i class="icon-edit icon-white"></i> {% trans 'Completar'%}</a> 
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div id="overwrite" class="muted"><i class="icon-user"></i> = {% trans 'Realizado por el médico' %} | <i class="icon-home"></i> = {% trans 'Realizado por el paciente' %} | <i class="icon-user"></i><i class="icon-home"></i> = {% trans 'Realizado por un profesional en el domicilio del paciente' %}</div>
+       {% include 'ui/includes/pagination_bar.html' with objects=reports %}
+                                   
+        {% else %}
+            <div class="alert alert-info">{% trans "No hay tareas ni informes disponibles" %} </div>
+        {% endif %}
+      </div>
+     
+    </div>
+             
+  </section>
+
+<div class="modal hide fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Previsualización de cuestionario/informe</h3>
+  </div>
+  <div class="modal-body">
+    <img src="{{ STATIC_URL }}img/ajax-loader.gif" alt="loading..." />
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+  </div>
+</div>
+{% endblock container %}
+
+{% block right %}
+  {% include 'consulting/patient/card-mini.html' %}
+  {% include 'consulting/patient/alert.html' %}
+  {% if request.user.get_profile.is_doctor %}
+  <br>
+    <img id="loader" src="{{ STATIC_URL }}img/ajax-bar-loader.gif" alt="loading..." / style="display: none" />
+  {% endif %}
+{% endblock %}

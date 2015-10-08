@@ -10,7 +10,7 @@
 <div class="page-header">
   <h1>{% trans 'Asignar cita' %}<small> {{ day }} {% trans "de" %} {{ mname }} {% trans "de" %} {{ year }}</small>
     <div class="btn-group pull-right">
-      <a class="btn btn-info" href="{% if patient_user %}{% url cal.views.day year month day patient_user.id %}{% else %}{% url cal.views.doctor_day doctor.id year month day %}{% endif %}">
+      <a class="btn btn-info" href="{% if patient_user %}{% url 'cal.views.day' year month day patient_user.id %}{% else %}{% url 'cal.views.doctor_day' doctor.id year month day %}{% endif %}">
       <i class="icon-arrow-left icon-white"></i>
       {% trans 'Volver' %}
       </a>
@@ -32,7 +32,7 @@
 
 {% if form %}
 <div class="well">
-<form id="appform" class="form-horizontal" method="post" action="{% if patient_user %}{% url cal.add year month day patient_user.id %}{% else %}{% url cal.add year month day doctor.id%}{% endif %}">{% csrf_token %}
+<form id="appform" class="form-horizontal" method="post" action="{% if patient_user %}{% url 'cal.add' year month day patient_user.id %}{% else %}{% url 'cal.add' year month day doctor.id%}{% endif %}">{% csrf_token %}
 
   <fieldset>
       {% if not_available_error %}
@@ -72,7 +72,7 @@
           <div class="input-prepend span9 relative">
             <span class="add-on">
               {% if request.user.get_profile.is_doctor %}
-              <a href="{% url cal.add_slot_type %}?next={{request.path}}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a>
+              <a href="{% url 'cal.add_slot_type' %}?next={{request.path}}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a>
               {% endif %}
             </span>
             {{ form.app_type }}
@@ -89,7 +89,7 @@
           <div class="input-prepend span9">
             <span class="add-on">
             {% if request.user.get_profile.is_doctor %}
-            <a href="{% url cal.add_slot_type %}?next={{request.path}}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a>
+            <a href="{% url 'cal.add_slot_type' %}?next={{request.path}}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a>
             {% endif %}
             </span>
             {{ form.app_type }}
@@ -280,6 +280,6 @@
   };
 
   $('#check_schedule').on('click', function(){
-    $('#appform').attr('action', "{% if patient_user %}{% url cal.check year month day patient_user.id %}{% else %}{% url cal.check year month day doctor.id%}{% endif %}").submit();
+    $('#appform').attr('action', "{% if patient_user %}{% url 'cal.check' year month day patient_user.id %}{% else %}{% url 'cal.check' year month day doctor.id%}{% endif %}").submit();
   });
 {% endblock %}

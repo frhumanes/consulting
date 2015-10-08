@@ -10,11 +10,11 @@
   <div class="page-header">
     <h1>{% trans 'Eventos' %} {{year}}
             <div class="btn-group pull-right">
-                  <a class="btn btn-info btn" href="{% url cal.add_event %}"><i class="icon-calendar icon-white"></i> {% trans "Añadir evento" %}</a>
+                  <a class="btn btn-info btn" href="{% url 'cal.add_event' %}"><i class="icon-calendar icon-white"></i> {% trans "Añadir evento" %}</a>
             </div>
         </h1>
   </div>
-
+<section>
   {% if events.object_list.count > 0 %}
   <div class="well" style="overflow-x: auto;">
     <div class="btn-group">
@@ -49,6 +49,7 @@
   {% else %}
     <div class="alert alert-info">{% trans "No hay ningún evento programado" %}</div>
   {% endif %}
+</section>
 {% endblock %}
 
 {% block jquery_init %}

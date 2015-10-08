@@ -13,8 +13,7 @@
 {% block body %}
 <div class="container" style="padding-top:50px;">
     <div class="row" >
-        <div class="span3">&nbsp;</div>
-        <div class="span6">
+        <div class="offset3 span6 well">
           {% if  form.non_field_errors  %}
               <div class="alert alert-error">
                   {% for error in form.non_field_errors %}
@@ -24,12 +23,15 @@
               </div>
           {% endif %}
 
-          <form class="form-horizontal" method="post" id="login-form" name="form" action="{% url login %}">
+          <form class="form-horizontal" method="post" id="login-form" name="form" action="{% if nuhsa %}{{request.path}}{% else %}{% url 'login' %}{% endif %}">
             {% csrf_token %}
             <fieldset class="control-group">
-              <legend>Login</legend>
+              <div class="center"><img src="{{ STATIC_URL }}img/logo_trans.png" alt="Login"/></div>
               <br>
               <input type="hidden" name="next" value="{{ next }}"/>
+              {% if nuhsa %}
+              <input type="hidden" name="nuhsa" value="{{ nuhsa }}"/>
+              {% endif %}
               <!-- USERNAME -->
               {% if form.username.errors %}
                 <div class="control-group error">
@@ -60,7 +62,7 @@
                     {% for error in form.password.errors %}
                        <span class="help-inline">{{ error|escape }}</span>
                     {% endfor %}
-                    <span class="help-inline"><a href="{% url password_reset %}">{% trans '¿Ha olvidado la contraseña?' %}</a></span>
+                    <span class="help-inline"><a href="{% url 'password_reset' %}">{% trans '¿Ha olvidado la contraseña?' %}</a></span>
                   </div>
                 </div>
               {% else %}
@@ -69,13 +71,13 @@
                   </label>
                   <div class="controls">
                     {{ form.password }}
-                    <span class="help-inline"><a href="{% url password_reset %}">{% trans '¿Ha olvidado la contraseña?' %}</a></span>
+                    <span class="help-inline"><a href="{% url 'password_reset' %}">{% trans '¿Ha olvidado la contraseña?' %}</a></span>
                   </div>
                 </div>
               {% endif %}
               <!-- END PASSWORD -->
 
-              <div class="well center">
+              <div class="center">
                 <button class="btn btn-primary btn-large btn-block" type="submit">
                   Login
                 </button>

@@ -116,7 +116,7 @@
       <!-- END DISCOUNT -->
 
       <div class="center">
-        {% if app.is_editable %}<a href="{% url cal.edit app.id %}" class="btn btn-large btn-success"><i class="icon-pencil icon-white"></i> {% trans 'Editar cita' %}</a>{% endif %}
+        {% if app.is_editable %}<a href="{% url 'cal.edit' app.id %}" class="btn btn-large btn-success"><i class="icon-pencil icon-white"></i> {% trans 'Editar cita' %}</a>{% endif %}
         <button class="btn btn-large btn-primary" type="submit">
           <i class="icon-ok-sign icon-white"></i>
           {% trans 'Guardar cambios' %}</button>

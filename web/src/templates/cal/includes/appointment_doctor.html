@@ -4,12 +4,12 @@
     {% if event.is_reserved %}<i class="icon-question-sign"></i>{% endif %}
     {% if event.is_canceled %}<i class="icon-remove-sign"></i>{% endif %}
   	{% if event.is_editable %}
-  	<a href="{% url cal.edit event.id %}" placement="top" rel="tooltip" data-original-title="Editar cita">{{ event.date|date:"d/M/Y" }}</a>
+  	<a href="{% url 'cal.edit' event.id %}" placement="top" rel="tooltip" data-original-title="Editar cita">{{ event.date|date:"d/M/Y" }}</a>
   	{% else %}
 	  	{% if request.user.get_profile.is_doctor %}
-	  		<a href="{% url consulting_start event.id %}" placement="top" rel="tooltip" data-original-title="{% trans 'Ir a resumen de la cita' %}">{{ event.date|date:"d/M/Y" }}</a>
+	  		<a href="{% url 'consulting_start' event.id %}" placement="top" rel="tooltip" data-original-title="{% trans 'Ir a resumen de la cita' %}">{{ event.date|date:"d/M/Y" }}</a>
 	  	{% else %}
-	  		<a href="{% url cal.edit_payment event.id %}" placement="top" rel="tooltip" data-original-title="{% trans 'Registrar cita' %}">{{ event.date|date:"d/M/Y" }}</a>
+	  		<a href="{% url 'cal.edit_payment' event.id %}" placement="top" rel="tooltip" data-original-title="{% trans 'Registrar cita' %}">{{ event.date|date:"d/M/Y" }}</a>
 	  	{% endif %}
   	{% endif %}
   </td>

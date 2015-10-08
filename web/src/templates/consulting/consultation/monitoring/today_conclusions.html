@@ -4,7 +4,7 @@
   <h4>{% trans 'Conclusiones' %}</h4>
   {% if not conclusions %}
     {% if illness %}
-    <div class="alert alert-warning">{% trans 'Pendiente.' %} <a href="{% url consulting_set_conclusion appointment.id illness.code %}"><strong class="warning">{% trans 'Rellenar ahora' %}</strong></a></div>
+    <div class="alert alert-warning">{% trans 'Pendiente.' %} <a href="{% url 'consulting_set_conclusion' appointment.id illness.code %}"><strong class="warning">{% trans 'Rellenar ahora' %}</strong></a></div>
     {% else %}
      <div class="alert alert-info">{% trans 'No hay conclusiones asociadas a esta cita' %}
      </div>

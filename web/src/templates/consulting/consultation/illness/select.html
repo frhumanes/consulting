@@ -12,7 +12,7 @@
     <h1>{% trans 'Selección de diagnóstico' %}</h1>
   </div>
   <div class="hero-unit center">
-    <form class="form-horizontal" method="post" action="{% url consulting_start id_appointment %}">{% csrf_token %}
+    <form class="form-horizontal" method="post" action="{% url 'consulting_start' id_appointment %}">{% csrf_token %}
       <fieldset>
           {% if form.illness.errors %}
             <div class="control-group error">

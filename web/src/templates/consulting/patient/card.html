@@ -6,7 +6,7 @@
       <tr>            
         <th colspan="2" >
           <h4 style="text-align:center;">
-            <a href="{% url consulting_editpatient_pm patient_user.id %}?next={{request.path}}" data-dismiss="alert" rel="tooltip" placement="left" title="{% trans 'Editar datos personales' %}">{{patient_user.get_profile.get_full_name|upper}}</a> 
+            <a href="{% url 'consulting_editpatient_pm' patient_user.id %}?next={{request.path}}" data-dismiss="alert" rel="tooltip" placement="left" title="{% trans 'Editar datos personales' %}">{{patient_user.get_profile.get_full_name|upper}}</a> 
           </h4>
         </th>
       </tr>
@@ -24,7 +24,8 @@
       <tr>            
         <td>{% trans 'SEXO' %}</td>
         <td>{{patient_user.get_profile.get_sex}}</td>
-      </tr>      
+      </tr> 
+      {% if not request.session.cronos %}    
       <tr>            
         <td>{% trans 'ESTADO CIVIL' %}</td>
         <td>{{patient_user.get_profile.get_status}}</td>
@@ -82,6 +83,7 @@
       </tr>
       {% endif %}
       {% endif %}
+      {% endif %}
       {% if mini %}
       {% if patient_user.get_profile.get_lastAppointment %}
       <tr>            
@@ -89,12 +91,13 @@
         <td>{{patient_user.get_profile.get_lastAppointment.date|date:'d/M/Y'}}</td>
       </tr>
       {% endif %}
+      {% if not request.session.cronos %}
       <tr>            
         <td>{% trans 'PRÓXIMA CITA' %}</td>
         <td>{% if patient_user.get_profile.get_nextAppointment and patient_user.is_active %}
           {{patient_user.get_profile.get_nextAppointment.date|date:'d/M/Y'}}
           {% else %}
-          <a href="{% url cal.scheduler patient_user.id %}" class="btn btn-small btn-info btn-block"><i class='icon-plus-sign icon-white'></i> {% trans 'Dar cita' %}</a>
+          <a href="{% url 'cal.scheduler' patient_user.id %}" class="btn btn-small btn-info btn-block"><i class='icon-plus-sign icon-white'></i> {% trans 'Dar cita' %}</a>
           {% endif %}
           {% if patient_user.get_profile.get_pending_tasks %}
           <br>
@@ -106,6 +109,7 @@
           {% endif %}
         </td>
       </tr>
+      {% endif %}
       {% if user.get_profile.is_doctor %}
       <tr>            
         <td colspan="2">{% trans 'NIVEL ESTRATIFICACIÓN' %}<br />

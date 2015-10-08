@@ -55,7 +55,7 @@
           </tbody>
         </table>
         <div class="pull-right">
-          <a id="goback" href="{% if illness %}{% url consulting_main id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}" class="btn btn-info btn-large">
+          <a id="goback" href="{% if illness %}{% url 'consulting_main' id_appointment=appointment.id code_illness=illness.code %}{% else %} javascript:history.back();{% endif %}" class="btn btn-info btn-large">
             {% trans 'Volver' %}
           </a>      
         </div>                             

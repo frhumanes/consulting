@@ -1,0 +1,68 @@
+{% extends "cronos/base.html" %}
+
+{% load i18n consulting userprofile %}
+
+{% block right %}
+  {% include 'consulting/patient/card-mini.html'%}
+{% endblock %}
+
+
+{% block container %}
+  <div class="page-header">
+    <h1>{% trans 'Listado de Consejos y recomendaciones' %}</h1>
+  </div>
+  <input name="csrfmiddlewaretoken" type="hidden" value="{{csrf_token}}">
+  <section>
+    <a class="btn btn-block btn-success" href="{% url 'cronos_new_recommendation' %}">{% trans 'Añadir consejo o recomendaciones' %}</a>
+    <br>
+    <div class="">       
+      <div id="overwrite_list" class="">            
+        {% if conclusions.object_list %}                     
+        <table id="list_conclusion" class="table table-bordered">  
+          <thead>
+            <tr>            
+              <th style="text-align:center;">
+                {% trans 'FECHA' %}
+              </th>
+              <th style="text-align:center;">
+                {% trans 'OBSERVACION' %}
+              </th>
+              <th style="text-align:center;">
+                {% trans 'RECOMENDACIÓN' %}
+              </th>
+              <th style="text-align:center;">
+                {% trans 'ADJUNTO' %}
+              </th>
+            </tr>
+          </thead>        
+          <tbody>                  
+            {% for conclusion in conclusions.object_list %}
+              <tr id="{{conclusion.id}}" class="conclusion">
+                <td style="text-align:center;"><a href="{% url 'cronos_edit_recommendation' id_conclusion=conclusion.id %}">{{conclusion.date|date:"d/M/Y"|lower}}</a></td>
+                <td style="text-align:justify;">{{conclusion.observation|striptags|safe|linebreaksbr }}</td>
+                <td style="text-align:justify;">{{conclusion.recommendation|safe|linebreaksbr }}</td>
+
+                <td style="text-align:center;">
+                  {% if conclusion.extra %}
+                    <a target="_blank" href="{{MEDIA_URL}}{{conclusion.extra}}"><i class="icon icon-file"></i></a>
+                  {% endif %}
+                </td>  
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% include 'ui/includes/pagination_bar.html' with objects=conclusions %}
+        <div id="overwrite"></div>                           
+        {% else %}
+            <div class="alert alert-info">{% trans "No hay recomendaciones asociadas a este paciente" %}</div>
+        {% endif %}
+      </div>
+     
+    </div>
+             
+  </section>
+{% endblock container %}
+
+{% block jquery_init %}
+    $('a[rel="popover"]').popover();
+{% endblock %}

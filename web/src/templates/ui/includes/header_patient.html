@@ -1,9 +1,9 @@
 {% load i18n%}
 {% load consulting %}
 
-{% url consulting_index as index %}
-{% url consulting_list_surveys as surveys %}
-{% url private_messages_inbox as inbox %}
+{% url 'consulting_index' as index %}
+{% url 'consulting_list_surveys' as surveys %}
+{% url 'private_messages_inbox' as inbox %}
 
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
@@ -13,24 +13,34 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="/">{% get_brand %}</a>
+        <a class="brand" href="{% url 'consulting_index' %}">{% get_brand %}</a>
         <div class="nav-collapse collapse navbar-responsive-collapse">
             <ul class="nav">
                 <li class="{% active_root request index %}">
-                    <a href="{% url consulting_index %}">
+                    <a href="{% url 'consulting_index' %}">
                         {% trans 'INICIO' %}
                     </a>
                 <li class="{% active_root request surveys %}">
-                    <a href="{% url consulting_list_surveys %}">
+                    <a href="{% url 'consulting_list_surveys' %}">
                       {% trans 'CUESTIONARIOS' %}
                     </a>
                 </li>
                 {% if user.get_profile.doctor %}
+                {% comment %}
                 <li class="{% active_root request inbox %}">
-                    <a href="{% url private_messages_inbox %}">
+                    <a href="{% url 'private_messages_inbox' %}">
                         {% trans 'MENSAJERÍA' %}
                         {% if user.get_profile.get_unread_messages.count %}
                             <span class="badge badge-important"><small  id="unread_messages">{{user.get_profile.get_unread_messages.count}}</small></span>
+                        {% endif %}
+                    </a>
+                </li>
+                {% endcomment %}
+                <li class="">
+                    <a href="#">
+                        {% trans 'NOTIFICACIONES' %}
+                        {% if user.get_profile.get_pending_tasks.count %}
+                            <span class="badge badge-important"><small  id="pending_notificatioones">{{user.get_profile.get_pending_tasks.count}}</small></span>
                         {% endif %}
                     </a>
                 </li>
@@ -44,10 +54,12 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><i class="icon-user"></i> <strong>{{ user.get_profile.get_full_name }}</strong></a></li>
-                        <li><a href="{% url password_change %}"><i class="icon-lock"></i> {% trans 'Cambiar contraseña' %}</a></li>
-                        <li><a href="{% url consulting_user_guide %}"><i class="icon-file"></i> {% trans 'Descargar manual' %} (PDF)</a></li>
+                        {% comment %}
+                        <li><a href="{% url 'password_change' %}"><i class="icon-lock"></i> {% trans 'Cambiar contraseña' %}</a></li>
+                        <li><a href="{% url 'consulting_user_guide' %}"><i class="icon-file"></i> {% trans 'Descargar manual' %} (PDF)</a></li>
+                        {% endcomment %}
                         <li class="divider"></li>
-                        <li><a href="{% url registration_logout %}"><i class="icon-off"></i> {% trans 'Desconectar' %}</a></li>
+                        <li><a href="{% if request.session.cronos %}{% url 'cronos_logout' %}{% else %}{% url 'registration_logout' %}{% endif %}"><i class="icon-off"></i> {% trans 'Desconectar' %}</a></li>
                     </ul>
                 </li>
             </ul>

@@ -150,7 +150,7 @@ $('ul').addClass("without_decorator");
 $('#reload_button').on('click',function(){
     $(this).html('<img src="{{STATIC_URL}}img/ajax-bar-loader.gif" />&nbsp;Cargando...');  
     $(this).addClass('disabled');
-    $(this).load('{% url rebuild_data %}', function(){
+    $(this).load('{% url 'rebuild_data' %}', function(){
       location.reload();
   });
 })
@@ -164,6 +164,7 @@ $('#reload_button').on('click',function(){
 <div class="page-header" style="margin-top:36px">
   <h4>{% trans 'Opciones de filtrado' %}</h4>
 </div>
+<section>
 <form class="form-inline" id="form" action="{{request.path}}" method="post" accept-charset="utf-8">
   {% csrf_token %}
   
@@ -233,11 +234,12 @@ $('#reload_button').on('click',function(){
     {% trans 'Limpiar filtros' %}
   </button>
 </form>
+</section>
 {% endblock %}
 
 
 {% block container %}
-<section>
+
 <div class="page-header">
   <h1>{% trans 'Explotación de resultados' %}
     <div class="btn-group pull-right">
@@ -246,7 +248,7 @@ $('#reload_button').on('click',function(){
     <small style="display: block">{{survey_block.name}}</small>
   </h1>
 </div>
-
+<section>
 <div class="hero-unit center">
   <button id="download_xls" class="btn btn-primary btn-block btn-large {% if not reports|length %}disabled{% endif %}">{% trans 'Descargar datos en formato Excel' %}</button>
   <br>

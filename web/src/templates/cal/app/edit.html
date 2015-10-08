@@ -70,7 +70,7 @@
               <div class="input-prepend span9 relative">
                 <span class="add-on">
                   {% if request.user.get_profile.is_doctor %}
-                  <a href="{% url cal.add_slot_type %}?next={{request.path}}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a>
+                  <a href="{% url 'cal.add_slot_type' %}?next={{request.path}}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a>
                   {% endif %}
                 </span>
                 {{ form.app_type }}
@@ -87,7 +87,7 @@
               <div class="input-prepend span9">
                 <span class="add-on">
                 {% if request.user.get_profile.is_doctor %}
-                  <a href="{% url cal.add_slot_type %}?next={{request.path}}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a>
+                  <a href="{% url 'cal.add_slot_type' %}?next={{request.path}}" rel="tooltip" data-title="{% trans 'Crear nuevo tipo' %}"><i class="icon-plus-sign"></i></a>
                   {% endif %}
                 </span>
                 {{ form.app_type }}
@@ -233,7 +233,7 @@
             <i class="icon-remove-sign icon-white"></i>
             {% trans 'Eliminar' %}
           </a>
-          <a class="btn btn-large btn-success" href="{% url cal.edit_payment event.id %}">
+          <a class="btn btn-large btn-success" href="{% url 'cal.edit_payment' event.id %}">
             <i class="icon-shopping-cart icon-white"></i>
             {% trans 'Registrar pago' %}
           </a>
@@ -317,17 +317,14 @@
     $(this).siblings().attr('disabled', true);
     $(this).siblings().attr('data-dismiss', 'static');
 
-    var json = { app_id: {{ event.id }}, csrfmiddlewaretoken: '{{ csrf_token }}' };
+    var json = { app_id: {{ event.id }} };
 
     $.ajax({
-      url: '{% url cal.delete event.id %}',
+      url: '{% url 'cal.delete' event.id %}',
       type: 'DELETE',
       dataType: 'json',
       contentType: "application/json",
       data: JSON.stringify(json),
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
-      },
       processData: false,
       success:function(data) {
                 if(data.action){

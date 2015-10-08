@@ -1,816 +1,1366 @@
 [
-  {
+{
     "pk": 1, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 1, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B1+H6.3", 
-      "factor": "0.7142857140"
+        "variable": 1, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B1+H6.3", 
+        "factor": "0.7142857140"
     }
-  }, 
-  {
+},
+{
     "pk": 2, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 1, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B1", 
-      "factor": "1.6666666670"
+        "variable": 1, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B1", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 3, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 2, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B2+H1.2+H1.3", 
-      "factor": "0.4545454550"
+        "variable": 2, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B2+H1.2+H1.3", 
+        "factor": "0.4545454550"
     }
-  }, 
-  {
+},
+{
     "pk": 4, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 2, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B2", 
-      "factor": "1.6666666670"
+        "variable": 2, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B2", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 5, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 3, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B3+B5+B6+B7+B8+B14+H6.1+H6.2", 
-      "factor": "0.1923076920"
+        "variable": 3, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B3+B5+B6+B7+B8+B14+H6.1+H6.2", 
+        "factor": "0.1923076920"
     }
-  }, 
-  {
+},
+{
     "pk": 6, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 3, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B3+B5+B6+B7+B8+B14", 
-      "factor": "0.1923076920"
+        "variable": 3, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B3+B5+B6+B7+B8+B14", 
+        "factor": "0.1923076920"
     }
-  }, 
-  {
+},
+{
     "pk": 7, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 4, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B20", 
-      "factor": "1.6666666670"
+        "variable": 4, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B20", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 8, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 4, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B20", 
-      "factor": "1.6666666670"
+        "variable": 4, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B20", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 9, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 5, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B4+H6.2+H6.1", 
-      "factor": "0.4545454550"
+        "variable": 5, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B4+H6.2+H6.1", 
+        "factor": "0.4545454550"
     }
-  }, 
-  {
+},
+{
     "pk": 10, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 5, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B4", 
-      "factor": "1.6666666670"
+        "variable": 5, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B4", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 11, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 6, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B9", 
-      "factor": "1.6666666670"
+        "variable": 6, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B9", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 12, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 6, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B9", 
-      "factor": "1.6666666670"
+        "variable": 6, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B9", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 13, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 7, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B10+H2.4", 
-      "factor": "0.7142857140"
+        "variable": 7, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B10+H2.4", 
+        "factor": "0.7142857140"
     }
-  }, 
-  {
+},
+{
     "pk": 14, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 7, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B10", 
-      "factor": "1.6666666670"
+        "variable": 7, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B10", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 15, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 8, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B11+H1.1", 
-      "factor": "0.7142857140"
+        "variable": 8, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B11+H1.1", 
+        "factor": "0.7142857140"
     }
-  }, 
-  {
+},
+{
     "pk": 16, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 8, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B11", 
-      "factor": "1.6666666670"
+        "variable": 8, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B11", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 17, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 9, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B12", 
-      "factor": "1.6666666670"
+        "variable": 9, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B12", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 18, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 9, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B12", 
-      "factor": "1.6666666670"
+        "variable": 9, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B12", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 19, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 10, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B13", 
-      "factor": "1.6666666670"
+        "variable": 10, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B13", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 20, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 10, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B13", 
-      "factor": "1.6666666670"
+        "variable": 10, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B13", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 21, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 11, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "H5.1+H5.2+H5.3", 
-      "factor": "0.1388888890"
+        "variable": 11, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "H5.1+H5.2+H5.3", 
+        "factor": "0.1388888890"
     }
-  }, 
-  {
+},
+{
     "pk": 22, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 11, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "H5", 
-      "factor": "0.4166666670"
+        "variable": 11, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "H5", 
+        "factor": "0.4166666670"
     }
-  }, 
-  {
+},
+{
     "pk": 23, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 12, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "H3.1+H3.2+H3.3+H3.4+H3.5+H3.6+H3.7", 
-      "factor": "0.1785714290"
+        "variable": 12, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "H3.1+H3.2+H3.3+H3.4+H3.5+H3.6+H3.7", 
+        "factor": "0.1785714290"
     }
-  }, 
-  {
+},
+{
     "pk": 24, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 12, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "H3", 
-      "factor": "1.2500000000"
+        "variable": 12, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "H3", 
+        "factor": "1.2500000000"
     }
-  }, 
-  {
+},
+{
     "pk": 25, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 13, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "H2.1+H2.2+H2.3+H2.4+H2.5+H2.6+H2.7+H2.8", 
-      "factor": "0.1562500000"
+        "variable": 13, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "H2.1+H2.2+H2.3+H2.4+H2.5+H2.6+H2.7+H2.8", 
+        "factor": "0.1562500000"
     }
-  }, 
-  {
+},
+{
     "pk": 26, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 13, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "H2", 
-      "factor": "1.2500000000"
+        "variable": 13, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "H2", 
+        "factor": "1.2500000000"
     }
-  }, 
-  {
+},
+{
     "pk": 27, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 14, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B15", 
-      "factor": "1.6666666670"
+        "variable": 14, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B15", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 28, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 14, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B15", 
-      "factor": "1.6666666670"
+        "variable": 14, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B15", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 29, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 15, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B17+H2.2", 
-      "factor": "0.7142857140"
+        "variable": 15, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B17+H2.2", 
+        "factor": "0.7142857140"
     }
-  }, 
-  {
+},
+{
     "pk": 30, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 15, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B17", 
-      "factor": "1.6666666670"
+        "variable": 15, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B17", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 31, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 16, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B16+H6.4", 
-      "factor": "0.4545454550"
+        "variable": 16, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B16+H6.4", 
+        "factor": "0.4545454550"
     }
-  }, 
-  {
+},
+{
     "pk": 32, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 16, 
-      "sibling": 26, 
-      "kind": 1, 
-      "polynomial": "H4.1+H4.2+H4.3+H4.4+H4.5+H4.6", 
-      "factor": "0.0757575760"
+        "variable": 16, 
+        "sibling": 26, 
+        "kind": 1, 
+        "polynomial": "H4.1+H4.2+H4.3+H4.4+H4.5+H4.6", 
+        "factor": "0.0757575760"
     }
-  }, 
-  {
+},
+{
     "pk": 33, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 16, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B16+H4", 
-      "factor": "0.7142857140"
+        "variable": 16, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B16+H4", 
+        "factor": "0.7142857140"
     }
-  }, 
-  {
+},
+{
     "pk": 34, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 17, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "H7.1+H7.2+H7.3+H7.4+H7.5+H7.6+H7.7", 
-      "factor": "0.1785714290"
+        "variable": 17, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "H7.1+H7.2+H7.3+H7.4+H7.5+H7.6+H7.7", 
+        "factor": "0.1785714290"
     }
-  }, 
-  {
+},
+{
     "pk": 35, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 17, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "H7", 
-      "factor": "1.2500000000"
+        "variable": 17, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "H7", 
+        "factor": "1.2500000000"
     }
-  }, 
-  {
+},
+{
     "pk": 36, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 18, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B19", 
-      "factor": "1.6666666670"
+        "variable": 18, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B19", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 37, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 18, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B19", 
-      "factor": "1.6666666670"
+        "variable": 18, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B19", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 38, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 19, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B18", 
-      "factor": "1.6666666670"
+        "variable": 19, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B18", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 39, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 19, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B18", 
-      "factor": "1.6666666670"
+        "variable": 19, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B18", 
+        "factor": "1.6666666670"
     }
-  }, 
-  {
+},
+{
     "pk": 40, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 20, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "H11.1+H11.2+H11.3+H11.4+H11.5+H11.6+H11.7+H11.8+H11.9+H11.10+H11.11+H11.12+H11.13+H11.14", 
-      "factor": "0.0892857140"
+        "variable": 20, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "H11.1+H11.2+H11.3+H11.4+H11.5+H11.6+H11.7+H11.8+H11.9+H11.10+H11.11+H11.12+H11.13+H11.14", 
+        "factor": "0.0892857140"
     }
-  }, 
-  {
+},
+{
     "pk": 41, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 20, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "H11", 
-      "factor": "1.2500000000"
+        "variable": 20, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "H11", 
+        "factor": "1.2500000000"
     }
-  }, 
-  {
+},
+{
     "pk": 42, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 21, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "H10.1+H10.2+H10.3+H10.4", 
-      "factor": "0.3125000000"
+        "variable": 21, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "H10.1+H10.2+H10.3+H10.4", 
+        "factor": "0.3125000000"
     }
-  }, 
-  {
+},
+{
     "pk": 43, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 21, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "H10", 
-      "factor": "1.2500000000"
+        "variable": 21, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "H10", 
+        "factor": "1.2500000000"
     }
-  }, 
-  {
+},
+{
     "pk": 44, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 22, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "H9.1+H9.2+H9.3+H9.4", 
-      "factor": "0.3125000000"
+        "variable": 22, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "H9.1+H9.2+H9.3+H9.4", 
+        "factor": "0.3125000000"
     }
-  }, 
-  {
+},
+{
     "pk": 45, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 22, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "H9", 
-      "factor": "1.2500000000"
+        "variable": 22, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "H9", 
+        "factor": "1.2500000000"
     }
-  }, 
-  {
+},
+{
     "pk": 46, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 23, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "B21", 
-      "factor": "0.7142857140"
+        "variable": 23, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "B21", 
+        "factor": "0.7142857140"
     }
-  }, 
-  {
+},
+{
     "pk": 47, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 23, 
-      "sibling": 39, 
-      "kind": 1, 
-      "polynomial": "H12.1+H12.2+H12.3+H12.4+H12.5+H12.6+H12.7", 
-      "factor": "0.1020408160"
+        "variable": 23, 
+        "sibling": 39, 
+        "kind": 1, 
+        "polynomial": "H12.1+H12.2+H12.3+H12.4+H12.5+H12.6+H12.7", 
+        "factor": "0.1020408160"
     }
-  }, 
-  {
+},
+{
     "pk": 48, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 23, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "B21+H12", 
-      "factor": "0.7142857140"
+        "variable": 23, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "B21+H12", 
+        "factor": "0.7142857140"
     }
-  }, 
-  {
+},
+{
     "pk": 49, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 24, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "H8.1+H8.2+H8.3+H8.4+H8.5", 
-      "factor": "0.2500000000"
+        "variable": 24, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "H8.1+H8.2+H8.3+H8.4+H8.5", 
+        "factor": "0.2500000000"
     }
-  }, 
-  {
+},
+{
     "pk": 50, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 24, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "H8", 
-      "factor": "1.2500000000"
+        "variable": 24, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "H8", 
+        "factor": "1.2500000000"
     }
-  }, 
-  {
+},
+{
     "pk": 51, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 25, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "H13.1+H13.2+H13.3+H13.4+H13.5+H13.6+H13.7", 
-      "factor": "0.1785714290"
+        "variable": 25, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "H13.1+H13.2+H13.3+H13.4+H13.5+H13.6+H13.7", 
+        "factor": "0.1785714290"
     }
-  }, 
-  {
+},
+{
     "pk": 52, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 25, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "H13", 
-      "factor": "1.2500000000"
+        "variable": 25, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "H13", 
+        "factor": "1.2500000000"
     }
-  }, 
-  {
+},
+{
     "pk": 53, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 26, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "Hd8", 
-      "factor": "1.2500000000"
+        "variable": 26, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "Hd8", 
+        "factor": "1.2500000000"
     }
-  }, 
-  {
+},
+{
     "pk": 54, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 26, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "Hd8", 
-      "factor": "1.2500000000"
+        "variable": 26, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "Hd8", 
+        "factor": "1.2500000000"
     }
-  }, 
-  {
+},
+{
     "pk": 55, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 27, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "Hd17", 
-      "factor": "1.2500000000"
+        "variable": 27, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "Hd17", 
+        "factor": "1.2500000000"
     }
-  }, 
-  {
+},
+{
     "pk": 56, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 27, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "Hd17", 
-      "factor": "1.2500000000"
+        "variable": 27, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "Hd17", 
+        "factor": "1.2500000000"
     }
-  }, 
-  {
+},
+{
     "pk": 57, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 28, 
-      "sibling": null, 
-      "kind": 1, 
-      "polynomial": "H14.1+H14.2+H14.3+H14.4+H14.5+H14.6+H14.7+H14.8+H14.9+H14.10+H14.11+H14.12+H14.13+H14.14+H14.15+H14.16+H14.17+H14.18+H14.19+H14.20+H14.21+H14.22", 
-      "factor": "0.0568181820"
+        "variable": 28, 
+        "sibling": null, 
+        "kind": 1, 
+        "polynomial": "H14.1+H14.2+H14.3+H14.4+H14.5+H14.6+H14.7+H14.8+H14.9+H14.10+H14.11+H14.12+H14.13+H14.14+H14.15+H14.16+H14.17+H14.18+H14.19+H14.20+H14.21+H14.22", 
+        "factor": "0.0568181820"
     }
-  }, 
-  {
+},
+{
     "pk": 58, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 28, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "H14", 
-      "factor": "1.2500000000"
+        "variable": 28, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "H14", 
+        "factor": "1.2500000000"
     }
-  }, 
-  {
+},
+{
     "pk": 59, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 29, 
-      "sibling": null, 
-      "kind": 0, 
-      "polynomial": "ADT", 
-      "factor": "1.0000000000"
+        "variable": 29, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "ADT", 
+        "factor": "1.0000000000"
     }
-  }, 
-  {
+},
+{
     "pk": 60, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 30, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "EPQR1+EPQR9+EPQR11+EPQR14+EPQR18+EPQR21", 
-      "factor": "1.0000000000"
+        "variable": 30, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "EPQR1+EPQR9+EPQR11+EPQR14+EPQR18+EPQR21", 
+        "factor": "1.0000000000"
     }
-  }, 
-  {
+},
+{
     "pk": 61, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 31, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "EPQR2+EPQR4+EPQR13+EPQR15+EPQR20+EPQR23", 
-      "factor": "1.0000000000"
+        "variable": 31, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "EPQR2+EPQR4+EPQR13+EPQR15+EPQR20+EPQR23", 
+        "factor": "1.0000000000"
     }
-  }, 
-  {
+},
+{
     "pk": 62, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 32, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "EPQR3+EPQR6+EPQR8+EPQR12+EPQR16+EPQR22", 
-      "factor": "1.0000000000"
+        "variable": 32, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "EPQR3+EPQR6+EPQR8+EPQR12+EPQR16+EPQR22", 
+        "factor": "1.0000000000"
     }
-  }, 
-  {
+},
+{
     "pk": 63, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 33, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "EPQR5+EPQR7+EPQR10+EPQR17+EPQR19+EPQR24", 
-      "factor": "1.0000000000"
+        "variable": 33, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "EPQR5+EPQR7+EPQR10+EPQR17+EPQR19+EPQR24", 
+        "factor": "1.0000000000"
     }
-  }, 
-  {
+},
+{
     "pk": 64, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 34, 
-      "sibling": null, 
-      "kind": 0, 
-      "polynomial": "U1+U6+U13+U15+19", 
-      "factor": "1.0000000000"
+        "variable": 34, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "U1+U6+U13+U15+19", 
+        "factor": "1.0000000000"
     }
-  }, 
-  {
+},
+{
     "pk": 65, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 35, 
-      "sibling": null, 
-      "kind": 0, 
-      "polynomial": "U2+U3+U9+U11+U12+U16+U17+U20", 
-      "factor": "1.0000000000"
+        "variable": 35, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "U2+U3+U9+U11+U12+U16+U17+U20", 
+        "factor": "1.0000000000"
     }
-  }, 
-  {
+},
+{
     "pk": 66, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 36, 
-      "sibling": null, 
-      "kind": 0, 
-      "polynomial": "U4+U7+U8+U14+U18", 
-      "factor": "1.0000000000"
+        "variable": 36, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "U4+U7+U8+U14+U18", 
+        "factor": "1.0000000000"
     }
-  }, 
-  {
+},
+{
     "pk": 68, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 38, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "YB1+YB2+YB3+YB4+YB5", 
-      "factor": "1.0000000000"
+        "variable": 38, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "YB1+YB2+YB3+YB4+YB5", 
+        "factor": "1.0000000000"
     }
-  }, 
-  {
+},
+{
     "pk": 69, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 39, 
-      "sibling": null, 
-      "kind": 2, 
-      "polynomial": "YB6+YB7+YB8+YB9+YB10", 
-      "factor": "1.0000000000"
+        "variable": 39, 
+        "sibling": null, 
+        "kind": 2, 
+        "polynomial": "YB6+YB7+YB8+YB9+YB10", 
+        "factor": "1.0000000000"
     }
-  }, 
-  {
+},
+{
     "pk": 71, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 41, 
-      "sibling": null, 
-      "kind": 0, 
-      "polynomial": "OCI1+OCI7+OCI13", 
-      "factor": "1.0000000000"
+        "variable": 41, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "OCI1+OCI7+OCI13", 
+        "factor": "1.0000000000"
     }
-  }, 
-  {
+},
+{
     "pk": 72, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 42, 
-      "sibling": null, 
-      "kind": 0, 
-      "polynomial": "OCI2+OCI8+OCI14", 
-      "factor": "1.0000000000"
+        "variable": 42, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "OCI2+OCI8+OCI14", 
+        "factor": "1.0000000000"
     }
-  }, 
-  {
+},
+{
     "pk": 73, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 43, 
-      "sibling": null, 
-      "kind": 0, 
-      "polynomial": "OCI3+OCI9+OCI15", 
-      "factor": "1.0000000000"
+        "variable": 43, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "OCI3+OCI9+OCI15", 
+        "factor": "1.0000000000"
     }
-  }, 
-  {
+},
+{
     "pk": 74, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 44, 
-      "sibling": null, 
-      "kind": 0, 
-      "polynomial": "OCI4+OCI10+OCI16", 
-      "factor": "1.0000000000"
+        "variable": 44, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "OCI4+OCI10+OCI16", 
+        "factor": "1.0000000000"
     }
-  }, 
-  {
+},
+{
     "pk": 75, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 45, 
-      "sibling": null, 
-      "kind": 0, 
-      "polynomial": "OCI5+OCI11+OCI17", 
-      "factor": "1.0000000000"
+        "variable": 45, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "OCI5+OCI11+OCI17", 
+        "factor": "1.0000000000"
     }
-  }, 
-  {
+},
+{
     "pk": 76, 
     "model": "formula.formula", 
     "fields": {
-      "variable": 46, 
-      "sibling": null, 
-      "kind": 0, 
-      "polynomial": "OCI6+OCI12+OCI18", 
-      "factor": "1.0000000000"
+        "variable": 46, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "OCI6+OCI12+OCI18", 
+        "factor": "1.0000000000"
     }
-  }
+},
+{
+    "pk": 77, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 48, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "QLQ1+QLQ2+QLQ3+QLQ4+QLQ5", 
+        "factor": "-20.0000000000"
+    }
+},
+{
+    "pk": 78, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 49, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "QLQ29+QLQ30", 
+        "factor": "8.3333300000"
+    }
+},
+{
+    "pk": 79, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 50, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "BODE1", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 80, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 51, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "BODE2", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 81, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 52, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "BODE3", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 82, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 53, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "BODE4", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 83, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 48, 
+        "sibling": 77, 
+        "kind": 0, 
+        "polynomial": "100", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 84, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 54, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "100", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 85, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 54, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "QLQ6+QLQ7", 
+        "factor": "-50.0000000000"
+    }
+},
+{
+    "pk": 86, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 55, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "100", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 87, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 55, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "QLQ21+QLQ22+QLQ23+QLQ24", 
+        "factor": "-8.3333333000"
+    }
+},
+{
+    "pk": 88, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 56, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "100", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 89, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 56, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "QLQ20+QLQ25", 
+        "factor": "-16.6666666667"
+    }
+},
+{
+    "pk": 90, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 57, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "100", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 91, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 57, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "QLQ26+QLQ27", 
+        "factor": "-16.6666666667"
+    }
+},
+{
+    "pk": 92, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 58, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "QLQ10+QLQ12+QLQ18", 
+        "factor": "11.1111111111"
+    }
+},
+{
+    "pk": 93, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 59, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "QLQ14+QLQ15", 
+        "factor": "16.6666666666"
+    }
+},
+{
+    "pk": 94, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 60, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "QLQ14+QLQ15", 
+        "factor": "16.6666666666"
+    }
+},
+{
+    "pk": 95, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 61, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "QLQ8", 
+        "factor": "33.3333333330"
+    }
+},
+{
+    "pk": 96, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 62, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "QLQ11", 
+        "factor": "33.3333333330"
+    }
+},
+{
+    "pk": 97, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 63, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "QLQ13", 
+        "factor": "33.3333333330"
+    }
+},
+{
+    "pk": 98, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 64, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "QLQ16", 
+        "factor": "33.3333333330"
+    }
+},
+{
+    "pk": 99, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 65, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "QLQ17", 
+        "factor": "33.3333333330"
+    }
+},
+{
+    "pk": 100, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 66, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "QLQ28", 
+        "factor": "33.3333333330"
+    }
+},
+{
+    "pk": 101, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 67, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "EQ1", 
+        "factor": "0.0897000000"
+    }
+},
+{
+    "pk": 102, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 68, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "EQ2", 
+        "factor": "0.1012000000"
+    }
+},
+{
+    "pk": 103, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 69, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "EQ3", 
+        "factor": "0.0551000000"
+    }
+},
+{
+    "pk": 104, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 70, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "EQ4", 
+        "factor": "0.0596000000"
+    }
+},
+{
+    "pk": 105, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 71, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "EQ5", 
+        "factor": "0.0512000000"
+    }
+},
+{
+    "pk": 106, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 72, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "EQ6", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 107, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 73, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "NH1", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 108, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 52, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "BODE3", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 109, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 74, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "ACT1+ACT2+ACT3+ACT4+ACT5", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 110, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 75, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "ACQ1+ACQ2+ACQ3+ACQ4+ACQ5", 
+        "factor": "0.2000000000"
+    }
+},
+{
+    "pk": 111, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 76, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "PD1", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 112, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 77, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "PD2", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 113, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 78, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "PD3", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 114, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 79, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "PD4", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 115, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 80, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "PD5", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 116, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 81, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "PD5", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 117, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 82, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "PD7", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 118, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 83, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "CH1", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 119, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 84, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "50+((100*((SF2A+SF2B)-2)/4-81.18122)/23.10588)*10", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 120, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 85, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "50 + ((100*(SF3A+SF3B-2)/8 - 80.52856) / 27.13526 ) * 10", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 121, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 86, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "50 + ((100*(SF5-1)/4 - 81.74015) / 24.53019) *10", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 122, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 87, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "50 + ((100*(SF1-1)/4 - 72.19795) / 23.19041) *10", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 123, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 88, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "50 + ((100*(SF6B-1)/4 - 55.59090) / 24.84380) * 10", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 124, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 89, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "50 + ((100*(SF4A+SF4B-2)/8 - 86.41051) / 22.35543) * 10", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 125, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 90, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "50 + ((100*(SF7-1)/4 - 83.73973) / 24.75775) * 10", 
+        "factor": "1.0000000000"
+    }
+},
+{
+    "pk": 126, 
+    "model": "formula.formula", 
+    "fields": {
+        "variable": 91, 
+        "sibling": null, 
+        "kind": 0, 
+        "polynomial": "50 + ((100*(SF6A+SF6C-2)/8 - 70.18217) / 20.50597)", 
+        "factor": "1.0000000000"
+    }
+}
 ]

@@ -1,0 +1,209 @@
+[
+{
+    "pk": 1, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 74, 
+        "score": "20.00", 
+        "risk": 3
+    }
+},
+{
+    "pk": 2, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 74, 
+        "score": "15.00", 
+        "risk": 2
+    }
+},
+{
+    "pk": 3, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 76, 
+        "score": "4.00", 
+        "risk": 1
+    }
+},
+{
+    "pk": 4, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 76, 
+        "score": "3.00", 
+        "risk": 2
+    }
+},
+{
+    "pk": 5, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 76, 
+        "score": "2.00", 
+        "risk": 4
+    }
+},
+{
+    "pk": 6, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 76, 
+        "score": "0.00", 
+        "risk": 4
+    }
+},
+{
+    "pk": 7, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 77, 
+        "score": "4.00", 
+        "risk": 1
+    }
+},
+{
+    "pk": 8, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 77, 
+        "score": "3.00", 
+        "risk": 2
+    }
+},
+{
+    "pk": 9, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 77, 
+        "score": "2.00", 
+        "risk": 4
+    }
+},
+{
+    "pk": 10, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 77, 
+        "score": "0.00", 
+        "risk": 3
+    }
+},
+{
+    "pk": 11, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 79, 
+        "score": "4.00", 
+        "risk": 1
+    }
+},
+{
+    "pk": 12, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 79, 
+        "score": "3.00", 
+        "risk": 2
+    }
+},
+{
+    "pk": 13, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 79, 
+        "score": "2.00", 
+        "risk": 3
+    }
+},
+{
+    "pk": 14, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 79, 
+        "score": "0.00", 
+        "risk": 4
+    }
+},
+{
+    "pk": 15, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 80, 
+        "score": "4.00", 
+        "risk": 1
+    }
+},
+{
+    "pk": 16, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 80, 
+        "score": "3.00", 
+        "risk": 2
+    }
+},
+{
+    "pk": 17, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 80, 
+        "score": "2.00", 
+        "risk": 4
+    }
+},
+{
+    "pk": 18, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 80, 
+        "score": "0.00", 
+        "risk": 3
+    }
+},
+{
+    "pk": 19, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 81, 
+        "score": "4.00", 
+        "risk": 1
+    }
+},
+{
+    "pk": 20, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 81, 
+        "score": "3.00", 
+        "risk": 2
+    }
+},
+{
+    "pk": 21, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 81, 
+        "score": "2.00", 
+        "risk": 4
+    }
+},
+{
+    "pk": 22, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 81, 
+        "score": "0.00", 
+        "risk": 3
+    }
+},
+{
+    "pk": 23, 
+    "model": "formula.condition", 
+    "fields": {
+        "variable": 74, 
+        "score": "0.00", 
+        "risk": 1
+    }
+}
+]

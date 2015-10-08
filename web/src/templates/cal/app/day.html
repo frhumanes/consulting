@@ -2,10 +2,6 @@
 
 {% load i18n messages %}
 
-{% block css_inline %}
-<meta http-equiv="pragma" content="no-cache" />
-{% endblock %}
-
 {% block right %}
   {% include "cal/includes/calendar.html" %}
 {% endblock %}
@@ -25,7 +21,7 @@
         </li>
     </ul>
   </div>
-  <a class="btn btn-info pull-right" style="margin: 5px 0" href="{% url cal.add year month day doctor.id %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva cita" %}</a>
+  <a class="btn btn-info pull-right" style="margin: 5px 0" href="{% url 'cal.add' year month day doctor.id %}"><i class="icon-pencil icon-white"></i> {% trans "Nueva cita" %}</a>
 </div>
 <div>
 

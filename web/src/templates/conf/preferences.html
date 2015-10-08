@@ -13,15 +13,15 @@
     <div class="span5">
       <div class="btn-toolbar" style="margin-bottom: 9px">
           <div class="btn-group">
-            <a class="btn btn-primary" href="{% url cal.views.main %}">{% trans "Calendar" %}</a>
-            <a class="btn btn-primary" href="{% url cal.list_slot_type %}">{% trans "Preference types" %}</a>
+            <a class="btn btn-primary" href="{% url 'cal.views.main' %}">{% trans "Calendar" %}</a>
+            <a class="btn btn-primary" href="{% url 'cal.list_slot_type' %}">{% trans "Preference types" %}</a>
           </div>
           <div class="btn-group">
             <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> {% trans "Absences" %}</a>
             <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="{% url cal.list_vacation %}"><i class="icon-plane"></i> {% trans "Vacations" %}</a></li>
-                <li><a href="{% url cal.list_event %}"><i class="icon-calendar"></i> {% trans "Events" %}</a></li>
+                <li><a href="{% url 'cal.list_vacation' %}"><i class="icon-plane"></i> {% trans "Vacations" %}</a></li>
+                <li><a href="{% url 'cal.list_event' %}"><i class="icon-calendar"></i> {% trans "Events" %}</a></li>
               </ul>
           </div>
       </div>
@@ -36,8 +36,8 @@
 <!-- ... -->
 
 {% block content %}
-    <a href="{% url cal.views.main year|add:'-3' %}">&lt;&lt; Prev</a>
-    <a href="{% url cal.views.main year|add:'3' %}">Next &gt;&gt;</a>
+    <a href="{% url 'cal.views.main' year|add:'-3' %}">&lt;&lt; Prev</a>
+    <a href="{% url 'cal.views.main' year|add:'3' %}">Next &gt;&gt;</a>
 
     {% for year, months in years %}
         <div class="clear"></div>
@@ -47,7 +47,7 @@
             {% if month.current %}"current"{% endif %}
             {% if not month.current %}"month"{% endif %} >
                 {% if month.entry %}<b>{% endif %}
-                <a href="{% url cal.views.month year month.n %}">{{ month.name }}</a>
+                <a href="{% url 'cal.views.month' year month.n %}">{{ month.name }}</a>
                 {% if month.entry %}</b>{% endif %}
             </div>
 

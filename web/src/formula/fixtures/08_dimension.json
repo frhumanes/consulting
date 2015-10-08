@@ -1,29 +1,65 @@
 [
-  {
-    "pk": 0, 
-    "model": "formula.dimension", 
-    "fields": {
-      "polynomial": "", 
-      "name": "", 
-      "factor": "1.00000000"
-    }
-  }, 
-  {
+{
     "pk": 1, 
     "model": "formula.dimension", 
     "fields": {
-      "polynomial": "V1+V2+V3+V4+V5+V6+V7+V8+V9+V10+V11+V12+V13+V14", 
-      "name": "Cognitiva", 
-      "factor": "0.14285714"
+        "polynomial": "V1+V2+V3+V4+V5+V6+V7+V8+V9+V10+V11+V12+V13+V14", 
+        "name": "Cognitiva", 
+        "factor": "0.14285714"
     }
-  }, 
-  {
+},
+{
     "pk": 2, 
     "model": "formula.dimension", 
     "fields": {
-      "polynomial": "V15+V16+V17+V18+V19+V20+V21+V22+V23+V24+V25", 
-      "name": "Som\u00e1tica", 
-      "factor": "0.18181818"
+        "polynomial": "V15+V16+V17+V18+V19+V20+V21+V22+V23+V24+V25", 
+        "name": "Som\u00e1tica", 
+        "factor": "0.18181818"
     }
-  }
+},
+{
+    "pk": 3, 
+    "model": "formula.dimension", 
+    "fields": {
+        "polynomial": "PF+RF+EF+CF+SF", 
+        "name": "Funcional", 
+        "factor": "0.20000000"
+    }
+},
+{
+    "pk": 4, 
+    "model": "formula.dimension", 
+    "fields": {
+        "polynomial": "QL", 
+        "name": "Estado general de salud", 
+        "factor": "1.00000000"
+    }
+},
+{
+    "pk": 5, 
+    "model": "formula.dimension", 
+    "fields": {
+        "polynomial": "FA+NV+PA+DY+SL+AP+CO+DI+FI", 
+        "name": "Sintom\u00e1tica", 
+        "factor": "0.11111100"
+    }
+},
+{
+    "pk": 6, 
+    "model": "formula.dimension", 
+    "fields": {
+        "polynomial": "50 + ( ((PF_T-50)/10 * 0.42402) + ((RP_T-50)/10 * 0.35119) + ((BP_T-50)/10 * 0.31754) + ((GH_T-50)/10 * 0.24954) + ((VT_T-50)/10 * 0.02877) + ((SF_T-50)/10 * -.00753) +  ((RE_T-50)/10 * -.19206) + ((MH_T-50)/10 * -.22069) ) * 10", 
+        "name": "Salud F\u00edsica", 
+        "factor": "1.00000000"
+    }
+},
+{
+    "pk": 7, 
+    "model": "formula.dimension", 
+    "fields": {
+        "polynomial": "50 + ( ((PF_T-50)/10 * -.22999) + ((RP_T-50)/10 * -.12329) + ((BP_T-50)/10 * -.09731) + ((GH_T-50)/10 * -.01571) + ((VT_T-50)/10 * 0.23534) + ((SF_T-50)/10 * 0.26876) +  ((RE_T-50)/10 * 0.43407) + ((MH_T-50)/10 * 0.48581) ) * 10", 
+        "name": "Salud Mental", 
+        "factor": "1.00000000"
+    }
+}
 ]

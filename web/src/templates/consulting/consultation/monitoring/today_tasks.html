@@ -18,13 +18,13 @@
     <tbody>                
       {% for t in tasks %}
       <tr>
-        <td style="text-align:left;"><a class="btn btn-link" data-target="#modal" href="{% url consulting_view_task t.id %}" role="button" data-toggle="modal">{{t.survey.name}}</a></td>
+        <td style="text-align:left;"><a class="btn btn-link" data-target="#modal" href="{% url 'consulting_view_task' t.id %}" role="button" data-toggle="modal">{{t.survey.name}}</a></td>
         <td style="text-align:center;">{{t.get_kind}}</td>
-        <td style="text-align:center;"><a class="btn btn-link" href="{% if illness %}{% if not t.completed %}{% url consulting_show_task_block appointment.id illness.code t.id 0 %}{% else %}{% url consulting_finished_task appointment.id illness.code t.id %}{% endif %}{% else %}{% if t.completed %}{% url consulting_finished_task appointment.id 0 t.id %}{% else %}{% url consulting_show_task_block appointment.id 0 t.id 0 %}{% endif %}{% endif %}">{{t.completed|yesno:'Resultados,Completar'}}</a></td>
+        <td style="text-align:center;"><a class="btn btn-link" href="{% if illness %}{% if not t.completed %}{% url 'consulting_show_task_block' appointment.id illness.code t.id 0 %}{% else %}{% url 'consulting_finished_task' appointment.id illness.code t.id %}{% endif %}{% else %}{% if t.completed %}{% url 'consulting_finished_task' appointment.id 0 t.id %}{% else %}{% url 'consulting_show_task_block' appointment.id 0 t.id 0 %}{% endif %}{% endif %}">{{t.completed|yesno:'Resultados,Completar'}}</a></td>
         {% comment %}
-        <td style="text-align:center;">{% if t.completed and t.survey.is_reportable %}<a class="btn btn-link" data-target="#modal" href="{% url consulting_view_report t.id %}" role="button" data-toggle="modal">Informe</a>{% endif %}</td>
+        <td style="text-align:center;">{% if t.completed and t.survey.is_reportable %}<a class="btn btn-link" data-target="#modal" href="{% url 'consulting_view_report' t.id %}" role="button" data-toggle="modal">Informe</a>{% endif %}</td>
         {% endcomment %}
-        <td style="text-align:center;">{% if t.completed and t.survey.is_reportable %}<a class="btn btn-link" href="{% url consulting_view_report t.id %}?as=pdf" role="button">Informe (PDF)</a>{% endif %}</td>
+        <td style="text-align:center;">{% if t.completed and t.survey.is_reportable %}<a class="btn btn-link" href="{% url 'consulting_view_report' t.id %}?as=pdf" role="button">Informe (PDF)</a>{% endif %}</td>
       </tr>
       {% endfor %}
     </tbody>
@@ -36,7 +36,7 @@
       <h3 id="myModalLabel">Previsualización de cuestionario/informe</h3>
     </div>
     <div class="modal-body">
-      <img src="{{ STATIC_URL }}/img/ajax-loader.gif" alt="loading..." />
+      <img src="{{ STATIC_URL }}img/ajax-loader.gif" alt="loading..." />
     </div>
     <div class="modal-footer">
       <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>

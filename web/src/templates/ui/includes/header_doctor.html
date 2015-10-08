@@ -1,12 +1,12 @@
 {% load i18n%}
 {% load consulting %}
 
-{% url consulting_newpatient as newpatient %}
-{% url consulting_today as today %}
-{% url consulting_index_pm as index_pm %}
-{% url stratification_statistic as index_statistic %}
-{% url private_messages_inbox as inbox %}
-{% url cal.index as calendar %}
+{% url 'consulting_newpatient' as newpatient %}
+{% url 'consulting_today' as today %}
+{% url 'consulting_index_pm' as index_pm %}
+{% url 'stratification_statistic' as index_statistic %}
+{% url 'private_messages_inbox' as inbox %}
+{% url 'cal.index' as calendar %}
 
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
@@ -16,43 +16,43 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="{% url consulting_index %}">{% get_brand %}</a>
+        <a class="brand" href="{% url 'consulting_index' %}">{% get_brand %}</a>
         <div class="nav-collapse collapse">
             <ul class="nav">
                 <li>
-                    <div id="notes" style="display:none; width: 0; height: 0;" data-pk="1" data-params="{'csrfmiddlewaretoken':'{{ csrf_token }}'}" data-toggle="#edit_notes" data-type="textarea" data-url="{% url consulting_save_notes %}" data-original-title="Notas" data-placement="bottom">{{request.session.notes}}</div>
+                    <div id="notes" style="display:none; width: 0; height: 0;" data-pk="1" data-params="{'csrfmiddlewaretoken':'{{ csrf_token }}'}" data-toggle="#edit_notes" data-type="textarea" data-url="{% url 'consulting_save_notes' %}" data-original-title="Notas" data-placement="bottom">{{request.session.notes}}</div>
                 </li>
             </ul>
         </div>
         <div class="nav-collapse collapse navbar-responsive-collapse">
             <ul class="nav permanentbar">
                 <li class="{% active_root request today %}">
-                    <a href="{% url consulting_today %}">
+                    <a href="{% url 'consulting_today' %}">
                       {% trans 'CONSULTA' %}
                     </a>
                 </li>
                 {% comment %}
                 <li class="{% active_root request newpatient %}">
-                    <a href="{% url consulting_newpatient %}">
+                    <a href="{% url 'consulting_newpatient' %}">
                       {% trans 'ALTA PACIENTE' %}
                     </a>
                 </li>
                 {% endcomment %}
                 <li class="{% active_root request calendar %}">
-                    <a href="{% url cal.index %}">
+                    <a href="{% url 'cal.index' %}">
                       {% trans 'AGENDA' %}
                     </a>
                 </li>
                 <li class="{% active_root request index_pm %}">
-                    <a href="{% url consulting_index_pm %}">
+                    <a href="{% url 'consulting_index_pm' %}">
                         {% trans 'PACIENTES' %}
                     </a>
                 </li>
                 <li class="{% active_root request index_statistic %}">
-                    <a href="{% url stratification_statistic %}">{% trans 'ESTADÍSTICA' %}</a>
+                    <a href="{% url 'stratification_statistic' %}">{% trans 'ESTADÍSTICA' %}</a>
                 </li>
                 <li class="{% active_root request inbox %}">
-                    <a href="{% url private_messages_inbox %}">
+                    <a href="{% url 'private_messages_inbox' %}">
                         {% trans 'MENSAJERÍA' %}
                         {% if user.get_profile.get_unread_messages.count %}
                             <span id="unread_messages" class="badge badge-important"><small>{{user.get_profile.get_unread_messages.count}}</small></span>
@@ -74,14 +74,14 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><i class="icon-user"></i> <strong>{{ user.get_profile.get_full_name }}</strong></a></li>
-                        <li><a href="{% url password_change %}"><i class="icon-lock"></i> {% trans 'Cambiar contraseña' %}</a></li>
-                        <li><a href="{% url consulting_user_guide %}"><i class="icon-file"></i> {% trans 'Descargar manual' %} (PDF)</a></li>
+                        <li><a href="{% url 'password_change' %}"><i class="icon-lock"></i> {% trans 'Cambiar contraseña' %}</a></li>
+                        <li><a href="{% url 'consulting_user_guide' %}"><i class="icon-file"></i> {% trans 'Descargar manual' %} (PDF)</a></li>
                         {% if request.user.is_staff %}
                         <li class="divider"></li>
                         <li><a href="/admin/" target="_blank"><i class="icon-wrench"></i> {% trans 'PANEL ADMINISTRATIVO' %}</a></li>
                         {% endif %}
                         <li class="divider"></li>
-                        <li><a href="{% url registration_logout %}"><i class="icon-off"></i> {% trans 'Desconectar' %}</a></li>
+                        <li><a href="{% url 'registration_logout' %}"><i class="icon-off"></i> {% trans 'Desconectar' %}</a></li>
                     </ul>
                 </li>
             </ul>
